@@ -14,13 +14,16 @@ importers:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)(swiper@8.4.7)
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-property-pane':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
+      swiper:
+        specifier: ^8.2.6
+        version: 8.4.7
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -90,13 +93,16 @@ importers:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)(swiper@8.4.7)
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-property-pane':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
+      swiper:
+        specifier: ^8.2.6
+        version: 8.4.7
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -166,13 +172,16 @@ importers:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)(swiper@8.4.7)
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-property-pane':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
+      swiper:
+        specifier: ^8.2.6
+        version: 8.4.7
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -245,13 +254,13 @@ importers:
         version: 1.22.0-beta.1
       '@microsoft/sp-application-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-dialog':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -322,12 +331,18 @@ importers:
       '@microsoft/decorators':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
+      '@microsoft/microsoft-graph-client':
+        specifier: 3.0.2
+        version: 3.0.2
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      scheduler:
+        specifier: 0.23.0
+        version: 0.23.0
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -368,6 +383,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.31.1
         version: 8.31.1(eslint@8.57.1)(typescript@5.3.3)
+      css-loader:
+        specifier: 5.2.7
+        version: 5.2.7(webpack@5.95.0)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -398,12 +416,18 @@ importers:
       '@microsoft/decorators':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
+      '@microsoft/microsoft-graph-client':
+        specifier: 3.0.2
+        version: 3.0.2
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      scheduler:
+        specifier: 0.23.0
+        version: 0.23.0
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -444,6 +468,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.31.1
         version: 8.31.1(eslint@8.57.1)(typescript@5.3.3)
+      css-loader:
+        specifier: 5.2.7
+        version: 5.2.7(webpack@5.95.0)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -477,18 +504,24 @@ importers:
       '@microsoft/decorators':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
+      '@microsoft/microsoft-graph-client':
+        specifier: 3.0.2
+        version: 3.0.2
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       react:
         specifier: 17.0.1
         version: 17.0.1
       react-dom:
         specifier: 17.0.1
         version: 17.0.1(react@17.0.1)
+      scheduler:
+        specifier: 0.23.0
+        version: 0.23.0
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -535,6 +568,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.31.1
         version: 8.31.1(eslint@8.57.1)(typescript@5.3.3)
+      css-loader:
+        specifier: 5.2.7
+        version: 5.2.7(webpack@5.95.0)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -568,18 +604,24 @@ importers:
       '@microsoft/decorators':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
+      '@microsoft/microsoft-graph-client':
+        specifier: 3.0.2
+        version: 3.0.2
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-lodash-subset':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
       '@microsoft/sp-office-ui-fabric-core':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
+      scheduler:
+        specifier: 0.23.0
+        version: 0.23.0
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -620,6 +662,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.31.1
         version: 8.31.1(eslint@8.57.1)(typescript@5.3.3)
+      css-loader:
+        specifier: 5.2.7
+        version: 5.2.7(webpack@5.95.0)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -653,12 +698,15 @@ importers:
       '@microsoft/decorators':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
+      '@microsoft/microsoft-graph-client':
+        specifier: 3.0.2
+        version: 3.0.2
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-lodash-subset':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
@@ -671,6 +719,9 @@ importers:
       react-dom:
         specifier: 17.0.1
         version: 17.0.1(react@17.0.1)
+      scheduler:
+        specifier: 0.23.0
+        version: 0.23.0
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -717,6 +768,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.31.1
         version: 8.31.1(eslint@8.57.1)(typescript@5.3.3)
+      css-loader:
+        specifier: 5.2.7
+        version: 5.2.7(webpack@5.95.0)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -750,15 +804,18 @@ importers:
       '@microsoft/decorators':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
+      '@microsoft/microsoft-graph-client':
+        specifier: 3.0.2
+        version: 3.0.2
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-dialog':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       '@microsoft/sp-listview-extensibility':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -829,12 +886,18 @@ importers:
       '@microsoft/decorators':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1
+      '@microsoft/microsoft-graph-client':
+        specifier: 3.0.2
+        version: 3.0.2
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-search-extensibility':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      scheduler:
+        specifier: 0.23.0
+        version: 0.23.0
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -971,7 +1034,7 @@ importers:
     dependencies:
       '@microsoft/sp-component-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -983,10 +1046,10 @@ importers:
         version: 1.22.0-beta.1
       '@microsoft/sp-property-pane':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       '@microsoft/sp-webpart-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -1030,6 +1093,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.31.1
         version: 8.31.1(eslint@8.57.1)(typescript@5.3.3)
+      css-loader:
+        specifier: 5.2.7
+        version: 5.2.7(webpack@5.95.0)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -1059,7 +1125,7 @@ importers:
     dependencies:
       '@microsoft/sp-component-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -1071,10 +1137,10 @@ importers:
         version: 1.22.0-beta.1
       '@microsoft/sp-property-pane':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       '@microsoft/sp-webpart-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -1118,6 +1184,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.31.1
         version: 8.31.1(eslint@8.57.1)(typescript@5.3.3)
+      css-loader:
+        specifier: 5.2.7
+        version: 5.2.7(webpack@5.95.0)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -1150,7 +1219,7 @@ importers:
         version: 8.123.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-component-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library':
         specifier: 1.22.0-beta.1
         version: 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -1162,10 +1231,10 @@ importers:
         version: 1.22.0-beta.1
       '@microsoft/sp-property-pane':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       '@microsoft/sp-webpart-base':
         specifier: 1.22.0-beta.1
-        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        version: 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       react:
         specifier: 17.0.1
         version: 17.0.1
@@ -1218,6 +1287,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.31.1
         version: 8.31.1(eslint@8.57.1)(typescript@5.3.3)
+      css-loader:
+        specifier: 5.2.7
+        version: 5.2.7(webpack@5.95.0)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -2356,6 +2428,24 @@ packages:
 
   '@microsoft/microsoft-graph-client@1.7.2-spfx':
     resolution: {integrity: sha512-BQN50r3tohWYOaQ0de7LJ5eCRjI6eg4RQqLhGDlgRmZIZhWzH0bhR6QBMmmxtYtwKWifhPhJSxYDW+cP67TJVw==}
+
+  '@microsoft/microsoft-graph-client@3.0.2':
+    resolution: {integrity: sha512-eYDiApYmiGsm1s1jfAa/rhB2xQCsX4pWt0vCTd1LZmiApMQfT/c0hXj2hvpuGz5GrcLdugbu05xB79rIV57Pjw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@azure/identity': '*'
+      '@azure/msal-browser': '*'
+      buffer: '*'
+      stream-browserify: '*'
+    peerDependenciesMeta:
+      '@azure/identity':
+        optional: true
+      '@azure/msal-browser':
+        optional: true
+      buffer:
+        optional: true
+      stream-browserify:
+        optional: true
 
   '@microsoft/rush-lib@5.153.2':
     resolution: {integrity: sha512-/edcbvjd5cYpytW1YXs4BIkOxUYGrtgBdDgmOtQN2MYMo89HhiZWhuwIOR1wcoesFvoI4abNT32d5+BHQkDwmg==}
@@ -3832,6 +3922,12 @@ packages:
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
 
+  css-loader@5.2.7:
+    resolution: {integrity: sha512-Q7mOvpBNBG7YrVGMxRxcBJZFL75o+cH2abNASdibkj/fffYD8qWbInZrD0S9ccI6vZclF3DsHE7njGlLtaHbhg==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      webpack: ^4.27.0 || ^5.0.0
+
   css-select@4.3.0:
     resolution: {integrity: sha512-wPpOYtnsVontu2mODhA19JrqWxNsfdatRKd64kmpRbQgh1KtItko5sTnEpPdpSaJszTOhEMlF/RPz28qj4HqhQ==}
 
@@ -4050,6 +4146,9 @@ packages:
 
   dom-serializer@1.4.1:
     resolution: {integrity: sha512-VHwB3KfrcOOkelEG2ZOfxqLZdfkil8PtJi4P8N2MMXucZq2yLp75ClViUlOVwyoHEDjYU433Aq+5zWP61+RGag==}
+
+  dom7@4.0.6:
+    resolution: {integrity: sha512-emjdpPLhpNubapLFdjNL9tP06Sr+GZkrIHEXLWvOGsytACUrkbeIdjO5g77m00BrHTznnlcNqgmn7pCN192TBA==}
 
   domelementtype@2.3.0:
     resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
@@ -5401,6 +5500,10 @@ packages:
     resolution: {integrity: sha512-I5d00Pd/jwMD2QCduo657+YM/6L3KZu++pmX9VFncxaxvHcru9jx1lBaFft+r4Mt2jK0Yhp41XlRAihzPxHNCg==}
     engines: {node: '>=4.0.0'}
 
+  loader-utils@2.0.4:
+    resolution: {integrity: sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw==}
+    engines: {node: '>=8.9.0'}
+
   loader-utils@3.2.2:
     resolution: {integrity: sha512-vjJi4vQDasD8t0kMpxe+9URAcgbSuASqoj/Wuk3MawTk97LYa2KfdHreAkd1G/pmPLMvzZEw7/OsydADNemerQ==}
     engines: {node: '>= 12.13.0'}
@@ -6712,6 +6815,9 @@ packages:
   scheduler@0.20.2:
     resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
 
+  scheduler@0.23.0:
+    resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
+
   schema-utils@2.7.1:
     resolution: {integrity: sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==}
     engines: {node: '>= 8.9.0'}
@@ -6897,6 +7003,9 @@ packages:
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
 
+  ssr-window@4.0.2:
+    resolution: {integrity: sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==}
+
   ssri@8.0.1:
     resolution: {integrity: sha512-97qShzy1AiyxvPNIkLWoGua7xoQzzPjQ0HAH4B0rWKo7SZ6USuPcrUiAFrws0UH8RrbWmgq3LMTObhPIHbbBeQ==}
     engines: {node: '>= 8'}
@@ -7054,6 +7163,10 @@ packages:
     resolution: {integrity: sha512-+N/Q9kV1+F+UeWYoSiULYo4xYSDQlTgb+ayMobAXPwMnLvop7oxKMo9OzIrX5x3eS4L4f2UHhc9axXwY8DpChg==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+
+  swiper@8.4.7:
+    resolution: {integrity: sha512-VwO/KU3i9IV2Sf+W2NqyzwWob4yX9Qdedq6vBtS0rFqJ6Fa5iLUJwxQkuD4I38w0WDJwmFl8ojkdcRFPHWD+2g==}
+    engines: {node: '>= 4.7.0'}
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
@@ -8022,10 +8135,10 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.12
 
-  '@fluentui/react-accordion@9.8.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-accordion@9.8.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-motion': 9.10.3(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8043,9 +8156,9 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-alert@9.0.0-beta.124(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-alert@9.0.0-beta.124(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-button': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
@@ -8074,13 +8187,13 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-avatar@9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-avatar@9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-badge': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
-      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -8160,11 +8273,11 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-carousel@9.8.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-carousel@9.8.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-button': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
@@ -8184,9 +8297,9 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-checkbox@9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-checkbox@9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-label': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8203,10 +8316,10 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-color-picker@9.2.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-color-picker@9.2.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@ctrl/tinycolor': 3.6.1
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8221,12 +8334,12 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-combobox@9.16.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-combobox@9.16.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-portal': 9.8.1(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8244,66 +8357,66 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-components@9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-components@9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-accordion': 9.8.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-alert': 9.0.0-beta.124(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-accordion': 9.8.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-alert': 9.0.0-beta.124(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-badge': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-breadcrumb': 9.3.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-button': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-card': 9.4.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-carousel': 9.8.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-checkbox': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-color-picker': 9.2.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-combobox': 9.16.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-dialog': 9.15.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-carousel': 9.8.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-checkbox': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-color-picker': 9.2.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-combobox': 9.16.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-dialog': 9.15.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-divider': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-drawer': 9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-drawer': 9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-image': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-infobutton': 9.0.0-beta.102(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-infolabel': 9.4.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-input': 9.7.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-infobutton': 9.0.0-beta.102(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-infolabel': 9.4.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-input': 9.7.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-label': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-link': 9.6.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-list': 9.5.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-menu': 9.19.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-list': 9.5.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-menu': 9.19.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-message-bar': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-motion': 9.10.3(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-nav': 9.3.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-overflow': 9.5.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-persona': 9.5.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-nav': 9.3.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-overflow': 9.5.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-persona': 9.5.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-portal': 9.8.1(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-positioning': 9.20.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-progress': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-progress': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-provider': 9.22.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-radio': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-radio': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-rating': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-search': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-select': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-search': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-select': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
-      '@fluentui/react-skeleton': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-slider': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-spinbutton': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-skeleton': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-slider': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-spinbutton': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-spinner': 9.7.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-swatch-picker': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-switch': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-table': 9.18.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-tabs': 9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-swatch-picker': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-switch': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-table': 9.18.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-tabs': 9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-tag-picker': 9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-tags': 9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-teaching-popover': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-tag-picker': 9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-tags': 9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-teaching-popover': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-text': 9.6.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-textarea': 9.6.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-textarea': 9.6.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-theme': 9.2.0
       '@fluentui/react-toast': 9.7.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-toolbar': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-toolbar': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-tooltip': 9.8.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-tree': 9.13.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-tree': 9.13.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-utilities': 9.24.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-virtualizer': 9.0.0-alpha.102(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@griffel/react': 1.5.30(react@17.0.1)
@@ -8315,7 +8428,7 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-context-selector@9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-context-selector@9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-utilities': 9.24.0(@types/react@17.0.45)(react@17.0.1)
       '@swc/helpers': 0.5.12
@@ -8323,13 +8436,13 @@ snapshots:
       '@types/react-dom': 17.0.17
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
-      scheduler: 0.20.2
+      scheduler: 0.23.0
 
-  '@fluentui/react-dialog@9.15.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-dialog@9.15.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-motion': 9.10.3(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8361,9 +8474,9 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-drawer@9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-drawer@9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-dialog': 9.15.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-dialog': 9.15.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-motion': 9.10.3(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-portal': 9.8.1(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8380,9 +8493,9 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-field@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-field@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-label': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8443,12 +8556,12 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-infobutton@9.0.0-beta.102(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-infobutton@9.0.0-beta.102(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-label': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
       '@fluentui/react-utilities': 9.24.0(@types/react@17.0.45)(react@17.0.1)
@@ -8461,12 +8574,12 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-infolabel@9.4.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-infolabel@9.4.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-label': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -8480,9 +8593,9 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-input@9.7.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-input@9.7.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -8532,11 +8645,11 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-list@9.5.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-list@9.5.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
-      '@fluentui/react-checkbox': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-checkbox': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8551,11 +8664,11 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-menu@9.19.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-menu@9.19.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-portal': 9.8.1(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8590,12 +8703,12 @@ snapshots:
       react-dom: 17.0.1(react@17.0.1)
       react-transition-group: 4.4.5(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
 
-  '@fluentui/react-migration-v8-v9@9.9.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-migration-v8-v9@9.9.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       '@fluentui/fluent2-theme': 8.107.142(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react': 8.123.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-components': 9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-components': 9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-hooks': 8.8.19(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-icons': 2.0.309(react@17.0.1)
       '@griffel/react': 1.5.30(react@17.0.1)
@@ -8626,13 +8739,13 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-nav@9.3.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-nav@9.3.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-button': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-divider': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-drawer': 9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-drawer': 9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-motion': 9.10.3(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8650,10 +8763,10 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-overflow@9.5.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-overflow@9.5.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/priority-overflow': 9.1.15
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-theme': 9.2.0
       '@fluentui/react-utilities': 9.24.0(@types/react@17.0.45)(react@17.0.1)
       '@griffel/react': 1.5.30(react@17.0.1)
@@ -8665,9 +8778,9 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-persona@9.5.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-persona@9.5.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-badge': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
@@ -8682,11 +8795,11 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-popover@9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-popover@9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-portal': 9.8.1(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-positioning': 9.20.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8736,9 +8849,9 @@ snapshots:
       react-dom: 17.0.1(react@17.0.1)
       use-sync-external-store: 1.5.0(react@17.0.1)
 
-  '@fluentui/react-progress@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-progress@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -8768,9 +8881,9 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-radio@9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-radio@9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-label': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
@@ -8801,10 +8914,10 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-search@9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-search@9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
-      '@fluentui/react-input': 9.7.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-input': 9.7.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -8818,9 +8931,9 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-select@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-select@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
@@ -8842,9 +8955,9 @@ snapshots:
       '@types/react': 17.0.45
       react: 17.0.1
 
-  '@fluentui/react-skeleton@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-skeleton@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -8858,9 +8971,9 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-slider@9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-slider@9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8875,10 +8988,10 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-spinbutton@9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-spinbutton@9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
@@ -8907,10 +9020,10 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-swatch-picker@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-swatch-picker@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
@@ -8926,9 +9039,9 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-switch@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-switch@9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-label': 9.3.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8945,16 +9058,16 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-table@9.18.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-table@9.18.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-checkbox': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-checkbox': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
-      '@fluentui/react-radio': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-radio': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -8968,9 +9081,9 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-tabs@9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-tabs@9.10.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -8999,20 +9112,20 @@ snapshots:
       react-dom: 17.0.1(react@17.0.1)
       tabster: 8.5.6
 
-  '@fluentui/react-tag-picker@9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-tag-picker@9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-combobox': 9.16.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-combobox': 9.16.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-portal': 9.8.1(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-positioning': 9.20.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-tags': 9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-tags': 9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-theme': 9.2.0
       '@fluentui/react-utilities': 9.24.0(@types/react@17.0.45)(react@17.0.1)
       '@griffel/react': 1.5.30(react@17.0.1)
@@ -9024,11 +9137,11 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-tags@9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-tags@9.7.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
@@ -9044,14 +9157,14 @@ snapshots:
     transitivePeerDependencies:
       - scheduler
 
-  '@fluentui/react-teaching-popover@9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-teaching-popover@9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-button': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
-      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-popover': 9.12.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -9079,9 +9192,9 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-textarea@9.6.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-textarea@9.6.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-field': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -9120,13 +9233,13 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-toolbar@9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-toolbar@9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react-button': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-divider': 9.4.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
-      '@fluentui/react-radio': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-radio': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -9157,19 +9270,19 @@ snapshots:
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
 
-  '@fluentui/react-tree@9.13.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@fluentui/react-tree@9.13.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/keyboard-keys': 9.0.8
       '@fluentui/react-aria': 9.16.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-avatar': 9.9.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-button': 9.6.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-checkbox': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-checkbox': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-context-selector': 9.2.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-jsx-runtime': 9.1.6(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-motion': 9.10.3(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-motion-components-preview': 0.9.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-radio': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-radio': 9.5.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-shared-contexts': 9.25.0(@types/react@17.0.45)(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-theme': 9.2.0
@@ -9645,6 +9758,11 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  '@microsoft/microsoft-graph-client@3.0.2':
+    dependencies:
+      '@babel/runtime': 7.28.3
+      tslib: 2.3.1
+
   '@microsoft/rush-lib@5.153.2(@types/node@24.3.0)':
     dependencies:
       '@pnpm/dependency-path': 5.1.7
@@ -9690,20 +9808,20 @@ snapshots:
       - '@types/node'
       - supports-color
 
-  '@microsoft/sp-adaptive-card-extension-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@microsoft/sp-adaptive-card-extension-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)(swiper@8.4.7)':
     dependencies:
-      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-http-base': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-loader': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)
       '@microsoft/sp-lodash-subset': 1.22.0-beta.1
       '@microsoft/sp-module-interfaces': 1.22.0-beta.1(@types/node@24.3.0)
-      '@microsoft/sp-property-pane': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+      '@microsoft/sp-property-pane': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       '@microsoft/teams-js-v2': '@microsoft/teams-js@2.32.0'
       '@swc/helpers': 0.5.12
-      adaptivecards: 2.11.2
+      adaptivecards: 2.11.2(swiper@8.4.7)
       tslib: 2.3.1
     transitivePeerDependencies:
       - '@microsoft/microsoft-graph-client'
@@ -9717,20 +9835,20 @@ snapshots:
       - supports-color
       - swiper
 
-  '@microsoft/sp-application-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@microsoft/sp-application-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-extension-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@microsoft/sp-http': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-extension-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@microsoft/sp-http': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-http-base': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-loader': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)
       '@microsoft/sp-lodash-subset': 1.22.0-beta.1
       '@microsoft/sp-module-interfaces': 1.22.0-beta.1(@types/node@24.3.0)
       '@microsoft/sp-odata-types': 1.22.0-beta.1
       '@microsoft/sp-page-context': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-search-extensibility': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-search-extensibility': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@swc/helpers': 0.5.12
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -9744,38 +9862,14 @@ snapshots:
       - scheduler
       - supports-color
 
-  '@microsoft/sp-component-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@microsoft/sp-component-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react': 8.123.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-components': 9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-components': 9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-dynamic-data': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-lodash-subset': 1.22.0-beta.1
-      '@microsoft/sp-module-interfaces': 1.22.0-beta.1(@types/node@24.3.0)
-      '@microsoft/sp-page-context': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@swc/helpers': 0.5.12
-      tslib: 2.3.1
-    transitivePeerDependencies:
-      - '@microsoft/microsoft-graph-client'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-dom'
-      - encoding
-      - react
-      - react-dom
-      - scheduler
-      - supports-color
-
-  '@microsoft/sp-component-base@1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
-    dependencies:
-      '@fluentui/react': 8.123.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-components': 9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-dynamic-data': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-lodash-subset': 1.22.0-beta.1
       '@microsoft/sp-module-interfaces': 1.22.0-beta.1(@types/node@24.3.0)
       '@microsoft/sp-page-context': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -9832,12 +9926,12 @@ snapshots:
       - react
       - react-dom
 
-  '@microsoft/sp-dialog@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)':
+  '@microsoft/sp-dialog@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react': 8.123.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-components': 9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@fluentui/react-migration-v8-v9': 9.9.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@microsoft/sp-application-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-components': 9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@fluentui/react-migration-v8-v9': 9.9.6(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
+      '@microsoft/sp-application-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.12
@@ -9868,29 +9962,9 @@ snapshots:
       - react
       - react-dom
 
-  '@microsoft/sp-extension-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@microsoft/sp-extension-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
-      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-loader': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)
-      '@microsoft/sp-module-interfaces': 1.22.0-beta.1(@types/node@24.3.0)
-      '@swc/helpers': 0.5.12
-      tslib: 2.3.1
-    transitivePeerDependencies:
-      - '@microsoft/microsoft-graph-client'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-dom'
-      - encoding
-      - react
-      - react-dom
-      - scheduler
-      - supports-color
-
-  '@microsoft/sp-extension-base@1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
-    dependencies:
-      '@microsoft/sp-component-base': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-loader': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)
@@ -9925,9 +9999,9 @@ snapshots:
       - react-dom
       - supports-color
 
-  '@microsoft/sp-http-msgraph@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-http-msgraph@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/microsoft-graph-client': 1.7.2-spfx
+      '@microsoft/microsoft-graph-client': 3.0.2
       '@microsoft/microsoft-graph-clientv1': '@microsoft/microsoft-graph-client@1.7.2-spfx'
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -9944,12 +10018,12 @@ snapshots:
       - react-dom
       - supports-color
 
-  '@microsoft/sp-http@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-http@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-http-base': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http-msgraph': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-msgraph': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.12
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -9980,29 +10054,10 @@ snapshots:
       - '@types/node'
       - supports-color
 
-  '@microsoft/sp-listview-extensibility@1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-listview-extensibility@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-extension-base': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-module-interfaces': 1.22.0-beta.1(@types/node@24.3.0)
-      '@microsoft/sp-page-context': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@swc/helpers': 0.5.12
-      tslib: 2.3.1
-    transitivePeerDependencies:
-      - '@microsoft/microsoft-graph-client'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-dom'
-      - encoding
-      - react
-      - react-dom
-      - scheduler
-      - supports-color
-
-  '@microsoft/sp-listview-extensibility@1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
-    dependencies:
-      '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-extension-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-extension-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-module-interfaces': 1.22.0-beta.1(@types/node@24.3.0)
       '@microsoft/sp-page-context': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.12
@@ -10083,14 +10138,14 @@ snapshots:
       - react
       - react-dom
 
-  '@microsoft/sp-property-pane@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)':
+  '@microsoft/sp-property-pane@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react': 8.123.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@fluentui/react-components': 9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-components': 9.69.0(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@fluentui/react-icons': 2.0.261(react@17.0.1)
       '@fluentui/react-tabster': 9.26.4(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/utilities': 8.15.23(@types/react@17.0.45)(react@17.0.1)
-      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-dynamic-data': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -10110,30 +10165,11 @@ snapshots:
       - scheduler
       - supports-color
 
-  '@microsoft/sp-search-extensibility@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@microsoft/sp-search-extensibility@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)':
     dependencies:
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-extension-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@microsoft/sp-loader': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)
-      '@swc/helpers': 0.5.12
-      tslib: 2.3.1
-    transitivePeerDependencies:
-      - '@microsoft/microsoft-graph-client'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-dom'
-      - encoding
-      - react
-      - react-dom
-      - scheduler
-      - supports-color
-
-  '@microsoft/sp-search-extensibility@1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
-    dependencies:
-      '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-extension-base': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-extension-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-loader': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)
       '@swc/helpers': 0.5.12
       tslib: 2.3.1
@@ -10150,19 +10186,19 @@ snapshots:
 
   '@microsoft/sp-top-actions@1.22.0-beta.1': {}
 
-  '@microsoft/sp-webpart-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)':
+  '@microsoft/sp-webpart-base@1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)':
     dependencies:
       '@fluentui/react': 8.123.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-component-base': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.23.0)
       '@microsoft/sp-core-library': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-diagnostics': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-http-base': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-loader': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)
       '@microsoft/sp-lodash-subset': 1.22.0-beta.1
       '@microsoft/sp-module-interfaces': 1.22.0-beta.1(@types/node@24.3.0)
       '@microsoft/sp-page-context': 1.22.0-beta.1(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-property-pane': 1.22.0-beta.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+      '@microsoft/sp-property-pane': 1.22.0-beta.1(@microsoft/microsoft-graph-client@3.0.2)(@types/node@24.3.0)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.23.0)
       '@microsoft/sp-top-actions': 1.22.0-beta.1
       '@microsoft/teams-js-v2': '@microsoft/teams-js@2.32.0'
       '@swc/helpers': 0.5.12
@@ -11445,7 +11481,9 @@ snapshots:
 
   adal-angular@1.0.16: {}
 
-  adaptivecards@2.11.2: {}
+  adaptivecards@2.11.2(swiper@8.4.7):
+    dependencies:
+      swiper: 8.4.7
 
   agent-base@6.0.2:
     dependencies:
@@ -12069,6 +12107,20 @@ snapshots:
       schema-utils: 2.7.1
       webpack: 5.95.0
 
+  css-loader@5.2.7(webpack@5.95.0):
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.5.6)
+      loader-utils: 2.0.4
+      postcss: 8.5.6
+      postcss-modules-extract-imports: 3.1.0(postcss@8.5.6)
+      postcss-modules-local-by-default: 4.2.0(postcss@8.5.6)
+      postcss-modules-scope: 3.2.1(postcss@8.5.6)
+      postcss-modules-values: 4.0.0(postcss@8.5.6)
+      postcss-value-parser: 4.2.0
+      schema-utils: 3.3.0
+      semver: 7.7.2
+      webpack: 5.95.0
+
   css-select@4.3.0:
     dependencies:
       boolbase: 1.0.0
@@ -12314,6 +12366,10 @@ snapshots:
       domelementtype: 2.3.0
       domhandler: 4.3.1
       entities: 2.2.0
+
+  dom7@4.0.6:
+    dependencies:
+      ssr-window: 4.0.2
 
   domelementtype@2.3.0: {}
 
@@ -14137,6 +14193,12 @@ snapshots:
       emojis-list: 3.0.0
       json5: 1.0.2
 
+  loader-utils@2.0.4:
+    dependencies:
+      big.js: 5.2.2
+      emojis-list: 3.0.0
+      json5: 2.2.3
+
   loader-utils@3.2.2: {}
 
   loader-utils@3.3.1: {}
@@ -14839,6 +14901,10 @@ snapshots:
     dependencies:
       postcss: 8.4.49
 
+  postcss-modules-extract-imports@3.1.0(postcss@8.5.6):
+    dependencies:
+      postcss: 8.5.6
+
   postcss-modules-local-by-default@3.0.3:
     dependencies:
       icss-utils: 4.1.1
@@ -14860,6 +14926,13 @@ snapshots:
       postcss-selector-parser: 7.1.0
       postcss-value-parser: 4.2.0
 
+  postcss-modules-local-by-default@4.2.0(postcss@8.5.6):
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.5.6)
+      postcss: 8.5.6
+      postcss-selector-parser: 7.1.0
+      postcss-value-parser: 4.2.0
+
   postcss-modules-scope@2.2.0:
     dependencies:
       postcss: 7.0.39
@@ -14873,6 +14946,11 @@ snapshots:
   postcss-modules-scope@3.2.1(postcss@8.4.49):
     dependencies:
       postcss: 8.4.49
+      postcss-selector-parser: 7.1.0
+
+  postcss-modules-scope@3.2.1(postcss@8.5.6):
+    dependencies:
+      postcss: 8.5.6
       postcss-selector-parser: 7.1.0
 
   postcss-modules-values@3.0.0:
@@ -15453,6 +15531,10 @@ snapshots:
       loose-envify: 1.4.0
       object-assign: 4.1.1
 
+  scheduler@0.23.0:
+    dependencies:
+      loose-envify: 1.4.0
+
   schema-utils@2.7.1:
     dependencies:
       '@types/json-schema': 7.0.15
@@ -15698,6 +15780,8 @@ snapshots:
 
   sprintf-js@1.0.3: {}
 
+  ssr-window@4.0.2: {}
+
   ssri@8.0.1:
     dependencies:
       minipass: 3.3.6
@@ -15868,6 +15952,11 @@ snapshots:
       csso: 4.2.0
       picocolors: 1.1.1
       stable: 0.1.8
+
+  swiper@8.4.7:
+    dependencies:
+      dom7: 4.0.6
+      ssr-window: 4.0.2
 
   symbol-tree@3.2.4: {}
 

@@ -48,9 +48,10 @@
     "@rushstack/heft-lint-plugin": "0.7.4",
     "@rushstack/heft-webpack5-plugin": "0.11.39",
     "glob": "^7.1.2",
+    "css-loader": "5.2.7",
+    "style-loader": "1.1.3",
     "sass": "1.49.11",
     "sass-loader": "8.0.2",
-    "style-loader": "1.1.3",
     "ts-loader": "9.5.1"
   },
   "overrides": {

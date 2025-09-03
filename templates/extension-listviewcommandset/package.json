@@ -21,7 +21,8 @@
     "@microsoft/sp-core-library": "1.22.0-beta.1",
     "@microsoft/decorators": "1.22.0-beta.1",
     "@microsoft/sp-listview-extensibility": "1.22.0-beta.1",
-    "@microsoft/sp-dialog": "1.22.0-beta.1"
+    "@microsoft/sp-dialog": "1.22.0-beta.1",
+    "@microsoft/microsoft-graph-client": "3.0.2"
   },
   "devDependencies": {
     "@rushstack/eslint-config": "4.3.0",
