@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "field-customizer-react-heft-1756847676957-client-side-solution",
+    "id": "66b0c3d5-19c6-41d3-b9c4-a921fde8e541",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.0-dev.128"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "field-customizer-react-heft-1756847676957 description"
+      },
+      "longDescription": {
+        "default": "field-customizer-react-heft-1756847676957 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Application Extension - Deployment of custom action",
+        "description": "Deploys a custom action with ClientSideComponentId association",
+        "id": "029f4474-92d8-46be-85d5-3140a41117ce",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml"
+          ]
+        }
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/field-customizer-react-heft-1756847676957.sppkg"
+  }
+}

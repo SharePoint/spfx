@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "field-customizer-minimal-heft-1756847676957-client-side-solution",
+    "id": "9cc27fa4-a563-47e6-88c3-1fbecd7ec744",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.0-dev.128"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "field-customizer-minimal-heft-1756847676957 description"
+      },
+      "longDescription": {
+        "default": "field-customizer-minimal-heft-1756847676957 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Application Extension - Deployment of custom action",
+        "description": "Deploys a custom action with ClientSideComponentId association",
+        "id": "6d201254-9373-45dc-b7d8-ac67a0134b94",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml"
+          ]
+        }
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/field-customizer-minimal-heft-1756847676957.sppkg"
+  }
+}

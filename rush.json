@@ -16,7 +16,7 @@
    * path segment in the "$schema" field for all your Rush config files.  This will ensure
    * correct error-underlining and tab-completion for editors such as VS Code.
    */
-  "rushVersion": "5.150.0",
+  "rushVersion": "5.158.1",
 
   /**
    * The next field selects which package manager should be installed and determines its version.
@@ -26,7 +26,7 @@
    * Specify one of: "pnpmVersion", "npmVersion", or "yarnVersion".  See the Rush documentation
    * for details about these alternatives.
    */
-  "pnpmVersion": "8.15.8",
+  "pnpmVersion": "10.15.1",
 
   // "npmVersion": "6.14.15",
   // "yarnVersion": "1.9.4",
@@ -42,7 +42,7 @@
    * LTS schedule: https://nodejs.org/en/about/releases/
    * LTS versions: https://nodejs.org/en/download/releases/
    */
-  "nodeSupportedVersionRange": ">=18.20.3 <19.0.0 || >=20.14.0 <21.0.0",
+  "nodeSupportedVersionRange": ">=22.14.0 < 23.0.0",
 
   /**
    * If the version check above fails, Rush will display a message showing the current
@@ -440,5 +440,108 @@
     //   "reviewCategory": "tools",
     //   "tags": [ "tools" ]
     // }
+    
+    //{
+    //  "packageName": "@spfx-template/ace-data-visualization",
+    //  "projectFolder": "templates/ace-data-visualization",
+    //  "reviewCategory": "templates",
+    //  "tags": [ ]
+    //},
+    {
+      "packageName": "@spfx-template/ace-generic-basic-card",
+      "projectFolder": "templates/ace-generic-basic-card",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/ace-generic-image-card",
+      "projectFolder": "templates/ace-generic-image-card",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/ace-generic-primarytext-card",
+      "projectFolder": "templates/ace-generic-primarytext-card",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    //{
+    //  "packageName": "@spfx-template/ace-search-card",
+    //  "projectFolder": "templates/ace-search-card",
+    //  "reviewCategory": "templates",
+    //  "tags": [ ]
+    //},
+    {
+      "packageName": "@spfx-template/extension-application-customizer",
+      "projectFolder": "templates/extension-application-customizer",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/extension-fieldcustomizer-minimal",
+      "projectFolder": "templates/extension-fieldcustomizer-minimal",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/extension-fieldcustomizer-noframework",
+      "projectFolder": "templates/extension-fieldcustomizer-noframework",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/extension-fieldcustomizer-react",
+      "projectFolder": "templates/extension-fieldcustomizer-react",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/extension-formcustomizer-noframework",
+      "projectFolder": "templates/extension-formcustomizer-noframework",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/extension-formcustomizer-react",
+      "projectFolder": "templates/extension-formcustomizer-react",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/extension-listviewcommandset",
+      "projectFolder": "templates/extension-listviewcommandset",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/extension-search-query-modifier",
+      "projectFolder": "templates/extension-search-query-modifier",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/library",
+      "projectFolder": "templates/library",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/webpart-minimal",
+      "projectFolder": "templates/webpart-minimal",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/webpart-noframework",
+      "projectFolder": "templates/webpart-noframework",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/webpart-react",
+      "projectFolder": "templates/webpart-react",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    }
   ]
 }

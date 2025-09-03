@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "form-customizer-react-heft-1756847676957-client-side-solution",
+    "id": "500ac7e7-ee78-45a8-9daa-9138c119a613",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.0-dev.128"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "form-customizer-react-heft-1756847676957 description"
+      },
+      "longDescription": {
+        "default": "form-customizer-react-heft-1756847676957 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "form-customizer-react-heft-1756847676957 Feature",
+        "description": "The feature that activates elements of the form-customizer-react-heft-1756847676957 solution.",
+        "id": "31ac6199-3cf9-46dd-8659-e230d69fbd60",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/form-customizer-react-heft-1756847676957.sppkg"
+  }
+}

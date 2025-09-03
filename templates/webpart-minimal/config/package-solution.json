@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "webpart-minimal-heft-1756847676957-client-side-solution",
+    "id": "ac944c2f-ba3e-4dcc-b163-3dd2316bd415",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.0-dev.128"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "webpart-minimal-heft-1756847676957 description"
+      },
+      "longDescription": {
+        "default": "webpart-minimal-heft-1756847676957 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "webpart-minimal-heft-1756847676957 Feature",
+        "description": "The feature that activates elements of the webpart-minimal-heft-1756847676957 solution.",
+        "id": "51e25cd1-fcdd-4630-b12d-1760ba4de7bf",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/webpart-minimal-heft-1756847676957.sppkg"
+  }
+}

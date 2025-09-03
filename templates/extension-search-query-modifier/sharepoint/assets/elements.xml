@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="SearchQueryModifier"
+        Location="ClientSideExtension.SearchQueryModifier"
+        ClientSideComponentId="4f24178e-9cc9-41f4-aabb-0812e9fe001a"
+        ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </CustomAction>
+</Elements>

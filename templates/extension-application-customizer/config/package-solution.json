@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "application-customizer-heft-1756847676957-client-side-solution",
+    "id": "480d30dc-6313-43ab-843c-df19ba825d30",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.0-dev.128"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "application-customizer-heft-1756847676957 description"
+      },
+      "longDescription": {
+        "default": "application-customizer-heft-1756847676957 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Application Extension - Deployment of custom action",
+        "description": "Deploys a custom action with ClientSideComponentId association",
+        "id": "5cbed0aa-4d0f-42ec-8a0f-8641f96c20c7",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml",
+            "ClientSideInstance.xml"
+          ]
+        }
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/application-customizer-heft-1756847676957.sppkg"
+  }
+}
