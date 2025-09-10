@@ -448,14 +448,14 @@
     //  "tags": [ ]
     //},
     {
-      "packageName": "@microsoft/generator-sharepoint-api",
-      "projectFolder": "api/generator-api",
+      "packageName": "@microsoft/spfx-template-api",
+      "projectFolder": "api/spfx-template-api",
       "reviewCategory": "api",
       "tags": [ ]
     },
     {
-      "packageName": "@microsoft/generator-sharepoint",
-      "projectFolder": "apps/generator-sharepoint",
+      "packageName": "@microsoft/spfx-cli",
+      "projectFolder": "apps/spfx-cli",
       "reviewCategory": "app",
       "tags": [ ]
     },
