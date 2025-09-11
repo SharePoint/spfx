@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { ConsoleTerminalProvider, Terminal } from '@rushstack/terminal';
+import { Colorize, ConsoleTerminalProvider, Terminal } from '@rushstack/terminal';
 
 import {
     LocalFileSystemRepositorySource,
@@ -7,6 +7,7 @@ import {
     SPFxTemplateRepositoryManager
 } from './repositories';
 import { SPFxTemplate } from './templating';
+import { MemFsEditor } from 'mem-fs-editor';
 
 /**
  * @public
@@ -38,7 +39,8 @@ export async function scaffold(options: IScaffoldProfile, terminal: Terminal = n
 
     const {
         localTemplateSources,
-        templateName
+        templateName,
+        targetDir
     } = {
         localTemplateSources: [],
         ...options
@@ -61,5 +63,41 @@ export async function scaffold(options: IScaffoldProfile, terminal: Terminal = n
         throw new Error(`Template not found: ${templateName}. Available: ${Array.from(templates.keys()).join(', ')}`);
     }
 
-    template.render({});
+    const fs = await template.render({
+        solution_name: 'test-solution-name'
+    }, targetDir);
+    _printFileChanges(terminal, fs, targetDir);
+    await template.write(fs);
 };
+
+/**
+ * Utility function to show the user which files in the in-memory file system are pending changes.
+ */
+function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: string): void {
+    terminal.writeLine(`targetDir: ${targetDir}`);
+    const changed: { [key: string]: { state: 'modified' | 'deleted', isNew: boolean } } = fs.dump('D:\\');
+
+    terminal.writeLine();
+    terminal.writeLine(Colorize.cyan('The following files will be modified:'));
+
+    for (const [file, data] of Object.entries(changed)) {
+        const { state, isNew } = data;
+        terminal.writeLine(JSON.stringify(data));
+        if (isNew) {
+            terminal.writeLine(Colorize.green(`Added: ${file}`));
+            continue;
+        }
+        switch (state) {
+            case 'modified':
+                terminal.writeLine(Colorize.yellow(`Modified: ${file}`));
+                break;
+            case 'deleted':
+                terminal.writeLine(Colorize.red(`Deleted: ${file}`));
+                break;
+            default:
+                terminal.writeLine(`Unchanged: ${file}`);
+                break;
+        }
+    }
+    terminal.writeLine();
+}

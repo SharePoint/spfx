@@ -4,6 +4,7 @@
 
 ```ts
 
+import { MemFsEditor } from 'mem-fs-editor';
 import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
@@ -75,7 +76,7 @@ export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHu
 
 // @public
 export class SPFxTemplate {
-    constructor(definition: SPFxTemplateJsonFile, files: Map<string, Buffer>);
+    constructor(definition: SPFxTemplateJsonFile, files: Map<string, string>);
     // (undocumented)
     get description(): string | undefined;
     // (undocumented)
@@ -83,13 +84,15 @@ export class SPFxTemplate {
     // (undocumented)
     get name(): string;
     // (undocumented)
-    render(context: object): string;
+    render(context: object, destinationDir: string): Promise<MemFsEditor>;
     // (undocumented)
     get spfxVersion(): string;
     // (undocumented)
     toString(): string;
     // (undocumented)
     get version(): string;
+    // (undocumented)
+    write(fs: MemFsEditor): Promise<void>;
 }
 
 // @public

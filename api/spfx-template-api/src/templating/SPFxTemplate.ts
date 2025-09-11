@@ -1,4 +1,6 @@
 import { FileSystem } from '@rushstack/node-core-library';
+import { create as createMemFs } from 'mem-fs';
+import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
 import * as path from 'path';
 import semverRegex from 'semver-regex';
 import * as z from 'zod';
@@ -47,11 +49,11 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateDefinition> = 
  */
 export class SPFxTemplate {
     private readonly _definition: SPFxTemplateJsonFile;
-    private readonly _files: Map<string, Buffer>;
+    private readonly _files: Map<string, string>;
 
     public constructor(
         definition: SPFxTemplateJsonFile,
-        files: Map<string, Buffer>
+        files: Map<string, string>
     ) {
         this._definition = definition;
         this._files = files;
@@ -79,8 +81,8 @@ export class SPFxTemplate {
         return new SPFxTemplate(templateJsonFile, files);
     }
 
-    private static async _readFilesRecursively(baseDir: string): Promise<Map<string, Buffer>> {
-        const files = new Map<string, Buffer>();
+    private static async _readFilesRecursively(baseDir: string): Promise<Map<string, string>> {
+        const files = new Map<string, string>();
         const frontier: string[] = [''];
         
         while (frontier.length > 0) {
@@ -98,7 +100,7 @@ export class SPFxTemplate {
 
                 if (item.isFile()) {
                     const fullPath: string = path.join(folderPath, item.name);
-                    const content = await FileSystem.readFileToBufferAsync(fullPath);
+                    const content = await FileSystem.readFileAsync(fullPath);
                     files.set(relativePath, content);
                 } else if (item.isDirectory()) {
                     frontier.push(relativePath);
@@ -109,9 +111,21 @@ export class SPFxTemplate {
         return files;
     }
 
-    public render(context: object): string {
-        // Render the template using the definition and context
-        return '';
+    public async render(context: object, destinationDir: string): Promise<MemFsEditor> {
+        const fs: MemFsEditor = createEditor(createMemFs());
+
+        for (const [filename, contents] of this._files.entries()) {
+            const destination = path.join(destinationDir, filename);
+            const rendered = fs._processTpl({ contents, filename, context });
+            console.log(`Writing file: ${destination}`);
+            fs.write(destination, rendered);
+        }
+
+        return fs;
+    }
+
+    public write(fs: MemFsEditor): Promise<void> {
+        return fs.commit();
     }
 
     public toString(): string {
