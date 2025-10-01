@@ -82,6 +82,8 @@ export class SPFxTemplate {
     // (undocumented)
     static fromFolderAsync(path: string): Promise<SPFxTemplate>;
     // (undocumented)
+    static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
+    // (undocumented)
     get name(): string;
     // (undocumented)
     render(context: object, destinationDir: string): Promise<MemFsEditor>;

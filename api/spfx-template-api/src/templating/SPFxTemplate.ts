@@ -41,7 +41,7 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateDefinition> = 
     description: z.string().max(DESCRIPTION_MAX_LENGTH).optional(),
     version: z.string().regex(VERSION_REGEX),
     spfxVersion: z.string().regex(SPFX_VERSION_REGEX)
-});
+}).strict();
 
 /**
  * @public
@@ -78,6 +78,31 @@ export class SPFxTemplate {
     public static async fromFolderAsync(path: string): Promise<SPFxTemplate> {
         const templateJsonFile: SPFxTemplateJsonFile = await SPFxTemplateJsonFile.fromFolderAsync(path);
         const files = await SPFxTemplate._readFilesRecursively(path);
+        return new SPFxTemplate(templateJsonFile, files);
+    }
+
+    public static async fromMemoryAsync(
+        templateName: string,
+        templateJsonData: unknown,
+        fileMap: Map<string, Buffer>
+    ): Promise<SPFxTemplate> {
+        // Validate the template JSON against our schema
+        const result = SPFxTemplateDefinitionSchema.safeParse(templateJsonData);
+        if (!result.success) {
+            throw new Error(`Invalid template.json: ${result.error}`);
+        }
+        
+        // Create SPFxTemplateJsonFile from the validated JSON
+        const templateJsonFile = new SPFxTemplateJsonFile(result.data);
+        
+        // Convert Buffer map to string map, excluding template.json
+        const files = new Map<string, string>();
+        for (const [filePath, buffer] of fileMap) {
+            if (filePath !== 'template.json') {
+                files.set(filePath, buffer.toString('utf8'));
+            }
+        }
+        
         return new SPFxTemplate(templateJsonFile, files);
     }
 

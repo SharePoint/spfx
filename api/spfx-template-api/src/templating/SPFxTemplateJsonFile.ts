@@ -27,7 +27,7 @@ const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z.object({
     description: z.string().max(DESCRIPTION_MAX_LENGTH).optional(),
     version: z.string().regex(VERSION_REGEX),
     spfxVersion: z.string().regex(SPFX_VERSION_REGEX)
-});
+}).strict();
 
 /**
  * @public
