@@ -1,0 +1,46 @@
+{
+  "name": <%= libraryName %>,
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=22.14.0 < 23.0.0"
+  },
+  "scripts": {
+    "build": "heft build --clean",
+    "test": "npm run build && heft test",
+    "clean": "heft clean",
+    "deploy": "heft dev-deploy",
+    "start": "heft start --clean",
+    "build-watch": "heft build --lite",
+    "package-solution": "heft package-solution",
+    "deploy-azure-storage": "heft deploy-azure-storage",
+    "eject-webpack": "heft eject-webpack",
+    "trust-dev-cert": "heft trust-dev-cert",
+    "untrust-dev-cert": "heft untrust-dev-cert"
+  },
+  "dependencies": {
+    "tslib": "2.3.1",
+    "@microsoft/sp-core-library": "1.22.0-beta.2",
+    "@microsoft/sp-component-base": "1.22.0-beta.2",
+    "@microsoft/sp-property-pane": "1.22.0-beta.2",
+    "@microsoft/sp-webpart-base": "1.22.0-beta.2",
+    "@microsoft/sp-lodash-subset": "1.22.0-beta.2",
+    "@microsoft/sp-office-ui-fabric-core": "1.22.0-beta.2"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-config": "4.3.0",
+    "@microsoft/eslint-plugin-spfx": "1.22.0-beta.2",
+    "@microsoft/eslint-config-spfx": "1.22.0-beta.2",
+    "@microsoft/spfx-web-build-rig": "1.22.0-beta.2",
+    "@rushstack/heft": "0.74.3",
+    "@types/webpack-env": "~1.15.2",
+    "@typescript-eslint/parser": "8.31.1",
+    "eslint": "8.57.1",
+    "typescript": "5.3.3",
+    "@microsoft/sp-module-interfaces": "1.22.0-beta.2",
+    "@fluentui/react": "^8.106.4"
+  },
+  "overrides": {
+    "@rushstack/heft": "0.74.3"
+  }
+}
