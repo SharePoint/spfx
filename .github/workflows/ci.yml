@@ -1,0 +1,27 @@
+name: CI
+on:
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Git config user
+        uses: snow-actions/git-config-user@v1.0.0
+        with:
+          name: SPFx CLI Bot
+          email: spfx-cli-bot@microsoft.com
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 22.15.0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+      - name: Rush Install
+        run: node common/scripts/install-run-rush.js install
+      - name: Rush rebuild
+        run: node common/scripts/install-run-rush.js rebuild
