@@ -2,46 +2,9 @@ import { FileSystem } from '@rushstack/node-core-library';
 import { create as createMemFs } from 'mem-fs';
 import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
 import * as path from 'path';
-import semverRegex from 'semver-regex';
 import * as z from 'zod';
 
-import { SPFxTemplateJsonFile } from './SPFxTemplateJsonFile';
-
-/** @public The minimum length of the template name */
-export const NAME_MIN_LENGTH: number = 3;
-
-/** @public The maximum length of the template name */
-export const NAME_MAX_LENGTH: number = 100;
-
-/** @public The maximum length of the template description */
-export const DESCRIPTION_MAX_LENGTH: number = 500;
-
-const VERSION_REGEX: RegExp = semverRegex();
-const SPFX_VERSION_REGEX: RegExp = semverRegex();
-
-/**
- * @public
- * Interface for SPFx template definition.
- */
-export interface ISPFxTemplateDefinition {
-    $schema: string;
-    name: string;
-    description?: string;
-    version: string;
-    spfxVersion: string;
-}
-
-/**
- * @public
- * The schema for validating SPFx template definition files (template.json).
- */
-export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateDefinition> = z.object({
-    $schema: z.string().url(),
-    name: z.string().min(NAME_MIN_LENGTH).max(NAME_MAX_LENGTH),
-    description: z.string().max(DESCRIPTION_MAX_LENGTH).optional(),
-    version: z.string().regex(VERSION_REGEX),
-    spfxVersion: z.string().regex(SPFX_VERSION_REGEX)
-}).strict();
+import { SPFxTemplateJsonFile, SPFxTemplateDefinitionSchema } from './SPFxTemplateJsonFile';
 
 /**
  * @public
@@ -74,6 +37,8 @@ export class SPFxTemplate {
     public get spfxVersion(): string {
         return this._definition.spfxVersion;
     }
+
+    
 
     public static async fromFolderAsync(path: string): Promise<SPFxTemplate> {
         const templateJsonFile: SPFxTemplateJsonFile = await SPFxTemplateJsonFile.fromFolderAsync(path);
@@ -137,6 +102,22 @@ export class SPFxTemplate {
     }
 
     public async render(context: object, destinationDir: string): Promise<MemFsEditor> {
+        // use the template "schema" to validate the context object
+        if (this._definition.contextSchema) {
+            // Build a Zod schema from the contextSchema metadata
+            const schemaShape: Record<string, z.ZodString> = {};
+            for (const [key, value] of Object.entries(this._definition.contextSchema)) {
+                if (value.type === 'string') {
+                    schemaShape[key] = z.string();
+                }
+            }
+            const contextSchema = z.object(schemaShape);
+            const validationResult = contextSchema.safeParse(context);
+            if (!validationResult.success) {
+                throw new Error(`Invalid context object: ${validationResult.error}`);
+            }
+        }
+
         const fs: MemFsEditor = createEditor(createMemFs());
 
         for (const [filename, contents] of this._files.entries()) {

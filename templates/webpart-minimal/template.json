@@ -3,10 +3,10 @@
     "description": "A minimal web part template (no framework) for SPFx",
     "version": "0.0.1",
     "spfxVersion": "1.22.0",
-    "variables": {
+    "contextSchema": {
         "eslintProfile": {
             "type": "string",
-            "description": "The ESLint profile from `@microsoft/eslint-config-spfx` to use",
+            "description": "The ESLint profile from `@microsoft/eslint-config-spfx` to use"
         },
         "libraryName": {
             "type": "string",

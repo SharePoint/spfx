@@ -15,18 +15,25 @@ interface ISPFxTemplateJson {
     description?: string;
     version: string;
     spfxVersion: string;
+    contextSchema?: Record<string, { type: 'string'; description: string }>;
 };
 
 /**
  * @public
  * The schema for validating SPFx template definition files (template.json).
  */
-const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z.object({
+export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z.object({
     $schema: z.url().optional(),
     name: z.string().min(NAME_MIN_LENGTH).max(NAME_MAX_LENGTH),
     description: z.string().max(DESCRIPTION_MAX_LENGTH).optional(),
     version: z.string().regex(VERSION_REGEX),
-    spfxVersion: z.string().regex(SPFX_VERSION_REGEX)
+    spfxVersion: z.string().regex(SPFX_VERSION_REGEX),
+    contextSchema: z.record(z.string(),
+        z.object({
+            type: z.enum(['string']),
+            description: z.string()
+        })
+    ).optional()
 }).strict();
 
 /**
@@ -56,6 +63,10 @@ export class SPFxTemplateJsonFile {
 
     public get spfxVersion(): string {
         return this._data.spfxVersion;
+    }
+
+    public get contextSchema(): Record<string, { type: 'string'; description: string }> | undefined {
+        return this._data.contextSchema;
     }
 
     public static async fromFileAsync(filePath: string): Promise<SPFxTemplateJsonFile> {

@@ -17,9 +17,6 @@ export abstract class BaseSPFxTemplateRepositorySource {
     readonly type: SPFxTemplateRepositorySourceTypes;
 }
 
-// @public
-export const DESCRIPTION_MAX_LENGTH: number;
-
 // @public (undocumented)
 export interface IScaffoldProfile {
     // (undocumented)
@@ -31,32 +28,12 @@ export interface IScaffoldProfile {
 }
 
 // @public
-export interface ISPFxTemplateDefinition {
-    // (undocumented)
-    $schema: string;
-    // (undocumented)
-    description?: string;
-    // (undocumented)
-    name: string;
-    // (undocumented)
-    spfxVersion: string;
-    // (undocumented)
-    version: string;
-}
-
-// @public
 export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
     constructor(path: string);
     // (undocumented)
     getTemplates(): Promise<Array<SPFxTemplate>>;
     readonly path: string;
 }
-
-// @public
-export const NAME_MAX_LENGTH: number;
-
-// @public
-export const NAME_MIN_LENGTH: number;
 
 // @public
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
@@ -120,13 +97,19 @@ export class SPFxTemplateCollection implements ReadonlyMap<string, SPFxTemplate>
     values(): MapIterator<SPFxTemplate>;
 }
 
+// Warning: (ae-forgotten-export) The symbol "ISPFxTemplateJson" needs to be exported by the entry point index.d.ts
+//
 // @public
-export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateDefinition>;
+export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson>;
 
 // @public
 export class SPFxTemplateJsonFile {
-    // Warning: (ae-forgotten-export) The symbol "ISPFxTemplateJson" needs to be exported by the entry point index.d.ts
     constructor(data: ISPFxTemplateJson);
+    // (undocumented)
+    get contextSchema(): Record<string, {
+        type: 'string';
+        description: string;
+    }> | undefined;
     // (undocumented)
     get description(): string | undefined;
     // (undocumented)
