@@ -1,0 +1,32 @@
+{
+  "name": "@microsoft/spfx-cli-build-rig",
+  "description": "A rig package for building SPFx CLI projects with Heft.",
+  "version": "0.0.1",
+  "private": true,
+  "keywords": ["Heft", "build rig", "SPFx"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.14.0 <23.0.0 || >=24.5.0 <25.0.0"
+  },
+  "packageManager": "pnpm@10.15.1",
+  "scripts": {
+    "build": "",
+    "_phase:build": ""
+  },
+  "peerDependencies": {
+    "@rushstack/heft": "^1.1.0",
+    "eslint": "~9.25.1"
+  },
+  "dependencies": {
+    "@microsoft/api-extractor": "^7.52.13",
+    "@rushstack/heft-node-rig": "^2.9.6",
+    "@types/heft-jest": "^1.0.6",
+    "@types/node": "^22.18.6",
+    "jest-environment-node": "^30.1.2",
+    "typescript": "~5.8.3"
+  },
+  "devDependencies": {
+    "@rushstack/heft": "^1.1.0",
+    "eslint": "~9.25.1"
+  }
+}
