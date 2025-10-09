@@ -10,7 +10,7 @@ This monorepo is organized into the following projects:
 | Package Name | Type | Description |
 |--------------|------|-------------|
 | [@microsoft/spfx-cli](apps/spfx-cli) | Application | Command-line interface for managing SPFx projects |
-| [@microsoft/spfx-template-api](libraries/spfx-template-api) | Library | Core scaffolding API |
+| [@microsoft/spfx-templating-engine](libraries/spfx-templating-engine) | Library | Core scaffolding API |
 
 ### Internal Packages
 

@@ -455,8 +455,8 @@
       "tags": [ ]
     },
     {
-      "packageName": "@microsoft/spfx-template-api",
-      "projectFolder": "libraries/spfx-template-api",
+      "packageName": "@microsoft/spfx-templating-engine",
+      "projectFolder": "libraries/spfx-templating-engine",
       "reviewCategory": "libraries",
       "shouldPublish": false,
       "tags": [ ]

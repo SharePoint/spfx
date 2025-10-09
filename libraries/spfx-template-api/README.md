@@ -1,1 +1,0 @@
-# @microsoft/spfx-template-api

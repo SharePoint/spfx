@@ -12,9 +12,9 @@ importers:
 
   ../../apps/spfx-cli:
     dependencies:
-      '@microsoft/spfx-template-api':
+      '@microsoft/spfx-templating-engine':
         specifier: workspace:*
-        version: link:../../libraries/spfx-template-api
+        version: link:../../libraries/spfx-templating-engine
       '@rushstack/terminal':
         specifier: 0.15.4
         version: 0.15.4(@types/node@22.18.8)
@@ -29,7 +29,7 @@ importers:
         specifier: ~9.25.1
         version: 9.25.1
 
-  ../../libraries/spfx-template-api:
+  ../../libraries/spfx-templating-engine:
     devDependencies:
       '@microsoft/spfx-cli-build-rig':
         specifier: workspace:*

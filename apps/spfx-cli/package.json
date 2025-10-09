@@ -14,7 +14,7 @@
     "_phase:test": "heft run --only test -- --clean"
   },
   "dependencies": {
-    "@microsoft/spfx-template-api": "workspace:*",
+    "@microsoft/spfx-templating-engine": "workspace:*",
     "@rushstack/terminal": "0.15.4"
   },
   "devDependencies": {

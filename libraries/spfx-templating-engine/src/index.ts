@@ -5,6 +5,6 @@
 
 /**
  * @public
- * The name of the SPFx Template API package.
+ * The name of the SPFx Templating Engine package.
  */
-export const PACKAGE_NAME: string = '@microsoft/spfx-template-api';
+export const PACKAGE_NAME: string = '@microsoft/spfx-templating-engine';

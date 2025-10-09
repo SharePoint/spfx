@@ -1,5 +1,5 @@
 {
-  "name": "@microsoft/spfx-template-api",
+  "name": "@microsoft/spfx-templating-engine",
   "description": "Library for generating SPFx solutions",
   "version": "1.0.0",
   "private": true,
