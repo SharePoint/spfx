@@ -1,7 +1,4 @@
-This is a monorepo, with each published package containing its own license. The
-license for each package can be found in the package's folder.
-
-The projects in this monorepo are licensed under the MIT license.
+@microsoft/spfx-templating-engine
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 

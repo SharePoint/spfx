@@ -79,7 +79,7 @@
    * The default value is false to avoid legacy compatibility issues.
    * It is strongly recommended to set `strictPeerDependencies=true`.
    */
-  // "strictPeerDependencies": true,
+  "strictPeerDependencies": false,
 
   /**
    * Environment variables that will be provided to PNPM.
@@ -122,7 +122,7 @@
    *
    * The default value is false.
    */
-  // "preventManualShrinkwrapChanges": true,
+  "preventManualShrinkwrapChanges": true,
 
   /**
    * When a project uses `workspace:` to depend on another Rush project, PNPM normally installs

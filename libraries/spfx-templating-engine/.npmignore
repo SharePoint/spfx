@@ -1,0 +1,11 @@
+# Ignore everything by default
+*
+
+# Then explicitly include what we want to publish
+!bin/
+!bin/**
+!lib/
+!lib/**
+!README.md
+!package.json
+!LICENSE

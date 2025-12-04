@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../node_modules/@rushstack/heft-node-rig/profiles/default/tsconfig-base.json",
+
+  "compilerOptions": {
+    "outDir": "../../../../../lib",
+    "rootDir": "../../../../../src",
+    // Module System - Override base config
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2022",
+    "lib": ["ES2022", "Decorators"],
+    "baseUrl": ".",
+    "paths": {
+      "*": ["../../../../../src/*"]
+    },
+
+    // Type Checking - Ensure strict mode is properly enabled
+    "strict": true,
+
+    // Type Checking - Additional Strictness (not in base)
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+
+    // Performance & Compatibility
+    "skipLibCheck": true,
+
+    // Type Definitions - Add Node types
+    "types": ["heft-jest", "node"],
+    "typeRoots": ["../../../../../node_modules/@types", "../../node_modules/@types"],
+  },
+  "include": ["../../../../../src/**/*.ts", "../../../../../src/**/*.tsx"]
+}

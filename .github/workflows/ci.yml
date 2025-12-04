@@ -14,14 +14,18 @@ jobs:
       - name: Git config user
         uses: snow-actions/git-config-user@v1.0.0
         with:
-          name: # Service Account's Name
-          email: # Service Account's Email Address
+          name: SPFx CLI Bot
+          email: spfx-cli-bot@microsoft.com
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 22.15.0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
       - name: Verify Change Logs
         run: node common/scripts/install-run-rush.js change --verify
       - name: Rush Install
         run: node common/scripts/install-run-rush.js install
       - name: Rush rebuild
-        run: node common/scripts/install-run-rush.js rebuild --verbose --production
+        run: node common/scripts/install-run-rush.js rebuild

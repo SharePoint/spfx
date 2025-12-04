@@ -11,8 +11,8 @@
     "_phase:test": "heft run --only test -- --clean"
   },
   "dependencies": {
-    "@rushstack/node-core-library": "^5.14.0",
-    "@rushstack/terminal": "0.15.4",
+    "@rushstack/node-core-library": "^5.19.0",
+    "@rushstack/terminal": "0.19.4",
     "adm-zip": "^0.5.16",
     "ejs": "^3.1.10",
     "mem-fs": "^4.1.2",
@@ -21,13 +21,13 @@
     "zod": "^4.1.5"
   },
   "devDependencies": {
-    "@rushstack/eslint-config": "4.3.0",
-    "@rushstack/heft": "0.74.3",
-    "@rushstack/heft-node-rig": "^2.2.13",
+    "@rushstack/eslint-config": "4.6.1",
+    "@rushstack/heft": "^1.1.6",
+    "@rushstack/heft-node-rig": "^2.11.11",
     "@types/adm-zip": "^0.5.5",
-    "@types/heft-jest": "1.0.2",
-    "@types/node": "^22.18.1",
-    "typescript": "~5.8.0",
-    "eslint": "8.57.1"
+    "@types/heft-jest": "^1.0.6",
+    "@types/node": "^22.18.6",
+    "typescript": "~5.8.3",
+    "eslint": "^8.57.1"
   }
 }
