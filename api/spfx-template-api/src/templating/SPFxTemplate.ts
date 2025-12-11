@@ -121,7 +121,13 @@ export class SPFxTemplate {
         const fs: MemFsEditor = createEditor(createMemFs());
 
         for (const [filename, contents] of this._files.entries()) {
-            const destination = path.join(destinationDir, filename);
+            // Render the filename by replacing {variableName} placeholders
+            let renderedFilename = filename;
+            for (const [key, value] of Object.entries(context)) {
+                // eslint-disable-next-line @rushstack/security/no-unsafe-regexp
+                renderedFilename = renderedFilename.replace(new RegExp(`\\{${key}\\}`, 'g'), String(value));
+            }
+            const destination = path.join(destinationDir, renderedFilename);
             const rendered = fs._processTpl({ contents, filename, context });
             console.log(`Writing file: ${destination}`);
             fs.write(destination, rendered);

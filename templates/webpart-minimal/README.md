@@ -46,7 +46,7 @@ Short summary on functionality and used technologies.
 - Ensure that you are at the solution folder
 - in the command-line run:
   - **npm install**
-  - **<% if(!useGulp){ %>npm run start<% } else { %>gulp serve<% } %>**
+  - **npm run start**
 
 > Include any additional steps as needed.
 

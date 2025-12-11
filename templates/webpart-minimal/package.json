@@ -1,5 +1,5 @@
 {
-  "name": <%= libraryName %>,
+  "name": "<%= libraryName %>",
   "version": "0.0.1",
   "private": true,
   "engines": {
@@ -20,24 +20,24 @@
   },
   "dependencies": {
     "tslib": "2.3.1",
-    "@microsoft/sp-core-library": "1.22.0-beta.2",
-    "@microsoft/sp-component-base": "1.22.0-beta.2",
-    "@microsoft/sp-property-pane": "1.22.0-beta.2",
-    "@microsoft/sp-webpart-base": "1.22.0-beta.2",
-    "@microsoft/sp-lodash-subset": "1.22.0-beta.2",
-    "@microsoft/sp-office-ui-fabric-core": "1.22.0-beta.2"
+    "@microsoft/sp-core-library": "1.22.0-rc.0",
+    "@microsoft/sp-component-base": "1.22.0-rc.0",
+    "@microsoft/sp-property-pane": "1.22.0-rc.0",
+    "@microsoft/sp-webpart-base": "1.22.0-rc.0",
+    "@microsoft/sp-lodash-subset": "1.22.0-rc.0",
+    "@microsoft/sp-office-ui-fabric-core": "1.22.0-rc.0"
   },
   "devDependencies": {
     "@rushstack/eslint-config": "4.3.0",
-    "@microsoft/eslint-plugin-spfx": "1.22.0-beta.2",
-    "@microsoft/eslint-config-spfx": "1.22.0-beta.2",
-    "@microsoft/spfx-web-build-rig": "1.22.0-beta.2",
+    "@microsoft/eslint-plugin-spfx": "1.22.0-rc.0",
+    "@microsoft/eslint-config-spfx": "1.22.0-rc.0",
+    "@microsoft/spfx-web-build-rig": "1.22.0-rc.0",
     "@rushstack/heft": "^1.1.0",
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.31.1",
-    "eslint": "~9.25.1",
+    "eslint": "^8.57.0",
     "typescript": "~5.8.3",
-    "@microsoft/sp-module-interfaces": "1.22.0-beta.2",
+    "@microsoft/sp-module-interfaces": "1.22.0-rc.0",
     "@fluentui/react": "^8.106.4"
   },
   "overrides": {
