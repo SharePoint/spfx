@@ -49,26 +49,46 @@ export class SPFxTemplateJsonFile {
         this._data = data;
     }
 
+    /**
+     * Gets the name of the template.
+     */
     public get name(): string {
         return this._data.name;
     }
 
+    /**
+     * Gets the description of the template.
+     */
     public get description(): string | undefined {
         return this._data.description;
     }
 
+    /**
+     * Gets the version of the template.
+     */
     public get version(): string {
         return this._data.version;
     }
 
+    /**
+     * Gets the SPFx version this template is compatible with.
+     */
     public get spfxVersion(): string {
         return this._data.spfxVersion;
     }
 
+    /**
+     * Gets the context schema defining the variables required for template rendering.
+     */
     public get contextSchema(): Record<string, { type: 'string'; description: string }> | undefined {
         return this._data.contextSchema;
     }
 
+    /**
+     * Creates a new SPFxTemplateJsonFile instance from a file path.
+     * @param filePath - The path to the template.json file
+     * @returns A Promise that resolves to a new SPFxTemplateJsonFile instance
+     */
     public static async fromFileAsync(filePath: string): Promise<SPFxTemplateJsonFile> {
         const content: string = await FileSystem.readFileAsync(filePath);
         const parsed = JSON.parse(content);
@@ -79,6 +99,11 @@ export class SPFxTemplateJsonFile {
         return new SPFxTemplateJsonFile(result.data);
     }
 
+    /**
+     * Creates a new SPFxTemplateJsonFile instance from a folder containing a template.json file.
+     * @param folderPath - The path to the folder containing the template.json file
+     * @returns A Promise that resolves to a new SPFxTemplateJsonFile instance
+     */
     public static async fromFolderAsync(folderPath: string): Promise<SPFxTemplateJsonFile> {
         const filePath = path.join(folderPath, SPFxTemplateJsonFile.TEMPLATE_JSON);
         return SPFxTemplateJsonFile.fromFileAsync(filePath);

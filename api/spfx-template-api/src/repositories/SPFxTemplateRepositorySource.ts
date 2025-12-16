@@ -20,6 +20,10 @@ export abstract class BaseSPFxTemplateRepositorySource {
         this.type = type;
     }
 
+    /**
+     * Retrieves all templates from this repository source.
+     * @returns A Promise that resolves to an array of SPFxTemplate instances
+     */
     public abstract getTemplates(): Promise<Array<SPFxTemplate>>;
 }
 
@@ -36,6 +40,10 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
         this.path = path;
     }
 
+    /**
+     * Retrieves all templates from the local file system.
+     * @returns A Promise that resolves to an array of SPFxTemplate instances
+     */
     public async getTemplates(): Promise<Array<SPFxTemplate>> {
         try {
             return await Promise.all(await FileSystem
@@ -57,14 +65,23 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
  */
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
     private readonly _repoUri: string;
-    private readonly _branch?: string;
+    private readonly _ref: string;
 
+    /**
+     * Creates a new instance of PublicGitHubRepositorySource.
+     * @param repoUri - The GitHub repository URI (e.g., https://github.com/owner/repo)
+     * @param branch - The optional branch name to fetch from (defaults to 'main')
+     */
     public constructor(repoUri: string, branch?: string) {
         super('github');
         this._repoUri = repoUri;
-        this._branch = branch;
+        this._ref = branch || 'main';
     }
 
+    /**
+     * Retrieves all templates from the GitHub repository.
+     * @returns A Promise that resolves to an array of SPFxTemplate instances
+     */
     public async getTemplates(): Promise<Array<SPFxTemplate>> {
         try {
             const downloadUrl = this._buildDownloadUrl();
@@ -77,8 +94,7 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
 
     private _buildDownloadUrl(): string {
         const { owner, repo } = this._parseGitHubUrl();
-        const ref = this._branch || 'main';
-        return `https://codeload.github.com/${owner}/${repo}/zip/${ref}`;
+        return `https://codeload.github.com/${owner}/${repo}/zip/${this._ref}`;
     }
 
     private _parseGitHubUrl(): { owner: string; repo: string } {

@@ -22,30 +22,53 @@ export class SPFxTemplate {
         this._files = files;
     }
 
+    /**
+     * Gets the name of the template.
+     */
     public get name(): string {
         return this._definition.name;
     }
 
+    /**
+     * Gets the description of the template.
+     */
     public get description(): string | undefined {
         return this._definition.description;
     }
 
+    /**
+     * Gets the version of the template as a string.
+     * This is a semver "X.Y.Z" string; pre-release and build metadata are not supported.
+     */
     public get version(): string {
         return this._definition.version;
     }
 
+    /**
+     * Gets the SPFx version this template is compatible with.
+     */
     public get spfxVersion(): string {
         return this._definition.spfxVersion;
     }
 
-    
-
+    /**
+     * Creates a new SPFxTemplate instance from a folder on disk.
+     * @param path - The path to the folder containing the template files
+     * @returns A Promise that resolves to a new SPFxTemplate instance
+     */
     public static async fromFolderAsync(path: string): Promise<SPFxTemplate> {
         const templateJsonFile: SPFxTemplateJsonFile = await SPFxTemplateJsonFile.fromFolderAsync(path);
         const files = await SPFxTemplate._readFilesRecursively(path);
         return new SPFxTemplate(templateJsonFile, files);
     }
 
+    /**
+     * Creates a new SPFxTemplate instance from in-memory data.
+     * @param templateName - The name of the template
+     * @param templateJsonData - The template.json data as an unknown object to be validated
+     * @param fileMap - A map of file paths to their buffer contents
+     * @returns A Promise that resolves to a new SPFxTemplate instance
+     */
     public static async fromMemoryAsync(
         templateName: string,
         templateJsonData: unknown,
@@ -101,6 +124,12 @@ export class SPFxTemplate {
         return files;
     }
 
+    /**
+     * Renders the template with the provided context object and writes to a destination directory.
+     * @param context - The context object containing variables to be used in template rendering
+     * @param destinationDir - The destination directory where rendered files will be written
+     * @returns A Promise that resolves to a MemFsEditor instance containing the rendered files
+     */
     public async render(context: object, destinationDir: string): Promise<MemFsEditor> {
         // use the template "schema" to validate the context object
         if (this._definition.contextSchema) {
@@ -136,10 +165,19 @@ export class SPFxTemplate {
         return fs;
     }
 
+    /**
+     * Commits the rendered files to disk.
+     * @param fs - The MemFsEditor instance containing the files to write
+     * @returns A Promise that resolves when all files have been written
+     */
     public write(fs: MemFsEditor): Promise<void> {
         return fs.commit();
     }
 
+    /**
+     * Returns a string representation of the template including its metadata.
+     * @returns A formatted string with template details
+     */
     public toString(): string {
         // print the name, description, version, spfxVersion, and number of files as a table
         return [

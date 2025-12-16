@@ -22,6 +22,10 @@ export class SPFxTemplateRepositoryManager {
     this._sources.push(source);
   }
 
+  /**
+   * Retrieves all templates from all configured repository sources.
+   * @returns A Promise that resolves to a SPFxTemplateCollection containing all templates
+   */
   public async getTemplates(): Promise<SPFxTemplateCollection> {
     const templates: Array<Array<SPFxTemplate>> = await Promise.all(this._sources.map(source => source.getTemplates()));
     return new SPFxTemplateCollection(templates.flat());
