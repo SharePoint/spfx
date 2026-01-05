@@ -93,7 +93,6 @@ function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: strin
 
     for (const [file, data] of Object.entries(changed)) {
         const { state, isNew } = data;
-        terminal.writeLine(JSON.stringify(data));
         if (isNew) {
             terminal.writeLine(Colorize.green(`Added: ${file}`));
             continue;

@@ -15,6 +15,9 @@ const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
 const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
 
+// Check for --update or -u flag
+const UPDATE_MODE = process.argv.includes('--update') || process.argv.includes('-u');
+
 /**
  * Parse .gitignore file and return ignore matcher
  */
@@ -99,6 +102,56 @@ function cleanOutputDir(templateName: string): void {
 }
 
 /**
+ * Copy directory recursively from source to destination
+ * Only updates files that are different
+ * Returns the number of files updated
+ */
+function copyDirectory(src: string, dest: string, ignoreMatcher?: ReturnType<typeof ignore>): number {
+  // Create destination directory
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true });
+  }
+
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  let updatedCount = 0;
+
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    const relativePath = path.relative(src, srcPath).replace(/\\/g, '/');
+
+    // Skip if should be ignored
+    if (ignoreMatcher && ignoreMatcher.ignores(relativePath)) {
+      continue;
+    }
+
+    if (entry.isDirectory()) {
+      updatedCount += copyDirectory(srcPath, destPath, ignoreMatcher);
+    } else {
+      // Compare files before copying
+      let shouldCopy = false;
+      
+      if (!fs.existsSync(destPath)) {
+        shouldCopy = true;
+      } else {
+        // Compare content (normalize line endings)
+        const srcContent = fs.readFileSync(srcPath, 'utf-8').replace(/\r\n/g, '\n');
+        const destContent = fs.readFileSync(destPath, 'utf-8').replace(/\r\n/g, '\n');
+        shouldCopy = srcContent !== destContent;
+      }
+      
+      if (shouldCopy) {
+        fs.copyFileSync(srcPath, destPath);
+        console.log(`  Updated: ${relativePath}`);
+        updatedCount++;
+      }
+    }
+  }
+  
+  return updatedCount;
+}
+
+/**
  * Get all template names from the templates directory
  */
 async function getTemplateNames(): Promise<string[]> {
@@ -132,11 +185,13 @@ describe('SPFx Template Scaffolding', () => {
 
     templateNames.forEach((templateName) => {
       it(`should scaffold ${templateName} template and match example output`, async () => {
-        const outputPath = path.join(OUTPUT_DIR, templateName);
         const examplePath = path.join(EXAMPLES_DIR, templateName);
+        // In update mode, scaffold directly to examples directory
+        // In normal mode, scaffold to temp directory for comparison
+        const outputPath = UPDATE_MODE ? examplePath : path.join(OUTPUT_DIR, templateName);
 
-        // Check if example exists
-        if (!fs.existsSync(examplePath)) {
+        // Check if example exists (only in normal mode)
+        if (!UPDATE_MODE && !fs.existsSync(examplePath)) {
           console.warn(`Warning: No example found for template '${templateName}' at ${examplePath}`);
           return;
         }
@@ -144,8 +199,11 @@ describe('SPFx Template Scaffolding', () => {
         // Clean up output directory
         cleanOutputDir(templateName);
 
+
         // Ensure output directory exists
-        fs.mkdirSync(outputPath, { recursive: true });
+        if (!fs.existsSync(outputPath)) {
+          fs.mkdirSync(outputPath, { recursive: true });
+        }
 
         // Run the scaffolding CLI
         try {
@@ -164,6 +222,12 @@ describe('SPFx Template Scaffolding', () => {
         // Parse .gitignore from template
         const templatePath = path.join(TEMPLATES_DIR, templateName);
         const ignoreMatcher = await parseGitignore(templatePath);
+
+        // If update mode, skip comparison (we scaffolded directly to examples)
+        if (UPDATE_MODE) {
+          console.log(`[UPDATE MODE] Scaffolded ${templateName} to ${examplePath}`);
+          return;
+        }
 
         // Get all files from both directories
         const scaffoldedFiles = await getAllFiles(outputPath, outputPath, ignoreMatcher);
