@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "webpart-noframework-heft-1756847676957-client-side-solution",
-    "id": "81820bc3-982d-44ff-bc45-34bce86d08e1",
+    "name": "my-client-side-solution",
+    "id": "fae7f6cd-a733-4c4d-bef0-0bb7921be962",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -12,14 +12,14 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.0-dev.128"
+      "mpnId": "Undefined-1.22.1"
     },
     "metadata": {
       "shortDescription": {
-        "default": "webpart-noframework-heft-1756847676957 description"
+        "default": "my description"
       },
       "longDescription": {
-        "default": "webpart-noframework-heft-1756847676957 description"
+        "default": "my description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "webpart-noframework-heft-1756847676957 Feature",
-        "description": "The feature that activates elements of the webpart-noframework-heft-1756847676957 solution.",
-        "id": "50b1b6ed-4f76-40bd-b977-b302db06b0ce",
+        "title": "my Feature",
+        "description": "The feature that activates elements of the my solution.",
+        "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/webpart-noframework-heft-1756847676957.sppkg"
+    "zippedPackage": "solution/my.sppkg"
   }
 }
