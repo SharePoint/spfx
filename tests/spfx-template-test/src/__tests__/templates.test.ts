@@ -1,0 +1,205 @@
+import * as fs from 'fs';
+import * as path from 'path';
+import { execSync } from 'child_process';
+import { promisify } from 'util';
+import ignore from 'ignore';
+
+const readdir = promisify(fs.readdir);
+const stat = promisify(fs.stat);
+const readFile = promisify(fs.readFile);
+
+// Path to the root of the monorepo
+const REPO_ROOT = path.resolve(__dirname, '../../../../');
+const TEMPLATES_DIR = path.join(REPO_ROOT, 'templates');
+const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
+const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
+const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
+
+/**
+ * Parse .gitignore file and return ignore matcher
+ */
+async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ignore>> {
+  const gitignorePath = path.join(templateDir, '.gitignore');
+  const ig = ignore();
+  
+  // Add default ignores that should always be excluded
+  ig.add([
+    'node_modules',
+    'lib',
+    'lib-commonjs',
+    'rush-logs',
+    'temp',
+    'dist',
+    '.rush'
+  ]);
+  
+  try {
+    const gitignoreContent = await readFile(gitignorePath, 'utf-8');
+    ig.add(gitignoreContent);
+  } catch (error) {
+    // If .gitignore doesn't exist, just use default ignores
+    console.warn(`No .gitignore found at ${gitignorePath}, using default ignores`);
+  }
+  
+  return ig;
+}
+
+/**
+ * Recursively get all files in a directory
+ */
+async function getAllFiles(
+  dir: string,
+  baseDir: string = dir,
+  ignoreMatcher?: ReturnType<typeof ignore>
+): Promise<string[]> {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const files = await Promise.all(
+    entries.map(async (entry) => {
+      const fullPath = path.join(dir, entry.name);
+      const relativePath = path.relative(baseDir, fullPath).replace(/\\/g, '/');
+      
+      // Check if this path should be ignored
+      if (ignoreMatcher && ignoreMatcher.ignores(relativePath)) {
+        return [];
+      }
+      
+      if (entry.isDirectory()) {
+        return getAllFiles(fullPath, baseDir, ignoreMatcher);
+      } else {
+        // Return relative path from baseDir
+        return [path.relative(baseDir, fullPath)];
+      }
+    })
+  );
+  return files.flat();
+}
+
+/**
+ * Read file content, return null if file doesn't exist or can't be read
+ * Normalizes line endings to \n for consistent comparison
+ */
+async function readFileContent(filePath: string): Promise<string | null> {
+  try {
+    const content = await readFile(filePath, 'utf-8');
+    // Normalize line endings to \n
+    return content.replace(/\r\n/g, '\n');
+  } catch (error) {
+    return null;
+  }
+}
+
+/**
+ * Clean up the output directory before scaffolding
+ */
+function cleanOutputDir(templateName: string): void {
+  const outputPath = path.join(OUTPUT_DIR, templateName);
+  if (fs.existsSync(outputPath)) {
+    fs.rmSync(outputPath, { recursive: true, force: true });
+  }
+}
+
+/**
+ * Get all template names from the templates directory
+ */
+async function getTemplateNames(): Promise<string[]> {
+  const entries = await readdir(TEMPLATES_DIR, { withFileTypes: true });
+  return entries
+    .filter((entry) => entry.isDirectory() && entry.name !== 'test')
+    .map((entry) => entry.name);
+}
+
+describe('SPFx Template Scaffolding', () => {
+  // Increase timeout for scaffolding operations
+  jest.setTimeout(120000);
+
+  let templateNames: string[];
+
+  beforeAll(async () => {
+    // Get all template names dynamically
+    templateNames = await getTemplateNames();
+    
+    // Ensure output directory exists
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+    }
+  });
+
+  // Dynamically create a test for each template
+  describe('Template scaffolding and comparison', () => {
+    templateNames = fs.readdirSync(TEMPLATES_DIR, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory() && entry.name !== 'test')
+      .map((entry) => entry.name);
+
+    templateNames.forEach((templateName) => {
+      it(`should scaffold ${templateName} template and match example output`, async () => {
+        const outputPath = path.join(OUTPUT_DIR, templateName);
+        const examplePath = path.join(EXAMPLES_DIR, templateName);
+
+        // Check if example exists
+        if (!fs.existsSync(examplePath)) {
+          console.warn(`Warning: No example found for template '${templateName}' at ${examplePath}`);
+          return;
+        }
+
+        // Clean up output directory
+        cleanOutputDir(templateName);
+
+        // Ensure output directory exists
+        fs.mkdirSync(outputPath, { recursive: true });
+
+        // Run the scaffolding CLI
+        try {
+          const command = `node "${CLI_PATH}" create --template ${templateName} --target-dir "${outputPath}" --local-template "${TEMPLATES_DIR}"`;
+          console.log(`Running: ${command}`);
+          
+          execSync(command, {
+            stdio: 'inherit',
+            cwd: REPO_ROOT,
+            env: { ...process.env }
+          });
+        } catch (error) {
+          throw new Error(`Failed to scaffold template '${templateName}': ${error.message}`);
+        }
+
+        // Parse .gitignore from template
+        const templatePath = path.join(TEMPLATES_DIR, templateName);
+        const ignoreMatcher = await parseGitignore(templatePath);
+
+        // Get all files from both directories
+        const scaffoldedFiles = await getAllFiles(outputPath, outputPath, ignoreMatcher);
+        const exampleFiles = await getAllFiles(examplePath, examplePath, ignoreMatcher);
+
+        // Filter out files that should be ignored in comparison
+        const filterFiles = (files: string[]) => 
+          files.filter((file) => {
+            const normalized = file.replace(/\\/g, '/');
+            // Skip build artifacts and generated files
+            return !normalized.match(/^(package-lock\.json|yarn\.lock|pnpm-lock\.yaml|\.rush\/|rush-logs\/|temp\/|node_modules\/|dist\/|teams\/|webpack\.config\.js)$/);
+          });
+
+        const filteredScaffolded = filterFiles(scaffoldedFiles).sort();
+        const filteredExample = filterFiles(exampleFiles).sort();
+
+        // Check that the same files exist in both directories
+        expect(filteredScaffolded).toEqual(filteredExample);
+
+        // Compare content of each file with detailed diffs
+        for (const file of filteredScaffolded) {
+          const scaffoldedFile = path.join(outputPath, file);
+          const exampleFile = path.join(examplePath, file);
+          
+          const scaffoldedContent = await readFileContent(scaffoldedFile);
+          const exampleContent = await readFileContent(exampleFile);
+          
+          // Use Jest's expect to get nice diff output
+          // Add file context to the error message
+          try {
+            expect(scaffoldedContent).toEqual(exampleContent);
+          } catch (error) {
+            throw new Error(`File content mismatch in '${file}':\n${error.message}`);
+          }
+        }
+      });
+    });
+  });
+});

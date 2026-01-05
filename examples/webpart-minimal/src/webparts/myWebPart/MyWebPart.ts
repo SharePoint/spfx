@@ -1,14 +1,14 @@
 import { Version } from '@microsoft/sp-core-library';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
-import styles from './MinimalWebPartWebPart.module.scss';
+import styles from './MyWebPart.module.scss';
 
-export interface IMinimalWebPartWebPartProps {
+export interface IMyWebPartProps {
 }
 
-export default class MinimalWebPartWebPart extends BaseClientSideWebPart<IMinimalWebPartWebPartProps> {
+export default class MyWebPart extends BaseClientSideWebPart<IMyWebPartProps> {
   public render(): void {
-    this.domElement.innerHTML = `<div class="${ styles.minimalWebPart }"></div>`;
+    this.domElement.innerHTML = `<div class="${ styles.myWebPart }"></div>`;
   }
 
   protected onInit(): Promise<void> {

@@ -32,6 +32,10 @@
             "type": "string",
             "description": "The component name (in manifest) for the web part, in camel case"
         },
+        "componentNameHypenCase": {
+            "type": "string",
+            "description": "The component name (in manifest) for the web part, in hyphen case"
+        },
         "componentClassName": {
             "type": "string",
             "description": "The component class name for the web part"

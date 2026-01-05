@@ -66,14 +66,15 @@ export async function scaffold(options: IScaffoldProfile, terminal: Terminal = n
     const fs = await template.render({
         solution_name: 'test-solution-name',
         eslintProfile: 'react',
-        libraryName: 'my-webpart-library',
+        libraryName: '@spfx-template/webpart-minimal',
         versionBadge: 'https://img.shields.io/badge/version-1.0.0-blue',
-        componentId: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+        componentId: '413af0cb-0c9f-43db-8f86-ad1accc90481',
         componentAlias: 'MyWebPart',
         componentNameUnescaped: 'My Web Part',
         componentNameCamelCase: 'myWebPart',
-        componentClassName: 'MyWebPartWebPart',
-        componentStrings: 'MyWebPartWebPartStrings',
+        componentNameHypenCase: 'my-web-part',
+        componentClassName: 'MyWebPart',
+        componentStrings: 'MyWebPartStrings',
         componentDescription: 'My Web Part Description',
     }, targetDir);
     _printFileChanges(terminal, fs, targetDir);
