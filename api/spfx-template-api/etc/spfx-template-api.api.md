@@ -11,7 +11,6 @@ import * as z from 'zod';
 // @public
 export abstract class BaseSPFxTemplateRepositorySource {
     constructor(type: SPFxTemplateRepositorySourceTypes);
-    // (undocumented)
     abstract getTemplates(): Promise<Array<SPFxTemplate>>;
     // (undocumented)
     readonly type: SPFxTemplateRepositorySourceTypes;
@@ -30,7 +29,6 @@ export interface IScaffoldProfile {
 // @public
 export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
     constructor(path: string);
-    // (undocumented)
     getTemplates(): Promise<Array<SPFxTemplate>>;
     readonly path: string;
 }
@@ -38,7 +36,6 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
 // @public
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
     constructor(repoUri: string, branch?: string);
-    // (undocumented)
     getTemplates(): Promise<Array<SPFxTemplate>>;
 }
 
@@ -54,47 +51,21 @@ export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHu
 // @public
 export class SPFxTemplate {
     constructor(definition: SPFxTemplateJsonFile, files: Map<string, string>);
-    // (undocumented)
     get description(): string | undefined;
-    // (undocumented)
     static fromFolderAsync(path: string): Promise<SPFxTemplate>;
-    // (undocumented)
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
-    // (undocumented)
     get name(): string;
-    // (undocumented)
     render(context: object, destinationDir: string): Promise<MemFsEditor>;
-    // (undocumented)
     get spfxVersion(): string;
-    // (undocumented)
     toString(): string;
-    // (undocumented)
     get version(): string;
-    // (undocumented)
     write(fs: MemFsEditor): Promise<void>;
 }
 
 // @public
-export class SPFxTemplateCollection implements ReadonlyMap<string, SPFxTemplate> {
-    // (undocumented)
-    [Symbol.iterator](): MapIterator<[string, SPFxTemplate]>;
+export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
     constructor(templates: SPFxTemplate[]);
-    // (undocumented)
-    entries(): MapIterator<[string, SPFxTemplate]>;
-    // (undocumented)
-    forEach(callback: (value: SPFxTemplate, key: string, map: ReadonlyMap<string, SPFxTemplate>) => void): void;
-    // (undocumented)
-    get(key: string): SPFxTemplate | undefined;
-    // (undocumented)
-    has(key: string): boolean;
-    // (undocumented)
-    keys(): MapIterator<string>;
-    // (undocumented)
-    get size(): number;
-    // (undocumented)
     toString(): string;
-    // (undocumented)
-    values(): MapIterator<SPFxTemplate>;
 }
 
 // Warning: (ae-forgotten-export) The symbol "ISPFxTemplateJson" needs to be exported by the entry point index.d.ts
@@ -105,24 +76,17 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson>;
 // @public
 export class SPFxTemplateJsonFile {
     constructor(data: ISPFxTemplateJson);
-    // (undocumented)
     get contextSchema(): Record<string, {
         type: 'string';
         description: string;
     }> | undefined;
-    // (undocumented)
     get description(): string | undefined;
-    // (undocumented)
     static fromFileAsync(filePath: string): Promise<SPFxTemplateJsonFile>;
-    // (undocumented)
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplateJsonFile>;
-    // (undocumented)
     get name(): string;
-    // (undocumented)
     get spfxVersion(): string;
     // (undocumented)
     static readonly TEMPLATE_JSON: string;
-    // (undocumented)
     get version(): string;
 }
 
@@ -130,7 +94,6 @@ export class SPFxTemplateJsonFile {
 export class SPFxTemplateRepositoryManager {
     constructor();
     addSource(source: BaseSPFxTemplateRepositorySource): void;
-    // (undocumented)
     getTemplates(): Promise<SPFxTemplateCollection>;
 }
 
