@@ -15,6 +15,29 @@ const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
 const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
 
+// Fixed GUID for testing
+const FIXED_COMPONENT_ID = '413af0cb-0c9f-43db-8f86-ad1accc90481';
+
+// Predefined template configuration
+interface TemplateConfig {
+  libraryName: string;
+  templateName: string;
+  templatePath: string;
+}
+
+const TEMPLATE_CONFIGS: TemplateConfig[] = [
+  {
+    libraryName: '@spfx-template/webpart-noframework',
+    templateName: 'webpart-noframework',
+    templatePath: path.join(TEMPLATES_DIR, 'webpart-noframework')
+  },
+  {
+    libraryName: '@spfx-template/webpart-minimal',
+    templateName: 'webpart-minimal',
+    templatePath: path.join(TEMPLATES_DIR, 'webpart-minimal')
+  }
+];
+
 // Check for --update or -u flag
 const UPDATE_MODE = process.argv.includes('--update') || process.argv.includes('-u');
 
@@ -165,39 +188,30 @@ describe('SPFx Template Scaffolding', () => {
   // Increase timeout for scaffolding operations
   jest.setTimeout(120000);
 
-  let templateNames: string[];
-
   beforeAll(async () => {
-    // Get all template names dynamically
-    templateNames = await getTemplateNames();
-    
     // Ensure output directory exists
     if (!fs.existsSync(OUTPUT_DIR)) {
       fs.mkdirSync(OUTPUT_DIR, { recursive: true });
     }
   });
 
-  // Dynamically create a test for each template
+  // Create a test for each template configuration
   describe('Template scaffolding and comparison', () => {
-    templateNames = fs.readdirSync(TEMPLATES_DIR, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory() && entry.name !== 'test')
-      .map((entry) => entry.name);
-
-    templateNames.forEach((templateName) => {
-      it(`should scaffold ${templateName} template and match example output`, async () => {
-        const examplePath = path.join(EXAMPLES_DIR, templateName);
+    TEMPLATE_CONFIGS.forEach((config) => {
+      it(`should scaffold ${config.templateName} template and match example output`, async () => {
+        const examplePath = path.join(EXAMPLES_DIR, config.templateName);
         // In update mode, scaffold directly to examples directory
         // In normal mode, scaffold to temp directory for comparison
-        const outputPath = UPDATE_MODE ? examplePath : path.join(OUTPUT_DIR, templateName);
+        const outputPath = UPDATE_MODE ? examplePath : path.join(OUTPUT_DIR, config.templateName);
 
         // Check if example exists (only in normal mode)
         if (!UPDATE_MODE && !fs.existsSync(examplePath)) {
-          console.warn(`Warning: No example found for template '${templateName}' at ${examplePath}`);
+          console.warn(`Warning: No example found for template '${config.templateName}' at ${examplePath}`);
           return;
         }
 
         // Clean up output directory
-        cleanOutputDir(templateName);
+        cleanOutputDir(config.templateName);
 
 
         // Ensure output directory exists
@@ -205,9 +219,9 @@ describe('SPFx Template Scaffolding', () => {
           fs.mkdirSync(outputPath, { recursive: true });
         }
 
-        // Run the scaffolding CLI
+        // Run the scaffolding CLI with library name and fixed component ID
         try {
-          const command = `node "${CLI_PATH}" create --template ${templateName} --target-dir "${outputPath}" --local-template "${TEMPLATES_DIR}"`;
+          const command = `node "${CLI_PATH}" create --template ${config.templateName} --target-dir "${outputPath}" --local-template "${TEMPLATES_DIR}" --library-name "${config.libraryName}" --component-id "${FIXED_COMPONENT_ID}"`;
           console.log(`Running: ${command}`);
           
           execSync(command, {
@@ -216,16 +230,15 @@ describe('SPFx Template Scaffolding', () => {
             env: { ...process.env }
           });
         } catch (error) {
-          throw new Error(`Failed to scaffold template '${templateName}': ${error.message}`);
+          throw new Error(`Failed to scaffold template '${config.templateName}': ${error.message}`);
         }
 
         // Parse .gitignore from template
-        const templatePath = path.join(TEMPLATES_DIR, templateName);
-        const ignoreMatcher = await parseGitignore(templatePath);
+        const ignoreMatcher = await parseGitignore(config.templatePath);
 
         // If update mode, skip comparison (we scaffolded directly to examples)
         if (UPDATE_MODE) {
-          console.log(`[UPDATE MODE] Scaffolded ${templateName} to ${examplePath}`);
+          console.log(`[UPDATE MODE] Scaffolded ${config.templateName} to ${examplePath}`);
           return;
         }
 

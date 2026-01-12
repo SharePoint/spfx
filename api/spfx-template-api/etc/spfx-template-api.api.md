@@ -5,7 +5,6 @@
 ```ts
 
 import { MemFsEditor } from 'mem-fs-editor';
-import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
 // @public
@@ -14,16 +13,6 @@ export abstract class BaseSPFxTemplateRepositorySource {
     abstract getTemplates(): Promise<Array<SPFxTemplate>>;
     // (undocumented)
     readonly type: SPFxTemplateRepositorySourceTypes;
-}
-
-// @public (undocumented)
-export interface IScaffoldProfile {
-    // (undocumented)
-    localTemplateSources?: Array<string> | readonly string[];
-    // (undocumented)
-    targetDir: string;
-    // (undocumented)
-    templateName: string;
 }
 
 // @public
@@ -38,12 +27,6 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
     constructor(repoUri: string, branch?: string);
     getTemplates(): Promise<Array<SPFxTemplate>>;
 }
-
-// @public (undocumented)
-export function scaffold(options: IScaffoldProfile, terminal?: Terminal): Promise<void>;
-
-// @public (undocumented)
-export const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile>;
 
 // @public
 export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;

@@ -19,7 +19,10 @@
   "dependencies": {
     "@microsoft/spfx-template-api": "workspace:*",
     "@rushstack/ts-command-line": "^5.0.2",
-    "@rushstack/terminal": "0.19.4"
+    "@rushstack/terminal": "0.19.4",
+    "mem-fs-editor": "^11.1.4",
+    "uuid": "^11.0.5",
+    "zod": "^4.1.5"
   },
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",
@@ -29,6 +32,7 @@
     "@types/heft-jest": "^1.0.6",
     "@types/node": "^22.18.6",
     "typescript": "~5.8.3",
+    "@types/uuid": "^10.0.0",
     "eslint": "^8.57.1"
   }
 }
