@@ -14,19 +14,19 @@
     "_phase:build": ""
   },
   "peerDependencies": {
-    "@rushstack/heft": "^1.1.0",
+    "@rushstack/heft": "^1.1.6",
     "eslint": "~9.25.1"
   },
   "dependencies": {
-    "@microsoft/api-extractor": "^7.52.13",
-    "@rushstack/heft-node-rig": "^2.9.6",
+    "@microsoft/api-extractor": "^7.55.1",
+    "@rushstack/heft-node-rig": "^2.11.11",
     "@types/heft-jest": "^1.0.6",
     "@types/node": "^22.18.6",
     "jest-environment-node": "^30.1.2",
     "typescript": "~5.8.3"
   },
   "devDependencies": {
-    "@rushstack/heft": "^1.1.0",
+    "@rushstack/heft": "^1.1.6",
     "eslint": "~9.25.1"
   }
 }
