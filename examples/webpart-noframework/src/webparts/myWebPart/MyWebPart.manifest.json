@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "712306bb-a6e0-4ffb-b0e8-76a13a2fdae0",
+  "id": "413af0cb-0c9f-43db-8f86-ad1accc90481",
   "alias": "MyWebPart",
   "componentType": "WebPart",
 
@@ -18,11 +18,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
     "group": { "default": "Advanced" },
-    "title": { "default": "My" },
-    "description": { "default": "My description" },
+    "title": { "default": "My Web Part" },
+    "description": { "default": "My Web Part Description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "My"
+      "description": "My Web Part"
     }
   }]
 }

@@ -36,6 +36,7 @@ export class CreateAction extends CommandLineAction {
   private readonly _libraryName: IRequiredCommandLineStringParameter;
   private readonly _componentId: CommandLineStringParameter;
   private readonly _solutionId: CommandLineStringParameter;
+  private readonly _featureId: CommandLineStringParameter;
 
   public constructor(terminal: Terminal) {
 
@@ -86,6 +87,12 @@ export class CreateAction extends CommandLineAction {
       argumentName: 'SOLUTION_ID',
       description: 'The unique solution ID (GUID). If not provided, a new GUID will be generated.'
     });
+
+    this._featureId = this.defineStringParameter({
+      parameterLongName: '--feature-id',
+      argumentName: 'FEATURE_ID',
+      description: 'The unique feature ID (GUID). If not provided, a new GUID will be generated.'
+    });
   }
 
   protected async onExecuteAsync(): Promise<void> {
@@ -125,6 +132,7 @@ export class CreateAction extends CommandLineAction {
       // Generate a new GUID if componentId was not provided
       const componentId = this._componentId.value || uuidv4();
       const solutionId = this._solutionId.value || uuidv4();
+      const featureId = this._featureId.value || uuidv4();
 
       const fs = await template.render({
         solution_name: 'test-solution-name',
@@ -132,6 +140,8 @@ export class CreateAction extends CommandLineAction {
         libraryName: this._libraryName.value,
         versionBadge: 'https://img.shields.io/badge/version-1.0.0-blue',
         componentId: componentId,
+        featureId: featureId,
+        solutionId: solutionId,
         componentAlias: 'MyWebPart',
         componentNameUnescaped: 'My Web Part',
         componentNameCamelCase: 'myWebPart',
@@ -139,7 +149,6 @@ export class CreateAction extends CommandLineAction {
         componentClassName: 'MyWebPart',
         componentStrings: 'MyWebPartStrings',
         componentDescription: 'My Web Part Description',
-        solutionId: solutionId
       }, targetDir);
       _printFileChanges(this._terminal, fs, targetDir);
       await template.write(fs);

@@ -12,13 +12,21 @@
             "type": "string",
             "description": "The name of the library (also used as the package name)"
         },
-        "versionBadge": {
+        "featureId": {
             "type": "string",
-            "description": "The version badge URL to use in the README.md"
+            "description": "The feature ID (GUID) for the solution feature"
+        },
+        "solutionId": {
+            "type": "string",
+            "description": "The solution ID (GUID) for the SharePoint solution"
         },
         "componentId": {
             "type": "string",
             "description": "The component ID (GUID) for the web part"
+        },
+        "versionBadge": {
+            "type": "string",
+            "description": "The version badge URL to use in the README.md"
         },
         "componentAlias": {
             "type": "string",

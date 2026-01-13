@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "my-client-side-solution",
-    "id": "413af0cb-0c9f-43db-8f86-ad1accc90481",
+    "name": "@spfx-template/webpart-noframework-client-side-solution",
+    "id": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "my description"
+        "default": "@spfx-template/webpart-noframework description"
       },
       "longDescription": {
-        "default": "my description"
+        "default": "@spfx-template/webpart-noframework description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "my Feature",
-        "description": "The feature that activates elements of the my solution.",
+        "title": "@spfx-template/webpart-noframework Feature",
+        "description": "The feature that activates elements of the @spfx-template/webpart-noframework solution.",
         "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/my.sppkg"
+    "zippedPackage": "solution/@spfx-template/webpart-noframework.sppkg"
   }
 }
