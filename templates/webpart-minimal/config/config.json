@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "<%= componentNameHypenCase %>": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/<%= componentNameCamelCase %>/<%= componentClassName %>.js",
+          "manifest": "./src/webparts/<%= componentNameCamelCase %>/<%= componentClassName %>.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "<%= componentClassName %>Strings": "lib/webparts/<%= componentNameCamelCase %>/loc/{locale}.js"
+  }
+}
