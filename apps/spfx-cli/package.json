@@ -15,11 +15,11 @@
   },
   "dependencies": {
     "@microsoft/spfx-templating-engine": "workspace:*",
-    "@rushstack/terminal": "0.15.4"
+    "@rushstack/terminal": "0.19.4"
   },
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",
-    "@rushstack/heft": "^1.1.0",
-    "eslint": "~9.25.1"
+    "@rushstack/heft": "^1.1.6",
+    "eslint": "^8.57.1"
   }
 }
