@@ -62,7 +62,7 @@ export default class ListViewCommandSetCommandSet extends BaseListViewCommandSet
 
     // TODO: Add your logic here
 
-    // You should call this.raiseOnChage() to update the command bar
+    // You should call this.raiseOnChange() to update the command bar
     this.raiseOnChange();
   }
 }
