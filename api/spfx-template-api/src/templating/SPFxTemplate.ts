@@ -158,7 +158,6 @@ export class SPFxTemplate {
             }
             const destination = path.join(destinationDir, renderedFilename);
             const rendered = fs._processTpl({ contents, filename, context });
-            console.log(`Writing file: ${destination}`);
             fs.write(destination, rendered);
         }
 

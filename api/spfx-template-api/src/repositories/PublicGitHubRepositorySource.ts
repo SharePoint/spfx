@@ -1,4 +1,5 @@
 import AdmZip from 'adm-zip';
+import { ConsoleTerminalProvider, Terminal } from '@rushstack/terminal';
 
 import { SPFxTemplate } from '../templating/SPFxTemplate';
 import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
@@ -10,16 +11,19 @@ import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
     private readonly _repoUri: string;
     private readonly _ref: string;
+    private readonly _terminal: Terminal;
 
     /**
      * Creates a new instance of PublicGitHubRepositorySource.
      * @param repoUri - The GitHub repository URI (e.g., https://github.com/owner/repo)
      * @param branch - The optional branch name to fetch from (defaults to 'main')
+     * @param terminal - The optional Terminal instance for logging (defaults to console terminal)
      */
-    public constructor(repoUri: string, branch?: string) {
+    public constructor(repoUri: string, branch?: string, terminal?: Terminal) {
         super('github');
         this._repoUri = repoUri;
         this._ref = branch || 'main';
+        this._terminal = terminal || new Terminal(new ConsoleTerminalProvider());
     }
 
     /**
@@ -105,7 +109,7 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
                     templates.push(template);
                 }
             } catch (error) {
-                console.warn(`Failed to parse template from directory ${templateDir}: ${error}`);
+                this._terminal.writeWarningLine(`Failed to parse template from directory ${templateDir}: ${error}`);
             }
         }
 
