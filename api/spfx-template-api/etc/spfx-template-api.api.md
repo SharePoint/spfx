@@ -16,9 +16,32 @@ export abstract class BaseSPFxTemplateRepositorySource {
     readonly type: SPFxTemplateRepositorySourceTypes;
 }
 
-// Warning: (ae-forgotten-export) The symbol "LocalFileSystemRepositorySource" needs to be exported by the entry point index.d.ts
-// Warning: (ae-forgotten-export) The symbol "PublicGitHubRepositorySource" needs to be exported by the entry point index.d.ts
-//
+// @public
+export interface ISPFxTemplateJson {
+    $schema?: string;
+    contextSchema?: Record<string, {
+        type: 'string';
+        description: string;
+    }>;
+    description?: string;
+    name: string;
+    spfxVersion: string;
+    version: string;
+}
+
+// @public
+export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
+    constructor(path: string, terminal?: Terminal);
+    getTemplates(): Promise<Array<SPFxTemplate>>;
+    readonly path: string;
+}
+
+// @public
+export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
+    constructor(repoUri: string, branch?: string, terminal?: Terminal);
+    getTemplates(): Promise<Array<SPFxTemplate>>;
+}
+
 // @public
 export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;
 
@@ -42,8 +65,6 @@ export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
     toString(): string;
 }
 
-// Warning: (ae-forgotten-export) The symbol "ISPFxTemplateJson" needs to be exported by the entry point index.d.ts
-//
 // @public
 export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson>;
 
@@ -73,7 +94,5 @@ export class SPFxTemplateRepositoryManager {
 
 // @public
 export type SPFxTemplateRepositorySourceTypes = 'local' | 'github';
-
-// (No @packageDocumentation comment for this package)
 
 ```

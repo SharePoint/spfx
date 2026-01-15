@@ -9,12 +9,22 @@ const DESCRIPTION_MAX_LENGTH: number = 500;
 const VERSION_REGEX: RegExp = semverRegex();
 const SPFX_VERSION_REGEX: RegExp = semverRegex();
 
-interface ISPFxTemplateJson {
+/**
+ * Interface representing the template.json file structure for SPFx templates.
+ * @public
+ */
+export interface ISPFxTemplateJson {
+    /** Optional JSON schema reference */
     $schema?: string;
+    /** The name of the template */
     name: string;
+    /** Optional description of the template */
     description?: string;
+    /** The version of the template (semantic version format) */
     version: string;
+    /** The SPFx version this template is compatible with */
     spfxVersion: string;
+    /** Optional schema defining the context variables required by this template */
     contextSchema?: Record<string, { type: 'string'; description: string }>;
 };
 
