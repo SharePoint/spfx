@@ -20,6 +20,6 @@
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",
     "@rushstack/heft": "^1.1.6",
-    "eslint": "^8.57.1"
+    "eslint": "~9.25.1"
   }
 }
