@@ -6,14 +6,9 @@
     "node": ">=22.14.0 < 23.0.0"
   },
   "scripts": {
-    "build": "heft build",
-    "test": "heft test",
-    "clean": "heft clean",
-    "deploy": "heft dev-deploy",
+    "build": "heft test --clean --production && heft package-solution --production",
     "start": "heft start --clean",
-    "build-watch": "heft build --lite",
-    "package-solution": "heft package-solution",
-    "deploy-azure-storage": "heft deploy-azure-storage",
+    "clean": "heft clean",
     "eject-webpack": "heft eject-webpack"
   },
   "dependencies": {
@@ -40,6 +35,7 @@
     "eslint": "^8.57.1",
     "jest-junit": "12.3.0",
     "typescript": "~5.8.3",
+    "@types/heft-jest": "1.0.2",
     "@types/react": "17.0.45",
     "@types/react-dom": "17.0.17",
     "eslint-plugin-react-hooks": "7.0.1",

@@ -142,12 +142,11 @@ export class CreateAction extends CommandLineAction {
         componentId: componentId,
         featureId: featureId,
         solutionId: solutionId,
-        componentAlias: 'MyWebPart',
-        componentNameUnescaped: 'My Web Part',
-        componentNameCamelCase: 'myWebPart',
+        componentAlias: 'My',
+        componentNameUnescaped: 'My',
+        componentNameCamelCase: 'my',
         componentNameHypenCase: 'my-web-part',
-        componentClassName: 'MyWebPart',
-        componentStrings: 'MyWebPartStrings',
+        componentNameCapitalCase: 'My',
         componentDescription: 'My Web Part Description',
       }, targetDir);
       _printFileChanges(this._terminal, fs, targetDir);

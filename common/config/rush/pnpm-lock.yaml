@@ -1328,6 +1328,9 @@ importers:
       '@rushstack/heft-webpack5-plugin':
         specifier: 1.2.6
         version: 1.2.6(@rushstack/heft@1.1.6(@types/node@22.19.1))(@types/node@22.19.1)(webpack@5.95.0)
+      '@types/heft-jest':
+        specifier: 1.0.2
+        version: 1.0.2
       '@types/react':
         specifier: 17.0.45
         version: 17.0.45

@@ -37,6 +37,11 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     libraryName: '@spfx-template/webpart-minimal',
     templateName: 'webpart-minimal',
     templatePath: path.join(TEMPLATES_DIR, 'webpart-minimal')
+  },
+  {
+    libraryName: '@spfx-template/webpart-react',
+    templateName: 'webpart-react',
+    templatePath: path.join(TEMPLATES_DIR, 'webpart-react')
   }
 ];
 
