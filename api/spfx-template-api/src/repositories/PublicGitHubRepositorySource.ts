@@ -7,6 +7,22 @@ import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource
 /**
  * @public
  * A repository that is hosted on a public GitHub repository.
+ *
+ * SECURITY NOTE: This class intentionally fetches from mutable branch references
+ * (not pinned commit SHAs) to enable template updates independent of CLI releases.
+ * This is a deliberate architectural decision that prioritizes:
+ * 
+ * 1. **Agility**: Template bug fixes can be deployed without CLI updates
+ * 2. **User experience**: Users automatically get template improvements
+ * 3. **Operational flexibility**: Decouples template lifecycle from CLI lifecycle
+ * 
+ * The security implications are acceptable because:
+ * - Templates are scaffolding code (one-time generation), not runtime dependencies
+ * - Users trust the source repository (Microsoft-controlled for defaults)
+ * - HTTPS provides transport security and authenticity
+ * - Users can override with --local-template for full control
+ * 
+ * This pattern is similar to other scaffolding tools (npm create, dotnet new, etc.)
  */
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
     private readonly _repoUri: string;
