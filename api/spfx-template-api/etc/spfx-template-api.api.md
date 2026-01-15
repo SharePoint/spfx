@@ -5,6 +5,7 @@
 ```ts
 
 import { MemFsEditor } from 'mem-fs-editor';
+import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
 // @public
@@ -15,19 +16,9 @@ export abstract class BaseSPFxTemplateRepositorySource {
     readonly type: SPFxTemplateRepositorySourceTypes;
 }
 
-// @public
-export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
-    constructor(path: string);
-    getTemplates(): Promise<Array<SPFxTemplate>>;
-    readonly path: string;
-}
-
-// @public
-export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
-    constructor(repoUri: string, branch?: string);
-    getTemplates(): Promise<Array<SPFxTemplate>>;
-}
-
+// Warning: (ae-forgotten-export) The symbol "LocalFileSystemRepositorySource" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "PublicGitHubRepositorySource" needs to be exported by the entry point index.d.ts
+//
 // @public
 export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;
 
