@@ -14,8 +14,8 @@
     "_phase:build": ""
   },
   "peerDependencies": {
-    "@rushstack/heft": "^1.1.0",
-    "eslint": "~9.25.1"
+    "@rushstack/heft": "^1.1.6",
+    "eslint": "^8.57.1"
   },
   "dependencies": {
     "@microsoft/api-extractor": "^7.55.1",
