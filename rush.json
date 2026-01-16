@@ -467,6 +467,13 @@
       "reviewCategory": "app",
       "shouldPublish": false,
       "tags": [ ]
+    },
+    {
+      "packageName": "@microsoft/spfx-template-test",
+      "projectFolder": "tests/spfx-template-test",
+      "reviewCategory": "tests",
+      "shouldPublish": false,
+      "tags": []
     }
   ]
 }

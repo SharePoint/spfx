@@ -1,9 +1,12 @@
 import { ConsoleTerminalProvider, Terminal } from '@rushstack/terminal';
+import { SPFxCommandLineParser } from './cli/SPFxCommandLineParser';
 
 const terminal: Terminal = new Terminal(new ConsoleTerminalProvider());
 
 async function main(): Promise<void> {
-  terminal.writeLine('Hello from SPFx CLI!');
+  const commandLine: SPFxCommandLineParser = new SPFxCommandLineParser(terminal);
+
+  await commandLine.executeAsync();
 }
 
 // Start the server if this file is run directly

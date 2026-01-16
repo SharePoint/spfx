@@ -1,6 +1,6 @@
 {
-  "name": "@microsoft/spfx-cli",
-  "description": "Project scaffolding and other tools for SharePoint Framework (SPFx) development",
+  "name": "@microsoft/spfx-template-test",
+  "description": "Tests that templates match expected output",
   "version": "1.0.0",
   "private": true,
   "main": "lib/index.js",
@@ -20,9 +20,7 @@
     "@microsoft/spfx-template-api": "workspace:*",
     "@rushstack/ts-command-line": "^5.0.2",
     "@rushstack/terminal": "0.19.4",
-    "mem-fs-editor": "^11.1.4",
-    "uuid": "^11.0.5",
-    "zod": "^4.1.5"
+    "ignore": "^5.3.0"
   },
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",
@@ -32,7 +30,6 @@
     "@types/heft-jest": "^1.0.6",
     "@types/node": "^22.18.6",
     "typescript": "~5.8.3",
-    "@types/uuid": "^10.0.0",
     "eslint": "~9.25.1"
   }
 }
