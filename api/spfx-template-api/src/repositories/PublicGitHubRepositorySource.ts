@@ -132,13 +132,13 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
         return templates;
     }
 
-    private async _createTemplateFromFileMap(templateDir: string, fileMap: Map<string, Buffer>): Promise<SPFxTemplate | null> {
+    private async _createTemplateFromFileMap(templateDir: string, fileMap: Map<string, Buffer>): Promise<SPFxTemplate | undefined> {
         // Get template.json content
         const templateJsonPath = templateDir ? `${templateDir}/template.json` : 'template.json';
         const templateJsonBuffer = fileMap.get(templateJsonPath);
         
         if (!templateJsonBuffer) {
-            return null;
+            return undefined;
         }
 
         try {

@@ -12,7 +12,6 @@ import * as z from 'zod';
 export abstract class BaseSPFxTemplateRepositorySource {
     constructor(type: SPFxTemplateRepositorySourceTypes);
     abstract getTemplates(): Promise<Array<SPFxTemplate>>;
-    // (undocumented)
     readonly type: SPFxTemplateRepositorySourceTypes;
 }
 
@@ -31,7 +30,7 @@ export interface ISPFxTemplateJson {
 
 // @public
 export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
-    constructor(path: string, terminal?: Terminal);
+    constructor(path: string);
     getTemplates(): Promise<Array<SPFxTemplate>>;
     readonly path: string;
 }

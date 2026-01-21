@@ -15,6 +15,7 @@ export type SPFxTemplateRepositorySourceTypes = 'local' | 'github';
  * Base class for SPFx template repository sources.
  */
 export abstract class BaseSPFxTemplateRepositorySource {
+    /** The type of the repository source */
     public readonly type: SPFxTemplateRepositorySourceTypes;
 
     public constructor(type: SPFxTemplateRepositorySourceTypes) {

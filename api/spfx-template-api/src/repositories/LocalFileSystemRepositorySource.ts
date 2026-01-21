@@ -1,6 +1,5 @@
 
 import { FileSystem } from '@rushstack/node-core-library';
-import { ConsoleTerminalProvider, Terminal } from '@rushstack/terminal';
 
 import { SPFxTemplate } from '../templating/SPFxTemplate';
 import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
@@ -12,17 +11,14 @@ import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource
 export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
     /** The file path of the repository */
     public readonly path: string;
-    private readonly _terminal: Terminal;
 
     /**
      * Creates a new instance of LocalFileSystemRepositorySource.
      * @param path - The file system path to the repository
-     * @param terminal - The optional Terminal instance for logging (defaults to console terminal)
      */
-    public constructor(path: string, terminal?: Terminal) {
+    public constructor(path: string) {
         super('local');
         this.path = path;
-        this._terminal = terminal || new Terminal(new ConsoleTerminalProvider());
     }
 
     /**
