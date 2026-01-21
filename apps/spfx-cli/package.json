@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@microsoft/spfx-templating-engine": "workspace:*",
-    "@rushstack/terminal": "0.15.4"
+    "@rushstack/terminal": "0.19.4"
   },
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",
