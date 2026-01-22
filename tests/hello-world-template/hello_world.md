@@ -1,1 +1,0 @@
-Hello, <% solution_name %>
