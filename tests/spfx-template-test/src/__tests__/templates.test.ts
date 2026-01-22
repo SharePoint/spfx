@@ -5,7 +5,6 @@ import { promisify } from 'util';
 import ignore from 'ignore';
 
 const readdir = promisify(fs.readdir);
-const stat = promisify(fs.stat);
 const readFile = promisify(fs.readFile);
 
 // Path to the root of the monorepo
@@ -257,7 +256,36 @@ describe('SPFx Template Scaffolding', () => {
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
             // Skip build artifacts and generated files
-            return !normalized.match(/^(package-lock\.json|yarn\.lock|pnpm-lock\.yaml|\.rush\/|rush-logs\/|temp\/|node_modules\/|dist\/|teams\/|webpack\.config\.js)$/);
+            const ignoredFiles = [
+              'package-lock.json',
+              'yarn.lock',
+              'pnpm-lock.yaml',
+              'webpack.config.js'
+            ];
+            const ignoredDirs = [
+              '.rush',
+              'rush-logs',
+              'temp',
+              'node_modules',
+              'dist',
+              'teams'
+            ];
+
+            // Ignore specific files regardless of their directory
+            if (ignoredFiles.some(name => normalized === name || normalized.endsWith('/' + name))) {
+              return false;
+            }
+
+            // Ignore any path that is or contains one of the ignored directories as a segment
+            if (ignoredDirs.some(dir =>
+              normalized === dir ||
+              normalized.startsWith(dir + '/') ||
+              normalized.includes('/' + dir + '/')
+            )) {
+              return false;
+            }
+
+            return true;
           });
 
         const filteredScaffolded = filterFiles(scaffoldedFiles).sort();
@@ -278,8 +306,11 @@ describe('SPFx Template Scaffolding', () => {
           // Add file context to the error message
           try {
             expect(scaffoldedContent).toEqual(exampleContent);
-          } catch (error) {
-            throw new Error(`File content mismatch in '${file}':\n${error.message}`);
+          } catch (error: unknown) {
+            if (error instanceof Error) {
+              throw new Error(`File content mismatch in '${file}':\n${error.message}`);
+            }
+            throw new Error(`File content mismatch in '${file}':\n${String(error)}`);
           }
         }
       });

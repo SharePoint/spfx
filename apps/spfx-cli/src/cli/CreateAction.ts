@@ -145,15 +145,16 @@ export class CreateAction extends CommandLineAction {
         componentAlias: 'My',
         componentNameUnescaped: 'My',
         componentNameCamelCase: 'my',
-        componentNameHypenCase: 'my-web-part',
+        componentNameHyphenCase: 'my-web-part',
         componentNameCapitalCase: 'My',
         componentDescription: 'My Web Part Description',
       }, targetDir);
       _printFileChanges(this._terminal, fs, targetDir);
       await template.write(fs);
 
-    } catch (error) {
-      this._terminal.writeErrorLine(`Error creating SPFx component: ${error.message}`);
+    } catch (error: unknown) {
+      const message: string = error instanceof Error ? error.message : String(error);
+      this._terminal.writeErrorLine(`Error creating SPFx component: ${message}`);
       throw error;
     }
   }
@@ -164,7 +165,7 @@ export class CreateAction extends CommandLineAction {
  */
 function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: string): void {
     terminal.writeLine(`targetDir: ${targetDir}`);
-    const changed: { [key: string]: { state: 'modified' | 'deleted', isNew: boolean } } = fs.dump('D:\\');
+    const changed: { [key: string]: { state: 'modified' | 'deleted', isNew: boolean } } = fs.dump(targetDir);
 
     terminal.writeLine();
     terminal.writeLine(Colorize.cyan('The following files will be modified:'));
