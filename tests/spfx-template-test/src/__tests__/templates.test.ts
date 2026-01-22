@@ -10,7 +10,7 @@ const readFile = promisify(fs.readFile);
 
 // Path to the root of the monorepo
 const REPO_ROOT = path.resolve(__dirname, '../../../../');
-const TEMPLATES_DIR = path.join(REPO_ROOT, 'templates');
+const TEST_TEMPLATE_DIR = path.join(REPO_ROOT, 'tests'); // Parent directory containing template subdirectories
 const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
 const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
@@ -29,20 +29,10 @@ interface TemplateConfig {
 
 const TEMPLATE_CONFIGS: TemplateConfig[] = [
   {
-    libraryName: '@spfx-template/webpart-noframework',
-    templateName: 'webpart-noframework',
-    templatePath: path.join(TEMPLATES_DIR, 'webpart-noframework')
+    libraryName: '@spfx-template/hello-world-test',
+    templateName: 'hello-world-template',
+    templatePath: path.join(REPO_ROOT, 'tests/hello-world-template')
   },
-  {
-    libraryName: '@spfx-template/webpart-minimal',
-    templateName: 'webpart-minimal',
-    templatePath: path.join(TEMPLATES_DIR, 'webpart-minimal')
-  },
-  {
-    libraryName: '@spfx-template/webpart-react',
-    templateName: 'webpart-react',
-    templatePath: path.join(TEMPLATES_DIR, 'webpart-react')
-  }
 ];
 
 // Check for --update or -u flag
@@ -185,7 +175,7 @@ function copyDirectory(src: string, dest: string, ignoreMatcher?: ReturnType<typ
  * Get all template names from the templates directory
  */
 async function getTemplateNames(): Promise<string[]> {
-  const entries = await readdir(TEMPLATES_DIR, { withFileTypes: true });
+  const entries = await readdir(TEST_TEMPLATE_DIR, { withFileTypes: true });
   return entries
     .filter((entry) => entry.isDirectory() && entry.name !== 'test')
     .map((entry) => entry.name);
@@ -232,7 +222,7 @@ describe('SPFx Template Scaffolding', () => {
             `node "${CLI_PATH}" create`,
             `--template ${config.templateName}`,
             `--target-dir "${outputPath}"`,
-            `--local-template "${TEMPLATES_DIR}"`,
+            `--local-template "${TEST_TEMPLATE_DIR}"`,
             `--library-name "${config.libraryName}"`,
             `--component-id "${FIXED_COMPONENT_ID}"`,
             `--solution-id "${FIXED_SOLUTION_ID}"`,

@@ -126,6 +126,46 @@ importers:
         specifier: ~9.25.1
         version: 9.25.1
 
+  ../../tests/spfx-template-test:
+    dependencies:
+      '@microsoft/spfx-template-api':
+        specifier: workspace:*
+        version: link:../../api/spfx-template-api
+      '@rushstack/terminal':
+        specifier: 0.19.4
+        version: 0.19.4(@types/node@22.18.8)
+      '@rushstack/ts-command-line':
+        specifier: ^5.0.2
+        version: 5.1.5(@types/node@22.18.8)
+      ignore:
+        specifier: ^5.3.0
+        version: 5.3.2
+    devDependencies:
+      '@microsoft/spfx-cli-build-rig':
+        specifier: workspace:*
+        version: link:../../tools/spfx-cli-build-rig
+      '@rushstack/eslint-config':
+        specifier: 4.6.1
+        version: 4.6.1(eslint@9.25.1)(typescript@5.8.3)
+      '@rushstack/heft':
+        specifier: ^1.1.6
+        version: 1.1.7(@types/node@22.18.8)
+      '@rushstack/heft-node-rig':
+        specifier: ^2.11.11
+        version: 2.11.12(@rushstack/heft@1.1.7(@types/node@22.18.8))(@types/node@22.18.8)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/node':
+        specifier: ^22.18.6
+        version: 22.18.8
+      eslint:
+        specifier: ~9.25.1
+        version: 9.25.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
   ../../tools/spfx-cli-build-rig:
     dependencies:
       '@microsoft/api-extractor':

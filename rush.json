@@ -474,6 +474,13 @@
       "reviewCategory": "libraries",
       "shouldPublish": false,
       "tags": [ ]
+    },
+    {
+      "packageName": "@microsoft/spfx-template-test",
+      "projectFolder": "tests/spfx-template-test",
+      "reviewCategory": "tools",
+      "shouldPublish": false,
+      "tags": [ ]
     }
   ]
 }
