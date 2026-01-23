@@ -121,56 +121,6 @@ function cleanOutputDir(templateName: string): void {
 }
 
 /**
- * Copy directory recursively from source to destination
- * Only updates files that are different
- * Returns the number of files updated
- */
-function copyDirectory(src: string, dest: string, ignoreMatcher?: ReturnType<typeof ignore>): number {
-  // Create destination directory
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest, { recursive: true });
-  }
-
-  const entries = fs.readdirSync(src, { withFileTypes: true });
-  let updatedCount = 0;
-
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    const relativePath = path.relative(src, srcPath).replace(/\\/g, '/');
-
-    // Skip if should be ignored
-    if (ignoreMatcher && ignoreMatcher.ignores(relativePath)) {
-      continue;
-    }
-
-    if (entry.isDirectory()) {
-      updatedCount += copyDirectory(srcPath, destPath, ignoreMatcher);
-    } else {
-      // Compare files before copying
-      let shouldCopy = false;
-      
-      if (!fs.existsSync(destPath)) {
-        shouldCopy = true;
-      } else {
-        // Compare content (normalize line endings)
-        const srcContent = fs.readFileSync(srcPath, 'utf-8').replace(/\r\n/g, '\n');
-        const destContent = fs.readFileSync(destPath, 'utf-8').replace(/\r\n/g, '\n');
-        shouldCopy = srcContent !== destContent;
-      }
-      
-      if (shouldCopy) {
-        fs.copyFileSync(srcPath, destPath);
-        console.log(`  Updated: ${relativePath}`);
-        updatedCount++;
-      }
-    }
-  }
-  
-  return updatedCount;
-}
-
-/**
  * Get all template names from the templates directory
  */
 async function getTemplateNames(): Promise<string[]> {
