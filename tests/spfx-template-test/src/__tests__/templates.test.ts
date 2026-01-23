@@ -120,16 +120,6 @@ function cleanOutputDir(templateName: string): void {
   }
 }
 
-/**
- * Get all template names from the templates directory
- */
-async function getTemplateNames(): Promise<string[]> {
-  const entries = await readdir(TEST_TEMPLATE_DIR, { withFileTypes: true });
-  return entries
-    .filter((entry) => entry.isDirectory() && entry.name !== 'test')
-    .map((entry) => entry.name);
-}
-
 describe('SPFx Template Scaffolding', () => {
   // Increase timeout for scaffolding operations
   jest.setTimeout(120000);
