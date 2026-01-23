@@ -174,8 +174,9 @@ describe('SPFx Template Scaffolding', () => {
             cwd: REPO_ROOT,
             env: { ...process.env }
           });
-        } catch (error) {
-          throw new Error(`Failed to scaffold template '${config.templateName}': ${error.message}`);
+        } catch (error: unknown) {
+          const message = error instanceof Error ? error.message : String(error);
+          throw new Error(`Failed to scaffold template '${config.templateName}': ${message}`);
         }
 
         // Parse .gitignore from template
