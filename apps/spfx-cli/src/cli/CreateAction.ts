@@ -7,7 +7,7 @@ import {
 } from '@rushstack/ts-command-line';
 import { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 
 import {    
   LocalFileSystemRepositorySource,
@@ -127,6 +127,17 @@ export class CreateAction extends CommandLineAction {
 
       if (!template) {
           throw new Error(`Template not found: ${templateName}. Available: ${Array.from(templates.keys()).join(', ')}`);
+      }
+
+      // Validate custom GUIDs if provided
+      if (this._componentId.value && !uuidValidate(this._componentId.value)) {
+        throw new Error(`Invalid component ID format: ${this._componentId.value}. Must be a valid UUID/GUID.`);
+      }
+      if (this._solutionId.value && !uuidValidate(this._solutionId.value)) {
+        throw new Error(`Invalid solution ID format: ${this._solutionId.value}. Must be a valid UUID/GUID.`);
+      }
+      if (this._featureId.value && !uuidValidate(this._featureId.value)) {
+        throw new Error(`Invalid feature ID format: ${this._featureId.value}. Must be a valid UUID/GUID.`);
       }
 
       // Generate a new GUID if componentId was not provided
