@@ -9,7 +9,7 @@ const readFile = promisify(fs.readFile);
 
 // Path to the root of the monorepo
 const REPO_ROOT = path.resolve(__dirname, '../../../../');
-const TEST_TEMPLATE_DIR = path.join(REPO_ROOT, 'tests/spfx-template-test'); // Parent directory containing test-template subdirectory
+const TEST_TEMPLATE_DIR = path.join(REPO_ROOT, 'tests/spfx-template-test'); // Directory passed to --local-template; contains the test-template subdirectory
 const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
 const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
@@ -29,7 +29,7 @@ interface TemplateConfig {
 const TEMPLATE_CONFIGS: TemplateConfig[] = [
   {
     libraryName: '@spfx-template/hello-world-test',
-    templateName: 'test-template',
+    templateName: 'test',
     templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template')
   },
 ];
