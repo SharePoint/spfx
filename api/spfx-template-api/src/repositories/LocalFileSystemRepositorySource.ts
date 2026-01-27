@@ -31,12 +31,30 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
      */
     public async getTemplates(): Promise<Array<SPFxTemplate>> {
         try {
-            return await Promise.all(await FileSystem
+            const items = await FileSystem
                 .readFolderItems(this.path, {
                     absolutePaths: true // get the full paths back so we don't have to reconstruct it
                 })
-                .filter(item => item.isDirectory())
-                .map(async item => await SPFxTemplate.fromFolderAsync(item.name))
+                .filter(item => {
+                    // Only include directories that don't start with a dot (e.g., .rush, .git)
+                    const basename = item.name.split(/[/\\]/).pop() || '';
+                    return item.isDirectory() && !basename.startsWith('.');
+                });
+
+            // Filter for directories that contain template.json
+            const templateDirs = await Promise.all(
+                items.map(async item => {
+                    const templateJsonPath = `${item.name}/template.json`;
+                    const exists = await FileSystem.existsAsync(templateJsonPath);
+                    return exists ? item.name : null;
+                })
+            );
+
+            // Load templates from valid directories
+            return await Promise.all(
+                templateDirs
+                    .filter((path): path is string => path !== null)
+                    .map(async path => await SPFxTemplate.fromFolderAsync(path))
             );
         } catch (error) {
             throw new Error(`Failed to read templates from ${this.path}: ${error}`);
