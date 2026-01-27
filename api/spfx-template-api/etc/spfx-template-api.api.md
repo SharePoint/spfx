@@ -12,7 +12,7 @@ import * as z from 'zod';
 export abstract class BaseSPFxTemplateRepositorySource {
     constructor(type: SPFxTemplateRepositorySourceTypes);
     abstract getTemplates(): Promise<Array<SPFxTemplate>>;
-    readonly type: SPFxTemplateRepositorySourceTypes;
+    get type(): SPFxTemplateRepositorySourceTypes;
 }
 
 // @public
@@ -32,7 +32,7 @@ export interface ISPFxTemplateJson {
 export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
     constructor(path: string);
     getTemplates(): Promise<Array<SPFxTemplate>>;
-    readonly path: string;
+    get path(): string;
 }
 
 // @public

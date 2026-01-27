@@ -62,8 +62,8 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
     }
 
     private _parseGitHubUrl(): { owner: string; repo: string } {
-        // Parse URLs like: https://github.com/sharepoint/spfx
-        const match = this._repoUri.match(/github\.com\/([^\/]+)\/([^\/]+)(?:\.git)?$/);
+        // Parse URLs like: https://github.com/sharepoint/spfx or https://github.com/sharepoint/spfx.git
+        const match = this._repoUri.match(/github\.com\/([^\/]+)\/([^\/]+?)(\.git)?$/);
         if (!match) {
             throw new Error(`Invalid GitHub repository URL: ${this._repoUri}`);
         }
