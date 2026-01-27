@@ -1,8 +1,12 @@
 // Mock for mem-fs ESM module
-export interface Store<T> {
+export interface IStore {
   // Mock interface
 }
 
-export function create(): Store<any> {
-  return {} as Store<any>;
+// Export as Store for compatibility with existing imports (with generic for type compatibility)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type Store<T = unknown> = IStore;
+
+export function create(): IStore {
+  return {} as IStore;
 }
