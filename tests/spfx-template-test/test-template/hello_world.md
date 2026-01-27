@@ -1,1 +1,1 @@
-Hello, <% solution_name %>
+Hello, <%= solution_name %>

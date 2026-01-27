@@ -1,1 +1,1 @@
-Hello, <% solution_name %>
+Hello, test-solution-name
