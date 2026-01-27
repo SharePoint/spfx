@@ -31,7 +31,11 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
                 .readFolderItems(this.path, {
                     absolutePaths: true // get the full paths back so we don't have to reconstruct it
                 })
-                .filter(item => item.isDirectory())
+                .filter(item => {
+                    // Only include directories that don't start with a dot (e.g., .rush, .git)
+                    const basename = item.name.split(/[/\\]/).pop() || '';
+                    return item.isDirectory() && !basename.startsWith('.');
+                })
                 .map(async item => await SPFxTemplate.fromFolderAsync(item.name))
             );
         } catch (error) {
