@@ -8,19 +8,6 @@ import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
 import { SPFxTemplate } from './SPFxTemplate';
 import { SPFxTemplateJsonFile } from './SPFxTemplateJsonFile';
 
-interface IFileSystemReadFolderItemsResult {
-  name: string;
-  isDirectory: () => boolean;
-  isFile: () => boolean;
-  isBlockDevice: () => boolean;
-  isCharacterDevice: () => boolean;
-  isSymbolicLink: () => boolean;
-  isFIFO: () => boolean;
-  isSocket: () => boolean;
-  parentPath: string;
-  path: string;
-}
-
 describe('SPFxTemplate', () => {
   const mockReadFileAsync = FileSystem.readFileAsync as jest.MockedFunction<typeof FileSystem.readFileAsync>;
   const mockReadFolderItemsAsync = FileSystem.readFolderItemsAsync as jest.MockedFunction<
