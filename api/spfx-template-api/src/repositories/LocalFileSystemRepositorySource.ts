@@ -9,8 +9,7 @@ import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource
  * A repository that already exists on disk.
  */
 export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
-    /** The file path of the repository */
-    public readonly path: string;
+    private readonly _path: string;
 
     /**
      * Creates a new instance of LocalFileSystemRepositorySource.
@@ -18,7 +17,12 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
      */
     public constructor(path: string) {
         super('local');
-        this.path = path;
+        this._path = path;
+    }
+
+    /** The file path of the repository */
+    public get path(): string {
+        return this._path;
     }
 
     /**
