@@ -467,6 +467,20 @@
       "reviewCategory": "app",
       "shouldPublish": false,
       "tags": [ ]
+    },
+    {
+      "packageName": "@microsoft/spfx-template-api",
+      "projectFolder": "api/spfx-template-api",
+      "reviewCategory": "libraries",
+      "shouldPublish": false,
+      "tags": [ ]
+    },
+    {
+      "packageName": "@microsoft/spfx-template-test",
+      "projectFolder": "tests/spfx-template-test",
+      "reviewCategory": "tools",
+      "shouldPublish": false,
+      "tags": [ ]
     }
   ]
 }
