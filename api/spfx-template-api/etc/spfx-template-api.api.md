@@ -5,26 +5,39 @@
 ```ts
 
 import { MemFsEditor } from 'mem-fs-editor';
+import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
 // @public
 export abstract class BaseSPFxTemplateRepositorySource {
     constructor(type: SPFxTemplateRepositorySourceTypes);
     abstract getTemplates(): Promise<Array<SPFxTemplate>>;
-    // (undocumented)
-    readonly type: SPFxTemplateRepositorySourceTypes;
+    get type(): SPFxTemplateRepositorySourceTypes;
+}
+
+// @public
+export interface ISPFxTemplateJson {
+    $schema?: string;
+    contextSchema?: Record<string, {
+        type: 'string';
+        description: string;
+    }>;
+    description?: string;
+    name: string;
+    spfxVersion: string;
+    version: string;
 }
 
 // @public
 export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
     constructor(path: string);
     getTemplates(): Promise<Array<SPFxTemplate>>;
-    readonly path: string;
+    get path(): string;
 }
 
 // @public
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
-    constructor(repoUri: string, branch?: string);
+    constructor(repoUri: string, branch?: string, terminal?: Terminal);
     getTemplates(): Promise<Array<SPFxTemplate>>;
 }
 
@@ -51,8 +64,6 @@ export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
     toString(): string;
 }
 
-// Warning: (ae-forgotten-export) The symbol "ISPFxTemplateJson" needs to be exported by the entry point index.d.ts
-//
 // @public
 export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson>;
 
@@ -82,7 +93,5 @@ export class SPFxTemplateRepositoryManager {
 
 // @public
 export type SPFxTemplateRepositorySourceTypes = 'local' | 'github';
-
-// (No @packageDocumentation comment for this package)
 
 ```

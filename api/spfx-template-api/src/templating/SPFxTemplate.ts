@@ -1,4 +1,5 @@
 import { FileSystem } from '@rushstack/node-core-library';
+import * as ejs from 'ejs';
 import { create as createMemFs } from 'mem-fs';
 import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
 import * as path from 'path';
@@ -153,12 +154,16 @@ export class SPFxTemplate {
             // Render the filename by replacing {variableName} placeholders
             let renderedFilename = filename;
             for (const [key, value] of Object.entries(context)) {
-                // eslint-disable-next-line @rushstack/security/no-unsafe-regexp
-                renderedFilename = renderedFilename.replace(new RegExp(`\\{${key}\\}`, 'g'), String(value));
+                const placeholder = `{${key}}`;
+                renderedFilename = renderedFilename.split(placeholder).join(String(value));
             }
             const destination = path.join(destinationDir, renderedFilename);
-            const rendered = fs._processTpl({ contents, filename, context });
-            console.log(`Writing file: ${destination}`);
+
+            // Process file contents as EJS template
+            const rendered = ejs.render(contents, context, { 
+                filename, 
+                cache: false 
+            });
             fs.write(destination, rendered);
         }
 

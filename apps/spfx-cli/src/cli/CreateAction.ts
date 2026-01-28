@@ -7,7 +7,7 @@ import {
 } from '@rushstack/ts-command-line';
 import { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 
 import {    
   LocalFileSystemRepositorySource,
@@ -129,6 +129,17 @@ export class CreateAction extends CommandLineAction {
           throw new Error(`Template not found: ${templateName}. Available: ${Array.from(templates.keys()).join(', ')}`);
       }
 
+      // Validate custom GUIDs if provided
+      if (this._componentId.value && !uuidValidate(this._componentId.value)) {
+        throw new Error(`Invalid component ID format: ${this._componentId.value}. Must be a valid UUID/GUID.`);
+      }
+      if (this._solutionId.value && !uuidValidate(this._solutionId.value)) {
+        throw new Error(`Invalid solution ID format: ${this._solutionId.value}. Must be a valid UUID/GUID.`);
+      }
+      if (this._featureId.value && !uuidValidate(this._featureId.value)) {
+        throw new Error(`Invalid feature ID format: ${this._featureId.value}. Must be a valid UUID/GUID.`);
+      }
+
       // Generate a new GUID if componentId was not provided
       const componentId = this._componentId.value || uuidv4();
       const solutionId = this._solutionId.value || uuidv4();
@@ -145,15 +156,16 @@ export class CreateAction extends CommandLineAction {
         componentAlias: 'My',
         componentNameUnescaped: 'My',
         componentNameCamelCase: 'my',
-        componentNameHypenCase: 'my-web-part',
+        componentNameHyphenCase: 'my-web-part',
         componentNameCapitalCase: 'My',
         componentDescription: 'My Web Part Description',
       }, targetDir);
       _printFileChanges(this._terminal, fs, targetDir);
       await template.write(fs);
 
-    } catch (error) {
-      this._terminal.writeErrorLine(`Error creating SPFx component: ${error.message}`);
+    } catch (error: unknown) {
+      const message: string = error instanceof Error ? error.message : String(error);
+      this._terminal.writeErrorLine(`Error creating SPFx component: ${message}`);
       throw error;
     }
   }
@@ -164,7 +176,7 @@ export class CreateAction extends CommandLineAction {
  */
 function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: string): void {
     terminal.writeLine(`targetDir: ${targetDir}`);
-    const changed: { [key: string]: { state: 'modified' | 'deleted', isNew: boolean } } = fs.dump('D:\\');
+    const changed: { [key: string]: { state: 'modified' | 'deleted', isNew: boolean } } = fs.dump(targetDir);
 
     terminal.writeLine();
     terminal.writeLine(Colorize.cyan('The following files will be modified:'));

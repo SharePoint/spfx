@@ -9,7 +9,7 @@ async function main(): Promise<void> {
   await commandLine.executeAsync();
 }
 
-// Start the server if this file is run directly
+// Execute the CLI if this file is run directly
 main().catch((error) => {
   terminal.writeErrorLine('Error:', error.toString());
   process.exit(1);

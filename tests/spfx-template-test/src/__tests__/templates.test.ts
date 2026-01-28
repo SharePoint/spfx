@@ -5,12 +5,12 @@ import { promisify } from 'util';
 import ignore from 'ignore';
 
 const readdir = promisify(fs.readdir);
-const stat = promisify(fs.stat);
 const readFile = promisify(fs.readFile);
 
 // Path to the root of the monorepo
 const REPO_ROOT = path.resolve(__dirname, '../../../../');
 const TEMPLATES_DIR = path.join(REPO_ROOT, 'templates');
+const TEST_TEMPLATE_DIR = path.join(REPO_ROOT, 'tests/spfx-template-test'); // Directory passed to --local-template; contains the test-template subdirectory
 const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
 const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
@@ -28,6 +28,11 @@ interface TemplateConfig {
 }
 
 const TEMPLATE_CONFIGS: TemplateConfig[] = [
+  {
+    libraryName: '@spfx-template/hello-world-test',
+    templateName: 'test',
+    templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template')
+  },
   {
     libraryName: '@spfx-template/webpart-noframework',
     templateName: 'webpart-noframework',
@@ -131,66 +136,6 @@ function cleanOutputDir(templateName: string): void {
   }
 }
 
-/**
- * Copy directory recursively from source to destination
- * Only updates files that are different
- * Returns the number of files updated
- */
-function copyDirectory(src: string, dest: string, ignoreMatcher?: ReturnType<typeof ignore>): number {
-  // Create destination directory
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest, { recursive: true });
-  }
-
-  const entries = fs.readdirSync(src, { withFileTypes: true });
-  let updatedCount = 0;
-
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    const relativePath = path.relative(src, srcPath).replace(/\\/g, '/');
-
-    // Skip if should be ignored
-    if (ignoreMatcher && ignoreMatcher.ignores(relativePath)) {
-      continue;
-    }
-
-    if (entry.isDirectory()) {
-      updatedCount += copyDirectory(srcPath, destPath, ignoreMatcher);
-    } else {
-      // Compare files before copying
-      let shouldCopy = false;
-      
-      if (!fs.existsSync(destPath)) {
-        shouldCopy = true;
-      } else {
-        // Compare content (normalize line endings)
-        const srcContent = fs.readFileSync(srcPath, 'utf-8').replace(/\r\n/g, '\n');
-        const destContent = fs.readFileSync(destPath, 'utf-8').replace(/\r\n/g, '\n');
-        shouldCopy = srcContent !== destContent;
-      }
-      
-      if (shouldCopy) {
-        fs.copyFileSync(srcPath, destPath);
-        console.log(`  Updated: ${relativePath}`);
-        updatedCount++;
-      }
-    }
-  }
-  
-  return updatedCount;
-}
-
-/**
- * Get all template names from the templates directory
- */
-async function getTemplateNames(): Promise<string[]> {
-  const entries = await readdir(TEMPLATES_DIR, { withFileTypes: true });
-  return entries
-    .filter((entry) => entry.isDirectory() && entry.name !== 'test')
-    .map((entry) => entry.name);
-}
-
 describe('SPFx Template Scaffolding', () => {
   // Increase timeout for scaffolding operations
   jest.setTimeout(120000);
@@ -233,6 +178,7 @@ describe('SPFx Template Scaffolding', () => {
             `--template ${config.templateName}`,
             `--target-dir "${outputPath}"`,
             `--local-template "${TEMPLATES_DIR}"`,
+            `--local-template "${TEST_TEMPLATE_DIR}"`,
             `--library-name "${config.libraryName}"`,
             `--component-id "${FIXED_COMPONENT_ID}"`,
             `--solution-id "${FIXED_SOLUTION_ID}"`,
@@ -245,8 +191,9 @@ describe('SPFx Template Scaffolding', () => {
             cwd: REPO_ROOT,
             env: { ...process.env }
           });
-        } catch (error) {
-          throw new Error(`Failed to scaffold template '${config.templateName}': ${error.message}`);
+        } catch (error: unknown) {
+          const message = error instanceof Error ? error.message : String(error);
+          throw new Error(`Failed to scaffold template '${config.templateName}': ${message}`);
         }
 
         // Parse .gitignore from template
@@ -263,11 +210,40 @@ describe('SPFx Template Scaffolding', () => {
         const exampleFiles = await getAllFiles(examplePath, examplePath, ignoreMatcher);
 
         // Filter out files that should be ignored in comparison
-        const filterFiles = (files: string[]) => 
+        const filterFiles = (files: string[]) =>
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
             // Skip build artifacts and generated files
-            return !normalized.match(/^(package-lock\.json|yarn\.lock|pnpm-lock\.yaml|\.rush\/|rush-logs\/|temp\/|node_modules\/|dist\/|teams\/|webpack\.config\.js)$/);
+            const ignoredFiles = [
+              'package-lock.json',
+              'yarn.lock',
+              'pnpm-lock.yaml',
+              'webpack.config.js'
+            ];
+            const ignoredDirs = [
+              '.rush',
+              'rush-logs',
+              'temp',
+              'node_modules',
+              'dist',
+              'teams'
+            ];
+
+            // Ignore specific files regardless of their directory
+            if (ignoredFiles.some(name => normalized === name || normalized.endsWith('/' + name))) {
+              return false;
+            }
+
+            // Ignore any path that is or contains one of the ignored directories as a segment
+            if (ignoredDirs.some(dir =>
+              normalized === dir ||
+              normalized.startsWith(dir + '/') ||
+              normalized.includes('/' + dir + '/')
+            )) {
+              return false;
+            }
+
+            return true;
           });
 
         const filteredScaffolded = filterFiles(scaffoldedFiles).sort();
@@ -288,8 +264,11 @@ describe('SPFx Template Scaffolding', () => {
           // Add file context to the error message
           try {
             expect(scaffoldedContent).toEqual(exampleContent);
-          } catch (error) {
-            throw new Error(`File content mismatch in '${file}':\n${error.message}`);
+          } catch (error: unknown) {
+            if (error instanceof Error) {
+              throw new Error(`File content mismatch in '${file}':\n${error.message}`);
+            }
+            throw new Error(`File content mismatch in '${file}':\n${String(error)}`);
           }
         }
       });
