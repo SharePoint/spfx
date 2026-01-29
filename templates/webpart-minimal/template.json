@@ -12,13 +12,21 @@
             "type": "string",
             "description": "The name of the library (also used as the package name)"
         },
-        "versionBadge": {
+        "featureId": {
             "type": "string",
-            "description": "The version badge URL to use in the README.md"
+            "description": "The feature ID (GUID) for the solution feature"
+        },
+        "solutionId": {
+            "type": "string",
+            "description": "The solution ID (GUID) for the SharePoint solution"
         },
         "componentId": {
             "type": "string",
             "description": "The component ID (GUID) for the web part"
+        },
+        "versionBadge": {
+            "type": "string",
+            "description": "The version badge URL to use in the README.md"
         },
         "componentAlias": {
             "type": "string",
@@ -32,17 +40,13 @@
             "type": "string",
             "description": "The component name (in manifest) for the web part, in camel case"
         },
-        "componentNameHypenCase": {
+        "componentNameHyphenCase": {
             "type": "string",
             "description": "The component name (in manifest) for the web part, in hyphen case"
         },
-        "componentClassName": {
+        "componentNameCapitalCase": {
             "type": "string",
             "description": "The component class name for the web part"
-        },
-        "componentStrings": {
-            "type": "string",
-            "description": "The component strings module name / webpack alias for the web part"
         }
     }
 }

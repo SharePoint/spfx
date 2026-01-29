@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "<%= libraryName %>-client-side-solution",
-    "id": "<%= solutionId %>",
+    "name": "@spfx-template/webpart-minimal-client-side-solution",
+    "id": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "<%= libraryName %> description"
+        "default": "@spfx-template/webpart-minimal description"
       },
       "longDescription": {
-        "default": "<%= libraryName %> description"
+        "default": "@spfx-template/webpart-minimal description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "<%= libraryName %> Feature",
-        "description": "The feature that activates elements of the <%= libraryName %> solution.",
-        "id": "<%= featureId %>",
+        "title": "@spfx-template/webpart-minimal Feature",
+        "description": "The feature that activates elements of the @spfx-template/webpart-minimal solution.",
+        "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= libraryName %>.sppkg"
+    "zippedPackage": "solution/@spfx-template/webpart-minimal.sppkg"
   }
 }

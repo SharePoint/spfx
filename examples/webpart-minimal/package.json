@@ -1,5 +1,5 @@
 {
-  "name": "<%= libraryName %>",
+  "name": "@spfx-template/webpart-minimal",
   "version": "0.0.1",
   "private": true,
   "engines": {
