@@ -78,8 +78,10 @@
    *
    * The default value is false to avoid legacy compatibility issues.
    * It is strongly recommended to set `strictPeerDependencies=true`.
+   *
+   * NOTE: Set to false for SPFx projects due to known peer dependency issues.
    */
-  "strictPeerDependencies": true,
+  "strictPeerDependencies": false,
 
   /**
    * Environment variables that will be provided to PNPM.
