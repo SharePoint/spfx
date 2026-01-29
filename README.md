@@ -1,6 +1,8 @@
 # SPFx CLI
 SPFx CLI tool for scaffolding and managing SPFx projects.
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/SharePoint/spfx)
+
 ## Projects
 
 This monorepo is organized into the following projects:
