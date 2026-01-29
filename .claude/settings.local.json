@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rush install)",
+      "Bash(rush rebuild:*)",
+      "Bash(rushx _phase:build:*)",
+      "Bash(rushx _phase:test:*)",
+      "Bash(rushx build)",
+      "Bash(node apps/spfx-cli/bin/spfx:*)",
+      "Bash(node:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Claude local config to .gitignore\n\nExclude .claude/*.local.json files from version control.\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)",
+      "Bash(git checkout:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nMerge branch ''main'' into nick-pape/wip\n\nResolved conflicts by:\n- Accepting refactored code structure \\(split repository source files\\)\n- Keeping EJS types and proper API usage\n- Maintaining eslint ^8.57.1 for consistency across repo\n- Merging test configurations to test both hello-world and real templates\n- Keeping our rush.json with all template packages\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(rush update)",
+      "Bash(find:*)",
+      "Bash(rushx build:*)",
+      "Bash(heft test:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nFix merge issues and build errors\n\n- Remove eslint.config.js \\(flat config not supported in ESLint 8\\)\n- Fix typo: componentNameHypenCase → componentNameHyphenCase in templates\n- Update examples to match current template output\n- Update lockfiles from rush update\n\nAll tests now pass successfully.\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}

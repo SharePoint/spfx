@@ -40,7 +40,7 @@
             "type": "string",
             "description": "The component name (in manifest) for the web part, in camel case"
         },
-        "componentNameHypenCase": {
+        "componentNameHyphenCase": {
             "type": "string",
             "description": "The component name (in manifest) for the web part, in hyphen case"
         },
