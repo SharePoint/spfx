@@ -1,0 +1,9 @@
+packages:
+  - 'api/*'
+  - 'apps/*'
+  - 'libraries/*'
+  - 'tools/*'
+  - 'tests/*'
+  - 'examples/*'
+
+strictPeerDependencies: false
