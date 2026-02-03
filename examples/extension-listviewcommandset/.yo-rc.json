@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "ListViewCommandSet",
+    "useGulp": false,
+    "componentType": "extension",
+    "extensionType": "ListViewCommandSet",
+    "componentName": "ListViewCommandSet",
+    "componentDescription": "List view command set extension",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.21.1",
+    "sdksVersions": {},
+    "version": "1.22.1",
+    "libraryName": "@spfx-template/extension-listviewcommandset",
+    "libraryId": "44d64337-e2f4-48e2-a954-a68795124bf2",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionShortDescription": "ListViewCommandSet description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

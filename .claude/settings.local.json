@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git merge:*)",
+      "Bash(git commit:*)",
+      "Bash(rush build:*)",
+      "Bash(git push:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(git add:*)",
+      "Bash(git pull:*)",
+      "Bash(rush purge:*)",
+      "Bash(nvm --version:*)",
+      "Bash(fnm --version:*)",
+      "Bash(node --version:*)",
+      "Bash(nvs:*)",
+      "Bash(source nvs.sh)",
+      "Bash(export PATH=\"$HOME/AppData/Local/nvs/default/bin:$PATH\")",
+      "Bash(export PATH=\"$LOCALAPPDATA/nvs/node/22.21.1/x64:$PATH\")",
+      "Bash(export PATH=\"/c/Users/$USER/AppData/Local/nvs/node/22.21.1/x64:$PATH\":*)",
+      "Bash(echo:*)",
+      "Bash(~/AppData/Local/nvs/node/22.21.1/x64/node.exe --version)",
+      "Bash(export PATH=\"$HOME/AppData/Local/nvs/node/22.21.1/x64:$PATH\")",
+      "Bash(rush update)",
+      "Bash(rushx build)"
+    ]
+  }
+}
