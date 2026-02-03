@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "<%= componentNameKebabCase %>-adaptive-card-extension": {
+      "components": [
+        {
+          "entrypoint": "./lib/adaptiveCardExtensions/<%= componentNameCamelCase %>/<%= componentNamePascalCase %>AdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/<%= componentNameCamelCase %>/<%= componentNamePascalCase %>AdaptiveCardExtension.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "<%= componentNamePascalCase %>AdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/<%= componentNameCamelCase %>/loc/{locale}.js"
+  }
+}

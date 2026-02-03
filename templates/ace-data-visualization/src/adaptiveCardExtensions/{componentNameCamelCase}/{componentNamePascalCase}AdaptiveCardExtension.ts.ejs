@@ -1,0 +1,53 @@
+import type { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
+import { BaseAdaptiveCardExtension } from '@microsoft/sp-adaptive-card-extension-base';
+import { CardView } from './cardView/CardView';
+import { QuickView } from './quickView/QuickView';
+import { <%= componentNamePascalCase %>PropertyPane } from './<%= componentNamePascalCase %>PropertyPane';
+
+export interface I<%= componentNamePascalCase %>AdaptiveCardExtensionProps {
+  title: string;
+}
+
+export interface I<%= componentNamePascalCase %>AdaptiveCardExtensionState {
+}
+
+const CARD_VIEW_REGISTRY_ID: string = '<%= componentNamePascalCase %>_CARD_VIEW';
+export const QUICK_VIEW_REGISTRY_ID: string = '<%= componentNamePascalCase %>_QUICK_VIEW';
+
+export default class <%= componentNamePascalCase %>AdaptiveCardExtension extends BaseAdaptiveCardExtension<
+  I<%= componentNamePascalCase %>AdaptiveCardExtensionProps,
+  I<%= componentNamePascalCase %>AdaptiveCardExtensionState
+> {
+  private _deferredPropertyPane: <%= componentNamePascalCase %>PropertyPane | undefined;
+
+  public onInit(): Promise<void> {
+    this.state = { };
+
+    // registers the card view to be shown in a dashboard
+    this.cardNavigator.register(CARD_VIEW_REGISTRY_ID, () => new CardView());
+    // registers the quick view to open via QuickView action
+    this.quickViewNavigator.register(QUICK_VIEW_REGISTRY_ID, () => new QuickView());
+
+    return Promise.resolve();
+  }
+
+  protected loadPropertyPaneResources(): Promise<void> {
+    return import(
+      /* webpackChunkName: '<%= componentNamePascalCase %>-property-pane'*/
+      './<%= componentNamePascalCase %>PropertyPane'
+    )
+      .then(
+        (component) => {
+          this._deferredPropertyPane = new component.<%= componentNamePascalCase %>PropertyPane();
+        }
+      );
+  }
+
+  protected renderCard(): string | undefined {
+    return CARD_VIEW_REGISTRY_ID;
+  }
+
+  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    return this._deferredPropertyPane?.getPropertyPaneConfiguration() ?? super.getPropertyPaneConfiguration();
+  }
+}
