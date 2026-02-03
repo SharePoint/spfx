@@ -481,6 +481,13 @@
       "reviewCategory": "tools",
       "shouldPublish": false,
       "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/ace-search-card",
+      "projectFolder": "examples/ace-search-card",
+      "reviewCategory": "templates",
+      "shouldPublish": false,
+      "tags": [ ]
     }
   ]
 }

@@ -1,0 +1,24 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "ace-search-card-alpha",
+    "useGulp": false,
+    "componentType": "adaptiveCardExtension",
+    "template": "none",
+    "componentName": "Alpha",
+    "componentDescription": "Alpha ACE",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.21.1",
+    "sdksVersions": {},
+    "version": "1.22.1",
+    "libraryName": "ace-search-card-alpha",
+    "libraryId": "a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionShortDescription": "ace-search-card-alpha description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "aceTemplateType": "Search"
+  }
+}

@@ -217,9 +217,11 @@
    * https://pnpm.io/package_json#pnpmpeerdependencyrules
    */
   "globalPeerDependencyRules": {
-    // "ignoreMissing": ["@eslint/*"],
-    // "allowedVersions": { "react": "17" },
-    // "allowAny": ["@babel/*"]
+    "ignoreMissing": ["@types/react", "@types/react-dom", "swiper"],
+    "allowedVersions": {
+      "@rushstack/heft": "*"
+    },
+    "allowAny": ["@microsoft/microsoft-graph-client"]
   },
 
   /**
