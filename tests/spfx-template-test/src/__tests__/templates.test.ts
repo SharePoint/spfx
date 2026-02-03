@@ -32,6 +32,11 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'test',
     templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template')
   },
+  {
+    libraryName: '@spfx-template/ace-generic-card',
+    templateName: 'ace-generic-card',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-generic-card')
+  },
 ];
 
 // Check for --update or -u flag
