@@ -32,6 +32,11 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'test',
     templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template')
   },
+  {
+    libraryName: '@spfx-template/extension-application-customizer',
+    templateName: 'extension-application-customizer',
+    templatePath: path.join(REPO_ROOT, 'templates/extension-application-customizer')
+  },
 ];
 
 // Check for --update or -u flag
