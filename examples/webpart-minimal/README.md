@@ -1,4 +1,4 @@
-# my
+# @spfx-template/webpart-minimal
 
 ## Summary
 
