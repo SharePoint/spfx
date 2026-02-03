@@ -448,6 +448,12 @@
     //  "tags": [ ]
     //},
     {
+      "packageName": "@spfx-template/extension-formcustomizer-react",
+      "projectFolder": "examples/extension-formcustomizer-react",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@microsoft/spfx-cli-build-rig",
       "projectFolder": "tools/spfx-cli-build-rig",
       "reviewCategory": "tools",

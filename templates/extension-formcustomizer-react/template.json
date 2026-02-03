@@ -1,0 +1,17 @@
+{
+  "$schema": "../../libraries/spfx-templating-engine/lib/schemas/template-schema.json",
+  "name": "extension-formcustomizer-react",
+  "componentType": "extension",
+  "extensionType": "FormCustomizer",
+  "framework": "react",
+  "templateVariables": {
+    "componentId": "guid",
+    "solutionId": "guid",
+    "featureId": "guid",
+    "componentNameCapitalCase": "string",
+    "componentNameCamelCase": "string",
+    "componentNameKebabCase": "string",
+    "componentNameCamelCase": "string",
+    "libraryName": "string"
+  }
+}

@@ -32,6 +32,11 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'test',
     templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template')
   },
+  {
+    libraryName: '@spfx-template/extension-formcustomizer-react',
+    templateName: 'extension-formcustomizer-react',
+    templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-react')
+  },
 ];
 
 // Check for --update or -u flag
