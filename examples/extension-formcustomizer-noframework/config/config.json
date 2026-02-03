@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "minimal-form-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/minimal/MinimalFormCustomizer.js",
+          "manifest": "./src/extensions/minimal/MinimalFormCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MinimalFormCustomizerStrings": "lib/extensions/minimal/loc/{locale}.js"
+  }
+}
