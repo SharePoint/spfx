@@ -117,7 +117,7 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
-  ../../examples/extension-formcustomizer-react:
+  ../../examples/extension-fieldcustomizer-react:
     dependencies:
       '@fluentui/react':
         specifier: ^8.106.4
@@ -131,12 +131,6 @@ importers:
       '@microsoft/sp-listview-extensibility':
         specifier: 1.22.1
         version: 1.22.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@22.19.8)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@microsoft/sp-lodash-subset':
-        specifier: 1.22.1
-        version: 1.22.1
-      '@microsoft/sp-office-ui-fabric-core':
-        specifier: 1.22.1
-        version: 1.22.1
       react:
         specifier: 17.0.1
         version: 17.0.1
@@ -1588,10 +1582,6 @@ packages:
 
   '@microsoft/sp-odata-types@1.22.1':
     resolution: {integrity: sha512-c8F06fC6gnbPscYqAidT1/Pp6ld3k5jG0FkAy/kdfeRDlFj0b0736eQO+2kChYymUZzJiuZ5GH7hRFwdOdc+CQ==}
-    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
-
-  '@microsoft/sp-office-ui-fabric-core@1.22.1':
-    resolution: {integrity: sha512-gU0QudI2ZLY1DobzO37UO1DTAmVyaRXAMPH29dpAthgQbTeNr+ZDRRx/Zjqc87P2oMhHRruAKq51ms+SFaOCDA==}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
 
   '@microsoft/sp-page-context@1.22.1':
@@ -4471,9 +4461,6 @@ packages:
 
   obuf@1.1.2:
     resolution: {integrity: sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==}
-
-  office-ui-fabric-core@11.0.1:
-    resolution: {integrity: sha512-jcfycbVOm2aUoI+AGtHW24HvM7nUVFr44hR5NIE56EobK67bVwbNAQL15CJj3vNz5PBrnitsV9ROOB+KOEWn8g==}
 
   on-finished@2.4.1:
     resolution: {integrity: sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==}
@@ -8273,12 +8260,6 @@ snapshots:
   '@microsoft/sp-odata-types@1.22.1':
     dependencies:
       '@swc/helpers': 0.5.18
-      tslib: 2.3.1
-
-  '@microsoft/sp-office-ui-fabric-core@1.22.1':
-    dependencies:
-      '@swc/helpers': 0.5.18
-      office-ui-fabric-core: 11.0.1
       tslib: 2.3.1
 
   '@microsoft/sp-page-context@1.22.1(@types/node@22.19.8)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
@@ -12562,8 +12543,6 @@ snapshots:
       es-object-atoms: 1.1.1
 
   obuf@1.1.2: {}
-
-  office-ui-fabric-core@11.0.1: {}
 
   on-finished@2.4.1:
     dependencies:
