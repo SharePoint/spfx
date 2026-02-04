@@ -487,6 +487,12 @@
       "reviewCategory": "tools",
       "shouldPublish": false,
       "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/webpart-minimal",
+      "projectFolder": "examples/webpart-minimal",
+      "reviewCategory": "templates",
+      "tags": [ ]
     }
   ]
 }
