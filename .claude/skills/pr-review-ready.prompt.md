@@ -16,6 +16,11 @@ You are helping prepare a pull request for human review. Your goal is to address
 # Get PR number from current branch if not provided
 gh pr status --json number,headRefName -q '.currentBranch.number'
 
+# Parse repo into owner and name
+REPO="{repo}"
+OWNER="${REPO%%/*}"
+REPO_NAME="${REPO##*/}"
+
 # Get PR details
 gh pr view {pr_number} --repo {repo} --json title,body,number,headRefName,baseRefName,state
 ```
@@ -28,13 +33,18 @@ Use GitHub API to fetch:
 3. Review threads and their resolution status
 
 ```bash
+# Parse repo into owner and name
+REPO="{repo}"
+OWNER="${REPO%%/*}"
+REPO_NAME="${REPO##*/}"
+
 # Get review comments
-gh api repos/{owner}/{repo}/pulls/{pr_number}/comments
+gh api "repos/$OWNER/$REPO_NAME/pulls/{pr_number}/comments"
 
 # Get review threads (for resolution tracking)
-gh api graphql -f query='
+gh api graphql -f query="
   query {
-    repository(owner: "{owner}", name: "{repo}") {
+    repository(owner: \"$OWNER\", name: \"$REPO_NAME\") {
       pullRequest(number: {pr_number}) {
         reviewThreads(first: 100) {
           nodes {
@@ -56,7 +66,7 @@ gh api graphql -f query='
       }
     }
   }
-'
+"
 ```
 
 ### Step 3: Analyze Each Comment
@@ -140,11 +150,18 @@ For each comment processed:
    - If ignored (not applicable): "This doesn't apply because [reason]."
    - If needs clarification: "Could you clarify [specific question]?"
 
-2. **Post the reply**:
+2. **Post inline reply to the review comment**:
    ```bash
-   gh pr comment {pr_number} --body "Reply to comment on {file}:{line}
+   # Parse repo into owner and name
+   REPO="{repo}"
+   OWNER="${REPO%%/*}"
+   REPO_NAME="${REPO##*/}"
 
-   {reply_message}"
+   # Reply directly to the review comment thread
+   gh api \
+     --method POST \
+     "repos/$OWNER/$REPO_NAME/pulls/comments/{comment_id}/replies" \
+     -f body="{reply_message}"
    ```
 
 ### Step 7: Resolve Threads
@@ -299,5 +316,5 @@ Default settings:
 
 Override with flags:
 ```bash
-/pr-review-ready 26 --max-iterations 10 --no-auto-commit
+/pr-review-ready 26 --max-ci-iterations 10 --no-auto-commit
 ```

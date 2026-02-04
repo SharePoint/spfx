@@ -43,7 +43,7 @@
       "description": "Process PR #26"
     },
     {
-      "command": "/pr-review-ready 26 --max-iterations 10",
+      "command": "/pr-review-ready 26 --max-ci-iterations 10",
       "description": "Process PR #26 with up to 10 CI fix attempts"
     },
     {

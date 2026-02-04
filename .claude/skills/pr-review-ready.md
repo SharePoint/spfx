@@ -24,7 +24,7 @@ This skill automates the tedious process of preparing a PR for final human revie
 /pr-review-ready 26
 
 # Specify repository and PR
-/pr-review-ready --repo SharePoint/spfx --pr 26
+/pr-review-ready --repo SharePoint/spfx --pr-number 26
 ```
 
 ## What This Skill Does
@@ -89,9 +89,9 @@ The skill will ask the user when:
 
 ## Parameters
 
-- `--pr <number>`: PR number to process (default: infer from current branch)
+- `--pr-number <number>`: PR number to process (default: infer from current branch)
 - `--repo <owner/name>`: Repository (default: origin remote)
-- `--max-iterations <number>`: Maximum CI fix attempts (default: 5)
+- `--max-ci-iterations <number>`: Maximum CI fix attempts (default: 5)
 - `--auto-commit`: Automatically commit and push changes (default: true)
 - `--dry-run`: Show what would be done without making changes
 
