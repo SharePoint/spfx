@@ -45,9 +45,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'webpart-noframework',
     templatePath: path.join(REPO_ROOT, 'templates/webpart-noframework'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'Minimal WebPart',
-    componentAlias: 'MinimalWebPart',
-    componentDescription: 'A minimal no-framework web part'
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal Web Part Description'
   },
 ];
 
