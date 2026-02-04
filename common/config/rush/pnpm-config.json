@@ -202,6 +202,7 @@
   "globalOverrides": {
     // "example1": "^1.0.0",
     // "example2": "npm:@company/example2@^1.0.0"
+    "baseline-browser-mapping": "^2.9.19"
   },
 
   /**

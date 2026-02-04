@@ -24,18 +24,21 @@ interface TemplateConfig {
   libraryName: string;
   templateName: string;
   templatePath: string;
+  localTemplatePath: string; // Path to parent directory containing template subdirectory
 }
 
 const TEMPLATE_CONFIGS: TemplateConfig[] = [
   {
     libraryName: '@spfx-template/hello-world-test',
     templateName: 'test',
-    templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template')
+    templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template'),
+    localTemplatePath: path.join(REPO_ROOT, 'tests/spfx-template-test')
   },
   {
     libraryName: '@spfx-template/extension-listviewcommandset',
     templateName: 'extension-listviewcommandset',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-listviewcommandset')
+    templatePath: path.join(REPO_ROOT, 'templates/extension-listviewcommandset'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates')
   },
 ];
 
@@ -166,7 +169,7 @@ describe('SPFx Template Scaffolding', () => {
             `node "${CLI_PATH}" create`,
             `--template ${config.templateName}`,
             `--target-dir "${outputPath}"`,
-            `--local-template "${TEST_TEMPLATE_DIR}"`,
+            `--local-template "${config.localTemplatePath}"`,
             `--library-name "${config.libraryName}"`,
             `--component-id "${FIXED_COMPONENT_ID}"`,
             `--solution-id "${FIXED_SOLUTION_ID}"`,
