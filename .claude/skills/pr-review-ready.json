@@ -1,0 +1,61 @@
+{
+  "name": "pr-review-ready",
+  "version": "1.0.0",
+  "description": "Automate PR review preparation: address comments, fix issues, ensure CI passes",
+  "type": "prompt",
+  "promptFile": "pr-review-ready.prompt.md",
+  "parameters": {
+    "pr_number": {
+      "type": "number",
+      "description": "Pull request number",
+      "required": false,
+      "inferFrom": "current-branch"
+    },
+    "repo": {
+      "type": "string",
+      "description": "Repository in format owner/name",
+      "required": false,
+      "inferFrom": "git-remote"
+    },
+    "max_ci_iterations": {
+      "type": "number",
+      "description": "Maximum CI fix attempts",
+      "default": 5
+    },
+    "auto_commit": {
+      "type": "boolean",
+      "description": "Automatically commit changes",
+      "default": true
+    },
+    "dry_run": {
+      "type": "boolean",
+      "description": "Show what would be done without making changes",
+      "default": false
+    }
+  },
+  "examples": [
+    {
+      "command": "/pr-review-ready",
+      "description": "Process current branch's PR"
+    },
+    {
+      "command": "/pr-review-ready 26",
+      "description": "Process PR #26"
+    },
+    {
+      "command": "/pr-review-ready 26 --max-iterations 10",
+      "description": "Process PR #26 with up to 10 CI fix attempts"
+    },
+    {
+      "command": "/pr-review-ready --dry-run",
+      "description": "Preview what would be done"
+    }
+  ],
+  "requirements": {
+    "tools": ["gh", "git"],
+    "permissions": ["read:repo", "write:repo", "read:pr", "write:pr"]
+  },
+  "tags": ["pr", "review", "ci", "automation", "github"],
+  "author": "SPFx Team",
+  "documentation": "pr-review-ready.md"
+}
