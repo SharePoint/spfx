@@ -8,6 +8,7 @@ import {
 import { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
+import { camelCase, kebabCase, upperFirst } from 'lodash';
 
 import {    
   LocalFileSystemRepositorySource,
@@ -37,6 +38,9 @@ export class CreateAction extends CommandLineAction {
   private readonly _componentId: CommandLineStringParameter;
   private readonly _solutionId: CommandLineStringParameter;
   private readonly _featureId: CommandLineStringParameter;
+  private readonly _componentName: IRequiredCommandLineStringParameter;
+  private readonly _componentAlias: CommandLineStringParameter;
+  private readonly _componentDescription: CommandLineStringParameter;
 
   public constructor(terminal: Terminal) {
 
@@ -93,6 +97,25 @@ export class CreateAction extends CommandLineAction {
       argumentName: 'FEATURE_ID',
       description: 'The unique feature ID (GUID). If not provided, a new GUID will be generated.'
     });
+
+    this._componentName = this.defineStringParameter({
+      parameterLongName: '--component-name',
+      argumentName: 'COMPONENT_NAME',
+      description: 'The component name (e.g., "Hello World")',
+      required: true
+    });
+
+    this._componentAlias = this.defineStringParameter({
+      parameterLongName: '--component-alias',
+      argumentName: 'COMPONENT_ALIAS',
+      description: 'The component alias. If not provided, will use the component name.'
+    });
+
+    this._componentDescription = this.defineStringParameter({
+      parameterLongName: '--component-description',
+      argumentName: 'COMPONENT_DESCRIPTION',
+      description: 'The component description. If not provided, will generate from component name.'
+    });
   }
 
   protected async onExecuteAsync(): Promise<void> {
@@ -145,6 +168,20 @@ export class CreateAction extends CommandLineAction {
       const solutionId = this._solutionId.value || uuidv4();
       const featureId = this._featureId.value || uuidv4();
 
+      // Get component name and validate
+      const componentName = this._componentName.value;
+      if (!componentName || componentName.trim().length === 0) {
+        throw new Error('Component name is required and cannot be empty or only whitespace.');
+      }
+
+      const componentAlias = this._componentAlias.value || componentName;
+      const componentDescription = this._componentDescription.value || `${componentName} description`;
+
+      // Compute name variants using lodash
+      const componentNameCamelCase = camelCase(componentName);
+      const componentNameHyphenCase = kebabCase(componentName);
+      const componentNameCapitalCase = upperFirst(camelCase(componentName));
+
       const fs = await template.render({
         solution_name: 'test-solution-name',
         eslintProfile: 'react',
@@ -153,12 +190,12 @@ export class CreateAction extends CommandLineAction {
         componentId: componentId,
         featureId: featureId,
         solutionId: solutionId,
-        componentAlias: 'Minimal',
-        componentNameUnescaped: 'Minimal',
-        componentNameCamelCase: 'minimal',
-        componentNameHyphenCase: 'minimal-web-part',
-        componentNameCapitalCase: 'Minimal',
-        componentDescription: 'Minimal Web Part Description',
+        componentAlias: componentAlias,
+        componentNameUnescaped: componentName,
+        componentNameCamelCase: componentNameCamelCase,
+        componentNameHyphenCase: componentNameHyphenCase,
+        componentNameCapitalCase: componentNameCapitalCase,
+        componentDescription: componentDescription,
       }, targetDir);
       _printFileChanges(this._terminal, fs, targetDir);
       await template.write(fs);
