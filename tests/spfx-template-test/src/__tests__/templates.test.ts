@@ -162,11 +162,14 @@ describe('SPFx Template Scaffolding', () => {
 
         // Run the scaffolding CLI with library name and fixed component ID
         try {
+          // Get the parent directory of the template path (where templates are discovered)
+          const templateSourceDir = path.dirname(config.templatePath);
+
           const command = [
             `node "${CLI_PATH}" create`,
             `--template ${config.templateName}`,
             `--target-dir "${outputPath}"`,
-            `--local-template "${TEST_TEMPLATE_DIR}"`,
+            `--local-template "${templateSourceDir}"`,
             `--library-name "${config.libraryName}"`,
             `--component-id "${FIXED_COMPONENT_ID}"`,
             `--solution-id "${FIXED_SOLUTION_ID}"`,
