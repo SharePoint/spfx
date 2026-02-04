@@ -8,6 +8,7 @@ import {
 import { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
+import { camelCase, kebabCase, upperFirst } from 'lodash';
 
 import {    
   LocalFileSystemRepositorySource,
@@ -167,15 +168,19 @@ export class CreateAction extends CommandLineAction {
       const solutionId = this._solutionId.value || uuidv4();
       const featureId = this._featureId.value || uuidv4();
 
-      // Get component name and compute variants
+      // Get component name and validate
       const componentName = this._componentName.value;
+      if (!componentName || componentName.trim().length === 0) {
+        throw new Error('Component name is required and cannot be empty or only whitespace.');
+      }
+
       const componentAlias = this._componentAlias.value || componentName;
       const componentDescription = this._componentDescription.value || `${componentName} description`;
 
-      // Compute name variants
-      const componentNameCamelCase = toCamelCase(componentName);
-      const componentNameHyphenCase = toKebabCase(componentName);
-      const componentNameCapitalCase = toPascalCase(componentName);
+      // Compute name variants using lodash
+      const componentNameCamelCase = camelCase(componentName);
+      const componentNameHyphenCase = kebabCase(componentName);
+      const componentNameCapitalCase = upperFirst(camelCase(componentName));
 
       const fs = await template.render({
         solution_name: 'test-solution-name',
@@ -201,35 +206,6 @@ export class CreateAction extends CommandLineAction {
       throw error;
     }
   }
-}
-
-/**
- * Converts a string to camelCase (e.g., "Hello World" -> "helloWorld")
- */
-function toCamelCase(str: string): string {
-  return str
-    .replace(/[^a-zA-Z0-9]+(.)/g, (_match, char) => char.toUpperCase())
-    .replace(/^[A-Z]/, (char) => char.toLowerCase());
-}
-
-/**
- * Converts a string to kebab-case/hyphen-case (e.g., "Hello World" -> "hello-world")
- */
-function toKebabCase(str: string): string {
-  return str
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
-    .toLowerCase()
-    .replace(/[^a-z0-9-]/g, '');
-}
-
-/**
- * Converts a string to PascalCase (e.g., "Hello World" -> "HelloWorld")
- */
-function toPascalCase(str: string): string {
-  return str
-    .replace(/[^a-zA-Z0-9]+(.)/g, (_match, char) => char.toUpperCase())
-    .replace(/^[a-z]/, (char) => char.toUpperCase());
 }
 
 /**
