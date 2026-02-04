@@ -24,6 +24,9 @@ interface TemplateConfig {
   templateName: string;
   templatePath: string;
   localTemplatePath: string; // Path to parent directory containing template subdirectory
+  componentName: string;
+  componentAlias?: string;
+  componentDescription?: string;
 }
 
 const TEMPLATE_CONFIGS: TemplateConfig[] = [
@@ -31,13 +34,19 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     libraryName: '@spfx-template/hello-world-test',
     templateName: 'test',
     templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template'),
-    localTemplatePath: path.join(REPO_ROOT, 'tests/spfx-template-test')
+    localTemplatePath: path.join(REPO_ROOT, 'tests/spfx-template-test'),
+    componentName: 'Hello World',
+    componentAlias: 'HelloWorld',
+    componentDescription: 'A hello world test component'
   },
   {
     libraryName: '@spfx-template/extension-application-customizer',
     templateName: 'extension-application-customizer',
     templatePath: path.join(REPO_ROOT, 'templates/extension-application-customizer'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates')
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'App Customizer',
+    componentAlias: 'AppCustomizer',
+    componentDescription: 'An application customizer extension'
   },
 ];
 
@@ -164,7 +173,7 @@ describe('SPFx Template Scaffolding', () => {
 
         // Run the scaffolding CLI with library name and fixed component ID
         try {
-          const command = [
+          const commandParts = [
             `node "${CLI_PATH}" create`,
             `--template ${config.templateName}`,
             `--target-dir "${outputPath}"`,
@@ -172,8 +181,19 @@ describe('SPFx Template Scaffolding', () => {
             `--library-name "${config.libraryName}"`,
             `--component-id "${FIXED_COMPONENT_ID}"`,
             `--solution-id "${FIXED_SOLUTION_ID}"`,
-            `--feature-id "${FIXED_FEATURE_ID}"`
-          ].join(' ');
+            `--feature-id "${FIXED_FEATURE_ID}"`,
+            `--component-name "${config.componentName}"`
+          ];
+
+          if (config.componentAlias) {
+            commandParts.push(`--component-alias "${config.componentAlias}"`);
+          }
+
+          if (config.componentDescription) {
+            commandParts.push(`--component-description "${config.componentDescription}"`);
+          }
+
+          const command = commandParts.join(' ');
           console.log(`Running: ${command}`);
           
           execSync(command, {

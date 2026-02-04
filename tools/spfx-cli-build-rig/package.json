@@ -15,7 +15,7 @@
   },
   "peerDependencies": {
     "@rushstack/heft": "^1.1.6",
-    "eslint": "~9.25.1"
+    "eslint": "^8.57.1"
   },
   "dependencies": {
     "@microsoft/api-extractor": "^7.55.1",
@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "@rushstack/heft": "^1.1.6",
-    "eslint": "~9.25.1"
+    "eslint": "^8.57.1"
   }
 }
