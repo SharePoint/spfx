@@ -208,7 +208,7 @@ export class CreateAction extends CommandLineAction {
  */
 function toCamelCase(str: string): string {
   return str
-    .replace(/[^a-zA-Z0-9]+(.)/g, (_, char) => char.toUpperCase())
+    .replace(/[^a-zA-Z0-9]+(.)/g, (_match, char) => char.toUpperCase())
     .replace(/^[A-Z]/, (char) => char.toLowerCase());
 }
 
@@ -228,7 +228,7 @@ function toKebabCase(str: string): string {
  */
 function toPascalCase(str: string): string {
   return str
-    .replace(/[^a-zA-Z0-9]+(.)/g, (_, char) => char.toUpperCase())
+    .replace(/[^a-zA-Z0-9]+(.)/g, (_match, char) => char.toUpperCase())
     .replace(/^[a-z]/, (char) => char.toUpperCase());
 }
 
