@@ -33,7 +33,6 @@
     "css-loader": "~7.1.2",
     "eslint": "^8.57.1",
     "typescript": "~5.8.3",
-    "@microsoft/sp-module-interfaces": "1.22.1",
-    "@fluentui/react": "^8.106.4"
+    "@microsoft/sp-module-interfaces": "1.22.1"
   }
 }

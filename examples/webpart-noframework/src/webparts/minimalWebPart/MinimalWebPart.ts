@@ -31,7 +31,7 @@ export default class MinimalWebPart extends BaseClientSideWebPart<IMinimalWebPar
       <div>
         <h3>Welcome to SharePoint Framework!</h3>
         <p>
-        The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
+        The SharePoint Framework (SPFx) is an extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
         </p>
         <h4>Learn more about SPFx development:</h4>
           <ul class="${styles.links}">
@@ -52,8 +52,6 @@ export default class MinimalWebPart extends BaseClientSideWebPart<IMinimalWebPar
       this._environmentMessage = message;
     });
   }
-
-
 
   private _getEnvironmentMessage(): Promise<string> {
     if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
