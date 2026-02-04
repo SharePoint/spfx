@@ -153,12 +153,12 @@ export class CreateAction extends CommandLineAction {
         componentId: componentId,
         featureId: featureId,
         solutionId: solutionId,
-        componentAlias: 'My',
-        componentNameUnescaped: 'My',
-        componentNameCamelCase: 'my',
-        componentNameHyphenCase: 'my-web-part',
-        componentNameCapitalCase: 'My',
-        componentDescription: 'My Web Part Description',
+        componentAlias: 'Minimal',
+        componentNameUnescaped: 'Minimal',
+        componentNameCamelCase: 'minimal',
+        componentNameHyphenCase: 'minimal-web-part',
+        componentNameCapitalCase: 'Minimal',
+        componentDescription: 'Minimal Web Part Description',
       }, targetDir);
       _printFileChanges(this._terminal, fs, targetDir);
       await template.write(fs);
