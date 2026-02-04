@@ -78,8 +78,10 @@
    *
    * The default value is false to avoid legacy compatibility issues.
    * It is strongly recommended to set `strictPeerDependencies=true`.
+   *
+   * NOTE: Set to false for SPFx projects due to known peer dependency issues.
    */
-  "strictPeerDependencies": true,
+  "strictPeerDependencies": false,
 
   /**
    * Environment variables that will be provided to PNPM.
@@ -218,11 +220,9 @@
    * https://pnpm.io/package_json#pnpmpeerdependencyrules
    */
   "globalPeerDependencyRules": {
-    "ignoreMissing": ["@types/react", "@types/react-dom", "swiper"],
-    "allowedVersions": {
-      "@rushstack/heft": "*"
-    },
-    "allowAny": ["@microsoft/microsoft-graph-client"]
+    // "ignoreMissing": ["@eslint/*"],
+    // "allowedVersions": { "react": "17" },
+    // "allowAny": ["@babel/*"]
   },
 
   /**

@@ -483,10 +483,9 @@
       "tags": [ ]
     },
     {
-      "packageName": "@spfx-template/ace-search-card",
-      "projectFolder": "examples/ace-search-card",
+      "packageName": "@spfx-template/webpart-minimal",
+      "projectFolder": "examples/webpart-minimal",
       "reviewCategory": "templates",
-      "shouldPublish": false,
       "tags": [ ]
     }
   ]
