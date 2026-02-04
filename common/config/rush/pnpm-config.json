@@ -78,8 +78,10 @@
    *
    * The default value is false to avoid legacy compatibility issues.
    * It is strongly recommended to set `strictPeerDependencies=true`.
+   *
+   * NOTE: Set to false for SPFx projects due to known peer dependency issues.
    */
-  "strictPeerDependencies": true,
+  "strictPeerDependencies": false,
 
   /**
    * Environment variables that will be provided to PNPM.
@@ -202,6 +204,7 @@
   "globalOverrides": {
     // "example1": "^1.0.0",
     // "example2": "npm:@company/example2@^1.0.0"
+    "baseline-browser-mapping": "^2.9.19"
   },
 
   /**
