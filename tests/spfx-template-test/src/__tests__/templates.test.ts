@@ -24,18 +24,30 @@ interface TemplateConfig {
   libraryName: string;
   templateName: string;
   templatePath: string;
+  localTemplatePath: string;
+  componentName: string;
+  componentAlias?: string;
+  componentDescription?: string;
 }
 
 const TEMPLATE_CONFIGS: TemplateConfig[] = [
   {
     libraryName: '@spfx-template/hello-world-test',
     templateName: 'test',
-    templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template')
+    templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template'),
+    localTemplatePath: path.join(REPO_ROOT, 'tests/spfx-template-test'),
+    componentName: 'Hello World',
+    componentAlias: 'HelloWorld',
+    componentDescription: 'A hello world test component'
   },
   {
     libraryName: '@spfx-template/extension-formcustomizer-react',
     templateName: 'extension-formcustomizer-react',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-react')
+    templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-react'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'Form Customizer React',
+    componentAlias: 'FormCustomizerReact',
+    componentDescription: 'A React-based form customizer extension'
   },
 ];
 
@@ -162,19 +174,27 @@ describe('SPFx Template Scaffolding', () => {
 
         // Run the scaffolding CLI with library name and fixed component ID
         try {
-          // Get the parent directory of the template path (where templates are discovered)
-          const templateSourceDir = path.dirname(config.templatePath);
-
-          const command = [
+          const commandParts = [
             `node "${CLI_PATH}" create`,
             `--template ${config.templateName}`,
             `--target-dir "${outputPath}"`,
-            `--local-template "${templateSourceDir}"`,
+            `--local-template "${config.localTemplatePath}"`,
             `--library-name "${config.libraryName}"`,
             `--component-id "${FIXED_COMPONENT_ID}"`,
             `--solution-id "${FIXED_SOLUTION_ID}"`,
-            `--feature-id "${FIXED_FEATURE_ID}"`
-          ].join(' ');
+            `--feature-id "${FIXED_FEATURE_ID}"`,
+            `--component-name "${config.componentName}"`
+          ];
+
+          if (config.componentAlias) {
+            commandParts.push(`--component-alias "${config.componentAlias}"`);
+          }
+
+          if (config.componentDescription) {
+            commandParts.push(`--component-description "${config.componentDescription}"`);
+          }
+
+          const command = commandParts.join(' ');
           console.log(`Running: ${command}`);
           
           execSync(command, {
