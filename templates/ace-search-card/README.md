@@ -1,4 +1,4 @@
-# ace-search-card-alpha
+# <%= libraryName %>
 
 ## Summary
 
