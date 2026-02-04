@@ -9,7 +9,6 @@ const readFile = promisify(fs.readFile);
 
 // Path to the root of the monorepo
 const REPO_ROOT = path.resolve(__dirname, '../../../../');
-const TEST_TEMPLATE_DIR = path.join(REPO_ROOT, 'tests/spfx-template-test'); // Directory passed to --local-template; contains the test-template subdirectory
 const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
 const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
@@ -24,18 +23,21 @@ interface TemplateConfig {
   libraryName: string;
   templateName: string;
   templatePath: string;
+  localTemplatePath: string; // Path to parent directory containing template subdirectory
 }
 
 const TEMPLATE_CONFIGS: TemplateConfig[] = [
   {
     libraryName: '@spfx-template/hello-world-test',
     templateName: 'test',
-    templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template')
+    templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template'),
+    localTemplatePath: path.join(REPO_ROOT, 'tests/spfx-template-test')
   },
   {
     libraryName: '@spfx-template/extension-application-customizer',
     templateName: 'extension-application-customizer',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-application-customizer')
+    templatePath: path.join(REPO_ROOT, 'templates/extension-application-customizer'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates')
   },
 ];
 
@@ -166,7 +168,7 @@ describe('SPFx Template Scaffolding', () => {
             `node "${CLI_PATH}" create`,
             `--template ${config.templateName}`,
             `--target-dir "${outputPath}"`,
-            `--local-template "${TEST_TEMPLATE_DIR}"`,
+            `--local-template "${config.localTemplatePath}"`,
             `--library-name "${config.libraryName}"`,
             `--component-id "${FIXED_COMPONENT_ID}"`,
             `--solution-id "${FIXED_SOLUTION_ID}"`,
