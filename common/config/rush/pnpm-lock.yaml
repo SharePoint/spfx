@@ -45,10 +45,10 @@ importers:
         version: 4.6.1(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
         specifier: ^1.1.6
-        version: 1.1.12(@types/node@22.19.8)
+        version: 1.1.13(@types/node@22.19.8)
       '@rushstack/heft-node-rig':
         specifier: ^2.11.11
-        version: 2.11.17(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
+        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
       '@types/adm-zip':
         specifier: ^0.5.5
         version: 0.5.7
@@ -100,10 +100,10 @@ importers:
         version: 4.6.1(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
         specifier: ^1.1.6
-        version: 1.1.12(@types/node@22.19.8)
+        version: 1.1.13(@types/node@22.19.8)
       '@rushstack/heft-node-rig':
         specifier: ^2.11.11
-        version: 2.11.17(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
+        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
       '@types/heft-jest':
         specifier: ^1.0.6
         version: 1.0.6
@@ -118,6 +118,64 @@ importers:
         version: 10.0.0
       eslint:
         specifier: ^8.57.1
+        version: 8.57.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
+  ../../examples/extension-listviewcommandset:
+    dependencies:
+      '@microsoft/decorators':
+        specifier: 1.22.1
+        version: 1.22.1
+      '@microsoft/sp-core-library':
+        specifier: 1.22.1
+        version: 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-dialog':
+        specifier: 1.22.1
+        version: 1.22.1(@types/node@22.19.8)(scheduler@0.20.2)
+      '@microsoft/sp-listview-extensibility':
+        specifier: 1.22.1
+        version: 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      tslib:
+        specifier: 2.3.1
+        version: 2.3.1
+    devDependencies:
+      '@microsoft/eslint-config-spfx':
+        specifier: 1.22.1
+        version: 1.22.1(@typescript-eslint/parser@8.48.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
+      '@microsoft/eslint-plugin-spfx':
+        specifier: 1.22.1
+        version: 1.22.1(eslint@8.57.1)(typescript@5.8.3)
+      '@microsoft/sp-module-interfaces':
+        specifier: 1.22.1
+        version: 1.22.1(@types/node@22.19.8)
+      '@microsoft/spfx-heft-plugins':
+        specifier: 1.22.1
+        version: 1.22.1(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)
+      '@microsoft/spfx-web-build-rig':
+        specifier: 1.22.1
+        version: 1.22.1(@types/node@22.19.8)(jest-environment-node@29.7.0)(tslib@2.3.1)
+      '@rushstack/eslint-config':
+        specifier: 4.6.1
+        version: 4.6.1(eslint@8.57.1)(typescript@5.8.3)
+      '@rushstack/heft':
+        specifier: ^1.1.6
+        version: 1.1.13(@types/node@22.19.8)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
+      '@typescript-eslint/parser':
+        specifier: 8.48.1
+        version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
+      css-loader:
+        specifier: ~7.1.2
+        version: 7.1.3(webpack@5.95.0)
+      eslint:
+        specifier: 8.57.1
         version: 8.57.1
       typescript:
         specifier: ~5.8.3
@@ -158,7 +216,7 @@ importers:
         version: 1.22.1(@types/node@22.19.8)
       '@microsoft/spfx-heft-plugins':
         specifier: 1.22.1
-        version: 1.22.1(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)
+        version: 1.22.1(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.1
         version: 1.22.1(@types/node@22.19.8)(jest-environment-node@29.7.0)(tslib@2.3.1)
@@ -167,7 +225,7 @@ importers:
         version: 4.6.1(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
         specifier: ^1.1.6
-        version: 1.1.12(@types/node@22.19.8)
+        version: 1.1.13(@types/node@22.19.8)
       '@types/heft-jest':
         specifier: ^1.0.6
         version: 1.0.6
@@ -194,7 +252,7 @@ importers:
         version: link:../../tools/spfx-cli-build-rig
       '@rushstack/heft':
         specifier: ^1.1.6
-        version: 1.1.12(@types/node@22.19.8)
+        version: 1.1.13(@types/node@22.19.8)
       eslint:
         specifier: ^8.57.1
         version: 8.57.1
@@ -222,10 +280,10 @@ importers:
         version: 4.6.1(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
         specifier: ^1.1.6
-        version: 1.1.12(@types/node@22.19.8)
+        version: 1.1.13(@types/node@22.19.8)
       '@rushstack/heft-node-rig':
         specifier: ^2.11.11
-        version: 2.11.17(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
+        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
       '@types/heft-jest':
         specifier: ^1.0.6
         version: 1.0.6
@@ -243,10 +301,10 @@ importers:
     dependencies:
       '@microsoft/api-extractor':
         specifier: ^7.55.1
-        version: 7.56.1(@types/node@22.19.8)
+        version: 7.56.2(@types/node@22.19.8)
       '@rushstack/heft-node-rig':
         specifier: ^2.11.11
-        version: 2.11.17(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
+        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
       '@types/heft-jest':
         specifier: ^1.0.6
         version: 1.0.6
@@ -262,7 +320,7 @@ importers:
     devDependencies:
       '@rushstack/heft':
         specifier: ^1.1.6
-        version: 1.1.12(@types/node@22.19.8)
+        version: 1.1.13(@types/node@22.19.8)
       eslint:
         specifier: ^8.57.1
         version: 8.57.1
@@ -566,6 +624,9 @@ packages:
   '@fluentui/dom-utilities@2.3.10':
     resolution: {integrity: sha512-6WDImiLqTOpkEtfUKSStcTDpzmJfL6ZammomcjawN9xH/8u8G3Hx72CIt2MNck9giw/oUlNLJFdWRAjeP3rmPQ==}
 
+  '@fluentui/fluent2-theme@8.107.151':
+    resolution: {integrity: sha512-VzDYC17snBzqZCJuO8AOoxxLiHxDQ1487gcRgA5oqM77bLmCDOLRBXm1rHb72On4VuICWxyr1wKQXLoDXfImFg==}
+
   '@fluentui/font-icons-mdl2@8.5.71':
     resolution: {integrity: sha512-pCJyPl5TCFW4ZW3Qcphttc8OBPkhDpK70yQRYk9NugeS+FhlSPcgIbwGefBcu9G+8KYbfdZno8xMyr9pg+F6Mg==}
 
@@ -831,6 +892,14 @@ packages:
       '@types/react-dom': '>=16.8.0 <20.0.0'
       react: '>=16.14.0 <20.0.0'
       react-dom: '>=16.8.0 <20.0.0'
+
+  '@fluentui/react-migration-v8-v9@9.10.1':
+    resolution: {integrity: sha512-d7rRCdMyv8kE5IVgRNAq224YuHfFh70CEkNIzKWb5/7ijZO6nIzYOa8FhPe5l2Igd3UR2tjGHOb3toxvzWWULQ==}
+    peerDependencies:
+      '@types/react': '>=16.14.0 <20.0.0'
+      '@types/react-dom': '>=16.9.0 <20.0.0'
+      react: '>=16.8.0 <20.0.0'
+      react-dom: '>=16.14.0 <20.0.0'
 
   '@fluentui/react-motion-components-preview@0.15.0':
     resolution: {integrity: sha512-CUNl3WZt4RU4q6iAG56M3WRAq5sxfm8BNr9Me5dru1mkDXwgsdrCk03UFzydru3gThmuyYsBHwze79YrPzzmxw==}
@@ -1470,9 +1539,13 @@ packages:
     resolution: {integrity: sha512-6WWgjjg6FkoDWpF/O3sjB05OkszpI5wtKJqd8fUIR/JJUv8IqNCGr1lJUZJnc1HegcT9gAvyf98KfH0wFncU0w==}
     hasBin: true
 
-  '@microsoft/api-extractor@7.56.1':
-    resolution: {integrity: sha512-wX9ugJFqhsEWwt+UFTAkvXcBOzSQ1FeKe0ZdwEDKtjsf20Ec2frmCDXPjQwPtSNrpXUy1yQgyaF6YJVuC8gMtg==}
+  '@microsoft/api-extractor@7.56.2':
+    resolution: {integrity: sha512-d94f7S+H43jDxY/YIyp5UOE9N12HZmEPP5Ct96us+fw1FVKBoy4itTopdVM1VrcpduuA7fK/t31CgA2jM8AqSA==}
     hasBin: true
+
+  '@microsoft/decorators@1.22.1':
+    resolution: {integrity: sha512-amCpybBzXUIhRCWBte+t2FxpXncGvDcSJMmucsp8bafFNAbjgPmQ6zuQK7J7eTXp9XI0jaP0u6REwM4q5GGWBQ==}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
 
   '@microsoft/eslint-config-spfx@1.22.1':
     resolution: {integrity: sha512-pNzWwHhfwO83+yOuiMvA7C/E3RzH9u5aSslt1J3la1BlOpTD4mITRmWIe6oSEXwRVMpLjzr55pVygV52PRMoBg==}
@@ -1493,6 +1566,10 @@ packages:
 
   '@microsoft/microsoft-graph-client@1.7.2-spfx':
     resolution: {integrity: sha512-BQN50r3tohWYOaQ0de7LJ5eCRjI6eg4RQqLhGDlgRmZIZhWzH0bhR6QBMmmxtYtwKWifhPhJSxYDW+cP67TJVw==}
+
+  '@microsoft/sp-application-base@1.22.1':
+    resolution: {integrity: sha512-uNaANlUF/PJgqb2bhXZIwChXCcO8Pj+iwf2fzB45YQ2Zf8cZ/BZr2utVhM5vcXLgj/EU4qOP9RxGsUgRIAHK7g==}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
 
   '@microsoft/sp-component-base@1.22.1':
     resolution: {integrity: sha512-vP1Y2RHIf1RmSEnHZvHPZXsTZIx7G+mSLpmziQ4EUNbZYLcDvMP+b1t/SdgnDCiVrCQ7g3L6fsq/69hb/r/g/w==}
@@ -1516,8 +1593,19 @@ packages:
     resolution: {integrity: sha512-6NJBwUJDSH6SiBf+6x88vHQhza2iTkGoZtWLxJE5UVnmqBYR0k/J27yqqdcWzxcLkPsAMLilk5H3jnayNknDlA==}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
 
+  '@microsoft/sp-dialog@1.22.1':
+    resolution: {integrity: sha512-BszqN/7lLbEWkp+cmW4M7Xv4+7NdDFGK7tRV2aFHJ3pNVlC789AcEc/PPpVrkRuS1I1QmLNr5FbJRkBarnVvGA==}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
+    peerDependencies:
+      '@types/react': '>=16.9.51 <18.0.0'
+      '@types/react-dom': '>=16.9.8 <18.0.0'
+
   '@microsoft/sp-dynamic-data@1.22.1':
     resolution: {integrity: sha512-8QGNsUFCGHTlHOclPzUyG6Aym10W6rCZRiLwLHKZYw8AIDkDmQtUf4bSntdqqpKHaoR7v5Q896Kv1PNFllk86Q==}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
+
+  '@microsoft/sp-extension-base@1.22.1':
+    resolution: {integrity: sha512-213sBtKW5xZeEWjUi8WES+GNpvImM681Q2zYEWvPNUgyHGVhy9ULtzOw8hc051c1aH9oaib2TFZ36btXEx5V5A==}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
 
   '@microsoft/sp-http-base@1.22.1':
@@ -1540,6 +1628,10 @@ packages:
       '@types/react-dom': '>=16.9.8 <18.0.0'
       react: '>=16.13.1 <18.0.0'
       react-dom: '>=16.13.1 <18.0.0'
+
+  '@microsoft/sp-listview-extensibility@1.22.1':
+    resolution: {integrity: sha512-Ohb9YlTnSo82+PXikdaUAimI/H0JQudqxDMMcLGV0I8muESS7yTe9HvZmulb/P4muxyvFFMm2JvK9IZP2WhPow==}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
 
   '@microsoft/sp-loader@1.22.1':
     resolution: {integrity: sha512-/DujFfFcQtXbY3X5iwfIumvwlDvCmudR1KhJU2v5BSAgqLqkEoCMu+AMcOPOTS3UcxaD6vAbEGEkXbwK3JRTxA==}
@@ -1574,6 +1666,10 @@ packages:
     peerDependencies:
       '@types/react': '>=16.9.51 <18.0.0'
       '@types/react-dom': '>=16.9.8 <18.0.0'
+
+  '@microsoft/sp-search-extensibility@1.22.1':
+    resolution: {integrity: sha512-DML5UEtPH9Hgji5xe3WI325+8GlyAY8x62wTCRZzBc6ihTbsMFkM35fJeOXx5xuxKqttN9VJwgB+hWPhIaAPgA==}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
 
   '@microsoft/sp-top-actions@1.22.1':
     resolution: {integrity: sha512-TKsUrv38svujMOf1o2Ip/fNnm+yzdyXE58JkPpqXTUbfkc92i2RifuSCnJtm6uDaH4G1w7gwnjC4I6QPrYQQBg==}
@@ -1705,10 +1801,10 @@ packages:
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
 
-  '@rushstack/heft-api-extractor-plugin@1.2.8':
-    resolution: {integrity: sha512-/HDy3knkSlmUULfxupVnmwumXmRvsVLbEnoANIp+caw1DNPLKz02GBJnG+w379ZZ1cHxKdJ3zU97FdO9LIWr7A==}
+  '@rushstack/heft-api-extractor-plugin@1.2.9':
+    resolution: {integrity: sha512-hVZe5WN5RQP4+Q+YX7d1Uu575V9uwRTqydZg+Dw4fiAt/eLV6bRNuhnAZfVn52yTrZ7wRYcVLE/GVHyRHvxAmQ==}
     peerDependencies:
-      '@rushstack/heft': 1.1.12
+      '@rushstack/heft': 1.1.13
 
   '@rushstack/heft-config-file@0.16.8':
     resolution: {integrity: sha512-zmdN2w3XFUjh9ftE5raNiocJCDlqsYdQNu8ldGdyZUqWfpumyC5wHuWHRS72g2+vHOddRMgZ02SNb/HmWI8J0A==}
@@ -1727,10 +1823,10 @@ packages:
     peerDependencies:
       '@rushstack/heft': ^1.1.2
 
-  '@rushstack/heft-jest-plugin@1.1.12':
-    resolution: {integrity: sha512-fvm3wIi4f/st/GZfxAUpIoFsaoj3HtYrZrM31yC4IK51mBaomSb89S4/ry55L+1XLUhNf3oA0J/0JUqAxB6wGA==}
+  '@rushstack/heft-jest-plugin@1.1.13':
+    resolution: {integrity: sha512-5IClnFP+g+GY/kM/pLCidzcYqMbgc86yFczgDrrPRXlryNLmUy8HqN3iSCEkf6b0EkJZ5GKUs/fUT0U05UzdVg==}
     peerDependencies:
-      '@rushstack/heft': ^1.1.12
+      '@rushstack/heft': ^1.1.13
       jest-environment-jsdom: ^29.5.0
       jest-environment-node: ^29.5.0
     peerDependenciesMeta:
@@ -1751,30 +1847,30 @@ packages:
       jest-environment-node:
         optional: true
 
-  '@rushstack/heft-lint-plugin@1.1.15':
-    resolution: {integrity: sha512-yYsbqGJ4Fs4uPLNBRwF3tlD8fLNvzpvETh/HgVnO6QF6Q4WyvGDEK5eiH3yi0zC7vfRWrg38HdSgYRwT1DobFg==}
+  '@rushstack/heft-lint-plugin@1.1.16':
+    resolution: {integrity: sha512-mt+GIt3kr+IkG6j/W09UxpyfS2EEg6elfTbE+gx2dpuUZXDJeWqA433PrYb+RqoMBCBU2A13ZVv+XoM1uuFaHQ==}
     peerDependencies:
-      '@rushstack/heft': 1.1.12
+      '@rushstack/heft': 1.1.13
 
   '@rushstack/heft-lint-plugin@1.1.2':
     resolution: {integrity: sha512-bXMHCWzqHEljSyMfjGbN9SB5OpxLsplLRdcbONhprcGNFYhImrEanMbN0o+vaXk6WrPra6hm4iZXYccZ0nQ6kg==}
     peerDependencies:
       '@rushstack/heft': 1.1.2
 
-  '@rushstack/heft-node-rig@2.11.17':
-    resolution: {integrity: sha512-XBQdWF79X8Rp7+g2zeNBK2Vuqg0UfUCGvVjHKsY+iELCz1d0UYFKBGH7+8z+mi8kwbQBNyby5/vWh5sGifmd9A==}
+  '@rushstack/heft-node-rig@2.11.18':
+    resolution: {integrity: sha512-8KnBXymkzWLeUMu7nusL9SheiWSursYriTTWDxENZxFyugeeOXVaNhmAElHs1OpV4RMdspQDoAhBNr2s2JVIDQ==}
     peerDependencies:
-      '@rushstack/heft': ^1.1.12
+      '@rushstack/heft': ^1.1.13
 
   '@rushstack/heft-sass-plugin@0.15.24':
     resolution: {integrity: sha512-Psu3KZ6dQdJv2UpROVux1NEfWOFv0dFQVg5wT4N8pppar1m40Y/E7gfxZGgHIeWdXSuwF61d/kKgjxo5qFAiAg==}
     peerDependencies:
       '@rushstack/heft': ^0.71.1
 
-  '@rushstack/heft-typescript-plugin@1.1.12':
-    resolution: {integrity: sha512-kVw6SmnPyoh2i+K4l5DMslUcy2soPwakDpgkvfvqy5G5x8NkiFk57hRbQXBtBmNhgIE8i5gMdI92x6G7zFKHvw==}
+  '@rushstack/heft-typescript-plugin@1.1.13':
+    resolution: {integrity: sha512-Kll27apKQ5IeT4NTmBXuMC4PVDi7CMhFd2AnWtLtqz0ywy4fs+BtG2WRVHuWps0+3JIR+VMsJb6thdqh/PycVw==}
     peerDependencies:
-      '@rushstack/heft': 1.1.12
+      '@rushstack/heft': 1.1.13
 
   '@rushstack/heft-typescript-plugin@1.1.2':
     resolution: {integrity: sha512-ZOCU/YGUyo1QtblEB5ECDHSuGM4P9gXw3LY+QdVOvjSvLuqAKiJzukRW2iMaixQimvHjSi+oO5+bK/+/V8ttlA==}
@@ -1787,8 +1883,8 @@ packages:
       '@rushstack/heft': ^1.1.2
       webpack: ^5.82.1
 
-  '@rushstack/heft@1.1.12':
-    resolution: {integrity: sha512-J0NB5ehCM0RguUL0QZpnspi5LjyO8YsjO+CYZ1tiWCsO+w9Uk/kwf1GjMbgN2oeOLek3OnfUSFlnQuSujvdEPw==}
+  '@rushstack/heft@1.1.13':
+    resolution: {integrity: sha512-MULMFMvlOKBRGcCJWIiWoZWXq3MkhC99D/ijivF8SpCV58y122oIiGjjBbmXdV1GY+O8+mtPE6hsCxl/5GGECg==}
     engines: {node: '>=10.13.0'}
     hasBin: true
 
@@ -4296,8 +4392,8 @@ packages:
   minimalistic-assert@1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
 
-  minimatch@10.0.3:
-    resolution: {integrity: sha512-IPZ167aShDZZUMdRk66cyQAW3qr0WzbHkPdMYa8bzZhlHhO3jALbKdxcaak7W9FfT2rZNpQuUu4Od7ILEpXSaw==}
+  minimatch@10.1.2:
+    resolution: {integrity: sha512-fu656aJ0n2kcXwsnwnv9g24tkU5uSmOlTjd6WyyaKm2Z+h1qmY6bAjrcaIxF/BslFqbZ8UBtbJi7KgQOZD2PTw==}
     engines: {node: 20 || >=22}
 
   minimatch@3.0.8:
@@ -6187,6 +6283,17 @@ snapshots:
       '@fluentui/set-version': 8.2.24
       tslib: 2.3.1
 
+  '@fluentui/fluent2-theme@8.107.151(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+    dependencies:
+      '@fluentui/react': 8.125.4(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@fluentui/set-version': 8.2.24
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react
+      - react-dom
+
   '@fluentui/font-icons-mdl2@8.5.71(react@17.0.1)':
     dependencies:
       '@fluentui/set-version': 8.2.24
@@ -6735,6 +6842,21 @@ snapshots:
       '@swc/helpers': 0.5.18
       react: 17.0.1
       react-dom: 17.0.1(react@17.0.1)
+
+  '@fluentui/react-migration-v8-v9@9.10.1(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+    dependencies:
+      '@ctrl/tinycolor': 3.6.1
+      '@fluentui/fluent2-theme': 8.107.151(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@fluentui/react': 8.125.4(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@fluentui/react-components': 9.72.11(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-hooks': 8.10.2(react@17.0.1)
+      '@fluentui/react-icons': 2.0.318(react@17.0.1)
+      '@griffel/react': 1.5.32(react@17.0.1)
+      '@swc/helpers': 0.5.18
+      react: 17.0.1
+      react-dom: 17.0.1(react@17.0.1)
+    transitivePeerDependencies:
+      - scheduler
 
   '@fluentui/react-motion-components-preview@0.15.0(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
@@ -7803,7 +7925,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/api-extractor@7.56.1(@types/node@22.19.8)':
+  '@microsoft/api-extractor@7.56.2(@types/node@22.19.8)':
     dependencies:
       '@microsoft/api-extractor-model': 7.32.2(@types/node@22.19.8)
       '@microsoft/tsdoc': 0.16.0
@@ -7814,13 +7936,18 @@ snapshots:
       '@rushstack/ts-command-line': 5.2.0(@types/node@22.19.8)
       diff: 8.0.3
       lodash: 4.17.23
-      minimatch: 10.0.3
+      minimatch: 10.1.2
       resolve: 1.22.11
       semver: 7.5.4
       source-map: 0.6.1
       typescript: 5.8.2
     transitivePeerDependencies:
       - '@types/node'
+
+  '@microsoft/decorators@1.22.1':
+    dependencies:
+      '@swc/helpers': 0.5.18
+      tslib: 2.3.1
 
   '@microsoft/eslint-config-spfx@1.22.1(@typescript-eslint/parser@8.48.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)':
     dependencies:
@@ -7855,6 +7982,33 @@ snapshots:
       tslib: 1.14.1
     transitivePeerDependencies:
       - encoding
+
+  '@microsoft/sp-application-base@1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+    dependencies:
+      '@microsoft/sp-component-base': 1.22.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-core-library': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-extension-base': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-http': 1.22.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-base': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-loader': 1.22.1(@types/node@22.19.8)
+      '@microsoft/sp-lodash-subset': 1.22.1
+      '@microsoft/sp-module-interfaces': 1.22.1(@types/node@22.19.8)
+      '@microsoft/sp-odata-types': 1.22.1
+      '@microsoft/sp-page-context': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-search-extensibility': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@swc/helpers': 0.5.18
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - '@microsoft/microsoft-graph-client'
+      - '@types/node'
+      - '@types/react'
+      - '@types/react-dom'
+      - encoding
+      - react
+      - react-dom
+      - scheduler
+      - supports-color
 
   '@microsoft/sp-component-base@1.22.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
     dependencies:
@@ -7919,6 +8073,25 @@ snapshots:
       - react
       - react-dom
 
+  '@microsoft/sp-dialog@1.22.1(@types/node@22.19.8)(scheduler@0.20.2)':
+    dependencies:
+      '@fluentui/react': 8.125.4(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@fluentui/react-components': 9.72.11(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@fluentui/react-migration-v8-v9': 9.10.1(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-application-base': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-core-library': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@swc/helpers': 0.5.18
+      react: 17.0.1
+      react-dom: 17.0.1(react@17.0.1)
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - '@microsoft/microsoft-graph-client'
+      - '@types/node'
+      - encoding
+      - scheduler
+      - supports-color
+
   '@microsoft/sp-dynamic-data@1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
       '@microsoft/sp-core-library': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
@@ -7933,6 +8106,26 @@ snapshots:
       - '@types/react-dom'
       - react
       - react-dom
+
+  '@microsoft/sp-extension-base@1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+    dependencies:
+      '@microsoft/sp-component-base': 1.22.1(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-core-library': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-loader': 1.22.1(@types/node@22.19.8)
+      '@microsoft/sp-module-interfaces': 1.22.1(@types/node@22.19.8)
+      '@swc/helpers': 0.5.18
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - '@microsoft/microsoft-graph-client'
+      - '@types/node'
+      - '@types/react'
+      - '@types/react-dom'
+      - encoding
+      - react
+      - react-dom
+      - scheduler
+      - supports-color
 
   '@microsoft/sp-http-base@1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
@@ -8002,6 +8195,25 @@ snapshots:
       tslib: 2.3.1
     transitivePeerDependencies:
       - '@types/node'
+      - supports-color
+
+  '@microsoft/sp-listview-extensibility@1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+    dependencies:
+      '@microsoft/sp-core-library': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-extension-base': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-module-interfaces': 1.22.1(@types/node@22.19.8)
+      '@microsoft/sp-page-context': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@swc/helpers': 0.5.18
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - '@microsoft/microsoft-graph-client'
+      - '@types/node'
+      - '@types/react'
+      - '@types/react-dom'
+      - encoding
+      - react
+      - react-dom
+      - scheduler
       - supports-color
 
   '@microsoft/sp-loader@1.22.1(@types/node@22.19.8)':
@@ -8092,6 +8304,25 @@ snapshots:
       - scheduler
       - supports-color
 
+  '@microsoft/sp-search-extensibility@1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+    dependencies:
+      '@microsoft/sp-core-library': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-extension-base': 1.22.1(@types/node@22.19.8)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-loader': 1.22.1(@types/node@22.19.8)
+      '@swc/helpers': 0.5.18
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - '@microsoft/microsoft-graph-client'
+      - '@types/node'
+      - '@types/react'
+      - '@types/react-dom'
+      - encoding
+      - react
+      - react-dom
+      - scheduler
+      - supports-color
+
   '@microsoft/sp-top-actions@1.22.1':
     dependencies:
       '@swc/helpers': 0.5.18
@@ -8123,12 +8354,12 @@ snapshots:
       - scheduler
       - supports-color
 
-  '@microsoft/spfx-heft-plugins@1.22.1(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)':
+  '@microsoft/spfx-heft-plugins@1.22.1(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)':
     dependencies:
       '@azure/storage-blob': 12.26.0
       '@microsoft/sp-css-loader': 1.22.1(@types/node@22.19.8)(webpack@5.95.0)
       '@microsoft/sp-module-interfaces': 1.22.1(@types/node@22.19.8)
-      '@rushstack/heft': 1.1.12(@types/node@22.19.8)
+      '@rushstack/heft': 1.1.13(@types/node@22.19.8)
       '@rushstack/heft-config-file': 0.19.2(@types/node@22.19.8)
       '@rushstack/localization-utilities': 0.14.2(@types/node@22.19.8)
       '@rushstack/module-minifier': 0.8.2(@types/node@22.19.8)
@@ -8512,9 +8743,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@rushstack/heft-api-extractor-plugin@1.2.8(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)':
+  '@rushstack/heft-api-extractor-plugin@1.2.9(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)':
     dependencies:
-      '@rushstack/heft': 1.1.12(@types/node@22.19.8)
+      '@rushstack/heft': 1.1.13(@types/node@22.19.8)
       '@rushstack/node-core-library': 5.19.1(@types/node@22.19.8)
       semver: 7.5.4
     transitivePeerDependencies:
@@ -8556,12 +8787,12 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@rushstack/heft-jest-plugin@1.1.12(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)(jest-environment-node@29.5.0)':
+  '@rushstack/heft-jest-plugin@1.1.13(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)(jest-environment-node@29.5.0)':
     dependencies:
       '@jest/core': 29.5.0
       '@jest/reporters': 29.5.0
       '@jest/transform': 29.5.0
-      '@rushstack/heft': 1.1.12(@types/node@22.19.8)
+      '@rushstack/heft': 1.1.13(@types/node@22.19.8)
       '@rushstack/heft-config-file': 0.19.7(@types/node@22.19.8)
       '@rushstack/node-core-library': 5.19.1(@types/node@22.19.8)
       '@rushstack/terminal': 0.21.0(@types/node@22.19.8)
@@ -8604,9 +8835,9 @@ snapshots:
       - supports-color
       - ts-node
 
-  '@rushstack/heft-lint-plugin@1.1.15(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)':
+  '@rushstack/heft-lint-plugin@1.1.16(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)':
     dependencies:
-      '@rushstack/heft': 1.1.12(@types/node@22.19.8)
+      '@rushstack/heft': 1.1.13(@types/node@22.19.8)
       '@rushstack/node-core-library': 5.19.1(@types/node@22.19.8)
       json-stable-stringify-without-jsonify: 1.0.1
       semver: 7.5.4
@@ -8622,15 +8853,15 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@rushstack/heft-node-rig@2.11.17(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)':
+  '@rushstack/heft-node-rig@2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)':
     dependencies:
-      '@microsoft/api-extractor': 7.56.1(@types/node@22.19.8)
+      '@microsoft/api-extractor': 7.56.2(@types/node@22.19.8)
       '@rushstack/eslint-config': 4.6.1(eslint@9.37.0)(typescript@5.8.3)
-      '@rushstack/heft': 1.1.12(@types/node@22.19.8)
-      '@rushstack/heft-api-extractor-plugin': 1.2.8(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)
-      '@rushstack/heft-jest-plugin': 1.1.12(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)(jest-environment-node@29.5.0)
-      '@rushstack/heft-lint-plugin': 1.1.15(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)
-      '@rushstack/heft-typescript-plugin': 1.1.12(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)
+      '@rushstack/heft': 1.1.13(@types/node@22.19.8)
+      '@rushstack/heft-api-extractor-plugin': 1.2.9(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)
+      '@rushstack/heft-jest-plugin': 1.1.13(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)(jest-environment-node@29.5.0)
+      '@rushstack/heft-lint-plugin': 1.1.16(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)
+      '@rushstack/heft-typescript-plugin': 1.1.13(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)
       '@types/heft-jest': 1.0.1
       eslint: 9.37.0
       jest-environment-node: 29.5.0
@@ -8656,9 +8887,9 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@rushstack/heft-typescript-plugin@1.1.12(@rushstack/heft@1.1.12(@types/node@22.19.8))(@types/node@22.19.8)':
+  '@rushstack/heft-typescript-plugin@1.1.13(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)':
     dependencies:
-      '@rushstack/heft': 1.1.12(@types/node@22.19.8)
+      '@rushstack/heft': 1.1.13(@types/node@22.19.8)
       '@rushstack/heft-config-file': 0.19.7(@types/node@22.19.8)
       '@rushstack/node-core-library': 5.19.1(@types/node@22.19.8)
       '@types/tapable': 1.0.6
@@ -8697,7 +8928,7 @@ snapshots:
       - utf-8-validate
       - webpack-cli
 
-  '@rushstack/heft@1.1.12(@types/node@22.19.8)':
+  '@rushstack/heft@1.1.13(@types/node@22.19.8)':
     dependencies:
       '@rushstack/heft-config-file': 0.19.7(@types/node@22.19.8)
       '@rushstack/node-core-library': 5.19.1(@types/node@22.19.8)
@@ -12068,7 +12299,7 @@ snapshots:
 
   minimalistic-assert@1.0.1: {}
 
-  minimatch@10.0.3:
+  minimatch@10.1.2:
     dependencies:
       '@isaacs/brace-expansion': 5.0.1
 
