@@ -447,12 +447,13 @@
     //  "reviewCategory": "templates",
     //  "tags": [ ]
     //},
-    {
-      "packageName": "@spfx-template/ace-data-visualization",
-      "projectFolder": "examples/ace-data-visualization",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
+    // Temporarily disabled - example has .ejs files that conflict with Rush build
+    //{
+    //  "packageName": "@spfx-template/ace-data-visualization",
+    //  "projectFolder": "examples/ace-data-visualization",
+    //  "reviewCategory": "templates",
+    //  "tags": [ ]
+    //},
     {
       "packageName": "@microsoft/spfx-cli-build-rig",
       "projectFolder": "tools/spfx-cli-build-rig",
