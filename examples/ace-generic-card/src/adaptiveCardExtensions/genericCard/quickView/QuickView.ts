@@ -23,6 +23,7 @@ export class QuickView extends BaseAdaptiveCardQuickView<
   }
 
   public get template(): ISPFxAdaptiveCard {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     return require('./template/QuickViewTemplate.json');
   }
 }

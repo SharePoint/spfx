@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/@spfx-template/ace-generic-card.sppkg"
+    "zippedPackage": "solution/generic-card.sppkg"
   }
 }
