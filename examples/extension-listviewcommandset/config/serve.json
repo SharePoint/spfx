@@ -15,7 +15,7 @@
         }
       }
     },
-    "minimalCommandSet": {
+    "listViewCommandSetCommandSet": {
       "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
       "customActions": {
         "413af0cb-0c9f-43db-8f86-ad1accc90481": {

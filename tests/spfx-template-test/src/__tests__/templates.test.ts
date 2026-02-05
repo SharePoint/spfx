@@ -45,9 +45,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-listviewcommandset',
     templatePath: path.join(REPO_ROOT, 'templates/extension-listviewcommandset'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'List View Command Set',
+    componentName: 'ListViewCommandSet',
     componentAlias: 'ListViewCommandSet',
-    componentDescription: 'A list view command set extension'
+    componentDescription: 'List View Command Set Description'
   },
 ];
 
