@@ -448,6 +448,12 @@
     //  "tags": [ ]
     //},
     {
+      "packageName": "@spfx-template/ace-data-visualization",
+      "projectFolder": "examples/ace-data-visualization",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@spfx-template/ace-generic-card",
       "projectFolder": "examples/ace-generic-card",
       "reviewCategory": "templates",
