@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "generic-card-adaptive-card-extension": {
+    "minimal-web-part-adaptive-card-extension": {
       "components": [
         {
-          "entrypoint": "./lib/adaptiveCardExtensions/genericCard/GenericCardAdaptiveCardExtension.js",
-          "manifest": "./src/adaptiveCardExtensions/genericCard/GenericCardAdaptiveCardExtension.manifest.json"
+          "entrypoint": "./lib/adaptiveCardExtensions/minimal/MinimalAdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/minimal/MinimalAdaptiveCardExtension.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "GenericCardAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/genericCard/loc/{locale}.js"
+    "MinimalAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/minimal/loc/{locale}.js"
   }
 }
