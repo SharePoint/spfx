@@ -45,9 +45,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-fieldcustomizer-noframework',
     templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-noframework'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'Field Customizer',
-    componentAlias: 'FieldCustomizer',
-    componentDescription: 'A no-framework field customizer extension'
+    componentName: 'NoFrameworkFieldCustomizer',
+    componentAlias: 'NoFrameworkFieldCustomizer',
+    componentDescription: 'No Framework Field Customizer Description'
   },
 ];
 
