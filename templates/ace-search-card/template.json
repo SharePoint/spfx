@@ -39,6 +39,14 @@
     "componentDescription": {
       "type": "string",
       "description": "Description of the component"
+    },
+    "componentAlias": {
+      "type": "string",
+      "description": "The component alias"
+    },
+    "versionBadge": {
+      "type": "string",
+      "description": "The version badge for README"
     }
   }
 }
