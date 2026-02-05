@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "application-customizer-application-customizer": {
+    "minimal-web-part-application-customizer": {
       "components": [
         {
-          "entrypoint": "./lib/extensions/applicationCustomizerApplicationCustomizer/ApplicationCustomizerApplicationCustomizer.js",
-          "manifest": "./src/extensions/applicationCustomizerApplicationCustomizer/ApplicationCustomizerApplicationCustomizer.manifest.json"
+          "entrypoint": "./lib/extensions/minimalApplicationCustomizer/MinimalApplicationCustomizer.js",
+          "manifest": "./src/extensions/minimalApplicationCustomizer/MinimalApplicationCustomizer.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "ApplicationCustomizerApplicationCustomizerStrings": "lib/extensions/applicationCustomizerApplicationCustomizer/loc/{locale}.js"
+    "MinimalApplicationCustomizerStrings": "lib/extensions/minimalApplicationCustomizer/loc/{locale}.js"
   }
 }
