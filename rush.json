@@ -448,6 +448,12 @@
     //  "tags": [ ]
     //},
     {
+      "packageName": "@spfx-template/ace-data-visualization",
+      "projectFolder": "examples/ace-data-visualization",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@spfx-template/extension-formcustomizer-react",
       "projectFolder": "examples/extension-formcustomizer-react",
       "reviewCategory": "templates",
