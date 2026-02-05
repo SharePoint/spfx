@@ -1,4 +1,4 @@
-# ace-search-card
+# @spfx-template/ace-search-card
 
 ## Summary
 
