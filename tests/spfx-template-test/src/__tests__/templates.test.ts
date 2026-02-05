@@ -41,13 +41,13 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'A hello world test component'
   },
   {
-    libraryName: '@spfx-template/extension-listviewcommandset',
-    templateName: 'extension-listviewcommandset',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-listviewcommandset'),
+    libraryName: '@spfx-template/webpart-react',
+    templateName: 'webpart-react',
+    templatePath: path.join(REPO_ROOT, 'templates/webpart-react'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'List View Command Set',
-    componentAlias: 'ListViewCommandSet',
-    componentDescription: 'A list view command set extension'
+    componentName: 'React',
+    componentAlias: 'React',
+    componentDescription: 'React Web Part Description'
   },
 ];
 
