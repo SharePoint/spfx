@@ -448,6 +448,12 @@
     //  "tags": [ ]
     //},
     {
+      "packageName": "@spfx-template/ace-data-visualization",
+      "projectFolder": "examples/ace-data-visualization",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@microsoft/spfx-cli-build-rig",
       "projectFolder": "tools/spfx-cli-build-rig",
       "reviewCategory": "tools",

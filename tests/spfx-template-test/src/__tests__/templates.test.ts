@@ -50,6 +50,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'Minimal Web Part Description'
   },
   {
+    libraryName: '@spfx-template/ace-data-visualization',
+    templateName: 'ace-data-visualization',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-data-visualization'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'DataVisualization',
+    componentAlias: 'DataVisualization',
+    componentDescription: 'DataVisualization Description'
+  },
+  {
     libraryName: '@spfx-template/ace-search-card',
     templateName: 'ace-search-card',
     templatePath: path.join(REPO_ROOT, 'templates/ace-search-card'),
