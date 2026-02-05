@@ -45,9 +45,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-formcustomizer-noframework',
     templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-noframework'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'Form Customizer',
-    componentAlias: 'FormCustomizer',
-    componentDescription: 'A no-framework form customizer extension'
+    componentName: 'NoFrameworkFormCustomizer',
+    componentAlias: 'NoFrameworkFormCustomizer',
+    componentDescription: 'No Framework Form Customizer Description'
   },
 ];
 

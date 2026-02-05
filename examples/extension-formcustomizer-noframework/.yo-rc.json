@@ -12,7 +12,7 @@
     "nodeVersion": "22.21.1",
     "sdksVersions": {},
     "version": "1.22.1",
-    "libraryName": "minimal",
+    "libraryName": "@spfx-template/extension-formcustomizer-noframework",
     "libraryId": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "environment": "spo",
     "packageManager": "npm",
