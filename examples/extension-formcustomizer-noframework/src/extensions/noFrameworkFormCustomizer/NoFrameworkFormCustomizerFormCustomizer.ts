@@ -3,34 +3,34 @@ import {
   BaseFormCustomizer
 } from '@microsoft/sp-listview-extensibility';
 
-import styles from './MinimalFormCustomizer.module.scss';
+import styles from './NoFrameworkFormCustomizerFormCustomizer.module.scss';
 
 /**
  * If your form customizer uses the ClientSideComponentProperties JSON input,
  * it will be deserialized into the BaseExtension.properties object.
  * You can define an interface to describe it.
  */
-export interface IMinimalFormCustomizerProperties {
+export interface INoFrameworkFormCustomizerFormCustomizerProperties {
   // This is an example; replace with your own property
   sampleText?: string;
 }
 
-const LOG_SOURCE: string = 'MinimalFormCustomizer';
+const LOG_SOURCE: string = 'NoFrameworkFormCustomizerFormCustomizer';
 
-export default class MinimalFormCustomizer
-  extends BaseFormCustomizer<IMinimalFormCustomizerProperties> {
+export default class NoFrameworkFormCustomizerFormCustomizer
+  extends BaseFormCustomizer<INoFrameworkFormCustomizerFormCustomizerProperties> {
 
   public onInit(): Promise<void> {
     // Add your custom initialization to this method. The framework will wait
     // for the returned promise to resolve before rendering the form.
-    Log.info(LOG_SOURCE, 'Activated MinimalFormCustomizer with properties:');
+    Log.info(LOG_SOURCE, 'Activated NoFrameworkFormCustomizerFormCustomizer with properties:');
     Log.info(LOG_SOURCE, JSON.stringify(this.properties, undefined, 2));
     return Promise.resolve();
   }
 
   public render(): void {
     // Use this method to perform your custom rendering.
-    this.domElement.innerHTML = `<div class="${ styles.minimal }"></div>`;
+    this.domElement.innerHTML = `<div class="${ styles.noFrameworkFormCustomizer }"></div>`;
   }
 
   public onDispose(): void {

@@ -1,12 +1,12 @@
 {
   "@microsoft/generator-sharepoint": {
     "whichFolder": "subdir",
-    "solutionName": "Minimal",
+    "solutionName": "NoFrameworkFormCustomizer",
     "useGulp": false,
     "componentType": "extension",
     "extensionType": "FormCustomizer",
     "template": "none",
-    "componentName": "Minimal",
+    "componentName": "NoFrameworkFormCustomizer",
     "plusBeta": false,
     "isCreatingSolution": true,
     "nodeVersion": "22.21.1",
@@ -16,7 +16,7 @@
     "libraryId": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "environment": "spo",
     "packageManager": "npm",
-    "solutionShortDescription": "Minimal description",
+    "solutionShortDescription": "NoFrameworkFormCustomizer description",
     "skipFeatureDeployment": true,
     "isDomainIsolated": false
   }

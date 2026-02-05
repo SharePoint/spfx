@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "minimal-form-customizer": {
+    "noFrameworkFormCustomizer-form-customizer": {
       "components": [
         {
-          "entrypoint": "./lib/extensions/minimal/MinimalFormCustomizer.js",
-          "manifest": "./src/extensions/minimal/MinimalFormCustomizer.manifest.json"
+          "entrypoint": "./lib/extensions/noFrameworkFormCustomizer/NoFrameworkFormCustomizerFormCustomizer.js",
+          "manifest": "./src/extensions/noFrameworkFormCustomizer/NoFrameworkFormCustomizerFormCustomizer.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "MinimalFormCustomizerStrings": "lib/extensions/minimal/loc/{locale}.js"
+    "NoFrameworkFormCustomizerFormCustomizerStrings": "lib/extensions/noFrameworkFormCustomizer/loc/{locale}.js"
   }
 }
