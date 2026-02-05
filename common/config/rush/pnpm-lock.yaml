@@ -283,6 +283,9 @@ importers:
 
   ../../tests/spfx-template-test:
     dependencies:
+      '@microsoft/spfx-cli':
+        specifier: workspace:*
+        version: link:../../apps/spfx-cli
       '@microsoft/spfx-template-api':
         specifier: workspace:*
         version: link:../../api/spfx-template-api
