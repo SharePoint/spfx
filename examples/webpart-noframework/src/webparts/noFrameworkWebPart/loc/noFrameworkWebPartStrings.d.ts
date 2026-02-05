@@ -1,4 +1,4 @@
-declare interface IMinimalWebPartStrings {
+declare interface INoFrameworkWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
@@ -13,7 +13,7 @@ declare interface IMinimalWebPartStrings {
   UnknownEnvironment: string;
 }
 
-declare module 'MinimalWebPartStrings' {
-  const strings: IMinimalWebPartStrings;
+declare module 'NoFrameworkWebPartStrings' {
+  const strings: INoFrameworkWebPartStrings;
   export = strings;
 }

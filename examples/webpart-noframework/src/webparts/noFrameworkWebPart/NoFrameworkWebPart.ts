@@ -7,21 +7,21 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import type { IReadonlyTheme } from '@microsoft/sp-component-base';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-import styles from './MinimalWebPart.module.scss';
-import * as strings from 'MinimalWebPartStrings';
+import styles from './NoFrameworkWebPart.module.scss';
+import * as strings from 'NoFrameworkWebPartStrings';
 
-export interface IMinimalWebPartProps {
+export interface INoFrameworkWebPartProps {
   description: string;
 }
 
-export default class MinimalWebPart extends BaseClientSideWebPart<IMinimalWebPartProps> {
+export default class NoFrameworkWebPart extends BaseClientSideWebPart<INoFrameworkWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
 
   public render(): void {
     this.domElement.innerHTML = `
-    <section class="${styles.minimalWebPart} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
+    <section class="${styles.noFrameworkWebPart} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
       <div class="${styles.welcome}">
         <img alt="" src="${this._isDarkTheme ? require('./assets/welcome-dark.png') : require('./assets/welcome-light.png')}" class="${styles.welcomeImage}" />
         <h2>Well done, ${escape(this.context.pageContext.user.displayName)}!</h2>
