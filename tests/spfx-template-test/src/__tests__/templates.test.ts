@@ -45,9 +45,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-formcustomizer-react',
     templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-react'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'Form Customizer React',
-    componentAlias: 'FormCustomizerReact',
-    componentDescription: 'A React-based form customizer extension'
+    componentName: 'ReactFormCustomizer',
+    componentAlias: 'ReactFormCustomizer',
+    componentDescription: 'React Form Customizer Description'
   },
 ];
 

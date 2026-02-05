@@ -1,4 +1,4 @@
-# extension-formcustomizer-react
+# @spfx-template/extension-formcustomizer-react
 
 ## Summary
 

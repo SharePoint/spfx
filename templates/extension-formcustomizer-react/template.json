@@ -1,16 +1,48 @@
 {
-  "$schema": "../../libraries/spfx-templating-engine/lib/schemas/template-schema.json",
   "name": "extension-formcustomizer-react",
-  "componentType": "extension",
-  "extensionType": "FormCustomizer",
-  "framework": "react",
-  "templateVariables": {
-    "componentId": "guid",
-    "solutionId": "guid",
-    "featureId": "guid",
-    "componentNameCapitalCase": "string",
-    "componentNameCamelCase": "string",
-    "componentNameKebabCase": "string",
-    "libraryName": "string"
+  "description": "A SharePoint Framework Form Customizer extension with React",
+  "version": "1.0.0",
+  "spfxVersion": "1.22.1",
+  "contextSchema": {
+    "componentNameCapitalCase": {
+      "type": "string",
+      "description": "The component name in capital case (e.g., ReactFormCustomizer)"
+    },
+    "componentNameCamelCase": {
+      "type": "string",
+      "description": "The component name in camel case (e.g., reactFormCustomizer)"
+    },
+    "componentNameHyphenCase": {
+      "type": "string",
+      "description": "The component name in hyphen case (e.g., react-form-customizer)"
+    },
+    "componentNameUnescaped": {
+      "type": "string",
+      "description": "The component name unescaped"
+    },
+    "componentAlias": {
+      "type": "string",
+      "description": "The component alias"
+    },
+    "libraryName": {
+      "type": "string",
+      "description": "The library name"
+    },
+    "solutionId": {
+      "type": "string",
+      "description": "The solution GUID"
+    },
+    "componentId": {
+      "type": "string",
+      "description": "The component GUID"
+    },
+    "featureId": {
+      "type": "string",
+      "description": "The feature GUID"
+    },
+    "versionBadge": {
+      "type": "string",
+      "description": "The version badge for README"
+    }
   }
 }
