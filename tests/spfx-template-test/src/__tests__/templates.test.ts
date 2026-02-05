@@ -45,9 +45,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-search-query-modifier',
     templatePath: path.join(REPO_ROOT, 'templates/extension-search-query-modifier'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'Search Query Modifier',
+    componentName: 'SearchQueryModifier',
     componentAlias: 'SearchQueryModifier',
-    componentDescription: 'A search query modifier extension'
+    componentDescription: 'Search Query Modifier Description'
   },
 ];
 
