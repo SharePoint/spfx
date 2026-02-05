@@ -45,9 +45,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'ace-generic-card',
     templatePath: path.join(REPO_ROOT, 'templates/ace-generic-card'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'Generic Card',
+    componentName: 'GenericCard',
     componentAlias: 'GenericCard',
-    componentDescription: 'An ACE generic card'
+    componentDescription: 'Generic Card Description'
   },
 ];
 

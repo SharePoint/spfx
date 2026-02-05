@@ -1,4 +1,4 @@
-# ace-generic-card
+# @spfx-template/ace-generic-card
 
 ## Summary
 
@@ -8,7 +8,7 @@ Short summary on functionality and used technologies.
 
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/version-1.22.1-green.svg)
+https://img.shields.io/badge/version-1.0.0-blue
 
 ## Applies to
 
@@ -63,7 +63,7 @@ This extension illustrates the following concepts:
 - topic 2
 - topic 3
 
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
+> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions in advance.
 
 > Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
 
