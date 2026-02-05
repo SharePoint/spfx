@@ -45,9 +45,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'ace-data-visualization',
     templatePath: path.join(REPO_ROOT, 'templates/ace-data-visualization'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'DataViz Card',
-    componentAlias: 'DataVizCard',
-    componentDescription: 'An ACE data visualization card'
+    componentName: 'DataVisualization',
+    componentAlias: 'DataVisualization',
+    componentDescription: 'Data Visualization Description'
   },
 ];
 

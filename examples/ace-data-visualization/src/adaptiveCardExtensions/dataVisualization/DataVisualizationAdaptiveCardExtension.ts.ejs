@@ -2,23 +2,23 @@ import type { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseAdaptiveCardExtension } from '@microsoft/sp-adaptive-card-extension-base';
 import { CardView } from './cardView/CardView';
 import { QuickView } from './quickView/QuickView';
-import { <%= componentNamePascalCase %>PropertyPane } from './<%= componentNamePascalCase %>PropertyPane';
+import { DataVisualizationPropertyPane } from './DataVisualizationPropertyPane';
 
-export interface I<%= componentNamePascalCase %>AdaptiveCardExtensionProps {
+export interface IDataVisualizationAdaptiveCardExtensionProps {
   title: string;
 }
 
-export interface I<%= componentNamePascalCase %>AdaptiveCardExtensionState {
+export interface IDataVisualizationAdaptiveCardExtensionState {
 }
 
-const CARD_VIEW_REGISTRY_ID: string = '<%= componentNamePascalCase %>_CARD_VIEW';
-export const QUICK_VIEW_REGISTRY_ID: string = '<%= componentNamePascalCase %>_QUICK_VIEW';
+const CARD_VIEW_REGISTRY_ID: string = 'DataVisualization_CARD_VIEW';
+export const QUICK_VIEW_REGISTRY_ID: string = 'DataVisualization_QUICK_VIEW';
 
-export default class <%= componentNamePascalCase %>AdaptiveCardExtension extends BaseAdaptiveCardExtension<
-  I<%= componentNamePascalCase %>AdaptiveCardExtensionProps,
-  I<%= componentNamePascalCase %>AdaptiveCardExtensionState
+export default class DataVisualizationAdaptiveCardExtension extends BaseAdaptiveCardExtension<
+  IDataVisualizationAdaptiveCardExtensionProps,
+  IDataVisualizationAdaptiveCardExtensionState
 > {
-  private _deferredPropertyPane: <%= componentNamePascalCase %>PropertyPane | undefined;
+  private _deferredPropertyPane: DataVisualizationPropertyPane | undefined;
 
   public onInit(): Promise<void> {
     this.state = { };
@@ -33,12 +33,12 @@ export default class <%= componentNamePascalCase %>AdaptiveCardExtension extends
 
   protected loadPropertyPaneResources(): Promise<void> {
     return import(
-      /* webpackChunkName: '<%= componentNamePascalCase %>-property-pane'*/
-      './<%= componentNamePascalCase %>PropertyPane'
+      /* webpackChunkName: 'DataVisualization-property-pane'*/
+      './DataVisualizationPropertyPane'
     )
       .then(
         (component) => {
-          this._deferredPropertyPane = new component.<%= componentNamePascalCase %>PropertyPane();
+          this._deferredPropertyPane = new component.DataVisualizationPropertyPane();
         }
       );
   }

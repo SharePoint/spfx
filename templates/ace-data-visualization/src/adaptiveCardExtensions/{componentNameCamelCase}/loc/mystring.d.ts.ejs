@@ -1,4 +1,4 @@
-declare interface I<%= componentNamePascalCase %>AdaptiveCardExtensionStrings {
+declare interface I<%= componentNameCapitalCase %>AdaptiveCardExtensionStrings {
   PropertyPaneDescription: string;
   TitleFieldLabel: string;
   Title: string;
@@ -8,7 +8,7 @@ declare interface I<%= componentNamePascalCase %>AdaptiveCardExtensionStrings {
   QuickViewButton: string;
 }
 
-declare module '<%= componentNamePascalCase %>AdaptiveCardExtensionStrings' {
-  const strings: I<%= componentNamePascalCase %>AdaptiveCardExtensionStrings;
+declare module '<%= componentNameCapitalCase %>AdaptiveCardExtensionStrings' {
+  const strings: I<%= componentNameCapitalCase %>AdaptiveCardExtensionStrings;
   export = strings;
 }
