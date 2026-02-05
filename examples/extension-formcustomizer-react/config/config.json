@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "minimal-web-part-form-customizer": {
+    "react-form-customizer-form-customizer": {
       "components": [
         {
-          "entrypoint": "./lib/extensions/minimal/MinimalFormCustomizer.js",
-          "manifest": "./src/extensions/minimal/MinimalFormCustomizer.manifest.json"
+          "entrypoint": "./lib/extensions/reactFormCustomizer/ReactFormCustomizerFormCustomizer.js",
+          "manifest": "./src/extensions/reactFormCustomizer/ReactFormCustomizerFormCustomizer.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "MinimalFormCustomizerStrings": "lib/extensions/minimal/loc/{locale}.js"
+    "ReactFormCustomizerFormCustomizerStrings": "lib/extensions/reactFormCustomizer/loc/{locale}.js"
   }
 }

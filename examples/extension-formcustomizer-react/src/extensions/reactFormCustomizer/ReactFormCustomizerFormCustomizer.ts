@@ -6,27 +6,27 @@ import {
   BaseFormCustomizer
 } from '@microsoft/sp-listview-extensibility';
 
-import Minimal, { IMinimalProps } from './components/Minimal';
+import ReactFormCustomizer, { IReactFormCustomizerProps } from './components/ReactFormCustomizer';
 
 /**
  * If your form customizer uses the ClientSideComponentProperties JSON input,
  * it will be deserialized into the BaseExtension.properties object.
  * You can define an interface to describe it.
  */
-export interface IMinimalFormCustomizerProperties {
+export interface IReactFormCustomizerFormCustomizerProperties {
   // This is an example; replace with your own property
   sampleText?: string;
 }
 
-const LOG_SOURCE: string = 'MinimalFormCustomizer';
+const LOG_SOURCE: string = 'ReactFormCustomizerFormCustomizer';
 
-export default class MinimalFormCustomizer
-  extends BaseFormCustomizer<IMinimalFormCustomizerProperties> {
+export default class ReactFormCustomizerFormCustomizer
+  extends BaseFormCustomizer<IReactFormCustomizerFormCustomizerProperties> {
 
   public onInit(): Promise<void> {
     // Add your custom initialization to this method. The framework will wait
     // for the returned promise to resolve before rendering the form.
-    Log.info(LOG_SOURCE, 'Activated MinimalFormCustomizer with properties:');
+    Log.info(LOG_SOURCE, 'Activated ReactFormCustomizerFormCustomizer with properties:');
     Log.info(LOG_SOURCE, JSON.stringify(this.properties, undefined, 2));
     return Promise.resolve();
   }
@@ -34,15 +34,15 @@ export default class MinimalFormCustomizer
   public render(): void {
     // Use this method to perform your custom rendering.
 
-    const minimal: React.ReactElement<IMinimalProps> =
-      React.createElement(Minimal, {
+    const reactFormCustomizer: React.ReactElement<IReactFormCustomizerProps> =
+      React.createElement(ReactFormCustomizer, {
         context: this.context,
         displayMode: this.displayMode,
         onSave: this._onSave,
         onClose: this._onClose
-       } as IMinimalProps);
+       } as IReactFormCustomizerProps);
 
-    ReactDOM.render(minimal, this.domElement);
+    ReactDOM.render(reactFormCustomizer, this.domElement);
   }
 
   public onDispose(): void {
