@@ -9,7 +9,6 @@ const readFile = promisify(fs.readFile);
 
 // Path to the root of the monorepo
 const REPO_ROOT = path.resolve(__dirname, '../../../../');
-const TEST_TEMPLATE_DIR = path.join(REPO_ROOT, 'tests/spfx-template-test'); // Directory passed to --local-template; contains the test-template subdirectory
 const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
 const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
@@ -41,6 +40,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'A hello world test component'
   },
   {
+    libraryName: '@spfx-template/webpart-minimal',
+    templateName: 'webpart-minimal',
+    templatePath: path.join(REPO_ROOT, 'templates/webpart-minimal'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal Web Part Description'
+  },
+  {
     libraryName: '@spfx-template/extension-listviewcommandset',
     templateName: 'extension-listviewcommandset',
     templatePath: path.join(REPO_ROOT, 'templates/extension-listviewcommandset'),
@@ -60,7 +68,7 @@ const UPDATE_MODE = process.argv.includes('--update') || process.argv.includes('
 async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ignore>> {
   const gitignorePath = path.join(templateDir, '.gitignore');
   const ig = ignore();
-  
+
   // Add default ignores that should always be excluded
   ig.add([
     'node_modules',
@@ -71,7 +79,7 @@ async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ig
     'dist',
     '.rush'
   ]);
-  
+
   try {
     const gitignoreContent = await readFile(gitignorePath, 'utf-8');
     ig.add(gitignoreContent);
@@ -79,7 +87,7 @@ async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ig
     // If .gitignore doesn't exist, just use default ignores
     console.warn(`No .gitignore found at ${gitignorePath}, using default ignores`);
   }
-  
+
   return ig;
 }
 
@@ -96,12 +104,12 @@ async function getAllFiles(
     entries.map(async (entry) => {
       const fullPath = path.join(dir, entry.name);
       const relativePath = path.relative(baseDir, fullPath).replace(/\\/g, '/');
-      
+
       // Check if this path should be ignored
       if (ignoreMatcher && ignoreMatcher.ignores(relativePath)) {
         return [];
       }
-      
+
       if (entry.isDirectory()) {
         return getAllFiles(fullPath, baseDir, ignoreMatcher);
       } else {
@@ -196,7 +204,7 @@ describe('SPFx Template Scaffolding', () => {
 
           const command = commandParts.join(' ');
           console.log(`Running: ${command}`);
-          
+
           execSync(command, {
             stdio: 'inherit',
             cwd: REPO_ROOT,
@@ -221,7 +229,7 @@ describe('SPFx Template Scaffolding', () => {
         const exampleFiles = await getAllFiles(examplePath, examplePath, ignoreMatcher);
 
         // Filter out files that should be ignored in comparison
-        const filterFiles = (files: string[]) => 
+        const filterFiles = (files: string[]) =>
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
             // Skip build artifacts and generated files
@@ -267,10 +275,10 @@ describe('SPFx Template Scaffolding', () => {
         for (const file of filteredScaffolded) {
           const scaffoldedFile = path.join(outputPath, file);
           const exampleFile = path.join(examplePath, file);
-          
+
           const scaffoldedContent = await readFileContent(scaffoldedFile);
           const exampleContent = await readFileContent(exampleFile);
-          
+
           // Use Jest's expect to get nice diff output
           // Add file context to the error message
           try {
