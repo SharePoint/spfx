@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/ace-search-card.sppkg"
+    "zippedPackage": "solution/@spfx-template/ace-search-card.sppkg"
   }
 }
