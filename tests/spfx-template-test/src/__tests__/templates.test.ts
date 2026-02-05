@@ -45,9 +45,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-fieldcustomizer-react',
     templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-react'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'Field Customizer React',
-    componentAlias: 'FieldCustomizerReact',
-    componentDescription: 'A React-based field customizer extension'
+    componentName: 'ReactFieldCustomizer',
+    componentAlias: 'ReactFieldCustomizer',
+    componentDescription: 'React Field Customizer Description'
   },
 ];
 
