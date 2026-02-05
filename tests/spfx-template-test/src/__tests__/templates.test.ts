@@ -24,6 +24,7 @@ interface TemplateConfig {
   libraryName: string;
   templateName: string;
   templatePath: string;
+  localTemplatePath: string;
   componentName: string;
   componentAlias?: string;
   componentDescription?: string;
@@ -34,9 +35,19 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     libraryName: '@spfx-template/hello-world-test',
     templateName: 'test',
     templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template'),
+    localTemplatePath: path.join(REPO_ROOT, 'tests/spfx-template-test'),
     componentName: 'Hello World',
     componentAlias: 'HelloWorld',
     componentDescription: 'A hello world test component'
+  },
+  {
+    libraryName: '@spfx-template/webpart-minimal',
+    templateName: 'webpart-minimal',
+    templatePath: path.join(REPO_ROOT, 'templates/webpart-minimal'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal Web Part Description'
   },
 ];
 
@@ -167,7 +178,7 @@ describe('SPFx Template Scaffolding', () => {
             `node "${CLI_PATH}" create`,
             `--template ${config.templateName}`,
             `--target-dir "${outputPath}"`,
-            `--local-template "${TEST_TEMPLATE_DIR}"`,
+            `--local-template "${config.localTemplatePath}"`,
             `--library-name "${config.libraryName}"`,
             `--component-id "${FIXED_COMPONENT_ID}"`,
             `--solution-id "${FIXED_SOLUTION_ID}"`,
