@@ -49,6 +49,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Web Part Description'
   },
+  {
+    libraryName: '@spfx-template/ace-search-card',
+    templateName: 'ace-search-card',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-search-card'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal ACE Description'
+  },
 ];
 
 // Check for --update or -u flag
