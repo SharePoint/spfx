@@ -24,6 +24,7 @@ interface TemplateConfig {
   libraryName: string;
   templateName: string;
   templatePath: string;
+  localTemplatePath: string;
   componentName: string;
   componentAlias?: string;
   componentDescription?: string;
@@ -177,7 +178,7 @@ describe('SPFx Template Scaffolding', () => {
             `node "${CLI_PATH}" create`,
             `--template ${config.templateName}`,
             `--target-dir "${outputPath}"`,
-            `--local-template "${TEST_TEMPLATE_DIR}"`,
+            `--local-template "${config.localTemplatePath}"`,
             `--library-name "${config.libraryName}"`,
             `--component-id "${FIXED_COMPONENT_ID}"`,
             `--solution-id "${FIXED_SOLUTION_ID}"`,
