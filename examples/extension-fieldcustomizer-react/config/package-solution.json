@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "minimal-client-side-solution",
+    "name": "@spfx-template/extension-fieldcustomizer-react-client-side-solution",
     "id": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
@@ -40,6 +40,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/minimal.sppkg"
+    "zippedPackage": "solution/@spfx-template/extension-fieldcustomizer-react.sppkg"
   }
 }
