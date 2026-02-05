@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "minimal-web-part-adaptive-card-extension": {
+    "data-visualization-adaptive-card-extension": {
       "components": [
         {
-          "entrypoint": "./lib/adaptiveCardExtensions/minimal/MinimalAdaptiveCardExtension.js",
-          "manifest": "./src/adaptiveCardExtensions/minimal/MinimalAdaptiveCardExtension.manifest.json"
+          "entrypoint": "./lib/adaptiveCardExtensions/dataVisualization/DataVisualizationAdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/dataVisualization/DataVisualizationAdaptiveCardExtension.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "MinimalAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/minimal/loc/{locale}.js"
+    "DataVisualizationAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/dataVisualization/loc/{locale}.js"
   }
 }

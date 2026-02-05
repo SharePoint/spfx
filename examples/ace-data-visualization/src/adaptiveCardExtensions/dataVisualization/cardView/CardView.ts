@@ -6,12 +6,12 @@ import {
   IExternalLinkCardAction,
   IQuickViewCardAction
 } from '@microsoft/sp-adaptive-card-extension-base';
-import * as strings from 'MinimalAdaptiveCardExtensionStrings';
+import * as strings from 'DataVisualizationAdaptiveCardExtensionStrings';
 import {
-  IMinimalAdaptiveCardExtensionProps,
-  IMinimalAdaptiveCardExtensionState,
+  IDataVisualizationAdaptiveCardExtensionProps,
+  IDataVisualizationAdaptiveCardExtensionState,
   QUICK_VIEW_REGISTRY_ID
-} from '../MinimalAdaptiveCardExtension';
+} from '../DataVisualizationAdaptiveCardExtension';
 
 const seriesData: IDataPoint<Date>[] = [
   { x: new Date(2024, 0, 1), y: 1000 },
@@ -32,8 +32,8 @@ const seriesData2: IDataPoint<Date>[] = [
 ];
 
 export class CardView extends BaseComponentsCardView<
-  IMinimalAdaptiveCardExtensionProps,
-  IMinimalAdaptiveCardExtensionState,
+  IDataVisualizationAdaptiveCardExtensionProps,
+  IDataVisualizationAdaptiveCardExtensionState,
   IDataVisualizationCardViewParameters
 > {
   public get cardViewParameters(): IDataVisualizationCardViewParameters {

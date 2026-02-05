@@ -2,23 +2,23 @@ import type { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseAdaptiveCardExtension } from '@microsoft/sp-adaptive-card-extension-base';
 import { CardView } from './cardView/CardView';
 import { QuickView } from './quickView/QuickView';
-import { MinimalPropertyPane } from './MinimalPropertyPane';
+import { DataVisualizationPropertyPane } from './DataVisualizationPropertyPane';
 
-export interface IMinimalAdaptiveCardExtensionProps {
+export interface IDataVisualizationAdaptiveCardExtensionProps {
   title: string;
 }
 
-export interface IMinimalAdaptiveCardExtensionState {
+export interface IDataVisualizationAdaptiveCardExtensionState {
 }
 
-const CARD_VIEW_REGISTRY_ID: string = 'Minimal_CARD_VIEW';
-export const QUICK_VIEW_REGISTRY_ID: string = 'Minimal_QUICK_VIEW';
+const CARD_VIEW_REGISTRY_ID: string = 'DataVisualization_CARD_VIEW';
+export const QUICK_VIEW_REGISTRY_ID: string = 'DataVisualization_QUICK_VIEW';
 
-export default class MinimalAdaptiveCardExtension extends BaseAdaptiveCardExtension<
-  IMinimalAdaptiveCardExtensionProps,
-  IMinimalAdaptiveCardExtensionState
+export default class DataVisualizationAdaptiveCardExtension extends BaseAdaptiveCardExtension<
+  IDataVisualizationAdaptiveCardExtensionProps,
+  IDataVisualizationAdaptiveCardExtensionState
 > {
-  private _deferredPropertyPane: MinimalPropertyPane | undefined;
+  private _deferredPropertyPane: DataVisualizationPropertyPane | undefined;
 
   public onInit(): Promise<void> {
     this.state = { };
@@ -33,12 +33,12 @@ export default class MinimalAdaptiveCardExtension extends BaseAdaptiveCardExtens
 
   protected loadPropertyPaneResources(): Promise<void> {
     return import(
-      /* webpackChunkName: 'Minimal-property-pane'*/
-      './MinimalPropertyPane'
+      /* webpackChunkName: 'DataVisualization-property-pane'*/
+      './DataVisualizationPropertyPane'
     )
       .then(
         (component) => {
-          this._deferredPropertyPane = new component.MinimalPropertyPane();
+          this._deferredPropertyPane = new component.DataVisualizationPropertyPane();
         }
       );
   }

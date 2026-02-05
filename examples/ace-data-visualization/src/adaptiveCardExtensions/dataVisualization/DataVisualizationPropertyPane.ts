@@ -1,7 +1,7 @@
 import { IPropertyPaneConfiguration, PropertyPaneTextField } from '@microsoft/sp-property-pane';
-import * as strings from 'MinimalAdaptiveCardExtensionStrings';
+import * as strings from 'DataVisualizationAdaptiveCardExtensionStrings';
 
-export class MinimalPropertyPane {
+export class DataVisualizationPropertyPane {
   public getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
       pages: [

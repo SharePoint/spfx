@@ -1,4 +1,4 @@
-declare interface IMinimalAdaptiveCardExtensionStrings {
+declare interface IDataVisualizationAdaptiveCardExtensionStrings {
   PropertyPaneDescription: string;
   TitleFieldLabel: string;
   Title: string;
@@ -8,7 +8,7 @@ declare interface IMinimalAdaptiveCardExtensionStrings {
   QuickViewButton: string;
 }
 
-declare module 'MinimalAdaptiveCardExtensionStrings' {
-  const strings: IMinimalAdaptiveCardExtensionStrings;
+declare module 'DataVisualizationAdaptiveCardExtensionStrings' {
+  const strings: IDataVisualizationAdaptiveCardExtensionStrings;
   export = strings;
 }

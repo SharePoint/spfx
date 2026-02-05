@@ -1,9 +1,9 @@
 import { ISPFxAdaptiveCard, BaseAdaptiveCardQuickView } from '@microsoft/sp-adaptive-card-extension-base';
-import * as strings from 'MinimalAdaptiveCardExtensionStrings';
+import * as strings from 'DataVisualizationAdaptiveCardExtensionStrings';
 import {
-  IMinimalAdaptiveCardExtensionProps,
-  IMinimalAdaptiveCardExtensionState
-} from '../MinimalAdaptiveCardExtension';
+  IDataVisualizationAdaptiveCardExtensionProps,
+  IDataVisualizationAdaptiveCardExtensionState
+} from '../DataVisualizationAdaptiveCardExtension';
 
 export interface IQuickViewData {
   subTitle: string;
@@ -11,8 +11,8 @@ export interface IQuickViewData {
 }
 
 export class QuickView extends BaseAdaptiveCardQuickView<
-  IMinimalAdaptiveCardExtensionProps,
-  IMinimalAdaptiveCardExtensionState,
+  IDataVisualizationAdaptiveCardExtensionProps,
+  IDataVisualizationAdaptiveCardExtensionState,
   IQuickViewData
 > {
   public get data(): IQuickViewData {
