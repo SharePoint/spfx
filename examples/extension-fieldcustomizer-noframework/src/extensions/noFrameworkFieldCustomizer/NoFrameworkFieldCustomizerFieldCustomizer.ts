@@ -4,30 +4,30 @@ import {
   type IFieldCustomizerCellEventParameters
 } from '@microsoft/sp-listview-extensibility';
 
-import * as strings from 'MinimalFieldCustomizerStrings';
-import styles from './MinimalFieldCustomizer.module.scss';
+import * as strings from 'NoFrameworkFieldCustomizerFieldCustomizerStrings';
+import styles from './NoFrameworkFieldCustomizerFieldCustomizer.module.scss';
 
 /**
  * If your field customizer uses the ClientSideComponentProperties JSON input,
  * it will be deserialized into the BaseExtension.properties object.
  * You can define an interface to describe it.
  */
-export interface IMinimalFieldCustomizerProperties {
+export interface INoFrameworkFieldCustomizerFieldCustomizerProperties {
   // This is an example; replace with your own property
   sampleText?: string;
 }
 
-const LOG_SOURCE: string = 'MinimalFieldCustomizer';
+const LOG_SOURCE: string = 'NoFrameworkFieldCustomizerFieldCustomizer';
 
-export default class MinimalFieldCustomizer
-  extends BaseFieldCustomizer<IMinimalFieldCustomizerProperties> {
+export default class NoFrameworkFieldCustomizerFieldCustomizer
+  extends BaseFieldCustomizer<INoFrameworkFieldCustomizerFieldCustomizerProperties> {
 
   public onInit(): Promise<void> {
     // Add your custom initialization to this method.  The framework will wait
     // for the returned promise to resolve before firing any BaseFieldCustomizer events.
-    Log.info(LOG_SOURCE, 'Activated MinimalFieldCustomizer with properties:');
+    Log.info(LOG_SOURCE, 'Activated NoFrameworkFieldCustomizerFieldCustomizer with properties:');
     Log.info(LOG_SOURCE, JSON.stringify(this.properties, undefined, 2));
-    Log.info(LOG_SOURCE, `The following string should be equal: "MinimalFieldCustomizer" and "${strings.Title}"`);
+    Log.info(LOG_SOURCE, `The following string should be equal: "NoFrameworkFieldCustomizerFieldCustomizer" and "${strings.Title}"`);
     return Promise.resolve();
   }
 
@@ -37,7 +37,7 @@ export default class MinimalFieldCustomizer
 
     event.domElement.innerText = text;
 
-    event.domElement.classList.add(styles.minimal);
+    event.domElement.classList.add(styles.noFrameworkFieldCustomizer);
   }
 
   public onDisposeCell(event: IFieldCustomizerCellEventParameters): void {

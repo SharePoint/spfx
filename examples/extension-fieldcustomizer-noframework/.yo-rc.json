@@ -1,12 +1,12 @@
 {
   "@microsoft/generator-sharepoint": {
     "whichFolder": "subdir",
-    "solutionName": "Minimal",
+    "solutionName": "NoFrameworkFieldCustomizer",
     "useGulp": false,
     "componentType": "extension",
     "extensionType": "FieldCustomizer",
     "template": "none",
-    "componentName": "Minimal",
+    "componentName": "NoFrameworkFieldCustomizer",
     "plusBeta": false,
     "isCreatingSolution": true,
     "nodeVersion": "22.21.1",
@@ -16,7 +16,7 @@
     "libraryId": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "environment": "spo",
     "packageManager": "npm",
-    "solutionShortDescription": "Minimal description",
+    "solutionShortDescription": "NoFrameworkFieldCustomizer description",
     "skipFeatureDeployment": true,
     "isDomainIsolated": false
   }
