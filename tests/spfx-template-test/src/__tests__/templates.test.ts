@@ -45,7 +45,7 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-fieldcustomizer-minimal',
     templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-minimal'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'Field Customizer Minimal',
+    componentName: 'MinimalFieldCustomizer',
     componentAlias: 'FieldCustomizerMinimal',
     componentDescription: 'A minimal field customizer extension'
   },
