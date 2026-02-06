@@ -57,7 +57,7 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentName: 'NoFrameworkFormCustomizer',
     componentAlias: 'NoFrameworkFormCustomizer',
     componentDescription: 'NoFrameworkFormCustomizer Description'
-  },
+  }
 ];
 
 // Check for --update or -u flag
