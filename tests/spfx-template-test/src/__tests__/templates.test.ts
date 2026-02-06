@@ -57,7 +57,7 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentName: 'ReactFieldCustomizer',
     componentAlias: 'ReactFieldCustomizer',
     componentDescription: 'ReactFieldCustomizer Description'
-  },
+  }
 ];
 
 // Check for --update or -u flag

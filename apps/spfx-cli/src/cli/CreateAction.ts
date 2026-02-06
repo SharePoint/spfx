@@ -186,7 +186,7 @@ export class CreateAction extends CommandLineAction {
         solution_name: 'test-solution-name',
         eslintProfile: 'react',
         libraryName: this._libraryName.value,
-        versionBadge: 'https://img.shields.io/badge/version-1.0.0-blue',
+        versionBadge: 'https://img.shields.io/badge/version-1.22.2-green.svg',
         componentId: componentId,
         featureId: featureId,
         solutionId: solutionId,
