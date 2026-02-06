@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-extension-manifest.schema.json",
 
   "id": "<%= componentId %>",
-  "alias": "<%= componentNameCapitalCase %>FormCustomizer",
+  "alias": "<%= componentAlias %>",
   "componentType": "Extension",
   "extensionType": "FormCustomizer",
 
