@@ -11,8 +11,8 @@ export interface IMinimalAdaptiveCardExtensionProps {
 export interface IMinimalAdaptiveCardExtensionState {
 }
 
-const CARD_VIEW_REGISTRY_ID: string = 'Minimal_CARD_VIEW';
-export const QUICK_VIEW_REGISTRY_ID: string = 'Minimal_QUICK_VIEW';
+const CARD_VIEW_REGISTRY_ID: string = 'MINIMAL_CARD_VIEW';
+export const QUICK_VIEW_REGISTRY_ID: string = 'MINIMAL_QUICK_VIEW';
 
 export default class MinimalAdaptiveCardExtension extends BaseAdaptiveCardExtension<
   IMinimalAdaptiveCardExtensionProps,
@@ -33,7 +33,7 @@ export default class MinimalAdaptiveCardExtension extends BaseAdaptiveCardExtens
 
   protected loadPropertyPaneResources(): Promise<void> {
     return import(
-      /* webpackChunkName: 'Minimal-property-pane'*/
+      /* webpackChunkName: 'minimal-property-pane'*/
       './MinimalPropertyPane'
     )
       .then(

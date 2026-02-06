@@ -2,7 +2,7 @@
 
 ## Summary
 
-Short summary on functionality and used technologies.
+Minimal ACE Description
 
 [picture of the solution in action, if possible]
 

@@ -36,6 +36,10 @@
       "type": "string",
       "description": "The component name in CapitalCase"
     },
+    "componentNameAllCaps": {
+      "type": "string",
+      "description": "The component name in ALL_CAPS"
+    },
     "componentDescription": {
       "type": "string",
       "description": "Description of the component"
