@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "noFrameworkFormCustomizer-form-customizer": {
+    "no-framework-form-customizer-form-customizer": {
       "components": [
         {
           "entrypoint": "./lib/extensions/noFrameworkFormCustomizer/NoFrameworkFormCustomizerFormCustomizer.js",
