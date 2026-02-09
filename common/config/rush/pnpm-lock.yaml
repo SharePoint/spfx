@@ -178,7 +178,7 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
-  ../../examples/ace-generic-card:
+  ../../examples/ace-search-card:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
         specifier: 1.22.1
@@ -9397,8 +9397,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.46.4(typescript@5.8.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.46.4(typescript@5.8.3)
-      '@typescript-eslint/types': 8.46.4
+      '@typescript-eslint/tsconfig-utils': 8.48.1(typescript@5.8.3)
+      '@typescript-eslint/types': 8.48.1
       debug: 4.4.3
       typescript: 5.8.3
     transitivePeerDependencies:
