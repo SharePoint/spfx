@@ -33,7 +33,6 @@ export default class ReactFormCustomizerFormCustomizer
 
   public render(): void {
     // Use this method to perform your custom rendering.
-
     const reactFormCustomizer: React.ReactElement<IReactFormCustomizerProps> =
       React.createElement(ReactFormCustomizer, {
         context: this.context,
@@ -52,7 +51,6 @@ export default class ReactFormCustomizerFormCustomizer
   }
 
   private _onSave = (): void => {
-
     // You MUST call this.formSaved() after you save the form.
     this.formSaved();
   }

@@ -2,7 +2,7 @@
 
 ## Summary
 
-Short summary on functionality and used technologies.
+ReactFormCustomizer Description
 
 [picture of the solution in action, if possible]
 

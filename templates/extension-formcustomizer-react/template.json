@@ -43,6 +43,10 @@
     "versionBadge": {
       "type": "string",
       "description": "The version badge for README"
+    },
+    "componentDescription": {
+      "type": "string",
+      "description": "The component description"
     }
   }
 }

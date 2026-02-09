@@ -33,7 +33,6 @@ export default class <%= componentNameCapitalCase %>FormCustomizer
 
   public render(): void {
     // Use this method to perform your custom rendering.
-
     const <%= componentNameCamelCase %>: React.ReactElement<I<%= componentNameCapitalCase %>Props> =
       React.createElement(<%= componentNameCapitalCase %>, {
         context: this.context,
@@ -52,7 +51,6 @@ export default class <%= componentNameCapitalCase %>FormCustomizer
   }
 
   private _onSave = (): void => {
-
     // You MUST call this.formSaved() after you save the form.
     this.formSaved();
   }
