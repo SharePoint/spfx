@@ -81,9 +81,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-formcustomizer-noframework',
     templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-noframework'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'NoFrameworkFormCustomizer',
-    componentAlias: 'NoFrameworkFormCustomizer',
-    componentDescription: 'NoFrameworkFormCustomizer Description'
+    componentName: 'NoFramework',
+    componentAlias: 'NoFramework',
+    componentDescription: 'NoFramework Description'
   },
   {
     libraryName: '@spfx-template/extension-formcustomizer-react',

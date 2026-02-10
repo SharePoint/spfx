@@ -3,33 +3,33 @@ import {
   BaseFormCustomizer
 } from '@microsoft/sp-listview-extensibility';
 
-import styles from './NoFrameworkFormCustomizerFormCustomizer.module.scss';
+import styles from './NoFrameworkFormCustomizer.module.scss';
 
 /**
  * If your form customizer uses the ClientSideComponentProperties JSON input,
  * it will be deserialized into the BaseExtension.properties object.
  * You can define an interface to describe it.
  */
-export interface INoFrameworkFormCustomizerFormCustomizerProperties {
+export interface INoFrameworkFormCustomizerProperties {
   // This is an example; replace with your own property
   sampleText?: string;
 }
 
-const LOG_SOURCE: string = 'NoFrameworkFormCustomizerFormCustomizer';
-export default class NoFrameworkFormCustomizerFormCustomizer
-  extends BaseFormCustomizer<INoFrameworkFormCustomizerFormCustomizerProperties> {
+const LOG_SOURCE: string = 'NoFrameworkFormCustomizer';
+export default class NoFrameworkFormCustomizer
+  extends BaseFormCustomizer<INoFrameworkFormCustomizerProperties> {
 
   public onInit(): Promise<void> {
     // Add your custom initialization to this method. The framework will wait
     // for the returned promise to resolve before rendering the form.
-    Log.info(LOG_SOURCE, 'Activated NoFrameworkFormCustomizerFormCustomizer with properties:');
+    Log.info(LOG_SOURCE, 'Activated NoFrameworkFormCustomizer with properties:');
     Log.info(LOG_SOURCE, JSON.stringify(this.properties, undefined, 2));
     return Promise.resolve();
   }
 
   public render(): void {
     // Use this method to perform your custom rendering.
-    this.domElement.innerHTML = `<div class="${ styles.noFrameworkFormCustomizer }"></div>`;
+    this.domElement.innerHTML = `<div class="${ styles.noFramework }"></div>`;
   }
 
   public onDispose(): void {

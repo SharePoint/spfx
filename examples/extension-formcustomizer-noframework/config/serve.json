@@ -14,7 +14,7 @@
         }
       }
     },
-    "noFrameworkFormCustomizer_NewForm": {
+    "noFramework_NewForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
         "componentId": "413af0cb-0c9f-43db-8f86-ad1accc90481",
@@ -25,7 +25,7 @@
         }
       }
     },
-    "noFrameworkFormCustomizer_EditForm": {
+    "noFramework_EditForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
         "componentId": "413af0cb-0c9f-43db-8f86-ad1accc90481",
@@ -37,7 +37,7 @@
         }
       }
     },
-    "noFrameworkFormCustomizer_ViewForm": {
+    "noFramework_ViewForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
         "componentId": "413af0cb-0c9f-43db-8f86-ad1accc90481",
