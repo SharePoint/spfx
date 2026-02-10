@@ -1,8 +1,8 @@
-# noFramework
+# @spfx-template/extension-formcustomizer-noframework
 
 ## Summary
 
-Short summary on functionality and used technologies.
+NoFramework Description
 
 [picture of the solution in action, if possible]
 

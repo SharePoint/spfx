@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "noFramework-client-side-solution",
+    "name": "@spfx-template/extension-formcustomizer-noframework-client-side-solution",
     "id": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "noFramework Feature",
-        "description": "The feature that activates elements of the noFramework solution.",
+        "title": "@spfx-template/extension-formcustomizer-noframework Feature",
+        "description": "The feature that activates elements of the @spfx-template/extension-formcustomizer-noframework solution.",
         "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/noFramework.sppkg"
+    "zippedPackage": "solution/@spfx-template/extension-formcustomizer-noframework.sppkg"
   }
 }

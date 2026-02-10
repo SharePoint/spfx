@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "<%= componentNameCamelCase %>-client-side-solution",
+    "name": "<%= libraryName %>-client-side-solution",
     "id": "<%= solutionId %>",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "<%= componentNameCamelCase %> Feature",
-        "description": "The feature that activates elements of the <%= componentNameCamelCase %> solution.",
+        "title": "<%= libraryName %> Feature",
+        "description": "The feature that activates elements of the <%= libraryName %> solution.",
         "id": "<%= featureId %>",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= componentNameCamelCase %>.sppkg"
+    "zippedPackage": "solution/<%= libraryName %>.sppkg"
   }
 }
