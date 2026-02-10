@@ -11,8 +11,8 @@ export interface IGenericCardAdaptiveCardExtensionProps {
 export interface IGenericCardAdaptiveCardExtensionState {
 }
 
-const CARD_VIEW_REGISTRY_ID: string = 'GenericCard_CARD_VIEW';
-export const QUICK_VIEW_REGISTRY_ID: string = 'GenericCard_QUICK_VIEW';
+const CARD_VIEW_REGISTRY_ID: string = 'GENERIC_CARD_CARD_VIEW';
+export const QUICK_VIEW_REGISTRY_ID: string = 'GENERIC_CARD_QUICK_VIEW';
 
 export default class GenericCardAdaptiveCardExtension extends BaseAdaptiveCardExtension<
   IGenericCardAdaptiveCardExtensionProps,
@@ -33,7 +33,7 @@ export default class GenericCardAdaptiveCardExtension extends BaseAdaptiveCardEx
 
   protected loadPropertyPaneResources(): Promise<void> {
     return import(
-      /* webpackChunkName: 'GenericCard-property-pane'*/
+      /* webpackChunkName: 'generic-card-property-pane'*/
       './GenericCardPropertyPane'
     )
       .then(
