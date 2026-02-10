@@ -85,6 +85,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentAlias: 'NoFrameworkFormCustomizer',
     componentDescription: 'NoFrameworkFormCustomizer Description'
   },
+  {
+    libraryName: '@spfx-template/extension-formcustomizer-react',
+    templateName: 'extension-formcustomizer-react',
+    templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-react'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'ReactFormCustomizer',
+    componentAlias: 'ReactFormCustomizerFormCustomizer',
+    componentDescription: 'ReactFormCustomizer Description'
+  },
 ];
 
 // Check for --update or -u flag
