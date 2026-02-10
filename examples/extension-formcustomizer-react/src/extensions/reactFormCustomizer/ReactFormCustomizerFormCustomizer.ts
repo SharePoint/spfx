@@ -19,7 +19,6 @@ export interface IReactFormCustomizerFormCustomizerProperties {
 }
 
 const LOG_SOURCE: string = 'ReactFormCustomizerFormCustomizer';
-
 export default class ReactFormCustomizerFormCustomizer
   extends BaseFormCustomizer<IReactFormCustomizerFormCustomizerProperties> {
 
