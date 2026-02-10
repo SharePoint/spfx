@@ -16,7 +16,6 @@ export interface INoFrameworkFormCustomizerFormCustomizerProperties {
 }
 
 const LOG_SOURCE: string = 'NoFrameworkFormCustomizerFormCustomizer';
-
 export default class NoFrameworkFormCustomizerFormCustomizer
   extends BaseFormCustomizer<INoFrameworkFormCustomizerFormCustomizerProperties> {
 

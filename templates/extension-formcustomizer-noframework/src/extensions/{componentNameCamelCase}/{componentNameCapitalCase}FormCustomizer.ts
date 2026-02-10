@@ -16,7 +16,6 @@ export interface I<%= componentNameCapitalCase %>FormCustomizerProperties {
 }
 
 const LOG_SOURCE: string = '<%= componentNameCapitalCase %>FormCustomizer';
-
 export default class <%= componentNameCapitalCase %>FormCustomizer
   extends BaseFormCustomizer<I<%= componentNameCapitalCase %>FormCustomizerProperties> {
 
