@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "<%= libraryName %>-client-side-solution",
-    "id": "<%= solutionId %>",
+    "name": "@spfx-template/ace-generic-card-client-side-solution",
+    "id": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -12,14 +12,14 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": ""
+      "mpnId": "Undefined-1.22.1"
     },
     "metadata": {
       "shortDescription": {
-        "default": "<%= componentDescription %>"
+        "default": "@spfx-template/ace-generic-card description"
       },
       "longDescription": {
-        "default": "<%= componentDescription %>"
+        "default": "@spfx-template/ace-generic-card description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "<%= libraryName %> Feature",
-        "description": "The feature that activates elements of the <%= libraryName %> solution.",
-        "id": "<%= featureId %>",
+        "title": "@spfx-template/ace-generic-card Feature",
+        "description": "The feature that activates elements of the @spfx-template/ace-generic-card solution.",
+        "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= libraryName %>.sppkg"
+    "zippedPackage": "solution/generic-card.sppkg"
   }
 }

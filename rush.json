@@ -454,6 +454,12 @@
       "tags": [ ]
     },
     {
+      "packageName": "@spfx-template/ace-generic-card",
+      "projectFolder": "examples/ace-generic-card",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@spfx-template/extension-formcustomizer-react",
       "projectFolder": "examples/extension-formcustomizer-react",
       "reviewCategory": "templates",
