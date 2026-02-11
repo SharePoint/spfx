@@ -2,7 +2,7 @@
   "name": "extension-formcustomizer-noframework",
   "description": "A SharePoint Framework Form Customizer extension with no framework",
   "version": "1.0.0",
-  "spfxVersion": "1.22.1",
+  "spfxVersion": "1.22.2",
   "contextSchema": {
     "componentNameCapitalCase": {
       "type": "string",
