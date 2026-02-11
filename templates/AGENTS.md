@@ -83,7 +83,7 @@ If you're unsure whether to use `description` vs another field, check:
    ```json
    {
      "context": {
-       "spfxVersion": "1.22.1"
+       "spfxVersion": "1.22.2"
      }
    }
    ```
@@ -110,7 +110,7 @@ Ensure the version string is properly formatted:
   "version": "<%= spfxVersion %>.0"
 }
 
-// ❌ WRONG - Results in "undefined-1.22.1"
+// ❌ WRONG - Results in "undefined-1.22.2"
 {
   "version": "undefined-<%= spfxVersion %>"
 }
@@ -159,7 +159,7 @@ Common template variables and their use cases:
 | `componentNameAllCaps` | UPPER_CASE | String IDs | "GENERICCARD" |
 | `libraryName` | scoped | Package name | "@spfx-template/generic-card" |
 | `description` | n/a | User description | User's text |
-| `spfxVersion` | n/a | SPFx version | "1.22.1" |
+| `spfxVersion` | n/a | SPFx version | "1.22.2" |
 
 ## Testing Your Template
 
