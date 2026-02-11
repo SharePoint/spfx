@@ -7,30 +7,30 @@ import {
   type IFieldCustomizerCellEventParameters
 } from '@microsoft/sp-listview-extensibility';
 
-import * as strings from 'ReactFieldCustomizerFieldCustomizerStrings';
-import ReactFieldCustomizer, { IReactFieldCustomizerProps } from './components/ReactFieldCustomizer';
+import * as strings from 'ReactFieldCustomizerStrings';
+import React, { IReactProps } from './components/React';
 
 /**
  * If your field customizer uses the ClientSideComponentProperties JSON input,
  * it will be deserialized into the BaseExtension.properties object.
  * You can define an interface to describe it.
  */
-export interface IReactFieldCustomizerFieldCustomizerProperties {
+export interface IReactFieldCustomizerProperties {
   // This is an example; replace with your own property
   sampleText?: string;
 }
 
-const LOG_SOURCE: string = 'ReactFieldCustomizerFieldCustomizer';
+const LOG_SOURCE: string = 'ReactFieldCustomizer';
 
-export default class ReactFieldCustomizerFieldCustomizer
-  extends BaseFieldCustomizer<IReactFieldCustomizerFieldCustomizerProperties> {
+export default class ReactFieldCustomizer
+  extends BaseFieldCustomizer<IReactFieldCustomizerProperties> {
 
   public onInit(): Promise<void> {
     // Add your custom initialization to this method.  The framework will wait
     // for the returned promise to resolve before firing any BaseFieldCustomizer events.
-    Log.info(LOG_SOURCE, 'Activated ReactFieldCustomizerFieldCustomizer with properties:');
+    Log.info(LOG_SOURCE, 'Activated ReactFieldCustomizer with properties:');
     Log.info(LOG_SOURCE, JSON.stringify(this.properties, undefined, 2));
-    Log.info(LOG_SOURCE, `The following string should be equal: "ReactFieldCustomizerFieldCustomizer" and "${strings.Title}"`);
+    Log.info(LOG_SOURCE, `The following string should be equal: "ReactFieldCustomizer" and "${strings.Title}"`);
     return Promise.resolve();
   }
 
@@ -38,10 +38,10 @@ export default class ReactFieldCustomizerFieldCustomizer
     // Use this method to perform your custom cell rendering.
     const text: string = `${this.properties.sampleText}: ${event.fieldValue}`;
 
-    const reactFieldCustomizer: React.ReactElement<IReactFieldCustomizerProps> =
-      React.createElement(ReactFieldCustomizer, { text } as IReactFieldCustomizerProps);
+    const react: React.ReactElement<IReactProps> =
+      React.createElement(React, { text } as IReactProps);
 
-    ReactDOM.render(reactFieldCustomizer, event.domElement);
+    ReactDOM.render(react, event.domElement);
   }
 
   public onDisposeCell(event: IFieldCustomizerCellEventParameters): void {
