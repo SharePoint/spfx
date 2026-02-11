@@ -55,15 +55,15 @@ All SPFx dependency versions must match across examples:
 ```json
 // ✅ CORRECT - Consistent version
 {
-  "@microsoft/sp-core-library": "~1.22.1",
-  "@microsoft/sp-webpart-base": "~1.22.1",
-  "@microsoft/sp-adaptive-card-extension-base": "~1.22.1"
+  "@microsoft/sp-core-library": "~1.22.2",
+  "@microsoft/sp-webpart-base": "~1.22.2",
+  "@microsoft/sp-adaptive-card-extension-base": "~1.22.2"
 }
 
 // ❌ WRONG - Mixed versions
 {
-  "@microsoft/sp-core-library": "~1.22.1",
-  "@microsoft/sp-webpart-base": "~1.22.0",  // Different!
+  "@microsoft/sp-core-library": "~1.22.2",
+  "@microsoft/sp-webpart-base": "~1.22.1",  // Different!
 }
 ```
 
@@ -75,14 +75,14 @@ Version must be properly formatted:
 // ✅ CORRECT
 {
   "solution": {
-    "version": "1.22.1.0"
+    "version": "1.0.0.0"
   }
 }
 
 // ❌ WRONG - Malformed version string
 {
   "solution": {
-    "version": "undefined-1.22.1"
+    "version": "undefined-1.22.2"
   }
 }
 ```
@@ -93,10 +93,10 @@ Version badges should match package.json SPFx version:
 
 ```markdown
 ✅ CORRECT
-![version](https://img.shields.io/badge/version-1.22.1-blue)
+![version](https://img.shields.io/badge/version-1.22.2-blue)
 
 ❌ WRONG
-![version](https://img.shields.io/badge/version-1.22.0-blue)
+![version](https://img.shields.io/badge/version-1.22.1-blue)
 ```
 
 ## Documentation Requirements
@@ -119,7 +119,7 @@ This sample shows how to build an Adaptive Card Extension using the generic card
 
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/version-1.22.1-blue)
+![version](https://img.shields.io/badge/version-1.22.2-blue)
 ```
 
 ❌ **NEVER** leave placeholder text like:
