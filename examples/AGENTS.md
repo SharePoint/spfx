@@ -63,7 +63,7 @@ All SPFx dependency versions must match across examples:
 // ❌ WRONG - Mixed versions
 {
   "@microsoft/sp-core-library": "~1.22.2",
-  "@microsoft/sp-webpart-base": "~1.22.0",  // Different!
+  "@microsoft/sp-webpart-base": "~1.22.1",  // Different!
 }
 ```
 
@@ -75,7 +75,7 @@ Version must be properly formatted:
 // ✅ CORRECT
 {
   "solution": {
-    "version": "1.22.2.0"
+    "version": "1.0.0.0"
   }
 }
 
@@ -96,7 +96,7 @@ Version badges should match package.json SPFx version:
 ![version](https://img.shields.io/badge/version-1.22.2-blue)
 
 ❌ WRONG
-![version](https://img.shields.io/badge/version-1.22.0-blue)
+![version](https://img.shields.io/badge/version-1.22.1-blue)
 ```
 
 ## Documentation Requirements
