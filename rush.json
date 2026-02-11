@@ -460,6 +460,12 @@
       "tags": [ ]
     },
     {
+      "packageName": "@spfx-template/extension-formcustomizer-noframework",
+      "projectFolder": "examples/extension-formcustomizer-noframework",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@spfx-template/extension-formcustomizer-react",
       "projectFolder": "examples/extension-formcustomizer-react",
       "reviewCategory": "templates",
