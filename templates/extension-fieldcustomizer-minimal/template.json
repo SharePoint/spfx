@@ -2,7 +2,7 @@
   "name": "extension-fieldcustomizer-minimal",
   "description": "A minimal Field Customizer extension for SharePoint Framework without any framework dependencies",
   "version": "1.0.0",
-  "spfxVersion": "1.22.1",
+  "spfxVersion": "1.22.2",
   "contextSchema": {
     "componentNameCapitalCase": {
       "type": "string",
@@ -43,6 +43,10 @@
     "versionBadge": {
       "type": "string",
       "description": "Version badge for display"
+    },
+    "componentDescription": {
+      "type": "string",
+      "description": "The component description"
     }
   }
 }

@@ -12,14 +12,14 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.1"
+      "mpnId": "Undefined-1.22.2"
     },
     "metadata": {
       "shortDescription": {
-        "default": "<%= componentNameCapitalCase %> description"
+        "default": "<%= componentDescription %>"
       },
       "longDescription": {
-        "default": "<%= componentNameCapitalCase %> description"
+        "default": "<%= componentDescription %>"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,8 +27,8 @@
     },
     "features": [
       {
-        "title": "Application Extension - Deployment of custom action",
-        "description": "Deploys a custom action with ClientSideComponentId association",
+        "title": "Field Customizer - Deployment of field customization",
+        "description": "Deploys a Field Customizer associated with a list field",
         "id": "<%= featureId %>",
         "version": "1.0.0.0",
         "assets": {
