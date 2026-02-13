@@ -77,6 +77,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'Minimal ACE Description'
   },
   {
+    libraryName: '@spfx-template/extension-fieldcustomizer-noframework',
+    templateName: 'extension-fieldcustomizer-noframework',
+    templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-noframework'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'NoFramework',
+    componentAlias: 'NoFramework',
+    componentDescription: 'NoFramework Description'
+  },
+  {
     libraryName: '@spfx-template/extension-fieldcustomizer-react',
     templateName: 'extension-fieldcustomizer-react',
     templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-react'),

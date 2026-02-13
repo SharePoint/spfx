@@ -460,6 +460,18 @@
       "tags": [ ]
     },
     {
+      "packageName": "@spfx-template/ace-search-card",
+      "projectFolder": "examples/ace-search-card",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/extension-fieldcustomizer-noframework",
+      "projectFolder": "examples/extension-fieldcustomizer-noframework",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@spfx-template/extension-fieldcustomizer-react",
       "projectFolder": "examples/extension-fieldcustomizer-react",
       "reviewCategory": "templates",
@@ -515,12 +527,6 @@
     {
       "packageName": "@spfx-template/webpart-minimal",
       "projectFolder": "examples/webpart-minimal",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/ace-search-card",
-      "projectFolder": "examples/ace-search-card",
       "reviewCategory": "templates",
       "tags": [ ]
     }
