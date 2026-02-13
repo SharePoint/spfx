@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "<%= componentNameUnescaped %> description"
+        "default": "<%= componentDescription %>"
       },
       "longDescription": {
-        "default": "<%= componentNameUnescaped %> description"
+        "default": "<%= componentDescription %>"
       },
       "screenshotPaths": [],
       "videoUrl": "",

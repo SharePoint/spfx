@@ -34,9 +34,7 @@ export default class NoFrameworkFieldCustomizer
   public onRenderCell(event: IFieldCustomizerCellEventParameters): void {
     // Use this method to perform your custom cell rendering.
     const text: string = `${this.properties.sampleText}: ${event.fieldValue}`;
-
     event.domElement.innerText = text;
-
     event.domElement.classList.add(styles.noFramework);
   }
 
