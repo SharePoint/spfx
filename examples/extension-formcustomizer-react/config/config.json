@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "react-form-customizer-form-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/reactFormCustomizer/ReactFormCustomizerFormCustomizer.js",
+          "manifest": "./src/extensions/reactFormCustomizer/ReactFormCustomizerFormCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ReactFormCustomizerFormCustomizerStrings": "lib/extensions/reactFormCustomizer/loc/{locale}.js"
+  }
+}
