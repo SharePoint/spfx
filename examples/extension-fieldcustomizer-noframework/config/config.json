@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "noFrameworkFieldCustomizer-field-customizer": {
+    "no-framework-field-customizer": {
       "components": [
         {
-          "entrypoint": "./lib/extensions/noFrameworkFieldCustomizer/NoFrameworkFieldCustomizerFieldCustomizer.js",
-          "manifest": "./src/extensions/noFrameworkFieldCustomizer/NoFrameworkFieldCustomizerFieldCustomizer.manifest.json"
+          "entrypoint": "./lib/extensions/noFramework/NoFrameworkFieldCustomizer.js",
+          "manifest": "./src/extensions/noFramework/NoFrameworkFieldCustomizer.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "NoFrameworkFieldCustomizerFieldCustomizerStrings": "lib/extensions/noFrameworkFieldCustomizer/loc/{locale}.js"
+    "NoFrameworkFieldCustomizerStrings": "lib/extensions/noFramework/loc/{locale}.js"
   }
 }

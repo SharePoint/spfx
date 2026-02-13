@@ -14,7 +14,7 @@
         }
       }
     },
-    "noFrameworkFieldCustomizer": {
+    "noFramework": {
       "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
       "fieldCustomizers": {
         "InternalFieldName": {

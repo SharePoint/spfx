@@ -27,8 +27,8 @@
     },
     "features": [
       {
-        "title": "Application Extension - Deployment of custom action",
-        "description": "Deploys a custom action with ClientSideComponentId association",
+        "title": "Field Customizer - Deployment of field customization",
+        "description": "Deploys a Field Customizer associated with a list field",
         "id": "<%= featureId %>",
         "version": "1.0.0.0",
         "assets": {
@@ -40,6 +40,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= libraryName %>.sppkg"
+    "zippedPackage": "solution/<%= componentNameHyphenCase %>-field-customizer.sppkg"
   }
 }

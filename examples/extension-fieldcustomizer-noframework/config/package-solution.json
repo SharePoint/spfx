@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "NoFrameworkFieldCustomizer description"
+        "default": "NoFramework description"
       },
       "longDescription": {
-        "default": "NoFrameworkFieldCustomizer description"
+        "default": "NoFramework description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,8 +27,8 @@
     },
     "features": [
       {
-        "title": "Application Extension - Deployment of custom action",
-        "description": "Deploys a custom action with ClientSideComponentId association",
+        "title": "Field Customizer - Deployment of field customization",
+        "description": "Deploys a Field Customizer associated with a list field",
         "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0",
         "assets": {
@@ -40,6 +40,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/@spfx-template/extension-fieldcustomizer-noframework.sppkg"
+    "zippedPackage": "solution/no-framework-field-customizer.sppkg"
   }
 }

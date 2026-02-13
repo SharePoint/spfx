@@ -81,9 +81,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-fieldcustomizer-noframework',
     templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-noframework'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'NoFrameworkFieldCustomizer',
-    componentAlias: 'NoFrameworkFieldCustomizer',
-    componentDescription: 'NoFrameworkFieldCustomizer Description'
+    componentName: 'NoFramework',
+    componentAlias: 'NoFramework',
+    componentDescription: 'NoFramework Description'
   },
   {
     libraryName: '@spfx-template/extension-fieldcustomizer-react',
