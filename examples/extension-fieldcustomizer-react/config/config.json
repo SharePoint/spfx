@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "react-field-customizer-field-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/reactFieldCustomizer/ReactFieldCustomizerFieldCustomizer.js",
+          "manifest": "./src/extensions/reactFieldCustomizer/ReactFieldCustomizerFieldCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ReactFieldCustomizerFieldCustomizerStrings": "lib/extensions/reactFieldCustomizer/loc/{locale}.js"
+  }
+}

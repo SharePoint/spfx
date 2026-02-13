@@ -50,6 +50,33 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'Minimal Web Part Description'
   },
   {
+    libraryName: '@spfx-template/ace-data-visualization',
+    templateName: 'ace-data-visualization',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-data-visualization'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'DataVisualization',
+    componentAlias: 'DataVisualization',
+    componentDescription: 'DataVisualization Description'
+  },
+  {
+    libraryName: '@spfx-template/ace-generic-card',
+    templateName: 'ace-generic-card',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-generic-card'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'GenericCard',
+    componentAlias: 'GenericCard',
+    componentDescription: 'GenericCard Description'
+  },
+  {
+    libraryName: '@spfx-template/ace-search-card',
+    templateName: 'ace-search-card',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-search-card'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal ACE Description'
+  },
+  {
     libraryName: '@spfx-template/extension-fieldcustomizer-minimal',
     templateName: 'extension-fieldcustomizer-minimal',
     templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-minimal'),
@@ -57,6 +84,33 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Description'
+  },
+  {
+    libraryName: '@spfx-template/extension-fieldcustomizer-react',
+    templateName: 'extension-fieldcustomizer-react',
+    templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-react'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'ReactFieldCustomizer',
+    componentAlias: 'ReactFieldCustomizerFieldCustomizer',
+    componentDescription: 'ReactFieldCustomizer Description'
+  },
+  {
+    libraryName: '@spfx-template/extension-formcustomizer-noframework',
+    templateName: 'extension-formcustomizer-noframework',
+    templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-noframework'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'NoFramework',
+    componentAlias: 'NoFramework',
+    componentDescription: 'NoFramework Description'
+  },
+  {
+    libraryName: '@spfx-template/extension-formcustomizer-react',
+    templateName: 'extension-formcustomizer-react',
+    templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-react'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'ReactFormCustomizer',
+    componentAlias: 'ReactFormCustomizerFormCustomizer',
+    componentDescription: 'ReactFormCustomizer Description'
   },
 ];
 

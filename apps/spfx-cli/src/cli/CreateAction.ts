@@ -8,7 +8,7 @@ import {
 import { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
-import { camelCase, kebabCase, upperFirst } from 'lodash';
+import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
 
 import {    
   LocalFileSystemRepositorySource,
@@ -181,12 +181,13 @@ export class CreateAction extends CommandLineAction {
       const componentNameCamelCase = camelCase(componentName);
       const componentNameHyphenCase = kebabCase(componentName);
       const componentNameCapitalCase = upperFirst(camelCase(componentName));
+      const componentNameAllCaps = snakeCase(componentName).toUpperCase();
 
       const fs = await template.render({
         solution_name: 'test-solution-name',
         eslintProfile: 'react',
         libraryName: this._libraryName.value,
-        versionBadge: 'https://img.shields.io/badge/version-1.0.0-blue',
+        versionBadge: `https://img.shields.io/badge/version-${template.spfxVersion || '1.22.2'}-green.svg`,
         componentId: componentId,
         featureId: featureId,
         solutionId: solutionId,
@@ -195,6 +196,7 @@ export class CreateAction extends CommandLineAction {
         componentNameCamelCase: componentNameCamelCase,
         componentNameHyphenCase: componentNameHyphenCase,
         componentNameCapitalCase: componentNameCapitalCase,
+        componentNameAllCaps: componentNameAllCaps,
         componentDescription: componentDescription,
       }, targetDir);
       _printFileChanges(this._terminal, fs, targetDir);
