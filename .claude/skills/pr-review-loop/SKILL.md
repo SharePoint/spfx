@@ -6,16 +6,17 @@ Automates the complete pull request review cycle from comment review to CI valid
 
 This skill handles the entire PR review workflow:
 1. Checks out the correct branch for a given PR number
-2. Fetches and analyzes all unresolved review comments (both Copilot and human)
-3. Determines which comments need code changes vs just responses
-4. Makes necessary code changes following repository patterns
-5. Builds locally and fixes any build issues
-6. Commits changes with proper attribution
-7. Responds to each comment explaining the fix
-8. Resolves conversations that have been addressed
-9. Pushes changes to the remote branch
-10. Waits for CI to complete and fixes any CI failures
-11. Reports final status
+2. Merges from main and resolves any merge conflicts
+3. Fetches and analyzes all unresolved review comments (both Copilot and human)
+4. Determines which comments need code changes vs just responses
+5. Makes necessary code changes following repository patterns
+6. Builds locally and fixes any build issues
+7. Commits changes with proper attribution
+8. Responds to each comment explaining the fix
+9. Resolves conversations that have been addressed
+10. Pushes changes to the remote branch
+11. Waits for CI to complete and fixes any CI failures
+12. Reports final status
 
 ## Usage
 
@@ -32,12 +33,22 @@ Example:
 
 You are now in PR Review Loop mode. Follow these steps systematically:
 
-### Step 1: Checkout PR Branch
+### Step 1: Checkout PR Branch and Merge Main
 
 1. Get the PR details using `gh pr view {pr_number} --repo SharePoint/spfx --json headRefName,state`
 2. Verify the PR is open
 3. Checkout the branch: `git checkout {headRefName}`
 4. Pull latest changes: `git pull`
+5. **Merge from main to resolve conflicts:**
+   - Fetch main: `git fetch origin main`
+   - Merge main: `git merge origin/main`
+   - If there are merge conflicts:
+     - List conflicted files: `git status`
+     - Read each conflicted file
+     - Resolve conflicts by choosing the appropriate changes
+     - Stage resolved files: `git add {file}`
+     - Complete the merge: `git commit -m "Merge main into {branch_name}"`
+   - If merge is clean, no additional action needed
 
 ### Step 2: Fetch All Review Comments
 
