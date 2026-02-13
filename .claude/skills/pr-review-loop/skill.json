@@ -1,0 +1,7 @@
+{
+  "name": "pr-review-loop",
+  "description": "Complete PR review cycle: checkout branch, read comments, make fixes, build, commit, respond, resolve conversations, wait on CI, and fix issues",
+  "version": "1.0.0",
+  "requiredTools": ["Bash", "Read", "Edit", "Write", "Grep"],
+  "tags": ["pr", "review", "ci", "github", "workflow"]
+}
