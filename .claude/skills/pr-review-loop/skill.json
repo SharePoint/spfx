@@ -1,0 +1,16 @@
+{
+  "name": "pr-review-loop",
+  "version": "1.0.0",
+  "description": "Complete PR review cycle: checkout branch, read comments, make fixes, build, commit, respond, resolve conversations, wait on CI, and fix issues",
+  "type": "workflow",
+  "promptFile": ".claude/skills/pr-review-loop/prompt.md",
+  "documentation": "Runs a full PR review and fix loop: checks out the branch, merges from main, inspects review comments, applies fixes, runs builds/tests, commits changes, updates the PR with responses, resolves conversations when appropriate, waits for CI, and iterates on any resulting issues.",
+  "parameters": {
+    "pr_number": {
+      "type": "number",
+      "description": "Pull request number to review",
+      "required": true
+    }
+  },
+  "requirements": ["Bash", "Read", "Edit", "Write", "Grep"]
+}
