@@ -121,6 +121,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentAlias: 'ReactFormCustomizerFormCustomizer',
     componentDescription: 'ReactFormCustomizer Description'
   },
+  {
+    libraryName: '@spfx-template/extension-search-query-modifier',
+    templateName: 'extension-search-query-modifier',
+    templatePath: path.join(REPO_ROOT, 'templates/extension-search-query-modifier'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal Description'
+  },
 ];
 
 // Check for --update or -u flag
