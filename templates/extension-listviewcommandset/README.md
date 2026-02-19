@@ -2,13 +2,13 @@
 
 ## Summary
 
-Short summary on functionality and used technologies.
+<%= componentDescription %>
 
 [picture of the solution in action, if possible]
 
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/version-1.22.1-green.svg)
+![version](<%= versionBadge %>)
 
 ## Applies to
 
@@ -65,7 +65,7 @@ This extension illustrates the following concepts:
 
 > Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions in advance.
 
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
+> Share your extension with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
 
 ## References
 

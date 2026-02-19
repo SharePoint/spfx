@@ -21,7 +21,6 @@ export interface I<%= componentNameCapitalCase %>CommandSetProperties {
 const LOG_SOURCE: string = '<%= componentNameCapitalCase %>CommandSet';
 
 export default class <%= componentNameCapitalCase %>CommandSet extends BaseListViewCommandSet<I<%= componentNameCapitalCase %>CommandSetProperties> {
-
   public onInit(): Promise<void> {
     Log.info(LOG_SOURCE, 'Initialized <%= componentNameCapitalCase %>CommandSet');
 
@@ -62,7 +61,7 @@ export default class <%= componentNameCapitalCase %>CommandSet extends BaseListV
 
     // TODO: Add your logic here
 
-    // You should call this.raiseOnChage() to update the command bar
+    // You should call this.raiseOnChange() to update the command bar
     this.raiseOnChange();
   }
 }

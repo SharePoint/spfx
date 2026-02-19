@@ -1,8 +1,8 @@
 {
   "name": "extension-listviewcommandset",
   "description": "SharePoint Framework list view command set extension template",
-  "version": "1.22.1",
-  "spfxVersion": "1.22.1",
+  "version": "1.0.0",
+  "spfxVersion": "1.22.2",
   "contextSchema": {
     "libraryName": {
       "type": "string",
@@ -31,6 +31,14 @@
     "featureId": {
       "type": "string",
       "description": "The feature ID (GUID)"
+    },
+    "versionBadge": {
+      "type": "string",
+      "description": "Version badge for display"
+    },
+    "componentDescription": {
+      "type": "string",
+      "description": "The component description"
     }
   }
 }

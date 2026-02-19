@@ -12,14 +12,14 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.1"
+      "mpnId": "Undefined-1.22.2"
     },
     "metadata": {
       "shortDescription": {
-        "default": "ListViewCommandSet description"
+        "default": "<%= componentDescription %>"
       },
       "longDescription": {
-        "default": "ListViewCommandSet description"
+        "default": "<%= componentDescription %>"
       },
       "screenshotPaths": [],
       "videoUrl": "",

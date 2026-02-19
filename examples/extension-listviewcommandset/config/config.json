@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "list-view-command-set-command-set": {
+    "minimal-command-set": {
       "components": [
         {
-          "entrypoint": "./lib/extensions/listViewCommandSetCommandSet/ListViewCommandSetCommandSet.js",
-          "manifest": "./src/extensions/listViewCommandSetCommandSet/ListViewCommandSetCommandSet.manifest.json"
+          "entrypoint": "./lib/extensions/minimalCommandSet/MinimalCommandSet.js",
+          "manifest": "./src/extensions/minimalCommandSet/MinimalCommandSet.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "ListViewCommandSetCommandSetStrings": "lib/extensions/listViewCommandSetCommandSet/loc/{locale}.js"
+    "MinimalCommandSetStrings": "lib/extensions/minimalCommandSet/loc/{locale}.js"
   }
 }
