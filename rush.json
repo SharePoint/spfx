@@ -466,6 +466,12 @@
       "tags": [ ]
     },
     {
+      "packageName": "@spfx-template/extension-fieldcustomizer-minimal",
+      "projectFolder": "examples/extension-fieldcustomizer-minimal",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@spfx-template/extension-fieldcustomizer-noframework",
       "projectFolder": "examples/extension-fieldcustomizer-noframework",
       "reviewCategory": "templates",
