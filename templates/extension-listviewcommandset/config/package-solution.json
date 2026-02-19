@@ -27,8 +27,8 @@
     },
     "features": [
       {
-        "title": "List view command set extension",
-        "description": "The feature that activates the list view command set extension.",
+        "title": "List View Command Set - Deployment of list view commands",
+        "description": "Deploys a List View Command Set associated with a SharePoint list view",
         "id": "<%= featureId %>",
         "version": "1.0.0.0"
       }
