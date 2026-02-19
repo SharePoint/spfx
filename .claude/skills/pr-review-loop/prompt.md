@@ -74,13 +74,7 @@ For each code fix:
 4. Keep track of which comments each change addresses
 
 **Important patterns for this repo:**
-- Any file under `/templates/` is a template file (regardless of whether it has EJS variables)
-- Template files may also use EJS variables like `<%= componentName %>`
-- Examples must match template output exactly
-- Always use `componentDescription` not `componentNameUnescaped` for descriptions
-- Bundle names should use `componentNameHyphenCase`
-- Follow existing naming conventions strictly
-- No extra blank lines between code blocks
+Read `templates/AGENTS.md` and `examples/AGENTS.md` for the complete style guide and common mistakes to avoid.
 
 ### Step 5: Build and Fix Issues
 
@@ -91,7 +85,11 @@ For each code fix:
    - Read the error message carefully
    - Fix the issue
    - Rebuild until successful
-5. Repeat for all affected projects
+5. If templates were modified, run the template tests: `cd tests/spfx-template-test && rushx test -- -t {template-name}`
+6. If tests fail:
+   - The test generates the template and compares output against the example — ensure template and example are in sync
+   - Fix the mismatch and rerun tests until they pass
+7. Repeat for all affected projects
 
 ### Step 6: Commit Changes
 
