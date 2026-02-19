@@ -16,7 +16,7 @@
     "libraryId": "<%= solutionId %>",
     "environment": "spo",
     "packageManager": "npm",
-    "solutionShortDescription": "<%= componentNameCapitalCase %> description",
+    "solutionShortDescription": "<%= componentDescription %>",
     "skipFeatureDeployment": true,
     "isDomainIsolated": false
   }
