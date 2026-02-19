@@ -16,7 +16,6 @@ export interface I<%= componentNameCapitalCase %>SearchQueryModifierProperties {
 const LOG_SOURCE: string = '<%= componentNameCapitalCase %>SearchQueryModifier';
 
 export default class <%= componentNameCapitalCase %>SearchQueryModifier extends BaseSearchQueryModifier<I<%= componentNameCapitalCase %>SearchQueryModifierProperties> {
-
   public onInit(): Promise<void> {
     Log.info(LOG_SOURCE, 'Initialized <%= componentNameCapitalCase %>SearchQueryModifier');
     return Promise.resolve();

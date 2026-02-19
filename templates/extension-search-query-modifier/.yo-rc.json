@@ -1,22 +1,22 @@
 {
   "@microsoft/generator-sharepoint": {
     "whichFolder": "subdir",
-    "solutionName": "SearchQueryModifier",
+    "solutionName": "<%= componentNameCapitalCase %>",
     "useGulp": false,
     "componentType": "extension",
     "extensionType": "SearchQueryModifier",
-    "componentName": "SearchQueryModifier",
-    "componentDescription": "Search query modifier extension",
+    "componentName": "<%= componentNameCapitalCase %>",
+    "componentDescription": "<%= componentDescription %>",
     "plusBeta": false,
     "isCreatingSolution": true,
     "nodeVersion": "22.21.1",
     "sdksVersions": {},
-    "version": "1.22.1",
+    "version": "1.22.2",
     "libraryName": "<%= libraryName %>",
     "libraryId": "<%= solutionId %>",
     "environment": "spo",
     "packageManager": "npm",
-    "solutionShortDescription": "Search query modifier extension",
+    "solutionShortDescription": "<%= componentDescription %>",
     "skipFeatureDeployment": true,
     "isDomainIsolated": false
   }

@@ -12,14 +12,14 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.1"
+      "mpnId": "Undefined-1.22.2"
     },
     "metadata": {
       "shortDescription": {
-        "default": "Search query modifier extension"
+        "default": "<%= componentDescription %>"
       },
       "longDescription": {
-        "default": "Search query modifier extension"
+        "default": "<%= componentDescription %>"
       },
       "screenshotPaths": [],
       "videoUrl": "",

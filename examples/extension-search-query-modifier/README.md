@@ -2,13 +2,13 @@
 
 ## Summary
 
-Short summary on functionality and used technologies.
+Minimal Description
 
 [picture of the solution in action, if possible]
 
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/version-1.22.1-green.svg)
+![version](https://img.shields.io/badge/version-1.22.2-green.svg)
 
 ## Applies to
 

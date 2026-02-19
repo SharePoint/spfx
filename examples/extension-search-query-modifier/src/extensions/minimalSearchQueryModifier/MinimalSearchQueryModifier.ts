@@ -16,7 +16,6 @@ export interface IMinimalSearchQueryModifierProperties {
 const LOG_SOURCE: string = 'MinimalSearchQueryModifier';
 
 export default class MinimalSearchQueryModifier extends BaseSearchQueryModifier<IMinimalSearchQueryModifierProperties> {
-
   public onInit(): Promise<void> {
     Log.info(LOG_SOURCE, 'Initialized MinimalSearchQueryModifier');
     return Promise.resolve();

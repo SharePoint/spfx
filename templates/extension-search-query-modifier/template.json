@@ -1,8 +1,8 @@
 {
   "name": "extension-search-query-modifier",
   "description": "A SharePoint Framework search query modifier extension",
-  "version": "1.22.1",
-  "spfxVersion": "1.22.1",
+  "version": "1.0.0",
+  "spfxVersion": "1.22.2",
   "contextSchema": {
     "libraryName": {
       "type": "string",
@@ -31,6 +31,14 @@
     "featureId": {
       "type": "string",
       "description": "Feature ID"
+    },
+    "versionBadge": {
+      "type": "string",
+      "description": "Version badge for display"
+    },
+    "componentDescription": {
+      "type": "string",
+      "description": "The component description"
     }
   }
 }
