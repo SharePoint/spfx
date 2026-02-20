@@ -2,7 +2,7 @@
   "name": "extension-application-customizer",
   "description": "A SharePoint Framework Application Customizer extension template",
   "version": "0.0.1",
-  "spfxVersion": "1.22.0",
+  "spfxVersion": "1.22.2",
   "contextSchema": {
     "libraryName": {
       "type": "string",

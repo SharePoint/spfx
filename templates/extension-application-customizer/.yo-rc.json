@@ -11,7 +11,7 @@
     "isCreatingSolution": true,
     "nodeVersion": "22.21.1",
     "sdksVersions": {},
-    "version": "1.22.1",
+    "version": "1.22.2",
     "libraryName": "<%= libraryName %>",
     "libraryId": "<%= solutionId %>",
     "environment": "spo",

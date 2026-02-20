@@ -80,9 +80,9 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     templateName: 'extension-application-customizer',
     templatePath: path.join(REPO_ROOT, 'templates/extension-application-customizer'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
-    componentName: 'ApplicationCustomizer',
-    componentAlias: 'ApplicationCustomizer',
-    componentDescription: 'Application Customizer Description'
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal Description'
   },
   {
     libraryName: '@spfx-template/extension-fieldcustomizer-minimal',

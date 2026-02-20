@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "minimal-web-part-application-customizer": {
+    "minimal-application-customizer": {
       "components": [
         {
           "entrypoint": "./lib/extensions/minimalApplicationCustomizer/MinimalApplicationCustomizer.js",
