@@ -11,6 +11,20 @@
    * "rush my-global-command --help".
    */
   "commands": [
+    {
+      "commandKind": "bulk",
+      "name": "build-allow-warnings",
+      "summary": "Build projects that may have expected warnings",
+      "description": "This command is used for projects like field customizers that output expected informational warnings during the build process. Unlike the standard build command, this allows warnings without causing a CI failure.",
+      "safeForSimultaneousRushProcesses": false,
+      "enableParallelism": true,
+      "ignoreDependencyOrder": false,
+      "ignoreMissingScript": true,
+      "allowWarningsInSuccessfulBuild": true,
+      "incremental": true,
+      "watchForChanges": false,
+      "disableBuildCache": false
+    },
     // {
     //   /**
     //    * (Required) Determines the type of custom command.

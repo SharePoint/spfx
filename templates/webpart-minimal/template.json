@@ -2,7 +2,7 @@
     "name": "webpart-minimal",
     "description": "A minimal web part template (no framework) for SPFx",
     "version": "0.0.1",
-    "spfxVersion": "1.22.0",
+    "spfxVersion": "1.22.2",
     "contextSchema": {
         "eslintProfile": {
             "type": "string",
