@@ -6,7 +6,7 @@
     "componentType": "extension",
     "extensionType": "ApplicationCustomizer",
     "componentName": "ApplicationCustomizer",
-    "componentDescription": "Application customizer extension",
+    "componentDescription": "Minimal Description",
     "plusBeta": false,
     "isCreatingSolution": true,
     "nodeVersion": "22.21.1",
@@ -16,7 +16,7 @@
     "libraryId": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "environment": "spo",
     "packageManager": "npm",
-    "solutionShortDescription": "Application customizer extension",
+    "solutionShortDescription": "Minimal Description",
     "skipFeatureDeployment": true,
     "isDomainIsolated": false
   }

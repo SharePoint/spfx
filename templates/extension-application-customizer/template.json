@@ -24,6 +24,10 @@
       "type": "string",
       "description": "The version badge URL to use in the README.md"
     },
+    "componentDescription": {
+      "type": "string",
+      "description": "The description of the component"
+    },
     "componentAlias": {
       "type": "string",
       "description": "The component alias (in manifest) for the extension"

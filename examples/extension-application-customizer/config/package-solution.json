@@ -41,6 +41,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/@spfx-template/extension-application-customizer.sppkg"
+    "zippedPackage": "solution/minimal.sppkg"
   }
 }
