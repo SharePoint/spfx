@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "Minimal",
+    "useGulp": false,
+    "componentType": "extension",
+    "extensionType": "ListViewCommandSet",
+    "componentName": "Minimal",
+    "componentDescription": "Minimal Description",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.21.1",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "@spfx-template/extension-listviewcommandset",
+    "libraryId": "44d64337-e2f4-48e2-a954-a68795124bf2",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionShortDescription": "Minimal Description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -502,6 +502,12 @@
       "tags": [ ]
     },
     {
+      "packageName": "@spfx-template/extension-listviewcommandset",
+      "projectFolder": "examples/extension-listviewcommandset",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@spfx-template/extension-search-query-modifier",
       "projectFolder": "examples/extension-search-query-modifier",
       "reviewCategory": "templates",
