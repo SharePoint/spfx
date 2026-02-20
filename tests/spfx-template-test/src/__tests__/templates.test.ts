@@ -139,6 +139,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Description'
   },
+  {
+    libraryName: '@spfx-template/webpart-react',
+    templateName: 'webpart-react',
+    templatePath: path.join(REPO_ROOT, 'templates/webpart-react'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal Web Part Description'
+  },
 ];
 
 // Check for --update or -u flag
