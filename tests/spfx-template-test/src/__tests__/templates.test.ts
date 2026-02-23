@@ -323,7 +323,13 @@ describe('SPFx Template Scaffolding', () => {
         const filterFiles = (files: string[]) =>
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
-            // Skip build artifacts and generated files
+            // Skip binary/image files that cannot be meaningfully compared as UTF-8 text
+            const ignoredExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'];
+            if (ignoredExtensions.some(ext => normalized.endsWith(ext))) {
+              return false;
+            }
+
+        // Skip build artifacts and generated files
             const ignoredFiles = [
               'package-lock.json',
               'yarn.lock',
