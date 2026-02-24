@@ -553,6 +553,12 @@
       "projectFolder": "examples/webpart-minimal",
       "reviewCategory": "templates",
       "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/webpart-noframework",
+      "projectFolder": "examples/webpart-noframework",
+      "reviewCategory": "templates",
+      "tags": [ ]
     }
   ]
 }
