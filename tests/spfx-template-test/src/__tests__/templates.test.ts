@@ -50,6 +50,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'Minimal Web Part Description'
   },
   {
+    libraryName: '@spfx-template/webpart-noframework',
+    templateName: 'webpart-noframework',
+    templatePath: path.join(REPO_ROOT, 'templates/webpart-noframework'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'NoFramework',
+    componentAlias: 'NoFramework',
+    componentDescription: 'No Framework Web Part Description'
+  },
+  {
     libraryName: '@spfx-template/ace-data-visualization',
     templateName: 'ace-data-visualization',
     templatePath: path.join(REPO_ROOT, 'templates/ace-data-visualization'),
@@ -150,7 +159,7 @@ const UPDATE_MODE = process.argv.includes('--update') || process.argv.includes('
 async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ignore>> {
   const gitignorePath = path.join(templateDir, '.gitignore');
   const ig = ignore();
-  
+
   // Add default ignores that should always be excluded
   ig.add([
     'node_modules',
@@ -161,7 +170,7 @@ async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ig
     'dist',
     '.rush'
   ]);
-  
+
   try {
     const gitignoreContent = await readFile(gitignorePath, 'utf-8');
     ig.add(gitignoreContent);
@@ -169,7 +178,7 @@ async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ig
     // If .gitignore doesn't exist, just use default ignores
     console.warn(`No .gitignore found at ${gitignorePath}, using default ignores`);
   }
-  
+
   return ig;
 }
 
@@ -186,12 +195,12 @@ async function getAllFiles(
     entries.map(async (entry) => {
       const fullPath = path.join(dir, entry.name);
       const relativePath = path.relative(baseDir, fullPath).replace(/\\/g, '/');
-      
+
       // Check if this path should be ignored
       if (ignoreMatcher && ignoreMatcher.ignores(relativePath)) {
         return [];
       }
-      
+
       if (entry.isDirectory()) {
         return getAllFiles(fullPath, baseDir, ignoreMatcher);
       } else {
@@ -286,7 +295,7 @@ describe('SPFx Template Scaffolding', () => {
 
           const command = commandParts.join(' ');
           console.log(`Running: ${command}`);
-          
+
           execSync(command, {
             stdio: 'inherit',
             cwd: REPO_ROOT,
@@ -311,10 +320,16 @@ describe('SPFx Template Scaffolding', () => {
         const exampleFiles = await getAllFiles(examplePath, examplePath, ignoreMatcher);
 
         // Filter out files that should be ignored in comparison
-        const filterFiles = (files: string[]) => 
+        const filterFiles = (files: string[]) =>
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
-            // Skip build artifacts and generated files
+            // Skip binary/image files that cannot be meaningfully compared as UTF-8 text
+            const ignoredExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'];
+            if (ignoredExtensions.some(ext => normalized.endsWith(ext))) {
+              return false;
+            }
+
+        // Skip build artifacts and generated files
             const ignoredFiles = [
               'package-lock.json',
               'yarn.lock',
@@ -357,10 +372,10 @@ describe('SPFx Template Scaffolding', () => {
         for (const file of filteredScaffolded) {
           const scaffoldedFile = path.join(outputPath, file);
           const exampleFile = path.join(examplePath, file);
-          
+
           const scaffoldedContent = await readFileContent(scaffoldedFile);
           const exampleContent = await readFileContent(exampleFile);
-          
+
           // Use Jest's expect to get nice diff output
           // Add file context to the error message
           try {
