@@ -466,6 +466,12 @@
       "tags": [ ]
     },
     {
+      "packageName": "@spfx-template/extension-application-customizer",
+      "projectFolder": "examples/extension-application-customizer",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@spfx-template/extension-fieldcustomizer-minimal",
       "projectFolder": "examples/extension-fieldcustomizer-minimal",
       "reviewCategory": "templates",
@@ -545,6 +551,12 @@
     {
       "packageName": "@spfx-template/webpart-minimal",
       "projectFolder": "examples/webpart-minimal",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
+      "packageName": "@spfx-template/webpart-noframework",
+      "projectFolder": "examples/webpart-noframework",
       "reviewCategory": "templates",
       "tags": [ ]
     },
