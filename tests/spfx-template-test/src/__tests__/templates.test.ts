@@ -166,21 +166,6 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Web Part Description'
-  },
-  {
-    libraryName: '@spfx-template/webpart-noframework',
-    templateName: 'webpart-noframework',
-    templatePath: path.join(TEMPLATES_DIR, 'webpart-noframework')
-  },
-  {
-    libraryName: '@spfx-template/webpart-minimal',
-    templateName: 'webpart-minimal',
-    templatePath: path.join(TEMPLATES_DIR, 'webpart-minimal')
-  },
-  {
-    libraryName: '@spfx-template/webpart-react',
-    templateName: 'webpart-react',
-    templatePath: path.join(TEMPLATES_DIR, 'webpart-react')
   }
 ];
 
