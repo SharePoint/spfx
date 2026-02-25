@@ -3405,9 +3405,6 @@ packages:
   '@types/office-js@1.0.36':
     resolution: {integrity: sha512-v5jOXCPS0nbbuVzZThhDMzttuJrpzzvx1GsPo5Qed8Cs9uzMwEV1vdkKN5zLFnAUlEF4s8Szl9KXnhnSvH89Kw==}
 
-  '@types/office-js@1.0.36':
-    resolution: {integrity: sha512-v5jOXCPS0nbbuVzZThhDMzttuJrpzzvx1GsPo5Qed8Cs9uzMwEV1vdkKN5zLFnAUlEF4s8Szl9KXnhnSvH89Kw==}
-
   '@types/prettier@2.7.3':
     resolution: {integrity: sha512-+68kP9yzs4LMp7VNh8gdzMSPZFL44MLGqiHWvttYJe+6qnuVr4Ek9wSBQoveqY/r+LwjCcU29kNVkidwim+kYA==}
 
