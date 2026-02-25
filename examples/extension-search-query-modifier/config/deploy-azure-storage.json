@@ -2,6 +2,6 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/deploy-azure-storage.schema.json",
   "workingDir": "./release/assets/",
   "account": "<!-- STORAGE ACCOUNT NAME -->",
-  "container": "search-query-modifier-heft-1756847676957",
+  "container": "@spfx-template/extension-search-query-modifier",
   "accessKey": "<!-- ACCESS KEY -->"
 }

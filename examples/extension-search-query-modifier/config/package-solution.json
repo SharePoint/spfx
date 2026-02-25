@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "search-query-modifier-heft-1756847676957-client-side-solution",
-    "id": "430db347-79e9-4dc4-a0c1-fff52841f88b",
+    "name": "@spfx-template/extension-search-query-modifier-client-side-solution",
+    "id": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -12,35 +12,21 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.0-dev.128"
+      "mpnId": "Undefined-1.22.2"
     },
     "metadata": {
       "shortDescription": {
-        "default": "search-query-modifier-heft-1756847676957 description"
+        "default": "Minimal Description"
       },
       "longDescription": {
-        "default": "search-query-modifier-heft-1756847676957 description"
+        "default": "Minimal Description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
       "categories": []
-    },
-    "features": [
-      {
-        "title": "Application Extension - Deployment of custom action",
-        "description": "Deploys a custom action with ClientSideComponentId association",
-        "id": "0afdb8fc-8756-45b4-8262-cec661ccfae3",
-        "version": "1.0.0.0",
-        "assets": {
-          "elementManifests": [
-            "elements.xml",
-            "ClientSideInstance.xml"
-          ]
-        }
-      }
-    ]
+    }
   },
   "paths": {
-    "zippedPackage": "solution/search-query-modifier-heft-1756847676957.sppkg"
+    "zippedPackage": "solution/@spfx-template/extension-search-query-modifier.sppkg"
   }
 }

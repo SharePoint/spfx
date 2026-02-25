@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
     <ClientSideComponentInstance
-        Title="SearchQueryModifier"
+        Title="MinimalSearchQueryModifier"
         Location="ClientSideExtension.SearchQueryModifier"
-        ComponentId="4f24178e-9cc9-41f4-aabb-0812e9fe001a"
-        Properties="{&quot;testMessage&quot;:&quot;Test message&quot;}"/>
+        ComponentId="413af0cb-0c9f-43db-8f86-ad1accc90481"
+        Properties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </ClientSideComponentInstance>
 </Elements>

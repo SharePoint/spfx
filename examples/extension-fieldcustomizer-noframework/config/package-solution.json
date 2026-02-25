@@ -1,24 +1,25 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "field-customizer-noframework-heft-1756847676957-client-side-solution",
-    "id": "0a71953a-6ac9-4ae3-9eea-9447bdd72202",
+    "name": "@spfx-template/extension-fieldcustomizer-noframework-client-side-solution",
+    "id": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
       "name": "",
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.0-dev.128"
+      "mpnId": "Undefined-1.22.2"
     },
     "metadata": {
       "shortDescription": {
-        "default": "field-customizer-noframework-heft-1756847676957 description"
+        "default": "NoFramework Description"
       },
       "longDescription": {
-        "default": "field-customizer-noframework-heft-1756847676957 description"
+        "default": "NoFramework Description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -26,9 +27,9 @@
     },
     "features": [
       {
-        "title": "Application Extension - Deployment of custom action",
-        "description": "Deploys a custom action with ClientSideComponentId association",
-        "id": "46ba276e-ef16-4df2-ae81-aaf305d05882",
+        "title": "Field Customizer - Deployment of field customization",
+        "description": "Deploys a Field Customizer associated with a list field",
+        "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0",
         "assets": {
           "elementManifests": [
@@ -39,6 +40,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/field-customizer-noframework-heft-1756847676957.sppkg"
+    "zippedPackage": "solution/no-framework-field-customizer.sppkg"
   }
 }

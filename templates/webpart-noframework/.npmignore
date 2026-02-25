@@ -6,16 +6,11 @@
 !/dist/**
 !/EULA/**
 !/lib/**
-!/lib-dts/***
 !ThirdPartyNotice.txt
 
-# Ignore certain files in the above folder
+# Ignore certain files in the above folders
 /dist/*.stats.*
 /dist/**/*.js.map
-/lib/**/*.js.map
-/lib/**/test/**
-/lib-dts/**/*.ts.map
-/lib-dts/**/test/**
 /lib/**/*.js.map
 /lib/**/test/**
 
@@ -25,8 +20,3 @@
 # README (and its variants)
 # CHANGELOG (and its variants)
 # LICENSE / LICENCE
-
-## Project specific definitions
-# -----------------------------
-/lib/**/integration-test/**
-/lib/scripts/**

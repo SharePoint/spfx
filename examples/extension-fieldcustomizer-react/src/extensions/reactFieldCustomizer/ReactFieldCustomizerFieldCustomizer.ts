@@ -7,7 +7,7 @@ import {
   type IFieldCustomizerCellEventParameters
 } from '@microsoft/sp-listview-extensibility';
 
-import strings from 'ReactFieldCustomizerFieldCustomizerStrings';
+import * as strings from 'ReactFieldCustomizerFieldCustomizerStrings';
 import ReactFieldCustomizer, { IReactFieldCustomizerProps } from './components/ReactFieldCustomizer';
 
 /**

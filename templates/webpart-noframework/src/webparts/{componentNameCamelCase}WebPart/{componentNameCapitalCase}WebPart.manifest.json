@@ -18,11 +18,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
     "group": { "default": "Advanced" },
-    "title": { "default": "<%= componentNameUnescaped %> Web Part" },
-    "description": { "default": "<%= componentNameUnescaped %> Web Part Description" },
+    "title": { "default": "<%= componentNameUnescaped %>" },
+    "description": { "default": "<%= componentNameUnescaped %> description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "<%= componentNameUnescaped %> Web Part"
+      "description": "<%= componentNameUnescaped %>"
     }
   }]
 }

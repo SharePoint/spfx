@@ -37,12 +37,12 @@ export default class <%= componentNameCapitalCase %>WebPart extends BaseClientSi
   }
 
   protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
+    return super.onInit().then(() => {
+      return this._getEnvironmentMessage().then(message => {
+        this._environmentMessage = message;
+      });
     });
   }
-
-
 
   private _getEnvironmentMessage(): Promise<string> {
     if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
@@ -82,9 +82,23 @@ export default class <%= componentNameCapitalCase %>WebPart extends BaseClientSi
     } = currentTheme;
 
     if (semanticColors) {
-      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
-      this.domElement.style.setProperty('--link', semanticColors.link || null);
-      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
+      if (semanticColors.bodyText) {
+        this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);
+      } else {
+        this.domElement.style.removeProperty('--bodyText');
+      }
+
+      if (semanticColors.link) {
+        this.domElement.style.setProperty('--link', semanticColors.link);
+      } else {
+        this.domElement.style.removeProperty('--link');
+      }
+
+      if (semanticColors.linkHovered) {
+        this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);
+      } else {
+        this.domElement.style.removeProperty('--linkHovered');
+      }
     }
 
   }

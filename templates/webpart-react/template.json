@@ -1,8 +1,8 @@
 {
     "name": "webpart-react",
-    "description": "A React web part template for SPFx",
+    "description": "A React-based web part template for SPFx",
     "version": "0.0.1",
-    "spfxVersion": "1.22.0",
+    "spfxVersion": "1.22.2",
     "contextSchema": {
         "eslintProfile": {
             "type": "string",
@@ -47,6 +47,10 @@
         "componentNameCapitalCase": {
             "type": "string",
             "description": "The component class name for the web part"
+        },
+        "componentDescription": {
+            "type": "string",
+            "description": "The description of the component"
         }
     }
 }

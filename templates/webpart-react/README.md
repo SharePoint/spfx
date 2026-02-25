@@ -1,14 +1,14 @@
-# my
+# <%= libraryName %>
 
 ## Summary
 
-Short summary on functionality and used technologies.
+<%= componentDescription %>
 
 [picture of the solution in action, if possible]
 
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/version-1.22.0-green.svg)
+![version](<%= versionBadge %>)
 
 ## Applies to
 

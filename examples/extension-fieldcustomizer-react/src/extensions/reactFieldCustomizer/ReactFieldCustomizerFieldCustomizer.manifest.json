@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-extension-manifest.schema.json",
 
-  "id": "75b0888f-594e-4f4c-8081-0c1316061767",
+  "id": "413af0cb-0c9f-43db-8f86-ad1accc90481",
   "alias": "ReactFieldCustomizerFieldCustomizer",
   "componentType": "Extension",
   "extensionType": "FieldCustomizer",
