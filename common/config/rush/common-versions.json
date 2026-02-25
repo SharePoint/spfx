@@ -24,8 +24,7 @@
      * instead of the latest version.
      */
     // "some-library": "1.2.3"
-    "@rushstack/heft": "^1.1.6",
-    "baseline-browser-mapping": "^2.9.0"
+    "@rushstack/heft": "^1.1.6"
   },
 
   /**
