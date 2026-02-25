@@ -55,28 +55,22 @@ After the plan is approved, implement every change from the plan:
 
 ## Step 5: Build and Verify Locally
 
-1. Set the correct Node version (required for this repo):
-   ```bash
-   export PATH="$HOME/AppData/Local/nvs/node/22.21.1/x64:$PATH"
-   ```
-
-2. If you changed any files in a buildable project (anything with a `package.json` under `examples/` or `apps/` or `libraries/`):
+1. If you changed any files in a buildable project (anything with a `package.json` under `examples/`, `apps/`, or `libraries/`):
    - Navigate to that project and build it:
      ```bash
-     cd examples/{project-name}
+     cd {project_dir}
      rushx build
      ```
    - If the build fails, read the error output carefully, fix the issue, and rebuild. Loop until the build succeeds.
 
-3. If you changed any template files under `templates/`, run the template tests:
+2. If you changed any template files under `templates/`, run the template tests:
    ```bash
-   export PATH="$HOME/AppData/Local/nvs/node/22.21.1/x64:$PATH"
    cd tests/spfx-template-test
-   rushx test -- -t {template-name}
+   rushx _phase:test -- -t {template-name}
    ```
    - If the test fails, the scaffolded output doesn't match the example — fix the mismatch and rerun until tests pass.
 
-4. Do not proceed until everything builds and tests locally.
+3. Do not proceed until everything builds and tests locally.
 
 ## Step 6: Commit the Changes
 
@@ -196,7 +190,6 @@ The PR is ready for review.
 
 ## Important Notes for This Repository
 
-- **Node.js**: Always prepend `export PATH="$HOME/AppData/Local/nvs/node/22.21.1/x64:$PATH"` before any `rush` or `rushx` command
 - **Templates vs Examples**: Files under `templates/` are the source of truth; files under `examples/` are generated output and must stay in sync
 - **Never merge the PR** — only humans should merge
 - **Commit attribution**: Always include `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>` in commit messages

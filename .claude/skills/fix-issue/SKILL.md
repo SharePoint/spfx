@@ -1,6 +1,12 @@
+---
+name: fix-issue
+description: Fix a GitHub issue end-to-end
+argument-hint: <issue-number>
+---
+
 # Fix Issue
 
-Automates the complete workflow for fixing a GitHub issue, from investigation through a merged-ready PR with passing CI.
+Automates the complete workflow for fixing a GitHub issue, from investigation through a merge-ready PR with passing CI.
 
 ## What This Skill Does
 
@@ -52,5 +58,4 @@ The skill will **not** attempt to fix CI failures that are outside the scope of 
 ## Notes
 
 - Requires `gh` CLI to be authenticated
-- Node.js path is automatically configured for Rush commands
 - All commits include Claude co-authorship attribution
