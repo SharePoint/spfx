@@ -131,6 +131,29 @@ When adding new skills:
 4. Test the skill thoroughly
 5. Create a PR with examples
 
+### fix-issue
+
+**Purpose**: Fix a GitHub issue end-to-end, from investigation to a CI-passing PR.
+
+**Usage**:
+```bash
+/fix-issue 43
+```
+
+**What it does**:
+1. Checks out latest `main` and creates `fix/issue-{number}` branch
+2. Launches parallel subagents to investigate the issue and codebase
+3. Enters plan mode for user approval before making any changes
+4. Implements the fix following repository patterns
+5. Builds and tests locally, looping until passing
+6. Opens a PR that closes the issue
+7. Watches CI and auto-fixes any failures until all checks pass
+
+**Files**:
+- `fix-issue/skill.json` - Skill configuration
+- `fix-issue/prompt.md` - Detailed instructions for Claude
+- `fix-issue/SKILL.md` - User documentation
+
 ## Skill Ideas
 
 Potential skills for future development:

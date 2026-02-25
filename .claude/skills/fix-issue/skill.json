@@ -1,0 +1,16 @@
+{
+  "name": "fix-issue",
+  "version": "1.0.0",
+  "description": "Fix a GitHub issue end-to-end: investigate, plan, implement, build, open a PR, and loop on CI until it passes",
+  "type": "workflow",
+  "promptFile": ".claude/skills/fix-issue/prompt.md",
+  "documentation": "Accepts a GitHub issue number, deeply investigates the issue and relevant codebase using subagents, enters plan mode for approval, implements the fix, verifies it builds locally, opens a PR, and then watches CI — auto-fixing any failures until all checks pass.",
+  "parameters": {
+    "issue_number": {
+      "type": "number",
+      "description": "GitHub issue number to fix (e.g. 43)",
+      "required": true
+    }
+  },
+  "requirements": ["Bash", "Read", "Edit", "Write", "Grep", "Glob", "Task"]
+}
