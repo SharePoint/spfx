@@ -38,7 +38,7 @@
     {
       "commandKind": "phased",
       "name": "package-solution",
-      "summary": "Builds all projects and runs their tests.",
+      "summary": "Builds all projects and packages the solution.",
       "phases": ["_phase:build", "_phase:package-solution"],
       "enableParallelism": true,
       "incremental": true
