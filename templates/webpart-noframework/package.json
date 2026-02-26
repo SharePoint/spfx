@@ -9,7 +9,10 @@
     "build": "heft test --clean --production && heft package-solution --production",
     "start": "heft start --clean",
     "clean": "heft clean",
-    "eject-webpack": "heft eject-webpack"
+    "eject-webpack": "heft eject-webpack",
+    "_phase:build": "heft run --only build -- --clean",
+    "_phase:test": "heft run --only test -- --clean",
+    "_phase:package-solution": "heft run --only package-solution -- --clean"
   },
   "dependencies": {
     "@microsoft/sp-component-base": "<%= spfxVersion %>",
