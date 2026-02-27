@@ -1,5 +1,5 @@
 import { ISPFxAdaptiveCard, BaseAdaptiveCardQuickView } from '@microsoft/sp-adaptive-card-extension-base';
-import strings from '<%= componentNameCapitalCase %>AdaptiveCardExtensionStrings';
+import * as strings from '<%= componentNameCapitalCase %>AdaptiveCardExtensionStrings';
 import {
   I<%= componentNameCapitalCase %>AdaptiveCardExtensionProps,
   I<%= componentNameCapitalCase %>AdaptiveCardExtensionState

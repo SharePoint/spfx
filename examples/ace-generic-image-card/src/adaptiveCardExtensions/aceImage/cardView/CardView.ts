@@ -5,7 +5,7 @@ import {
   IQuickViewCardAction,
   ICardButton
 } from '@microsoft/sp-adaptive-card-extension-base';
-import strings from 'AceImageAdaptiveCardExtensionStrings';
+import * as strings from 'AceImageAdaptiveCardExtensionStrings';
 import {
   IAceImageAdaptiveCardExtensionProps,
   IAceImageAdaptiveCardExtensionState,
