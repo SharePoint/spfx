@@ -256,5 +256,3 @@ function generateConfig({ production }) {
         ]
     };
 }
-
-//# sourceMappingURL=./webpack.config.js.map

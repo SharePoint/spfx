@@ -1,5 +1,5 @@
 import { IPropertyPaneConfiguration, PropertyPaneTextField } from '@microsoft/sp-property-pane';
-import strings from 'AcePrimaryTextAdaptiveCardExtensionStrings';
+import * as strings from 'AcePrimaryTextAdaptiveCardExtensionStrings';
 
 export class AcePrimaryTextPropertyPane {
   public getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
