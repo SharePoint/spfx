@@ -77,6 +77,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'GenericCard Description'
   },
   {
+    libraryName: '@spfx-template/ace-generic-image-card',
+    templateName: 'ace-generic-image-card',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-generic-image-card'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'AceImage',
+    componentAlias: 'AceImage',
+    componentDescription: 'AceImage Description'
+  },
+  {
     libraryName: '@spfx-template/ace-search-card',
     templateName: 'ace-search-card',
     templatePath: path.join(REPO_ROOT, 'templates/ace-search-card'),
