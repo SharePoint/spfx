@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ace-primary-text-adaptive-card-extension": {
+      "components": [
+        {
+          "entrypoint": "./lib/adaptiveCardExtensions/acePrimaryText/AcePrimaryTextAdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/acePrimaryText/AcePrimaryTextAdaptiveCardExtension.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "AcePrimaryTextAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/acePrimaryText/loc/{locale}.js"
+  }
+}
