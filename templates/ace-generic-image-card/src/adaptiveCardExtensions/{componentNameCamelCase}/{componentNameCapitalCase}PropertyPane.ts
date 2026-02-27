@@ -1,5 +1,5 @@
 import { IPropertyPaneConfiguration, PropertyPaneTextField } from '@microsoft/sp-property-pane';
-import strings from '<%= componentNameCapitalCase %>AdaptiveCardExtensionStrings';
+import * as strings from '<%= componentNameCapitalCase %>AdaptiveCardExtensionStrings';
 
 export class <%= componentNameCapitalCase %>PropertyPane {
   public getPropertyPaneConfiguration(): IPropertyPaneConfiguration {

@@ -20,8 +20,7 @@
     "tslib": "2.3.1",
     "@microsoft/sp-core-library": "<%= spfxVersion %>",
     "@microsoft/sp-property-pane": "<%= spfxVersion %>",
-    "@microsoft/sp-adaptive-card-extension-base": "<%= spfxVersion %>",
-    "swiper": "^8.2.6"
+    "@microsoft/sp-adaptive-card-extension-base": "<%= spfxVersion %>"
   },
   "devDependencies": {
     "@rushstack/eslint-config": "4.6.1",
@@ -32,7 +31,7 @@
     "@rushstack/heft": "^1.1.6",
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.48.1",
-    "eslint": "^8.57.1",
+    "eslint": "8.57.1",
     "jest-junit": "12.3.0",
     "typescript": "~5.8.3",
     "@microsoft/sp-module-interfaces": "<%= spfxVersion %>",
