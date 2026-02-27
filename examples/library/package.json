@@ -9,7 +9,6 @@
     "build": "heft build",
     "test": "heft test",
     "clean": "heft clean",
-    "deploy": "heft dev-deploy",
     "start": "heft start --clean",
     "build-watch": "heft build --lite",
     "package-solution": "heft package-solution",
@@ -28,7 +27,7 @@
     "@rushstack/heft": "^1.1.6",
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.48.1",
-    "eslint": "^8.57.1",
+    "eslint": "8.57.1",
     "jest-junit": "12.3.0",
     "typescript": "~5.8.3",
     "@microsoft/sp-module-interfaces": "1.22.2",
@@ -42,6 +41,6 @@
     "ts-loader": "9.5.1"
   },
   "overrides": {
-    "@rushstack/heft": "^1.1.0"
+    "@rushstack/heft": "^1.1.6"
   }
 }

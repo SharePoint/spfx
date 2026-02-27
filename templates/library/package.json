@@ -9,7 +9,6 @@
     "build": "heft build",
     "test": "heft test",
     "clean": "heft clean",
-    "deploy": "heft dev-deploy",
     "start": "heft start --clean",
     "build-watch": "heft build --lite",
     "package-solution": "heft package-solution",
@@ -21,17 +20,17 @@
   },
   "devDependencies": {
     "@rushstack/eslint-config": "4.6.1",
-    "@microsoft/eslint-plugin-spfx": "<%= spfxVersion %>",
-    "@microsoft/eslint-config-spfx": "<%= spfxVersion %>",
-    "@microsoft/spfx-heft-plugins": "<%= spfxVersion %>",
-    "@microsoft/spfx-web-build-rig": "<%= spfxVersion %>",
+    "@microsoft/eslint-plugin-spfx": "1.22.2",
+    "@microsoft/eslint-config-spfx": "1.22.2",
+    "@microsoft/spfx-heft-plugins": "1.22.2",
+    "@microsoft/spfx-web-build-rig": "1.22.2",
     "@rushstack/heft": "^1.1.6",
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.48.1",
-    "eslint": "^8.57.1",
+    "eslint": "8.57.1",
     "jest-junit": "12.3.0",
     "typescript": "~5.8.3",
-    "@microsoft/sp-module-interfaces": "<%= spfxVersion %>",
+    "@microsoft/sp-module-interfaces": "1.22.2",
     "@rushstack/heft-jest-plugin": "1.1.6",
     "@rushstack/heft-lint-plugin": "1.1.9",
     "@rushstack/heft-webpack5-plugin": "1.2.6",
@@ -42,6 +41,6 @@
     "ts-loader": "9.5.1"
   },
   "overrides": {
-    "@rushstack/heft": "^1.1.0"
+    "@rushstack/heft": "^1.1.6"
   }
 }

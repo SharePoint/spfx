@@ -21,6 +21,17 @@
         }
       ]
     },
+    "test": {
+      "phaseDescription": "Run tests using Jest.",
+      "dependsOn": ["build"],
+      "tasksByName": {
+        "jest": {
+          "taskPlugin": {
+            "pluginPackage": "@rushstack/heft-jest-plugin"
+          }
+        }
+      }
+    },
     "eject-webpack": {
       "tasksByName": {
         "eject-webpack": {
