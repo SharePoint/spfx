@@ -1,0 +1,9 @@
+{
+  "id": "<%= componentId %>",
+  "alias": "<%= componentAlias %>",
+  "componentType": "Library",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2
+}

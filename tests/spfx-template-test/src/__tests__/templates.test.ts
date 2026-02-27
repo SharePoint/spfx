@@ -41,6 +41,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'A hello world test component'
   },
   {
+    libraryName: '@spfx-template/library',
+    templateName: 'library',
+    templatePath: path.join(REPO_ROOT, 'templates/library'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'Library',
+    componentAlias: 'LibraryLibrary',
+    componentDescription: 'Library Description'
+  },
+  {
     libraryName: '@spfx-template/webpart-minimal',
     templateName: 'webpart-minimal',
     templatePath: path.join(REPO_ROOT, 'templates/webpart-minimal'),
