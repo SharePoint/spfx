@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "AcePrimaryText Description",
+    "PropertyPaneDescription": "GenericPrimaryText Description",
     "TitleFieldLabel": "Card title",
     "Title": "Adaptive Card Extension",
     "SubTitle": "Quick view",
