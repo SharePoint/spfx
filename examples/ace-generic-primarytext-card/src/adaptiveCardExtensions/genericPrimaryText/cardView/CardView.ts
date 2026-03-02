@@ -5,16 +5,16 @@ import {
   IQuickViewCardAction,
   ICardButton
 } from '@microsoft/sp-adaptive-card-extension-base';
-import * as strings from 'AcePrimaryTextAdaptiveCardExtensionStrings';
+import * as strings from 'GenericPrimaryTextAdaptiveCardExtensionStrings';
 import {
-  IAcePrimaryTextAdaptiveCardExtensionProps,
-  IAcePrimaryTextAdaptiveCardExtensionState,
+  IGenericPrimaryTextAdaptiveCardExtensionProps,
+  IGenericPrimaryTextAdaptiveCardExtensionState,
   QUICK_VIEW_REGISTRY_ID
-} from '../AcePrimaryTextAdaptiveCardExtension';
+} from '../GenericPrimaryTextAdaptiveCardExtension';
 
 export class CardView extends BasePrimaryTextCardView<
-  IAcePrimaryTextAdaptiveCardExtensionProps,
-  IAcePrimaryTextAdaptiveCardExtensionState
+  IGenericPrimaryTextAdaptiveCardExtensionProps,
+  IGenericPrimaryTextAdaptiveCardExtensionState
 > {
   public get cardButtons(): [ICardButton] | [ICardButton, ICardButton] | undefined {
     return [

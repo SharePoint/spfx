@@ -2,23 +2,23 @@ import type { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseAdaptiveCardExtension } from '@microsoft/sp-adaptive-card-extension-base';
 import { CardView } from './cardView/CardView';
 import { QuickView } from './quickView/QuickView';
-import { AcePrimaryTextPropertyPane } from './AcePrimaryTextPropertyPane';
+import { GenericPrimaryTextPropertyPane } from './GenericPrimaryTextPropertyPane';
 
-export interface IAcePrimaryTextAdaptiveCardExtensionProps {
+export interface IGenericPrimaryTextAdaptiveCardExtensionProps {
   title: string;
 }
 
-export interface IAcePrimaryTextAdaptiveCardExtensionState {
+export interface IGenericPrimaryTextAdaptiveCardExtensionState {
 }
 
-const CARD_VIEW_REGISTRY_ID: string = 'ACE_PRIMARY_TEXT_CARD_VIEW';
-export const QUICK_VIEW_REGISTRY_ID: string = 'ACE_PRIMARY_TEXT_QUICK_VIEW';
+const CARD_VIEW_REGISTRY_ID: string = 'GENERIC_PRIMARY_TEXT_CARD_VIEW';
+export const QUICK_VIEW_REGISTRY_ID: string = 'GENERIC_PRIMARY_TEXT_QUICK_VIEW';
 
-export default class AcePrimaryTextAdaptiveCardExtension extends BaseAdaptiveCardExtension<
-  IAcePrimaryTextAdaptiveCardExtensionProps,
-  IAcePrimaryTextAdaptiveCardExtensionState
+export default class GenericPrimaryTextAdaptiveCardExtension extends BaseAdaptiveCardExtension<
+  IGenericPrimaryTextAdaptiveCardExtensionProps,
+  IGenericPrimaryTextAdaptiveCardExtensionState
 > {
-  private _deferredPropertyPane: AcePrimaryTextPropertyPane | undefined;
+  private _deferredPropertyPane: GenericPrimaryTextPropertyPane | undefined;
 
   public onInit(): Promise<void> {
     this.state = { };
@@ -33,12 +33,12 @@ export default class AcePrimaryTextAdaptiveCardExtension extends BaseAdaptiveCar
 
   protected loadPropertyPaneResources(): Promise<void> {
     return import(
-      /* webpackChunkName: 'ace-primary-text-property-pane'*/
-      './AcePrimaryTextPropertyPane'
+      /* webpackChunkName: 'generic-primary-text-property-pane'*/
+      './GenericPrimaryTextPropertyPane'
     )
       .then(
         (component) => {
-          this._deferredPropertyPane = new component.AcePrimaryTextPropertyPane();
+          this._deferredPropertyPane = new component.GenericPrimaryTextPropertyPane();
         }
       );
   }

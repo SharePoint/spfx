@@ -5,14 +5,14 @@
     "ace-primary-text-adaptive-card-extension": {
       "components": [
         {
-          "entrypoint": "./lib/adaptiveCardExtensions/acePrimaryText/AcePrimaryTextAdaptiveCardExtension.js",
-          "manifest": "./src/adaptiveCardExtensions/acePrimaryText/AcePrimaryTextAdaptiveCardExtension.manifest.json"
+          "entrypoint": "./lib/adaptiveCardExtensions/genericPrimaryText/GenericPrimaryTextAdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/genericPrimaryText/GenericPrimaryTextAdaptiveCardExtension.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "AcePrimaryTextAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/acePrimaryText/loc/{locale}.js"
+    "GenericPrimaryTextAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/genericPrimaryText/loc/{locale}.js"
   }
 }
