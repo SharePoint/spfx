@@ -2,7 +2,7 @@
 
 ## Summary
 
-AceImage Description
+GenericImage Description
 
 [picture of the solution in action, if possible]
 
