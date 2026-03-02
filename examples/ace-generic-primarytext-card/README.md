@@ -2,7 +2,7 @@
 
 ## Summary
 
-AcePrimaryText Description
+GenericPrimaryText Description
 
 [picture of the solution in action, if possible]
 
