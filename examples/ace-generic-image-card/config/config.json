@@ -5,14 +5,14 @@
     "ace-image-adaptive-card-extension": {
       "components": [
         {
-          "entrypoint": "./lib/adaptiveCardExtensions/aceImage/AceImageAdaptiveCardExtension.js",
-          "manifest": "./src/adaptiveCardExtensions/aceImage/AceImageAdaptiveCardExtension.manifest.json"
+          "entrypoint": "./lib/adaptiveCardExtensions/genericImage/GenericImageAdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/genericImage/GenericImageAdaptiveCardExtension.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "AceImageAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/aceImage/loc/{locale}.js"
+    "GenericImageAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/genericImage/loc/{locale}.js"
   }
 }

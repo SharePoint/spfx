@@ -1,9 +1,10 @@
 import { ISPFxAdaptiveCard, BaseAdaptiveCardQuickView } from '@microsoft/sp-adaptive-card-extension-base';
-import * as strings from 'AceImageAdaptiveCardExtensionStrings';
+import * as strings from 'GenericImageAdaptiveCardExtensionStrings';
 import {
-  IAceImageAdaptiveCardExtensionProps,
-  IAceImageAdaptiveCardExtensionState
-} from '../AceImageAdaptiveCardExtension';
+  IGenericImageAdaptiveCardExtensionProps,
+  IGenericImageAdaptiveCardExtensionState
+} from '../GenericImageAdaptiveCardExtension';
+import QuickViewTemplate from './template/QuickViewTemplate.json';
 
 export interface IQuickViewData {
   subTitle: string;
@@ -11,8 +12,8 @@ export interface IQuickViewData {
 }
 
 export class QuickView extends BaseAdaptiveCardQuickView<
-  IAceImageAdaptiveCardExtensionProps,
-  IAceImageAdaptiveCardExtensionState,
+  IGenericImageAdaptiveCardExtensionProps,
+  IGenericImageAdaptiveCardExtensionState,
   IQuickViewData
 > {
   public get data(): IQuickViewData {
@@ -23,7 +24,6 @@ export class QuickView extends BaseAdaptiveCardQuickView<
   }
 
   public get template(): ISPFxAdaptiveCard {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    return require('./template/QuickViewTemplate.json');
+    return QuickViewTemplate as unknown as ISPFxAdaptiveCard;
   }
 }

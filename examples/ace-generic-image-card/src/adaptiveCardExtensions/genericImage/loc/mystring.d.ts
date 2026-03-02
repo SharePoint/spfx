@@ -1,4 +1,4 @@
-declare interface IAceImageAdaptiveCardExtensionStrings {
+declare interface IGenericImageAdaptiveCardExtensionStrings {
   PropertyPaneDescription: string;
   TitleFieldLabel: string;
   Title: string;
@@ -8,7 +8,7 @@ declare interface IAceImageAdaptiveCardExtensionStrings {
   QuickViewButton: string;
 }
 
-declare module 'AceImageAdaptiveCardExtensionStrings' {
-  const strings: IAceImageAdaptiveCardExtensionStrings;
+declare module 'GenericImageAdaptiveCardExtensionStrings' {
+  const strings: IGenericImageAdaptiveCardExtensionStrings;
   export = strings;
 }

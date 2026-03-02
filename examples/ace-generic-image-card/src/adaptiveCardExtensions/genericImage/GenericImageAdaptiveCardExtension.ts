@@ -2,23 +2,23 @@ import type { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseAdaptiveCardExtension } from '@microsoft/sp-adaptive-card-extension-base';
 import { CardView } from './cardView/CardView';
 import { QuickView } from './quickView/QuickView';
-import { AceImagePropertyPane } from './AceImagePropertyPane';
+import { GenericImagePropertyPane } from './GenericImagePropertyPane';
 
-export interface IAceImageAdaptiveCardExtensionProps {
+export interface IGenericImageAdaptiveCardExtensionProps {
   title: string;
 }
 
-export interface IAceImageAdaptiveCardExtensionState {
+export interface IGenericImageAdaptiveCardExtensionState {
 }
 
-const CARD_VIEW_REGISTRY_ID: string = 'ACE_IMAGE_CARD_VIEW';
-export const QUICK_VIEW_REGISTRY_ID: string = 'ACE_IMAGE_QUICK_VIEW';
+const CARD_VIEW_REGISTRY_ID: string = 'GENERIC_IMAGE_CARD_VIEW';
+export const QUICK_VIEW_REGISTRY_ID: string = 'GENERIC_IMAGE_QUICK_VIEW';
 
-export default class AceImageAdaptiveCardExtension extends BaseAdaptiveCardExtension<
-  IAceImageAdaptiveCardExtensionProps,
-  IAceImageAdaptiveCardExtensionState
+export default class GenericImageAdaptiveCardExtension extends BaseAdaptiveCardExtension<
+  IGenericImageAdaptiveCardExtensionProps,
+  IGenericImageAdaptiveCardExtensionState
 > {
-  private _deferredPropertyPane: AceImagePropertyPane | undefined;
+  private _deferredPropertyPane: GenericImagePropertyPane | undefined;
 
   public onInit(): Promise<void> {
     this.state = { };
@@ -33,12 +33,12 @@ export default class AceImageAdaptiveCardExtension extends BaseAdaptiveCardExten
 
   protected loadPropertyPaneResources(): Promise<void> {
     return import(
-      /* webpackChunkName: 'ace-image-property-pane'*/
-      './AceImagePropertyPane'
+      /* webpackChunkName: 'generic-image-property-pane'*/
+      './GenericImagePropertyPane'
     )
       .then(
         (component) => {
-          this._deferredPropertyPane = new component.AceImagePropertyPane();
+          this._deferredPropertyPane = new component.GenericImagePropertyPane();
         }
       );
   }

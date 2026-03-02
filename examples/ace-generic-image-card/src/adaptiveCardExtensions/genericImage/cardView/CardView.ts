@@ -5,16 +5,16 @@ import {
   IQuickViewCardAction,
   ICardButton
 } from '@microsoft/sp-adaptive-card-extension-base';
-import * as strings from 'AceImageAdaptiveCardExtensionStrings';
+import * as strings from 'GenericImageAdaptiveCardExtensionStrings';
 import {
-  IAceImageAdaptiveCardExtensionProps,
-  IAceImageAdaptiveCardExtensionState,
+  IGenericImageAdaptiveCardExtensionProps,
+  IGenericImageAdaptiveCardExtensionState,
   QUICK_VIEW_REGISTRY_ID
-} from '../AceImageAdaptiveCardExtension';
+} from '../GenericImageAdaptiveCardExtension';
 
 export class CardView extends BaseImageCardView<
-  IAceImageAdaptiveCardExtensionProps,
-  IAceImageAdaptiveCardExtensionState
+  IGenericImageAdaptiveCardExtensionProps,
+  IGenericImageAdaptiveCardExtensionState
 > {
   /**
    * Buttons will not be visible if card size is 'Medium' with Image Card View.
