@@ -77,6 +77,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'GenericCard Description'
   },
   {
+    libraryName: '@spfx-template/ace-generic-primarytext-card',
+    templateName: 'ace-generic-primarytext-card',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-generic-primarytext-card'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'GenericPrimaryText',
+    componentAlias: 'GenericPrimaryText',
+    componentDescription: 'GenericPrimaryText Description'
+  },
+  {
     libraryName: '@spfx-template/ace-search-card',
     templateName: 'ace-search-card',
     templatePath: path.join(REPO_ROOT, 'templates/ace-search-card'),
