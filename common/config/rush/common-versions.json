@@ -24,7 +24,8 @@
      * instead of the latest version.
      */
     // "some-library": "1.2.3"
-    "@rushstack/heft": "^1.1.6"
+    "@rushstack/heft": "^1.1.6",
+    "fast-xml-parser": "^5.3.5"
   },
 
   /**
@@ -74,38 +75,16 @@
     // "typescript": [
     //   "~2.4.0"
     // ]
-    "eslint": [
-      "8.57.1"
-    ],
-    "@microsoft/sp-core-library": [
-      "1.22.2"
-    ],
-    "@microsoft/decorators": [
-      "1.22.2"
-    ],
-    "@microsoft/sp-listview-extensibility": [
-      "1.22.2"
-    ],
-    "@microsoft/sp-lodash-subset": [
-      "1.22.2"
-    ],
-    "@microsoft/sp-office-ui-fabric-core": [
-      "1.22.2"
-    ],
-    "@microsoft/eslint-plugin-spfx": [
-      "1.22.2"
-    ],
-    "@microsoft/eslint-config-spfx": [
-      "1.22.2"
-    ],
-    "@microsoft/spfx-web-build-rig": [
-      "1.22.2"
-    ],
-    "@microsoft/spfx-heft-plugins": [
-      "1.22.2"
-    ],
-    "@microsoft/sp-module-interfaces": [
-      "1.22.2"
-    ]
+    "eslint": ["8.57.1"],
+    "@microsoft/sp-core-library": ["1.22.2"],
+    "@microsoft/decorators": ["1.22.2"],
+    "@microsoft/sp-listview-extensibility": ["1.22.2"],
+    "@microsoft/sp-lodash-subset": ["1.22.2"],
+    "@microsoft/sp-office-ui-fabric-core": ["1.22.2"],
+    "@microsoft/eslint-plugin-spfx": ["1.22.2"],
+    "@microsoft/eslint-config-spfx": ["1.22.2"],
+    "@microsoft/spfx-web-build-rig": ["1.22.2"],
+    "@microsoft/spfx-heft-plugins": ["1.22.2"],
+    "@microsoft/sp-module-interfaces": ["1.22.2"]
   }
 }
