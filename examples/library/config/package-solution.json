@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/library.sppkg"
+    "zippedPackage": "solution/example.sppkg"
   }
 }

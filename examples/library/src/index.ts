@@ -1,1 +1,1 @@
-export { LibraryLibrary } from './libraries/library/LibraryLibrary';
+export { ExampleLibrary } from './libraries/example/ExampleLibrary';
