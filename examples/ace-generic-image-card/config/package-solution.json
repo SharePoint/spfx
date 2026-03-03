@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "@spfx-template/ace-generic-image-card description"
+        "default": "GenericImage Description"
       },
       "longDescription": {
-        "default": "@spfx-template/ace-generic-image-card description"
+        "default": "GenericImage Description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
