@@ -40,33 +40,24 @@ importers:
         specifier: ^4.1.5
         version: 4.3.6
     devDependencies:
+      '@microsoft/spfx-cli-build-rig':
+        specifier: workspace:*
+        version: link:../../tools/spfx-cli-build-rig
       '@rushstack/eslint-config':
         specifier: 4.6.1
         version: 4.6.1(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
         specifier: ^1.1.6
         version: 1.1.13(@types/node@22.19.8)
-      '@rushstack/heft-node-rig':
-        specifier: ^2.11.11
-        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
       '@types/adm-zip':
         specifier: ^0.5.5
         version: 0.5.7
       '@types/ejs':
         specifier: ^3.1.5
         version: 3.1.5
-      '@types/heft-jest':
-        specifier: ^1.0.6
-        version: 1.0.6
-      '@types/node':
-        specifier: ^22.18.6
-        version: 22.19.8
       eslint:
         specifier: 8.57.1
         version: 8.57.1
-      typescript:
-        specifier: ~5.8.3
-        version: 5.8.3
 
   ../../apps/spfx-cli:
     dependencies:
@@ -101,27 +92,15 @@ importers:
       '@rushstack/heft':
         specifier: ^1.1.6
         version: 1.1.13(@types/node@22.19.8)
-      '@rushstack/heft-node-rig':
-        specifier: ^2.11.11
-        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
-      '@types/heft-jest':
-        specifier: ^1.0.6
-        version: 1.0.6
       '@types/lodash':
         specifier: ^4.17.18
         version: 4.17.23
-      '@types/node':
-        specifier: ^22.18.6
-        version: 22.19.8
       '@types/uuid':
         specifier: ^10.0.0
         version: 10.0.0
       eslint:
         specifier: 8.57.1
         version: 8.57.1
-      typescript:
-        specifier: ~5.8.3
-        version: 5.8.3
 
   ../../examples/ace-data-visualization:
     dependencies:
@@ -1184,21 +1163,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.1.6
         version: 1.1.13(@types/node@22.19.8)
-      '@rushstack/heft-node-rig':
-        specifier: ^2.11.11
-        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
-      '@types/heft-jest':
-        specifier: ^1.0.6
-        version: 1.0.6
-      '@types/node':
-        specifier: ^22.18.6
-        version: 22.19.8
       eslint:
         specifier: 8.57.1
         version: 8.57.1
-      typescript:
-        specifier: ~5.8.3
-        version: 5.8.3
 
   ../../tools/spfx-cli-build-rig:
     dependencies:
