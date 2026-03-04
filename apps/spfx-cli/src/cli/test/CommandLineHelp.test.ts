@@ -10,6 +10,9 @@ describe('CommandLineHelp', () => {
     });
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   it(`prints the help`, async () => {
     const parser: SPFxCommandLineParser = new SPFxCommandLineParser(
       new Terminal(new StringBufferTerminalProvider())
