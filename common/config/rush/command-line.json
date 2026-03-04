@@ -42,7 +42,8 @@
       "phases": ["_phase:build", "_phase:package-solution"],
       "enableParallelism": true,
       "incremental": true
-    }
+    },
+
     // {
     //   /**
     //    * (Required) Determines the type of custom command.
@@ -479,18 +480,8 @@
       "longName": "--production",
       "parameterKind": "flag",
       "description": "Perform a production build, including minification and localization steps",
-      "associatedPhases": [
-        "_phase:build",
-        "_phase:test",
-        "_phase:package-solution"
-      ],
-      "associatedCommands": [
-        "build",
-        "rebuild",
-        "test",
-        "retest",
-        "package-solution"
-      ]
+      "associatedPhases": ["_phase:build", "_phase:test", "_phase:package-solution"],
+      "associatedCommands": ["build", "rebuild", "test", "retest", "package-solution"]
     },
     {
       "longName": "--fix",
