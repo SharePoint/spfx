@@ -32,8 +32,5 @@
     "css-loader": "~7.1.2",
     "eslint": "8.57.1",
     "typescript": "~5.8.3"
-  },
-  "overrides": {
-    "@rushstack/heft": "^1.1.6"
   }
 }
