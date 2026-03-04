@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "DataVisualization Description",
+    "PropertyPaneDescription": "DataVisualizationCard Description",
     "TitleFieldLabel": "Card title",
     "Title": "Adaptive Card Extension",
     "SubTitle": "Quick view",

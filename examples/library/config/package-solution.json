@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "Example Description"
+        "default": "Library Description"
       },
       "longDescription": {
-        "default": "Example Description"
+        "default": "Library Description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/example.sppkg"
+    "zippedPackage": "solution/@spfx-template/library.sppkg"
   }
 }

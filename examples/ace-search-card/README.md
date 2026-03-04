@@ -2,7 +2,7 @@
 
 ## Summary
 
-Minimal Description
+SearchCard Description
 
 [picture of the solution in action, if possible]
 
