@@ -29,11 +29,18 @@ export default class NoFrameworkFormCustomizer
 
   public render(): void {
     // Use this method to perform your custom rendering.
-    this.domElement.innerHTML = `<div class="${ styles.noFramework }"></div>`;
+    this.domElement.innerHTML = `<div class="${ styles.noFramework }">
+      <button id="save">Save</button>
+      <button id="close">Close</button>
+    </div>`;
+    this.domElement.querySelector('#save')!.addEventListener('click', this._onSave);
+    this.domElement.querySelector('#close')!.addEventListener('click', this._onClose);
   }
 
   public onDispose(): void {
     // This method should be used to free any resources that were allocated during rendering.
+    this.domElement.querySelector('#save')?.removeEventListener('click', this._onSave);
+    this.domElement.querySelector('#close')?.removeEventListener('click', this._onClose);
     super.onDispose();
   }
 
