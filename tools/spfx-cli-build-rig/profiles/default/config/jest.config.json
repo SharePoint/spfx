@@ -1,3 +1,9 @@
 {
-  "extends": "@rushstack/heft-node-rig/profiles/default/config/jest.config.json"
+  "extends": "@rushstack/heft-node-rig/profiles/default/config/jest.config.json",
+  "moduleNameMapper": {
+    "^mem-fs-editor/(.*)$": "<packageDir:@microsoft/test-transformed-mem-fs-editor>/lib/$1",
+    "^mem-fs-editor$": "<packageDir:@microsoft/test-transformed-mem-fs-editor>/lib/index.js",
+    "^mem-fs/(.*)$": "<packageDir:@microsoft/test-transformed-mem-fs>/lib/$1",
+    "^mem-fs$": "<packageDir:@microsoft/test-transformed-mem-fs>/lib/index.js"
+  }
 }

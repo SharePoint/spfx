@@ -1,0 +1,27 @@
+{
+  "name": "@microsoft/test-transformed-mem-fs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "heft build --clean",
+    "_phase:build": "heft run --only build -- --clean"
+  },
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js"
+    },
+    "./lib/*": {
+      "require": "./lib/*.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "mem-fs": "^4.1.2"
+  },
+  "devDependencies": {
+    "@rushstack/heft-node-rig": "^2.11.11",
+    "@rushstack/heft": "^1.1.6",
+    "@types/heft-jest": "^1.0.6"
+  }
+}

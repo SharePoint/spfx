@@ -463,6 +463,24 @@
     },
 
     //
+    // TEST TRANSFORMED LIBRARIES
+    //
+    {
+      "packageName": "@microsoft/test-transformed-mem-fs",
+      "projectFolder": "test-transformed-libraries/test-transformed-mem-fs",
+      "reviewCategory": "tools",
+      "shouldPublish": false,
+      "tags": []
+    },
+    {
+      "packageName": "@microsoft/test-transformed-mem-fs-editor",
+      "projectFolder": "test-transformed-libraries/test-transformed-mem-fs-editor",
+      "reviewCategory": "tools",
+      "shouldPublish": false,
+      "tags": []
+    },
+
+    //
     // EXAMPLE PROJECTS
     //
     {

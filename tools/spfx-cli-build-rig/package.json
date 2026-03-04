@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "@microsoft/api-extractor": "^7.55.1",
+    "@microsoft/test-transformed-mem-fs-editor": "workspace:*",
+    "@microsoft/test-transformed-mem-fs": "workspace:*",
     "@rushstack/heft-node-rig": "^2.11.11",
     "@types/heft-jest": "^1.0.6",
     "@types/node": "^22.18.6",
