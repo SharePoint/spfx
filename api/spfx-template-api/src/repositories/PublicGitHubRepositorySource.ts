@@ -67,7 +67,9 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
     if (!match) {
       throw new Error(`Invalid GitHub repository URL: ${this._repoUri}`);
     }
-    return { owner: match[1], repo: match[2] };
+
+    const [, owner, repo] = match as [string, string, string];
+    return { owner, repo };
   }
 
   private async _downloadAndExtractRepository(downloadUrl: string): Promise<Map<string, Buffer>> {

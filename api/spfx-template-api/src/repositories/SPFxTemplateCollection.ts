@@ -18,7 +18,7 @@ export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
    * Returns a string representation of the collection including the count and details of all templates.
    * @returns A formatted string with collection details
    */
-  public toString(): string {
+  public override toString(): string {
     return [
       `# of templates: ${this.size}`,
       ...Array.from(this.values()).map((template) => template.toString() + '\n')
