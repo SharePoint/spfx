@@ -16,6 +16,12 @@ export abstract class BaseSPFxTemplateRepositorySource {
 }
 
 // @public
+export const BINARY_EXTENSIONS: readonly string[];
+
+// @public
+export function isBinaryFile(filePath: string): boolean;
+
+// @public
 export interface ISPFxTemplateJson {
     $schema?: string;
     contextSchema?: Record<string, {
@@ -46,7 +52,7 @@ export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHu
 
 // @public
 export class SPFxTemplate {
-    constructor(definition: SPFxTemplateJsonFile, files: Map<string, string | Buffer>);
+    constructor(definition: SPFxTemplateJsonFile, files: Map<string, Buffer>);
     get description(): string | undefined;
     static fromFolderAsync(path: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;

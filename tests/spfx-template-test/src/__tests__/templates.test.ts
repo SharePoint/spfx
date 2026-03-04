@@ -250,6 +250,15 @@ async function getAllFiles(
 }
 
 /**
+ * Check if a file is a binary file based on its extension.
+ * NOTE: Keep in sync with BINARY_EXTENSIONS in SPFxTemplate.ts
+ */
+function isBinaryFile(filePath: string): boolean {
+  const ext = path.extname(filePath).toLowerCase();
+  return ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'].includes(ext);
+}
+
+/**
  * Read file content, return null if file doesn't exist or can't be read
  * Normalizes line endings to \n for consistent comparison
  */
@@ -261,17 +270,6 @@ async function readFileContent(filePath: string): Promise<string | null> {
   } catch (error) {
     return null;
   }
-}
-
-/** Binary file extensions that should be compared as raw buffers */
-const BINARY_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'];
-
-/**
- * Check if a file is a binary file based on its extension
- */
-function isBinaryFile(filePath: string): boolean {
-  const ext = path.extname(filePath).toLowerCase();
-  return BINARY_EXTENSIONS.includes(ext);
 }
 
 /**
@@ -410,7 +408,7 @@ describe('SPFx Template Scaffolding', () => {
             try {
               const scaffoldedBuffer = fs.readFileSync(scaffoldedFile);
               const exampleBuffer = fs.readFileSync(exampleFile);
-              expect(scaffoldedBuffer.equals(exampleBuffer)).toBe(true);
+              expect(scaffoldedBuffer).toEqual(exampleBuffer);
             } catch (error: unknown) {
               if (error instanceof Error) {
                 throw new Error(`Binary file mismatch in '${file}':\n${error.message}`);

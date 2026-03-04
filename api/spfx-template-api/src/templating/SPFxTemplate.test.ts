@@ -23,6 +23,9 @@ interface IFileSystemReadFolderItemsResult {
 
 describe('SPFxTemplate', () => {
   const mockReadFileAsync = FileSystem.readFileAsync as jest.MockedFunction<typeof FileSystem.readFileAsync>;
+  const mockReadFileToBufferAsync = FileSystem.readFileToBufferAsync as jest.MockedFunction<
+    typeof FileSystem.readFileToBufferAsync
+  >;
   const mockReadFolderItemsAsync = FileSystem.readFolderItemsAsync as jest.MockedFunction<
     typeof FileSystem.readFolderItemsAsync
   >;
@@ -51,9 +54,9 @@ describe('SPFxTemplate', () => {
         spfxVersion: '1.18.0'
       });
 
-      const files = new Map<string, string>([
-        ['file1.txt', 'content1'],
-        ['file2.txt', 'content2']
+      const files = new Map<string, Buffer>([
+        ['file1.txt', Buffer.from('content1')],
+        ['file2.txt', Buffer.from('content2')]
       ]);
 
       const template = new SPFxTemplate(definition, files);
@@ -114,13 +117,16 @@ describe('SPFxTemplate', () => {
         spfxVersion: '1.18.0'
       };
 
-      // Mock template.json read
+      // Mock template.json read (via readFileAsync)
       mockReadFileAsync.mockImplementation(async (filePath: string) => {
         if (filePath.includes('template.json')) {
           return JSON.stringify(templateJson);
         }
         return 'file content';
       });
+
+      // Mock all file reads as Buffer
+      mockReadFileToBufferAsync.mockResolvedValue(Buffer.from('file content'));
 
       // Mock folder structure
       const rootItems: IFileSystemReadFolderItemsResult[] = [
@@ -169,6 +175,8 @@ describe('SPFxTemplate', () => {
         return 'file content';
       });
 
+      mockReadFileToBufferAsync.mockResolvedValue(Buffer.from('file content'));
+
       const rootItems: IFileSystemReadFolderItemsResult[] = [
         {
           name: 'template.json',
@@ -186,9 +194,10 @@ describe('SPFxTemplate', () => {
 
       await SPFxTemplate.fromFolderAsync('/test/folder');
 
-      // Verify template.json was read for definition but not as a file
-      const fileReadCalls = mockReadFileAsync.mock.calls.filter((call) => !call[0].includes('template.json'));
-      expect(fileReadCalls.length).toBeGreaterThan(0);
+      // Verify non-template.json files were read as buffers
+      expect(mockReadFileToBufferAsync).toHaveBeenCalled();
+      const bufferReadCalls = mockReadFileToBufferAsync.mock.calls;
+      expect(bufferReadCalls.length).toBeGreaterThan(0);
     });
 
     it('should handle nested directories', async () => {
@@ -203,6 +212,10 @@ describe('SPFxTemplate', () => {
           return JSON.stringify(templateJson);
         }
         return `content of ${filePath}`;
+      });
+
+      mockReadFileToBufferAsync.mockImplementation(async (filePath: string) => {
+        return Buffer.from(`content of ${filePath}`);
       });
 
       const rootItems: IFileSystemReadFolderItemsResult[] = [
@@ -313,9 +326,9 @@ describe('SPFxTemplate', () => {
         spfxVersion: '1.18.0'
       });
 
-      const files = new Map<string, string>([
-        ['src/index.ts', 'const name = "<%= name %>";'],
-        ['README.md', '# <%= title %>']
+      const files = new Map<string, Buffer>([
+        ['src/index.ts', Buffer.from('const name = "<%= name %>";')],
+        ['README.md', Buffer.from('# <%= title %>')]
       ]);
 
       const template = new SPFxTemplate(definition, files);
@@ -340,7 +353,9 @@ describe('SPFxTemplate', () => {
         }
       });
 
-      const files = new Map<string, string>([['src/index.ts', 'const name = "<%= componentName %>";']]);
+      const files = new Map<string, Buffer>([
+        ['src/index.ts', Buffer.from('const name = "<%= componentName %>";')]
+      ]);
 
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
@@ -363,7 +378,7 @@ describe('SPFxTemplate', () => {
         }
       });
 
-      const files = new Map<string, string>([['file.txt', 'content']]);
+      const files = new Map<string, Buffer>([['file.txt', Buffer.from('content')]]);
 
       const template = new SPFxTemplate(definition, files);
       const invalidContext = { wrongField: 'value' };
@@ -378,8 +393,8 @@ describe('SPFxTemplate', () => {
         spfxVersion: '1.18.0'
       });
 
-      const files = new Map<string, string>([
-        ['src/{componentName}.ts', 'export class <%= componentName %> {}']
+      const files = new Map<string, Buffer>([
+        ['src/{componentName}.ts', Buffer.from('export class <%= componentName %> {}')]
       ]);
 
       const template = new SPFxTemplate(definition, files);
@@ -400,9 +415,9 @@ describe('SPFxTemplate', () => {
         spfxVersion: '1.18.0'
       });
 
-      const files = new Map<string, string>([
-        ['file.txt', 'Hello <%= name %>!'],
-        ['config.json', '{"version": "<%= version %>"}']
+      const files = new Map<string, Buffer>([
+        ['file.txt', Buffer.from('Hello <%= name %>!')],
+        ['config.json', Buffer.from('{"version": "<%= version %>"}')]
       ]);
 
       const template = new SPFxTemplate(definition, files);
@@ -465,10 +480,10 @@ describe('SPFxTemplate', () => {
         spfxVersion: '1.18.0'
       });
 
-      const files = new Map<string, string>([
-        ['file1.txt', 'content1'],
-        ['file2.txt', 'content2'],
-        ['file3.txt', 'content3']
+      const files = new Map<string, Buffer>([
+        ['file1.txt', Buffer.from('content1')],
+        ['file2.txt', Buffer.from('content2')],
+        ['file3.txt', Buffer.from('content3')]
       ]);
 
       const template = new SPFxTemplate(definition, files);
@@ -501,9 +516,9 @@ describe('SPFxTemplate', () => {
         spfxVersion: '1.18.0'
       });
 
-      const files = new Map<string, string>();
+      const files = new Map<string, Buffer>();
       for (let i = 0; i < 10; i++) {
-        files.set(`file${i}.txt`, 'content');
+        files.set(`file${i}.txt`, Buffer.from('content'));
       }
 
       const template = new SPFxTemplate(definition, files);

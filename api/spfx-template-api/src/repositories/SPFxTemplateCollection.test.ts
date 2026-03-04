@@ -178,7 +178,7 @@ describe('SPFxTemplateCollection', () => {
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
-        new Map([['file.txt', 'content']])
+        new Map([['file.txt', Buffer.from('content')]])
       );
 
       const template2 = new SPFxTemplate(
@@ -207,8 +207,8 @@ describe('SPFxTemplateCollection', () => {
           spfxVersion: '1.19.0'
         }),
         new Map([
-          ['file1.txt', 'content1'],
-          ['file2.txt', 'content2']
+          ['file1.txt', Buffer.from('content1')],
+          ['file2.txt', Buffer.from('content2')]
         ])
       );
 
