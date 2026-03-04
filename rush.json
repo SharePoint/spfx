@@ -439,13 +439,6 @@
       "shouldPublish": false,
       "tags": []
     },
-    {
-      "packageName": "@microsoft/spfx-templating-engine",
-      "projectFolder": "libraries/spfx-templating-engine",
-      "reviewCategory": "libraries",
-      "shouldPublish": false,
-      "tags": []
-    },
 
     //
     // TOOLS
