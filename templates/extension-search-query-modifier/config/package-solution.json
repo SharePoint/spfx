@@ -24,7 +24,21 @@
       "screenshotPaths": [],
       "videoUrl": "",
       "categories": []
-    }
+    },
+    "features": [
+      {
+        "title": "<%= libraryName %> Feature",
+        "description": "The feature that activates elements of the <%= libraryName %> solution.",
+        "id": "<%= featureId %>",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml",
+            "ClientSideInstance.xml"
+          ]
+        }
+      }
+    ]
   },
   "paths": {
     "zippedPackage": "solution/<%= libraryName %>.sppkg"
