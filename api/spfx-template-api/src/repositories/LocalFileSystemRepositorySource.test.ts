@@ -153,14 +153,17 @@ describe('LocalFileSystemRepositorySource', () => {
       ];
 
       mockReadFolderItems.mockReturnValue(mockFolderItems);
-      mockExistsAsync
-        .mockResolvedValueOnce(true) // valid-template has template.json
-        .mockResolvedValueOnce(false); // not-a-template does not
+      mockExistsAsync.mockImplementation(async (filePath: string) => {
+        return filePath === '/path/to/templates/valid-template/template.json';
+      });
       mockFromFolderAsync.mockResolvedValue(mockTemplate);
 
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
       const templates = await source.getTemplates();
 
+      expect(mockExistsAsync).toHaveBeenCalledTimes(2);
+      expect(mockExistsAsync).toHaveBeenCalledWith('/path/to/templates/valid-template/template.json');
+      expect(mockExistsAsync).toHaveBeenCalledWith('/path/to/templates/not-a-template/template.json');
       expect(templates.length).toBe(1);
       expect(mockFromFolderAsync).toHaveBeenCalledTimes(1);
       expect(mockFromFolderAsync).toHaveBeenCalledWith('/path/to/templates/valid-template');
