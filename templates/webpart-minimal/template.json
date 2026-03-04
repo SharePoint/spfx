@@ -24,10 +24,6 @@
             "type": "string",
             "description": "The component ID (GUID) for the web part"
         },
-        "versionBadge": {
-            "type": "string",
-            "description": "The version badge URL to use in the README.md"
-        },
         "componentAlias": {
             "type": "string",
             "description": "The component alias (in manifest) for the web part"
