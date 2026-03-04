@@ -29,20 +29,27 @@ export default class <%= componentNameCapitalCase %>FormCustomizer
 
   public render(): void {
     // Use this method to perform your custom rendering.
-    this.domElement.innerHTML = `<div class="${ styles.<%= componentNameCamelCase %> }">
-      <button id="btnSave">Save</button>
-      <button id="btnClose">Close</button>
-    </div>`;
-    this.domElement.querySelector('#btnSave')!.addEventListener('click', this._onSave);
-    this.domElement.querySelector('#btnClose')!.addEventListener('click', this._onClose);
+    const container = this.domElement.appendChild(document.createElement('div'));
+    container.className = styles.<%= componentNameCamelCase %>;
+
+    this._saveButton = container.appendChild(document.createElement('button'));
+    this._saveButton.textContent = 'Save';
+    this._saveButton.addEventListener('click', this._onSave);
+
+    this._closeButton = container.appendChild(document.createElement('button'));
+    this._closeButton.textContent = 'Close';
+    this._closeButton.addEventListener('click', this._onClose);
   }
 
   public onDispose(): void {
     // This method should be used to free any resources that were allocated during rendering.
-    this.domElement.querySelector('#btnSave')?.removeEventListener('click', this._onSave);
-    this.domElement.querySelector('#btnClose')?.removeEventListener('click', this._onClose);
+    this._saveButton.removeEventListener('click', this._onSave);
+    this._closeButton.removeEventListener('click', this._onClose);
     super.onDispose();
   }
+
+  private _saveButton!: HTMLButtonElement;
+  private _closeButton!: HTMLButtonElement;
 
   /**
    * Use the methods below to handle the save and close events.
