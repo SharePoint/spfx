@@ -29,12 +29,18 @@ export default class NoFrameworkFormCustomizer
 
   public render(): void {
     // Use this method to perform your custom rendering.
-    // Call this._onSave() / this._onClose() from your form UI when the user saves or cancels.
-    this.domElement.innerHTML = `<div class="${ styles.noFramework }"></div>`;
+    this.domElement.innerHTML = `<div class="${ styles.noFramework }">
+      <button id="btnSave">Save</button>
+      <button id="btnClose">Close</button>
+    </div>`;
+    this.domElement.querySelector('#btnSave')!.addEventListener('click', this._onSave);
+    this.domElement.querySelector('#btnClose')!.addEventListener('click', this._onClose);
   }
 
   public onDispose(): void {
     // This method should be used to free any resources that were allocated during rendering.
+    this.domElement.querySelector('#btnSave')?.removeEventListener('click', this._onSave);
+    this.domElement.querySelector('#btnClose')?.removeEventListener('click', this._onClose);
     super.onDispose();
   }
 
