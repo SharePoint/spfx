@@ -1,8 +1,7 @@
 {
   "name": "@microsoft/spfx-cli",
   "description": "Project scaffolding and other tools for SharePoint Framework (SPFx) development",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.0.0",
   "main": "lib/index.js",
   "license": "MIT",
   "engines": {
