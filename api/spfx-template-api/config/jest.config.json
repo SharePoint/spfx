@@ -1,9 +1,3 @@
 {
-  "extends": "@rushstack/heft-node-rig/profiles/default/config/jest.config.json",
-  "transformIgnorePatterns": ["node_modules/(?!(semver-regex|mem-fs|mem-fs-editor))"],
-  "moduleNameMapper": {
-    "^semver-regex$": "<rootDir>/src/__mocks__/semver-regex.ts",
-    "^mem-fs$": "<rootDir>/src/__mocks__/mem-fs.ts",
-    "^mem-fs-editor$": "<rootDir>/src/__mocks__/mem-fs-editor.ts"
-  }
+  "extends": "@microsoft/spfx-cli-build-rig/profiles/default/config/jest.config.json"
 }

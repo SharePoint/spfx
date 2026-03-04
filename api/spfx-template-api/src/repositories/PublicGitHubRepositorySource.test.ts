@@ -332,10 +332,10 @@ describe('PublicGitHubRepositorySource', () => {
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
       await source['_createTemplateFromFileMap']('webpart', fileMap);
 
-      const capturedFileMap = mockFromMemoryAsync.mock.calls[0][2];
-      expect(capturedFileMap.size).toBe(2); // template.json and src/index.ts
-      expect(capturedFileMap.has('template.json')).toBe(true);
-      expect(capturedFileMap.has('src/index.ts')).toBe(true);
+      const capturedFileMap = mockFromMemoryAsync.mock.calls[0]?.[2];
+      expect(capturedFileMap?.size).toBe(2); // template.json and src/index.ts
+      expect(capturedFileMap?.has('template.json')).toBe(true);
+      expect(capturedFileMap?.has('src/index.ts')).toBe(true);
     });
 
     it('should throw error for invalid template.json', async () => {
