@@ -310,7 +310,6 @@ describe('SPFx Template Scaffolding', () => {
             `--target-dir "${outputPath}"`,
             `--local-template "${config.localTemplatePath}"`,
             `--library-name "${config.libraryName}"`,
-            `--ci-mode`,
             `--component-name "${config.componentName}"`
           ];
 
@@ -328,7 +327,7 @@ describe('SPFx Template Scaffolding', () => {
           execSync(command, {
             stdio: 'inherit',
             cwd: REPO_ROOT,
-            env: { ...process.env }
+            env: { ...process.env, SPFX_CI_MODE: '1' }
           });
         } catch (error: unknown) {
           const message = error instanceof Error ? error.message : String(error);
