@@ -32,7 +32,7 @@
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.48.1",
     "css-loader": "~7.1.2",
-    "eslint": "^8.57.1",
+    "eslint": "8.57.1",
     "typescript": "~5.8.3"
   }
 }

@@ -115,6 +115,27 @@ export PATH="$HOME/AppData/Local/nvs/node/22.21.1/x64:$PATH"
 
 Templates and examples must stay in sync - any changes to a template should be reflected in its corresponding example.
 
+## Change Logs (rush change)
+
+If a PR modifies a **published** project (`apps/spfx-cli/` or `api/spfx-template-api/`), CI will fail unless a change file exists. Create one at `common/changes/@microsoft/<package-short-name>/<description>_<date>.json`:
+
+```json
+{
+  "changes": [
+    {
+      "packageName": "@microsoft/spfx-cli",
+      "comment": "Brief description of the change",
+      "type": "none"
+    }
+  ],
+  "packageName": "@microsoft/spfx-cli"
+}
+```
+
+**Change types:** `"none"` (devDep/config changes), `"patch"` (bug fix), `"minor"` (new feature). Do not use `"major"` — we are pre-1.0 so the max bump is `"minor"`.
+
+**NOTE:** We have not shipped the initial release yet. Until then, always use `"none"` with an empty `"comment"` so the only changelog entry will be "Initial release."
+
 ## Git Workflow
 
 - Main branch: `main`
