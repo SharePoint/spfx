@@ -14,11 +14,6 @@ const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
 const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
 
-// Fixed GUID for testing
-const FIXED_SOLUTION_ID = '44d64337-e2f4-48e2-a954-a68795124bf2';
-const FIXED_COMPONENT_ID = '413af0cb-0c9f-43db-8f86-ad1accc90481';
-const FIXED_FEATURE_ID = '31c122c7-8373-4d00-89e7-e5f412958ca4';
-
 // Predefined template configuration
 interface TemplateConfig {
   libraryName: string;

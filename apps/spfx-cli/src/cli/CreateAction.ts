@@ -174,7 +174,7 @@ export class CreateAction extends CommandLineAction {
         throw new Error(`Invalid feature ID format: ${this._featureId.value}. Must be a valid UUID/GUID.`);
       }
 
-      // Generate a new GUID if componentId was not provided; in CI mode, use well-known fixed GUIDs
+      // Set default GUIDs for component, solution, and feature; in CI mode, use well-known fixed GUIDs
       const componentId = this._componentId.value || (this._ciMode.value ? CI_COMPONENT_ID : uuidv4());
       const solutionId = this._solutionId.value || (this._ciMode.value ? CI_SOLUTION_ID : uuidv4());
       const featureId = this._featureId.value || (this._ciMode.value ? CI_FEATURE_ID : uuidv4());
