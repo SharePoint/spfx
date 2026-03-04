@@ -7,7 +7,7 @@ import {
 } from '@rushstack/ts-command-line';
 import type { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
-import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
 
 import {
@@ -17,6 +17,10 @@ import {
   SPFxTemplate
 } from '@microsoft/spfx-template-api';
 import { SOLUTION_NAME_PATTERN } from '../validation';
+
+const CI_COMPONENT_ID: string = '11111111-1111-1111-1111-111111111111';
+const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
+const CI_FEATURE_ID: string = '33333333-3333-3333-3333-333333333333';
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -36,9 +40,6 @@ export class CreateAction extends CommandLineAction {
   private readonly _template: IRequiredCommandLineStringParameter;
   private readonly _localTemplateSources: CommandLineStringListParameter;
   private readonly _libraryName: IRequiredCommandLineStringParameter;
-  private readonly _componentId: CommandLineStringParameter;
-  private readonly _solutionId: CommandLineStringParameter;
-  private readonly _featureId: CommandLineStringParameter;
   private readonly _componentName: IRequiredCommandLineStringParameter;
   private readonly _componentAlias: CommandLineStringParameter;
   private readonly _componentDescription: CommandLineStringParameter;
@@ -78,24 +79,6 @@ export class CreateAction extends CommandLineAction {
       argumentName: 'LIBRARY_NAME',
       description: 'The library name for the component',
       required: true
-    });
-
-    this._componentId = this.defineStringParameter({
-      parameterLongName: '--component-id',
-      argumentName: 'COMPONENT_ID',
-      description: 'The unique component ID (GUID). If not provided, a new GUID will be generated.'
-    });
-
-    this._solutionId = this.defineStringParameter({
-      parameterLongName: '--solution-id',
-      argumentName: 'SOLUTION_ID',
-      description: 'The unique solution ID (GUID). If not provided, a new GUID will be generated.'
-    });
-
-    this._featureId = this.defineStringParameter({
-      parameterLongName: '--feature-id',
-      argumentName: 'FEATURE_ID',
-      description: 'The unique feature ID (GUID). If not provided, a new GUID will be generated.'
     });
 
     this._componentName = this.defineStringParameter({
@@ -157,23 +140,14 @@ export class CreateAction extends CommandLineAction {
         );
       }
 
-      // Validate custom GUIDs if provided
-      if (this._componentId.value && !uuidValidate(this._componentId.value)) {
-        throw new Error(
-          `Invalid component ID format: ${this._componentId.value}. Must be a valid UUID/GUID.`
-        );
-      }
-      if (this._solutionId.value && !uuidValidate(this._solutionId.value)) {
-        throw new Error(`Invalid solution ID format: ${this._solutionId.value}. Must be a valid UUID/GUID.`);
-      }
-      if (this._featureId.value && !uuidValidate(this._featureId.value)) {
-        throw new Error(`Invalid feature ID format: ${this._featureId.value}. Must be a valid UUID/GUID.`);
-      }
-
-      // Generate a new GUID if componentId was not provided
-      const componentId = this._componentId.value || uuidv4();
-      const solutionId = this._solutionId.value || uuidv4();
-      const featureId = this._featureId.value || uuidv4();
+      // CI mode is read from an environment variable instead of a ts-command-line
+      // parameter so it stays out of --help output. It is an internal/undocumented
+      // flag used only by CI pipelines and tests to produce deterministic output.
+      // eslint-disable-next-line dot-notation
+      const ciMode: boolean = process.env['SPFX_CI_MODE'] === '1';
+      const componentId = ciMode ? CI_COMPONENT_ID : uuidv4();
+      const solutionId = ciMode ? CI_SOLUTION_ID : uuidv4();
+      const featureId = ciMode ? CI_FEATURE_ID : uuidv4();
 
       // Get component name and validate
       const componentName = this._componentName.value;

@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
     "name": "@spfx-template/extension-search-query-modifier-client-side-solution",
-    "id": "44d64337-e2f4-48e2-a954-a68795124bf2",
+    "id": "22222222-2222-2222-2222-222222222222",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -29,7 +29,7 @@
       {
         "title": "@spfx-template/extension-search-query-modifier Feature",
         "description": "The feature that activates elements of the @spfx-template/extension-search-query-modifier solution.",
-        "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
+        "id": "33333333-3333-3333-3333-333333333333",
         "version": "1.0.0.0",
         "assets": {
           "elementManifests": [
