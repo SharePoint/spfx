@@ -27,7 +27,7 @@ jobs:
         run: node common/scripts/install-run-rush.js install
 
       - name: Rush rebuild (all projects except field customizer)
-        run: node common/scripts/install-run-rush.js rebuild --only @microsoft/spfx-cli-build-rig --only @microsoft/spfx-templating-engine --only @microsoft/spfx-template-api --only @microsoft/spfx-cli --only @microsoft/spfx-template-test --only @spfx-template/webpart-minimal --only @spfx-template/webpart-noframework --only @spfx-template/webpart-react --only @spfx-template/ace-data-visualization --only @spfx-template/ace-generic-card --only @spfx-template/ace-search-card --only @spfx-template/extension-application-customizer --only @spfx-template/extension-formcustomizer-noframework --only @spfx-template/extension-formcustomizer-react
+        run: node common/scripts/install-run-rush.js rebuild --only @microsoft/spfx-cli-build-rig --only @microsoft/spfx-template-api --only @microsoft/spfx-cli --only @microsoft/spfx-template-test --only @spfx-template/webpart-minimal --only @spfx-template/webpart-noframework --only @spfx-template/webpart-react --only @spfx-template/ace-data-visualization --only @spfx-template/ace-generic-card --only @spfx-template/ace-search-card --only @spfx-template/extension-application-customizer --only @spfx-template/extension-formcustomizer-noframework --only @spfx-template/extension-formcustomizer-react
 
       - name: Build field customizer (allows expected warnings)
         run: node common/scripts/install-run-rush.js build-allow-warnings --only extension-fieldcustomizer-react
