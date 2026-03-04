@@ -136,6 +136,36 @@ describe('LocalFileSystemRepositorySource', () => {
       expect(mockFromFolderAsync).toHaveBeenCalledWith('/path/to/templates/template1');
     });
 
+    it('should skip directories that do not contain template.json', async () => {
+      const mockTemplate = { name: 'Template1' } as SPFxTemplate;
+
+      const mockFolderItems: IFileSystemReadFolderItemsResult[] = [
+        {
+          name: '/path/to/templates/valid-template',
+          isDirectory: () => true,
+          isFile: () => false
+        } as IFileSystemReadFolderItemsResult,
+        {
+          name: '/path/to/templates/not-a-template',
+          isDirectory: () => true,
+          isFile: () => false
+        } as IFileSystemReadFolderItemsResult
+      ];
+
+      mockReadFolderItems.mockReturnValue(mockFolderItems);
+      mockExistsAsync
+        .mockResolvedValueOnce(true) // valid-template has template.json
+        .mockResolvedValueOnce(false); // not-a-template does not
+      mockFromFolderAsync.mockResolvedValue(mockTemplate);
+
+      const source = new LocalFileSystemRepositorySource('/path/to/templates');
+      const templates = await source.getTemplates();
+
+      expect(templates.length).toBe(1);
+      expect(mockFromFolderAsync).toHaveBeenCalledTimes(1);
+      expect(mockFromFolderAsync).toHaveBeenCalledWith('/path/to/templates/valid-template');
+    });
+
     it('should return empty array when no directories found', async () => {
       const mockFolderItems: IFileSystemReadFolderItemsResult[] = [
         {
