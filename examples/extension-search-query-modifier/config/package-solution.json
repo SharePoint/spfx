@@ -27,9 +27,9 @@
     },
     "features": [
       {
-        "title": "Search Query Modifier - Deployment of custom action",
-        "description": "Deploys a custom action with ClientSideComponentId association",
-        "id": "413af0cb-0c9f-43db-8f86-ad1accc90481",
+        "title": "@spfx-template/extension-search-query-modifier Feature",
+        "description": "The feature that activates elements of the @spfx-template/extension-search-query-modifier solution.",
+        "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0",
         "assets": {
           "elementManifests": [
