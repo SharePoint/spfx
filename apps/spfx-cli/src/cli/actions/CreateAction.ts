@@ -16,7 +16,7 @@ import {
   SPFxTemplateRepositoryManager,
   SPFxTemplate
 } from '@microsoft/spfx-template-api';
-import { SOLUTION_NAME_PATTERN } from './validation';
+import { SOLUTION_NAME_PATTERN } from '../validation';
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];

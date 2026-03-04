@@ -1,4 +1,4 @@
-import { SOLUTION_NAME_PATTERN } from '../validation';
+import { SOLUTION_NAME_PATTERN } from '../../validation';
 
 describe('SOLUTION_NAME_PATTERN', () => {
   it('should accept simple alphanumeric names', () => {
