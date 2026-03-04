@@ -46,7 +46,7 @@ export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHu
 
 // @public
 export class SPFxTemplate {
-    constructor(definition: SPFxTemplateJsonFile, files: Map<string, string>);
+    constructor(definition: SPFxTemplateJsonFile, files: Map<string, string | Buffer>);
     get description(): string | undefined;
     static fromFolderAsync(path: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;

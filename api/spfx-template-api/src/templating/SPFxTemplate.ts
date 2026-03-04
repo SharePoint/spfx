@@ -7,15 +7,26 @@ import * as z from 'zod';
 
 import { SPFxTemplateJsonFile, SPFxTemplateDefinitionSchema } from './SPFxTemplateJsonFile';
 
+/** File extensions that should be treated as binary (not processed as EJS templates) */
+const BINARY_EXTENSIONS: string[] = ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'];
+
+/**
+ * Check if a file path has a binary extension
+ */
+function _isBinaryFile(filePath: string): boolean {
+  const ext = path.extname(filePath).toLowerCase();
+  return BINARY_EXTENSIONS.includes(ext);
+}
+
 /**
  * @public
  * Represents a SharePoint Framework (SPFx) template, which can be rendered.
  */
 export class SPFxTemplate {
   private readonly _definition: SPFxTemplateJsonFile;
-  private readonly _files: Map<string, string>;
+  private readonly _files: Map<string, string | Buffer>;
 
-  public constructor(definition: SPFxTemplateJsonFile, files: Map<string, string>) {
+  public constructor(definition: SPFxTemplateJsonFile, files: Map<string, string | Buffer>) {
     this._definition = definition;
     this._files = files;
   }
@@ -81,19 +92,24 @@ export class SPFxTemplate {
     // Create SPFxTemplateJsonFile from the validated JSON
     const templateJsonFile = new SPFxTemplateJsonFile(result.data);
 
-    // Convert Buffer map to string map, excluding template.json
-    const files = new Map<string, string>();
+    // Convert Buffer map to string/Buffer map, excluding template.json
+    // Binary files are kept as Buffers; text files are converted to strings
+    const files = new Map<string, string | Buffer>();
     for (const [filePath, buffer] of fileMap) {
       if (filePath !== 'template.json') {
-        files.set(filePath, buffer.toString('utf8'));
+        if (_isBinaryFile(filePath)) {
+          files.set(filePath, buffer);
+        } else {
+          files.set(filePath, buffer.toString('utf8'));
+        }
       }
     }
 
     return new SPFxTemplate(templateJsonFile, files);
   }
 
-  private static async _readFilesRecursively(baseDir: string): Promise<Map<string, string>> {
-    const files = new Map<string, string>();
+  private static async _readFilesRecursively(baseDir: string): Promise<Map<string, string | Buffer>> {
+    const files = new Map<string, string | Buffer>();
     const frontier: string[] = [''];
 
     while (frontier.length > 0) {
@@ -112,8 +128,13 @@ export class SPFxTemplate {
 
           if (item.isFile()) {
             const fullPath: string = path.join(folderPath, item.name);
-            const content = await FileSystem.readFileAsync(fullPath);
-            files.set(relativePath, content);
+            if (_isBinaryFile(item.name)) {
+              const buffer = await FileSystem.readFileToBufferAsync(fullPath);
+              files.set(relativePath, buffer);
+            } else {
+              const content = await FileSystem.readFileAsync(fullPath);
+              files.set(relativePath, content);
+            }
           } else if (item.isDirectory()) {
             frontier.push(relativePath);
           }
@@ -158,12 +179,17 @@ export class SPFxTemplate {
       }
       const destination = path.join(destinationDir, renderedFilename);
 
-      // Process file contents as EJS template
-      const rendered = ejs.render(contents, context, {
-        filename,
-        cache: false
-      });
-      fs.write(destination, rendered);
+      if (Buffer.isBuffer(contents)) {
+        // Binary files are written as-is without EJS processing
+        fs.write(destination, contents);
+      } else {
+        // Process text file contents as EJS template
+        const rendered = ejs.render(contents, context, {
+          filename,
+          cache: false
+        });
+        fs.write(destination, rendered);
+      }
     }
 
     return fs;

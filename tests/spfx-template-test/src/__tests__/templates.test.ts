@@ -263,6 +263,17 @@ async function readFileContent(filePath: string): Promise<string | null> {
   }
 }
 
+/** Binary file extensions that should be compared as raw buffers */
+const BINARY_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'];
+
+/**
+ * Check if a file is a binary file based on its extension
+ */
+function isBinaryFile(filePath: string): boolean {
+  const ext = path.extname(filePath).toLowerCase();
+  return BINARY_EXTENSIONS.includes(ext);
+}
+
 /**
  * Clean up the output directory before scaffolding
  */
@@ -359,12 +370,6 @@ describe('SPFx Template Scaffolding', () => {
         const filterFiles = (files: string[]) =>
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
-            // Skip binary/image files that cannot be meaningfully compared as UTF-8 text
-            const ignoredExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'];
-            if (ignoredExtensions.some((ext) => normalized.endsWith(ext))) {
-              return false;
-            }
-
             // Skip build artifacts and generated files
             const ignoredFiles = ['package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'webpack.config.js'];
             const ignoredDirs = ['.rush', 'rush-logs', 'temp', 'node_modules', 'dist', 'teams'];
@@ -400,18 +405,33 @@ describe('SPFx Template Scaffolding', () => {
           const scaffoldedFile = path.join(outputPath, file);
           const exampleFile = path.join(examplePath, file);
 
-          const scaffoldedContent = await readFileContent(scaffoldedFile);
-          const exampleContent = await readFileContent(exampleFile);
-
-          // Use Jest's expect to get nice diff output
-          // Add file context to the error message
-          try {
-            expect(scaffoldedContent).toEqual(exampleContent);
-          } catch (error: unknown) {
-            if (error instanceof Error) {
-              throw new Error(`File content mismatch in '${file}':\n${error.message}`);
+          if (isBinaryFile(file)) {
+            // Compare binary files as raw buffers
+            try {
+              const scaffoldedBuffer = fs.readFileSync(scaffoldedFile);
+              const exampleBuffer = fs.readFileSync(exampleFile);
+              expect(scaffoldedBuffer.equals(exampleBuffer)).toBe(true);
+            } catch (error: unknown) {
+              if (error instanceof Error) {
+                throw new Error(`Binary file mismatch in '${file}':\n${error.message}`);
+              }
+              throw new Error(`Binary file mismatch in '${file}':\n${String(error)}`);
             }
-            throw new Error(`File content mismatch in '${file}':\n${String(error)}`);
+          } else {
+            // Compare text files as normalized strings
+            const scaffoldedContent = await readFileContent(scaffoldedFile);
+            const exampleContent = await readFileContent(exampleFile);
+
+            // Use Jest's expect to get nice diff output
+            // Add file context to the error message
+            try {
+              expect(scaffoldedContent).toEqual(exampleContent);
+            } catch (error: unknown) {
+              if (error instanceof Error) {
+                throw new Error(`File content mismatch in '${file}':\n${error.message}`);
+              }
+              throw new Error(`File content mismatch in '${file}':\n${String(error)}`);
+            }
           }
         }
       });
