@@ -1,4 +1,4 @@
-import {  Colorize, Terminal } from '@rushstack/terminal';
+import { Colorize, Terminal } from '@rushstack/terminal';
 import {
   CommandLineAction,
   CommandLineStringListParameter,
@@ -10,7 +10,7 @@ import * as z from 'zod';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
 
-import {    
+import {
   LocalFileSystemRepositorySource,
   SPFxTemplateCollection,
   SPFxTemplateRepositoryManager,
@@ -18,15 +18,15 @@ import {
 } from '@microsoft/spfx-template-api';
 
 interface IScaffoldProfile {
-    localTemplateSources?: Array<string> | readonly string[];
-    templateName: string;
-    targetDir: string;
+  localTemplateSources?: Array<string> | readonly string[];
+  templateName: string;
+  targetDir: string;
 }
 
 const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile> = z.object({
-    targetDir: z.string().min(1),
-    localTemplateSources: z.array(z.string()).optional().default([]),
-    templateName: z.string().min(1)
+  targetDir: z.string().min(1),
+  localTemplateSources: z.array(z.string()).optional().default([]),
+  templateName: z.string().min(1)
 });
 
 export class CreateAction extends CommandLineAction {
@@ -43,12 +43,10 @@ export class CreateAction extends CommandLineAction {
   private readonly _componentDescription: CommandLineStringParameter;
 
   public constructor(terminal: Terminal) {
-
     super({
       actionName: 'create',
       summary: 'Scaffolds an SPFx component into the current folder',
-      documentation:
-        'This command creates a new SPFx component.'
+      documentation: 'This command creates a new SPFx component.'
     });
 
     this._terminal = terminal;
@@ -130,10 +128,7 @@ export class CreateAction extends CommandLineAction {
       if (!validationResult.success) {
         throw new Error(`Invalid scaffold profile: ${JSON.stringify(validationResult.error.issues)}`);
       }
-      const {
-        templateName,
-        targetDir
-      } = options;
+      const { templateName, targetDir } = options;
 
       const manager: SPFxTemplateRepositoryManager = new SPFxTemplateRepositoryManager();
 
@@ -149,12 +144,16 @@ export class CreateAction extends CommandLineAction {
       const template: SPFxTemplate | undefined = templates.get(templateName);
 
       if (!template) {
-          throw new Error(`Template not found: ${templateName}. Available: ${Array.from(templates.keys()).join(', ')}`);
+        throw new Error(
+          `Template not found: ${templateName}. Available: ${Array.from(templates.keys()).join(', ')}`
+        );
       }
 
       // Validate custom GUIDs if provided
       if (this._componentId.value && !uuidValidate(this._componentId.value)) {
-        throw new Error(`Invalid component ID format: ${this._componentId.value}. Must be a valid UUID/GUID.`);
+        throw new Error(
+          `Invalid component ID format: ${this._componentId.value}. Must be a valid UUID/GUID.`
+        );
       }
       if (this._solutionId.value && !uuidValidate(this._solutionId.value)) {
         throw new Error(`Invalid solution ID format: ${this._solutionId.value}. Must be a valid UUID/GUID.`);
@@ -183,25 +182,27 @@ export class CreateAction extends CommandLineAction {
       const componentNameCapitalCase = upperFirst(camelCase(componentName));
       const componentNameAllCaps = snakeCase(componentName).toUpperCase();
 
-      const fs = await template.render({
-        solution_name: 'test-solution-name',
-        eslintProfile: 'react',
-        libraryName: this._libraryName.value,
-        versionBadge: `https://img.shields.io/badge/version-${template.spfxVersion || '1.22.2'}-green.svg`,
-        componentId: componentId,
-        featureId: featureId,
-        solutionId: solutionId,
-        componentAlias: componentAlias,
-        componentNameUnescaped: componentName,
-        componentNameCamelCase: componentNameCamelCase,
-        componentNameHyphenCase: componentNameHyphenCase,
-        componentNameCapitalCase: componentNameCapitalCase,
-        componentNameAllCaps: componentNameAllCaps,
-        componentDescription: componentDescription,
-      }, targetDir);
+      const fs = await template.render(
+        {
+          solution_name: 'test-solution-name',
+          eslintProfile: 'react',
+          libraryName: this._libraryName.value,
+          versionBadge: `https://img.shields.io/badge/version-${template.spfxVersion || '1.22.2'}-green.svg`,
+          componentId: componentId,
+          featureId: featureId,
+          solutionId: solutionId,
+          componentAlias: componentAlias,
+          componentNameUnescaped: componentName,
+          componentNameCamelCase: componentNameCamelCase,
+          componentNameHyphenCase: componentNameHyphenCase,
+          componentNameCapitalCase: componentNameCapitalCase,
+          componentNameAllCaps: componentNameAllCaps,
+          componentDescription: componentDescription
+        },
+        targetDir
+      );
       _printFileChanges(this._terminal, fs, targetDir);
       await template.write(fs);
-
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
       this._terminal.writeErrorLine(`Error creating SPFx component: ${message}`);
@@ -214,29 +215,29 @@ export class CreateAction extends CommandLineAction {
  * Utility function to show the user which files in the in-memory file system are pending changes.
  */
 function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: string): void {
-    terminal.writeLine(`targetDir: ${targetDir}`);
-    const changed: { [key: string]: { state: 'modified' | 'deleted', isNew: boolean } } = fs.dump(targetDir);
+  terminal.writeLine(`targetDir: ${targetDir}`);
+  const changed: { [key: string]: { state: 'modified' | 'deleted'; isNew: boolean } } = fs.dump(targetDir);
 
-    terminal.writeLine();
-    terminal.writeLine(Colorize.cyan('The following files will be modified:'));
+  terminal.writeLine();
+  terminal.writeLine(Colorize.cyan('The following files will be modified:'));
 
-    for (const [file, data] of Object.entries(changed)) {
-        const { state, isNew } = data;
-        if (isNew) {
-            terminal.writeLine(Colorize.green(`Added: ${file}`));
-            continue;
-        }
-        switch (state) {
-            case 'modified':
-                terminal.writeLine(Colorize.yellow(`Modified: ${file}`));
-                break;
-            case 'deleted':
-                terminal.writeLine(Colorize.red(`Deleted: ${file}`));
-                break;
-            default:
-                terminal.writeLine(`Unchanged: ${file}`);
-                break;
-        }
+  for (const [file, data] of Object.entries(changed)) {
+    const { state, isNew } = data;
+    if (isNew) {
+      terminal.writeLine(Colorize.green(`Added: ${file}`));
+      continue;
     }
-    terminal.writeLine();
+    switch (state) {
+      case 'modified':
+        terminal.writeLine(Colorize.yellow(`Modified: ${file}`));
+        break;
+      case 'deleted':
+        terminal.writeLine(Colorize.red(`Deleted: ${file}`));
+        break;
+      default:
+        terminal.writeLine(`Unchanged: ${file}`);
+        break;
+    }
+  }
+  terminal.writeLine();
 }

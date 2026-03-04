@@ -102,7 +102,6 @@ export PATH="$HOME/AppData/Local/nvs/node/22.21.1/x64:$PATH"
 ## Repository Structure
 
 - `apps/spfx-cli/` - SPFx CLI tool
-- `libraries/spfx-templating-engine/` - Template processing engine
 - `templates/` - Template definitions (used to generate new projects)
 - `examples/` - Example implementations of templates
 - `api/` - API definitions

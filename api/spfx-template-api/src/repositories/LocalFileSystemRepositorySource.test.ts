@@ -89,9 +89,7 @@ describe('LocalFileSystemRepositorySource', () => {
       ];
 
       mockReadFolderItems.mockReturnValue(mockFolderItems);
-      mockFromFolderAsync
-        .mockResolvedValueOnce(mockTemplate1)
-        .mockResolvedValueOnce(mockTemplate2);
+      mockFromFolderAsync.mockResolvedValueOnce(mockTemplate1).mockResolvedValueOnce(mockTemplate2);
 
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
       const templates = await source.getTemplates();
