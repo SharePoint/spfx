@@ -460,6 +460,12 @@
       "tags": [ ]
     },
     {
+      "packageName": "@spfx-template/ace-generic-image-card",
+      "projectFolder": "examples/ace-generic-image-card",
+      "reviewCategory": "templates",
+      "tags": [ ]
+    },
+    {
       "packageName": "@spfx-template/ace-generic-primarytext-card",
       "projectFolder": "examples/ace-generic-primarytext-card",
       "reviewCategory": "templates",

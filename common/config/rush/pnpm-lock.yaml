@@ -233,6 +233,61 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
+  ../../examples/ace-generic-image-card:
+    dependencies:
+      '@microsoft/sp-adaptive-card-extension-base':
+        specifier: 1.22.2
+        version: 1.22.2(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@22.19.8)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+      '@microsoft/sp-core-library':
+        specifier: 1.22.2
+        version: 1.22.2(@types/node@22.19.8)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-property-pane':
+        specifier: 1.22.2
+        version: 1.22.2(@microsoft/microsoft-graph-client@1.7.2-spfx)(@types/node@22.19.8)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+      tslib:
+        specifier: 2.3.1
+        version: 2.3.1
+    devDependencies:
+      '@microsoft/eslint-config-spfx':
+        specifier: 1.22.2
+        version: 1.22.2(@typescript-eslint/parser@8.48.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
+      '@microsoft/eslint-plugin-spfx':
+        specifier: 1.22.2
+        version: 1.22.2(eslint@8.57.1)(typescript@5.8.3)
+      '@microsoft/sp-module-interfaces':
+        specifier: 1.22.2
+        version: 1.22.2(@types/node@22.19.8)
+      '@microsoft/spfx-heft-plugins':
+        specifier: 1.22.2
+        version: 1.22.2(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)
+      '@microsoft/spfx-web-build-rig':
+        specifier: 1.22.2
+        version: 1.22.2(@types/node@22.19.8)(jest-environment-node@29.7.0)(tslib@2.3.1)
+      '@rushstack/eslint-config':
+        specifier: 4.6.1
+        version: 4.6.1(eslint@8.57.1)(typescript@5.8.3)
+      '@rushstack/heft':
+        specifier: ^1.1.6
+        version: 1.1.13(@types/node@22.19.8)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
+      '@typescript-eslint/parser':
+        specifier: 8.48.1
+        version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
+      css-loader:
+        specifier: ~7.1.2
+        version: 7.1.3(webpack@5.95.0)
+      eslint:
+        specifier: 8.57.1
+        version: 8.57.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
   ../../examples/ace-generic-primarytext-card:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
