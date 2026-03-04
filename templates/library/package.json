@@ -15,11 +15,11 @@
     "tslib": "2.3.1"
   },
   "devDependencies": {
-    "@microsoft/eslint-config-spfx": "1.22.2",
-    "@microsoft/eslint-plugin-spfx": "1.22.2",
-    "@microsoft/sp-module-interfaces": "1.22.2",
-    "@microsoft/spfx-heft-plugins": "1.22.2",
-    "@microsoft/spfx-web-build-rig": "1.22.2",
+    "@microsoft/eslint-config-spfx": "<%= spfxVersion %>",
+    "@microsoft/eslint-plugin-spfx": "<%= spfxVersion %>",
+    "@microsoft/sp-module-interfaces": "<%= spfxVersion %>",
+    "@microsoft/spfx-heft-plugins": "<%= spfxVersion %>",
+    "@microsoft/spfx-web-build-rig": "<%= spfxVersion %>",
     "@rushstack/eslint-config": "4.6.1",
     "@rushstack/heft": "^1.1.6",
     "@types/heft-jest": "^1.0.6",
