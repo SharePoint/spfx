@@ -1,6 +1,6 @@
 jest.mock('@rushstack/node-core-library');
-jest.mock('mem-fs');
-jest.mock('mem-fs-editor');
+jest.mock('mem-fs', () => ({ create: jest.fn() }));
+jest.mock('mem-fs-editor', () => ({ create: jest.fn() }));
 
 import { FileSystem } from '@rushstack/node-core-library';
 import { create as createMemFs, type Store } from 'mem-fs';

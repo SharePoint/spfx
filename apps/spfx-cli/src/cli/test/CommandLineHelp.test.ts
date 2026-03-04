@@ -22,7 +22,10 @@ describe('CommandLineHelp', () => {
     expect(globalHelpText).toMatchSnapshot('global help');
 
     for (const action of parser.actions) {
-      const actionHelpText: string = AnsiEscape.formatForTests(action.renderHelpText());
+      const actionHelpText: string = AnsiEscape.formatForTests(action.renderHelpText()).replace(
+        process.cwd(),
+        '<cwd>'
+      );
       expect(actionHelpText).toMatchSnapshot(action.actionName);
     }
   });

@@ -191,18 +191,6 @@
     // }
 
     {
-      "commandKind": "bulk",
-      "name": "test",
-      "summary": "Run unit tests for projects that define a \"test\" script",
-      "description": "Invokes the \"test\" script in each project's package.json. Projects without a \"test\" script are skipped.",
-      "safeForSimultaneousRushProcesses": false,
-      "enableParallelism": true,
-      "ignoreDependencyOrder": false,
-      "ignoreMissingScript": true,
-      "allowWarningsInSuccessfulBuild": false,
-      "incremental": false
-    },
-    {
       "name": "prettier",
       "commandKind": "global",
       "summary": "Used by the pre-commit Git hook. This command invokes Prettier to reformat staged changes.",
