@@ -189,7 +189,13 @@ export class CreateAction extends CommandLineAction {
       const componentNameCapitalCase = upperFirst(camelCase(componentName));
       const componentNameAllCaps = snakeCase(componentName).toUpperCase();
 
-      const solutionName = this._solutionName.value || kebabCase(componentName);
+      const rawSolutionName = this._solutionName.value?.trim();
+      if (rawSolutionName !== undefined && !/^[a-zA-Z0-9][a-zA-Z0-9-_]*$/.test(rawSolutionName)) {
+        throw new Error(
+          `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
+        );
+      }
+      const solutionName = rawSolutionName || componentNameHyphenCase;
 
       const fs = await template.render(
         {
