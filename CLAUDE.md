@@ -115,6 +115,54 @@ export PATH="$HOME/AppData/Local/nvs/node/22.21.1/x64:$PATH"
 
 Templates and examples must stay in sync - any changes to a template should be reflected in its corresponding example.
 
+## Change Logs (rush change)
+
+CI runs `rush change --verify` to ensure that any modified **published** project has a change description file. Published projects are those with `versionPolicyName` or `shouldPublish: true` in `rush.json`. Currently the published projects are:
+
+- `@microsoft/spfx-cli` (versionPolicyName: "spfx")
+- `@microsoft/spfx-template-api` (versionPolicyName: "spfx")
+
+### When you need a change file
+
+If your PR modifies any file inside `apps/spfx-cli/` or `api/spfx-template-api/` (including `package.json`), CI will fail with:
+
+```
+ERROR: The following projects have been changed and require change descriptions
+```
+
+### How to create a change file
+
+Create a JSON file under `common/changes/@microsoft/<package-short-name>/` with any filename (convention: `<description>_<date>.json`):
+
+```json
+{
+  "changes": [
+    {
+      "packageName": "@microsoft/spfx-cli",
+      "comment": "Brief description of the change",
+      "type": "none"
+    }
+  ],
+  "packageName": "@microsoft/spfx-cli"
+}
+```
+
+**Change types:**
+- `"none"` — No version bump (use for devDependency changes, config tweaks, etc.)
+- `"patch"` — Bug fix (0.0.x)
+- `"minor"` — New feature (0.x.0)
+- `"major"` — Breaking change (x.0.0)
+
+For changes that only affect devDependencies or build config, use `"none"`.
+
+### Alternative: run `rush change` interactively
+
+```bash
+rush change
+```
+
+This walks through an interactive prompt for each changed published project. However, since this requires interactive input, Claude should create the change files directly instead.
+
 ## Git Workflow
 
 - Main branch: `main`

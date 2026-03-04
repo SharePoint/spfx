@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@microsoft/spfx-cli",
+      "comment": "Pin eslint to exact 8.57.1",
+      "type": "none"
+    }
+  ],
+  "packageName": "@microsoft/spfx-cli"
+}
