@@ -38,6 +38,10 @@ export default class <%= componentNameCapitalCase %>FormCustomizer
     super.onDispose();
   }
 
+  /**
+   * Use the methods below to handle the save and close events.
+   * Please note that formSaved() MUST be called when a form is saved, and formClosed() when it is closed.
+   */
   private _onSave = (): void => {
     // TODO: Add your custom save logic here.
 
