@@ -429,14 +429,14 @@
       "packageName": "@microsoft/spfx-cli",
       "projectFolder": "apps/spfx-cli",
       "reviewCategory": "apps",
-      "shouldPublish": false,
+      "versionPolicyName": "spfx",
       "tags": []
     },
     {
       "packageName": "@microsoft/spfx-template-api",
       "projectFolder": "api/spfx-template-api",
       "reviewCategory": "libraries",
-      "shouldPublish": false,
+      "versionPolicyName": "spfx",
       "tags": []
     },
 

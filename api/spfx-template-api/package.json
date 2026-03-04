@@ -1,8 +1,7 @@
 {
   "name": "@microsoft/spfx-template-api",
   "description": "Library for generating SPFx solutions",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.0.0",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {

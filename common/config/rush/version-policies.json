@@ -99,4 +99,10 @@
   //
   //   // "includeEmailInChangeFile": true
   // }
+  {
+    "definitionName": "lockStepVersion",
+    "policyName": "spfx",
+    "version": "0.0.0",
+    "mainProject": "@microsoft/spfx-cli"
+  }
 ]
