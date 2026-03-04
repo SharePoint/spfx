@@ -41,6 +41,7 @@ export class CreateAction extends CommandLineAction {
   private readonly _componentName: IRequiredCommandLineStringParameter;
   private readonly _componentAlias: CommandLineStringParameter;
   private readonly _componentDescription: CommandLineStringParameter;
+  private readonly _solutionName: CommandLineStringParameter;
 
   public constructor(terminal: Terminal) {
     super({
@@ -114,6 +115,12 @@ export class CreateAction extends CommandLineAction {
       argumentName: 'COMPONENT_DESCRIPTION',
       description: 'The component description. If not provided, will generate from component name.'
     });
+
+    this._solutionName = this.defineStringParameter({
+      parameterLongName: '--solution-name',
+      argumentName: 'SOLUTION_NAME',
+      description: 'The solution name. If not provided, defaults to the kebab-case component name.'
+    });
   }
 
   protected async onExecuteAsync(): Promise<void> {
@@ -182,9 +189,11 @@ export class CreateAction extends CommandLineAction {
       const componentNameCapitalCase = upperFirst(camelCase(componentName));
       const componentNameAllCaps = snakeCase(componentName).toUpperCase();
 
+      const solutionName = this._solutionName.value || kebabCase(componentName);
+
       const fs = await template.render(
         {
-          solution_name: 'test-solution-name',
+          solution_name: solutionName,
           eslintProfile: 'react',
           libraryName: this._libraryName.value,
           versionBadge: `https://img.shields.io/badge/version-${template.spfxVersion || '1.22.2'}-green.svg`,
