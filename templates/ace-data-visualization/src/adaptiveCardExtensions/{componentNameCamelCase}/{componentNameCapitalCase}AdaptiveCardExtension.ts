@@ -11,8 +11,8 @@ export interface I<%= componentNameCapitalCase %>AdaptiveCardExtensionProps {
 export interface I<%= componentNameCapitalCase %>AdaptiveCardExtensionState {
 }
 
-const CARD_VIEW_REGISTRY_ID: string = '<%= componentNameCapitalCase %>_CARD_VIEW';
-export const QUICK_VIEW_REGISTRY_ID: string = '<%= componentNameCapitalCase %>_QUICK_VIEW';
+const CARD_VIEW_REGISTRY_ID: string = '<%= componentNameAllCaps %>_CARD_VIEW';
+export const QUICK_VIEW_REGISTRY_ID: string = '<%= componentNameAllCaps %>_QUICK_VIEW';
 
 export default class <%= componentNameCapitalCase %>AdaptiveCardExtension extends BaseAdaptiveCardExtension<
   I<%= componentNameCapitalCase %>AdaptiveCardExtensionProps,
@@ -33,7 +33,7 @@ export default class <%= componentNameCapitalCase %>AdaptiveCardExtension extend
 
   protected loadPropertyPaneResources(): Promise<void> {
     return import(
-      /* webpackChunkName: '<%= componentNameCapitalCase %>-property-pane'*/
+      /* webpackChunkName: '<%= componentNameHyphenCase %>-property-pane'*/
       './<%= componentNameCapitalCase %>PropertyPane'
     )
       .then(
