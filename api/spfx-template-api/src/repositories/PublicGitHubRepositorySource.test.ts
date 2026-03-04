@@ -145,9 +145,12 @@ describe('PublicGitHubRepositorySource', () => {
         }
       ];
 
-      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(() => ({
-        getEntries: jest.fn().mockReturnValue(mockEntries)
-      } as unknown as AdmZip));
+      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(
+        () =>
+          ({
+            getEntries: jest.fn().mockReturnValue(mockEntries)
+          }) as unknown as AdmZip
+      );
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
       const zipBuffer = Buffer.from('fake zip');
@@ -171,9 +174,12 @@ describe('PublicGitHubRepositorySource', () => {
         }
       ];
 
-      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(() => ({
-        getEntries: jest.fn().mockReturnValue(mockEntries)
-      } as unknown as AdmZip));
+      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(
+        () =>
+          ({
+            getEntries: jest.fn().mockReturnValue(mockEntries)
+          }) as unknown as AdmZip
+      );
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
       const result = source['_extractZipBuffer'](Buffer.from('fake zip'));
@@ -191,9 +197,12 @@ describe('PublicGitHubRepositorySource', () => {
         }
       ];
 
-      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(() => ({
-        getEntries: jest.fn().mockReturnValue(mockEntries)
-      } as unknown as AdmZip));
+      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(
+        () =>
+          ({
+            getEntries: jest.fn().mockReturnValue(mockEntries)
+          }) as unknown as AdmZip
+      );
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
       const result = source['_extractZipBuffer'](Buffer.from('fake zip'));
@@ -230,9 +239,7 @@ describe('PublicGitHubRepositorySource', () => {
         ['extension/template.json', Buffer.from(JSON.stringify({ name: 'Extension' }))]
       ]);
 
-      mockFromMemoryAsync
-        .mockResolvedValueOnce(mockTemplate1)
-        .mockResolvedValueOnce(mockTemplate2);
+      mockFromMemoryAsync.mockResolvedValueOnce(mockTemplate1).mockResolvedValueOnce(mockTemplate2);
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
       const templates = await source['_parseTemplatesFromFileMap'](fileMap);
@@ -299,17 +306,11 @@ describe('PublicGitHubRepositorySource', () => {
       const result = await source['_createTemplateFromFileMap']('webpart', fileMap);
 
       expect(result).toBe(mockTemplate);
-      expect(mockFromMemoryAsync).toHaveBeenCalledWith(
-        'webpart',
-        templateJson,
-        expect.any(Map)
-      );
+      expect(mockFromMemoryAsync).toHaveBeenCalledWith('webpart', templateJson, expect.any(Map));
     });
 
     it('should return undefined if template.json not found', async () => {
-      const fileMap = new Map<string, Buffer>([
-        ['webpart/src/index.ts', Buffer.from('code')]
-      ]);
+      const fileMap = new Map<string, Buffer>([['webpart/src/index.ts', Buffer.from('code')]]);
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
       const result = await source['_createTemplateFromFileMap']('webpart', fileMap);
@@ -338,15 +339,13 @@ describe('PublicGitHubRepositorySource', () => {
     });
 
     it('should throw error for invalid template.json', async () => {
-      const fileMap = new Map<string, Buffer>([
-        ['webpart/template.json', Buffer.from('invalid json {')]
-      ]);
+      const fileMap = new Map<string, Buffer>([['webpart/template.json', Buffer.from('invalid json {')]]);
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
 
-      await expect(
-        source['_createTemplateFromFileMap']('webpart', fileMap)
-      ).rejects.toThrow(/Failed to parse template.json/);
+      await expect(source['_createTemplateFromFileMap']('webpart', fileMap)).rejects.toThrow(
+        /Failed to parse template.json/
+      );
     });
   });
 
@@ -373,9 +372,12 @@ describe('PublicGitHubRepositorySource', () => {
         }
       ];
 
-      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(() => ({
-        getEntries: jest.fn().mockReturnValue(mockEntries)
-      } as unknown as AdmZip));
+      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(
+        () =>
+          ({
+            getEntries: jest.fn().mockReturnValue(mockEntries)
+          }) as unknown as AdmZip
+      );
 
       mockFetch.mockResolvedValue({
         ok: true,
@@ -387,9 +389,7 @@ describe('PublicGitHubRepositorySource', () => {
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
       const templates = await source.getTemplates();
 
-      expect(mockFetch).toHaveBeenCalledWith(
-        'https://codeload.github.com/owner/repo/zip/main'
-      );
+      expect(mockFetch).toHaveBeenCalledWith('https://codeload.github.com/owner/repo/zip/main');
       expect(templates).toHaveLength(1);
     });
 
@@ -402,9 +402,7 @@ describe('PublicGitHubRepositorySource', () => {
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
 
-      await expect(source.getTemplates()).rejects.toThrow(
-        /Failed to fetch templates from GitHub repository/
-      );
+      await expect(source.getTemplates()).rejects.toThrow(/Failed to fetch templates from GitHub repository/);
     });
 
     it('should throw error when network request fails', async () => {
@@ -412,9 +410,7 @@ describe('PublicGitHubRepositorySource', () => {
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
 
-      await expect(source.getTemplates()).rejects.toThrow(
-        /Failed to fetch templates from GitHub repository/
-      );
+      await expect(source.getTemplates()).rejects.toThrow(/Failed to fetch templates from GitHub repository/);
     });
   });
 });
