@@ -6,7 +6,7 @@
     "default": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
-        "componentId": "413af0cb-0c9f-43db-8f86-ad1accc90481",
+        "componentId": "11111111-1111-1111-1111-111111111111",
         "PageType": 8,
         "RootFolder": "/sites/mySite/Lists/MyList",
         "properties": {
@@ -17,7 +17,7 @@
     "reactFormCustomizer_NewForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
-        "componentId": "413af0cb-0c9f-43db-8f86-ad1accc90481",
+        "componentId": "11111111-1111-1111-1111-111111111111",
         "PageType": 8,
         "RootFolder": "/sites/mySite/Lists/MyList",
         "properties": {
@@ -28,7 +28,7 @@
     "reactFormCustomizer_EditForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
-        "componentId": "413af0cb-0c9f-43db-8f86-ad1accc90481",
+        "componentId": "11111111-1111-1111-1111-111111111111",
         "PageType": 6,
         "RootFolder": "/sites/mySite/Lists/MyList",
         "ID": 1,
@@ -40,7 +40,7 @@
     "reactFormCustomizer_ViewForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
-        "componentId": "413af0cb-0c9f-43db-8f86-ad1accc90481",
+        "componentId": "11111111-1111-1111-1111-111111111111",
         "PageType": 4,
         "RootFolder": "/sites/mySite/Lists/MyList",
         "ID": 1,

@@ -6,7 +6,7 @@
     "default": {
       "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
       "customActions": {
-        "413af0cb-0c9f-43db-8f86-ad1accc90481": {
+        "11111111-1111-1111-1111-111111111111": {
           "location": "ClientSideExtension.SearchQueryModifier",
           "properties": {
             "testMessage": "Test message"
@@ -17,7 +17,7 @@
     "minimalSearchQueryModifier": {
       "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
       "customActions": {
-        "413af0cb-0c9f-43db-8f86-ad1accc90481": {
+        "11111111-1111-1111-1111-111111111111": {
           "location": "ClientSideExtension.SearchQueryModifier",
           "properties": {
             "testMessage": "Test message"

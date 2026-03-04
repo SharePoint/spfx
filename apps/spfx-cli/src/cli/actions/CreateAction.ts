@@ -18,9 +18,9 @@ import {
 } from '@microsoft/spfx-template-api';
 import { SOLUTION_NAME_PATTERN } from '../validation';
 
-const CI_COMPONENT_ID: string = '413af0cb-0c9f-43db-8f86-ad1accc90481';
-const CI_SOLUTION_ID: string = '44d64337-e2f4-48e2-a954-a68795124bf2';
-const CI_FEATURE_ID: string = '31c122c7-8373-4d00-89e7-e5f412958ca4';
+const CI_COMPONENT_ID: string = '11111111-1111-1111-1111-111111111111';
+const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
+const CI_FEATURE_ID: string = '33333333-3333-3333-3333-333333333333';
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -140,14 +140,11 @@ export class CreateAction extends CommandLineAction {
         );
       }
 
-      // CI mode is intentionally read from an environment variable instead of a
-      // ts-command-line parameter so it stays out of --help output. It is an
-      // internal/undocumented flag used only by CI pipelines and tests to produce
-      // deterministic scaffolding output.
+      // CI mode is read from an environment variable instead of a ts-command-line
+      // parameter so it stays out of --help output. It is an internal/undocumented
+      // flag used only by CI pipelines and tests to produce deterministic output.
       // eslint-disable-next-line dot-notation
       const ciMode: boolean = process.env['SPFX_CI_MODE'] === '1';
-
-      // In CI mode, use well-known fixed GUIDs; otherwise generate random ones
       const componentId = ciMode ? CI_COMPONENT_ID : uuidv4();
       const solutionId = ciMode ? CI_SOLUTION_ID : uuidv4();
       const featureId = ciMode ? CI_FEATURE_ID : uuidv4();
