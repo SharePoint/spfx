@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommandLineHelp prints the help: create 1`] = `
+"usage: spfx-cli create [-h] [--target-dir TARGET_DIR]
+                       [--local-template TEMPLATE_PATH] --template
+                       TEMPLATE_NAME --library-name LIBRARY_NAME
+                       [--component-id COMPONENT_ID]
+                       [--solution-id SOLUTION_ID] [--feature-id FEATURE_ID]
+                       --component-name COMPONENT_NAME
+                       [--component-alias COMPONENT_ALIAS]
+                       [--component-description COMPONENT_DESCRIPTION]
+                       [--solution-name SOLUTION_NAME]
+                       
+
+This command creates a new SPFx component.
+
+Optional arguments:
+  -h, --help            Show this help message and exit.
+  --target-dir TARGET_DIR
+                        The directory to create the solution (or where the 
+                        solution already exists) The default value is 
+                        \\"/workspaces/spfx-samples/apps/spfx-cli\\".
+  --local-template TEMPLATE_PATH
+                        Path to a local template folder
+  --template TEMPLATE_NAME
+                        The template to use for scaffolding
+  --library-name LIBRARY_NAME
+                        The library name for the component
+  --component-id COMPONENT_ID
+                        The unique component ID (GUID). If not provided, a 
+                        new GUID will be generated.
+  --solution-id SOLUTION_ID
+                        The unique solution ID (GUID). If not provided, a new 
+                        GUID will be generated.
+  --feature-id FEATURE_ID
+                        The unique feature ID (GUID). If not provided, a new 
+                        GUID will be generated.
+  --component-name COMPONENT_NAME
+                        The component name (e.g., \\"Hello World\\")
+  --component-alias COMPONENT_ALIAS
+                        The component alias. If not provided, will use the 
+                        component name.
+  --component-description COMPONENT_DESCRIPTION
+                        The component description. If not provided, will 
+                        generate from component name.
+  --solution-name SOLUTION_NAME
+                        The solution name. If not provided, defaults to the 
+                        kebab-case component name.
+"
+`;
+
+exports[`CommandLineHelp prints the help: global help 1`] = `
+"usage: spfx-cli [-h] <command> ...
+
+CLI for managing SharePoint Framework (SPFx) projects
+
+Positional arguments:
+  <command>
+    create    Scaffolds an SPFx component into the current folder
+
+Optional arguments:
+  -h, --help  Show this help message and exit.
+
+[bold]For detailed help about a specific command, use: spfx-cli <command> 
+-h[normal]
+"
+`;
