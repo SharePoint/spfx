@@ -7,6 +7,7 @@
   },
   "scripts": {
     "build": "heft test --clean --production && heft package-solution --production",
+    "build-allow-warnings": "heft test --clean --production && heft package-solution --production",
     "start": "heft start --clean",
     "clean": "heft clean",
     "eject-webpack": "heft eject-webpack"

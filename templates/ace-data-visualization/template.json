@@ -47,6 +47,10 @@
     "versionBadge": {
       "type": "string",
       "description": "The version badge for README"
+    },
+    "componentNameAllCaps": {
+      "type": "string",
+      "description": "The component name in ALL_CAPS"
     }
   }
 }
