@@ -8,7 +8,7 @@ Short summary on functionality and used technologies.
 
 ## Used SharePoint Framework Version
 
-<%= versionBadge %>
+[![version](<%= versionBadge %>)](<%= versionBadge %>)
 
 ## Applies to
 

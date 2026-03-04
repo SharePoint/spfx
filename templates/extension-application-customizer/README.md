@@ -8,7 +8,7 @@
 
 ## Used SharePoint Framework Version
 
-![version](<%= versionBadge %>)
+[![version](<%= versionBadge %>)](<%= versionBadge %>)
 
 ## Applies to
 
