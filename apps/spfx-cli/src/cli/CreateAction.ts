@@ -1,6 +1,7 @@
 import { Colorize, Terminal } from '@rushstack/terminal';
 import {
   CommandLineAction,
+  CommandLineFlagParameter,
   CommandLineStringListParameter,
   CommandLineStringParameter,
   type IRequiredCommandLineStringParameter
@@ -16,6 +17,10 @@ import {
   SPFxTemplateRepositoryManager,
   SPFxTemplate
 } from '@microsoft/spfx-template-api';
+
+const CI_COMPONENT_ID: string = '413af0cb-0c9f-43db-8f86-ad1accc90481';
+const CI_SOLUTION_ID: string = '44d64337-e2f4-48e2-a954-a68795124bf2';
+const CI_FEATURE_ID: string = '31c122c7-8373-4d00-89e7-e5f412958ca4';
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -41,6 +46,7 @@ export class CreateAction extends CommandLineAction {
   private readonly _componentName: IRequiredCommandLineStringParameter;
   private readonly _componentAlias: CommandLineStringParameter;
   private readonly _componentDescription: CommandLineStringParameter;
+  private readonly _ciMode: CommandLineFlagParameter;
 
   public constructor(terminal: Terminal) {
     super({
@@ -114,6 +120,12 @@ export class CreateAction extends CommandLineAction {
       argumentName: 'COMPONENT_DESCRIPTION',
       description: 'The component description. If not provided, will generate from component name.'
     });
+
+    this._ciMode = this.defineFlagParameter({
+      parameterLongName: '--ci-mode',
+      description:
+        'Enable CI mode for deterministic output. Uses well-known fixed GUIDs unless overridden by individual GUID flags.'
+    });
   }
 
   protected async onExecuteAsync(): Promise<void> {
@@ -162,10 +174,10 @@ export class CreateAction extends CommandLineAction {
         throw new Error(`Invalid feature ID format: ${this._featureId.value}. Must be a valid UUID/GUID.`);
       }
 
-      // Generate a new GUID if componentId was not provided
-      const componentId = this._componentId.value || uuidv4();
-      const solutionId = this._solutionId.value || uuidv4();
-      const featureId = this._featureId.value || uuidv4();
+      // Generate a new GUID if componentId was not provided; in CI mode, use well-known fixed GUIDs
+      const componentId = this._componentId.value || (this._ciMode.value ? CI_COMPONENT_ID : uuidv4());
+      const solutionId = this._solutionId.value || (this._ciMode.value ? CI_SOLUTION_ID : uuidv4());
+      const featureId = this._featureId.value || (this._ciMode.value ? CI_FEATURE_ID : uuidv4());
 
       // Get component name and validate
       const componentName = this._componentName.value;

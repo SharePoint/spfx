@@ -315,9 +315,7 @@ describe('SPFx Template Scaffolding', () => {
             `--target-dir "${outputPath}"`,
             `--local-template "${config.localTemplatePath}"`,
             `--library-name "${config.libraryName}"`,
-            `--component-id "${FIXED_COMPONENT_ID}"`,
-            `--solution-id "${FIXED_SOLUTION_ID}"`,
-            `--feature-id "${FIXED_FEATURE_ID}"`,
+            `--ci-mode`,
             `--component-name "${config.componentName}"`
           ];
 
