@@ -1157,18 +1157,6 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
-  ../../libraries/spfx-templating-engine:
-    devDependencies:
-      '@microsoft/spfx-cli-build-rig':
-        specifier: workspace:*
-        version: link:../../tools/spfx-cli-build-rig
-      '@rushstack/heft':
-        specifier: ^1.1.6
-        version: 1.1.13(@types/node@22.19.8)
-      eslint:
-        specifier: ^8.57.1
-        version: 8.57.1
-
   ../../tests/spfx-template-test:
     dependencies:
       '@microsoft/spfx-cli':

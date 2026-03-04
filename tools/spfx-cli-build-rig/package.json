@@ -3,7 +3,11 @@
   "description": "A rig package for building SPFx CLI projects with Heft.",
   "version": "0.0.1",
   "private": true,
-  "keywords": ["Heft", "build rig", "SPFx"],
+  "keywords": [
+    "Heft",
+    "build rig",
+    "SPFx"
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=22.14.0 <23.0.0 || >=24.5.0 <25.0.0"

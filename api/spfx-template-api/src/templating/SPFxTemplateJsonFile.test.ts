@@ -6,7 +6,11 @@ jest.mock('@rushstack/node-core-library', () => ({
 
 import * as path from 'path';
 import { FileSystem } from '@rushstack/node-core-library';
-import { SPFxTemplateJsonFile, SPFxTemplateDefinitionSchema, ISPFxTemplateJson } from './SPFxTemplateJsonFile';
+import {
+  SPFxTemplateJsonFile,
+  SPFxTemplateDefinitionSchema,
+  ISPFxTemplateJson
+} from './SPFxTemplateJsonFile';
 
 describe('SPFxTemplateJsonFile', () => {
   const mockReadFileAsync = FileSystem.readFileAsync as jest.MockedFunction<typeof FileSystem.readFileAsync>;
@@ -136,8 +140,7 @@ describe('SPFxTemplateJsonFile', () => {
     it('should throw an error for invalid JSON', async () => {
       mockReadFileAsync.mockResolvedValue('invalid json {');
 
-      await expect(SPFxTemplateJsonFile.fromFileAsync('/path/to/invalid.json'))
-        .rejects.toThrow();
+      await expect(SPFxTemplateJsonFile.fromFileAsync('/path/to/invalid.json')).rejects.toThrow();
     });
 
     it('should throw an error when validation fails', async () => {
@@ -149,8 +152,9 @@ describe('SPFxTemplateJsonFile', () => {
 
       mockReadFileAsync.mockResolvedValue(JSON.stringify(invalidData));
 
-      await expect(SPFxTemplateJsonFile.fromFileAsync('/path/to/invalid.json'))
-        .rejects.toThrow(/Invalid template.json file/);
+      await expect(SPFxTemplateJsonFile.fromFileAsync('/path/to/invalid.json')).rejects.toThrow(
+        /Invalid template.json file/
+      );
     });
 
     it('should throw an error for missing required fields', async () => {
@@ -161,8 +165,9 @@ describe('SPFxTemplateJsonFile', () => {
 
       mockReadFileAsync.mockResolvedValue(JSON.stringify(incompleteData));
 
-      await expect(SPFxTemplateJsonFile.fromFileAsync('/path/to/incomplete.json'))
-        .rejects.toThrow(/Invalid template.json file/);
+      await expect(SPFxTemplateJsonFile.fromFileAsync('/path/to/incomplete.json')).rejects.toThrow(
+        /Invalid template.json file/
+      );
     });
   });
 
@@ -301,7 +306,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     it('should accept valid semantic versions', () => {
       const versions = ['1.0.0', '0.0.1', '10.20.30', '1.0.0-alpha', '1.0.0-beta.1'];
 
-      versions.forEach(version => {
+      versions.forEach((version) => {
         const data = {
           name: 'Test',
           version,
@@ -332,7 +337,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
         { name: 'Test', version: '1.0.0' } // Missing spfxVersion
       ];
 
-      testCases.forEach(data => {
+      testCases.forEach((data) => {
         const result = SPFxTemplateDefinitionSchema.safeParse(data);
         expect(result.success).toBe(false);
       });

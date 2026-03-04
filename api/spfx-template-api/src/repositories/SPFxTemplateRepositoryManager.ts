@@ -1,6 +1,6 @@
-import { SPFxTemplate } from "../templating/SPFxTemplate";
-import { BaseSPFxTemplateRepositorySource } from "./SPFxTemplateRepositorySource";
-import { SPFxTemplateCollection } from "./SPFxTemplateCollection";
+import { SPFxTemplate } from '../templating/SPFxTemplate';
+import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
+import { SPFxTemplateCollection } from './SPFxTemplateCollection';
 
 /**
  * @public
@@ -27,7 +27,9 @@ export class SPFxTemplateRepositoryManager {
    * @returns A Promise that resolves to a SPFxTemplateCollection containing all templates
    */
   public async getTemplates(): Promise<SPFxTemplateCollection> {
-    const templates: Array<Array<SPFxTemplate>> = await Promise.all(this._sources.map(source => source.getTemplates()));
+    const templates: Array<Array<SPFxTemplate>> = await Promise.all(
+      this._sources.map((source) => source.getTemplates())
+    );
     return new SPFxTemplateCollection(templates.flat());
   }
 }
