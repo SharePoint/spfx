@@ -29,19 +29,32 @@ export default class <%= componentNameCapitalCase %>FormCustomizer
 
   public render(): void {
     // Use this method to perform your custom rendering.
-    this.domElement.innerHTML = `<div class="${ styles.<%= componentNameCamelCase %> }"></div>`;
+    const container = this.domElement.appendChild(document.createElement('div'));
+    container.className = styles.<%= componentNameCamelCase %>;
+
+    this._saveButton = container.appendChild(document.createElement('button'));
+    this._saveButton.textContent = 'Save';
+    this._saveButton.addEventListener('click', this._onSave);
+
+    this._closeButton = container.appendChild(document.createElement('button'));
+    this._closeButton.textContent = 'Close';
+    this._closeButton.addEventListener('click', this._onClose);
   }
 
   public onDispose(): void {
     // This method should be used to free any resources that were allocated during rendering.
+    this._saveButton?.removeEventListener('click', this._onSave);
+    this._closeButton?.removeEventListener('click', this._onClose);
     super.onDispose();
   }
 
+  private _saveButton: HTMLButtonElement | undefined;
+  private _closeButton: HTMLButtonElement | undefined;
+
   /**
-   * The commented code below is an example of how to handle the save and close events.
-   * Please note that formSaved method MUST be called when a form is saved or closed.
+   * Use the methods below to handle the save and close events.
+   * Please note that formSaved() MUST be called when a form is saved, and formClosed() when it is closed.
    */
-  /*
   private _onSave = (): void => {
     // TODO: Add your custom save logic here.
 
@@ -55,5 +68,4 @@ export default class <%= componentNameCapitalCase %>FormCustomizer
     // You MUST call this.formClosed() after you close the form.
     this.formClosed();
   }
-  */
 }
