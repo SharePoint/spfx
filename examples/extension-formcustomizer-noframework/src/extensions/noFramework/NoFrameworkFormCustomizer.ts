@@ -43,13 +43,13 @@ export default class NoFrameworkFormCustomizer
 
   public onDispose(): void {
     // This method should be used to free any resources that were allocated during rendering.
-    this._saveButton.removeEventListener('click', this._onSave);
-    this._closeButton.removeEventListener('click', this._onClose);
+    this._saveButton?.removeEventListener('click', this._onSave);
+    this._closeButton?.removeEventListener('click', this._onClose);
     super.onDispose();
   }
 
-  private _saveButton!: HTMLButtonElement;
-  private _closeButton!: HTMLButtonElement;
+  private _saveButton: HTMLButtonElement | undefined;
+  private _closeButton: HTMLButtonElement | undefined;
 
   /**
    * Use the methods below to handle the save and close events.
