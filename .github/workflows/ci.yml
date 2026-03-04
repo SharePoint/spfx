@@ -11,20 +11,23 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
+
       - run: git config --global user.email "spfx-cli-bot@users.noreply.github.com"
+
       - run: git config --global user.name "SPFx CLI Bot"
+
       - uses: actions/setup-node@v3
         with:
           node-version: 22.15.0
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.1
+
       - name: Verify Change Logs
         run: node common/scripts/install-run-rush.js change --verify
+
       - name: Rush Install
         run: node common/scripts/install-run-rush.js install
+
       - name: Rush rebuild (all projects except field customizer)
         run: node common/scripts/install-run-rush.js rebuild --only @microsoft/spfx-cli-build-rig --only @microsoft/spfx-templating-engine --only @microsoft/spfx-template-api --only @microsoft/spfx-cli --only @microsoft/spfx-template-test --only @spfx-template/webpart-minimal --only @spfx-template/webpart-noframework --only @spfx-template/webpart-react --only @spfx-template/ace-data-visualization --only @spfx-template/ace-generic-card --only @spfx-template/ace-search-card --only @spfx-template/extension-application-customizer --only @spfx-template/extension-formcustomizer-noframework --only @spfx-template/extension-formcustomizer-react
+
       - name: Build field customizer (allows expected warnings)
         run: node common/scripts/install-run-rush.js build-allow-warnings --only extension-fieldcustomizer-react
