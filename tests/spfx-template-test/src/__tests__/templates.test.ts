@@ -28,6 +28,7 @@ interface TemplateConfig {
   componentName: string;
   componentAlias?: string;
   componentDescription?: string;
+  solutionName?: string;
 }
 
 const TEMPLATE_CONFIGS: TemplateConfig[] = [
@@ -38,7 +39,8 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     localTemplatePath: path.join(REPO_ROOT, 'tests/spfx-template-test'),
     componentName: 'Hello World',
     componentAlias: 'HelloWorld',
-    componentDescription: 'A hello world test component'
+    componentDescription: 'A hello world test component',
+    solutionName: 'test-solution-name'
   },
   {
     libraryName: '@spfx-template/library',
@@ -327,6 +329,10 @@ describe('SPFx Template Scaffolding', () => {
 
           if (config.componentDescription) {
             commandParts.push(`--component-description "${config.componentDescription}"`);
+          }
+
+          if (config.solutionName) {
+            commandParts.push(`--solution-name "${config.solutionName}"`);
           }
 
           const command = commandParts.join(' ');
