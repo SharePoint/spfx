@@ -137,7 +137,7 @@
   //     "tools",      // non-shipping projects that are part of the developer toolchain
   //     "prototypes"  // experiments that should mostly be ignored by the review process
   //   ],
-  // 
+  //
   //   /**
   //    * A list of NPM package scopes that will be excluded from review.
   //    * We recommend to exclude TypeScript typings (the "@types" scope), because
@@ -163,10 +163,7 @@
      * IMPORTANT: Because these are regular expressions encoded as JSON string literals,
      * RegExp escapes need two backslashes, and ordinary periods should be "\\.".
      */
-    "allowedEmailRegExps": [
-      "[^@]+@users\\.noreply\\.github\\.com",
-      "rush-bot@example\\.org"
-    ],
+    "allowedEmailRegExps": ["[^@]+@users\\.noreply\\.github\\.com"],
 
     /**
      * When Rush reports that the address is malformed, the notice can include an example
@@ -198,7 +195,7 @@
      *
      * If no commit message is set it will default to 'Rush change'
      */
-     // "changefilesCommitMessage": "Rush change"
+    // "changefilesCommitMessage": "Rush change"
   },
 
   "repository": {
@@ -218,13 +215,11 @@
      * to retrieve the latest activity for the remote main branch.
      */
     // "url": "https://github.com/microsoft/rush-example",
-
     /**
      * The default branch name. This tells "rush change" which remote branch to compare against.
      * The default value is "main"
      */
     // "defaultBranch": "main",
-
     /**
      * The default remote. This tells "rush change" which remote to compare against if the remote URL is
      * not set or if a remote matching the provided remote URL is not found.
@@ -286,13 +281,13 @@
    *
    * For more details and instructions, see this article:  https://rushjs.io/pages/advanced/installation_variants/
    */
-   "variants": [
+  "variants": [
     // {
     //   /**
     //    * The folder name for this variant.
     //    */
     //   "variantName": "old-sdk",
-    // 
+    //
     //   /**
     //    * An informative description
     //    */
@@ -325,7 +320,7 @@
    * separated by hyphens or slashes, where a word may contain lowercase ASCII letters, digits,
    * ".", and "@" characters.
    */
-  "allowedProjectTags": [ "tools", "library", "app" ],
+  "allowedProjectTags": ["tools", "library", "apps", "templates"],
 
   /**
    * (Required) This is the inventory of projects to be managed by Rush.
@@ -341,26 +336,26 @@
     //    * The NPM package name of the project (must match package.json)
     //    */
     //   "packageName": "my-app",
-    // 
+    //
     //   /**
     //    * The path to the project folder, relative to the rush.json config file.
     //    */
     //   "projectFolder": "apps/my-app",
-    // 
+    //
     //   /**
     //    * This field is only used if "subspacesEnabled" is true in subspaces.json.
     //    * It specifies the subspace that this project belongs to.  If omitted, then the
     //    * project belongs to the "default" subspace.
     //    */
     //   // "subspaceName": "my-subspace",
-    // 
+    //
     //   /**
     //    * An optional category for usage in the "browser-approved-packages.json"
     //    * and "nonbrowser-approved-packages.json" files.  The value must be one of the
     //    * strings from the "reviewCategories" defined above.
     //    */
     //   "reviewCategory": "production",
-    // 
+    //
     //   /**
     //    * A list of Rush project names that are to be installed from NPM
     //    * instead of linking to the local project.
@@ -387,20 +382,20 @@
     //   "decoupledLocalDependencies": [
     //     // "my-toolchain"
     //   ],
-    // 
+    //
     //   /**
     //    * If true, then this project will be ignored by the "rush check" command.
     //    * The default value is false.
     //    */
     //   // "skipRushCheck": false,
-    // 
+    //
     //   /**
     //    * A flag indicating that changes to this project will be published to npm, which affects
     //    * the Rush change and publish workflows. The default value is false.
     //    * NOTE: "versionPolicyName" and "shouldPublish" are alternatives; you cannot specify them both.
     //    */
     //   // "shouldPublish": false,
-    // 
+    //
     //   /**
     //    * Facilitates postprocessing of a project's files prior to publishing.
     //    *
@@ -409,14 +404,14 @@
     //    * must contain its own package.json file, which is typically a build output.
     //    */
     //   // "publishFolder": "temp/publish",
-    // 
+    //
     //   /**
     //    * An optional version policy associated with the project.  Version policies are defined
     //    * in "version-policies.json" file.  See the "rush publish" documentation for more info.
     //    * NOTE: "versionPolicyName" and "shouldPublish" are alternatives; you cannot specify them both.
     //    */
     //   // "versionPolicyName": "",
-    // 
+    //
     //   /**
     //    * An optional set of custom tags that can be used to select this project.  For example,
     //    * adding "my-custom-tag" will allow this project to be selected by the
@@ -426,163 +421,158 @@
     //    */
     //   // "tags": [ "1.0.0-release", "frontend-team" ]
     // },
-    // 
-    // {
-    //   "packageName": "my-controls",
-    //   "projectFolder": "libraries/my-controls",
-    //   "reviewCategory": "production",
-    //   "tags": [ "frontend-team" ]
-    // },
-    // 
-    // {
-    //   "packageName": "my-toolchain",
-    //   "projectFolder": "tools/my-toolchain",
-    //   "reviewCategory": "tools",
-    //   "tags": [ "tools" ]
-    // }
-    
-    //{
-    //  "packageName": "@spfx-template/ace-data-visualization",
-    //  "projectFolder": "examples/ace-data-visualization",
-    //  "reviewCategory": "templates",
-    //  "tags": [ ]
-    //},
-    {
-      "packageName": "@spfx-template/ace-data-visualization",
-      "projectFolder": "examples/ace-data-visualization",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/ace-generic-card",
-      "projectFolder": "examples/ace-generic-card",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/ace-generic-image-card",
-      "projectFolder": "examples/ace-generic-image-card",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/ace-generic-primarytext-card",
-      "projectFolder": "examples/ace-generic-primarytext-card",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/ace-search-card",
-      "projectFolder": "examples/ace-search-card",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/extension-application-customizer",
-      "projectFolder": "examples/extension-application-customizer",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/extension-fieldcustomizer-minimal",
-      "projectFolder": "examples/extension-fieldcustomizer-minimal",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/extension-fieldcustomizer-noframework",
-      "projectFolder": "examples/extension-fieldcustomizer-noframework",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/extension-fieldcustomizer-react",
-      "projectFolder": "examples/extension-fieldcustomizer-react",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/extension-formcustomizer-noframework",
-      "projectFolder": "examples/extension-formcustomizer-noframework",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/extension-formcustomizer-react",
-      "projectFolder": "examples/extension-formcustomizer-react",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/extension-listviewcommandset",
-      "projectFolder": "examples/extension-listviewcommandset",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/extension-search-query-modifier",
-      "projectFolder": "examples/extension-search-query-modifier",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@spfx-template/library",
-      "projectFolder": "examples/library",
-      "reviewCategory": "templates",
-      "tags": [ ]
-    },
-    {
-      "packageName": "@microsoft/spfx-cli-build-rig",
-      "projectFolder": "tools/spfx-cli-build-rig",
-      "reviewCategory": "tools",
-      "shouldPublish": false,
-      "tags": [ ]
-    },
-    {
-      "packageName": "@microsoft/spfx-templating-engine",
-      "projectFolder": "libraries/spfx-templating-engine",
-      "reviewCategory": "libraries",
-      "shouldPublish": false,
-      "tags": [ ]
-    },
+
+    //
+    // APPS AND LIBRARIES
+    //
     {
       "packageName": "@microsoft/spfx-cli",
       "projectFolder": "apps/spfx-cli",
-      "reviewCategory": "app",
+      "reviewCategory": "apps",
       "shouldPublish": false,
-      "tags": [ ]
+      "tags": []
     },
     {
       "packageName": "@microsoft/spfx-template-api",
       "projectFolder": "api/spfx-template-api",
       "reviewCategory": "libraries",
       "shouldPublish": false,
-      "tags": [ ]
+      "tags": []
     },
+    {
+      "packageName": "@microsoft/spfx-templating-engine",
+      "projectFolder": "libraries/spfx-templating-engine",
+      "reviewCategory": "libraries",
+      "shouldPublish": false,
+      "tags": []
+    },
+
+    //
+    // TOOLS
+    //
+    {
+      "packageName": "@microsoft/spfx-cli-build-rig",
+      "projectFolder": "tools/spfx-cli-build-rig",
+      "reviewCategory": "tools",
+      "shouldPublish": false,
+      "tags": []
+    },
+
+    //
+    // TEST PROJECTS
+    //
     {
       "packageName": "@microsoft/spfx-template-test",
       "projectFolder": "tests/spfx-template-test",
       "reviewCategory": "tools",
       "shouldPublish": false,
-      "tags": [ ]
+      "tags": []
+    },
+
+    //
+    // EXAMPLE PROJECTS
+    //
+    {
+      "packageName": "@spfx-template/ace-data-visualization",
+      "projectFolder": "examples/ace-data-visualization",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/ace-generic-card",
+      "projectFolder": "examples/ace-generic-card",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/ace-generic-image-card",
+      "projectFolder": "examples/ace-generic-image-card",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/ace-generic-primarytext-card",
+      "projectFolder": "examples/ace-generic-primarytext-card",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/ace-search-card",
+      "projectFolder": "examples/ace-search-card",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/extension-application-customizer",
+      "projectFolder": "examples/extension-application-customizer",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/extension-fieldcustomizer-minimal",
+      "projectFolder": "examples/extension-fieldcustomizer-minimal",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/extension-fieldcustomizer-noframework",
+      "projectFolder": "examples/extension-fieldcustomizer-noframework",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/extension-fieldcustomizer-react",
+      "projectFolder": "examples/extension-fieldcustomizer-react",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/extension-formcustomizer-noframework",
+      "projectFolder": "examples/extension-formcustomizer-noframework",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/extension-formcustomizer-react",
+      "projectFolder": "examples/extension-formcustomizer-react",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/extension-listviewcommandset",
+      "projectFolder": "examples/extension-listviewcommandset",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/extension-search-query-modifier",
+      "projectFolder": "examples/extension-search-query-modifier",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/library",
+      "projectFolder": "examples/library",
+      "reviewCategory": "templates",
+      "tags": []
     },
     {
       "packageName": "@spfx-template/webpart-minimal",
       "projectFolder": "examples/webpart-minimal",
       "reviewCategory": "templates",
-      "tags": [ ]
+      "tags": []
     },
     {
       "packageName": "@spfx-template/webpart-noframework",
       "projectFolder": "examples/webpart-noframework",
       "reviewCategory": "templates",
-      "tags": [ ]
+      "tags": []
     },
     {
       "packageName": "@spfx-template/webpart-react",
       "projectFolder": "examples/webpart-react",
       "reviewCategory": "templates",
-      "tags": [ ]
+      "tags": []
     }
   ]
 }
