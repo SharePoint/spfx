@@ -24,7 +24,21 @@
       "screenshotPaths": [],
       "videoUrl": "",
       "categories": []
-    }
+    },
+    "features": [
+      {
+        "title": "Search Query Modifier - Deployment of custom action",
+        "description": "Deploys a custom action with ClientSideComponentId association",
+        "id": "<%= featureId %>",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml",
+            "ClientSideInstance.xml"
+          ]
+        }
+      }
+    ]
   },
   "paths": {
     "zippedPackage": "solution/<%= libraryName %>.sppkg"
