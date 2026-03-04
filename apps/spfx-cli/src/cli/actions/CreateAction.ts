@@ -5,7 +5,7 @@ import {
   CommandLineStringParameter,
   type IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
-import { MemFsEditor } from 'mem-fs-editor';
+import type { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
@@ -16,7 +16,7 @@ import {
   SPFxTemplateRepositoryManager,
   SPFxTemplate
 } from '@microsoft/spfx-template-api';
-import { SOLUTION_NAME_PATTERN } from './validation';
+import { SOLUTION_NAME_PATTERN } from '../validation';
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -203,7 +203,7 @@ export class CreateAction extends CommandLineAction {
           solution_name: solutionName,
           eslintProfile: 'react',
           libraryName: this._libraryName.value,
-          versionBadge: `https://img.shields.io/badge/version-${template.spfxVersion || '1.22.2'}-green.svg`,
+          spfxVersion: template.spfxVersion,
           componentId: componentId,
           featureId: featureId,
           solutionId: solutionId,

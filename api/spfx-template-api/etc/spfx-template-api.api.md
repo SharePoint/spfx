@@ -4,7 +4,7 @@
 
 ```ts
 
-import { MemFsEditor } from 'mem-fs-editor';
+import type { MemFsEditor } from 'mem-fs-editor';
 import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 

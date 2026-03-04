@@ -1,13 +1,15 @@
 import * as path from 'path';
 import * as z from 'zod';
-import semverRegex from 'semver-regex';
+import { valid as semverValid } from 'semver';
 import { FileSystem } from '@rushstack/node-core-library';
 
 const NAME_MIN_LENGTH: number = 3;
 const NAME_MAX_LENGTH: number = 100;
 const DESCRIPTION_MAX_LENGTH: number = 500;
-const VERSION_REGEX: RegExp = semverRegex();
-const SPFX_VERSION_REGEX: RegExp = semverRegex();
+
+function isValidSemver(version: string): boolean {
+  return semverValid(version) !== null;
+}
 
 /**
  * Interface representing the template.json file structure for SPFx templates.
@@ -37,8 +39,16 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z
     $schema: z.url().optional(),
     name: z.string().min(NAME_MIN_LENGTH).max(NAME_MAX_LENGTH),
     description: z.string().max(DESCRIPTION_MAX_LENGTH).optional(),
-    version: z.string().regex(VERSION_REGEX),
-    spfxVersion: z.string().regex(SPFX_VERSION_REGEX),
+    version: z
+      .string()
+      .refine(isValidSemver, {
+        message: 'Invalid semantic version for "version" (expected format like "1.0.0").'
+      }),
+    spfxVersion: z
+      .string()
+      .refine(isValidSemver, {
+        message: 'Invalid semantic version for "spfxVersion" (expected format like "1.0.0").'
+      }),
     contextSchema: z
       .record(
         z.string(),
