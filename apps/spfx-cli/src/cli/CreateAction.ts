@@ -187,7 +187,7 @@ export class CreateAction extends CommandLineAction {
           solution_name: 'test-solution-name',
           eslintProfile: 'react',
           libraryName: this._libraryName.value,
-          spfxVersion: template.spfxVersion || '1.22.2',
+          spfxVersion: template.spfxVersion,
           componentId: componentId,
           featureId: featureId,
           solutionId: solutionId,
