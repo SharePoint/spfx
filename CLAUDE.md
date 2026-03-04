@@ -132,7 +132,9 @@ If a PR modifies a **published** project (`apps/spfx-cli/` or `api/spfx-template
 }
 ```
 
-**Change types:** `"none"` (devDep/config changes), `"patch"` (bug fix), `"minor"` (new feature). We are pre-1.0 and have not done the initial release yet, so always use `"none"` with an empty `"comment"` until the first release ships.
+**Change types:** `"none"` (devDep/config changes), `"patch"` (bug fix), `"minor"` (new feature). Do not use `"major"` — we are pre-1.0 so the max bump is `"minor"`.
+
+**NOTE:** We have not shipped the initial release yet. Until then, always use `"none"` with an empty `"comment"` so the only changelog entry will be "Initial release."
 
 ## Git Workflow
 
