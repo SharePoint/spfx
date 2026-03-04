@@ -63,7 +63,7 @@ describe('SPFxTemplateRepositoryManager', () => {
         new MockRepositorySource('local')
       ];
 
-      sources.forEach(source => manager.addSource(source));
+      sources.forEach((source) => manager.addSource(source));
 
       expect(manager['_sources']).toEqual(sources);
     });
@@ -218,7 +218,7 @@ describe('SPFxTemplateRepositoryManager', () => {
 
         public async getTemplates(): Promise<Array<SPFxTemplate>> {
           startTimes.push(Date.now());
-          await new Promise(resolve => setTimeout(resolve, 10));
+          await new Promise((resolve) => setTimeout(resolve, 10));
           return [];
         }
       }
