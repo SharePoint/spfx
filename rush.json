@@ -320,7 +320,7 @@
    * separated by hyphens or slashes, where a word may contain lowercase ASCII letters, digits,
    * ".", and "@" characters.
    */
-  "allowedProjectTags": ["build", "build-allow-warnings"],
+  "allowedProjectTags": ["tools", "library", "apps", "templates", "build", "build-allow-warnings"],
 
   /**
    * (Required) This is the inventory of projects to be managed by Rush.
