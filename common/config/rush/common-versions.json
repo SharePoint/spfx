@@ -75,16 +75,5 @@
     // "typescript": [
     //   "~2.4.0"
     // ]
-    "eslint": ["8.57.1"],
-    "@microsoft/sp-core-library": ["1.22.2"],
-    "@microsoft/decorators": ["1.22.2"],
-    "@microsoft/sp-listview-extensibility": ["1.22.2"],
-    "@microsoft/sp-lodash-subset": ["1.22.2"],
-    "@microsoft/sp-office-ui-fabric-core": ["1.22.2"],
-    "@microsoft/eslint-plugin-spfx": ["1.22.2"],
-    "@microsoft/eslint-config-spfx": ["1.22.2"],
-    "@microsoft/spfx-web-build-rig": ["1.22.2"],
-    "@microsoft/spfx-heft-plugins": ["1.22.2"],
-    "@microsoft/sp-module-interfaces": ["1.22.2"]
   }
 }
