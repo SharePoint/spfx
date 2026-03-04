@@ -75,5 +75,9 @@
     // "typescript": [
     //   "~2.4.0"
     // ]
+    "eslint": [
+      // Used by templates and examples for now
+      "8.57.1"
+    ]
   }
 }
