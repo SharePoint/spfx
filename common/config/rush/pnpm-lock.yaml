@@ -1136,41 +1136,6 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
-  ../../test-transformed-libraries/test-transformed-mem-fs:
-    dependencies:
-      mem-fs:
-        specifier: ^4.1.2
-        version: 4.1.3
-    devDependencies:
-      '@rushstack/heft':
-        specifier: ^1.1.6
-        version: 1.1.13(@types/node@22.19.8)
-      '@rushstack/heft-node-rig':
-        specifier: ^2.11.11
-        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
-      '@types/heft-jest':
-        specifier: ^1.0.6
-        version: 1.0.6
-
-  ../../test-transformed-libraries/test-transformed-mem-fs-editor:
-    dependencies:
-      mem-fs:
-        specifier: ^4.1.2
-        version: 4.1.3
-      mem-fs-editor:
-        specifier: ^11.1.4
-        version: 11.1.4(mem-fs@4.1.3)
-    devDependencies:
-      '@rushstack/heft':
-        specifier: ^1.1.6
-        version: 1.1.13(@types/node@22.19.8)
-      '@rushstack/heft-node-rig':
-        specifier: ^2.11.11
-        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
-      '@types/heft-jest':
-        specifier: ^1.0.6
-        version: 1.0.6
-
   ../../tests/spfx-template-test:
     dependencies:
       '@microsoft/spfx-cli':
@@ -1198,21 +1163,27 @@ importers:
       '@rushstack/heft':
         specifier: ^1.1.6
         version: 1.1.13(@types/node@22.19.8)
+      '@rushstack/heft-node-rig':
+        specifier: ^2.11.11
+        version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/node':
+        specifier: ^22.18.6
+        version: 22.19.8
       eslint:
         specifier: 8.57.1
         version: 8.57.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
 
   ../../tools/spfx-cli-build-rig:
     dependencies:
       '@microsoft/api-extractor':
         specifier: ^7.55.1
         version: 7.56.2(@types/node@22.19.8)
-      '@microsoft/test-transformed-mem-fs':
-        specifier: workspace:*
-        version: link:../../test-transformed-libraries/test-transformed-mem-fs
-      '@microsoft/test-transformed-mem-fs-editor':
-        specifier: workspace:*
-        version: link:../../test-transformed-libraries/test-transformed-mem-fs-editor
       '@rushstack/heft-node-rig':
         specifier: ^2.11.11
         version: 2.11.18(@rushstack/heft@1.1.13(@types/node@22.19.8))(@types/node@22.19.8)(jest-environment-jsdom@29.5.0)

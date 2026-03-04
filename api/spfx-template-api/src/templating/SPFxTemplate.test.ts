@@ -1,26 +1,6 @@
 jest.mock('@rushstack/node-core-library');
-
-let mockCreateMemFs: jest.MockedFunction<typeof createMemFs>;
-jest.mock('mem-fs', () => {
-  const actual: typeof import('mem-fs') = jest.requireActual('mem-fs');
-
-  mockCreateMemFs = jest.fn().mockImplementation(actual.create);
-  return {
-    ...actual,
-    create: mockCreateMemFs
-  };
-});
-
-let mockCreateEditor: jest.MockedFunction<typeof createEditor>;
-jest.mock('mem-fs-editor', () => {
-  const actual: typeof import('mem-fs-editor') = jest.requireActual('mem-fs-editor');
-
-  mockCreateEditor = jest.fn().mockImplementation(actual.create);
-  return {
-    ...actual,
-    create: mockCreateEditor
-  };
-});
+jest.mock('mem-fs');
+jest.mock('mem-fs-editor');
 
 import { FileSystem } from '@rushstack/node-core-library';
 import { create as createMemFs, type Store } from 'mem-fs';
@@ -46,6 +26,8 @@ describe('SPFxTemplate', () => {
   const mockReadFolderItemsAsync = FileSystem.readFolderItemsAsync as jest.MockedFunction<
     typeof FileSystem.readFolderItemsAsync
   >;
+  const mockCreateMemFs = createMemFs as jest.MockedFunction<typeof createMemFs>;
+  const mockCreateEditor = createEditor as jest.MockedFunction<typeof createEditor>;
 
   let mockEditor: MemFsEditor;
 
