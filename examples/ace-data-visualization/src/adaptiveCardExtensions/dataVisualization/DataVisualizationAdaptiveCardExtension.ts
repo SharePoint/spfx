@@ -11,8 +11,8 @@ export interface IDataVisualizationAdaptiveCardExtensionProps {
 export interface IDataVisualizationAdaptiveCardExtensionState {
 }
 
-const CARD_VIEW_REGISTRY_ID: string = 'DataVisualization_CARD_VIEW';
-export const QUICK_VIEW_REGISTRY_ID: string = 'DataVisualization_QUICK_VIEW';
+const CARD_VIEW_REGISTRY_ID: string = 'DATA_VISUALIZATION_CARD_VIEW';
+export const QUICK_VIEW_REGISTRY_ID: string = 'DATA_VISUALIZATION_QUICK_VIEW';
 
 export default class DataVisualizationAdaptiveCardExtension extends BaseAdaptiveCardExtension<
   IDataVisualizationAdaptiveCardExtensionProps,
@@ -33,7 +33,7 @@ export default class DataVisualizationAdaptiveCardExtension extends BaseAdaptive
 
   protected loadPropertyPaneResources(): Promise<void> {
     return import(
-      /* webpackChunkName: 'DataVisualization-property-pane'*/
+      /* webpackChunkName: 'data-visualization-property-pane'*/
       './DataVisualizationPropertyPane'
     )
       .then(

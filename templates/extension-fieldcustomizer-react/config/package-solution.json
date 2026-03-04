@@ -27,8 +27,8 @@
     },
     "features": [
       {
-        "title": "Application Extension - Deployment of custom action",
-        "description": "Deploys a custom action with ClientSideComponentId association",
+        "title": "<%= libraryName %> Feature",
+        "description": "The feature that activates elements of the <%= libraryName %> solution.",
         "id": "<%= featureId %>",
         "version": "1.0.0.0",
         "assets": {

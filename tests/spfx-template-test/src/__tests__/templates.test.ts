@@ -42,6 +42,15 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentDescription: 'A hello world test component'
   },
   {
+    libraryName: '@spfx-template/library',
+    templateName: 'library',
+    templatePath: path.join(REPO_ROOT, 'templates/library'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'Example',
+    componentAlias: 'ExampleLibrary',
+    componentDescription: 'Example Description'
+  },
+  {
     libraryName: '@spfx-template/webpart-minimal',
     templateName: 'webpart-minimal',
     templatePath: path.join(REPO_ROOT, 'templates/webpart-minimal'),
@@ -76,6 +85,24 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     componentName: 'GenericCard',
     componentAlias: 'GenericCard',
     componentDescription: 'GenericCard Description'
+  },
+  {
+    libraryName: '@spfx-template/ace-generic-image-card',
+    templateName: 'ace-generic-image-card',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-generic-image-card'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'GenericImage',
+    componentAlias: 'GenericImage',
+    componentDescription: 'GenericImage Description'
+  },
+  {
+    libraryName: '@spfx-template/ace-generic-primarytext-card',
+    templateName: 'ace-generic-primarytext-card',
+    templatePath: path.join(REPO_ROOT, 'templates/ace-generic-primarytext-card'),
+    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    componentName: 'GenericPrimaryText',
+    componentAlias: 'GenericPrimaryText',
+    componentDescription: 'GenericPrimaryText Description'
   },
   {
     libraryName: '@spfx-template/ace-search-card',
@@ -180,15 +207,7 @@ async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ig
   const ig = ignore();
 
   // Add default ignores that should always be excluded
-  ig.add([
-    'node_modules',
-    'lib',
-    'lib-commonjs',
-    'rush-logs',
-    'temp',
-    'dist',
-    '.rush'
-  ]);
+  ig.add(['node_modules', 'lib', 'lib-commonjs', 'rush-logs', 'temp', 'dist', '.rush']);
 
   try {
     const gitignoreContent = await readFile(gitignorePath, 'utf-8');
@@ -284,7 +303,6 @@ describe('SPFx Template Scaffolding', () => {
         // Clean up output directory
         cleanOutputDir(config.templateName);
 
-
         // Ensure output directory exists
         if (!fs.existsSync(outputPath)) {
           fs.mkdirSync(outputPath, { recursive: true });
@@ -344,37 +362,28 @@ describe('SPFx Template Scaffolding', () => {
             const normalized = file.replace(/\\/g, '/');
             // Skip binary/image files that cannot be meaningfully compared as UTF-8 text
             const ignoredExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'];
-            if (ignoredExtensions.some(ext => normalized.endsWith(ext))) {
+            if (ignoredExtensions.some((ext) => normalized.endsWith(ext))) {
               return false;
             }
 
-        // Skip build artifacts and generated files
-            const ignoredFiles = [
-              'package-lock.json',
-              'yarn.lock',
-              'pnpm-lock.yaml',
-              'webpack.config.js'
-            ];
-            const ignoredDirs = [
-              '.rush',
-              'rush-logs',
-              'temp',
-              'node_modules',
-              'dist',
-              'teams'
-            ];
+            // Skip build artifacts and generated files
+            const ignoredFiles = ['package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'webpack.config.js'];
+            const ignoredDirs = ['.rush', 'rush-logs', 'temp', 'node_modules', 'dist', 'teams'];
 
             // Ignore specific files regardless of their directory
-            if (ignoredFiles.some(name => normalized === name || normalized.endsWith('/' + name))) {
+            if (ignoredFiles.some((name) => normalized === name || normalized.endsWith('/' + name))) {
               return false;
             }
 
             // Ignore any path that is or contains one of the ignored directories as a segment
-            if (ignoredDirs.some(dir =>
-              normalized === dir ||
-              normalized.startsWith(dir + '/') ||
-              normalized.includes('/' + dir + '/')
-            )) {
+            if (
+              ignoredDirs.some(
+                (dir) =>
+                  normalized === dir ||
+                  normalized.startsWith(dir + '/') ||
+                  normalized.includes('/' + dir + '/')
+              )
+            ) {
               return false;
             }
 

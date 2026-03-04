@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "ace-primary-text-heft-1756847676957-client-side-solution",
-    "id": "018e5eea-513f-43fa-ae2e-7f2e34f302a7",
+    "name": "@spfx-template/ace-generic-primarytext-card-client-side-solution",
+    "id": "44d64337-e2f4-48e2-a954-a68795124bf2",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -12,14 +12,14 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.0-dev.128"
+      "mpnId": "Undefined-1.22.2"
     },
     "metadata": {
       "shortDescription": {
-        "default": "ace-primary-text-heft-1756847676957 description"
+        "default": "GenericPrimaryText Description"
       },
       "longDescription": {
-        "default": "ace-primary-text-heft-1756847676957 description"
+        "default": "GenericPrimaryText Description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "ace-primary-text-heft-1756847676957 Feature",
-        "description": "The feature that activates elements of the ace-primary-text-heft-1756847676957 solution.",
-        "id": "84324431-7207-4d1e-8599-acd3e3f1c070",
+        "title": "@spfx-template/ace-generic-primarytext-card Feature",
+        "description": "The feature that activates elements of the @spfx-template/ace-generic-primarytext-card solution.",
+        "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/ace-primary-text-heft-1756847676957.sppkg"
+    "zippedPackage": "solution/generic-primary-text.sppkg"
   }
 }

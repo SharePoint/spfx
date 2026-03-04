@@ -27,8 +27,8 @@
     },
     "features": [
       {
-        "title": "Application Extension - Deployment of custom action",
-        "description": "Deploys a custom action with ClientSideComponentId association",
+        "title": "@spfx-template/extension-fieldcustomizer-react Feature",
+        "description": "The feature that activates elements of the @spfx-template/extension-fieldcustomizer-react solution.",
         "id": "31c122c7-8373-4d00-89e7-e5f412958ca4",
         "version": "1.0.0.0",
         "assets": {

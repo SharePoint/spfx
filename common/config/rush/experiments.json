@@ -3,7 +3,7 @@
  * Rush features.  More documentation is available on the Rush website: https://rushjs.io
  */
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/experiments.schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/experiments.schema.json"
 
   /**
    * By default, 'rush install' passes --no-prefer-frozen-lockfile to 'pnpm install'.
@@ -96,15 +96,14 @@
    * This ensures that important notices will be seen by anyone doing active development, since people often
    * ignore normal discussion group messages or don't know to subscribe.
    */
-   // "rushAlerts": true,
-
+  // "rushAlerts": true,
 
   /**
    * When using cobuilds, this experiment allows uncacheable operations to benefit from cobuild orchestration without using the build cache.
    */
-   // "allowCobuildWithoutCache": true,
+  // "allowCobuildWithoutCache": true,
 
-   /**
+  /**
    * By default, rush perform a full scan of the entire repository. For example, Rush runs `git status` to check for local file changes.
    * When this toggle is enabled, Rush will only scan specific paths, significantly speeding up Git operations.
    */

@@ -124,9 +124,17 @@ describe('SPFxTemplate', () => {
 
       // Mock folder structure
       const rootItems: IFileSystemReadFolderItemsResult[] = [
-        { name: 'template.json', isFile: () => true, isDirectory: () => false } as IFileSystemReadFolderItemsResult,
+        {
+          name: 'template.json',
+          isFile: () => true,
+          isDirectory: () => false
+        } as IFileSystemReadFolderItemsResult,
         { name: 'src', isFile: () => false, isDirectory: () => true } as IFileSystemReadFolderItemsResult,
-        { name: 'README.md', isFile: () => true, isDirectory: () => false } as IFileSystemReadFolderItemsResult
+        {
+          name: 'README.md',
+          isFile: () => true,
+          isDirectory: () => false
+        } as IFileSystemReadFolderItemsResult
       ];
 
       const srcItems: IFileSystemReadFolderItemsResult[] = [
@@ -162,8 +170,16 @@ describe('SPFxTemplate', () => {
       });
 
       const rootItems: IFileSystemReadFolderItemsResult[] = [
-        { name: 'template.json', isFile: () => true, isDirectory: () => false } as IFileSystemReadFolderItemsResult,
-        { name: 'other.txt', isFile: () => true, isDirectory: () => false } as IFileSystemReadFolderItemsResult
+        {
+          name: 'template.json',
+          isFile: () => true,
+          isDirectory: () => false
+        } as IFileSystemReadFolderItemsResult,
+        {
+          name: 'other.txt',
+          isFile: () => true,
+          isDirectory: () => false
+        } as IFileSystemReadFolderItemsResult
       ];
 
       mockReadFolderItemsAsync.mockResolvedValue(rootItems);
@@ -171,9 +187,7 @@ describe('SPFxTemplate', () => {
       await SPFxTemplate.fromFolderAsync('/test/folder');
 
       // Verify template.json was read for definition but not as a file
-      const fileReadCalls = mockReadFileAsync.mock.calls.filter(
-        (call) => !call[0].includes('template.json')
-      );
+      const fileReadCalls = mockReadFileAsync.mock.calls.filter((call) => !call[0].includes('template.json'));
       expect(fileReadCalls.length).toBeGreaterThan(0);
     });
 
@@ -192,7 +206,11 @@ describe('SPFxTemplate', () => {
       });
 
       const rootItems: IFileSystemReadFolderItemsResult[] = [
-        { name: 'template.json', isFile: () => true, isDirectory: () => false } as IFileSystemReadFolderItemsResult,
+        {
+          name: 'template.json',
+          isFile: () => true,
+          isDirectory: () => false
+        } as IFileSystemReadFolderItemsResult,
         { name: 'level1', isFile: () => false, isDirectory: () => true } as IFileSystemReadFolderItemsResult
       ];
 
@@ -360,7 +378,9 @@ describe('SPFxTemplate', () => {
         spfxVersion: '1.18.0'
       });
 
-      const files = new Map<string, string>([['src/{componentName}.ts', 'export class <%= componentName %> {}']]);
+      const files = new Map<string, string>([
+        ['src/{componentName}.ts', 'export class <%= componentName %> {}']
+      ]);
 
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
