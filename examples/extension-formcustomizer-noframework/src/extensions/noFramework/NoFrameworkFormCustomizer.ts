@@ -39,11 +39,15 @@ export default class NoFrameworkFormCustomizer
   }
 
   private _onSave = (): void => {
+    // TODO: Add your custom save logic here.
+
     // You MUST call this.formSaved() after you save the form.
     this.formSaved();
   }
 
   private _onClose = (): void => {
+    // TODO: Add your custom close logic here.
+
     // You MUST call this.formClosed() after you close the form.
     this.formClosed();
   }
