@@ -16,6 +16,7 @@ import {
   SPFxTemplateRepositoryManager,
   SPFxTemplate
 } from '@microsoft/spfx-template-api';
+import { SOLUTION_NAME_PATTERN } from './validation';
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -190,7 +191,7 @@ export class CreateAction extends CommandLineAction {
       const componentNameAllCaps = snakeCase(componentName).toUpperCase();
 
       const rawSolutionName = this._solutionName.value?.trim();
-      if (rawSolutionName !== undefined && !/^[a-zA-Z0-9][a-zA-Z0-9-_]*$/.test(rawSolutionName)) {
+      if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
         throw new Error(
           `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
         );
