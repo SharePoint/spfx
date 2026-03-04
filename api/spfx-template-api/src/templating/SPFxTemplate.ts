@@ -1,7 +1,6 @@
 import { FileSystem } from '@rushstack/node-core-library';
 import * as ejs from 'ejs';
-import { create as createMemFs } from 'mem-fs';
-import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
+import type { MemFsEditor } from 'mem-fs-editor';
 import * as path from 'path';
 import * as z from 'zod';
 
@@ -131,6 +130,9 @@ export class SPFxTemplate {
    * @returns A Promise that resolves to a MemFsEditor instance containing the rendered files
    */
   public async render(context: object, destinationDir: string): Promise<MemFsEditor> {
+    const { create: createMemFs } = await import('mem-fs');
+    const { create: createEditor } = await import('mem-fs-editor');
+
     // use the template "schema" to validate the context object
     if (this._definition.contextSchema) {
       // Build a Zod schema from the contextSchema metadata

@@ -15,7 +15,7 @@
    * SUPPORTED TOKENS: none
    * DEFAULT VALUE: ""
    */
-  "extends": "@rushstack/heft-node-rig/profiles/default/config/api-extractor-task.json",
+  // "extends": "",
 
   /**
    * Determines the "<projectFolder>" token that can be used with other config file settings.  The project folder

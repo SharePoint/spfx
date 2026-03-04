@@ -5,7 +5,7 @@ import {
   CommandLineStringParameter,
   type IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
-import { MemFsEditor } from 'mem-fs-editor';
+import type { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
 import { v4 as uuidv4 } from 'uuid';
 import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
@@ -16,6 +16,7 @@ import {
   SPFxTemplateRepositoryManager,
   SPFxTemplate
 } from '@microsoft/spfx-template-api';
+import { SOLUTION_NAME_PATTERN } from '../validation';
 
 const CI_COMPONENT_ID: string = '413af0cb-0c9f-43db-8f86-ad1accc90481';
 const CI_SOLUTION_ID: string = '44d64337-e2f4-48e2-a954-a68795124bf2';
@@ -42,6 +43,7 @@ export class CreateAction extends CommandLineAction {
   private readonly _componentName: IRequiredCommandLineStringParameter;
   private readonly _componentAlias: CommandLineStringParameter;
   private readonly _componentDescription: CommandLineStringParameter;
+  private readonly _solutionName: CommandLineStringParameter;
 
   public constructor(terminal: Terminal) {
     super({
@@ -96,6 +98,12 @@ export class CreateAction extends CommandLineAction {
       parameterLongName: '--component-description',
       argumentName: 'COMPONENT_DESCRIPTION',
       description: 'The component description. If not provided, will generate from component name.'
+    });
+
+    this._solutionName = this.defineStringParameter({
+      parameterLongName: '--solution-name',
+      argumentName: 'SOLUTION_NAME',
+      description: 'The solution name. If not provided, defaults to the kebab-case component name.'
     });
   }
 
@@ -159,12 +167,20 @@ export class CreateAction extends CommandLineAction {
       const componentNameCapitalCase = upperFirst(camelCase(componentName));
       const componentNameAllCaps = snakeCase(componentName).toUpperCase();
 
+      const rawSolutionName = this._solutionName.value?.trim();
+      if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
+        throw new Error(
+          `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
+        );
+      }
+      const solutionName = rawSolutionName || componentNameHyphenCase;
+
       const fs = await template.render(
         {
-          solution_name: 'test-solution-name',
+          solution_name: solutionName,
           eslintProfile: 'react',
           libraryName: this._libraryName.value,
-          versionBadge: `https://img.shields.io/badge/version-${template.spfxVersion || '1.22.2'}-green.svg`,
+          spfxVersion: template.spfxVersion,
           componentId: componentId,
           featureId: featureId,
           solutionId: solutionId,

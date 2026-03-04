@@ -1,6 +1,7 @@
 import { CommandLineParser } from '@rushstack/ts-command-line';
-import { CreateAction } from './CreateAction';
 import { Terminal } from '@rushstack/terminal';
+
+import { CreateAction } from './actions/CreateAction';
 
 export class SPFxCommandLineParser extends CommandLineParser {
   public constructor(terminal: Terminal) {
