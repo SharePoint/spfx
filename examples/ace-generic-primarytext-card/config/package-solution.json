@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/generic-primary-text.sppkg"
+    "zippedPackage": "solution/@spfx-template/ace-generic-primarytext-card.sppkg"
   }
 }

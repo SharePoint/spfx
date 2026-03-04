@@ -110,7 +110,7 @@ const TEMPLATE_CONFIGS: TemplateConfig[] = [
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
     componentName: 'Minimal',
     componentAlias: 'Minimal',
-    componentDescription: 'Minimal ACE Description'
+    componentDescription: 'Minimal Description'
   },
   {
     libraryName: '@spfx-template/extension-application-customizer',

@@ -40,6 +40,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= componentNameHyphenCase %>-field-customizer.sppkg"
+    "zippedPackage": "solution/<%= libraryName %>.sppkg"
   }
 }

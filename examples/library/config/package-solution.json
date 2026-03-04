@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/example.sppkg"
+    "zippedPackage": "solution/@spfx-template/library.sppkg"
   }
 }
