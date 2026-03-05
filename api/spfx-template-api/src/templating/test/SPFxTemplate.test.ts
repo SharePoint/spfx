@@ -2,12 +2,9 @@
 // See LICENSE in the project root for license information.
 
 jest.mock('@rushstack/node-core-library');
-jest.mock('mem-fs');
-jest.mock('mem-fs-editor');
 
-import { FileSystem } from '@rushstack/node-core-library';
-import { create as createMemFs, type Store } from 'mem-fs';
-import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
+import * as NodeCoreLibrary from '@rushstack/node-core-library';
+import type { MemFsEditor } from 'mem-fs-editor';
 import { SPFxTemplate } from '../SPFxTemplate';
 import { SPFxTemplateJsonFile } from '../SPFxTemplateJsonFile';
 
@@ -25,28 +22,16 @@ interface IFileSystemReadFolderItemsResult {
 }
 
 describe('SPFxTemplate', () => {
-  const mockReadFileAsync = FileSystem.readFileAsync as jest.MockedFunction<typeof FileSystem.readFileAsync>;
-  const mockReadFileToBufferAsync = FileSystem.readFileToBufferAsync as jest.MockedFunction<
-    typeof FileSystem.readFileToBufferAsync
-  >;
-  const mockReadFolderItemsAsync = FileSystem.readFolderItemsAsync as jest.MockedFunction<
-    typeof FileSystem.readFolderItemsAsync
-  >;
-  const mockCreateMemFs = createMemFs as jest.MockedFunction<typeof createMemFs>;
-  const mockCreateEditor = createEditor as jest.MockedFunction<typeof createEditor>;
-
-  let mockEditor: MemFsEditor;
+  const {
+    FileSystem: {
+      readFileAsync: mockReadFileAsync,
+      readFileToBufferAsync: mockReadFileToBufferAsync,
+      readFolderItemsAsync: mockReadFolderItemsAsync
+    }
+  } = NodeCoreLibrary as jest.Mocked<typeof NodeCoreLibrary>;
 
   beforeEach(() => {
     jest.clearAllMocks();
-
-    mockEditor = {
-      write: jest.fn(),
-      commit: jest.fn().mockResolvedValue(undefined)
-    } as unknown as MemFsEditor;
-
-    mockCreateMemFs.mockReturnValue({} as Store<{ path: string }>);
-    mockCreateEditor.mockReturnValue(mockEditor);
   });
 
   describe('constructor', () => {
@@ -199,8 +184,6 @@ describe('SPFxTemplate', () => {
 
       // Verify non-template.json files were read as buffers
       expect(mockReadFileToBufferAsync).toHaveBeenCalled();
-      const bufferReadCalls = mockReadFileToBufferAsync.mock.calls;
-      expect(bufferReadCalls.length).toBeGreaterThan(0);
     });
 
     it('should handle nested directories', async () => {
@@ -337,10 +320,10 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { name: 'MyApp', title: 'My Application' };
 
-      await template.renderAsync(context, '/output');
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
 
-      expect(mockEditor.write).toHaveBeenCalledTimes(2);
-      expect(mockCreateEditor).toHaveBeenCalled();
+      expect(editor.read('/output/src/index.ts')).toBe('const name = "MyApp";');
+      expect(editor.read('/output/README.md')).toBe('# My Application');
     });
 
     it('should render template with context schema validation', async () => {
@@ -363,9 +346,9 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
 
-      await template.renderAsync(context, '/output');
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
 
-      expect(mockEditor.write).toHaveBeenCalled();
+      expect(editor.read('/output/src/index.ts')).toBe('const name = "MyComponent";');
     });
 
     it('should throw error when context does not match schema', async () => {
@@ -403,12 +386,9 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
 
-      await template.renderAsync(context, '/output');
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
 
-      expect(mockEditor.write).toHaveBeenCalledWith(
-        expect.stringContaining('MyComponent.ts'),
-        expect.any(String)
-      );
+      expect(editor.read('/output/src/MyComponent.ts')).toBe('export class MyComponent {}');
     });
 
     it('should process EJS templates in file contents', async () => {
@@ -426,10 +406,10 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { name: 'World', version: '1.0.0' };
 
-      await template.renderAsync(context, '/output');
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
 
-      expect(mockEditor.write).toHaveBeenCalledWith(expect.any(String), 'Hello World!');
-      expect(mockEditor.write).toHaveBeenCalledWith(expect.any(String), '{"version": "1.0.0"}');
+      expect(editor.read('/output/file.txt')).toBe('Hello World!');
+      expect(editor.read('/output/config.json')).toBe('{"version": "1.0.0"}');
     });
 
     it('should return MemFsEditor instance', async () => {
@@ -440,9 +420,12 @@ describe('SPFxTemplate', () => {
       });
 
       const template = new SPFxTemplate(definition, new Map());
-      const result = await template.renderAsync({}, '/output');
+      const result: MemFsEditor = await template.renderAsync({}, '/output');
 
-      expect(result).toBe(mockEditor);
+      expect(result).toBeDefined();
+      expect(typeof result.read).toBe('function');
+      expect(typeof result.write).toBe('function');
+      expect(typeof result.commit).toBe('function');
     });
   });
 
@@ -453,6 +436,10 @@ describe('SPFxTemplate', () => {
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });
+
+      const mockEditor: MemFsEditor = {
+        commit: jest.fn().mockResolvedValue(undefined)
+      } as unknown as MemFsEditor;
 
       const template = new SPFxTemplate(definition, new Map());
 
@@ -467,6 +454,10 @@ describe('SPFxTemplate', () => {
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });
+
+      const mockEditor: MemFsEditor = {
+        commit: jest.fn().mockResolvedValue(undefined)
+      } as unknown as MemFsEditor;
 
       const template = new SPFxTemplate(definition, new Map());
 
