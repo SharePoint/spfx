@@ -44,16 +44,12 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z
     $schema: z.url().optional(),
     name: z.string().min(NAME_MIN_LENGTH).max(NAME_MAX_LENGTH),
     description: z.string().max(DESCRIPTION_MAX_LENGTH).optional(),
-    version: z
-      .string()
-      .refine(isValidSemver, {
-        message: 'Invalid semantic version for "version" (expected format like "1.0.0").'
-      }),
-    spfxVersion: z
-      .string()
-      .refine(isValidSemver, {
-        message: 'Invalid semantic version for "spfxVersion" (expected format like "1.0.0").'
-      }),
+    version: z.string().refine(isValidSemver, {
+      message: 'Invalid semantic version for "version" (expected format like "1.0.0").'
+    }),
+    spfxVersion: z.string().refine(isValidSemver, {
+      message: 'Invalid semantic version for "spfxVersion" (expected format like "1.0.0").'
+    }),
     contextSchema: z
       .record(
         z.string(),

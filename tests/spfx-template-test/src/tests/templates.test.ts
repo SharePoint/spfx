@@ -46,7 +46,7 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
     componentName: 'Example',
     componentAlias: 'ExampleLibrary',
-    componentDescription: 'Example Description'
+    componentDescription: 'Library Description'
   },
   {
     libraryName: '@spfx-template/webpart-minimal',
@@ -72,8 +72,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
     templatePath: path.join(REPO_ROOT, 'templates/ace-data-visualization'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
     componentName: 'DataVisualization',
-    componentAlias: 'DataVisualization',
-    componentDescription: 'DataVisualization Description'
+    componentAlias: 'DataVisualizationCard',
+    componentDescription: 'DataVisualizationCard Description'
   },
   {
     libraryName: '@spfx-template/ace-generic-card',
@@ -90,8 +90,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
     templatePath: path.join(REPO_ROOT, 'templates/ace-generic-image-card'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
     componentName: 'GenericImage',
-    componentAlias: 'GenericImage',
-    componentDescription: 'GenericImage Description'
+    componentAlias: 'GenericImageCard',
+    componentDescription: 'GenericImageCard Description'
   },
   {
     libraryName: '@spfx-template/ace-generic-primarytext-card',
@@ -99,8 +99,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
     templatePath: path.join(REPO_ROOT, 'templates/ace-generic-primarytext-card'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
     componentName: 'GenericPrimaryText',
-    componentAlias: 'GenericPrimaryText',
-    componentDescription: 'GenericPrimaryText Description'
+    componentAlias: 'GenericPrimaryTextCard',
+    componentDescription: 'GenericPrimaryTextCard Description'
   },
   {
     libraryName: '@spfx-template/ace-search-card',
@@ -108,8 +108,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
     templatePath: path.join(REPO_ROOT, 'templates/ace-search-card'),
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
     componentName: 'Minimal',
-    componentAlias: 'Minimal',
-    componentDescription: 'Minimal ACE Description'
+    componentAlias: 'SearchCard',
+    componentDescription: 'SearchCard Description'
   },
   {
     libraryName: '@spfx-template/extension-application-customizer',
@@ -118,7 +118,7 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
     localTemplatePath: path.join(REPO_ROOT, 'templates'),
     componentName: 'Minimal',
     componentAlias: 'Minimal',
-    componentDescription: 'Minimal Description'
+    componentDescription: 'ApplicationCustomizer Description'
   },
   {
     libraryName: '@spfx-template/extension-fieldcustomizer-minimal',

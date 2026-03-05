@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/adaptive-card-extension-manifest.schema.json",
   "id": "<%= componentId %>",
-  "alias": "<%= componentNameCapitalCase %>AdaptiveCardExtension",
+  "alias": "<%= componentAlias %>",
   "componentType": "AdaptiveCardExtension",
 
   // The "*" signifies that the version should be taken from the package.json
@@ -16,11 +16,11 @@
   "preconfiguredEntries": [{
     "groupId": "bd067b1e-3ad5-4d5d-a5fe-505f07d7f59c", // Dashboard
     "group": { "default": "Dashboard" },
-    "title": { "default": "<%= componentNameUnescaped %>" },
+    "title": { "default": "<%= componentNameCapitalCase %>" },
     "description": { "default": "<%= componentDescription %>" },
     "iconImageUrl": "https://res.cdn.office.net/files/fabric-cdn-prod_20240610.001/assets/brand-icons/product-monoline/svg/vivaconnections_32x1.svg",
     "properties": {
-      "title": "<%= componentNameUnescaped %>"
+      "title": "<%= componentNameCapitalCase %>"
     },
     "cardSize": "Medium"
   }]

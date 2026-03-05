@@ -2,7 +2,7 @@
 
 ## Summary
 
-GenericImage Description
+GenericImageCard Description
 
 [picture of the solution in action, if possible]
 

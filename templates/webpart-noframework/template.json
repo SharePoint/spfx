@@ -39,6 +39,10 @@
         "componentNameCapitalCase": {
             "type": "string",
             "description": "The component class name for the web part"
+        },
+        "componentDescription": {
+            "type": "string",
+            "description": "The description of the component"
         }
     }
 }

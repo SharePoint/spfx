@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "Application customizer extension"
+        "default": "<%= componentDescription %>"
       },
       "longDescription": {
-        "default": "Application customizer extension"
+        "default": "<%= componentDescription %>"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -41,6 +41,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= componentNameHyphenCase %>.sppkg"
+    "zippedPackage": "solution/<%= libraryName %>.sppkg"
   }
 }
