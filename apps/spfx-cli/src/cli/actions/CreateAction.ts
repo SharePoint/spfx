@@ -162,8 +162,7 @@ export class CreateAction extends CommandLineAction {
       }
 
       const componentAlias: string = this._componentAlias.value || componentName;
-      const componentDescription: string =
-        this._componentDescription.value || `${componentName} description`;
+      const componentDescription: string = this._componentDescription.value || `${componentName} description`;
 
       // Compute name variants using lodash
       const componentNameCamelCase: string = camelCase(componentName);
