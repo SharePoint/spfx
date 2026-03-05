@@ -3,7 +3,7 @@
 
 jest.mock('adm-zip');
 jest.mock('@rushstack/terminal');
-jest.mock('../templating/SPFxTemplate');
+jest.mock('../../templating/SPFxTemplate');
 
 import AdmZip from 'adm-zip';
 import { Terminal, ConsoleTerminalProvider } from '@rushstack/terminal';
@@ -11,8 +11,8 @@ import {
   PublicGitHubRepositorySource,
   _parseTemplatesFromFileMapAsync,
   _createTemplateFromFileMapAsync
-} from './PublicGitHubRepositorySource';
-import { SPFxTemplate } from '../templating/SPFxTemplate';
+} from '../PublicGitHubRepositorySource';
+import { SPFxTemplate } from '../../templating/SPFxTemplate';
 
 // Mock global fetch
 global.fetch = jest.fn();

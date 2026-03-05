@@ -8,8 +8,8 @@ jest.mock('mem-fs-editor');
 import { FileSystem } from '@rushstack/node-core-library';
 import { create as createMemFs, type Store } from 'mem-fs';
 import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
-import { SPFxTemplate } from './SPFxTemplate';
-import { SPFxTemplateJsonFile } from './SPFxTemplateJsonFile';
+import { SPFxTemplate } from '../SPFxTemplate';
+import { SPFxTemplateJsonFile } from '../SPFxTemplateJsonFile';
 
 interface IFileSystemReadFolderItemsResult {
   name: string;

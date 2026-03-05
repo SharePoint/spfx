@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { SPFxTemplateRepositoryManager } from './SPFxTemplateRepositoryManager';
-import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
-import { SPFxTemplate } from '../templating/SPFxTemplate';
-import { SPFxTemplateJsonFile } from '../templating/SPFxTemplateJsonFile';
-import { SPFxTemplateCollection } from './SPFxTemplateCollection';
+import { SPFxTemplateRepositoryManager } from '../SPFxTemplateRepositoryManager';
+import { BaseSPFxTemplateRepositorySource } from '../SPFxTemplateRepositorySource';
+import { SPFxTemplate } from '../../templating/SPFxTemplate';
+import { SPFxTemplateJsonFile } from '../../templating/SPFxTemplateJsonFile';
+import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
 
 // Create a mock repository source for testing
 class MockRepositorySource extends BaseSPFxTemplateRepositorySource {

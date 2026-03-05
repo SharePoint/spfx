@@ -4,8 +4,8 @@
 import {
   BaseSPFxTemplateRepositorySource,
   type SPFxTemplateRepositorySourceTypes
-} from './SPFxTemplateRepositorySource';
-import type { SPFxTemplate } from '../templating/SPFxTemplate';
+} from '../SPFxTemplateRepositorySource';
+import type { SPFxTemplate } from '../../templating/SPFxTemplate';
 
 // Create a concrete implementation for testing
 class TestRepositorySource extends BaseSPFxTemplateRepositorySource {

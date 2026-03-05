@@ -13,7 +13,7 @@ import {
   SPFxTemplateJsonFile,
   SPFxTemplateDefinitionSchema,
   type ISPFxTemplateJson
-} from './SPFxTemplateJsonFile';
+} from '../SPFxTemplateJsonFile';
 
 describe('SPFxTemplateJsonFile', () => {
   const mockReadFileAsync = FileSystem.readFileAsync as jest.MockedFunction<typeof FileSystem.readFileAsync>;

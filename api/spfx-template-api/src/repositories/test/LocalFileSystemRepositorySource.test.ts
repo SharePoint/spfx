@@ -2,11 +2,11 @@
 // See LICENSE in the project root for license information.
 
 jest.mock('@rushstack/node-core-library');
-jest.mock('../templating/SPFxTemplate');
+jest.mock('../../templating/SPFxTemplate');
 
 import { FileSystem } from '@rushstack/node-core-library';
-import { LocalFileSystemRepositorySource } from './LocalFileSystemRepositorySource';
-import { SPFxTemplate } from '../templating/SPFxTemplate';
+import { LocalFileSystemRepositorySource } from '../LocalFileSystemRepositorySource';
+import { SPFxTemplate } from '../../templating/SPFxTemplate';
 
 interface IFileSystemReadFolderItemsResult {
   name: string;
