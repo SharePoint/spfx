@@ -5,7 +5,7 @@ Thank you for your interest in contributing to the SPFx CLI! This document provi
 ## Code of Conduct
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-See [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) for details.
+For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## Contributor License Agreement (CLA)
 
@@ -15,7 +15,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 ## Reporting Issues
 
-- Use [GitHub Issues](../../issues) to report bugs and request features.
+- Use [GitHub Issues](https://github.com/SharePoint/spfx/issues) to report bugs and request features.
 - Search existing issues before filing a new one to avoid duplicates.
 - When reporting a bug, include steps to reproduce, expected behavior, and actual behavior.
 
@@ -42,7 +42,7 @@ Please keep PRs focused — one logical change per PR. Ensure your fork is up to
 Install dependencies and build all projects:
 
 ```bash
-rush update
+rush install
 rush build
 ```
 
@@ -73,7 +73,7 @@ The workflow for template changes is:
 
 **Never hand-edit examples** — they are generated from templates and will be overwritten.
 
-See [`templates/AGENTS.md`](../templates/AGENTS.md) and [`examples/AGENTS.md`](../examples/AGENTS.md) for template style guides and conventions.
+See [`templates/AGENTS.md`](templates/AGENTS.md) and [`examples/AGENTS.md`](examples/AGENTS.md) for template style guides and conventions.
 
 ## Change Log Requirements
 
