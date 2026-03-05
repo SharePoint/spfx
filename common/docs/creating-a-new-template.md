@@ -18,11 +18,7 @@ See [`templates/AGENTS.md`](../../templates/AGENTS.md) for the full variable ref
 ## Workflow
 
 1. **Create or edit** files in `templates/<your-template>/`.
-2. **Regenerate the example**:
-   ```bash
-   cd tests/spfx-template-test
-   npm test -- --update
-   ```
+2. **Regenerate the example** by re-scaffolding the template into `examples/<your-template>/` using the CLI.
 3. **Verify the build**:
    ```bash
    rush build
@@ -30,7 +26,7 @@ See [`templates/AGENTS.md`](../../templates/AGENTS.md) for the full variable ref
 4. **Run tests** to confirm everything matches:
    ```bash
    cd tests/spfx-template-test
-   rushx test
+   rushx build
    ```
 
 ## Registering a New Template

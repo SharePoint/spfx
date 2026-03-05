@@ -20,7 +20,7 @@ rushx build
 
 ```bash
 cd tests/spfx-template-test
-rushx test
+rushx build
 ```
 
 ## How Template Snapshot Testing Works
@@ -36,16 +36,9 @@ This means the `examples/` directories are the source of truth. Any template cha
 
 ## Updating Snapshots
 
-When you intentionally change a template, regenerate the examples:
+The test suite has an update mode that scaffolds templates directly into `examples/` instead of a temp directory. It is triggered by `--update` or `-u` in `process.argv`, but this flag does not currently propagate through heft/Jest workers. A fix is tracked separately.
 
-```bash
-cd tests/spfx-template-test
-npm test -- --update
-```
-
-The `--update` (or `-u`) flag scaffolds templates directly into `examples/` instead of the temp directory, skipping comparison. This regenerates all snapshots at once.
-
-After updating, review the diff to make sure only your intended changes are present, then commit the updated examples alongside your template changes.
+In the meantime, if you change a template and need to regenerate examples, use the CLI directly to re-scaffold into the example directory, then verify with a test run.
 
 ## Change Log Requirements
 
