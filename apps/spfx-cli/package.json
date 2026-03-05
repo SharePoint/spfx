@@ -26,10 +26,9 @@
   },
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",
-    "@rushstack/eslint-config": "4.6.1",
     "@rushstack/heft": "^1.1.6",
     "@types/lodash": "^4.17.18",
     "@types/uuid": "^10.0.0",
-    "eslint": "8.57.1"
+    "eslint": "9.37.0"
   }
 }

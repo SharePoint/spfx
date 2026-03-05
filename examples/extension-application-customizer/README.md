@@ -2,13 +2,13 @@
 
 ## Summary
 
-Minimal Description
+ApplicationCustomizer Description
 
 [picture of the solution in action, if possible]
 
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/version-1.22.2-green.svg)
+[![version](https://img.shields.io/badge/version-1.22.2-green.svg)](https://img.shields.io/badge/version-1.22.2-green.svg)
 
 ## Applies to
 

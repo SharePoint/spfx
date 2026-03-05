@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Write 1-3 sentences describing the functionality of this component.",
+    "PropertyPaneDescription": "SearchCard Description",
     "TitleFieldLabel": "Card title",
     "Title": "Adaptive Card Extension",
     "SubTitle": "Quick view",

@@ -1,6 +1,10 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 import { CommandLineParser } from '@rushstack/ts-command-line';
-import { CreateAction } from './CreateAction';
-import { Terminal } from '@rushstack/terminal';
+import type { Terminal } from '@rushstack/terminal';
+
+import { CreateAction } from './actions/CreateAction';
 
 export class SPFxCommandLineParser extends CommandLineParser {
   public constructor(terminal: Terminal) {

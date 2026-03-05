@@ -1,2 +1,9 @@
-export * from './SPFxTemplate';
-export * from './SPFxTemplateJsonFile';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
+export { SPFxTemplate } from './SPFxTemplate';
+export {
+  type ISPFxTemplateJson,
+  SPFxTemplateDefinitionSchema,
+  SPFxTemplateJsonFile
+} from './SPFxTemplateJsonFile';

@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/adaptive-card-extension-manifest.schema.json",
-  "id": "413af0cb-0c9f-43db-8f86-ad1accc90481",
-  "alias": "DataVisualizationAdaptiveCardExtension",
+  "id": "11111111-1111-1111-1111-111111111111",
+  "alias": "DataVisualizationCard",
   "componentType": "AdaptiveCardExtension",
 
   // The "*" signifies that the version should be taken from the package.json
@@ -17,7 +17,7 @@
     "groupId": "bd067b1e-3ad5-4d5d-a5fe-505f07d7f59c", // Dashboard
     "group": { "default": "Dashboard" },
     "title": { "default": "DataVisualization" },
-    "description": { "default": "DataVisualization Description" },
+    "description": { "default": "DataVisualizationCard Description" },
     "iconImageUrl": "https://res.cdn.office.net/files/fabric-cdn-prod_20240610.001/assets/brand-icons/product-monoline/svg/vivaconnections_32x1.svg",
     "properties": {
       "title": "DataVisualization"

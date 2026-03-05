@@ -12,14 +12,14 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.2"
+      "mpnId": "Undefined-<%= spfxVersion %>"
     },
     "metadata": {
       "shortDescription": {
-        "default": "Application customizer extension"
+        "default": "<%= componentDescription %>"
       },
       "longDescription": {
-        "default": "Application customizer extension"
+        "default": "<%= componentDescription %>"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -41,6 +41,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= componentNameHyphenCase %>.sppkg"
+    "zippedPackage": "solution/<%= libraryName %>.sppkg"
   }
 }

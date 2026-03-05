@@ -12,7 +12,7 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.2"
+      "mpnId": "Undefined-<%= spfxVersion %>"
     },
     "metadata": {
       "shortDescription": {
@@ -40,6 +40,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= componentNameHyphenCase %>-field-customizer.sppkg"
+    "zippedPackage": "solution/<%= libraryName %>.sppkg"
   }
 }

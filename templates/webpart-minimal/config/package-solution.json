@@ -12,14 +12,14 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.22.2"
+      "mpnId": "Undefined-<%= spfxVersion %>"
     },
     "metadata": {
       "shortDescription": {
-        "default": "<%= libraryName %> description"
+        "default": "<%= componentDescription %>"
       },
       "longDescription": {
-        "default": "<%= libraryName %> description"
+        "default": "<%= componentDescription %>"
       },
       "screenshotPaths": [],
       "videoUrl": "",

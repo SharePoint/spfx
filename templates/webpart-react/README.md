@@ -8,7 +8,7 @@
 
 ## Used SharePoint Framework Version
 
-![version](<%= versionBadge %>)
+[![version](https://img.shields.io/badge/version-<%= spfxVersion %>-green.svg)](https://img.shields.io/badge/version-<%= spfxVersion %>-green.svg)
 
 ## Applies to
 
