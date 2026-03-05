@@ -1,7 +1,9 @@
-import { SPFxTemplate } from '../templating/SPFxTemplate';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
 
-import { LocalFileSystemRepositorySource } from './LocalFileSystemRepositorySource';
-import { PublicGitHubRepositorySource } from './PublicGitHubRepositorySource';
+import type { SPFxTemplate } from '../templating/SPFxTemplate';
+import type { LocalFileSystemRepositorySource } from './LocalFileSystemRepositorySource';
+import type { PublicGitHubRepositorySource } from './PublicGitHubRepositorySource';
 
 /**
  * @public
@@ -29,7 +31,7 @@ export abstract class BaseSPFxTemplateRepositorySource {
    * Retrieves all templates from this repository source.
    * @returns A Promise that resolves to an array of SPFxTemplate instances
    */
-  public abstract getTemplates(): Promise<Array<SPFxTemplate>>;
+  public abstract getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
 }
 
 /**

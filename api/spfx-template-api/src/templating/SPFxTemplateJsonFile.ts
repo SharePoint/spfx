@@ -1,6 +1,11 @@
-import * as path from 'path';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
+import * as path from 'node:path';
+
 import * as z from 'zod';
 import { valid as semverValid } from 'semver';
+
 import { FileSystem } from '@rushstack/node-core-library';
 
 const NAME_MIN_LENGTH: number = 3;
@@ -112,8 +117,8 @@ export class SPFxTemplateJsonFile {
    */
   public static async fromFileAsync(filePath: string): Promise<SPFxTemplateJsonFile> {
     const content: string = await FileSystem.readFileAsync(filePath);
-    const parsed = JSON.parse(content);
-    const result = SPFxTemplateDefinitionSchema.safeParse(parsed);
+    const parsed: ISPFxTemplateJson = JSON.parse(content);
+    const result: z.ZodSafeParseResult<ISPFxTemplateJson> = SPFxTemplateDefinitionSchema.safeParse(parsed);
     if (!result.success) {
       throw new Error(`Invalid template.json file at ${filePath}: ${result.error}`);
     }
@@ -126,7 +131,7 @@ export class SPFxTemplateJsonFile {
    * @returns A Promise that resolves to a new SPFxTemplateJsonFile instance
    */
   public static async fromFolderAsync(folderPath: string): Promise<SPFxTemplateJsonFile> {
-    const filePath = path.join(folderPath, SPFxTemplateJsonFile.TEMPLATE_JSON);
+    const filePath: string = path.join(folderPath, SPFxTemplateJsonFile.TEMPLATE_JSON);
     return SPFxTemplateJsonFile.fromFileAsync(filePath);
   }
 }

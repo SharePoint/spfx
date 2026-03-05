@@ -4,14 +4,14 @@
 
 ```ts
 
-import type { MemFsEditor } from 'mem-fs-editor';
+import { MemFsEditor } from 'mem-fs-editor';
 import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
 // @public
 export abstract class BaseSPFxTemplateRepositorySource {
     constructor(type: SPFxTemplateRepositorySourceTypes);
-    abstract getTemplates(): Promise<Array<SPFxTemplate>>;
+    abstract getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
     get type(): SPFxTemplateRepositorySourceTypes;
 }
 
@@ -31,14 +31,14 @@ export interface ISPFxTemplateJson {
 // @public
 export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
     constructor(path: string);
-    getTemplates(): Promise<Array<SPFxTemplate>>;
+    getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
     get path(): string;
 }
 
 // @public
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
     constructor(repoUri: string, branch?: string, terminal?: Terminal);
-    getTemplates(): Promise<Array<SPFxTemplate>>;
+    getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
 }
 
 // @public
@@ -48,10 +48,10 @@ export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHu
 export class SPFxTemplate {
     constructor(definition: SPFxTemplateJsonFile, files: Map<string, string>);
     get description(): string | undefined;
-    static fromFolderAsync(path: string): Promise<SPFxTemplate>;
+    static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
     get name(): string;
-    render(context: object, destinationDir: string): Promise<MemFsEditor>;
+    renderAsync(context: object, destinationDir: string): Promise<MemFsEditor>;
     get spfxVersion(): string;
     toString(): string;
     get version(): string;
@@ -88,7 +88,7 @@ export class SPFxTemplateJsonFile {
 export class SPFxTemplateRepositoryManager {
     constructor();
     addSource(source: BaseSPFxTemplateRepositorySource): void;
-    getTemplates(): Promise<SPFxTemplateCollection>;
+    getTemplatesAsync(): Promise<SPFxTemplateCollection>;
 }
 
 // @public

@@ -1,8 +1,11 @@
-import { SPFxTemplateRepositoryManager } from './SPFxTemplateRepositoryManager';
-import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
-import { SPFxTemplate } from '../templating/SPFxTemplate';
-import { SPFxTemplateJsonFile } from '../templating/SPFxTemplateJsonFile';
-import { SPFxTemplateCollection } from './SPFxTemplateCollection';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
+import { SPFxTemplateRepositoryManager } from '../SPFxTemplateRepositoryManager';
+import { BaseSPFxTemplateRepositorySource } from '../SPFxTemplateRepositorySource';
+import { SPFxTemplate } from '../../templating/SPFxTemplate';
+import { SPFxTemplateJsonFile } from '../../templating/SPFxTemplateJsonFile';
+import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
 
 // Create a mock repository source for testing
 class MockRepositorySource extends BaseSPFxTemplateRepositorySource {
@@ -13,7 +16,7 @@ class MockRepositorySource extends BaseSPFxTemplateRepositorySource {
     this._templates = templates;
   }
 
-  public async getTemplates(): Promise<Array<SPFxTemplate>> {
+  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     return this._templates;
   }
 }
@@ -73,7 +76,7 @@ describe('SPFxTemplateRepositoryManager', () => {
     it('should return empty collection when no sources added', async () => {
       const manager = new SPFxTemplateRepositoryManager();
 
-      const collection = await manager.getTemplates();
+      const collection = await manager.getTemplatesAsync();
 
       expect(collection).toBeInstanceOf(SPFxTemplateCollection);
       expect(collection.size).toBe(0);
@@ -102,7 +105,7 @@ describe('SPFxTemplateRepositoryManager', () => {
       const source = new MockRepositorySource('local', [template1, template2]);
       manager.addSource(source);
 
-      const collection = await manager.getTemplates();
+      const collection = await manager.getTemplatesAsync();
 
       expect(collection.size).toBe(2);
       expect(collection.get('Template1')).toBe(template1);
@@ -135,7 +138,7 @@ describe('SPFxTemplateRepositoryManager', () => {
       manager.addSource(localSource);
       manager.addSource(githubSource);
 
-      const collection = await manager.getTemplates();
+      const collection = await manager.getTemplatesAsync();
 
       expect(collection.size).toBe(2);
       expect(collection.get('LocalTemplate')).toBe(template1);
@@ -177,7 +180,7 @@ describe('SPFxTemplateRepositoryManager', () => {
       manager.addSource(new MockRepositorySource('github', templates2));
       manager.addSource(new MockRepositorySource('local', templates3));
 
-      const collection = await manager.getTemplates();
+      const collection = await manager.getTemplatesAsync();
 
       expect(collection.size).toBe(5);
       expect(collection.has('T1')).toBe(true);
@@ -202,7 +205,7 @@ describe('SPFxTemplateRepositoryManager', () => {
       manager.addSource(new MockRepositorySource('github', [template]));
       manager.addSource(new MockRepositorySource('local', []));
 
-      const collection = await manager.getTemplates();
+      const collection = await manager.getTemplatesAsync();
 
       expect(collection.size).toBe(1);
       expect(collection.get('Template1')).toBe(template);
@@ -216,7 +219,7 @@ describe('SPFxTemplateRepositoryManager', () => {
           super('local');
         }
 
-        public async getTemplates(): Promise<Array<SPFxTemplate>> {
+        public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
           startTimes.push(Date.now());
           await new Promise((resolve) => setTimeout(resolve, 10));
           return [];
@@ -228,7 +231,7 @@ describe('SPFxTemplateRepositoryManager', () => {
       manager.addSource(new TimedMockSource());
       manager.addSource(new TimedMockSource());
 
-      await manager.getTemplates();
+      await manager.getTemplatesAsync();
 
       // All calls should start at approximately the same time (concurrent)
       expect(startTimes).toHaveLength(3);
@@ -242,7 +245,7 @@ describe('SPFxTemplateRepositoryManager', () => {
           super('local');
         }
 
-        public async getTemplates(): Promise<Array<SPFxTemplate>> {
+        public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
           throw new Error('Failed to fetch templates');
         }
       }
@@ -250,7 +253,7 @@ describe('SPFxTemplateRepositoryManager', () => {
       const manager = new SPFxTemplateRepositoryManager();
       manager.addSource(new ErrorSource());
 
-      await expect(manager.getTemplates()).rejects.toThrow('Failed to fetch templates');
+      await expect(manager.getTemplatesAsync()).rejects.toThrow('Failed to fetch templates');
     });
 
     it('should handle duplicate template names (last one wins)', async () => {
@@ -276,7 +279,7 @@ describe('SPFxTemplateRepositoryManager', () => {
       manager.addSource(new MockRepositorySource('local', [template1]));
       manager.addSource(new MockRepositorySource('github', [template2]));
 
-      const collection = await manager.getTemplates();
+      const collection = await manager.getTemplatesAsync();
 
       expect(collection.size).toBe(1);
       // The last template with the same name wins

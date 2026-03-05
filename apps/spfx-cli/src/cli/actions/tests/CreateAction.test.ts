@@ -1,4 +1,7 @@
-import { SOLUTION_NAME_PATTERN } from '../../validation';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
+import { SOLUTION_NAME_PATTERN } from '../../../utilcities/validation';
 
 describe('SOLUTION_NAME_PATTERN', () => {
   it('should accept simple alphanumeric names', () => {

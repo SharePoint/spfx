@@ -1,9 +1,12 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 jest.mock('@rushstack/node-core-library');
-jest.mock('../templating/SPFxTemplate');
+jest.mock('../../templating/SPFxTemplate');
 
 import { FileSystem } from '@rushstack/node-core-library';
-import { LocalFileSystemRepositorySource } from './LocalFileSystemRepositorySource';
-import { SPFxTemplate } from '../templating/SPFxTemplate';
+import { LocalFileSystemRepositorySource } from '../LocalFileSystemRepositorySource';
+import { SPFxTemplate } from '../../templating/SPFxTemplate';
 
 interface IFileSystemReadFolderItemsResult {
   name: string;
@@ -29,7 +32,7 @@ describe('LocalFileSystemRepositorySource', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    // By default, template.json exists in all directories
+    // By default, assume template.json exists in all directories
     mockExistsAsync.mockResolvedValue(true);
   });
 
@@ -95,7 +98,7 @@ describe('LocalFileSystemRepositorySource', () => {
       mockFromFolderAsync.mockResolvedValueOnce(mockTemplate1).mockResolvedValueOnce(mockTemplate2);
 
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
-      const templates = await source.getTemplates();
+      const templates = await source.getTemplatesAsync();
 
       expect(mockReadFolderItems).toHaveBeenCalledWith('/path/to/templates', {
         absolutePaths: true
@@ -129,7 +132,7 @@ describe('LocalFileSystemRepositorySource', () => {
       mockFromFolderAsync.mockResolvedValue(mockTemplate);
 
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
-      const templates = await source.getTemplates();
+      const templates = await source.getTemplatesAsync();
 
       expect(templates.length).toBe(1);
       expect(mockFromFolderAsync).toHaveBeenCalledTimes(1);
@@ -181,7 +184,7 @@ describe('LocalFileSystemRepositorySource', () => {
       mockReadFolderItems.mockReturnValue(mockFolderItems);
 
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
-      const templates = await source.getTemplates();
+      const templates = await source.getTemplatesAsync();
 
       expect(templates).toEqual([]);
       expect(mockFromFolderAsync).not.toHaveBeenCalled();
@@ -191,7 +194,7 @@ describe('LocalFileSystemRepositorySource', () => {
       mockReadFolderItems.mockReturnValue([]);
 
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
-      const templates = await source.getTemplates();
+      const templates = await source.getTemplatesAsync();
 
       expect(templates).toEqual([]);
       expect(mockFromFolderAsync).not.toHaveBeenCalled();
@@ -204,7 +207,7 @@ describe('LocalFileSystemRepositorySource', () => {
 
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
 
-      await expect(source.getTemplates()).rejects.toThrow(
+      await expect(source.getTemplatesAsync()).rejects.toThrow(
         /Failed to read templates from \/path\/to\/templates/
       );
     });
@@ -223,14 +226,14 @@ describe('LocalFileSystemRepositorySource', () => {
 
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
 
-      await expect(source.getTemplates()).rejects.toThrow(/Failed to read templates/);
+      await expect(source.getTemplatesAsync()).rejects.toThrow(/Failed to read templates/);
     });
 
     it('should use absolute paths when reading folders', async () => {
       mockReadFolderItems.mockReturnValue([]);
 
       const source = new LocalFileSystemRepositorySource('/test/path');
-      await source.getTemplates();
+      await source.getTemplatesAsync();
 
       expect(mockReadFolderItems).toHaveBeenCalledWith('/test/path', {
         absolutePaths: true
@@ -268,7 +271,7 @@ describe('LocalFileSystemRepositorySource', () => {
       });
 
       const source = new LocalFileSystemRepositorySource('/path');
-      await source.getTemplates();
+      await source.getTemplatesAsync();
 
       // All calls should be made at approximately the same time (concurrent)
       expect(mockFromFolderAsync).toHaveBeenCalledTimes(3);

@@ -1,10 +1,20 @@
-import { FileSystem } from '@rushstack/node-core-library';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
+import * as path from 'node:path';
+
+import { create as createMemFs } from 'mem-fs';
+import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
 import * as ejs from 'ejs';
-import type { MemFsEditor } from 'mem-fs-editor';
-import * as path from 'path';
 import * as z from 'zod';
 
-import { SPFxTemplateJsonFile, SPFxTemplateDefinitionSchema } from './SPFxTemplateJsonFile';
+import { FileSystem, type FolderItem } from '@rushstack/node-core-library';
+
+import {
+  SPFxTemplateJsonFile,
+  SPFxTemplateDefinitionSchema,
+  type ISPFxTemplateJson
+} from './SPFxTemplateJsonFile';
 
 /**
  * @public
@@ -50,12 +60,12 @@ export class SPFxTemplate {
 
   /**
    * Creates a new SPFxTemplate instance from a folder on disk.
-   * @param path - The path to the folder containing the template files
+   * @param folderPath - The path to the folder containing the template files
    * @returns A Promise that resolves to a new SPFxTemplate instance
    */
-  public static async fromFolderAsync(path: string): Promise<SPFxTemplate> {
-    const templateJsonFile: SPFxTemplateJsonFile = await SPFxTemplateJsonFile.fromFolderAsync(path);
-    const files = await SPFxTemplate._readFilesRecursively(path);
+  public static async fromFolderAsync(folderPath: string): Promise<SPFxTemplate> {
+    const templateJsonFile: SPFxTemplateJsonFile = await SPFxTemplateJsonFile.fromFolderAsync(folderPath);
+    const files: Map<string, string> = await SPFxTemplate._readFilesRecursivelyAsync(folderPath);
     return new SPFxTemplate(templateJsonFile, files);
   }
 
@@ -72,16 +82,17 @@ export class SPFxTemplate {
     fileMap: Map<string, Buffer>
   ): Promise<SPFxTemplate> {
     // Validate the template JSON against our schema
-    const result = SPFxTemplateDefinitionSchema.safeParse(templateJsonData);
+    const result: z.ZodSafeParseResult<ISPFxTemplateJson> =
+      SPFxTemplateDefinitionSchema.safeParse(templateJsonData);
     if (!result.success) {
       throw new Error(`Invalid template.json: ${result.error}`);
     }
 
     // Create SPFxTemplateJsonFile from the validated JSON
-    const templateJsonFile = new SPFxTemplateJsonFile(result.data);
+    const templateJsonFile: SPFxTemplateJsonFile = new SPFxTemplateJsonFile(result.data);
 
     // Convert Buffer map to string map, excluding template.json
-    const files = new Map<string, string>();
+    const files: Map<string, string> = new Map<string, string>();
     for (const [filePath, buffer] of fileMap) {
       if (filePath !== 'template.json') {
         files.set(filePath, buffer.toString('utf8'));
@@ -91,14 +102,14 @@ export class SPFxTemplate {
     return new SPFxTemplate(templateJsonFile, files);
   }
 
-  private static async _readFilesRecursively(baseDir: string): Promise<Map<string, string>> {
-    const files = new Map<string, string>();
+  private static async _readFilesRecursivelyAsync(baseDir: string): Promise<Map<string, string>> {
+    const files: Map<string, string> = new Map<string, string>();
     const frontier: string[] = [''];
 
     while (frontier.length > 0) {
       const currentSubDir: string = frontier.pop()!;
-      const folderPath = path.join(baseDir, currentSubDir);
-      const items = await FileSystem.readFolderItemsAsync(folderPath);
+      const folderPath: string = path.join(baseDir, currentSubDir);
+      const items: FolderItem[] = await FileSystem.readFolderItemsAsync(folderPath);
 
       await Promise.all(
         items.map(async (item) => {
@@ -111,7 +122,7 @@ export class SPFxTemplate {
 
           if (item.isFile()) {
             const fullPath: string = path.join(folderPath, item.name);
-            const content = await FileSystem.readFileAsync(fullPath);
+            const content: string = await FileSystem.readFileAsync(fullPath);
             files.set(relativePath, content);
           } else if (item.isDirectory()) {
             frontier.push(relativePath);
@@ -129,10 +140,7 @@ export class SPFxTemplate {
    * @param destinationDir - The destination directory where rendered files will be written
    * @returns A Promise that resolves to a MemFsEditor instance containing the rendered files
    */
-  public async render(context: object, destinationDir: string): Promise<MemFsEditor> {
-    const { create: createMemFs } = await import('mem-fs');
-    const { create: createEditor } = await import('mem-fs-editor');
-
+  public async renderAsync(context: object, destinationDir: string): Promise<MemFsEditor> {
     // use the template "schema" to validate the context object
     if (this._definition.contextSchema) {
       // Build a Zod schema from the contextSchema metadata
@@ -142,8 +150,8 @@ export class SPFxTemplate {
           schemaShape[key] = z.string();
         }
       }
-      const contextSchema = z.object(schemaShape);
-      const validationResult = contextSchema.safeParse(context);
+      const contextSchema: z.ZodObject<Record<string, z.ZodString>> = z.object(schemaShape);
+      const validationResult: z.ZodSafeParseResult<Record<string, string>> = contextSchema.safeParse(context);
       if (!validationResult.success) {
         throw new Error(`Invalid context object: ${validationResult.error}`);
       }
@@ -153,15 +161,15 @@ export class SPFxTemplate {
 
     for (const [filename, contents] of this._files.entries()) {
       // Render the filename by replacing {variableName} placeholders
-      let renderedFilename = filename;
+      let renderedFilename: string = filename;
       for (const [key, value] of Object.entries(context)) {
-        const placeholder = `{${key}}`;
+        const placeholder: string = `{${key}}`;
         renderedFilename = renderedFilename.split(placeholder).join(String(value));
       }
-      const destination = path.join(destinationDir, renderedFilename);
+      const destination: string = path.join(destinationDir, renderedFilename);
 
       // Process file contents as EJS template
-      const rendered = ejs.render(contents, context, {
+      const rendered: string = ejs.render(contents, context, {
         filename,
         cache: false
       });
