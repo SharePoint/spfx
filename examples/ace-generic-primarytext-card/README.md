@@ -2,7 +2,7 @@
 
 ## Summary
 
-GenericPrimaryText Description
+GenericPrimaryTextCard Description
 
 [picture of the solution in action, if possible]
 

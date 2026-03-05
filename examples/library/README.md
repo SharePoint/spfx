@@ -2,7 +2,7 @@
 
 ## Summary
 
-Example Description
+Library Description
 
 [picture of the solution in action, if possible]
 

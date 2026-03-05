@@ -40,6 +40,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/no-framework-field-customizer.sppkg"
+    "zippedPackage": "solution/@spfx-template/extension-fieldcustomizer-noframework.sppkg"
   }
 }

@@ -6,18 +6,16 @@
 !/dist/**
 !/EULA/**
 !/lib/**
-!/lib-dts/***
+!/lib-*/**
 !ThirdPartyNotice.txt
 
-# Ignore certain files in the above folder
+# Ignore certain files in the above folders
 /dist/*.stats.*
 /dist/**/*.js.map
 /lib/**/*.js.map
 /lib/**/test/**
-/lib-dts/**/*.ts.map
-/lib-dts/**/test/**
-/lib/**/*.js.map
-/lib/**/test/**
+/lib-*/**/*.js.map
+/lib-*/**/test/**
 
 # NOTE: These don't need to be specified, because NPM includes them automatically.
 #

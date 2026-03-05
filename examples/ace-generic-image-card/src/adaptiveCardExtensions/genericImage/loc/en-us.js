@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "GenericImage Description",
+    "PropertyPaneDescription": "GenericImageCard Description",
     "TitleFieldLabel": "Card title",
     "Title": "Adaptive Card Extension",
     "SubTitle": "Quick view",

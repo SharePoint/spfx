@@ -2,7 +2,7 @@
 
 ## Summary
 
-Minimal Description
+ApplicationCustomizer Description
 
 [picture of the solution in action, if possible]
 

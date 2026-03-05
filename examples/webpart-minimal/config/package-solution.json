@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "@spfx-template/webpart-minimal description"
+        "default": "Minimal Web Part Description"
       },
       "longDescription": {
-        "default": "@spfx-template/webpart-minimal description"
+        "default": "Minimal Web Part Description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
