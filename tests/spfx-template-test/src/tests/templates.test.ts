@@ -1,7 +1,10 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { execSync } from 'child_process';
-import { promisify } from 'util';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { execSync } from 'node:child_process';
+import { promisify } from 'node:util';
 import ignore from 'ignore';
 
 const readdir = promisify(fs.readdir);
@@ -9,13 +12,12 @@ const readFile = promisify(fs.readFile);
 
 // Path to the root of the monorepo
 const REPO_ROOT = path.resolve(__dirname, '../../../../');
-const TEST_TEMPLATE_DIR = path.join(REPO_ROOT, 'tests/spfx-template-test'); // Directory passed to --local-template; contains the test-template subdirectory
 const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
 const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
 
 // Predefined template configuration
-interface TemplateConfig {
+interface ITemplateConfig {
   libraryName: string;
   templateName: string;
   templatePath: string;
@@ -26,7 +28,7 @@ interface TemplateConfig {
   solutionName?: string;
 }
 
-const TEMPLATE_CONFIGS: TemplateConfig[] = [
+const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/hello-world-test',
     templateName: 'test',
@@ -208,9 +210,9 @@ async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ig
   try {
     const gitignoreContent = await readFile(gitignorePath, 'utf-8');
     ig.add(gitignoreContent);
-  } catch (error) {
+  } catch {
     // If .gitignore doesn't exist, just use default ignores
-    console.warn(`No .gitignore found at ${gitignorePath}, using default ignores`);
+    console.info(`No .gitignore found at ${gitignorePath}, using default ignores`);
   }
 
   return ig;
@@ -247,16 +249,16 @@ async function getAllFiles(
 }
 
 /**
- * Read file content, return null if file doesn't exist or can't be read
- * Normalizes line endings to \n for consistent comparison
+ * Read file content, return undefined if file doesn't exist or can't be read.
+ * Normalizes line endings to `\n` for consistent comparison.
  */
-async function readFileContent(filePath: string): Promise<string | null> {
+async function readFileContent(filePath: string): Promise<string | undefined> {
   try {
     const content = await readFile(filePath, 'utf-8');
     // Normalize line endings to \n
     return content.replace(/\r\n/g, '\n');
-  } catch (error) {
-    return null;
+  } catch {
+    return undefined;
   }
 }
 
@@ -292,7 +294,7 @@ describe('SPFx Template Scaffolding', () => {
 
         // Check if example exists (only in normal mode)
         if (!UPDATE_MODE && !fs.existsSync(examplePath)) {
-          console.warn(`Warning: No example found for template '${config.templateName}' at ${examplePath}`);
+          console.info(`Warning: No example found for template '${config.templateName}' at ${examplePath}`);
           return;
         }
 
@@ -328,7 +330,7 @@ describe('SPFx Template Scaffolding', () => {
           }
 
           const command = commandParts.join(' ');
-          console.log(`Running: ${command}`);
+          console.info(`Running: ${command}`);
 
           execSync(command, {
             stdio: 'inherit',
@@ -345,7 +347,7 @@ describe('SPFx Template Scaffolding', () => {
 
         // If update mode, skip comparison (we scaffolded directly to examples)
         if (UPDATE_MODE) {
-          console.log(`[UPDATE MODE] Scaffolded ${config.templateName} to ${examplePath}`);
+          console.info(`[UPDATE MODE] Scaffolded ${config.templateName} to ${examplePath}`);
           return;
         }
 
@@ -354,7 +356,7 @@ describe('SPFx Template Scaffolding', () => {
         const exampleFiles = await getAllFiles(examplePath, examplePath, ignoreMatcher);
 
         // Filter out files that should be ignored in comparison
-        const filterFiles = (files: string[]) =>
+        const filterFiles = (files: string[]): string[] =>
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
             // Skip binary/image files that cannot be meaningfully compared as UTF-8 text

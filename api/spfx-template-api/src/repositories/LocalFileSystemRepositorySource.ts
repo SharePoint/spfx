@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { FileSystem } from '@rushstack/node-core-library';
+import { FileSystem, type FolderItem } from '@rushstack/node-core-library';
 
 import { SPFxTemplate } from '../templating/SPFxTemplate';
 import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
@@ -33,19 +33,19 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
    */
   public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     try {
-      const items = await FileSystem.readFolderItems(this.path, {
+      const items: FolderItem[] = FileSystem.readFolderItems(this.path, {
         absolutePaths: true // get the full paths back so we don't have to reconstruct it
       }).filter((item) => {
         // Only include directories that don't start with a dot (e.g., .rush, .git)
-        const basename = item.name.split(/[/\\]/).pop() || '';
+        const basename: string = item.name.split(/[/\\]/).pop() || '';
         return item.isDirectory() && !basename.startsWith('.');
       });
 
       // Filter for directories that contain template.json
-      const templateDirs = await Promise.all(
+      const templateDirs: Array<string | null> = await Promise.all(
         items.map(async (item) => {
-          const templateJsonPath = `${item.name}/template.json`;
-          const exists = await FileSystem.existsAsync(templateJsonPath);
+          const templateJsonPath: string = `${item.name}/template.json`;
+          const exists: boolean = await FileSystem.existsAsync(templateJsonPath);
           return exists ? item.name : null;
         })
       );

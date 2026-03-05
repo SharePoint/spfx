@@ -11,6 +11,4 @@ export interface IStore {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type Store<T = unknown> = IStore;
 
-export function create(): IStore {
-  return {} as IStore;
-}
+export const create = jest.fn((): IStore => ({}) as IStore);

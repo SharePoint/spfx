@@ -12,10 +12,11 @@ export interface IMemFsEditor {
 // Export as MemFsEditor for compatibility with existing imports
 export type MemFsEditor = IMemFsEditor;
 
-export function create(store: unknown): IMemFsEditor {
-  return {
-    write: jest.fn(),
-    commit: jest.fn().mockResolvedValue(undefined),
-    dump: jest.fn().mockReturnValue({})
-  } as unknown as IMemFsEditor;
-}
+export const create = jest.fn(
+  (): IMemFsEditor =>
+    ({
+      write: jest.fn(),
+      commit: jest.fn().mockResolvedValue(undefined),
+      dump: jest.fn().mockReturnValue({})
+    }) as unknown as IMemFsEditor
+);

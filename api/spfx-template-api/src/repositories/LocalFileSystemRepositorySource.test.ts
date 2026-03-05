@@ -25,12 +25,15 @@ describe('LocalFileSystemRepositorySource', () => {
   const mockReadFolderItems = FileSystem.readFolderItems as jest.MockedFunction<
     typeof FileSystem.readFolderItems
   >;
+  const mockExistsAsync = FileSystem.existsAsync as jest.MockedFunction<typeof FileSystem.existsAsync>;
   const mockFromFolderAsync = SPFxTemplate.fromFolderAsync as jest.MockedFunction<
     typeof SPFxTemplate.fromFolderAsync
   >;
 
   beforeEach(() => {
     jest.clearAllMocks();
+    // By default, assume template.json exists in all directories
+    mockExistsAsync.mockResolvedValue(true);
   });
 
   describe('constructor', () => {
