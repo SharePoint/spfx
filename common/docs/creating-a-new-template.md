@@ -13,7 +13,7 @@ A template directory contains:
 - `template.json` — manifest with metadata, context variables, and their schemas
 - Source files using EJS syntax (`<%= variableName %>`) for dynamic content
 
-See [`templates/AGENTS.md`](../../templates/AGENTS.md) for the full variable reference and style guide.
+See the [Template Style Guide](template-style-guide.md) for variable reference and naming conventions.
 
 ## Workflow
 
@@ -49,4 +49,4 @@ If you're adding a brand-new template (not editing an existing one):
 | `description` | — | User-provided description |
 | `spfxVersion` | — | SPFx framework version |
 
-See [`templates/AGENTS.md`](../../templates/AGENTS.md) and [`examples/AGENTS.md`](../../examples/AGENTS.md) for the full style guide, naming conventions, and common mistakes checklist.
+See the [Template Style Guide](template-style-guide.md) for the full naming conventions and pre-submit checklist.

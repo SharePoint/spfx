@@ -1,5 +1,7 @@
 # SPFx Examples Development Style Guide
 
+> The human-readable version of this guide is at [common/docs/template-style-guide.md](../common/docs/template-style-guide.md).
+
 This guide contains critical guidelines for maintaining SPFx examples. Examples are the rendered output of templates and must stay synchronized with their template definitions.
 
 ## Purpose of Examples
