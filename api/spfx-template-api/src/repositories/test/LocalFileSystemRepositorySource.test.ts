@@ -162,7 +162,7 @@ describe('LocalFileSystemRepositorySource', () => {
       mockFromFolderAsync.mockResolvedValue(mockTemplate);
 
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
-      const templates = await source.getTemplates();
+      const templates = await source.getTemplatesAsync();
 
       expect(mockExistsAsync).toHaveBeenCalledTimes(2);
       expect(mockExistsAsync).toHaveBeenCalledWith('/path/to/templates/valid-template/template.json');
