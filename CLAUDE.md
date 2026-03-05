@@ -143,6 +143,19 @@ If a PR modifies a **published** project (`apps/spfx-cli/` or `api/spfx-template
 - Commit messages should be concise and descriptive
 - Always include Co-Authored-By line for Claude commits
 
+## Pull Requests
+
+When creating a PR, follow the template in `.github/PULL_REQUEST_TEMPLATE.md`:
+- **Description**: Explain what the PR does and why
+- **How was this tested**: Describe how you verified the changes (e.g., `rushx build`, `rushx test`, manual testing)
+- **Type of change**: Check the applicable box (bug fix, new feature, template change, docs/CI)
+
+## Filing Issues
+
+When filing issues, use the appropriate template from `.github/ISSUE_TEMPLATE/`:
+- **Bug report**: Include reproduction steps, expected vs actual behavior, CLI/Node versions, and the affected template if applicable
+- **Feature request**: Include a description, use case, and alternatives considered
+
 ## Important Notes
 
 1. **Always use the correct Node version** - This is the #1 cause of build failures
