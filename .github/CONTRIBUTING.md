@@ -15,14 +15,15 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 ## Reporting Issues
 
-- Use [GitHub Issues](https://github.com/nickvdyck/spfx/issues) to report bugs and request features.
+- Use [GitHub Issues](../../issues) to report bugs and request features.
 - Search existing issues before filing a new one to avoid duplicates.
 - When reporting a bug, include steps to reproduce, expected behavior, and actual behavior.
 
 ## How to Contribute
 
 1. **Fork** the repository and clone your fork locally.
-2. Create a **branch** for your change (`git checkout -b my-feature`).
+2. Create a **branch** for your change (`git checkout -b <github-username>/<feature-name>`).
+   - Use branch names in the form `<github-username>/<feature-name>` (for example, `alice/add-logging`).
 3. Make your changes and verify the build passes (see [Development Setup](#development-setup)).
 4. **Commit** your changes with a clear, descriptive message.
 5. **Push** to your fork and open a Pull Request against `main`.
