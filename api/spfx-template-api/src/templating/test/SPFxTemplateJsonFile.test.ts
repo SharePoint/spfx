@@ -1,16 +1,19 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 jest.mock('@rushstack/node-core-library', () => ({
   FileSystem: {
     readFileAsync: jest.fn()
   }
 }));
 
-import * as path from 'path';
+import * as path from 'node:path';
 import { FileSystem } from '@rushstack/node-core-library';
 import {
   SPFxTemplateJsonFile,
   SPFxTemplateDefinitionSchema,
-  ISPFxTemplateJson
-} from './SPFxTemplateJsonFile';
+  type ISPFxTemplateJson
+} from '../SPFxTemplateJsonFile';
 
 describe('SPFxTemplateJsonFile', () => {
   const mockReadFileAsync = FileSystem.readFileAsync as jest.MockedFunction<typeof FileSystem.readFileAsync>;

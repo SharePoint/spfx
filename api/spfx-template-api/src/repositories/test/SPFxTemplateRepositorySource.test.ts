@@ -1,8 +1,11 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 import {
   BaseSPFxTemplateRepositorySource,
-  SPFxTemplateRepositorySourceTypes
-} from './SPFxTemplateRepositorySource';
-import { SPFxTemplate } from '../templating/SPFxTemplate';
+  type SPFxTemplateRepositorySourceTypes
+} from '../SPFxTemplateRepositorySource';
+import type { SPFxTemplate } from '../../templating/SPFxTemplate';
 
 // Create a concrete implementation for testing
 class TestRepositorySource extends BaseSPFxTemplateRepositorySource {
@@ -13,7 +16,7 @@ class TestRepositorySource extends BaseSPFxTemplateRepositorySource {
     this._templates = templates;
   }
 
-  public async getTemplates(): Promise<Array<SPFxTemplate>> {
+  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     return this._templates;
   }
 }
@@ -56,20 +59,20 @@ describe('BaseSPFxTemplateRepositorySource', () => {
     it('should be implemented by concrete class', async () => {
       const source = new TestRepositorySource('local');
 
-      expect(source.getTemplates).toBeDefined();
-      expect(typeof source.getTemplates).toBe('function');
+      expect(source.getTemplatesAsync).toBeDefined();
+      expect(typeof source.getTemplatesAsync).toBe('function');
     });
 
     it('should return a promise', () => {
       const source = new TestRepositorySource('local');
-      const result = source.getTemplates();
+      const result = source.getTemplatesAsync();
 
       expect(result).toBeInstanceOf(Promise);
     });
 
     it('should resolve to an array', async () => {
       const source = new TestRepositorySource('local');
-      const result = await source.getTemplates();
+      const result = await source.getTemplatesAsync();
 
       expect(Array.isArray(result)).toBe(true);
     });

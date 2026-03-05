@@ -1,6 +1,9 @@
-import { SPFxTemplateCollection } from './SPFxTemplateCollection';
-import { SPFxTemplate } from '../templating';
-import { SPFxTemplateJsonFile } from '../templating';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
+import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
+import { SPFxTemplate } from '../../templating';
+import { SPFxTemplateJsonFile } from '../../templating';
 
 describe('SPFxTemplateCollection', () => {
   describe('constructor', () => {
