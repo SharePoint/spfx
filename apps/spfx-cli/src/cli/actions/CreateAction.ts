@@ -13,7 +13,6 @@ import {
   type CommandLineStringParameter,
   type IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
-
 import {
   LocalFileSystemRepositorySource,
   type SPFxTemplateCollection,
@@ -21,7 +20,7 @@ import {
   type SPFxTemplate
 } from '@microsoft/spfx-template-api';
 
-import { SOLUTION_NAME_PATTERN } from '../validation';
+import { SOLUTION_NAME_PATTERN } from '../../utilcities/validation';
 
 const CI_COMPONENT_ID: string = '11111111-1111-1111-1111-111111111111';
 const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
