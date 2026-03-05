@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 jest.mock('adm-zip');
 jest.mock('@rushstack/terminal');
 jest.mock('../templating/SPFxTemplate');
@@ -387,7 +390,7 @@ describe('PublicGitHubRepositorySource', () => {
       mockFromMemoryAsync.mockResolvedValue(mockTemplate);
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
-      const templates = await source.getTemplates();
+      const templates = await source.getTemplatesAsync();
 
       expect(mockFetch).toHaveBeenCalledWith('https://codeload.github.com/owner/repo/zip/main');
       expect(templates).toHaveLength(1);
@@ -402,7 +405,9 @@ describe('PublicGitHubRepositorySource', () => {
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
 
-      await expect(source.getTemplates()).rejects.toThrow(/Failed to fetch templates from GitHub repository/);
+      await expect(source.getTemplatesAsync()).rejects.toThrow(
+        /Failed to fetch templates from GitHub repository/
+      );
     });
 
     it('should throw error when network request fails', async () => {
@@ -410,7 +415,9 @@ describe('PublicGitHubRepositorySource', () => {
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
 
-      await expect(source.getTemplates()).rejects.toThrow(/Failed to fetch templates from GitHub repository/);
+      await expect(source.getTemplatesAsync()).rejects.toThrow(
+        /Failed to fetch templates from GitHub repository/
+      );
     });
   });
 });

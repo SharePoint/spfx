@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 import { FileSystem } from '@rushstack/node-core-library';
 
 import { SPFxTemplate } from '../templating/SPFxTemplate';
@@ -28,7 +31,7 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
    * Retrieves all templates from the local file system.
    * @returns A Promise that resolves to an array of SPFxTemplate instances
    */
-  public async getTemplates(): Promise<Array<SPFxTemplate>> {
+  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     try {
       const items = await FileSystem.readFolderItems(this.path, {
         absolutePaths: true // get the full paths back so we don't have to reconstruct it

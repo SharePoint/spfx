@@ -1,8 +1,78 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 import AdmZip from 'adm-zip';
+
 import { ConsoleTerminalProvider, Terminal } from '@rushstack/terminal';
 
 import { SPFxTemplate } from '../templating/SPFxTemplate';
 import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
+
+/**
+ * @internal
+ */
+export async function _parseTemplatesFromFileMapAsync(
+  terminal: Terminal,
+  fileMap: Map<string, Buffer>
+): Promise<Array<SPFxTemplate>> {
+  const templates: Array<SPFxTemplate> = [];
+  const templateDirs = new Set<string>();
+
+  // Find all directories that contain template.json
+  for (const [filePath] of fileMap) {
+    if (filePath.endsWith('/template.json') || filePath === 'template.json') {
+      const dirPath = filePath === 'template.json' ? '' : filePath.replace('/template.json', '');
+      templateDirs.add(dirPath);
+    }
+  }
+
+  // Create SPFxTemplate instances for each template directory
+  for (const templateDir of templateDirs) {
+    try {
+      const template = await _createTemplateFromFileMapAsync(templateDir, fileMap);
+      if (template) {
+        templates.push(template);
+      }
+    } catch (error) {
+      terminal.writeWarningLine(`Failed to parse template from directory ${templateDir}: ${error}`);
+    }
+  }
+
+  return templates;
+}
+
+async function _createTemplateFromFileMapAsync(
+  templateDir: string,
+  fileMap: Map<string, Buffer>
+): Promise<SPFxTemplate | undefined> {
+  // Get template.json content
+  const templateJsonPath = templateDir ? `${templateDir}/template.json` : 'template.json';
+  const templateJsonBuffer = fileMap.get(templateJsonPath);
+
+  if (!templateJsonBuffer) {
+    return undefined;
+  }
+
+  try {
+    const templateJson = JSON.parse(templateJsonBuffer.toString('utf8'));
+
+    // Create a virtual file system for this template
+    const templateFiles = new Map<string, Buffer>();
+    const prefix = templateDir ? `${templateDir}/` : '';
+
+    for (const [filePath, content] of fileMap) {
+      if (filePath.startsWith(prefix)) {
+        const relativePath = filePath.substring(prefix.length);
+        templateFiles.set(relativePath, content);
+      }
+    }
+
+    // Use SPFxTemplate.fromMemoryAsync method
+    return await SPFxTemplate.fromMemoryAsync(templateDir || 'root', templateJson, templateFiles);
+  } catch (error) {
+    throw new Error(`Failed to parse template.json in ${templateDir}: ${error}`);
+  }
+}
 
 /**
  * @public
@@ -46,11 +116,11 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
    * Retrieves all templates from the GitHub repository.
    * @returns A Promise that resolves to an array of SPFxTemplate instances
    */
-  public async getTemplates(): Promise<Array<SPFxTemplate>> {
+  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     try {
       const downloadUrl = this._buildDownloadUrl();
-      const fileMap = await this._downloadAndExtractRepository(downloadUrl);
-      return await this._parseTemplatesFromFileMap(fileMap);
+      const fileMap = await this._downloadAndExtractRepositoryAsync(downloadUrl);
+      return await _parseTemplatesFromFileMapAsync(this._terminal, fileMap);
     } catch (error) {
       throw new Error(`Failed to fetch templates from GitHub repository ${this._repoUri}: ${error}`);
     }
@@ -72,7 +142,7 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
     return { owner, repo };
   }
 
-  private async _downloadAndExtractRepository(downloadUrl: string): Promise<Map<string, Buffer>> {
+  private async _downloadAndExtractRepositoryAsync(downloadUrl: string): Promise<Map<string, Buffer>> {
     const response = await fetch(downloadUrl);
     if (!response.ok) {
       throw new Error(`Failed to download repository: ${response.status} ${response.statusText}`);
@@ -105,65 +175,5 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
     }
 
     return fileMap;
-  }
-
-  private async _parseTemplatesFromFileMap(fileMap: Map<string, Buffer>): Promise<Array<SPFxTemplate>> {
-    const templates: Array<SPFxTemplate> = [];
-    const templateDirs = new Set<string>();
-
-    // Find all directories that contain template.json
-    for (const [filePath] of fileMap) {
-      if (filePath.endsWith('/template.json') || filePath === 'template.json') {
-        const dirPath = filePath === 'template.json' ? '' : filePath.replace('/template.json', '');
-        templateDirs.add(dirPath);
-      }
-    }
-
-    // Create SPFxTemplate instances for each template directory
-    for (const templateDir of templateDirs) {
-      try {
-        const template = await this._createTemplateFromFileMap(templateDir, fileMap);
-        if (template) {
-          templates.push(template);
-        }
-      } catch (error) {
-        this._terminal.writeWarningLine(`Failed to parse template from directory ${templateDir}: ${error}`);
-      }
-    }
-
-    return templates;
-  }
-
-  private async _createTemplateFromFileMap(
-    templateDir: string,
-    fileMap: Map<string, Buffer>
-  ): Promise<SPFxTemplate | undefined> {
-    // Get template.json content
-    const templateJsonPath = templateDir ? `${templateDir}/template.json` : 'template.json';
-    const templateJsonBuffer = fileMap.get(templateJsonPath);
-
-    if (!templateJsonBuffer) {
-      return undefined;
-    }
-
-    try {
-      const templateJson = JSON.parse(templateJsonBuffer.toString('utf8'));
-
-      // Create a virtual file system for this template
-      const templateFiles = new Map<string, Buffer>();
-      const prefix = templateDir ? `${templateDir}/` : '';
-
-      for (const [filePath, content] of fileMap) {
-        if (filePath.startsWith(prefix)) {
-          const relativePath = filePath.substring(prefix.length);
-          templateFiles.set(relativePath, content);
-        }
-      }
-
-      // Use SPFxTemplate.fromMemoryAsync method
-      return await SPFxTemplate.fromMemoryAsync(templateDir || 'root', templateJson, templateFiles);
-    } catch (error) {
-      throw new Error(`Failed to parse template.json in ${templateDir}: ${error}`);
-    }
   }
 }
