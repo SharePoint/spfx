@@ -18,6 +18,11 @@ export abstract class BaseSPFxTemplateRepositorySource {
 // @internal
 export function _isBinaryFile(filePath: string): boolean;
 
+// @public (undocumented)
+export interface IRenderOptions {
+    retainPhaseScripts?: boolean;
+}
+
 // @public
 export interface ISPFxTemplateJson {
     $schema?: string;
@@ -54,7 +59,7 @@ export class SPFxTemplate {
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
     get name(): string;
-    renderAsync(context: object, destinationDir: string): Promise<MemFsEditor>;
+    renderAsync(context: object, destinationDir: string, options?: IRenderOptions): Promise<MemFsEditor>;
     get spfxVersion(): string;
     toString(): string;
     get version(): string;
