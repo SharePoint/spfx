@@ -1,11 +1,18 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 jest.mock('adm-zip');
 jest.mock('@rushstack/terminal');
-jest.mock('../templating/SPFxTemplate');
+jest.mock('../../templating/SPFxTemplate');
 
 import AdmZip from 'adm-zip';
 import { Terminal, ConsoleTerminalProvider } from '@rushstack/terminal';
-import { PublicGitHubRepositorySource } from './PublicGitHubRepositorySource';
-import { SPFxTemplate } from '../templating/SPFxTemplate';
+import {
+  PublicGitHubRepositorySource,
+  _parseTemplatesFromFileMapAsync,
+  _createTemplateFromFileMapAsync
+} from '../PublicGitHubRepositorySource';
+import { SPFxTemplate } from '../../templating/SPFxTemplate';
 
 // Mock global fetch
 global.fetch = jest.fn();
@@ -212,7 +219,7 @@ describe('PublicGitHubRepositorySource', () => {
     });
   });
 
-  describe('_parseTemplatesFromFileMap', () => {
+  describe('_parseTemplatesFromFileMapAsync', () => {
     it('should find templates with template.json files', async () => {
       const mockTemplate = { name: 'Template1' } as SPFxTemplate;
 
@@ -223,8 +230,7 @@ describe('PublicGitHubRepositorySource', () => {
 
       mockFromMemoryAsync.mockResolvedValue(mockTemplate);
 
-      const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
-      const templates = await source['_parseTemplatesFromFileMap'](fileMap);
+      const templates = await _parseTemplatesFromFileMapAsync(mockTerminal, fileMap);
 
       expect(templates).toHaveLength(1);
       expect(mockFromMemoryAsync).toHaveBeenCalledTimes(1);
@@ -241,8 +247,7 @@ describe('PublicGitHubRepositorySource', () => {
 
       mockFromMemoryAsync.mockResolvedValueOnce(mockTemplate1).mockResolvedValueOnce(mockTemplate2);
 
-      const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
-      const templates = await source['_parseTemplatesFromFileMap'](fileMap);
+      const templates = await _parseTemplatesFromFileMapAsync(mockTerminal, fileMap);
 
       expect(templates).toHaveLength(2);
     });
@@ -256,8 +261,7 @@ describe('PublicGitHubRepositorySource', () => {
 
       mockFromMemoryAsync.mockResolvedValue(mockTemplate);
 
-      const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
-      const templates = await source['_parseTemplatesFromFileMap'](fileMap);
+      const templates = await _parseTemplatesFromFileMapAsync(mockTerminal, fileMap);
 
       expect(templates).toHaveLength(1);
     });
@@ -274,8 +278,7 @@ describe('PublicGitHubRepositorySource', () => {
         .mockResolvedValueOnce(mockTemplate)
         .mockRejectedValueOnce(new Error('Invalid template'));
 
-      const source = new PublicGitHubRepositorySource('https://github.com/owner/repo', 'main', mockTerminal);
-      const templates = await source['_parseTemplatesFromFileMap'](fileMap);
+      const templates = await _parseTemplatesFromFileMapAsync(mockTerminal, fileMap);
 
       expect(templates).toHaveLength(1);
       expect(mockTerminal.writeWarningLine).toHaveBeenCalledWith(
@@ -284,7 +287,7 @@ describe('PublicGitHubRepositorySource', () => {
     });
   });
 
-  describe('_createTemplateFromFileMap', () => {
+  describe('_createTemplateFromFileMapAsync', () => {
     it('should create template from file map', async () => {
       const mockTemplate = { name: 'Template' } as SPFxTemplate;
 
@@ -302,8 +305,7 @@ describe('PublicGitHubRepositorySource', () => {
 
       mockFromMemoryAsync.mockResolvedValue(mockTemplate);
 
-      const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
-      const result = await source['_createTemplateFromFileMap']('webpart', fileMap);
+      const result = await _createTemplateFromFileMapAsync('webpart', fileMap);
 
       expect(result).toBe(mockTemplate);
       expect(mockFromMemoryAsync).toHaveBeenCalledWith('webpart', templateJson, expect.any(Map));
@@ -312,8 +314,7 @@ describe('PublicGitHubRepositorySource', () => {
     it('should return undefined if template.json not found', async () => {
       const fileMap = new Map<string, Buffer>([['webpart/src/index.ts', Buffer.from('code')]]);
 
-      const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
-      const result = await source['_createTemplateFromFileMap']('webpart', fileMap);
+      const result = await _createTemplateFromFileMapAsync('webpart', fileMap);
 
       expect(result).toBeUndefined();
     });
@@ -329,8 +330,7 @@ describe('PublicGitHubRepositorySource', () => {
 
       mockFromMemoryAsync.mockResolvedValue(mockTemplate);
 
-      const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
-      await source['_createTemplateFromFileMap']('webpart', fileMap);
+      await _createTemplateFromFileMapAsync('webpart', fileMap);
 
       const capturedFileMap = mockFromMemoryAsync.mock.calls[0]?.[2];
       expect(capturedFileMap?.size).toBe(2); // template.json and src/index.ts
@@ -341,9 +341,7 @@ describe('PublicGitHubRepositorySource', () => {
     it('should throw error for invalid template.json', async () => {
       const fileMap = new Map<string, Buffer>([['webpart/template.json', Buffer.from('invalid json {')]]);
 
-      const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
-
-      await expect(source['_createTemplateFromFileMap']('webpart', fileMap)).rejects.toThrow(
+      await expect(_createTemplateFromFileMapAsync('webpart', fileMap)).rejects.toThrow(
         /Failed to parse template.json/
       );
     });
@@ -387,7 +385,7 @@ describe('PublicGitHubRepositorySource', () => {
       mockFromMemoryAsync.mockResolvedValue(mockTemplate);
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
-      const templates = await source.getTemplates();
+      const templates = await source.getTemplatesAsync();
 
       expect(mockFetch).toHaveBeenCalledWith('https://codeload.github.com/owner/repo/zip/main');
       expect(templates).toHaveLength(1);
@@ -402,7 +400,9 @@ describe('PublicGitHubRepositorySource', () => {
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
 
-      await expect(source.getTemplates()).rejects.toThrow(/Failed to fetch templates from GitHub repository/);
+      await expect(source.getTemplatesAsync()).rejects.toThrow(
+        /Failed to fetch templates from GitHub repository/
+      );
     });
 
     it('should throw error when network request fails', async () => {
@@ -410,7 +410,9 @@ describe('PublicGitHubRepositorySource', () => {
 
       const source = new PublicGitHubRepositorySource('https://github.com/owner/repo');
 
-      await expect(source.getTemplates()).rejects.toThrow(/Failed to fetch templates from GitHub repository/);
+      await expect(source.getTemplatesAsync()).rejects.toThrow(
+        /Failed to fetch templates from GitHub repository/
+      );
     });
   });
 });

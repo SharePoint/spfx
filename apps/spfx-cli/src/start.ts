@@ -1,4 +1,8 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 import { ConsoleTerminalProvider, Terminal } from '@rushstack/terminal';
+
 import { SPFxCommandLineParser } from './cli/SPFxCommandLineParser';
 
 const terminal: Terminal = new Terminal(new ConsoleTerminalProvider());

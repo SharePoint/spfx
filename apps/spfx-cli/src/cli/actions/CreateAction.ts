@@ -1,22 +1,26 @@
-import { Colorize, Terminal } from '@rushstack/terminal';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
+import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
+import type { MemFsEditor } from 'mem-fs-editor';
+import { v4 as uuidv4 } from 'uuid';
+import * as z from 'zod';
+
+import { Colorize, type Terminal } from '@rushstack/terminal';
 import {
   CommandLineAction,
-  CommandLineStringListParameter,
-  CommandLineStringParameter,
+  type CommandLineStringListParameter,
+  type CommandLineStringParameter,
   type IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
-import type { MemFsEditor } from 'mem-fs-editor';
-import * as z from 'zod';
-import { v4 as uuidv4 } from 'uuid';
-import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
-
 import {
   LocalFileSystemRepositorySource,
-  SPFxTemplateCollection,
+  type SPFxTemplateCollection,
   SPFxTemplateRepositoryManager,
-  SPFxTemplate
+  type SPFxTemplate
 } from '@microsoft/spfx-template-api';
-import { SOLUTION_NAME_PATTERN } from '../validation';
+
+import { SOLUTION_NAME_PATTERN } from '../../utilcities/validation';
 
 const CI_COMPONENT_ID: string = '11111111-1111-1111-1111-111111111111';
 const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
@@ -115,7 +119,8 @@ export class CreateAction extends CommandLineAction {
         targetDir: this._targetDir.value
       };
 
-      const validationResult = ScaffoldProfileSchema.safeParse(options);
+      const validationResult: z.ZodSafeParseResult<IScaffoldProfile> =
+        ScaffoldProfileSchema.safeParse(options);
       if (!validationResult.success) {
         throw new Error(`Invalid scaffold profile: ${JSON.stringify(validationResult.error.issues)}`);
       }
@@ -128,7 +133,7 @@ export class CreateAction extends CommandLineAction {
         manager.addSource(new LocalFileSystemRepositorySource(localPath));
       }
 
-      const templates: SPFxTemplateCollection = await manager.getTemplates();
+      const templates: SPFxTemplateCollection = await manager.getTemplatesAsync();
 
       this._terminal.writeLine(templates.toString());
 
@@ -145,34 +150,34 @@ export class CreateAction extends CommandLineAction {
       // flag used only by CI pipelines and tests to produce deterministic output.
       // eslint-disable-next-line dot-notation
       const ciMode: boolean = process.env['SPFX_CI_MODE'] === '1';
-      const componentId = ciMode ? CI_COMPONENT_ID : uuidv4();
-      const solutionId = ciMode ? CI_SOLUTION_ID : uuidv4();
-      const featureId = ciMode ? CI_FEATURE_ID : uuidv4();
+      const componentId: string = ciMode ? CI_COMPONENT_ID : uuidv4();
+      const solutionId: string = ciMode ? CI_SOLUTION_ID : uuidv4();
+      const featureId: string = ciMode ? CI_FEATURE_ID : uuidv4();
 
       // Get component name and validate
-      const componentName = this._componentName.value;
+      const componentName: string = this._componentName.value;
       if (!componentName || componentName.trim().length === 0) {
         throw new Error('Component name is required and cannot be empty or only whitespace.');
       }
 
-      const componentAlias = this._componentAlias.value || componentName;
-      const componentDescription = this._componentDescription.value || `${componentName} description`;
+      const componentAlias: string = this._componentAlias.value || componentName;
+      const componentDescription: string = this._componentDescription.value || `${componentName} description`;
 
       // Compute name variants using lodash
-      const componentNameCamelCase = camelCase(componentName);
-      const componentNameHyphenCase = kebabCase(componentName);
-      const componentNameCapitalCase = upperFirst(camelCase(componentName));
-      const componentNameAllCaps = snakeCase(componentName).toUpperCase();
+      const componentNameCamelCase: string = camelCase(componentName);
+      const componentNameHyphenCase: string = kebabCase(componentName);
+      const componentNameCapitalCase: string = upperFirst(camelCase(componentName));
+      const componentNameAllCaps: string = snakeCase(componentName).toUpperCase();
 
-      const rawSolutionName = this._solutionName.value?.trim();
+      const rawSolutionName: string | undefined = this._solutionName.value?.trim();
       if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
         throw new Error(
           `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
         );
       }
-      const solutionName = rawSolutionName || componentNameHyphenCase;
+      const solutionName: string = rawSolutionName || componentNameHyphenCase;
 
-      const fs = await template.render(
+      const fs: MemFsEditor = await template.renderAsync(
         {
           solution_name: solutionName,
           eslintProfile: 'react',

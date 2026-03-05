@@ -1,5 +1,8 @@
-import { SPFxTemplate } from '../templating/SPFxTemplate';
-import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
+import type { SPFxTemplate } from '../templating/SPFxTemplate';
+import type { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
 import { SPFxTemplateCollection } from './SPFxTemplateCollection';
 
 /**
@@ -26,9 +29,9 @@ export class SPFxTemplateRepositoryManager {
    * Retrieves all templates from all configured repository sources.
    * @returns A Promise that resolves to a SPFxTemplateCollection containing all templates
    */
-  public async getTemplates(): Promise<SPFxTemplateCollection> {
+  public async getTemplatesAsync(): Promise<SPFxTemplateCollection> {
     const templates: Array<Array<SPFxTemplate>> = await Promise.all(
-      this._sources.map((source) => source.getTemplates())
+      this._sources.map((source) => source.getTemplatesAsync())
     );
     return new SPFxTemplateCollection(templates.flat());
   }

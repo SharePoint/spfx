@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See LICENSE in the project root for license information.
+
 jest.mock('@rushstack/node-core-library');
 jest.mock('mem-fs');
 jest.mock('mem-fs-editor');
@@ -5,8 +8,8 @@ jest.mock('mem-fs-editor');
 import { FileSystem } from '@rushstack/node-core-library';
 import { create as createMemFs, type Store } from 'mem-fs';
 import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
-import { SPFxTemplate } from './SPFxTemplate';
-import { SPFxTemplateJsonFile } from './SPFxTemplateJsonFile';
+import { SPFxTemplate } from '../SPFxTemplate';
+import { SPFxTemplateJsonFile } from '../SPFxTemplateJsonFile';
 
 interface IFileSystemReadFolderItemsResult {
   name: string;
@@ -321,7 +324,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { name: 'MyApp', title: 'My Application' };
 
-      await template.render(context, '/output');
+      await template.renderAsync(context, '/output');
 
       expect(mockEditor.write).toHaveBeenCalledTimes(2);
       expect(mockCreateEditor).toHaveBeenCalled();
@@ -345,7 +348,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
 
-      await template.render(context, '/output');
+      await template.renderAsync(context, '/output');
 
       expect(mockEditor.write).toHaveBeenCalled();
     });
@@ -368,7 +371,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const invalidContext = { wrongField: 'value' };
 
-      await expect(template.render(invalidContext, '/output')).rejects.toThrow(/Invalid context object/);
+      await expect(template.renderAsync(invalidContext, '/output')).rejects.toThrow(/Invalid context object/);
     });
 
     it('should replace placeholders in filenames', async () => {
@@ -385,7 +388,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
 
-      await template.render(context, '/output');
+      await template.renderAsync(context, '/output');
 
       expect(mockEditor.write).toHaveBeenCalledWith(
         expect.stringContaining('MyComponent.ts'),
@@ -408,7 +411,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { name: 'World', version: '1.0.0' };
 
-      await template.render(context, '/output');
+      await template.renderAsync(context, '/output');
 
       expect(mockEditor.write).toHaveBeenCalledWith(expect.any(String), 'Hello World!');
       expect(mockEditor.write).toHaveBeenCalledWith(expect.any(String), '{"version": "1.0.0"}');
@@ -422,7 +425,7 @@ describe('SPFxTemplate', () => {
       });
 
       const template = new SPFxTemplate(definition, new Map());
-      const result = await template.render({}, '/output');
+      const result = await template.renderAsync({}, '/output');
 
       expect(result).toBe(mockEditor);
     });
