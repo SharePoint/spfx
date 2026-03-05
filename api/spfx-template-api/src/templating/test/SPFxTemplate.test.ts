@@ -3,7 +3,7 @@
 
 jest.mock('@rushstack/node-core-library');
 
-import * as NodeCoreLibrary from '@rushstack/node-core-library';
+import { FileSystem } from '@rushstack/node-core-library';
 import type { MemFsEditor } from 'mem-fs-editor';
 import { SPFxTemplate } from '../SPFxTemplate';
 import { SPFxTemplateJsonFile } from '../SPFxTemplateJsonFile';
@@ -22,13 +22,9 @@ interface IFileSystemReadFolderItemsResult {
 }
 
 describe('SPFxTemplate', () => {
-  const {
-    FileSystem: {
-      readFileAsync: mockReadFileAsync,
-      readFileToBufferAsync: mockReadFileToBufferAsync,
-      readFolderItemsAsync: mockReadFolderItemsAsync
-    }
-  } = NodeCoreLibrary as jest.Mocked<typeof NodeCoreLibrary>;
+  const mockReadFileAsync = jest.mocked(FileSystem.readFileAsync);
+  const mockReadFileToBufferAsync = jest.mocked(FileSystem.readFileToBufferAsync);
+  const mockReadFolderItemsAsync = jest.mocked(FileSystem.readFolderItemsAsync);
 
   beforeEach(() => {
     jest.clearAllMocks();
