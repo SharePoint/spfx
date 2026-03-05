@@ -6,6 +6,7 @@ import * as path from 'node:path';
 import { execSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import ignore from 'ignore';
+import { _isBinaryFile as isBinaryFile } from '@microsoft/spfx-template-api';
 
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
@@ -249,15 +250,6 @@ async function getAllFiles(
 }
 
 /**
- * Check if a file is a binary file based on its extension.
- * NOTE: Keep in sync with BINARY_EXTENSIONS in SPFxTemplate.ts
- */
-function isBinaryFile(filePath: string): boolean {
-  const ext = path.extname(filePath).toLowerCase();
-  return ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'].includes(ext);
-}
-
-/**
  * Read file content, return undefined if file doesn't exist or can't be read
  * Normalizes line endings to `\n` for consistent comparison
  */
@@ -400,14 +392,14 @@ describe('SPFx Template Scaffolding', () => {
 
         // Compare content of each file with detailed diffs
         for (const file of filteredScaffolded) {
-          const scaffoldedFile = path.join(outputPath, file);
-          const exampleFile = path.join(examplePath, file);
+          const scaffoldedFile = `${outputPath}/${file}`;
+          const exampleFile = `${examplePath}/${file}`;
 
           if (isBinaryFile(file)) {
             // Compare binary files as raw buffers
             try {
-              const scaffoldedBuffer = fs.readFileSync(scaffoldedFile);
-              const exampleBuffer = fs.readFileSync(exampleFile);
+              const scaffoldedBuffer = await readFile(scaffoldedFile);
+              const exampleBuffer = await readFile(exampleFile);
               expect(scaffoldedBuffer).toEqual(exampleBuffer);
             } catch (error: unknown) {
               if (error instanceof Error) {

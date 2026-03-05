@@ -4,7 +4,7 @@
 
 ```ts
 
-import { MemFsEditor } from 'mem-fs-editor';
+import type { MemFsEditor } from 'mem-fs-editor';
 import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
@@ -14,6 +14,9 @@ export abstract class BaseSPFxTemplateRepositorySource {
     abstract getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
     get type(): SPFxTemplateRepositorySourceTypes;
 }
+
+// @internal
+export function _isBinaryFile(filePath: string): boolean;
 
 // @public
 export interface ISPFxTemplateJson {

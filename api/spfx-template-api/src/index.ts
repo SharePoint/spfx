@@ -9,6 +9,7 @@
 
 export {
   SPFxTemplate,
+  isBinaryFile as _isBinaryFile,
   type ISPFxTemplateJson,
   SPFxTemplateDefinitionSchema,
   SPFxTemplateJsonFile

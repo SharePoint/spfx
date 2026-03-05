@@ -3,8 +3,7 @@
 
 import * as path from 'node:path';
 
-import { create as createMemFs } from 'mem-fs';
-import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
+import type { MemFsEditor } from 'mem-fs-editor';
 import * as ejs from 'ejs';
 import * as z from 'zod';
 
@@ -15,30 +14,7 @@ import {
   SPFxTemplateDefinitionSchema,
   type ISPFxTemplateJson
 } from './SPFxTemplateJsonFile';
-
-/**
- * File extensions that should be treated as binary (not processed as EJS templates).
- * @public
- */
-export const BINARY_EXTENSIONS: readonly string[] = [
-  '.png',
-  '.jpg',
-  '.jpeg',
-  '.gif',
-  '.woff',
-  '.eot',
-  '.ttf',
-  '.ico'
-];
-
-/**
- * Check if a file path has a binary extension.
- * @public
- */
-export function isBinaryFile(filePath: string): boolean {
-  const ext: string = path.extname(filePath).toLowerCase();
-  return BINARY_EXTENSIONS.includes(ext);
-}
+import { isBinaryFile } from './binaryFiles';
 
 /**
  * @public
@@ -181,6 +157,8 @@ export class SPFxTemplate {
       }
     }
 
+    const { create: createMemFs } = await import('mem-fs');
+    const { create: createEditor } = await import('mem-fs-editor');
     const fs: MemFsEditor = createEditor(createMemFs());
 
     for (const [filename, contents] of this._files.entries()) {
