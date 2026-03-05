@@ -1,13 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import * as path from 'node:path';
-
 import type { MemFsEditor } from 'mem-fs-editor';
 import * as ejs from 'ejs';
 import * as z from 'zod';
 
-import { FileSystem, type FolderItem } from '@rushstack/node-core-library';
+import { Async, FileSystem, type FolderItem } from '@rushstack/node-core-library';
 
 import {
   SPFxTemplateJsonFile,
@@ -22,9 +20,9 @@ import { isBinaryFile } from './binaryFiles';
  */
 export class SPFxTemplate {
   private readonly _definition: SPFxTemplateJsonFile;
-  private readonly _files: Map<string, Buffer>;
+  private readonly _files: Map<string, string | Buffer>;
 
-  public constructor(definition: SPFxTemplateJsonFile, files: Map<string, Buffer>) {
+  public constructor(definition: SPFxTemplateJsonFile, files: Map<string, string | Buffer>) {
     this._definition = definition;
     this._files = files;
   }
@@ -65,7 +63,7 @@ export class SPFxTemplate {
    */
   public static async fromFolderAsync(folderPath: string): Promise<SPFxTemplate> {
     const templateJsonFile: SPFxTemplateJsonFile = await SPFxTemplateJsonFile.fromFolderAsync(folderPath);
-    const files: Map<string, Buffer> = await SPFxTemplate._readFilesRecursivelyAsync(folderPath);
+    const files: Map<string, string | Buffer> = await SPFxTemplate._readFilesRecursivelyAsync(folderPath);
     return new SPFxTemplate(templateJsonFile, files);
   }
 
@@ -91,43 +89,58 @@ export class SPFxTemplate {
     // Create SPFxTemplateJsonFile from the validated JSON
     const templateJsonFile: SPFxTemplateJsonFile = new SPFxTemplateJsonFile(result.data);
 
-    // Copy all files except template.json
-    const files: Map<string, Buffer> = new Map<string, Buffer>();
+    // Copy all files except template.json, storing text files as strings for EJS processing
+    const files: Map<string, string | Buffer> = new Map<string, string | Buffer>();
     for (const [filePath, buffer] of fileMap) {
       if (filePath !== 'template.json') {
-        files.set(filePath, buffer);
+        if (isBinaryFile(filePath)) {
+          files.set(filePath, buffer);
+        } else {
+          files.set(filePath, buffer.toString('utf8'));
+        }
       }
     }
 
     return new SPFxTemplate(templateJsonFile, files);
   }
 
-  private static async _readFilesRecursivelyAsync(baseDir: string): Promise<Map<string, Buffer>> {
-    const files: Map<string, Buffer> = new Map<string, Buffer>();
+  private static async _readFilesRecursivelyAsync(baseDir: string): Promise<Map<string, string | Buffer>> {
+    const files: Map<string, string | Buffer> = new Map<string, string | Buffer>();
     const frontier: string[] = [''];
 
     while (frontier.length > 0) {
       const currentSubDir: string = frontier.pop()!;
-      const folderPath: string = path.join(baseDir, currentSubDir);
+      const folderPath: string = `${baseDir}/${currentSubDir}`;
       const items: FolderItem[] = await FileSystem.readFolderItemsAsync(folderPath);
 
-      await Promise.all(
-        items.map(async (item) => {
+      await Async.forEachAsync(
+        items,
+        async (item) => {
+          const itemName: string = item.name;
+          const itemRelativePath: string = `${currentSubDir}/${itemName}`;
           // Ignore the "template.json" in the root
-          if (currentSubDir === '' && item.name === SPFxTemplateJsonFile.TEMPLATE_JSON) {
+          if (currentSubDir === '' && itemName === SPFxTemplateJsonFile.TEMPLATE_JSON) {
             return;
           }
 
-          const relativePath: string = path.join(currentSubDir, item.name);
-
           if (item.isFile()) {
-            const fullPath: string = path.join(folderPath, item.name);
-            const buffer: Buffer = await FileSystem.readFileToBufferAsync(fullPath);
-            files.set(relativePath, buffer);
+            const fullPath: string = `${folderPath}/${itemName}`;
+            const fileIsBinary: boolean = await isBinaryFile(itemName);
+            let itemContents: string | Buffer;
+            if (fileIsBinary) {
+              itemContents = await FileSystem.readFileToBufferAsync(fullPath);
+            } else {
+              itemContents = await FileSystem.readFileAsync(fullPath);
+            }
+
+            files.set(itemRelativePath, itemContents);
           } else if (item.isDirectory()) {
-            frontier.push(relativePath);
+            frontier.push(itemRelativePath);
+          } else {
+            throw new Error(`Unexpected item type at ${itemRelativePath}`);
           }
-        })
+        },
+        { concurrency: 50 }
       );
     }
 
@@ -159,7 +172,7 @@ export class SPFxTemplate {
 
     const { create: createMemFs } = await import('mem-fs');
     const { create: createEditor } = await import('mem-fs-editor');
-    const fs: MemFsEditor = createEditor(createMemFs());
+    const memFs: MemFsEditor = createEditor(createMemFs());
 
     for (const [filename, contents] of this._files.entries()) {
       // Render the filename by replacing {variableName} placeholders
@@ -168,31 +181,31 @@ export class SPFxTemplate {
         const placeholder: string = `{${key}}`;
         renderedFilename = renderedFilename.split(placeholder).join(String(value));
       }
-      const destination: string = path.join(destinationDir, renderedFilename);
 
-      if (isBinaryFile(filename)) {
-        // Binary files are written as-is without EJS processing
-        fs.write(destination, contents);
-      } else {
+      const destination: string = `${destinationDir}/${renderedFilename}`;
+      if (typeof contents === 'string') {
         // Process text file contents as EJS template
-        const rendered: string = ejs.render(contents.toString('utf-8'), context, {
+        const rendered: string = ejs.render(contents, context, {
           filename,
           cache: false
         });
-        fs.write(destination, rendered);
+        memFs.write(destination, rendered);
+      } else {
+        // Binary files are written as-is without EJS processing
+        memFs.write(destination, contents);
       }
     }
 
-    return fs;
+    return memFs;
   }
 
   /**
    * Commits the rendered files to disk.
-   * @param fs - The MemFsEditor instance containing the files to write
+   * @param memFs - The MemFsEditor instance containing the files to write
    * @returns A Promise that resolves when all files have been written
    */
-  public write(fs: MemFsEditor): Promise<void> {
-    return fs.commit();
+  public write(memFs: MemFsEditor): Promise<void> {
+    return memFs.commit();
   }
 
   /**
