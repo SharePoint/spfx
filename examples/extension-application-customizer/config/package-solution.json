@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "Application customizer extension"
+        "default": "ApplicationCustomizer Description"
       },
       "longDescription": {
-        "default": "Application customizer extension"
+        "default": "ApplicationCustomizer Description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -41,6 +41,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/minimal.sppkg"
+    "zippedPackage": "solution/@spfx-template/extension-application-customizer.sppkg"
   }
 }

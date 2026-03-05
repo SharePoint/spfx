@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "<%= libraryName %> description"
+        "default": "<%= componentDescription %>"
       },
       "longDescription": {
-        "default": "<%= libraryName %> description"
+        "default": "<%= componentDescription %>"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= componentNameHyphenCase %>.sppkg"
+    "zippedPackage": "solution/<%= libraryName %>.sppkg"
   }
 }

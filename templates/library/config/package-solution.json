@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/<%= componentNameHyphenCase %>.sppkg"
+    "zippedPackage": "solution/<%= libraryName %>.sppkg"
   }
 }

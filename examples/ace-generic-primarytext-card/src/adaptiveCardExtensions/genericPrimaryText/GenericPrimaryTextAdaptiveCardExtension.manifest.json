@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/adaptive-card-extension-manifest.schema.json",
   "id": "11111111-1111-1111-1111-111111111111",
-  "alias": "GenericPrimaryText",
+  "alias": "GenericPrimaryTextCard",
   "componentType": "AdaptiveCardExtension",
 
   // The "*" signifies that the version should be taken from the package.json
@@ -17,7 +17,7 @@
     "groupId": "bd067b1e-3ad5-4d5d-a5fe-505f07d7f59c", // Dashboard
     "group": { "default": "Dashboard" },
     "title": { "default": "GenericPrimaryText" },
-    "description": { "default": "GenericPrimaryText ACE" },
+    "description": { "default": "GenericPrimaryTextCard Description" },
     "iconImageUrl": "https://res.cdn.office.net/files/fabric-cdn-prod_20240610.001/assets/brand-icons/product-monoline/svg/vivaconnections_32x1.svg",
     "cardSize": "Large",
     "properties": {

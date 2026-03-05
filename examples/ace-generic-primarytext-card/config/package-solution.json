@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "GenericPrimaryText Description"
+        "default": "GenericPrimaryTextCard Description"
       },
       "longDescription": {
-        "default": "GenericPrimaryText Description"
+        "default": "GenericPrimaryTextCard Description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/generic-primary-text.sppkg"
+    "zippedPackage": "solution/@spfx-template/ace-generic-primarytext-card.sppkg"
   }
 }

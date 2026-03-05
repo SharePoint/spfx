@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "@spfx-template/ace-generic-card description"
+        "default": "GenericCard Description"
       },
       "longDescription": {
-        "default": "@spfx-template/ace-generic-card description"
+        "default": "GenericCard Description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/generic-card.sppkg"
+    "zippedPackage": "solution/@spfx-template/ace-generic-card.sppkg"
   }
 }
