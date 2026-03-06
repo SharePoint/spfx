@@ -19,15 +19,22 @@ export async function getAuthHeaderAsync(): Promise<string> {
   // The checkout with persistCredentials sets an extraheader in git config
   // Format: "http.<url>.extraheader AUTHORIZATION: basic <token>"
   const result: string = await execGitAsync(['config', '--get-regexp', 'http\\..*\\.extraheader']);
-  const headerValue: string | undefined = result.split(/\s+(.+)/)[1];
-  if (!headerValue) {
+  const headerLine: string | undefined = result.split(/\s+(.+)/)[1];
+  if (!headerLine) {
     throw new Error(
       'Could not extract authorization header from git config. ' +
         'Ensure persistCredentials is enabled on the checkout step.'
     );
   }
 
-  return headerValue;
+  // headerLine is "AUTHORIZATION: basic <token>" — strip the header name prefix
+  // to get just the value ("basic <token>") for use with fetch.
+  const colonIndex: number = headerLine.indexOf(':');
+  if (colonIndex === -1) {
+    throw new Error(`Unexpected authorization header format: ${headerLine}`);
+  }
+
+  return headerLine.substring(colonIndex + 1).trim();
 }
 
 export async function execGitAsync(args: string[]): Promise<string> {
