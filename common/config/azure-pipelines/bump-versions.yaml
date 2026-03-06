@@ -1,5 +1,7 @@
 # Pipeline: Bump Versions
 
+trigger: none
+pr: none
 resources:
   repositories:
     - repository: 1esPipelines
