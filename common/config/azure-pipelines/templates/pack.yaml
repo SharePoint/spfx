@@ -4,8 +4,8 @@
 steps:
   - script: >
       node common/scripts/install-run-rush.js publish
-        --publish
-        --pack
-        --include-all
-        --release-folder $(Build.ArtifactStagingDirectory)/packages
+      --publish
+      --pack
+      --include-all
+      --release-folder $(Build.ArtifactStagingDirectory)/packages
     displayName: 'Rush Pack'

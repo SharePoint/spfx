@@ -8,6 +8,6 @@ parameters:
 steps:
   - script: >
       node common/scripts/install-run-rush.js version
-        --bump
-        --version-policy ${{ parameters.VersionPolicyName }}
+      --bump
+      --version-policy ${{ parameters.VersionPolicyName }}
     displayName: 'Rush Version Bump (Policy: ${{ parameters.VersionPolicyName }})'
