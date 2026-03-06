@@ -79,18 +79,12 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
     const authHeader: string = await getAuthHeaderAsync();
     const apiBase: string = `https://api.github.com/repos/${repoSlug}`;
 
-    const headers: Record<string, string> = {
-      Authorization: authHeader,
-      Accept: 'application/vnd.github+json',
-      'Content-Type': 'application/json'
-    };
-
     // Check for existing open PR from this branch
     const branchName: string = this._branchNameParameter.value;
-    const [existingPr]: IGitHubPr[] = await githubGetAsync<IGitHubPr[]>(
-      `${apiBase}/pulls?head=${encodeURIComponent(`${owner}:${branchName}`)}&state=open`,
-      headers
-    );
+    const [existingPr]: IGitHubPr[] = await githubGetAsync<IGitHubPr[]>({
+      url: `${apiBase}/pulls?head=${encodeURIComponent(`${owner}:${branchName}`)}&state=open`,
+      authHeader
+    });
 
     const title: string = this._titleParameter.value;
     const body: string = this._bodyParameter.value;
@@ -100,13 +94,14 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       ({ number: prNumber } = existingPr);
       terminal.writeLine(`Updating existing PR #${prNumber}`);
 
-      await githubRequestAsync(`${apiBase}/pulls/${prNumber}`, {
+      await githubRequestAsync({
+        url: `${apiBase}/pulls/${prNumber}`,
         method: 'PATCH',
-        headers,
-        body: JSON.stringify({
+        authHeader,
+        jsonBody: {
           title,
           body
-        })
+        }
       });
 
       terminal.writeLine(`PR #${prNumber} updated.`);
@@ -114,15 +109,16 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       terminal.writeLine('Creating new PR');
 
       const baseBranch: string = this._baseBranchParameter.value;
-      ({ number: prNumber } = await githubRequestAsync<IGitHubPr>(`${apiBase}/pulls`, {
+      ({ number: prNumber } = await githubRequestAsync<IGitHubPr>({
+        url: `${apiBase}/pulls`,
         method: 'POST',
-        headers,
-        body: JSON.stringify({
+        authHeader,
+        jsonBody: {
           title,
           body,
           head: branchName,
           base: baseBranch
-        })
+        }
       }));
 
       terminal.writeLine(`Created PR #${prNumber}`);
@@ -133,18 +129,19 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
     terminal.writeLine(`Applying label: ${sourceBuildLabel}`);
 
     // Remove any existing SourceBuild: labels
-    const existingLabels: IGitHubLabel[] = await githubGetAsync<IGitHubLabel[]>(
-      `${apiBase}/issues/${prNumber}/labels`,
-      headers
-    );
+    const existingLabels: IGitHubLabel[] = await githubGetAsync<IGitHubLabel[]>({
+      url: `${apiBase}/issues/${prNumber}/labels`,
+      authHeader
+    });
 
     for (const label of existingLabels) {
       if (label.name.startsWith('SourceBuild:')) {
         const encodedLabel: string = encodeURIComponent(label.name);
         try {
-          await githubRequestAsync(`${apiBase}/issues/${prNumber}/labels/${encodedLabel}`, {
+          await githubRequestAsync({
+            url: `${apiBase}/issues/${prNumber}/labels/${encodedLabel}`,
             method: 'DELETE',
-            headers
+            authHeader
           });
         } catch {
           // Ignore errors when removing old labels
@@ -153,10 +150,11 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
     }
 
     // Add the new label
-    await githubRequestAsync(`${apiBase}/issues/${prNumber}/labels`, {
+    await githubRequestAsync({
+      url: `${apiBase}/issues/${prNumber}/labels`,
       method: 'POST',
-      headers,
-      body: JSON.stringify({ labels: [sourceBuildLabel] })
+      authHeader,
+      jsonBody: { labels: [sourceBuildLabel] }
     });
 
     terminal.writeLine('Label applied.');

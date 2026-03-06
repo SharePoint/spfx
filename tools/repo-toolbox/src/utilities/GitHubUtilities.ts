@@ -9,18 +9,40 @@ export interface IGitHubLabel {
   name: string;
 }
 
-export async function githubGetAsync<T>(url: string, headers: Record<string, string>): Promise<T> {
-  return await githubRequestAsync<T>(url, { method: 'GET', headers });
+export interface IGitHubGetRequestOptions {
+  url: string;
+  authHeader: string;
 }
 
-export async function githubRequestAsync<T>(url: string, init: RequestInit): Promise<T>;
+export interface IGitHubRequestOptions extends IGitHubGetRequestOptions {
+  jsonBody?: object;
+  method: string;
+}
+
+const AUTHORIZATION_HEADER_NAME: 'Authorization' = 'Authorization';
+const COMMON_HEADERS: Record<string, string> = {
+  Accept: 'application/vnd.github+json',
+  'Content-Type': 'application/json'
+};
+
+export async function githubGetAsync<TResponse>(options: IGitHubGetRequestOptions): Promise<TResponse> {
+  return await githubRequestAsync<TResponse>({ ...options, method: 'GET' });
+}
+
+export async function githubRequestAsync<TResponse>(options: IGitHubRequestOptions): Promise<TResponse>;
 export async function githubRequestAsync(
-  url: string,
-  init: RequestInit & { method: 'DELETE' }
+  options: IGitHubRequestOptions & { method: 'DELETE' }
 ): Promise<undefined>;
-export async function githubRequestAsync<T>(url: string, init: RequestInit): Promise<T | undefined> {
-  const { method } = init;
-  const response: Response = await fetch(url, init);
+export async function githubRequestAsync<T>(options: IGitHubRequestOptions): Promise<T | undefined> {
+  const { url, method, jsonBody, authHeader } = options;
+  const response: Response = await fetch(url, {
+    method,
+    body: JSON.stringify(jsonBody),
+    headers: {
+      ...COMMON_HEADERS,
+      [AUTHORIZATION_HEADER_NAME]: authHeader
+    }
+  });
   const { status, ok } = response;
   if (!ok) {
     const text: string = await response.text();
