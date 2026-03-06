@@ -17,7 +17,7 @@ variables:
   - name: FORCE_COLOR
     value: 1
   - name: FeatureBranch
-    value: 'user/rushbot/bump-versions'
+    value: 'user/spfx-cli-bot/bump-versions'
 
 resources:
   repositories:
