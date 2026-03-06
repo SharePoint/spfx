@@ -44,6 +44,15 @@
       "incremental": true
     },
 
+    {
+      "commandKind": "phased",
+      "name": "test-and-package-solution",
+      "summary": "Builds all projects, runs their tests, and packages the solution.",
+      "phases": ["_phase:build", "_phase:test", "_phase:package-solution"],
+      "enableParallelism": true,
+      "incremental": true
+    },
+
     // {
     //   /**
     //    * (Required) Determines the type of custom command.
@@ -474,21 +483,28 @@
       "parameterKind": "flag",
       "description": "Perform a production build, including minification and localization steps",
       "associatedPhases": ["_phase:build", "_phase:test", "_phase:package-solution"],
-      "associatedCommands": ["build", "rebuild", "test", "retest", "package-solution"]
+      "associatedCommands": [
+        "build",
+        "rebuild",
+        "test",
+        "retest",
+        "package-solution",
+        "test-and-package-solution"
+      ]
     },
     {
       "longName": "--update-snapshots",
       "parameterKind": "flag",
       "description": "Update Jest snapshots",
       "associatedPhases": ["_phase:test"],
-      "associatedCommands": ["test", "retest"]
+      "associatedCommands": ["test", "retest", "test-and-package-solution"]
     },
     {
       "longName": "--fix",
       "parameterKind": "flag",
       "description": "Automatically fix problems encountered while linting",
       "associatedPhases": ["_phase:build"],
-      "associatedCommands": ["build", "rebuild", "test", "retest"]
+      "associatedCommands": ["build", "rebuild", "test", "retest", "test-and-package-solution"]
     }
   ]
 }
