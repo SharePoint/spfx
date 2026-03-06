@@ -22,8 +22,8 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 ## How to Contribute
 
 1. **Fork** the repository and clone your fork locally.
-2. Create a **branch** for your change (`git checkout -b <github-username>/<feature-name>`).
-   - Use branch names in the form `<github-username>/<feature-name>` (for example, `alice/add-logging`).
+2. Create a **branch** for your change (`git checkout -b <feature-name>`).
+   - Use branch names in the form `<feature-name>` (for example, `add-logging`).
 3. Make your changes and verify the build passes (see [Development](#development)).
 4. **Commit** your changes with a clear, descriptive message.
 5. **Push** to your fork and open a Pull Request against `main`.
