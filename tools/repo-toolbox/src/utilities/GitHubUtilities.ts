@@ -1,6 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
+export interface IGitHubPr {
+  number: number;
+}
+
+export interface IGitHubLabel {
+  name: string;
+}
+
 export async function githubGetAsync<T>(url: string, headers: Record<string, string>): Promise<T> {
   return await githubRequestAsync<T>(url, { method: 'GET', headers });
 }

@@ -4,16 +4,13 @@
 import type { ITerminal } from '@rushstack/terminal';
 import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
 
-import { githubGetAsync, githubRequestAsync } from '../../utilities/GitHubUtilities';
+import {
+  githubGetAsync,
+  githubRequestAsync,
+  type IGitHubLabel,
+  type IGitHubPr
+} from '../../utilities/GitHubUtilities';
 import { getAuthHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
-
-interface IGitHubPr {
-  number: number;
-}
-
-interface IGitHubLabel {
-  name: string;
-}
 
 export class CreateOrUpdatePrAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
