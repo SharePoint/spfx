@@ -17,7 +17,7 @@ variables:
   - name: FORCE_COLOR
     value: 1
   - name: FeatureBranch
-    value: 'user/rushbot/bump-versions/$(Build.BuildNumber)'
+    value: 'user/rushbot/bump-versions'
 
 resources:
   repositories:
@@ -79,7 +79,7 @@ extends:
 
               - template: /common/config/azure-pipelines/templates/pack.yaml@self
 
-              # Commit version bump changes
+              # Check for changes and commit
               - bash: |
                   git add -A
 
@@ -91,8 +91,10 @@ extends:
 
                   [skip ci]"
                     echo "Changes committed"
+                    echo "##vso[task.setvariable variable=HasChanges]true"
                   else
                     echo "No changes to commit"
+                    echo "##vso[task.setvariable variable=HasChanges]false"
                   fi
                 displayName: 'Commit Version Bumps'
 
@@ -102,6 +104,7 @@ extends:
                   git push -f -u origin $(FeatureBranch)
                   echo "Pushed to $(FeatureBranch)"
                 displayName: 'Push Feature Branch'
+                condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
 
               - template: /common/config/azure-pipelines/templates/prepare-publish-artifacts.yaml@self
 

@@ -49,15 +49,15 @@ steps:
       RESPONSE=$(curl -s -w "\n%{http_code}" -K "$CURL_CONFIG" \
         "${API_BASE}/pulls?head=${OWNER}:${{ parameters.BranchName }}&state=open")
       HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
-      BODY=$(echo "$RESPONSE" | sed '$d')
+      RESPONSE_BODY=$(echo "$RESPONSE" | sed '$d')
 
       if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then
         echo "##[error]Failed to query existing PRs (HTTP ${HTTP_CODE}):"
-        echo "$BODY"
+        echo "$RESPONSE_BODY"
         exit 1
       fi
 
-      EXISTING_PR=$(echo "$BODY" | jq '.[0].number // empty')
+      EXISTING_PR=$(echo "$RESPONSE_BODY" | jq '.[0].number // empty')
       PR_NUMBER=""
 
       if [ -n "$EXISTING_PR" ]; then
@@ -95,7 +95,7 @@ steps:
           "${API_BASE}/issues/${PR_NUMBER}/labels" \
           | jq -r '.[].name | select(startswith("SourceBuild:"))' 2>/dev/null || true)
         for OLD_LABEL in $EXISTING_LABELS; do
-          ENCODED_LABEL=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$OLD_LABEL', safe=''))")
+          ENCODED_LABEL=$(printf '%s' "$OLD_LABEL" | python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.stdin.read().strip(), safe=''))")
           curl -s -f -K "$CURL_CONFIG" -X DELETE \
             "${API_BASE}/issues/${PR_NUMBER}/labels/${ENCODED_LABEL}" > /dev/null 2>&1 || true
         done
@@ -107,6 +107,7 @@ steps:
         echo "Label applied."
       fi
     displayName: 'Create or update GitHub PR'
+    condition: and(succeeded(), ne(variables['HasChanges'], 'false'))
     env:
       PR_TITLE: ${{ parameters.Title }}
       PR_BODY: ${{ parameters.Body }}
