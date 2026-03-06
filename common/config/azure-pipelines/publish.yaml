@@ -1,5 +1,7 @@
 # Pipeline: Publish Packages
 
+trigger: none
+pr: none
 resources:
   repositories:
     - repository: 1esPipelines
