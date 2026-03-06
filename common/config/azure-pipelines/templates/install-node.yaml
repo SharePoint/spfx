@@ -1,0 +1,13 @@
+# Template: Install Node.js
+# Installs the correct Node.js version for Rush operations.
+
+parameters:
+  - name: NodeVersion
+    type: string
+    default: '22.x'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '${{ parameters.NodeVersion }}'
+    displayName: 'Install Node.js ${{ parameters.NodeVersion }}'

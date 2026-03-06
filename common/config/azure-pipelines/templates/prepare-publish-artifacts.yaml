@@ -1,0 +1,22 @@
+# Template: Prepare publish artifacts
+# Generates artifact metadata file. Artifacts are published via templateContext.outputs
+# in the main pipeline.
+
+steps:
+  - bash: |
+      METADATA_FILE="$(Build.ArtifactStagingDirectory)/artifact-metadata.json"
+
+      cat > "$METADATA_FILE" <<EOF
+      {
+        "pipelineRunId": "$(Build.BuildId)",
+        "pipelineRunNumber": "$(Build.BuildNumber)",
+        "commitHash": "$(Build.SourceVersion)",
+        "commitBranch": "$(Build.SourceBranch)",
+        "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+        "pipelineUrl": "$(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
+      }
+      EOF
+
+      echo "Created artifact metadata file:"
+      cat "$METADATA_FILE"
+    displayName: 'Generate Artifact Metadata'

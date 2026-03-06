@@ -1,0 +1,113 @@
+# Template: Create or update a GitHub pull request
+# Creates a new PR or updates an existing one for the version bump branch.
+# Optionally applies a SourceBuild label to track the originating pipeline run.
+# Requires checkout with persistCredentials: true.
+
+parameters:
+  - name: BranchName
+    type: string
+  - name: BaseBranch
+    type: string
+    default: 'main'
+  - name: Title
+    type: string
+  - name: Body
+    type: string
+    default: ''
+  - name: SourceBuildLabel
+    type: string
+
+steps:
+  - bash: |
+      set -e
+
+      # Extract repository slug from git remote
+      REPO_SLUG=$(git remote get-url origin \
+        | sed -E 's#.*github\.com[:/](.+/[^.]+)(\.git)?$#\1#')
+      echo "Repository: ${REPO_SLUG}"
+      OWNER=$(echo "${REPO_SLUG}" | cut -d/ -f1)
+
+      # Extract authorization header from git config (set by checkout with persistCredentials)
+      AUTH_HEADER=$(git config --get-regexp 'http\..*\.extraheader' \
+        | head -1 | sed 's/^[^ ]* //')
+      if [ -z "$AUTH_HEADER" ]; then
+        echo "##[error]Could not extract authorization header from git config."
+        echo "##[error]Ensure persistCredentials is enabled on the checkout step."
+        exit 1
+      fi
+
+      # Create a temporary curl config file for auth
+      CURL_CONFIG=$(mktemp)
+      trap 'rm -f "$CURL_CONFIG"' EXIT
+      printf '%s\n' "-H \"${AUTH_HEADER}\"" > "$CURL_CONFIG"
+      printf '%s\n' '-H "Accept: application/vnd.github+json"' >> "$CURL_CONFIG"
+      printf '%s\n' '-H "Content-Type: application/json"' >> "$CURL_CONFIG"
+
+      API_BASE="https://api.github.com/repos/${REPO_SLUG}"
+
+      # Check for existing open PR from this branch
+      RESPONSE=$(curl -s -w "\n%{http_code}" -K "$CURL_CONFIG" \
+        "${API_BASE}/pulls?head=${OWNER}:${{ parameters.BranchName }}&state=open")
+      HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+      BODY=$(echo "$RESPONSE" | sed '$d')
+
+      if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then
+        echo "##[error]Failed to query existing PRs (HTTP ${HTTP_CODE}):"
+        echo "$BODY"
+        exit 1
+      fi
+
+      EXISTING_PR=$(echo "$BODY" | jq '.[0].number // empty')
+      PR_NUMBER=""
+
+      if [ -n "$EXISTING_PR" ]; then
+        echo "Updating existing PR #${EXISTING_PR}"
+        PAYLOAD=$(jq -n \
+          --arg title "$PR_TITLE" \
+          --arg body "$PR_BODY" \
+          '{title: $title, body: $body}')
+        curl -s -f -K "$CURL_CONFIG" -X PATCH \
+          "${API_BASE}/pulls/${EXISTING_PR}" \
+          -d "$PAYLOAD" > /dev/null
+        PR_NUMBER="$EXISTING_PR"
+        echo "PR #${PR_NUMBER} updated."
+      else
+        echo "Creating new PR"
+        PAYLOAD=$(jq -n \
+          --arg title "$PR_TITLE" \
+          --arg body "$PR_BODY" \
+          --arg head "${{ parameters.BranchName }}" \
+          --arg base "${{ parameters.BaseBranch }}" \
+          '{title: $title, body: $body, head: $head, base: $base}')
+        PR_RESPONSE=$(curl -s -f -K "$CURL_CONFIG" -X POST \
+          "${API_BASE}/pulls" \
+          -d "$PAYLOAD")
+        PR_NUMBER=$(echo "$PR_RESPONSE" | jq '.number')
+        echo "Created PR #${PR_NUMBER}"
+      fi
+
+      # Apply SourceBuild label if specified
+      if [ -n "$SOURCE_BUILD_LABEL" ] && [ -n "$PR_NUMBER" ]; then
+        echo "Applying label: ${SOURCE_BUILD_LABEL}"
+
+        # Remove any existing SourceBuild: labels first
+        EXISTING_LABELS=$(curl -s -K "$CURL_CONFIG" \
+          "${API_BASE}/issues/${PR_NUMBER}/labels" \
+          | jq -r '.[].name | select(startswith("SourceBuild:"))' 2>/dev/null || true)
+        for OLD_LABEL in $EXISTING_LABELS; do
+          ENCODED_LABEL=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$OLD_LABEL', safe=''))")
+          curl -s -f -K "$CURL_CONFIG" -X DELETE \
+            "${API_BASE}/issues/${PR_NUMBER}/labels/${ENCODED_LABEL}" > /dev/null 2>&1 || true
+        done
+
+        # Add the new label
+        curl -s -f -K "$CURL_CONFIG" -X POST \
+          "${API_BASE}/issues/${PR_NUMBER}/labels" \
+          -d "$(jq -n --arg label "$SOURCE_BUILD_LABEL" '{labels: [$label]}')" > /dev/null
+        echo "Label applied."
+      fi
+    displayName: 'Create or update GitHub PR'
+    env:
+      PR_TITLE: ${{ parameters.Title }}
+      PR_BODY: ${{ parameters.Body }}
+      SOURCE_BUILD_LABEL: ${{ parameters.SourceBuildLabel }}
