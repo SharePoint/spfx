@@ -1,0 +1,22 @@
+{
+  "name": "repo-toolbox",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Used to execute various operations specific to this repo",
+  "license": "MIT",
+  "scripts": {
+    "build": "heft build --clean",
+    "readme": "node ./lib/start.js readme",
+    "_phase:build": "heft run --only build -- --clean"
+  },
+  "dependencies": {
+    "@rushstack/node-core-library": "^5.19.0",
+    "@rushstack/terminal": "0.19.4",
+    "@rushstack/ts-command-line": "^5.0.2"
+  },
+  "devDependencies": {
+    "@rushstack/heft": "^1.1.6",
+    "eslint": "9.37.0",
+    "@microsoft/spfx-cli-build-rig": "workspace:*"
+  }
+}

@@ -1169,6 +1169,28 @@ importers:
         specifier: 9.37.0
         version: 9.37.0
 
+  ../../tools/repo-toolbox:
+    dependencies:
+      '@rushstack/node-core-library':
+        specifier: ^5.19.0
+        version: 5.20.3(@types/node@22.19.13)
+      '@rushstack/terminal':
+        specifier: 0.19.4
+        version: 0.19.4(@types/node@22.19.13)
+      '@rushstack/ts-command-line':
+        specifier: ^5.0.2
+        version: 5.3.3(@types/node@22.19.13)
+    devDependencies:
+      '@microsoft/spfx-cli-build-rig':
+        specifier: workspace:*
+        version: link:../spfx-cli-build-rig
+      '@rushstack/heft':
+        specifier: ^1.1.6
+        version: 1.2.6(@types/node@22.19.13)
+      eslint:
+        specifier: 9.37.0
+        version: 9.37.0
+
   ../../tools/spfx-cli-build-rig:
     dependencies:
       '@microsoft/api-extractor':
