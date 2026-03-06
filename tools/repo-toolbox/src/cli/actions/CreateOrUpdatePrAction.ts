@@ -41,8 +41,7 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       parameterLongName: '--base-branch',
       argumentName: 'BRANCH',
       description: 'The target branch for the pull request',
-      defaultValue: 'main',
-      required: true
+      defaultValue: 'main'
     });
 
     this._titleParameter = this.defineStringParameter({
@@ -58,7 +57,6 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       argumentName: 'BODY',
       description: 'The pull request body',
       defaultValue: '',
-      required: true,
       environmentVariable: 'PR_BODY'
     });
 
