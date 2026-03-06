@@ -20,9 +20,9 @@ parameters:
 steps:
   - script: >
       node tools/repo-toolbox/lib/start.js create-or-update-pr
-        --branch-name "${{ parameters.BranchName }}"
-        --base-branch "${{ parameters.BaseBranch }}"
-        --source-build-label "${{ parameters.SourceBuildLabel }}"
+      --branch-name "${{ parameters.BranchName }}"
+      --base-branch "${{ parameters.BaseBranch }}"
+      --source-build-label "${{ parameters.SourceBuildLabel }}"
     displayName: 'Create or update GitHub PR'
     condition: and(succeeded(), ne(variables['HasChanges'], 'false'))
     env:
