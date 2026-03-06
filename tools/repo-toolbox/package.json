@@ -6,7 +6,6 @@
   "license": "MIT",
   "scripts": {
     "build": "heft build --clean",
-    "readme": "node ./lib/start.js readme",
     "_phase:build": "heft run --only build -- --clean"
   },
   "dependencies": {
