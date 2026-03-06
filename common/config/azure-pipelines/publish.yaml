@@ -16,9 +16,9 @@ extends:
       name: Azure-Pipelines-1ESPT-ExDShared
       os: windows
     stages:
-      - stage:
+      - stage: Publish
         jobs:
-          - job:
+          - job: PublishJob
             pool:
               name: publish-rushstack
               os: linux
