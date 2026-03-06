@@ -4,7 +4,7 @@
 
 ```ts
 
-import { MemFsEditor } from 'mem-fs-editor';
+import type { MemFsEditor } from 'mem-fs-editor';
 import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
@@ -14,6 +14,9 @@ export abstract class BaseSPFxTemplateRepositorySource {
     abstract getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
     get type(): SPFxTemplateRepositorySourceTypes;
 }
+
+// @internal
+export function _isBinaryFile(filePath: string): boolean;
 
 // @public
 export interface ISPFxTemplateJson {
@@ -46,7 +49,7 @@ export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHu
 
 // @public
 export class SPFxTemplate {
-    constructor(definition: SPFxTemplateJsonFile, files: Map<string, string>);
+    constructor(definition: SPFxTemplateJsonFile, files: Map<string, string | Buffer>);
     get description(): string | undefined;
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
@@ -55,7 +58,7 @@ export class SPFxTemplate {
     get spfxVersion(): string;
     toString(): string;
     get version(): string;
-    write(fs: MemFsEditor): Promise<void>;
+    write(memFs: MemFsEditor): Promise<void>;
 }
 
 // @public
