@@ -1,0 +1,421 @@
+# RFC: SPFx CLI Architecture
+
+## Status
+
+This document captures the architecture and design of the SPFx CLI and scaffolding
+infrastructure. It is a living document and will be updated as the project evolves.
+
+---
+
+## Motivation
+
+The existing SPFx scaffolding tool is the Yeoman generator
+(`@microsoft/generator-sharepoint`). It has served the platform well, but carries
+several structural problems:
+
+- **Yeoman itself is legacy.** The project is in maintenance mode, many of its
+  transitive dependencies are outdated, and the ecosystem has largely moved on.
+- **Closed-source templates.** The generator's templates are bundled inside the
+  closed-source generator package, which limits community feedback and contributions.
+- **High support cost.** The generator has a large test matrix that is difficult to
+  test manually, has correctness issues in existing automated tests, and requires a
+  complex environment setup.
+- **Coupled release cadence.** Template changes cannot ship without a full SPFx
+  release, which slows iteration and prevents out-of-band fixes.
+
+The vision is to replace this with an open-source, decoupled system where
+templates live in a public GitHub repo, a standalone scaffolding API handles rendering
+and merging, and a new CLI (or any other front-end) is a thin consumer of that API.
+
+---
+
+## Objectives
+
+### For SharePoint engineering
+
+- Ability to run CI on template changes against public SPFx versions.
+- Ability to publish out-of-band changes to templates (i.e. change templates without
+  doing a full SPFx release).
+- Complete decoupling of scaffolding tool from SPFx releases.
+
+### For SPFx developers
+
+- An open-source repo with SPFx templates.
+- Ability to point to a custom public GitHub repo containing custom or forked SPFx
+  templates.
+- A new SPFx CLI tool with a command for scaffolding.
+
+---
+
+## Design
+
+### SPFx CLI
+
+**Package:** `@microsoft/spfx-cli`
+**Binary:** `spfx`
+
+The CLI is a thin front-end over the scaffolding API. It handles argument parsing,
+interactive prompts, and user-facing output, but delegates all template loading,
+rendering, and writing to `@microsoft/spfx-template-api`.
+
+This separation means additional front-ends (e.g. `npm create`, an MCP server, or a
+Yeoman compatibility shim) can be built without duplicating core logic.
+
+#### `spfx create`
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--template TEMPLATE_NAME` | Yes | Choose the template to scaffold. |
+| `--target-dir TARGET` | No | The directory where output should be written. Defaults to current working directory. |
+| `--local-template PATH` | No | Path to a local template folder. Can be specified multiple times. |
+| `--library-name NAME` | Yes | The library name for the component. |
+| `--component-name NAME` | Yes | The display name for the component (e.g. "Hello World"). |
+| `--component-alias ALIAS` | No | The component alias. Defaults to the component name. |
+| `--component-description DESC` | No | The component description. Auto-generated from component name if omitted. |
+| `--solution-name NAME` | No | The solution name. Defaults to the kebab-case component name. |
+
+**Planned parameters (not yet implemented):**
+
+| Parameter | Description |
+|-----------|-------------|
+| `--package-manager {npm, pnpm, yarn}` | Sets the package manager for dependency installation. Defaults to npm. Only on new projects. |
+| `--skip-install` | Skips the automatic dependency installation step after scaffolding. |
+| `--spfx-version SEMVER` | Selects the branch from the public template repo. Only for first creation. |
+| `--github-source URL` | Registers additional public GitHub template sources. |
+
+The `create` command downloads, unzips, and reads templates from registered sources.
+It finds the selected template, validates parameters, renders the template in-memory,
+and writes to disk — routing modified files through merge helpers when scaffolding
+onto an existing project. After writing, the CLI runs dependency installation
+(via the selected package manager) so the project is immediately buildable.
+
+The CLI validates that the current Node.js version meets SPFx requirements before
+proceeding.
+
+For parameters not specified on the command line (e.g. component name, solution name),
+the CLI will fall back to an interactive prompt flow.
+
+#### `spfx list-templates` (planned)
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--local-template PATH` | No | Shows templates found on local disk. Can be specified multiple times. |
+| `--github-source URL` | No | Shows templates found in additional public GitHub template sources. Only public GitHub repos are supported. |
+
+Lists all templates available from the registered sources.
+
+---
+
+### Scaffolding API
+
+**Package:** `@microsoft/spfx-template-api`
+
+A proper SDK surface for downloading templates, rendering them, and writing them to
+disk. The rationale for separating this into a different package is:
+
+- **Programmatic access:** Allows any consumer a programmatic way to build their own
+  generators — e.g. pulling from a custom template source, running multiple templates,
+  etc., all in one script.
+- **Multiple front-ends:** Arbitrary front-ends (e.g. `npm create`, a Yeoman
+  compatibility shim, an MCP server) can be built without changing any core code.
+- **Testability:** The API is both unit-testable and used for the public template
+  repository's own CI.
+- **Future extensibility:** The generic parts could later be refactored into a
+  general-purpose templating engine.
+
+#### `SPFxTemplateJsonFile`
+
+Utility for reading and validating SPFx template definition files (`template.json`).
+Each template directory contains a `template.json` with the following fields:
+
+- **`name`** — Template name (e.g. `"webpart-minimal"`)
+- **`description`** — Human-readable description
+- **`version`** — Template version (semver)
+- **`spfxVersion`** — Compatible SPFx version
+- **`contextSchema`** (optional) — Declares the context variables the template
+  expects, used for validation at render time
+
+The schema is validated with Zod at load time.
+
+#### `SPFxTemplate`
+
+An in-memory encapsulation of a single SPFx template. A template consists of:
+
+- `template.json` — the template definition (read by `SPFxTemplateJsonFile`)
+- All other files — treated as EJS template files
+
+The class can be constructed from a folder on disk (`fromFolderAsync`) or from
+in-memory data (`fromMemoryAsync`). It exposes a `renderAsync()` method that
+processes all files through EJS with the provided context object and returns a
+`MemFsEditor` containing the rendered files. Notably, `SPFxTemplate` is
+responsible only for _rendering_ — it does not write to disk. Writing is handled
+separately by `SPFxTemplateWriter`, which enables the writer to inspect the
+rendered output and apply merge logic before committing.
+
+Filenames support `{variableName}` placeholder syntax — e.g.
+`src/webparts/{componentNameCamelCase}WebPart.ts` is resolved using the render
+context.
+
+#### `SPFxTemplateCollection`
+
+A `Map<string, SPFxTemplate>` keyed by template name. Aggregates templates from
+one or more sources.
+
+#### `SPFxTemplateRepositoryManager`
+
+Top-level utility for downloading and reading template collections from multiple
+sources.
+
+Several `BaseSPFxTemplateRepositorySource` subclasses can be registered. Initially
+two flavors are supported, but this can be expanded in the future (e.g. for
+authenticated repos, npm packages, Azure DevOps artifacts, etc.):
+
+- **`LocalFileSystemRepositorySource`** — Accepts a path, reads templates from local
+  disk. Primarily used for local testing and debugging.
+- **`PublicGitHubRepositorySource`** — Accepts a GitHub repo URL and optional branch
+  (defaults to `main`). Constructs a GitHub Codeload URL, performs an in-memory
+  download and unzip of the repository. Primary path for production CLI.
+
+**Download mechanism:** The GitHub source constructs a URL of the form:
+
+```
+https://codeload.github.com/{owner}/{repo}/zip/{ref}
+```
+
+Where `{ref}` is a branch name (e.g. `main`, `1.22`, `1.23-rc.0`) or a git commit
+hash. This enables version-locked downloads and reproducible scaffolding.
+
+#### `SPFxTemplateWriter`
+
+A public orchestration class that manages writing rendered template output to disk.
+It accepts a `MemFsEditor` (returned by `SPFxTemplate.renderAsync()`) and a target
+directory. Before committing files, it calls `editor.dump()` and checks
+`fs.existsSync()` for each file to classify it as new (write as-is) or modified
+(route through a merge helper). Modified files are routed through specialized
+`MergeHelper` subclasses that perform intelligent merging rather than blind
+overwriting.
+
+This is critical for the "add a second component to an existing project" workflow,
+where config files like `package.json` and `config/config.json` must be merged rather
+than replaced.
+
+**Merge helper hierarchy:**
+
+```
+BaseMergeHelper (abstract)
+  fileRelativePath: string   — the relative path this helper handles
+  merge(existing, new): string
+
+  └─ JsonMergeHelper (abstract — parseJson/serializeJson helpers)
+       ├─ PackageJsonMergeHelper       → "package.json"
+       ├─ ConfigJsonMergeHelper        → "config/config.json"
+       ├─ PackageSolutionJsonMergeHelper → "config/package-solution.json"
+       └─ ServeJsonMergeHelper         → "config/serve.json"
+```
+
+**Merge strategies:**
+
+| File | Strategy |
+|------|----------|
+| `package.json` | Union `dependencies` and `devDependencies`; existing versions win on conflict. Preserve all other fields from the existing file. |
+| `config/config.json` | Merge `bundles`, `localizedResources`, and `externals` by key. Preserve `$schema` and `version`. |
+| `config/package-solution.json` | Append new entries to `solution.features`, deduplicate by feature `id` (GUID). Preserve all solution-level metadata. |
+| `config/serve.json` | Merge `serveConfigurations` by name key. Preserve `port`, `https`, `initialPage` from existing. |
+
+For modified files with no registered merge helper, the writer emits a warning and
+falls back to overwriting. Custom merge helpers can be registered via
+`addMergeHelper()`.
+
+#### `SPFxCreationAuditLog` (future)
+
+A structured successor to the `.yo-rc.json` file — a well-defined audit log of what
+the CLI has done, what template was used, what decisions were made, etc. This file
+also serves as the mechanism for detecting existing SPFx projects: when the CLI is
+run in a directory that already contains an audit log, it can skip solution-level
+prompts and proceed directly to adding a new component. Not yet implemented but the
+design accommodates it.
+
+---
+
+### Example API Usage
+
+The following illustrates how the scaffolding API is used programmatically — this is
+essentially what the CLI does internally:
+
+```typescript
+import {
+  SPFxTemplateRepositoryManager,
+  LocalFileSystemRepositorySource,
+  PublicGitHubRepositorySource,
+  SPFxTemplateCollection,
+  SPFxTemplate,
+  SPFxTemplateWriter
+} from '@microsoft/spfx-template-api';
+
+async function scaffold(): Promise<void> {
+  // Create a manager and register template sources
+  const manager = new SPFxTemplateRepositoryManager();
+  manager.addSource(new PublicGitHubRepositorySource(
+    'https://github.com/SharePoint/spfx',
+    'main'
+  ));
+  manager.addSource(new LocalFileSystemRepositorySource(
+    '/path/to/local/templates'
+  ));
+
+  // Download and aggregate templates from all sources
+  const templates: SPFxTemplateCollection = await manager.getTemplatesAsync();
+
+  // Select a template
+  const template: SPFxTemplate = templates.get('webpart-minimal')!;
+
+  // Render with context variables
+  const editor = await template.renderAsync(
+    {
+      solution_name: 'my-solution',
+      componentNameCamelCase: 'helloWorld',
+      componentNameCapitalCase: 'HelloWorld',
+      componentNameHyphenCase: 'hello-world',
+      componentNameAllCaps: 'HELLO_WORLD',
+      componentId: '11111111-1111-1111-1111-111111111111',
+      solutionId: '22222222-2222-2222-2222-222222222222',
+      featureId: '33333333-3333-3333-3333-333333333333',
+      // ... other context variables
+    },
+    '/path/to/output'
+  );
+
+  // Write to disk with intelligent merging
+  const writer = new SPFxTemplateWriter(terminal);
+  await writer.writeAsync(editor, '/path/to/output');
+}
+```
+
+---
+
+### Template Monorepo
+
+Templates live in the `SharePoint/spfx` repo.
+
+Rather than making the templates themselves buildable projects (which would require
+either a "buildable" templating syntax or a complex hardcoded list of string
+replacements), the design follows the API-Extractor pattern: check in both the
+template source and the output of running the template.
+
+- In **dev mode**, we simply overwrite the rendered examples.
+- In **CI builds**, we require that the rendered output matches exactly what is
+  checked in.
+
+A dedicated test package (`tests/spfx-template-test`) implements this validation.
+
+#### Structure
+
+This is a Rush monorepo with the following layout:
+
+| Directory | Purpose |
+|-----------|---------|
+| `api/` | The scaffolding API (`@microsoft/spfx-template-api`) |
+| `apps/` | Contains the SPFx CLI and other front-ends (e.g. MCP server, `npm create`, Yeoman shim) |
+| `libraries/` | Shared internal libraries (e.g. `spfx-templating-engine`) |
+| `templates/` | Raw EJS templates. **Not** registered as Rush projects. |
+| `examples/` | Rendered examples generated from the templates. These **are** Rush projects (must build cleanly). |
+| `tests/` | Validation tooling (template rendering tests, example build verification) |
+| `tools/` | Build rigs and toolchain configuration |
+
+#### Template directory structure
+
+Each template is a flat directory under `templates/`:
+
+```
+templates/
+  webpart-minimal/
+    template.json                          ← template definition
+    package.json                           ← EJS template
+    config/config.json                     ← EJS template
+    config/package-solution.json           ← EJS template
+    config/serve.json                      ← EJS template
+    src/webparts/{componentNameCamelCase}WebPart/
+      {componentNameCapitalCase}WebPart.ts ← EJS template (filename has placeholders)
+      ...
+```
+
+There are currently 16 templates spanning web parts, adaptive card extensions (ACEs),
+field customizers, form customizers, application customizers, list view command sets,
+search query modifiers, and libraries.
+
+#### Branching
+
+There is a branch for every SPFx release type (including beta, RC). The CLI tool
+constructs the download URL assuming the SPFx version is a branch name in the repo.
+`main` always tracks the latest stable release.
+
+For changes that need to be applied to older template versions (e.g. a security
+vulnerability in an indirect dependency), the fix is cherry-picked to any affected
+branch.
+
+Templates for unreleased SPFx versions are developed in a private repo. Branches
+are synced to the public repo during each SPFx release.
+
+---
+
+## Governance
+
+All open-source projects at Microsoft must meet minimum governance requirements:
+
+- CI/CD pipelines
+- Release workflow (NPM publishing, branch tagging)
+- Branch policies
+- Contributor guidelines and PR bot
+- Dependabot for dependency updates
+- PR and issue templates
+
+---
+
+## Out of Scope
+
+The following are explicitly out of scope for the initial release:
+
+- **gulp-core-build support** — The legacy build system is not being carried forward.
+- **Post-creation congratulations banner** — The legacy generator displayed an ASCII
+  art banner after scaffolding. This will not be carried forward.
+
+---
+
+## Development Phases
+
+### Phase 1 — Core Foundation (MVP)
+
+- **Repo + monorepo setup:** Rush configuration, package layout (API, CLI, templates,
+  examples).
+- **Scaffolding API MVP:** `SPFxTemplateCollection`, template definition schema,
+  local + GitHub sources.
+- **Template monorepo baseline:** Migrate existing Yeoman templates into `/templates`
+  and generate corresponding `/examples`.
+- **CLI package creation** (`@microsoft/spfx-cli`):
+  - `create` command (scaffold with options)
+
+### Phase 2 — Governance & Core Functionality (GA)
+
+- **Governance setup:** Publishing to NPM, CI/CD, branch policies, contributor guide,
+  Dependabot, PR templates.
+- **Pre-build validation tool:** Check rendered templates vs. checked-in examples.
+- **CI coverage:** Run rendered examples against public SPFx releases. Additionally,
+  validate templates against the latest internal SharePoint builds to catch regressions
+  before release.
+- **Interactive fallback flow** for missing CLI params (solution name, component name).
+- **MergeHelpers:** Robust merge handlers (`package.json`, `config.json`,
+  `package-solution.json`, `serve.json`, Teams manifest).
+- **`list-templates` command.**
+
+### Phase 3 — Stabilization & Expansion (post-GA)
+
+- **OSS hardening:** Documentation polish, contributor workflows, PR bot setup, code
+  coverage.
+- **Expanded template sources:** Ensure GitHub source flexibility, package manager
+  selection, SPFx version selection.
+- **AuditLog MVP:** Structured `.yo-rc.json` successor.
+- **Third-party enablement:** Verify external repo pointing and custom template usage,
+  documentation for building custom template collections.
+- **Additional front-ends (stretch):** `npm create`, MCP server prototype, Yeoman
+  compatibility shim.
+
