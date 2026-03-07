@@ -43,10 +43,10 @@ describe('SPFxTemplateJsonFile', () => {
         description: 'A test template',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
-          componentName: {
+        parameters: {
+          customParam: {
             type: 'string',
-            description: 'The name of the component'
+            description: 'A custom parameter'
           }
         }
       };
@@ -54,10 +54,10 @@ describe('SPFxTemplateJsonFile', () => {
       const instance = new SPFxTemplateJsonFile(data);
 
       expect(instance.description).toBe('A test template');
-      expect(instance.contextSchema).toEqual({
-        componentName: {
+      expect(instance.parameters).toEqual({
+        customParam: {
           type: 'string',
-          description: 'The name of the component'
+          description: 'A custom parameter'
         }
       });
     });
@@ -108,7 +108,7 @@ describe('SPFxTemplateJsonFile', () => {
       expect(instance.spfxVersion).toBe('1.19.0');
     });
 
-    it('should return undefined for missing contextSchema', () => {
+    it('should return undefined for missing parameters', () => {
       const data: ISPFxTemplateJson = {
         name: 'My Template',
         version: '1.0.0',
@@ -116,7 +116,7 @@ describe('SPFxTemplateJsonFile', () => {
       };
       const instance = new SPFxTemplateJsonFile(data);
 
-      expect(instance.contextSchema).toBeUndefined();
+      expect(instance.parameters).toBeUndefined();
     });
   });
 
@@ -227,27 +227,46 @@ describe('SPFxTemplateDefinitionSchema', () => {
       expect(result.success).toBe(true);
     });
 
-    it('should validate template with all optional fields', () => {
+    it('should validate template with custom parameters', () => {
       const data = {
         $schema: 'https://example.com/schema.json',
         name: 'Complete Template',
         description: 'A complete template with all fields',
         version: '1.2.3',
         spfxVersion: '1.18.0',
-        contextSchema: {
-          componentName: {
+        parameters: {
+          customParam: {
             type: 'string',
-            description: 'Component name'
+            description: 'A custom parameter'
           },
-          componentDescription: {
+          optionalParam: {
             type: 'string',
-            description: 'Component description'
+            description: 'An optional parameter',
+            required: false,
+            default: 'defaultValue'
           }
         }
       };
 
       const result = SPFxTemplateDefinitionSchema.safeParse(data);
       expect(result.success).toBe(true);
+    });
+
+    it('should reject parameter names that collide with built-in names', () => {
+      const data = {
+        name: 'Valid Name',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        parameters: {
+          componentId: {
+            type: 'string',
+            description: 'This collides with a built-in'
+          }
+        }
+      };
+
+      const result = SPFxTemplateDefinitionSchema.safeParse(data);
+      expect(result.success).toBe(false);
     });
 
     it('should reject name that is too short', () => {
@@ -358,12 +377,12 @@ describe('SPFxTemplateDefinitionSchema', () => {
       expect(result.success).toBe(false);
     });
 
-    it('should reject invalid contextSchema type', () => {
+    it('should reject invalid parameter type', () => {
       const data = {
         name: 'Valid Name',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
+        parameters: {
           field: {
             type: 'number', // Only 'string' is allowed
             description: 'A field'
@@ -375,12 +394,12 @@ describe('SPFxTemplateDefinitionSchema', () => {
       expect(result.success).toBe(false);
     });
 
-    it('should reject contextSchema without description', () => {
+    it('should reject parameter without description', () => {
       const data = {
         name: 'Valid Name',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
+        parameters: {
           field: {
             type: 'string'
             // Missing description

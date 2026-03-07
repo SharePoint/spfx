@@ -8,12 +8,27 @@ import { valid as semverValid } from 'semver';
 
 import { FileSystem } from '@rushstack/node-core-library';
 
+import { BUILT_IN_PARAMETER_NAMES } from './SPFxBuiltInContext';
+
 const NAME_MIN_LENGTH: number = 3;
 const NAME_MAX_LENGTH: number = 100;
 const DESCRIPTION_MAX_LENGTH: number = 500;
 
 function isValidSemver(version: string): boolean {
   return semverValid(version) !== null;
+}
+
+/**
+ * Defines a single custom template parameter.
+ * @public
+ */
+export interface ISPFxTemplateParameterDefinition {
+  type: 'string';
+  description: string;
+  /** Whether this parameter is required. Defaults to true. */
+  required?: boolean;
+  /** Default value, only valid when required is false. */
+  default?: string;
 }
 
 /**
@@ -31,8 +46,8 @@ export interface ISPFxTemplateJson {
   version: string;
   /** The SPFx version this template is compatible with */
   spfxVersion: string;
-  /** Optional schema defining the context variables required by this template */
-  contextSchema?: Record<string, { type: 'string'; description: string }>;
+  /** Optional custom parameters that this template accepts beyond the built-in context */
+  parameters?: Record<string, ISPFxTemplateParameterDefinition>;
 }
 
 /**
@@ -50,15 +65,26 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z
     spfxVersion: z.string().refine(isValidSemver, {
       message: 'Invalid semantic version for "spfxVersion" (expected format like "1.0.0").'
     }),
-    contextSchema: z
+    parameters: z
       .record(
         z.string(),
         z.object({
           type: z.enum(['string']),
-          description: z.string()
+          description: z.string(),
+          required: z.boolean().optional(),
+          default: z.string().optional()
         })
       )
       .optional()
+      .refine(
+        (params) => {
+          if (!params) return true;
+          return Object.keys(params).every((key) => !BUILT_IN_PARAMETER_NAMES.has(key));
+        },
+        {
+          message: `Parameter names must not collide with built-in parameter names: ${Array.from(BUILT_IN_PARAMETER_NAMES).join(', ')}`
+        }
+      )
   })
   .strict();
 
@@ -104,10 +130,10 @@ export class SPFxTemplateJsonFile {
   }
 
   /**
-   * Gets the context schema defining the variables required for template rendering.
+   * Gets the custom parameter definitions for this template.
    */
-  public get contextSchema(): Record<string, { type: 'string'; description: string }> | undefined {
-    return this._data.contextSchema;
+  public get parameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined {
+    return this._data.parameters;
   }
 
   /**

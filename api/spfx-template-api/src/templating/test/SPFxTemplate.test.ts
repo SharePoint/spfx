@@ -109,6 +109,41 @@ describe('SPFxTemplate', () => {
     });
   });
 
+  describe('getParameters', () => {
+    it('should return undefined when no parameters defined', () => {
+      const definition = new SPFxTemplateJsonFile({
+        name: 'No Params',
+        version: '1.0.0',
+        spfxVersion: '1.18.0'
+      });
+
+      const template = new SPFxTemplate(definition, new Map());
+      expect(template.getParameters()).toBeUndefined();
+    });
+
+    it('should return parameter definitions', () => {
+      const definition = new SPFxTemplateJsonFile({
+        name: 'With Params',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        parameters: {
+          customParam: {
+            type: 'string',
+            description: 'A custom param'
+          }
+        }
+      });
+
+      const template = new SPFxTemplate(definition, new Map());
+      expect(template.getParameters()).toEqual({
+        customParam: {
+          type: 'string',
+          description: 'A custom param'
+        }
+      });
+    });
+  });
+
   describe('fromFolderAsync', () => {
     it('should create a template from a folder', async () => {
       const templateJson = {
@@ -309,7 +344,7 @@ describe('SPFxTemplate', () => {
   });
 
   describe('render', () => {
-    it('should render template without context schema', async () => {
+    it('should render template without parameters', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Simple',
         version: '1.0.0',
@@ -330,35 +365,35 @@ describe('SPFxTemplate', () => {
       expect(mockCreateEditor).toHaveBeenCalled();
     });
 
-    it('should render template with context schema validation', async () => {
+    it('should render template with custom parameters when provided', async () => {
       const definition = new SPFxTemplateJsonFile({
-        name: 'WithSchema',
+        name: 'WithParams',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
-          componentName: {
+        parameters: {
+          customParam: {
             type: 'string',
-            description: 'Component name'
+            description: 'A custom parameter'
           }
         }
       });
 
-      const files = new Map<string, string>([['src/index.ts', 'const name = "<%= componentName %>";']]);
+      const files = new Map<string, string>([['src/index.ts', 'const val = "<%= customParam %>";']]);
 
       const template = new SPFxTemplate(definition, files);
-      const context = { componentName: 'MyComponent' };
+      const context = { customParam: 'myValue' };
 
       await template.renderAsync(context, '/output');
 
       expect(mockEditor.write).toHaveBeenCalled();
     });
 
-    it('should throw error when context does not match schema', async () => {
+    it('should throw error when required custom parameter is missing', async () => {
       const definition = new SPFxTemplateJsonFile({
-        name: 'WithSchema',
+        name: 'WithParams',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
+        parameters: {
           requiredField: {
             type: 'string',
             description: 'A required field'
@@ -371,7 +406,31 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const invalidContext = { wrongField: 'value' };
 
-      await expect(template.renderAsync(invalidContext, '/output')).rejects.toThrow(/Invalid context object/);
+      await expect(template.renderAsync(invalidContext, '/output')).rejects.toThrow(
+        /Missing required custom parameters: requiredField/
+      );
+    });
+
+    it('should not throw when optional custom parameter is missing', async () => {
+      const definition = new SPFxTemplateJsonFile({
+        name: 'WithOptional',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        parameters: {
+          optionalField: {
+            type: 'string',
+            description: 'An optional field',
+            required: false,
+            default: 'fallback'
+          }
+        }
+      });
+
+      const files = new Map<string, string>([['file.txt', 'content']]);
+
+      const template = new SPFxTemplate(definition, files);
+
+      await expect(template.renderAsync({}, '/output')).resolves.toBeDefined();
     });
 
     it('should replace placeholders in filenames', async () => {

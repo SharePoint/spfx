@@ -34,9 +34,21 @@ When using component name variables in templates, ensure you use the correct cas
 
 ### Missing Template Variables
 
-If you need a case transformation that doesn't exist (e.g., `componentNameAllCaps`), either:
-1. Add it to the template.json contextSchema
-2. OR manually transform in the template using EJS: `<%= componentName.toUpperCase().replace(/[^A-Z0-9]/g, '') %>`
+All standard name variants (`componentNameCamelCase`, `componentNameHyphenCase`, `componentNameCapitalCase`, `componentNameAllCaps`, etc.) are built-in and automatically available in every template. You do NOT need to declare them anywhere.
+
+If you need a custom template variable beyond the built-ins, add it to the `parameters` field in template.json:
+```json
+{
+  "parameters": {
+    "myCustomVar": {
+      "type": "string",
+      "description": "A custom variable",
+      "required": true
+    }
+  }
+}
+```
+Users pass custom parameters via `--param myCustomVar=value` on the CLI.
 
 ## Description and Documentation Placeholders
 
@@ -204,7 +216,7 @@ Before submitting a PR, verify:
 ## Questions?
 
 If you're unsure about:
-- Which variable to use → Check template.json contextSchema
+- Which variable to use → Check the built-in variables or the template's `parameters` field
 - How to format a specific identifier → Look at existing working templates
 - Whether to add a new variable → Consider if it prevents hardcoding
 

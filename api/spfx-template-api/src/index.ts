@@ -10,8 +10,14 @@
 export {
   SPFxTemplate,
   type ISPFxTemplateJson,
+  type ISPFxTemplateParameterDefinition,
   SPFxTemplateDefinitionSchema,
-  SPFxTemplateJsonFile
+  SPFxTemplateJsonFile,
+  type ISPFxBuiltInContextInputs,
+  type ISPFxBuiltInContext,
+  type IBuildBuiltInContextOptions,
+  BUILT_IN_PARAMETER_NAMES,
+  buildBuiltInContext
 } from './templating/index';
 export {
   SPFxTemplateRepositoryManager,

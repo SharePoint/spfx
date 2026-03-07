@@ -6,14 +6,15 @@ import * as path from 'node:path';
 import { create as createMemFs } from 'mem-fs';
 import { create as createEditor, type MemFsEditor } from 'mem-fs-editor';
 import * as ejs from 'ejs';
-import * as z from 'zod';
+import type * as z from 'zod';
 
 import { FileSystem, type FolderItem } from '@rushstack/node-core-library';
 
 import {
   SPFxTemplateJsonFile,
   SPFxTemplateDefinitionSchema,
-  type ISPFxTemplateJson
+  type ISPFxTemplateJson,
+  type ISPFxTemplateParameterDefinition
 } from './SPFxTemplateJsonFile';
 
 /**
@@ -140,20 +141,27 @@ export class SPFxTemplate {
    * @param destinationDir - The destination directory where rendered files will be written
    * @returns A Promise that resolves to a MemFsEditor instance containing the rendered files
    */
+  /**
+   * Gets the custom parameter definitions for this template, if any.
+   */
+  public getParameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined {
+    return this._definition.parameters;
+  }
+
   public async renderAsync(context: object, destinationDir: string): Promise<MemFsEditor> {
-    // use the template "schema" to validate the context object
-    if (this._definition.contextSchema) {
-      // Build a Zod schema from the contextSchema metadata
-      const schemaShape: Record<string, z.ZodString> = {};
-      for (const [key, value] of Object.entries(this._definition.contextSchema)) {
-        if (value.type === 'string') {
-          schemaShape[key] = z.string();
+    // Validate custom parameters if the template defines any
+    if (this._definition.parameters) {
+      const contextRecord: Record<string, unknown> = context as Record<string, unknown>;
+      const missing: string[] = [];
+
+      for (const [key, paramDef] of Object.entries(this._definition.parameters)) {
+        const isRequired: boolean = paramDef.required !== false;
+        if (isRequired && (contextRecord[key] === undefined || contextRecord[key] === null)) {
+          missing.push(key);
         }
       }
-      const contextSchema: z.ZodObject<Record<string, z.ZodString>> = z.object(schemaShape);
-      const validationResult: z.ZodSafeParseResult<Record<string, string>> = contextSchema.safeParse(context);
-      if (!validationResult.success) {
-        throw new Error(`Invalid context object: ${validationResult.error}`);
+      if (missing.length > 0) {
+        throw new Error(`Missing required custom parameters: ${missing.join(', ')}`);
       }
     }
 

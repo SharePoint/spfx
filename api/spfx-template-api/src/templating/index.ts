@@ -4,6 +4,14 @@
 export { SPFxTemplate } from './SPFxTemplate';
 export {
   type ISPFxTemplateJson,
+  type ISPFxTemplateParameterDefinition,
   SPFxTemplateDefinitionSchema,
   SPFxTemplateJsonFile
 } from './SPFxTemplateJsonFile';
+export {
+  type ISPFxBuiltInContextInputs,
+  type ISPFxBuiltInContext,
+  type IBuildBuiltInContextOptions,
+  BUILT_IN_PARAMETER_NAMES,
+  buildBuiltInContext
+} from './SPFxBuiltInContext';

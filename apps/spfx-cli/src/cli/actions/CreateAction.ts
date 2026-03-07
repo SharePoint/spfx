@@ -1,9 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
 import type { MemFsEditor } from 'mem-fs-editor';
-import { v4 as uuidv4 } from 'uuid';
 import * as z from 'zod';
 
 import { Colorize, type Terminal } from '@rushstack/terminal';
@@ -14,6 +12,9 @@ import {
   type IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
 import {
+  buildBuiltInContext,
+  type ISPFxBuiltInContext,
+  type ISPFxTemplateParameterDefinition,
   LocalFileSystemRepositorySource,
   type SPFxTemplateCollection,
   SPFxTemplateRepositoryManager,
@@ -21,10 +22,6 @@ import {
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilcities/validation';
-
-const CI_COMPONENT_ID: string = '11111111-1111-1111-1111-111111111111';
-const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
-const CI_FEATURE_ID: string = '33333333-3333-3333-3333-333333333333';
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -48,6 +45,7 @@ export class CreateAction extends CommandLineAction {
   private readonly _componentAlias: CommandLineStringParameter;
   private readonly _componentDescription: CommandLineStringParameter;
   private readonly _solutionName: CommandLineStringParameter;
+  private readonly _params: CommandLineStringListParameter;
 
   public constructor(terminal: Terminal) {
     super({
@@ -109,6 +107,12 @@ export class CreateAction extends CommandLineAction {
       argumentName: 'SOLUTION_NAME',
       description: 'The solution name. If not provided, defaults to the kebab-case component name.'
     });
+
+    this._params = this.defineStringListParameter({
+      parameterLongName: '--param',
+      argumentName: 'KEY_VALUE',
+      description: 'Custom template parameter in key=value format (repeatable)'
+    });
   }
 
   protected async onExecuteAsync(): Promise<void> {
@@ -145,29 +149,11 @@ export class CreateAction extends CommandLineAction {
         );
       }
 
-      // CI mode is read from an environment variable instead of a ts-command-line
-      // parameter so it stays out of --help output. It is an internal/undocumented
-      // flag used only by CI pipelines and tests to produce deterministic output.
-      // eslint-disable-next-line dot-notation
-      const ciMode: boolean = process.env['SPFX_CI_MODE'] === '1';
-      const componentId: string = ciMode ? CI_COMPONENT_ID : uuidv4();
-      const solutionId: string = ciMode ? CI_SOLUTION_ID : uuidv4();
-      const featureId: string = ciMode ? CI_FEATURE_ID : uuidv4();
-
       // Get component name and validate
       const componentName: string = this._componentName.value;
       if (!componentName || componentName.trim().length === 0) {
         throw new Error('Component name is required and cannot be empty or only whitespace.');
       }
-
-      const componentAlias: string = this._componentAlias.value || componentName;
-      const componentDescription: string = this._componentDescription.value || `${componentName} description`;
-
-      // Compute name variants using lodash
-      const componentNameCamelCase: string = camelCase(componentName);
-      const componentNameHyphenCase: string = kebabCase(componentName);
-      const componentNameCapitalCase: string = upperFirst(camelCase(componentName));
-      const componentNameAllCaps: string = snakeCase(componentName).toUpperCase();
 
       const rawSolutionName: string | undefined = this._solutionName.value?.trim();
       if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
@@ -175,27 +161,62 @@ export class CreateAction extends CommandLineAction {
           `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
         );
       }
-      const solutionName: string = rawSolutionName || componentNameHyphenCase;
 
-      const fs: MemFsEditor = await template.renderAsync(
+      // CI mode is read from an environment variable instead of a ts-command-line
+      // parameter so it stays out of --help output. It is an internal/undocumented
+      // flag used only by CI pipelines and tests to produce deterministic output.
+      // eslint-disable-next-line dot-notation
+      const ciMode: boolean = process.env['SPFX_CI_MODE'] === '1';
+
+      const builtInContext: ISPFxBuiltInContext = buildBuiltInContext(
         {
-          solution_name: solutionName,
-          eslintProfile: 'react',
+          componentName,
           libraryName: this._libraryName.value,
           spfxVersion: template.spfxVersion,
-          componentId: componentId,
-          featureId: featureId,
-          solutionId: solutionId,
-          componentAlias: componentAlias,
-          componentNameUnescaped: componentName,
-          componentNameCamelCase: componentNameCamelCase,
-          componentNameHyphenCase: componentNameHyphenCase,
-          componentNameCapitalCase: componentNameCapitalCase,
-          componentNameAllCaps: componentNameAllCaps,
-          componentDescription: componentDescription
+          solutionName: rawSolutionName,
+          componentAlias: this._componentAlias.value || undefined,
+          componentDescription: this._componentDescription.value || undefined
         },
-        targetDir
+        { ciMode }
       );
+
+      // Parse custom --param values
+      const customParams: Record<string, string> = {};
+      for (const paramValue of this._params.values) {
+        const eqIndex: number = paramValue.indexOf('=');
+        if (eqIndex <= 0) {
+          throw new Error(`Invalid --param format: "${paramValue}". Expected key=value format.`);
+        }
+        const key: string = paramValue.slice(0, eqIndex);
+        const value: string = paramValue.slice(eqIndex + 1);
+        customParams[key] = value;
+      }
+
+      // Validate custom params against template's parameter definitions
+      const templateParams: Record<string, ISPFxTemplateParameterDefinition> | undefined =
+        template.getParameters();
+      if (templateParams) {
+        const missingParams: string[] = [];
+        for (const [key, paramDef] of Object.entries(templateParams)) {
+          const isRequired: boolean = paramDef.required !== false;
+          if (isRequired && customParams[key] === undefined) {
+            missingParams.push(key);
+          }
+          // Apply defaults for optional params
+          if (!isRequired && customParams[key] === undefined && paramDef.default !== undefined) {
+            customParams[key] = paramDef.default;
+          }
+        }
+        if (missingParams.length > 0) {
+          throw new Error(
+            `Missing required template parameters: ${missingParams.join(', ')}. Use --param key=value to provide them.`
+          );
+        }
+      }
+
+      const context: Record<string, string> = { ...builtInContext, ...customParams };
+
+      const fs: MemFsEditor = await template.renderAsync(context, targetDir);
       _printFileChanges(this._terminal, fs, targetDir);
       await template.write(fs);
     } catch (error: unknown) {

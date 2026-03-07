@@ -16,16 +16,76 @@ export abstract class BaseSPFxTemplateRepositorySource {
 }
 
 // @public
+export function buildBuiltInContext(inputs: ISPFxBuiltInContextInputs, options?: IBuildBuiltInContextOptions): ISPFxBuiltInContext;
+
+// @public
+export const BUILT_IN_PARAMETER_NAMES: ReadonlySet<string>;
+
+// @public
+export interface IBuildBuiltInContextOptions {
+    ciMode?: boolean;
+}
+
+// @public
+export interface ISPFxBuiltInContext {
+    // (undocumented)
+    componentAlias: string;
+    // (undocumented)
+    componentDescription: string;
+    // (undocumented)
+    componentId: string;
+    // (undocumented)
+    componentNameAllCaps: string;
+    // (undocumented)
+    componentNameCamelCase: string;
+    // (undocumented)
+    componentNameCapitalCase: string;
+    // (undocumented)
+    componentNameHyphenCase: string;
+    // (undocumented)
+    componentNameUnescaped: string;
+    // (undocumented)
+    eslintProfile: string;
+    // (undocumented)
+    featureId: string;
+    // (undocumented)
+    libraryName: string;
+    // (undocumented)
+    solution_name: string;
+    // (undocumented)
+    solutionId: string;
+    // (undocumented)
+    spfxVersion: string;
+}
+
+// @public
+export interface ISPFxBuiltInContextInputs {
+    componentAlias?: string;
+    componentDescription?: string;
+    componentName: string;
+    libraryName: string;
+    solutionName?: string;
+    spfxVersion: string;
+}
+
+// @public
 export interface ISPFxTemplateJson {
     $schema?: string;
-    contextSchema?: Record<string, {
-        type: 'string';
-        description: string;
-    }>;
     description?: string;
     name: string;
+    parameters?: Record<string, ISPFxTemplateParameterDefinition>;
     spfxVersion: string;
     version: string;
+}
+
+// @public
+export interface ISPFxTemplateParameterDefinition {
+    default?: string;
+    // (undocumented)
+    description: string;
+    required?: boolean;
+    // (undocumented)
+    type: 'string';
 }
 
 // @public
@@ -50,7 +110,9 @@ export class SPFxTemplate {
     get description(): string | undefined;
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
+    getParameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined;
     get name(): string;
+    // (undocumented)
     renderAsync(context: object, destinationDir: string): Promise<MemFsEditor>;
     get spfxVersion(): string;
     toString(): string;
@@ -70,14 +132,11 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson>;
 // @public
 export class SPFxTemplateJsonFile {
     constructor(data: ISPFxTemplateJson);
-    get contextSchema(): Record<string, {
-        type: 'string';
-        description: string;
-    }> | undefined;
     get description(): string | undefined;
     static fromFileAsync(filePath: string): Promise<SPFxTemplateJsonFile>;
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplateJsonFile>;
     get name(): string;
+    get parameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined;
     get spfxVersion(): string;
     // (undocumented)
     static readonly TEMPLATE_JSON: string;
