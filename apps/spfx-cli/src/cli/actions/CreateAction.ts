@@ -17,7 +17,8 @@ import {
   LocalFileSystemRepositorySource,
   type SPFxTemplateCollection,
   SPFxTemplateRepositoryManager,
-  type SPFxTemplate
+  type SPFxTemplate,
+  SPFxTemplateWriter
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilcities/validation';
@@ -197,7 +198,8 @@ export class CreateAction extends CommandLineAction {
         targetDir
       );
       _printFileChanges(this._terminal, fs, targetDir);
-      await template.write(fs);
+      const writer: SPFxTemplateWriter = new SPFxTemplateWriter(this._terminal);
+      await writer.writeAsync(fs, targetDir);
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
       this._terminal.writeErrorLine(`Error creating SPFx component: ${message}`);

@@ -9,10 +9,24 @@ import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
 // @public
+export abstract class BaseMergeHelper {
+    abstract get fileRelativePath(): string;
+    abstract merge(existingContent: string, newContent: string): string;
+}
+
+// @public
 export abstract class BaseSPFxTemplateRepositorySource {
     constructor(type: SPFxTemplateRepositorySourceTypes);
     abstract getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
     get type(): SPFxTemplateRepositorySourceTypes;
+}
+
+// @public
+export class ConfigJsonMergeHelper extends JsonMergeHelper {
+    // (undocumented)
+    get fileRelativePath(): string;
+    // (undocumented)
+    merge(existingContent: string, newContent: string): string;
 }
 
 // @public
@@ -29,6 +43,12 @@ export interface ISPFxTemplateJson {
 }
 
 // @public
+export abstract class JsonMergeHelper extends BaseMergeHelper {
+    protected parseJson<T>(content: string): T;
+    protected serializeJson(value: unknown): string;
+}
+
+// @public
 export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositorySource {
     constructor(path: string);
     getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
@@ -36,9 +56,33 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
 }
 
 // @public
+export class PackageJsonMergeHelper extends JsonMergeHelper {
+    // (undocumented)
+    get fileRelativePath(): string;
+    // (undocumented)
+    merge(existingContent: string, newContent: string): string;
+}
+
+// @public
+export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
+    // (undocumented)
+    get fileRelativePath(): string;
+    // (undocumented)
+    merge(existingContent: string, newContent: string): string;
+}
+
+// @public
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
     constructor(repoUri: string, branch?: string, terminal?: Terminal);
     getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
+}
+
+// @public
+export class ServeJsonMergeHelper extends JsonMergeHelper {
+    // (undocumented)
+    get fileRelativePath(): string;
+    // (undocumented)
+    merge(existingContent: string, newContent: string): string;
 }
 
 // @public
@@ -55,7 +99,6 @@ export class SPFxTemplate {
     get spfxVersion(): string;
     toString(): string;
     get version(): string;
-    write(fs: MemFsEditor): Promise<void>;
 }
 
 // @public
@@ -93,5 +136,12 @@ export class SPFxTemplateRepositoryManager {
 
 // @public
 export type SPFxTemplateRepositorySourceTypes = 'local' | 'github';
+
+// @public
+export class SPFxTemplateWriter {
+    constructor(terminal: Terminal);
+    addMergeHelper(helper: BaseMergeHelper): void;
+    writeAsync(editor: MemFsEditor, targetDir: string): Promise<void>;
+}
 
 ```
