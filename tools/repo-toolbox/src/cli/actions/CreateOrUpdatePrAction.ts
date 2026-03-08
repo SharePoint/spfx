@@ -137,15 +137,11 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
     for (const label of existingLabels) {
       if (label.name.startsWith('SourceBuild:')) {
         const encodedLabel: string = encodeURIComponent(label.name);
-        try {
-          await githubRequestAsync({
-            url: `${apiBase}/issues/${prNumber}/labels/${encodedLabel}`,
-            method: 'DELETE',
-            authHeader
-          });
-        } catch {
-          // Ignore errors when removing old labels
-        }
+        await githubRequestAsync({
+          url: `${apiBase}/issues/${prNumber}/labels/${encodedLabel}`,
+          method: 'DELETE',
+          authHeader
+        });
       }
     }
 
