@@ -82,7 +82,8 @@ extends:
 
               # Check for changes and commit
               - bash: |
-                  git add -A
+                  git add -u
+                  git add -- '**/CHANGELOG.md' '**/CHANGELOG.json'
 
                   if [ -n "$(git diff --cached --numstat)" ]; then
                     git commit -m "Applying package version bumps
