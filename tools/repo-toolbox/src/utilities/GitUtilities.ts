@@ -7,7 +7,7 @@ import { Executable } from '@rushstack/node-core-library';
 
 export async function getRepoSlugAsync(): Promise<string> {
   const result: string = await execGitAsync(['remote', 'get-url', 'origin']);
-  const match: RegExpMatchArray | null = result.match(/github\.com[:/](.+\/[^.]+?)(?:\.git)?$/);
+  const match: RegExpMatchArray | null = result.match(/github\.com[:/]([^/]+\/[^/]+?)(?:\.git)?$/);
   if (!match) {
     throw new Error(`Could not extract repository slug from remote URL: ${result}`);
   }
