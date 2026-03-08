@@ -69,15 +69,15 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
     const terminal: ITerminal = this._terminal;
 
     const repoSlug: string = await getRepoSlugAsync();
-    const [owner] = repoSlug.split('/');
-    if (!owner) {
-      throw new Error(`Unable to determine repository owner from slug: ${repoSlug}`);
+    const [owner, repo] = repoSlug.split('/');
+    if (!owner || !repo) {
+      throw new Error(`Unable to determine repository owner or name from slug: ${repoSlug}`);
     }
 
     terminal.writeLine(`Repository: ${repoSlug}`);
 
     const authorizationHeader: string = await getGitAuthorizationHeaderAsync();
-    const gitHubClient: GitHubClient = new GitHubClient({ authorizationHeader, repoSlug });
+    const gitHubClient: GitHubClient = new GitHubClient({ authorizationHeader, owner, repo });
 
     // Check for existing open PR from this branch
     const branchName: string = this._branchNameParameter.value;

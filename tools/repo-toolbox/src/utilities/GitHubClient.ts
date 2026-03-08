@@ -1,28 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { Async } from '@rushstack/node-core-library';
+import { Octokit, type RestEndpointMethodTypes } from '@octokit/rest';
 
-export interface IGitHubPr {
-  number: number;
-}
-
-export interface IGitHubLabel {
-  name: string;
-}
-
-export interface IGitHubGetRequestOptions {
-  url: string;
-}
-
-export interface IGitHubRequestOptions extends IGitHubGetRequestOptions {
-  jsonBody?: object;
-  method: string;
-}
+export type IGitHubPr = RestEndpointMethodTypes['pulls']['list']['response']['data'][number];
+export type IGitHubLabel = RestEndpointMethodTypes['issues']['listLabelsOnIssue']['response']['data'][number];
+export type IGitHubCreationResult = RestEndpointMethodTypes['pulls']['create']['response']['data'];
 
 export interface IGitHubClientOptions {
   authorizationHeader: string;
-  repoSlug: string;
+  owner: string;
+  repo: string;
 }
 
 export interface IGetPrForBranchOptions {
@@ -53,116 +41,80 @@ export interface IUpdatePrDescriptionOptions {
   body: string;
 }
 
-const AUTHORIZATION_HEADER_NAME: 'Authorization' = 'Authorization';
-const COMMON_HEADERS: Record<string, string> = {
-  Accept: 'application/vnd.github+json',
-  'Content-Type': 'application/json'
-};
+interface IOctokitCommonOptions {
+  owner: string;
+  repo: string;
+}
 
 export class GitHubClient {
-  private readonly _authorizationHeader: string;
-  private readonly _apiBase: string;
+  private readonly _octokit: Octokit;
+  private readonly _octokitCommonOptions: IOctokitCommonOptions;
 
   public constructor(options: IGitHubClientOptions) {
-    const { authorizationHeader, repoSlug } = options;
-    this._authorizationHeader = authorizationHeader;
-    this._apiBase = `https://api.github.com/repos/${repoSlug}`;
+    const { authorizationHeader, owner, repo } = options;
+    this._octokitCommonOptions = { owner, repo };
+
+    this._octokit = new Octokit();
+    this._octokit.hook.before('request', (requestOptions) => {
+      requestOptions.headers.authorization = authorizationHeader;
+    });
   }
 
   public async getPrForBranchAsync(options: IGetPrForBranchOptions): Promise<IGitHubPr | undefined> {
     const { owner, branchName } = options;
-    const [existingPr]: IGitHubPr[] = await this.githubGetAsync<IGitHubPr[]>({
-      url: `${this._apiBase}/pulls?head=${encodeURIComponent(`${owner}:${branchName}`)}&state=open`
+    const { data } = await this._octokit.pulls.list({
+      ...this._octokitCommonOptions,
+      head: `${owner}:${branchName}`,
+      state: 'open'
     });
-
-    return existingPr;
+    return data[0];
   }
 
-  public async openPrAsync(options: IOpenPrOptions): Promise<IGitHubPr> {
+  public async openPrAsync(options: IOpenPrOptions): Promise<IGitHubCreationResult> {
     const { title, body, branchName, baseBranch } = options;
-    return await this.githubRequestAsync<IGitHubPr>({
-      url: `${this._apiBase}/pulls`,
-      method: 'POST',
-      jsonBody: {
-        title,
-        body,
-        head: branchName,
-        base: baseBranch
-      }
+    const { data } = await this._octokit.pulls.create({
+      ...this._octokitCommonOptions,
+      title,
+      body,
+      head: branchName,
+      base: baseBranch
     });
+    return data;
   }
 
   public async getPrLabelsAsync(prNumber: number): Promise<IGitHubLabel[]> {
-    return await this.githubGetAsync<IGitHubLabel[]>({
-      url: `${this._apiBase}/issues/${prNumber}/labels`
+    const { data } = await this._octokit.issues.listLabelsOnIssue({
+      ...this._octokitCommonOptions,
+      issue_number: prNumber
     });
+    return data;
   }
 
   public async addPrLabelAsync(options: IAddPrLabelOptions): Promise<void> {
     const { prNumber, labelName } = options;
-    await this.githubRequestAsync({
-      url: `${this._apiBase}/issues/${prNumber}/labels`,
-      method: 'POST',
-      jsonBody: { labels: [labelName] }
+    await this._octokit.issues.addLabels({
+      ...this._octokitCommonOptions,
+      issue_number: prNumber,
+      labels: [labelName]
     });
   }
 
   public async deletePrLabelAsync(options: IDeletePrLabelOptions): Promise<void> {
     const { prNumber, labelName } = options;
-    const encodedLabel: string = encodeURIComponent(labelName);
-    await this.githubRequestAsync({
-      url: `${this._apiBase}/issues/${prNumber}/labels/${encodedLabel}`,
-      method: 'DELETE'
+    await this._octokit.issues.removeLabel({
+      ...this._octokitCommonOptions,
+      issue_number: prNumber,
+      name: labelName
     });
   }
 
   public async updatePrDescriptionAsync(options: IUpdatePrDescriptionOptions): Promise<void> {
     const { prNumber, title, body } = options;
-    await this.githubRequestAsync({
-      url: `${this._apiBase}/pulls/${prNumber}`,
-      method: 'PATCH',
-      jsonBody: {
-        title,
-        body
-      }
-    });
-  }
-
-  public async githubGetAsync<TResponse>(options: IGitHubGetRequestOptions): Promise<TResponse> {
-    return await this.githubRequestAsync<TResponse>({ ...options, method: 'GET' });
-  }
-
-  public async githubRequestAsync(options: IGitHubRequestOptions & { method: 'DELETE' }): Promise<undefined>;
-  public async githubRequestAsync<TResponse>(options: IGitHubRequestOptions): Promise<TResponse>;
-  public async githubRequestAsync<T>(options: IGitHubRequestOptions): Promise<T | undefined> {
-    const { url, method, jsonBody } = options;
-    const requestInit: RequestInit = {
-      method,
-      body: JSON.stringify(jsonBody),
-      headers: {
-        ...COMMON_HEADERS,
-        [AUTHORIZATION_HEADER_NAME]: this._authorizationHeader
-      }
-    };
-
-    return await Async.runWithRetriesAsync({
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      action: async () => {
-        const response: Response = await fetch(url, requestInit);
-        const { status, ok } = response;
-        if (!ok) {
-          const text: string = await response.text();
-          throw new Error(`GitHub API ${method} ${url} returned ${status}: ${text}`);
-        }
-
-        if (method === 'DELETE' || status === 204) {
-          return undefined;
-        }
-
-        return (await response.json()) as T;
-      },
-      maxRetries: 3,
-      retryDelayMs: 1000
+    await this._octokit.pulls.update({
+      ...this._octokitCommonOptions,
+      pull_number: prNumber,
+      title,
+      body
     });
   }
 }
