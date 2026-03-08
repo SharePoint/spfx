@@ -15,13 +15,13 @@ export abstract class BaseSPFxTemplateRepositorySource {
     get type(): SPFxTemplateRepositorySourceTypes;
 }
 
-// @internal
-export function _isBinaryFile(filePath: string): boolean;
-
 // @public (undocumented)
 export interface IRenderOptions {
     retainPhaseScripts?: boolean;
 }
+
+// @internal
+export function _isBinaryFile(filePath: string): boolean;
 
 // @public
 export interface ISPFxTemplateJson {
