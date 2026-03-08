@@ -14,7 +14,6 @@ export interface IGitHubClientOptions {
 }
 
 export interface IGetPrForBranchOptions {
-  owner: string;
   branchName: string;
 }
 
@@ -61,10 +60,10 @@ export class GitHubClient {
   }
 
   public async getPrForBranchAsync(options: IGetPrForBranchOptions): Promise<IGitHubPr | undefined> {
-    const { owner, branchName } = options;
+    const { branchName } = options;
     const { data } = await this._octokit.pulls.list({
       ...this._octokitCommonOptions,
-      head: `${owner}:${branchName}`,
+      head: `${this._octokitCommonOptions.owner}:${branchName}`,
       state: 'open'
     });
     return data[0];
@@ -83,11 +82,10 @@ export class GitHubClient {
   }
 
   public async getPrLabelsAsync(prNumber: number): Promise<IGitHubLabel[]> {
-    const { data } = await this._octokit.issues.listLabelsOnIssue({
+    return await this._octokit.paginate(this._octokit.issues.listLabelsOnIssue, {
       ...this._octokitCommonOptions,
       issue_number: prNumber
     });
-    return data;
   }
 
   public async addPrLabelAsync(options: IAddPrLabelOptions): Promise<void> {

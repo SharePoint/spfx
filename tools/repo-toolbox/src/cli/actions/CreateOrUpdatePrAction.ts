@@ -81,7 +81,7 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
 
     // Check for existing open PR from this branch
     const branchName: string = this._branchNameParameter.value;
-    const existingPr: IGitHubPr | undefined = await gitHubClient.getPrForBranchAsync({ owner, branchName });
+    const existingPr: IGitHubPr | undefined = await gitHubClient.getPrForBranchAsync({ branchName });
 
     const title: string = this._titleParameter.value;
     const body: string = this._bodyParameter.value;
