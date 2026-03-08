@@ -1,0 +1,26 @@
+# Pipeline: Publish Packages
+
+trigger: none
+pr: none
+resources:
+  repositories:
+    - repository: 1esPipelines
+      type: git
+      name: 1ESPipelineTemplates/1ESPipelineTemplates
+      ref: refs/tags/release
+
+extends:
+  template: v1/1ES.Official.PipelineTemplate.yml@1esPipelines
+  parameters:
+    pool:
+      name: Azure-Pipelines-1ESPT-ExDShared
+      os: windows
+    stages:
+      - stage: Publish
+        jobs:
+          - job: PublishJob
+            pool:
+              name: publish-rushstack
+              os: linux
+            steps:
+              - checkout: self
