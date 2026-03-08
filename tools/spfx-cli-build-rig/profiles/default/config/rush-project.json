@@ -1,12 +1,10 @@
 {
+  "extends": "@rushstack/heft-node-rig/profiles/default/config/rush-project.json",
+
   "operationSettings": [
     {
-      "operationName": "_phase:build",
-      "outputFolderNames": ["dist", "lib", "temp"]
-    },
-    {
-      "operationName": "build",
-      "outputFolderNames": ["dist", "lib", "temp"]
+      "operationName": "_phase:test",
+      "outputFolderNames": ["coverage"]
     }
   ]
 }
