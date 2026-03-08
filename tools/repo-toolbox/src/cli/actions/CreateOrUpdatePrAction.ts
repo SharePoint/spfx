@@ -3,14 +3,10 @@
 
 import type { ITerminal } from '@rushstack/terminal';
 import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
+import { Async } from '@rushstack/node-core-library';
 
-import {
-  githubGetAsync,
-  githubRequestAsync,
-  type IGitHubLabel,
-  type IGitHubPr
-} from '../../utilities/GitHubUtilities';
-import { getAuthHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
+import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
+import { GitHubClient, type IGitHubLabel, type IGitHubPr } from '../../utilities/GitHubClient';
 
 export class CreateOrUpdatePrAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
@@ -74,17 +70,18 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
 
     const repoSlug: string = await getRepoSlugAsync();
     const [owner] = repoSlug.split('/');
+    if (!owner) {
+      throw new Error(`Unable to determine repository owner from slug: ${repoSlug}`);
+    }
+
     terminal.writeLine(`Repository: ${repoSlug}`);
 
-    const authHeader: string = await getAuthHeaderAsync();
-    const apiBase: string = `https://api.github.com/repos/${repoSlug}`;
+    const authorizationHeader: string = await getGitAuthorizationHeaderAsync();
+    const gitHubClient: GitHubClient = new GitHubClient({ authorizationHeader, repoSlug });
 
     // Check for existing open PR from this branch
     const branchName: string = this._branchNameParameter.value;
-    const [existingPr]: IGitHubPr[] = await githubGetAsync<IGitHubPr[]>({
-      url: `${apiBase}/pulls?head=${encodeURIComponent(`${owner}:${branchName}`)}&state=open`,
-      authHeader
-    });
+    const existingPr: IGitHubPr | undefined = await gitHubClient.getPrForBranchAsync({ owner, branchName });
 
     const title: string = this._titleParameter.value;
     const body: string = this._bodyParameter.value;
@@ -93,34 +90,12 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
     if (existingPr) {
       ({ number: prNumber } = existingPr);
       terminal.writeLine(`Updating existing PR #${prNumber}`);
-
-      await githubRequestAsync({
-        url: `${apiBase}/pulls/${prNumber}`,
-        method: 'PATCH',
-        authHeader,
-        jsonBody: {
-          title,
-          body
-        }
-      });
-
+      await gitHubClient.updatePrDescriptionAsync({ prNumber, title, body });
       terminal.writeLine(`PR #${prNumber} updated.`);
     } else {
       terminal.writeLine('Creating new PR');
-
       const baseBranch: string = this._baseBranchParameter.value;
-      ({ number: prNumber } = await githubRequestAsync<IGitHubPr>({
-        url: `${apiBase}/pulls`,
-        method: 'POST',
-        authHeader,
-        jsonBody: {
-          title,
-          body,
-          head: branchName,
-          base: baseBranch
-        }
-      }));
-
+      ({ number: prNumber } = await gitHubClient.openPrAsync({ title, body, branchName, baseBranch }));
       terminal.writeLine(`Created PR #${prNumber}`);
     }
 
@@ -129,29 +104,20 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
     terminal.writeLine(`Applying label: ${sourceBuildLabel}`);
 
     // Remove any existing SourceBuild: labels
-    const existingLabels: IGitHubLabel[] = await githubGetAsync<IGitHubLabel[]>({
-      url: `${apiBase}/issues/${prNumber}/labels`,
-      authHeader
-    });
+    const existingLabels: IGitHubLabel[] = await gitHubClient.getPrLabelsAsync(prNumber);
 
-    for (const label of existingLabels) {
-      if (label.name.startsWith('SourceBuild:')) {
-        const encodedLabel: string = encodeURIComponent(label.name);
-        await githubRequestAsync({
-          url: `${apiBase}/issues/${prNumber}/labels/${encodedLabel}`,
-          method: 'DELETE',
-          authHeader
-        });
-      }
-    }
+    await Async.forEachAsync(
+      existingLabels,
+      async ({ name: labelName }) => {
+        if (labelName.startsWith('SourceBuild:')) {
+          await gitHubClient.deletePrLabelAsync({ prNumber, labelName });
+        }
+      },
+      { concurrency: 5 }
+    );
 
     // Add the new label
-    await githubRequestAsync({
-      url: `${apiBase}/issues/${prNumber}/labels`,
-      method: 'POST',
-      authHeader,
-      jsonBody: { labels: [sourceBuildLabel] }
-    });
+    await gitHubClient.addPrLabelAsync({ prNumber, labelName: sourceBuildLabel });
 
     terminal.writeLine('Label applied.');
   }

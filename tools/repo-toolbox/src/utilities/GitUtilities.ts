@@ -15,7 +15,7 @@ export async function getRepoSlugAsync(): Promise<string> {
   return match[1]!;
 }
 
-export async function getAuthHeaderAsync(): Promise<string> {
+export async function getGitAuthorizationHeaderAsync(): Promise<string> {
   // The checkout with persistCredentials sets an extraheader in git config
   // Format: "http.<url>.extraheader AUTHORIZATION: basic <token>"
   const result: string = await execGitAsync(['config', '--get-regexp', 'http\\..*\\.extraheader']);
