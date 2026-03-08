@@ -2,8 +2,8 @@
 // See LICENSE in the project root for license information.
 
 jest.mock('@rushstack/node-core-library');
-jest.mock('mem-fs', () => ({ create: jest.fn() }));
-jest.mock('mem-fs-editor', () => ({ create: jest.fn() }));
+jest.mock('mem-fs');
+jest.mock('mem-fs-editor');
 
 import type { MemFsEditor } from 'mem-fs-editor';
 
