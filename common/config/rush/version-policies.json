@@ -103,6 +103,7 @@
     "definitionName": "lockStepVersion",
     "policyName": "spfx",
     "version": "0.0.0",
+    "nextBump": "minor",
     "mainProject": "@microsoft/spfx-cli"
   }
 ]

@@ -446,6 +446,13 @@
     // TOOLS
     //
     {
+      "packageName": "repo-toolbox",
+      "projectFolder": "tools/repo-toolbox",
+      "reviewCategory": "tools",
+      "shouldPublish": false,
+      "tags": []
+    },
+    {
       "packageName": "@microsoft/spfx-cli-build-rig",
       "projectFolder": "tools/spfx-cli-build-rig",
       "reviewCategory": "tools",
