@@ -91,7 +91,7 @@ extends:
                   Pipeline Run: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
                   Run ID: $(Build.BuildId)
 
-                  [skip ci]"
+                  ***NO_CI***"
                     echo "Changes committed"
                     echo "##vso[task.setvariable variable=HasChanges]true"
                   else
