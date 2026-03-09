@@ -5,6 +5,8 @@ import type { ChildProcess } from 'node:child_process';
 
 import { Executable } from '@rushstack/node-core-library';
 
+import { GitHubClient } from './GitHubClient';
+
 export async function getRepoSlugAsync(): Promise<string> {
   const result: string = await execGitAsync(['remote', 'get-url', 'origin']);
   const match: RegExpMatchArray | null = result.match(/github\.com[:/]([^/]+\/[^/]+?)(?:\.git)?$/);
@@ -48,4 +50,19 @@ export async function execGitAsync(args: string[]): Promise<string> {
   });
 
   return stdout.trim();
+}
+
+/**
+ * Creates a {@link GitHubClient} by reading the repository slug and authorization
+ * header from the local git configuration.
+ */
+export async function createGitHubClientAsync(): Promise<GitHubClient> {
+  const repoSlug: string = await getRepoSlugAsync();
+  const [owner, repo] = repoSlug.split('/');
+  if (!owner || !repo) {
+    throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
+  }
+
+  const authorizationHeader: string = await getGitAuthorizationHeaderAsync();
+  return new GitHubClient({ authorizationHeader, owner, repo });
 }
