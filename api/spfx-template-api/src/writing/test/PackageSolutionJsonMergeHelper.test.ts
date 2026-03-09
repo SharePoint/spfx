@@ -123,4 +123,64 @@ describe('PackageSolutionJsonMergeHelper', () => {
 
     expect(result.solution.features).toHaveLength(1);
   });
+
+  describe('error handling', () => {
+    it('should throw when existing content is invalid JSON', () => {
+      const incoming = JSON.stringify({ solution: { features: [] } });
+      expect(() => helper.merge('not json', incoming)).toThrow(SyntaxError);
+    });
+
+    it('should throw when incoming content is invalid JSON', () => {
+      const existing = JSON.stringify({ solution: { features: [] } });
+      expect(() => helper.merge(existing, 'not json')).toThrow(SyntaxError);
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should handle empty features arrays on both sides', () => {
+      const existing = JSON.stringify({ solution: { features: [] } });
+      const incoming = JSON.stringify({ solution: { features: [] } });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.solution.features).toEqual([]);
+    });
+
+    it('should handle no solution key in either side', () => {
+      const existing = JSON.stringify({ $schema: 'https://schema.example.com' });
+      const incoming = JSON.stringify({ paths: { zippedPackage: 'solution/pkg.sppkg' } });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.solution).toBeUndefined();
+    });
+
+    it('should deduplicate when multiple incoming features overlap with existing', () => {
+      const existing = JSON.stringify({
+        solution: {
+          features: [
+            { id: 'feat-1', title: 'Feature 1' },
+            { id: 'feat-2', title: 'Feature 2' }
+          ]
+        }
+      });
+
+      const incoming = JSON.stringify({
+        solution: {
+          features: [
+            { id: 'feat-1', title: 'Feature 1 Updated' },
+            { id: 'feat-2', title: 'Feature 2 Updated' },
+            { id: 'feat-3', title: 'Feature 3' }
+          ]
+        }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.solution.features).toHaveLength(3);
+      expect(result.solution.features[0].title).toBe('Feature 1');
+      expect(result.solution.features[1].title).toBe('Feature 2');
+      expect(result.solution.features[2].title).toBe('Feature 3');
+    });
+  });
 });

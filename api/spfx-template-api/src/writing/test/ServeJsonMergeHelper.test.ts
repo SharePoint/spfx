@@ -94,4 +94,65 @@ describe('ServeJsonMergeHelper', () => {
 
     expect(result.serveConfigurations.helloWorld).toBeDefined();
   });
+
+  describe('error handling', () => {
+    it('should throw when existing content is invalid JSON', () => {
+      const incoming = JSON.stringify({ serveConfigurations: {} });
+      expect(() => helper.merge('not json', incoming)).toThrow(SyntaxError);
+    });
+
+    it('should throw when incoming content is invalid JSON', () => {
+      const existing = JSON.stringify({ serveConfigurations: {} });
+      expect(() => helper.merge(existing, 'not json')).toThrow(SyntaxError);
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should overwrite existing serveConfiguration when incoming has same key', () => {
+      const existing = JSON.stringify({
+        serveConfigurations: {
+          shared: { pageUrl: 'https://localhost/old' }
+        }
+      });
+
+      const incoming = JSON.stringify({
+        serveConfigurations: {
+          shared: { pageUrl: 'https://localhost/new' }
+        }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.serveConfigurations.shared.pageUrl).toBe('https://localhost/new');
+    });
+
+    it('should handle empty serveConfigurations objects', () => {
+      const existing = JSON.stringify({ port: 4321, serveConfigurations: {} });
+      const incoming = JSON.stringify({ port: 5000, serveConfigurations: {} });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.serveConfigurations).toEqual({});
+      expect(result.port).toBe(4321);
+    });
+
+    it('should preserve unknown top-level fields from existing', () => {
+      const existing = JSON.stringify({
+        port: 4321,
+        serveConfigurations: {},
+        customSetting: 'preserved',
+        debugMode: true
+      });
+
+      const incoming = JSON.stringify({
+        port: 9999,
+        serveConfigurations: { newConfig: {} }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.customSetting).toBe('preserved');
+      expect(result.debugMode).toBe(true);
+    });
+  });
 });

@@ -172,4 +172,109 @@ describe('SPFxTemplateWriter', () => {
     expect(mockEditor.write).not.toHaveBeenCalled();
     expect(mockEditor.commit).toHaveBeenCalled();
   });
+
+  describe('error propagation', () => {
+    it('should propagate error when editor.commit() rejects', async () => {
+      (mockEditor.dump as jest.Mock).mockReturnValue({});
+      (mockEditor.commit as jest.Mock).mockRejectedValue(new Error('commit failed'));
+
+      const writer = new SPFxTemplateWriter(mockTerminal);
+
+      await expect(writer.writeAsync(mockEditor, '/target')).rejects.toThrow('commit failed');
+    });
+
+    it('should propagate error when fs.readFileSync throws', async () => {
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'package.json': { contents: '{}', state: 'modified' }
+      });
+      (fs.existsSync as jest.Mock).mockReturnValue(true);
+      (fs.readFileSync as jest.Mock).mockImplementation(() => {
+        throw new Error('ENOENT: file not found');
+      });
+
+      const writer = new SPFxTemplateWriter(mockTerminal);
+
+      await expect(writer.writeAsync(mockEditor, '/target')).rejects.toThrow('ENOENT');
+    });
+
+    it('should propagate error when a merge helper merge() throws', async () => {
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'package.json': { contents: 'not valid json', state: 'modified' }
+      });
+      (fs.existsSync as jest.Mock).mockReturnValue(true);
+      (fs.readFileSync as jest.Mock).mockReturnValue('{"name": "existing"}');
+
+      const writer = new SPFxTemplateWriter(mockTerminal);
+
+      await expect(writer.writeAsync(mockEditor, '/target')).rejects.toThrow(SyntaxError);
+    });
+  });
+
+  describe('addMergeHelper behavior', () => {
+    it('should replace a built-in helper when registering for the same path', async () => {
+      const existingPkg = JSON.stringify({ name: 'existing', dependencies: {} });
+      const incomingPkg = JSON.stringify({ name: 'incoming', dependencies: {} });
+
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'package.json': { contents: incomingPkg, state: 'modified' }
+      });
+      (fs.existsSync as jest.Mock).mockReturnValue(true);
+      (fs.readFileSync as jest.Mock).mockReturnValue(existingPkg);
+
+      const writer = new SPFxTemplateWriter(mockTerminal);
+      writer.addMergeHelper({
+        fileRelativePath: 'package.json',
+        merge: () => '{"custom":"merged"}\n'
+      });
+      await writer.writeAsync(mockEditor, '/target');
+
+      expect(mockEditor.write).toHaveBeenCalledTimes(1);
+      const writtenContent = JSON.parse((mockEditor.write as jest.Mock).mock.calls[0][1]);
+      expect(writtenContent.custom).toBe('merged');
+    });
+
+    it('should not warn for built-in helper paths', async () => {
+      const jsonContent = JSON.stringify({ name: 'test' });
+
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'package.json': { contents: jsonContent, state: 'modified' },
+        'config/config.json': { contents: '{"bundles":{}}', state: 'modified' },
+        'config/package-solution.json': { contents: '{"solution":{}}', state: 'modified' },
+        'config/serve.json': { contents: '{"serveConfigurations":{}}', state: 'modified' }
+      });
+      (fs.existsSync as jest.Mock).mockReturnValue(true);
+      (fs.readFileSync as jest.Mock).mockReturnValue(jsonContent);
+
+      const writer = new SPFxTemplateWriter(mockTerminal);
+      await writer.writeAsync(mockEditor, '/target');
+
+      expect(mockTerminal.writeWarningLine).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should handle empty dump object without errors', async () => {
+      (mockEditor.dump as jest.Mock).mockReturnValue({});
+
+      const writer = new SPFxTemplateWriter(mockTerminal);
+      await writer.writeAsync(mockEditor, '/target');
+
+      expect(mockEditor.write).not.toHaveBeenCalled();
+      expect(mockEditor.commit).toHaveBeenCalled();
+    });
+
+    it('should treat entry with undefined state as non-deleted', async () => {
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'src/file.ts': { contents: 'content', state: undefined }
+      });
+      (fs.existsSync as jest.Mock).mockReturnValue(false);
+
+      const writer = new SPFxTemplateWriter(mockTerminal);
+      await writer.writeAsync(mockEditor, '/target');
+
+      // File doesn't exist on disk, so no merge attempted — just commit
+      expect(mockEditor.write).not.toHaveBeenCalled();
+      expect(mockEditor.commit).toHaveBeenCalled();
+    });
+  });
 });

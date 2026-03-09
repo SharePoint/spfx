@@ -93,4 +93,115 @@ describe('ConfigJsonMergeHelper', () => {
     expect(result.$schema).toBe('https://existing-schema.example.com');
     expect(result.version).toBe('2.0');
   });
+
+  describe('error handling', () => {
+    it('should throw when existing content is invalid JSON', () => {
+      const incoming = JSON.stringify({ bundles: {} });
+      expect(() => helper.merge('not json', incoming)).toThrow(SyntaxError);
+    });
+
+    it('should throw when incoming content is invalid JSON', () => {
+      const existing = JSON.stringify({ bundles: {} });
+      expect(() => helper.merge(existing, 'not json')).toThrow(SyntaxError);
+    });
+
+    it('should throw when existing content is empty string', () => {
+      const incoming = JSON.stringify({ bundles: {} });
+      expect(() => helper.merge('', incoming)).toThrow(SyntaxError);
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should overwrite existing bundle when incoming has same key', () => {
+      const existing = JSON.stringify({
+        bundles: { 'shared-bundle': { components: [{ entrypoint: './lib/old.js' }] } }
+      });
+
+      const incoming = JSON.stringify({
+        bundles: { 'shared-bundle': { components: [{ entrypoint: './lib/new.js' }] } }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.bundles['shared-bundle'].components[0].entrypoint).toBe('./lib/new.js');
+    });
+
+    it('should overwrite existing externals when incoming has same key', () => {
+      const existing = JSON.stringify({
+        externals: { jquery: 'https://cdn.example.com/jquery-old.js' }
+      });
+
+      const incoming = JSON.stringify({
+        externals: { jquery: 'https://cdn.example.com/jquery-new.js' }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.externals.jquery).toBe('https://cdn.example.com/jquery-new.js');
+    });
+
+    it('should overwrite existing localizedResources when incoming has same key', () => {
+      const existing = JSON.stringify({
+        localizedResources: { SharedStrings: 'lib/loc/old/{locale}.js' }
+      });
+
+      const incoming = JSON.stringify({
+        localizedResources: { SharedStrings: 'lib/loc/new/{locale}.js' }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.localizedResources.SharedStrings).toBe('lib/loc/new/{locale}.js');
+    });
+
+    it('should handle empty objects for bundles, localizedResources, and externals', () => {
+      const existing = JSON.stringify({ bundles: {}, localizedResources: {}, externals: {} });
+      const incoming = JSON.stringify({ bundles: {}, localizedResources: {}, externals: {} });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.bundles).toEqual({});
+      expect(result.localizedResources).toEqual({});
+      expect(result.externals).toEqual({});
+    });
+
+    it('should handle undefined bundles in existing', () => {
+      const existing = JSON.stringify({ $schema: 'https://schema.example.com' });
+      const incoming = JSON.stringify({ bundles: { 'new-bundle': {} } });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.bundles['new-bundle']).toBeDefined();
+    });
+
+    it('should handle undefined bundles in incoming', () => {
+      const existing = JSON.stringify({ bundles: { 'old-bundle': {} } });
+      const incoming = JSON.stringify({ $schema: 'https://schema.example.com' });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.bundles['old-bundle']).toBeDefined();
+    });
+
+    it('should preserve unknown top-level fields from existing', () => {
+      const existing = JSON.stringify({
+        bundles: {},
+        localizedResources: {},
+        externals: {},
+        customField: 'custom-value',
+        anotherField: 42
+      });
+
+      const incoming = JSON.stringify({
+        bundles: { 'new-bundle': {} },
+        localizedResources: {},
+        externals: {}
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.customField).toBe('custom-value');
+      expect(result.anotherField).toBe(42);
+    });
+  });
 });

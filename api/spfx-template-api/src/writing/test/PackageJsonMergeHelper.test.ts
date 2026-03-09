@@ -108,4 +108,72 @@ describe('PackageJsonMergeHelper', () => {
     expect(result.dependencies).toBeUndefined();
     expect(result.devDependencies).toBeUndefined();
   });
+
+  describe('error handling', () => {
+    it('should throw when existing content is invalid JSON', () => {
+      const incoming = JSON.stringify({ dependencies: {} });
+      expect(() => helper.merge('not json', incoming)).toThrow(SyntaxError);
+    });
+
+    it('should throw when incoming content is invalid JSON', () => {
+      const existing = JSON.stringify({ dependencies: {} });
+      expect(() => helper.merge(existing, '{invalid')).toThrow(SyntaxError);
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should handle empty dependency objects', () => {
+      const existing = JSON.stringify({ dependencies: {}, devDependencies: {} });
+      const incoming = JSON.stringify({ dependencies: {}, devDependencies: {} });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.dependencies).toEqual({});
+      expect(result.devDependencies).toEqual({});
+    });
+
+    it('should preserve scripts and engines together from existing', () => {
+      const existing = JSON.stringify({
+        name: 'my-project',
+        scripts: { build: 'tsc', test: 'jest' },
+        engines: { node: '>=18', npm: '>=9' },
+        dependencies: { lodash: '^4.17.0' }
+      });
+
+      const incoming = JSON.stringify({
+        name: 'template',
+        scripts: { build: 'webpack' },
+        engines: { node: '>=20' },
+        dependencies: { axios: '^1.0.0' }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.scripts).toEqual({ build: 'tsc', test: 'jest' });
+      expect(result.engines).toEqual({ node: '>=18', npm: '>=9' });
+    });
+
+    it('should not let incoming non-dep fields override existing metadata', () => {
+      const existing = JSON.stringify({
+        name: 'my-project',
+        version: '2.0.0',
+        description: 'My project',
+        dependencies: {}
+      });
+
+      const incoming = JSON.stringify({
+        name: 'template',
+        version: '0.0.0',
+        description: 'Template description',
+        license: 'MIT',
+        dependencies: { react: '^18.0.0' }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.name).toBe('my-project');
+      expect(result.version).toBe('2.0.0');
+      expect(result.description).toBe('My project');
+    });
+  });
 });
