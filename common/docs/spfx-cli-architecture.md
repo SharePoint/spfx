@@ -150,14 +150,13 @@ The class can be constructed from a folder on disk (`fromFolderAsync`) or from
 in-memory data (`fromMemoryAsync`). It exposes a `renderAsync()` method that
 processes text files through EJS with the provided context object (while copying
 binary assets unchanged) and returns a rendered file set. In the current
-implementation, `SPFxTemplate` also exposes a `write(memFs)` helper that the CLI
+implementation, `SPFxTemplate` also exposes a `write()` helper that the CLI
 calls to persist the rendered output to disk.
 
-> **Planned change:** The render output currently uses `MemFsEditor` directly.
-> This will be replaced with a minimal wrapper interface so that the `mem-fs`
-> dependency can be removed without a breaking API change. A separate
-> `SPFxTemplateWriter` class will be introduced to handle inspecting rendered
-> output and applying merge logic before committing changes to disk.
+> **Planned change:** `renderAsync()` will return an `ISPFxTemplateFileSet`
+> interface that we define and own, rather than exposing a third-party type. A
+> separate `SPFxTemplateWriter` class will be introduced to handle inspecting
+> rendered output and applying merge logic before committing changes to disk.
 
 Filenames support `{variableName}` placeholder syntax — e.g.
 `src/webparts/{componentNameCamelCase}WebPart.ts` is resolved using the render
@@ -257,10 +256,9 @@ import {
   SPFxTemplateRepositoryManager,
   LocalFileSystemRepositorySource,
   SPFxTemplateCollection,
-  SPFxTemplate
+  SPFxTemplate,
+  ISPFxTemplateFileSet
 } from '@microsoft/spfx-template-api';
-import { MemFsEditor, create } from 'mem-fs-editor';
-import { create as createMemFs } from 'mem-fs';
 
 async function scaffold(): Promise<void> {
   // Create a manager and register template sources
@@ -276,7 +274,7 @@ async function scaffold(): Promise<void> {
   const template: SPFxTemplate = templates.get('webpart-minimal')!;
 
   // Render with context variables
-  const editor: MemFsEditor = await template.renderAsync(
+  const fileSet: ISPFxTemplateFileSet = await template.renderAsync(
     {
       solution_name: 'my-solution',
       componentNameCamelCase: 'helloWorld',
@@ -297,8 +295,8 @@ async function scaffold(): Promise<void> {
     '/path/to/output'
   );
 
-  // Write to disk (current: direct write via template helper)
-  await template.write(editor);
+  // Write to disk
+  await template.write(fileSet);
 }
 ```
 
