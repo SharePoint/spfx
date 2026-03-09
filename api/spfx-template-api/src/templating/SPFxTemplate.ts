@@ -192,7 +192,7 @@ export class SPFxTemplate {
     const { create: createEditor } = await import('mem-fs-editor');
     const memFs: MemFsEditor = createEditor(createMemFs());
 
-    for (const [filename, contents] of this._files.entries()) {
+    for (const [filename, contents] of this._files) {
       // Render the filename by replacing {variableName} placeholders
       let renderedFilename: string = filename;
       for (const [key, value] of Object.entries(context)) {
@@ -208,7 +208,7 @@ export class SPFxTemplate {
           cache: false
         });
 
-        if (!options?.retainPhaseScripts && renderedFilename.split('/').pop() === 'package.json') {
+        if (!options?.retainPhaseScripts && renderedFilename.endsWith('/package.json')) {
           rendered = _stripPhaseScripts(rendered);
         }
 
