@@ -6,6 +6,7 @@ import * as ejs from 'ejs';
 import * as z from 'zod';
 
 import { Async, FileSystem, type IPackageJson, type FolderItem } from '@rushstack/node-core-library';
+import type { ITerminal } from '@rushstack/terminal';
 
 import {
   SPFxTemplateJsonFile,
@@ -162,11 +163,13 @@ export class SPFxTemplate {
 
   /**
    * Renders the template with the provided context object and writes to a destination directory.
+   * @param terminal - The terminal instance for logging during rendering
    * @param context - The context object containing variables to be used in template rendering
    * @param destinationDir - The destination directory where rendered files will be written
    * @returns A Promise that resolves to a MemFsEditor instance containing the rendered files
    */
   public async renderAsync(
+    terminal: ITerminal,
     context: object,
     destinationDir: string,
     options?: IRenderOptions
@@ -188,17 +191,27 @@ export class SPFxTemplate {
       }
     }
 
-    const { create: createMemFs } = await import('mem-fs');
+    terminal.writeLine(`!!! AAAA (starting to render template "${this.name}" to ${destinationDir})`);
+
     const { create: createEditor } = await import('mem-fs-editor');
+    terminal.writeLine(`!!! AAAA.1 (loaded mem-fs-editor)`);
+
+    const { create: createMemFs } = await import('mem-fs');
+    terminal.writeLine(`!!! AAAA.2 (loaded mem-fs)`);
+
     const memFs: MemFsEditor = createEditor(createMemFs());
 
-    for (const [filename, contents] of this._files) {
+    terminal.writeLine(`!!! BBBB (starting to render ${this._files.size} files)`);
+
+    for (const [filename, contents] of this._files.entries()) {
       // Render the filename by replacing {variableName} placeholders
       let renderedFilename: string = filename;
       for (const [key, value] of Object.entries(context)) {
         const placeholder: string = `{${key}}`;
         renderedFilename = renderedFilename.split(placeholder).join(String(value));
       }
+
+      terminal.writeLine(`!!! CCCC (rendering ${filename} to ${renderedFilename})`);
 
       const destination: string = `${destinationDir}/${renderedFilename}`;
       if (typeof contents === 'string') {
@@ -213,9 +226,11 @@ export class SPFxTemplate {
         }
 
         memFs.write(destination, rendered);
+        terminal.writeLine(`!!! DDDD (finished rendering non-binary ${filename})`);
       } else {
         // Binary files are written as-is without EJS processing
         memFs.write(destination, contents);
+        terminal.writeLine(`!!! DDDD (finished rendering binary ${filename})`);
       }
     }
 
