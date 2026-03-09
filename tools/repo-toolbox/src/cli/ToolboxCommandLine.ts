@@ -7,7 +7,6 @@ import { ConsoleTerminalProvider, type ITerminal, Terminal } from '@rushstack/te
 import { CreateOrUpdatePrAction } from './actions/CreateOrUpdatePrAction';
 import { DownloadBumpArtifactsAction } from './actions/DownloadBumpArtifactsAction';
 import { PublishTarballsAction } from './actions/PublishTarballsAction';
-import { ValidateVersionBumpAction } from './actions/ValidateVersionBumpAction';
 
 export class ToolboxCommandLine extends CommandLineParser {
   public readonly terminal: ITerminal;
@@ -24,6 +23,5 @@ export class ToolboxCommandLine extends CommandLineParser {
     this.addAction(new CreateOrUpdatePrAction(terminal));
     this.addAction(new DownloadBumpArtifactsAction(terminal));
     this.addAction(new PublishTarballsAction(terminal));
-    this.addAction(new ValidateVersionBumpAction(terminal));
   }
 }
