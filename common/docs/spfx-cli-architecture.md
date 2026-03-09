@@ -83,17 +83,17 @@ Yeoman compatibility shim) can be built without duplicating core logic.
 | `--spfx-version SEMVER` | Selects the branch from the public template repo. Only for first creation. |
 | `--github-source URL` | Registers additional public GitHub template sources. |
 
-The `create` command downloads, unzips, and reads templates from registered sources.
-It finds the selected template, validates parameters, renders the template in-memory,
-and writes to disk — routing modified files through merge helpers when scaffolding
-onto an existing project. After writing, the CLI runs dependency installation
-(via the selected package manager) so the project is immediately buildable.
+In the current implementation, the `create` command reads templates from local template
+sources and writes the generated project files directly to disk via `SPFxTemplate.write()`.
 
-The CLI validates that the current Node.js version meets SPFx requirements before
-proceeding.
-
-For parameters not specified on the command line (e.g. component name, solution name),
-the CLI will fall back to an interactive prompt flow.
+**Planned future behavior:** the `create` command will download, unzip, and read
+templates from all registered sources, find the selected template, validate parameters,
+render the template in-memory, and write to disk — routing modified files through merge
+helpers when scaffolding onto an existing project. After writing, the CLI will run
+dependency installation (via the selected package manager) so the project is immediately
+buildable. The CLI will also validate that the current Node.js version meets SPFx
+requirements before proceeding and, for parameters not specified on the command line
+(e.g. component name, solution name), will fall back to an interactive prompt flow.
 
 #### `spfx list-templates` (planned)
 
@@ -142,15 +142,22 @@ The schema is validated with Zod at load time.
 An in-memory encapsulation of a single SPFx template. A template consists of:
 
 - `template.json` — the template definition (read by `SPFxTemplateJsonFile`)
-- All other files — treated as EJS template files
+- All other files:
+  - Text files — treated as EJS template files
+  - Binary assets — copied as-is without EJS processing
 
 The class can be constructed from a folder on disk (`fromFolderAsync`) or from
 in-memory data (`fromMemoryAsync`). It exposes a `renderAsync()` method that
-processes all files through EJS with the provided context object and returns a
-`MemFsEditor` containing the rendered files. Notably, `SPFxTemplate` is
-responsible only for _rendering_ — it does not write to disk. Writing is handled
-separately by `SPFxTemplateWriter`, which enables the writer to inspect the
-rendered output and apply merge logic before committing.
+processes text files through EJS with the provided context object (while copying
+binary assets unchanged) and returns a rendered file set. In the current
+implementation, `SPFxTemplate` also exposes a `write(memFs)` helper that the CLI
+calls to persist the rendered output to disk.
+
+> **Planned change:** The render output currently uses `MemFsEditor` directly.
+> This will be replaced with a minimal wrapper interface so that the `mem-fs`
+> dependency can be removed without a breaking API change. A separate
+> `SPFxTemplateWriter` class will be introduced to handle inspecting rendered
+> output and applying merge logic before committing changes to disk.
 
 Filenames support `{variableName}` placeholder syntax — e.g.
 `src/webparts/{componentNameCamelCase}WebPart.ts` is resolved using the render
@@ -185,15 +192,18 @@ https://codeload.github.com/{owner}/{repo}/zip/{ref}
 Where `{ref}` is a branch name (e.g. `main`, `1.22`, `1.23-rc.0`) or a git commit
 hash. This enables version-locked downloads and reproducible scaffolding.
 
-#### `SPFxTemplateWriter`
+#### `SPFxTemplateWriter` (planned — not yet implemented)
 
-A public orchestration class that manages writing rendered template output to disk.
-It accepts a `MemFsEditor` (returned by `SPFxTemplate.renderAsync()`) and a target
-directory. Before committing files, it calls `editor.dump()` and checks
-`fs.existsSync()` for each file to classify it as new (write as-is) or modified
-(route through a merge helper). Modified files are routed through specialized
-`MergeHelper` subclasses that perform intelligent merging rather than blind
-overwriting.
+> **Note:** This class does not exist yet. The CLI currently calls
+> `template.write()` directly. The design below describes the planned
+> implementation for the "add a component to an existing project" workflow.
+
+A public orchestration class that will manage writing rendered template output to
+disk. It will accept a rendered file set and a target directory. Before committing
+files, it will check `fs.existsSync()` for each file to classify it as new
+(write as-is) or modified (route through a merge helper). Modified files will be
+routed through specialized `MergeHelper` subclasses that perform intelligent
+merging rather than blind overwriting.
 
 This is critical for the "add a second component to an existing project" workflow,
 where config files like `package.json` and `config/config.json` must be merged rather
@@ -217,7 +227,7 @@ BaseMergeHelper (abstract)
 
 | File | Strategy |
 |------|----------|
-| `package.json` | Union `dependencies` and `devDependencies`; existing versions win on conflict. Preserve all other fields from the existing file. |
+| `package.json` | Union `dependencies` and `devDependencies`. If the new template specifies a different SPFx version than the existing project, throw an error (an upgrader is out of scope for v0). Preserve all other fields from the existing file. |
 | `config/config.json` | Merge `bundles`, `localizedResources`, and `externals` by key. Preserve `$schema` and `version`. |
 | `config/package-solution.json` | Append new entries to `solution.features`, deduplicate by feature `id` (GUID). Preserve all solution-level metadata. |
 | `config/serve.json` | Merge `serveConfigurations` by name key. Preserve `port`, `https`, `initialPage` from existing. |
@@ -239,38 +249,34 @@ design accommodates it.
 
 ### Example API Usage
 
-The following illustrates how the scaffolding API is used programmatically — this is
-essentially what the CLI does internally:
+The following illustrates how the scaffolding API is currently used
+programmatically — this reflects the current API surface:
 
 ```typescript
 import {
   SPFxTemplateRepositoryManager,
   LocalFileSystemRepositorySource,
-  PublicGitHubRepositorySource,
   SPFxTemplateCollection,
-  SPFxTemplate,
-  SPFxTemplateWriter
+  SPFxTemplate
 } from '@microsoft/spfx-template-api';
+import { MemFsEditor, create } from 'mem-fs-editor';
+import { create as createMemFs } from 'mem-fs';
 
 async function scaffold(): Promise<void> {
   // Create a manager and register template sources
   const manager = new SPFxTemplateRepositoryManager();
-  manager.addSource(new PublicGitHubRepositorySource(
-    'https://github.com/SharePoint/spfx',
-    'main'
-  ));
   manager.addSource(new LocalFileSystemRepositorySource(
     '/path/to/local/templates'
   ));
 
-  // Download and aggregate templates from all sources
+  // Aggregate templates from all sources
   const templates: SPFxTemplateCollection = await manager.getTemplatesAsync();
 
   // Select a template
   const template: SPFxTemplate = templates.get('webpart-minimal')!;
 
   // Render with context variables
-  const editor = await template.renderAsync(
+  const editor: MemFsEditor = await template.renderAsync(
     {
       solution_name: 'my-solution',
       componentNameCamelCase: 'helloWorld',
@@ -280,14 +286,19 @@ async function scaffold(): Promise<void> {
       componentId: '11111111-1111-1111-1111-111111111111',
       solutionId: '22222222-2222-2222-2222-222222222222',
       featureId: '33333333-3333-3333-3333-333333333333',
-      // ... other context variables
+      eslintProfile: 'recommended',
+      libraryName: 'my-solution',
+      componentAlias: 'helloWorld',
+      componentNameUnescaped: 'Hello World',
+      componentDescription: 'Hello World web part',
+      spfxVersion: '1.22.1',
+      nodeVersion: '>=18.17.1 <19.0.0 || >=20.0.0 <21.0.0',
     },
     '/path/to/output'
   );
 
-  // Write to disk with intelligent merging
-  const writer = new SPFxTemplateWriter(terminal);
-  await writer.writeAsync(editor, '/path/to/output');
+  // Write to disk (current: direct write via template helper)
+  await template.write(editor);
 }
 ```
 
@@ -339,7 +350,7 @@ templates/
       ...
 ```
 
-There are currently 16 templates spanning web parts, adaptive card extensions (ACEs),
+The available templates span web parts, adaptive card extensions (ACEs),
 field customizers, form customizers, application customizers, list view command sets,
 search query modifiers, and libraries.
 
