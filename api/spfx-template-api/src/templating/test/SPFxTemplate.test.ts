@@ -358,16 +358,14 @@ describe('SPFxTemplate', () => {
         }
       });
 
-      const files = new Map<string, string | Buffer>([
-        ['src/index.ts', 'const val = "<%= customParam %>";']
-      ]);
+      const files = new Map<string, string | Buffer>([['src/index.ts', 'const val = "<%= customParam %>";']]);
 
       const template = new SPFxTemplate(definition, files);
       const context = { customParam: 'myValue' };
 
       const editor: MemFsEditor = await template.renderAsync(context, '/output');
 
-      expect(editor.read('/output/src/index.ts')).toBe('const name = "MyComponent";');
+      expect(editor.read('/output/src/index.ts')).toBe('const val = "myValue";');
     });
 
     it('should throw error when required custom parameter is missing', async () => {

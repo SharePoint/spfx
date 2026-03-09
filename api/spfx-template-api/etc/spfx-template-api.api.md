@@ -15,9 +15,6 @@ export abstract class BaseSPFxTemplateRepositorySource {
     get type(): SPFxTemplateRepositorySourceTypes;
 }
 
-// @internal
-export function _isBinaryFile(filePath: string): boolean;
-
 // @public
 export function buildBuiltInContext(inputs: ISPFxBuiltInContextInputs, options?: IBuildBuiltInContextOptions): ISPFxBuiltInContext;
 
@@ -28,6 +25,9 @@ export const BUILT_IN_PARAMETER_NAMES: ReadonlySet<string>;
 export interface IBuildBuiltInContextOptions {
     ciMode?: boolean;
 }
+
+// @internal
+export function _isBinaryFile(filePath: string): boolean;
 
 // @public
 export interface ISPFxBuiltInContext {
