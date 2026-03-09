@@ -121,6 +121,78 @@ describe('PackageJsonMergeHelper', () => {
     });
   });
 
+  describe('SPFx version conflict detection', () => {
+    it('should throw when @microsoft/* dependency versions differ', () => {
+      const existing = JSON.stringify({
+        dependencies: { '@microsoft/sp-core-library': '1.22.0' }
+      });
+
+      const incoming = JSON.stringify({
+        dependencies: { '@microsoft/sp-core-library': '1.23.0' }
+      });
+
+      expect(() => helper.merge(existing, incoming)).toThrow(
+        /SPFx version mismatch for "@microsoft\/sp-core-library"/
+      );
+    });
+
+    it('should throw when @microsoft/* devDependency versions differ', () => {
+      const existing = JSON.stringify({
+        devDependencies: { '@microsoft/spfx-heft-plugins': '1.22.0' }
+      });
+
+      const incoming = JSON.stringify({
+        devDependencies: { '@microsoft/spfx-heft-plugins': '1.23.0' }
+      });
+
+      expect(() => helper.merge(existing, incoming)).toThrow(
+        /SPFx version mismatch for "@microsoft\/spfx-heft-plugins"/
+      );
+    });
+
+    it('should allow non-@microsoft dependency version conflicts', () => {
+      const existing = JSON.stringify({
+        dependencies: { lodash: '^4.17.0', tslib: '2.3.0' }
+      });
+
+      const incoming = JSON.stringify({
+        dependencies: { lodash: '^4.18.0', tslib: '2.4.0' }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.dependencies.lodash).toBe('^4.17.0');
+      expect(result.dependencies.tslib).toBe('2.3.0');
+    });
+
+    it('should allow matching @microsoft/* versions', () => {
+      const existing = JSON.stringify({
+        dependencies: { '@microsoft/sp-core-library': '1.22.0' }
+      });
+
+      const incoming = JSON.stringify({
+        dependencies: { '@microsoft/sp-core-library': '1.22.0', '@microsoft/sp-webpart-base': '1.22.0' }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.dependencies['@microsoft/sp-core-library']).toBe('1.22.0');
+      expect(result.dependencies['@microsoft/sp-webpart-base']).toBe('1.22.0');
+    });
+
+    it('should include both versions in error message', () => {
+      const existing = JSON.stringify({
+        dependencies: { '@microsoft/sp-core-library': '1.20.0' }
+      });
+
+      const incoming = JSON.stringify({
+        dependencies: { '@microsoft/sp-core-library': '1.22.0' }
+      });
+
+      expect(() => helper.merge(existing, incoming)).toThrow(/1\.20\.0.*1\.22\.0/);
+    });
+  });
+
   describe('edge cases', () => {
     it('should handle empty dependency objects', () => {
       const existing = JSON.stringify({ dependencies: {}, devDependencies: {} });

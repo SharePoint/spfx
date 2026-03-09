@@ -14,6 +14,7 @@ interface IPackageJson {
  *
  * Strategy:
  * - Union `dependencies` and `devDependencies` — existing versions win on conflict
+ * - Throw if any `@microsoft/*` package has a version mismatch (indicates SPFx version conflict)
  * - Preserve all other fields from the existing file
  *
  * @public
@@ -27,6 +28,12 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
     const existing: IPackageJson = this.parseJson<IPackageJson>(existingContent);
     const incoming: IPackageJson = this.parseJson<IPackageJson>(newContent);
 
+    PackageJsonMergeHelper._checkMicrosoftVersionConflicts(existing.dependencies, incoming.dependencies);
+    PackageJsonMergeHelper._checkMicrosoftVersionConflicts(
+      existing.devDependencies,
+      incoming.devDependencies
+    );
+
     const merged: IPackageJson = { ...existing };
 
     merged.dependencies = PackageJsonMergeHelper._unionDeps(existing.dependencies, incoming.dependencies);
@@ -36,6 +43,27 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
     );
 
     return this.serializeJson(merged);
+  }
+
+  /**
+   * Throws if any `@microsoft/*` package appears in both maps with different versions.
+   */
+  private static _checkMicrosoftVersionConflicts(
+    existing: Record<string, string> | undefined,
+    incoming: Record<string, string> | undefined
+  ): void {
+    if (!existing || !incoming) {
+      return;
+    }
+    for (const [pkg, incomingVersion] of Object.entries(incoming)) {
+      if (pkg.startsWith('@microsoft/') && pkg in existing && existing[pkg] !== incomingVersion) {
+        throw new Error(
+          `SPFx version mismatch for "${pkg}": existing project uses ${existing[pkg]} ` +
+            `but the incoming template requires ${incomingVersion}. ` +
+            `All components in a project must use the same SPFx version.`
+        );
+      }
+    }
   }
 
   /**
