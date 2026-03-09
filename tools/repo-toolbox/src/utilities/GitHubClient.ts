@@ -6,6 +6,8 @@ import { Octokit, type RestEndpointMethodTypes } from '@octokit/rest';
 export type IGitHubPr = RestEndpointMethodTypes['pulls']['list']['response']['data'][number];
 export type IGitHubLabel = RestEndpointMethodTypes['issues']['listLabelsOnIssue']['response']['data'][number];
 export type IGitHubCreationResult = RestEndpointMethodTypes['pulls']['create']['response']['data'];
+export type ICommitPr =
+  RestEndpointMethodTypes['repos']['listPullRequestsAssociatedWithCommit']['response']['data'][number];
 
 export interface IGitHubClientOptions {
   authorizationHeader: string;
@@ -65,6 +67,14 @@ export class GitHubClient {
       ...this._octokitCommonOptions,
       head: `${this._octokitCommonOptions.owner}:${branchName}`,
       state: 'open'
+    });
+    return data[0];
+  }
+
+  public async getPrForCommitAsync(commitSha: string): Promise<ICommitPr | undefined> {
+    const { data } = await this._octokit.repos.listPullRequestsAssociatedWithCommit({
+      ...this._octokitCommonOptions,
+      commit_sha: commitSha
     });
     return data[0];
   }

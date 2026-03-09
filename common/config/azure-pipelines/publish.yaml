@@ -1,6 +1,7 @@
 # Pipeline: Publish Packages
 # Trigger: When CHANGELOG files change on main (indicating a bump PR was merged).
-# Purpose: Download packed artifacts from the bump pipeline and publish to npm.
+# Purpose: Validate the version bump merge, download pre-packed artifacts from the
+#          bump pipeline, and publish to npm.
 
 trigger:
   branches:
@@ -44,48 +45,15 @@ extends:
               - checkout: self
                 persistCredentials: true
 
-              - bash: |
-                  set -e
+              - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
-                  # Extract repository slug and auth from git config
-                  REPO_SLUG=$(git remote get-url origin \
-                    | sed -E 's#.*github\.com[:/](.+/[^.]+)(\.git)?$#\1#')
-                  AUTH_HEADER=$(git config --get-regexp 'http\..*\.extraheader' \
-                    | head -1 | sed 's/^[^ ]* //')
+              - script: node common/scripts/install-run-rush.js install --to repo-toolbox
+                displayName: 'Rush Install (repo-toolbox)'
 
-                  CURL_CONFIG=$(mktemp)
-                  trap 'rm -f "$CURL_CONFIG"' EXIT
-                  printf '%s\n' "-H \"${AUTH_HEADER}\"" > "$CURL_CONFIG"
-                  printf '%s\n' '-H "Accept: application/vnd.github+json"' >> "$CURL_CONFIG"
+              - script: node common/scripts/install-run-rush.js build --to repo-toolbox
+                displayName: 'Rush Build (repo-toolbox)'
 
-                  COMMIT_SHA=$(git rev-parse HEAD)
-                  echo "Merge commit SHA: ${COMMIT_SHA}"
-
-                  # Find the PR that produced this merge commit
-                  PR_DATA=$(curl -s -f -K "$CURL_CONFIG" \
-                    "https://api.github.com/repos/${REPO_SLUG}/commits/${COMMIT_SHA}/pulls" 2>/dev/null || echo "[]")
-                  PR_NUMBER=$(echo "$PR_DATA" | jq '.[0].number // empty')
-
-                  if [ -z "$PR_NUMBER" ]; then
-                    echo "No PR found for this commit. Skipping publish."
-                    echo "##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false"
-                    exit 0
-                  fi
-                  echo "Found PR #${PR_NUMBER}"
-
-                  # Check if the PR has a SourceBuild: label
-                  LABELS=$(curl -s -f -K "$CURL_CONFIG" \
-                    "https://api.github.com/repos/${REPO_SLUG}/issues/${PR_NUMBER}/labels" 2>/dev/null || echo "[]")
-                  HAS_SOURCE_BUILD=$(echo "$LABELS" \
-                    | jq -r '.[].name | select(startswith("SourceBuild:"))' | head -1)
-
-                  if [ -n "$HAS_SOURCE_BUILD" ]; then
-                    echo "Valid version bump PR detected (label: ${HAS_SOURCE_BUILD})."
-                    echo "##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]true"
-                  else
-                    echo "PR #${PR_NUMBER} does not have a SourceBuild: label. Skipping publish."
-                    echo "##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false"
-                  fi
+              - script: node tools/repo-toolbox/lib/start.js validate-version-bump
                 name: CheckCommit
                 displayName: 'Validate Version Bump PR'
 
@@ -109,57 +77,38 @@ extends:
               - checkout: self
                 persistCredentials: true
 
-              - script: git config --local user.email "spfx-cli-bot@users.noreply.github.com"
-                displayName: 'git config email'
-
-              - script: git config --local user.name "SPFx CLI Bot"
-                displayName: 'git config name'
-
               - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
-              # Download pre-packed artifacts from the bump pipeline
-              - template: /common/config/azure-pipelines/templates/download-bump-artifacts.yaml@self
-
-              # Install dependencies (needed for rush publish --apply)
               - script: node common/scripts/install-run-rush.js install
                 displayName: 'Rush Install'
 
-              # Configure npm authentication
-              - bash: |
-                  echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
-                displayName: 'Configure npm authentication'
+              - script: node common/scripts/install-run-rush.js build --to repo-toolbox
+                displayName: 'Rush Build (repo-toolbox)'
+
+              # Download the pre-packed tarballs and metadata from the bump pipeline
+              # run that created the version bump PR. Uses System.AccessToken to
+              # authenticate against the Azure DevOps Pipelines API.
+              - script: >-
+                  node tools/repo-toolbox/lib/start.js download-bump-artifacts
+                  --artifact-name packages
+                  --artifact-name metadata
+                  --artifact-name package-versions
+                  --target-path $(Pipeline.Workspace)
+                displayName: 'Download Bump Pipeline Artifacts'
+                env:
+                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+              # Publish the downloaded tarballs to npm
+              - script: >-
+                  node tools/repo-toolbox/lib/start.js publish-tarballs
+                  --artifact-path $(Pipeline.Workspace)/packages
+                displayName: 'Publish Packages to npm'
                 env:
                   NPM_AUTH_TOKEN: $(npmToken)
 
-              # Publish the downloaded tarballs
-              - template: /common/config/azure-pipelines/templates/publish-packed-artifacts.yaml@self
-                parameters:
-                  ArtifactPath: $(Pipeline.Workspace)/packages
-
-              # Create git tags and record published versions
+              # Copy the published-versions artifact from the bump pipeline so it can
+              # be re-published as an artifact of this pipeline run.
               - bash: |
-                  set -e
-                  node common/scripts/install-run-rush.js publish \
-                    --apply \
-                    --target-branch main \
-                    --add-commit-details
-
-                  # Record published versions for the output artifact
                   mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
-                  node -e "
-                    const rushConfig = require('./rush.json');
-                    const versions = rushConfig.projects
-                      .filter(p => p.versionPolicyName === 'spfx')
-                      .map(p => {
-                        const pkg = require('./' + p.projectFolder + '/package.json');
-                        return { name: pkg.name, version: pkg.version };
-                      });
-                    require('fs').writeFileSync(
-                      '$(Build.ArtifactStagingDirectory)/published-versions/versions.json',
-                      JSON.stringify(versions, null, 2)
-                    );
-                  "
-                displayName: 'Create git tags and record versions'
-
-              - script: git push origin --tags
-                displayName: 'Push git tags'
+                  cp $(Pipeline.Workspace)/package-versions/* $(Build.ArtifactStagingDirectory)/published-versions/
+                displayName: 'Stage Published Versions Artifact'
