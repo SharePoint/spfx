@@ -1,9 +1,17 @@
+# Set default behavior to automatically normalize line endings.
+* text=auto
+
 # Don't allow people to merge changes to these generated files, because the result
 # may be invalid.  You need to run "rush update" again.
 pnpm-lock.yaml               merge=text
 shrinkwrap.yaml              merge=binary
 npm-shrinkwrap.json          merge=binary
 yarn.lock                    merge=binary
+
+# NPM "bin" scripts MUST have LF, or else the executable fails to run on Mac.
+# This fnmatch expression only matches files in a "bin" folder and without
+# a period in the filename.
+/*/*/bin/+([!.]) -text
 
 # Rush's JSON config files use JavaScript-style code comments.  The rule below prevents pedantic
 # syntax highlighters such as GitHub's from highlighting these comments as errors.  Your text editor
