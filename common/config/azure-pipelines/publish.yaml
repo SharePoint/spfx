@@ -1,6 +1,6 @@
 # Pipeline: Publish Packages
 # Trigger: When CHANGELOG files change on main (indicating a bump PR was merged).
-# Purpose: Validate the version bump merge, download pre-packed artifacts from the
+# Purpose: Detect version bump merges, download pre-packed artifacts from the
 #          bump pipeline, and publish to npm.
 
 trigger:
@@ -33,34 +33,8 @@ extends:
       name: Azure-Pipelines-1ESPT-ExDShared
       os: windows
     stages:
-      - stage: Validate
-        displayName: 'Validate Version Bump Merge'
-        jobs:
-          - job: ValidateMerge
-            displayName: 'Check if version bump PR'
-            pool:
-              name: publish-rushstack
-              os: linux
-            steps:
-              - checkout: self
-                persistCredentials: true
-
-              - template: /common/config/azure-pipelines/templates/install-node.yaml@self
-
-              - script: node common/scripts/install-run-rush.js install --to repo-toolbox
-                displayName: 'Rush Install (repo-toolbox)'
-
-              - script: node common/scripts/install-run-rush.js build --to repo-toolbox
-                displayName: 'Rush Build (repo-toolbox)'
-
-              - script: node tools/repo-toolbox/lib/start.js validate-version-bump
-                name: CheckCommit
-                displayName: 'Validate Version Bump PR'
-
       - stage: Publish
         displayName: 'Publish Packages'
-        dependsOn: Validate
-        condition: eq(dependencies.Validate.outputs['ValidateMerge.CheckCommit.IsVersionBumpMerge'], 'true')
         jobs:
           - job: PublishPackages
             displayName: 'Publish to npm'
@@ -79,21 +53,22 @@ extends:
 
               - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
-              - script: node common/scripts/install-run-rush.js install
-                displayName: 'Rush Install'
+              - script: node common/scripts/install-run-rush.js install --to repo-toolbox
+                displayName: 'Rush Install (repo-toolbox)'
 
               - script: node common/scripts/install-run-rush.js build --to repo-toolbox
                 displayName: 'Rush Build (repo-toolbox)'
 
-              # Download the pre-packed tarballs and metadata from the bump pipeline
-              # run that created the version bump PR. Uses System.AccessToken to
-              # authenticate against the Azure DevOps Pipelines API.
+              # Check if this commit is a version bump merge and, if so, download
+              # the pre-packed tarballs and metadata from the originating bump
+              # pipeline run. Sets IsVersionBumpMerge output variable.
               - script: >-
                   node tools/repo-toolbox/lib/start.js download-bump-artifacts
                   --artifact-name packages
                   --artifact-name metadata
                   --artifact-name package-versions
                   --target-path $(Pipeline.Workspace)
+                name: DownloadArtifacts
                 displayName: 'Download Bump Pipeline Artifacts'
                 env:
                   SYSTEM_ACCESSTOKEN: $(System.AccessToken)
@@ -102,6 +77,7 @@ extends:
               - script: >-
                   node tools/repo-toolbox/lib/start.js publish-tarballs
                   --artifact-path $(Pipeline.Workspace)/packages
+                condition: eq(variables['DownloadArtifacts.IsVersionBumpMerge'], 'true')
                 displayName: 'Publish Packages to npm'
                 env:
                   NPM_AUTH_TOKEN: $(npmToken)
@@ -111,4 +87,5 @@ extends:
               - bash: |
                   mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
                   cp $(Pipeline.Workspace)/package-versions/* $(Build.ArtifactStagingDirectory)/published-versions/
+                condition: eq(variables['DownloadArtifacts.IsVersionBumpMerge'], 'true')
                 displayName: 'Stage Published Versions Artifact'

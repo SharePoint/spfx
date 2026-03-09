@@ -8,13 +8,14 @@ import {
   CommandLineAction
 } from '@rushstack/ts-command-line';
 
-import { createGitHubClientAsync, execGitAsync } from '../../utilities/GitUtilities';
+import { createGitHubClientAsync } from '../../utilities/GitUtilities';
 import type { GitHubClient, ICommitPr } from '../../utilities/GitHubClient';
 import { AzDoClient } from '../../utilities/AzDoClient';
 
 export class DownloadBumpArtifactsAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
 
+  private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
   private readonly _artifactNamesParameter: CommandLineStringListParameter;
   private readonly _targetPathParameter: IRequiredCommandLineStringParameter;
   private readonly _orgUrlParameter: IRequiredCommandLineStringParameter;
@@ -24,13 +25,23 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
   public constructor(terminal: ITerminal) {
     super({
       actionName: 'download-bump-artifacts',
-      summary: 'Downloads artifacts from the bump pipeline run that produced the current commit.',
+      summary:
+        'If the current commit is a version bump merge, downloads artifacts from the originating bump pipeline run.',
       documentation:
-        'Finds the PR for HEAD, extracts the SourceBuild: label to get the pipeline run ID, ' +
-        'then downloads the specified artifacts via the Azure DevOps Pipelines API.'
+        'Looks up the PR associated with the specified commit SHA. If a SourceBuild: label is found, ' +
+        'downloads the specified artifacts from that pipeline run via the Azure DevOps Pipelines API. ' +
+        'Sets the AzDO output variable IsVersionBumpMerge to true or false.'
     });
 
     this._terminal = terminal;
+
+    this._commitShaParameter = this.defineStringParameter({
+      parameterLongName: '--commit-sha',
+      argumentName: 'SHA',
+      description: 'The merge commit SHA to look up',
+      required: true,
+      environmentVariable: 'BUILD_SOURCEVERSION'
+    });
 
     this._artifactNamesParameter = this.defineStringListParameter({
       parameterLongName: '--artifact-name',
@@ -73,16 +84,18 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
   protected override async onExecuteAsync(): Promise<void> {
     const terminal: ITerminal = this._terminal;
 
-    // --- Resolve the bump pipeline run ID from the GitHub PR label ---
-
-    const commitSha: string = await execGitAsync(['rev-parse', 'HEAD']);
+    const commitSha: string = this._commitShaParameter.value;
     terminal.writeLine(`Merge commit SHA: ${commitSha}`);
+
+    // --- Check whether this commit is a version bump merge ---
 
     const gitHubClient: GitHubClient = await createGitHubClientAsync();
 
     const pr: ICommitPr | undefined = await gitHubClient.getPrForCommitAsync(commitSha);
     if (!pr) {
-      throw new Error(`Could not find a PR associated with commit ${commitSha}.`);
+      terminal.writeLine('No PR found for this commit. Skipping publish.');
+      terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
+      return;
     }
     terminal.writeLine(`Found PR #${pr.number}`);
 
@@ -90,7 +103,9 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
       l.name?.startsWith('SourceBuild:')
     );
     if (!sourceBuildLabel?.name) {
-      throw new Error(`PR #${pr.number} does not have a SourceBuild: label.`);
+      terminal.writeLine(`PR #${pr.number} does not have a SourceBuild: label. Skipping publish.`);
+      terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
+      return;
     }
 
     const buildIdString: string | undefined = sourceBuildLabel.name.split(':')[1];
@@ -102,16 +117,16 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
 
     // --- Download artifacts via AzDO API ---
 
+    const artifactNames: readonly string[] = this._artifactNamesParameter.values;
+    if (artifactNames.length === 0) {
+      throw new Error('At least one --artifact-name must be specified.');
+    }
+
     const orgUrl: string = this._orgUrlParameter.value;
     const project: string = this._projectParameter.value;
     const accessToken: string = this._accessTokenParameter.value;
 
     const azDoClient: AzDoClient = new AzDoClient({ orgUrl, project, accessToken }, terminal);
-
-    const artifactNames: readonly string[] = this._artifactNamesParameter.values;
-    if (artifactNames.length === 0) {
-      throw new Error('At least one --artifact-name must be specified.');
-    }
 
     const targetPath: string = this._targetPathParameter.value;
 
@@ -124,5 +139,6 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
     }
 
     terminal.writeLine('All artifacts downloaded successfully.');
+    terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]true');
   }
 }
