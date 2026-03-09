@@ -52,7 +52,8 @@ If you're adding a brand-new template (not editing an existing one):
 
 1. Add the example project to `rush.json` in the `projects` array. Examples follow the naming convention `examples-<template-name>`.
 2. Add a test entry in `tests/spfx-template-test/src/tests/templates.test.ts` with the template name, component name, and other scaffolding parameters.
-3. Run `rush update` to pick up the new project.
+3. Ensure the example `package.json` scripts include explicit phased entries: `_phase:build`, `_phase:test`, and `_phase:package-solution`. Note that these will be stripped out when the template is scaffolded outside of this repo.
+4. Run `rush update` to pick up the new project.
 
 ## Common Template Variables
 
