@@ -5,7 +5,7 @@ import type { MemFsEditor } from 'mem-fs-editor';
 import * as ejs from 'ejs';
 import * as z from 'zod';
 
-import { Async, FileSystem, type FolderItem } from '@rushstack/node-core-library';
+import { Async, FileSystem, type IPackageJson, type FolderItem } from '@rushstack/node-core-library';
 
 import {
   SPFxTemplateJsonFile,
@@ -13,6 +13,19 @@ import {
   type ISPFxTemplateJson
 } from './SPFxTemplateJsonFile';
 import { isBinaryFile } from './binaryFiles';
+
+/**
+ * @public
+ */
+export interface IRenderOptions {
+  /**
+   * If true, any scripts in package.json whose names start with "_phase:" will be retained in
+   * the rendered output. This is useful for CI environments where these scripts are used
+   * for building the templates repo, but aren't used in the actual generated projects and would
+   * just add noise if left in. By default, these scripts are stripped out during rendering.
+   */
+  retainPhaseScripts?: boolean;
+}
 
 /**
  * @public
@@ -153,7 +166,11 @@ export class SPFxTemplate {
    * @param destinationDir - The destination directory where rendered files will be written
    * @returns A Promise that resolves to a MemFsEditor instance containing the rendered files
    */
-  public async renderAsync(context: object, destinationDir: string): Promise<MemFsEditor> {
+  public async renderAsync(
+    context: object,
+    destinationDir: string,
+    options?: IRenderOptions
+  ): Promise<MemFsEditor> {
     // use the template "schema" to validate the context object
     if (this._definition.contextSchema) {
       // Build a Zod schema from the contextSchema metadata
@@ -163,6 +180,7 @@ export class SPFxTemplate {
           schemaShape[key] = z.string();
         }
       }
+
       const contextSchema: z.ZodObject<Record<string, z.ZodString>> = z.object(schemaShape);
       const validationResult: z.ZodSafeParseResult<Record<string, string>> = contextSchema.safeParse(context);
       if (!validationResult.success) {
@@ -174,7 +192,7 @@ export class SPFxTemplate {
     const { create: createEditor } = await import('mem-fs-editor');
     const memFs: MemFsEditor = createEditor(createMemFs());
 
-    for (const [filename, contents] of this._files.entries()) {
+    for (const [filename, contents] of this._files) {
       // Render the filename by replacing {variableName} placeholders
       let renderedFilename: string = filename;
       for (const [key, value] of Object.entries(context)) {
@@ -185,10 +203,15 @@ export class SPFxTemplate {
       const destination: string = `${destinationDir}/${renderedFilename}`;
       if (typeof contents === 'string') {
         // Process text file contents as EJS template
-        const rendered: string = ejs.render(contents, context, {
+        let rendered: string = ejs.render(contents, context, {
           filename,
           cache: false
         });
+
+        if (!options?.retainPhaseScripts && renderedFilename.endsWith('/package.json')) {
+          rendered = _stripPhaseScripts(rendered);
+        }
+
         memFs.write(destination, rendered);
       } else {
         // Binary files are written as-is without EJS processing
@@ -222,4 +245,22 @@ export class SPFxTemplate {
       `Number of Files: ${this._files.size}`
     ].join('\n');
   }
+}
+
+function _stripPhaseScripts(packageJsonContents: string): string {
+  const parsed: IPackageJson = JSON.parse(packageJsonContents);
+
+  if (!parsed.scripts) {
+    return packageJsonContents;
+  }
+
+  let modified: boolean = false;
+  for (const key of Object.keys(parsed.scripts)) {
+    if (key.startsWith('_phase:')) {
+      delete parsed.scripts[key];
+      modified = true;
+    }
+  }
+
+  return modified ? JSON.stringify(parsed, undefined, 2) + '\n' : packageJsonContents;
 }

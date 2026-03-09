@@ -2,26 +2,15 @@
 // See LICENSE in the project root for license information.
 
 jest.mock('@rushstack/node-core-library');
+jest.mock('mem-fs');
+jest.mock('mem-fs-editor');
 
 import type { MemFsEditor } from 'mem-fs-editor';
 
-import { Async, FileSystem } from '@rushstack/node-core-library';
+import { Async, FileSystem, type FolderItem } from '@rushstack/node-core-library';
 
 import { SPFxTemplate } from '../SPFxTemplate';
 import { SPFxTemplateJsonFile } from '../SPFxTemplateJsonFile';
-
-interface IFileSystemReadFolderItemsResult {
-  name: string;
-  isDirectory: () => boolean;
-  isFile: () => boolean;
-  isBlockDevice: () => boolean;
-  isCharacterDevice: () => boolean;
-  isSymbolicLink: () => boolean;
-  isFIFO: () => boolean;
-  isSocket: () => boolean;
-  parentPath: string;
-  path: string;
-}
 
 describe('SPFxTemplate', () => {
   const mockReadFileAsync = jest.mocked(FileSystem.readFileAsync);
@@ -118,22 +107,22 @@ describe('SPFxTemplate', () => {
       });
 
       // Mock folder structure
-      const rootItems: IFileSystemReadFolderItemsResult[] = [
+      const rootItems: FolderItem[] = [
         {
           name: 'template.json',
           isFile: () => true,
           isDirectory: () => false
-        } as IFileSystemReadFolderItemsResult,
-        { name: 'src', isFile: () => false, isDirectory: () => true } as IFileSystemReadFolderItemsResult,
+        } as FolderItem,
+        { name: 'src', isFile: () => false, isDirectory: () => true } as FolderItem,
         {
           name: 'README.md',
           isFile: () => true,
           isDirectory: () => false
-        } as IFileSystemReadFolderItemsResult
+        } as FolderItem
       ];
 
-      const srcItems: IFileSystemReadFolderItemsResult[] = [
-        { name: 'index.ts', isFile: () => true, isDirectory: () => false } as IFileSystemReadFolderItemsResult
+      const srcItems: FolderItem[] = [
+        { name: 'index.ts', isFile: () => true, isDirectory: () => false } as FolderItem
       ];
 
       mockReadFolderItemsAsync.mockImplementation(async (folderPath: string) => {
@@ -164,17 +153,17 @@ describe('SPFxTemplate', () => {
         return 'file content';
       });
 
-      const rootItems: IFileSystemReadFolderItemsResult[] = [
+      const rootItems: FolderItem[] = [
         {
           name: 'template.json',
           isFile: () => true,
           isDirectory: () => false
-        } as IFileSystemReadFolderItemsResult,
+        } as FolderItem,
         {
           name: 'other.txt',
           isFile: () => true,
           isDirectory: () => false
-        } as IFileSystemReadFolderItemsResult
+        } as FolderItem
       ];
 
       mockReadFolderItemsAsync.mockResolvedValue(rootItems);
@@ -199,21 +188,21 @@ describe('SPFxTemplate', () => {
         return `content of ${filePath}`;
       });
 
-      const rootItems: IFileSystemReadFolderItemsResult[] = [
+      const rootItems: FolderItem[] = [
         {
           name: 'template.json',
           isFile: () => true,
           isDirectory: () => false
-        } as IFileSystemReadFolderItemsResult,
-        { name: 'level1', isFile: () => false, isDirectory: () => true } as IFileSystemReadFolderItemsResult
+        } as FolderItem,
+        { name: 'level1', isFile: () => false, isDirectory: () => true } as FolderItem
       ];
 
-      const level1Items: IFileSystemReadFolderItemsResult[] = [
-        { name: 'level2', isFile: () => false, isDirectory: () => true } as IFileSystemReadFolderItemsResult
+      const level1Items: FolderItem[] = [
+        { name: 'level2', isFile: () => false, isDirectory: () => true } as FolderItem
       ];
 
-      const level2Items: IFileSystemReadFolderItemsResult[] = [
-        { name: 'deep.txt', isFile: () => true, isDirectory: () => false } as IFileSystemReadFolderItemsResult
+      const level2Items: FolderItem[] = [
+        { name: 'deep.txt', isFile: () => true, isDirectory: () => false } as FolderItem
       ];
 
       mockReadFolderItemsAsync.mockImplementation(async (folderPath: string) => {

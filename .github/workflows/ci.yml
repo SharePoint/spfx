@@ -26,5 +26,5 @@ jobs:
       - name: Rush Install
         run: node common/scripts/install-run-rush.js install
 
-      - name: Rush rebuild
-        run: node common/scripts/install-run-rush.js rebuild
+      - name: Rush test-and-package-solution
+        run: node common/scripts/install-run-rush.js test-and-package-solution --production --timeline --verbose

@@ -21,11 +21,16 @@ describe('CommandLineHelp', () => {
       new Terminal(new StringBufferTerminalProvider())
     );
 
-    const globalHelpText: string = AnsiEscape.formatForTests(parser.renderHelpText());
+    const globalHelpText: string = AnsiEscape.formatForTests(parser.renderHelpText()).replace(
+      /[ \t]+$/gm,
+      ''
+    );
     expect(globalHelpText).toMatchSnapshot('global help');
 
     for (const action of parser.actions) {
-      const actionHelpText: string = AnsiEscape.formatForTests(action.renderHelpText());
+      const actionHelpText: string = AnsiEscape.formatForTests(action.renderHelpText())
+        .replace(process.cwd(), '<cwd>')
+        .replace(/[ \t]+$/gm, '');
       expect(actionHelpText).toMatchSnapshot(action.actionName);
     }
   });

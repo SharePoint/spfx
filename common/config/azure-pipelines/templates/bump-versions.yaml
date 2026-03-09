@@ -1,0 +1,13 @@
+# Template: Bump versions using Rush
+# Processes change files and bumps package versions for the specified policy.
+
+parameters:
+  - name: VersionPolicyName
+    type: string
+
+steps:
+  - script: >
+      node common/scripts/install-run-rush.js version
+      --bump
+      --version-policy ${{ parameters.VersionPolicyName }}
+    displayName: 'Rush Version Bump (Policy: ${{ parameters.VersionPolicyName }})'

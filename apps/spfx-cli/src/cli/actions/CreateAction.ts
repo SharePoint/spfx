@@ -194,8 +194,10 @@ export class CreateAction extends CommandLineAction {
           componentNameAllCaps: componentNameAllCaps,
           componentDescription: componentDescription
         },
-        targetDir
+        targetDir,
+        { retainPhaseScripts: ciMode }
       );
+
       _printFileChanges(this._terminal, fs, targetDir);
       await template.write(fs);
     } catch (error: unknown) {
