@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@microsoft/spfx-template-api",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@microsoft/spfx-template-api"
+}
