@@ -6,6 +6,7 @@ import * as path from 'node:path';
 import { execSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import ignore from 'ignore';
+import { _isBinaryFile as isBinaryFile } from '@microsoft/spfx-template-api';
 
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
@@ -249,8 +250,8 @@ async function getAllFiles(
 }
 
 /**
- * Read file content, return undefined if file doesn't exist or can't be read.
- * Normalizes line endings to `\n` for consistent comparison.
+ * Read file content, return undefined if file doesn't exist or can't be read
+ * Normalizes line endings to `\n` for consistent comparison
  */
 async function readFileContent(filePath: string): Promise<string | undefined> {
   try {
@@ -359,12 +360,6 @@ describe('SPFx Template Scaffolding', () => {
         const filterFiles = (files: string[]): string[] =>
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
-            // Skip binary/image files that cannot be meaningfully compared as UTF-8 text
-            const ignoredExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.woff', '.eot', '.ttf', '.ico'];
-            if (ignoredExtensions.some((ext) => normalized.endsWith(ext))) {
-              return false;
-            }
-
             // Skip build artifacts and generated files
             const ignoredFiles = ['package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'webpack.config.js'];
             const ignoredDirs = ['.rush', 'rush-logs', 'temp', 'node_modules', 'dist', 'teams'];
@@ -397,21 +392,36 @@ describe('SPFx Template Scaffolding', () => {
 
         // Compare content of each file with detailed diffs
         for (const file of filteredScaffolded) {
-          const scaffoldedFile = path.join(outputPath, file);
-          const exampleFile = path.join(examplePath, file);
+          const scaffoldedFile = `${outputPath}/${file}`;
+          const exampleFile = `${examplePath}/${file}`;
 
-          const scaffoldedContent = await readFileContent(scaffoldedFile);
-          const exampleContent = await readFileContent(exampleFile);
-
-          // Use Jest's expect to get nice diff output
-          // Add file context to the error message
-          try {
-            expect(scaffoldedContent).toEqual(exampleContent);
-          } catch (error: unknown) {
-            if (error instanceof Error) {
-              throw new Error(`File content mismatch in '${file}':\n${error.message}`);
+          if (isBinaryFile(file)) {
+            // Compare binary files as raw buffers
+            try {
+              const scaffoldedBuffer = await readFile(scaffoldedFile);
+              const exampleBuffer = await readFile(exampleFile);
+              expect(scaffoldedBuffer).toEqual(exampleBuffer);
+            } catch (error: unknown) {
+              if (error instanceof Error) {
+                throw new Error(`Binary file mismatch in '${file}':\n${error.message}`);
+              }
+              throw new Error(`Binary file mismatch in '${file}':\n${String(error)}`);
             }
-            throw new Error(`File content mismatch in '${file}':\n${String(error)}`);
+          } else {
+            // Compare text files as normalized strings
+            const scaffoldedContent = await readFileContent(scaffoldedFile);
+            const exampleContent = await readFileContent(exampleFile);
+
+            // Use Jest's expect to get nice diff output
+            // Add file context to the error message
+            try {
+              expect(scaffoldedContent).toEqual(exampleContent);
+            } catch (error: unknown) {
+              if (error instanceof Error) {
+                throw new Error(`File content mismatch in '${file}':\n${error.message}`);
+              }
+              throw new Error(`File content mismatch in '${file}':\n${String(error)}`);
+            }
           }
         }
       });

@@ -1,0 +1,22 @@
+diff --git a/lib-commonjs/plugins/packageSolutionPlugin/packageSolution/utils/validateSolutionDefinition.js b/lib-commonjs/plugins/packageSolutionPlugin/packageSolution/utils/validateSolutionDefinition.js
+index ad764968a18d522dd2f3ad22eabc176c05a6d916..f860e528c88867a525f006a3725cadae92e48edd 100644
+--- a/lib-commonjs/plugins/packageSolutionPlugin/packageSolution/utils/validateSolutionDefinition.js
++++ b/lib-commonjs/plugins/packageSolutionPlugin/packageSolution/utils/validateSolutionDefinition.js
+@@ -20,7 +20,7 @@ function validateSolutionDefinition(terminal, options, customFeatures, manifests
+                 // HACK: The description is a extensionType - title, but really extensionType should be a first
+                 // class property
+                 if (component.manifest.componentType === 'Extension' && component.description.substring(0, 15) === 'FieldCustomizer') {
+-                    terminal.writeWarningLine(`${component.manifest.alias}: Admins can make this solution available to all sites in the` + ` organization, but field customizers won't automatically appear. SharePoint Framework field ` + `customizers must be specifically associated to fields programmatically to be visible to site users.`);
++                    terminal.writeLine(`${component.manifest.alias}: Admins can make this solution available to all sites in the` + ` organization, but field customizers won't automatically appear. SharePoint Framework field ` + `customizers must be specifically associated to fields programmatically to be visible to site users.`);
+                     hasWarning = true;
+                 }
+             });
+@@ -41,7 +41,7 @@ function validateSolutionDefinition(terminal, options, customFeatures, manifests
+             if (hasExtensions) {
+                 terminal.writeLine(featureXmlMessage);
+             } else {
+-                terminal.writeWarningLine(featureXmlMessage);
++                terminal.writeLine(featureXmlMessage);
+                 hasWarning = true;
+             }
+         }
