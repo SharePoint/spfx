@@ -75,7 +75,12 @@ extends:
                 parameters:
                   VersionPolicyName: spfx
 
-              - script: node common/scripts/install-run-rush.js rebuild
+              - script: >
+                  node common/scripts/install-run-rush.js
+                  test-and-package-solution
+                  --production
+                  --timeline
+                  --verbose
                 displayName: 'Rush Rebuild'
 
               - template: /common/config/azure-pipelines/templates/pack.yaml@self
