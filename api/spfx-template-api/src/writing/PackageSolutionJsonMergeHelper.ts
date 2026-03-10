@@ -41,7 +41,8 @@ export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
     const merged: IPackageSolutionJson = { ...existing };
 
     if (existing.solution || incoming.solution) {
-      merged.solution = { ...existing.solution };
+      // Spread existing first, then overlay incoming metadata for keys absent in existing
+      merged.solution = { ...incoming.solution, ...existing.solution };
 
       const existingFeatures: IFeature[] = existing.solution?.features ?? [];
       const incomingFeatures: IFeature[] = incoming.solution?.features ?? [];

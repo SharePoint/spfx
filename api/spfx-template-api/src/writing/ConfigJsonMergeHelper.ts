@@ -34,6 +34,8 @@ export class ConfigJsonMergeHelper extends JsonMergeHelper {
 
     const merged: IConfigJson = { ...existing };
 
+    // Incoming wins on key collision — each component contributes unique bundle
+    // names, so collisions indicate a re-scaffold of the same component.
     merged.bundles = { ...existing.bundles, ...incoming.bundles };
     merged.localizedResources = { ...existing.localizedResources, ...incoming.localizedResources };
     merged.externals = { ...existing.externals, ...incoming.externals };

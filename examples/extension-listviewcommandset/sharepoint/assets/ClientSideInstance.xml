@@ -3,7 +3,7 @@
     <ClientSideComponentInstance
         Title="MinimalCommandSet"
         Location="ClientSideExtension.ListViewCommandSet.CommandBar"
-        ComponentId="11111111-1111-1111-1111-111111111111"
+        ComponentId="838638c8-36e9-53b5-a8c3-37a22b55fa22"
         Properties="{&quot;sampleTextOne&quot;:&quot;One item is selected in the list&quot;,&quot;sampleTextTwo&quot;:&quot;This command is always visible.&quot;}">
     </ClientSideComponentInstance>
 </Elements>

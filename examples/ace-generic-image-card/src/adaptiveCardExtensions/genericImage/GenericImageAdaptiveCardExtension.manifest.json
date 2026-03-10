@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/adaptive-card-extension-manifest.schema.json",
-  "id": "11111111-1111-1111-1111-111111111111",
+  "id": "8c6ce550-e6f0-551f-aff3-f5fcbc7b6122",
   "alias": "GenericImageCard",
   "componentType": "AdaptiveCardExtension",
 

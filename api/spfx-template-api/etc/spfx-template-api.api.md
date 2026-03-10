@@ -21,9 +21,6 @@ export abstract class BaseSPFxTemplateRepositorySource {
     get type(): SPFxTemplateRepositorySourceTypes;
 }
 
-// @internal
-export function _isBinaryFile(filePath: string): boolean;
-
 // @public
 export class ConfigJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
@@ -31,6 +28,9 @@ export class ConfigJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
     merge(existingContent: string, newContent: string): string;
 }
+
+// @internal
+export function _isBinaryFile(filePath: string): boolean;
 
 // @public
 export interface ISPFxTemplateJson {
@@ -142,7 +142,7 @@ export type SPFxTemplateRepositorySourceTypes = 'local' | 'github';
 
 // @public
 export class SPFxTemplateWriter {
-    constructor(terminal: Terminal);
+    constructor();
     addMergeHelper(helper: BaseMergeHelper): void;
     writeAsync(editor: MemFsEditor, targetDir: string): Promise<void>;
 }

@@ -3,7 +3,7 @@
 
 import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
 import type { MemFsEditor } from 'mem-fs-editor';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
 import * as z from 'zod';
 
 import { Colorize, type Terminal } from '@rushstack/terminal';
@@ -23,9 +23,10 @@ import {
 
 import { SOLUTION_NAME_PATTERN } from '../../utilcities/validation';
 
-const CI_COMPONENT_ID: string = '11111111-1111-1111-1111-111111111111';
+// Deterministic namespace for CI mode GUIDs, derived from the well-known URL
+// namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
+const CI_NAMESPACE: string = '035a23a9-8c9e-569b-ae00-7ff2e4c82fb0';
 const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
-const CI_FEATURE_ID: string = '33333333-3333-3333-3333-333333333333';
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -146,15 +147,6 @@ export class CreateAction extends CommandLineAction {
         );
       }
 
-      // CI mode is read from an environment variable instead of a ts-command-line
-      // parameter so it stays out of --help output. It is an internal/undocumented
-      // flag used only by CI pipelines and tests to produce deterministic output.
-      // eslint-disable-next-line dot-notation
-      const ciMode: boolean = process.env['SPFX_CI_MODE'] === '1';
-      const componentId: string = ciMode ? CI_COMPONENT_ID : uuidv4();
-      const solutionId: string = ciMode ? CI_SOLUTION_ID : uuidv4();
-      const featureId: string = ciMode ? CI_FEATURE_ID : uuidv4();
-
       // Get component name and validate
       const componentName: string = this._componentName.value;
       if (!componentName || componentName.trim().length === 0) {
@@ -162,6 +154,15 @@ export class CreateAction extends CommandLineAction {
       }
 
       const componentAlias: string = this._componentAlias.value || componentName;
+
+      // CI mode is read from an environment variable instead of a ts-command-line
+      // parameter so it stays out of --help output. It is an internal/undocumented
+      // flag used only by CI pipelines and tests to produce deterministic output.
+      // eslint-disable-next-line dot-notation
+      const ciMode: boolean = process.env['SPFX_CI_MODE'] === '1';
+      const componentId: string = ciMode ? uuidv5(`component:${componentAlias}`, CI_NAMESPACE) : uuidv4();
+      const solutionId: string = ciMode ? CI_SOLUTION_ID : uuidv4();
+      const featureId: string = ciMode ? uuidv5(`feature:${componentAlias}`, CI_NAMESPACE) : uuidv4();
       const componentDescription: string = this._componentDescription.value || `${componentName} description`;
 
       // Compute name variants using lodash
@@ -198,7 +199,7 @@ export class CreateAction extends CommandLineAction {
         targetDir
       );
       _printFileChanges(this._terminal, fs, targetDir);
-      const writer: SPFxTemplateWriter = new SPFxTemplateWriter(this._terminal);
+      const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
       await writer.writeAsync(fs, targetDir);
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);

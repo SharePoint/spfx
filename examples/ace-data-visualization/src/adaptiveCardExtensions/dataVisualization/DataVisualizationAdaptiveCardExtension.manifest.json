@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/adaptive-card-extension-manifest.schema.json",
-  "id": "11111111-1111-1111-1111-111111111111",
+  "id": "cef0f276-88e8-5bd8-b82c-0e79affbc4b1",
   "alias": "DataVisualizationCard",
   "componentType": "AdaptiveCardExtension",
 

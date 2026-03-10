@@ -6,7 +6,7 @@
     "default": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
-        "componentId": "11111111-1111-1111-1111-111111111111",
+        "componentId": "883e8d4f-7073-52ba-a991-5970ff009391",
         "PageType": 8,
         "RootFolder": "/sites/mySite/Lists/MyList",
         "properties": {
@@ -17,7 +17,7 @@
     "noFramework_NewForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
-        "componentId": "11111111-1111-1111-1111-111111111111",
+        "componentId": "883e8d4f-7073-52ba-a991-5970ff009391",
         "PageType": 8,
         "RootFolder": "/sites/mySite/Lists/MyList",
         "properties": {
@@ -28,7 +28,7 @@
     "noFramework_EditForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
-        "componentId": "11111111-1111-1111-1111-111111111111",
+        "componentId": "883e8d4f-7073-52ba-a991-5970ff009391",
         "PageType": 6,
         "RootFolder": "/sites/mySite/Lists/MyList",
         "ID": 1,
@@ -40,7 +40,7 @@
     "noFramework_ViewForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
-        "componentId": "11111111-1111-1111-1111-111111111111",
+        "componentId": "883e8d4f-7073-52ba-a991-5970ff009391",
         "PageType": 4,
         "RootFolder": "/sites/mySite/Lists/MyList",
         "ID": 1,

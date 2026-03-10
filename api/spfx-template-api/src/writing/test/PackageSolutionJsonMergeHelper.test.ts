@@ -146,6 +146,29 @@ describe('PackageSolutionJsonMergeHelper', () => {
       expect(result.solution.features).toEqual([]);
     });
 
+    it('should use incoming solution metadata when existing has no solution', () => {
+      const existing = JSON.stringify({
+        $schema: 'https://schema.example.com'
+      });
+
+      const incoming = JSON.stringify({
+        solution: {
+          name: 'incoming-solution',
+          id: 'sol-2',
+          version: '1.0.0.0',
+          features: [{ id: 'feat-1', title: 'Feature 1' }]
+        },
+        paths: { zippedPackage: 'solution/incoming.sppkg' }
+      });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.solution.name).toBe('incoming-solution');
+      expect(result.solution.id).toBe('sol-2');
+      expect(result.solution.version).toBe('1.0.0.0');
+      expect(result.solution.features).toHaveLength(1);
+    });
+
     it('should handle no solution key in either side', () => {
       const existing = JSON.stringify({ $schema: 'https://schema.example.com' });
       const incoming = JSON.stringify({ paths: { zippedPackage: 'solution/pkg.sppkg' } });

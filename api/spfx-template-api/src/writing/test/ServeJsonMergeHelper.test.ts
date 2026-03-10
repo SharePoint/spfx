@@ -126,6 +126,16 @@ describe('ServeJsonMergeHelper', () => {
       expect(result.serveConfigurations.shared.pageUrl).toBe('https://localhost/new');
     });
 
+    it('should not add serveConfigurations when neither side defines it', () => {
+      const existing = JSON.stringify({ port: 4321 });
+      const incoming = JSON.stringify({ port: 9999 });
+
+      const result = JSON.parse(helper.merge(existing, incoming));
+
+      expect(result.port).toBe(4321);
+      expect(result.serveConfigurations).toBeUndefined();
+    });
+
     it('should handle empty serveConfigurations objects', () => {
       const existing = JSON.stringify({ port: 4321, serveConfigurations: {} });
       const incoming = JSON.stringify({ port: 5000, serveConfigurations: {} });

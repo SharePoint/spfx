@@ -47,8 +47,20 @@ Object {
     "features": Array [
       Object {
         "description": "The feature that activates elements of the @spfx-template/multi-component-test solution.",
-        "id": "33333333-3333-3333-3333-333333333333",
+        "id": "0371fe5a-40d6-5183-8b37-80b9120a6ce4",
         "title": "@spfx-template/multi-component-test Feature",
+        "version": "1.0.0.0",
+      },
+      Object {
+        "assets": Object {
+          "elementManifests": Array [
+            "elements.xml",
+            "ClientSideInstance.xml",
+          ],
+        },
+        "description": "Deploys a custom action with ClientSideComponentId association",
+        "id": "888001ec-8de9-5d1d-a405-a236314e8a16",
+        "title": "Application Extension - Deployment of custom action",
         "version": "1.0.0.0",
       },
     ],
@@ -82,7 +94,7 @@ Object {
   "serveConfigurations": Object {
     "appCustomizerApplicationCustomizer": Object {
       "customActions": Object {
-        "11111111-1111-1111-1111-111111111111": Object {
+        "6740119c-14cd-5999-8bef-f62f058aeffe": Object {
           "location": "ClientSideExtension.ApplicationCustomizer",
           "properties": Object {
             "testMessage": "Test message",
@@ -93,7 +105,7 @@ Object {
     },
     "default": Object {
       "customActions": Object {
-        "11111111-1111-1111-1111-111111111111": Object {
+        "6740119c-14cd-5999-8bef-f62f058aeffe": Object {
           "location": "ClientSideExtension.ApplicationCustomizer",
           "properties": Object {
             "testMessage": "Test message",

@@ -32,7 +32,9 @@ export class ServeJsonMergeHelper extends JsonMergeHelper {
 
     const merged: IServeJson = { ...existing };
 
-    merged.serveConfigurations = { ...existing.serveConfigurations, ...incoming.serveConfigurations };
+    if (existing.serveConfigurations || incoming.serveConfigurations) {
+      merged.serveConfigurations = { ...existing.serveConfigurations, ...incoming.serveConfigurations };
+    }
 
     return this.serializeJson(merged);
   }

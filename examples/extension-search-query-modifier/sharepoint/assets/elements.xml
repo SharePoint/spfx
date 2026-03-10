@@ -3,7 +3,7 @@
     <CustomAction
         Title="MinimalSearchQueryModifier"
         Location="ClientSideExtension.SearchQueryModifier"
-        ClientSideComponentId="11111111-1111-1111-1111-111111111111"
+        ClientSideComponentId="838638c8-36e9-53b5-a8c3-37a22b55fa22"
         ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
     </CustomAction>
 </Elements>

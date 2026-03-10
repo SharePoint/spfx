@@ -180,6 +180,34 @@ describe('PackageJsonMergeHelper', () => {
       expect(result.dependencies['@microsoft/sp-webpart-base']).toBe('1.22.0');
     });
 
+    it('should throw when @microsoft/* version differs across dep types (dep vs devDep)', () => {
+      const existing = JSON.stringify({
+        dependencies: { '@microsoft/sp-core-library': '1.22.0' }
+      });
+
+      const incoming = JSON.stringify({
+        devDependencies: { '@microsoft/sp-core-library': '1.23.0' }
+      });
+
+      expect(() => helper.merge(existing, incoming)).toThrow(
+        /SPFx version mismatch for "@microsoft\/sp-core-library"/
+      );
+    });
+
+    it('should throw when @microsoft/* version differs across dep types (devDep vs dep)', () => {
+      const existing = JSON.stringify({
+        devDependencies: { '@microsoft/spfx-heft-plugins': '1.22.0' }
+      });
+
+      const incoming = JSON.stringify({
+        dependencies: { '@microsoft/spfx-heft-plugins': '1.23.0' }
+      });
+
+      expect(() => helper.merge(existing, incoming)).toThrow(
+        /SPFx version mismatch for "@microsoft\/spfx-heft-plugins"/
+      );
+    });
+
     it('should include both versions in error message', () => {
       const existing = JSON.stringify({
         dependencies: { '@microsoft/sp-core-library': '1.20.0' }

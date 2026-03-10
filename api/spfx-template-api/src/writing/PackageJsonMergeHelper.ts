@@ -28,11 +28,16 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
     const existing: IPackageJson = this.parseJson<IPackageJson>(existingContent);
     const incoming: IPackageJson = this.parseJson<IPackageJson>(newContent);
 
-    PackageJsonMergeHelper._checkMicrosoftVersionConflicts(existing.dependencies, incoming.dependencies);
-    PackageJsonMergeHelper._checkMicrosoftVersionConflicts(
-      existing.devDependencies,
+    // Check @microsoft/* version conflicts across ALL dependency types (deps vs devDeps)
+    const existingVersions: Map<string, string> = PackageJsonMergeHelper._collectMicrosoftVersions(
+      existing.dependencies,
+      existing.devDependencies
+    );
+    const incomingVersions: Map<string, string> = PackageJsonMergeHelper._collectMicrosoftVersions(
+      incoming.dependencies,
       incoming.devDependencies
     );
+    PackageJsonMergeHelper._checkMicrosoftVersionConflicts(existingVersions, incomingVersions);
 
     const merged: IPackageJson = { ...existing };
 
@@ -46,19 +51,40 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
   }
 
   /**
-   * Throws if any `@microsoft/*` package appears in both maps with different versions.
+   * Collects all `@microsoft/*` packages from both dependencies and devDependencies
+   * into a single map, enabling cross-dep-type conflict detection.
+   */
+  private static _collectMicrosoftVersions(
+    deps?: Record<string, string>,
+    devDeps?: Record<string, string>
+  ): Map<string, string> {
+    const result: Map<string, string> = new Map();
+    for (const map of [deps, devDeps]) {
+      if (map) {
+        for (const [pkg, version] of Object.entries(map)) {
+          if (pkg.startsWith('@microsoft/')) {
+            result.set(pkg, version);
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Throws if any `@microsoft/*` package appears in both the existing and
+   * incoming version maps with different versions — regardless of whether the
+   * package lives in `dependencies` or `devDependencies`.
    */
   private static _checkMicrosoftVersionConflicts(
-    existing: Record<string, string> | undefined,
-    incoming: Record<string, string> | undefined
+    existing: Map<string, string>,
+    incoming: Map<string, string>
   ): void {
-    if (!existing || !incoming) {
-      return;
-    }
-    for (const [pkg, incomingVersion] of Object.entries(incoming)) {
-      if (pkg.startsWith('@microsoft/') && pkg in existing && existing[pkg] !== incomingVersion) {
+    for (const [pkg, incomingVersion] of incoming) {
+      const existingVersion: string | undefined = existing.get(pkg);
+      if (existingVersion !== undefined && existingVersion !== incomingVersion) {
         throw new Error(
-          `SPFx version mismatch for "${pkg}": existing project uses ${existing[pkg]} ` +
+          `SPFx version mismatch for "${pkg}": existing project uses ${existingVersion} ` +
             `but the incoming template requires ${incomingVersion}. ` +
             `All components in a project must use the same SPFx version.`
         );
@@ -77,6 +103,8 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
     if (!incoming && !existing) {
       return undefined;
     }
+    // Existing wins — dependencies are globally shared across the project,
+    // so the first-scaffolded version is authoritative.
     return { ...incoming, ...existing };
   }
 }

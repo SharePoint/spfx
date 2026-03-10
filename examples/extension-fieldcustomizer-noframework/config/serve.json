@@ -7,7 +7,7 @@
       "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
       "fieldCustomizers": {
         "InternalFieldName": {
-          "id": "11111111-1111-1111-1111-111111111111",
+          "id": "883e8d4f-7073-52ba-a991-5970ff009391",
           "properties": {
             "sampleText": "Value"
           }
@@ -18,7 +18,7 @@
       "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
       "fieldCustomizers": {
         "InternalFieldName": {
-          "id": "11111111-1111-1111-1111-111111111111",
+          "id": "883e8d4f-7073-52ba-a991-5970ff009391",
           "properties": {
             "sampleText": "Value"
           }

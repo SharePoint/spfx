@@ -15,21 +15,14 @@ import { SPFxTemplateWriter } from '../SPFxTemplateWriter';
  * These tests create real temp directories and write real JSON files to disk,
  * then verify that the writer correctly reads existing files and merges them
  * with incoming content. The MemFsEditor is still mocked (dump/write/commit),
- * but fs.existsSync and fs.readFileSync use the real filesystem.
+ * but the writer uses real async file reads via node:fs/promises.
  */
 describe('SPFxTemplateWriter integration', () => {
   let tempDir: string;
   let mockEditor: MemFsEditor;
-  let mockTerminal: { writeWarningLine: jest.Mock; writeLine: jest.Mock; writeErrorLine: jest.Mock };
 
   beforeEach(() => {
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'spfx-writer-'));
-
-    mockTerminal = {
-      writeWarningLine: jest.fn(),
-      writeLine: jest.fn(),
-      writeErrorLine: jest.fn()
-    };
 
     mockEditor = {
       write: jest.fn(),
@@ -62,7 +55,7 @@ describe('SPFxTemplateWriter integration', () => {
       'package.json': { contents: incomingPkg, state: 'modified' }
     });
 
-    const writer = new SPFxTemplateWriter(mockTerminal as any);
+    const writer = new SPFxTemplateWriter();
     await writer.writeAsync(mockEditor, tempDir);
 
     expect(mockEditor.write).toHaveBeenCalledTimes(1);
@@ -99,7 +92,7 @@ describe('SPFxTemplateWriter integration', () => {
       'config/config.json': { contents: incomingConfig, state: 'modified' }
     });
 
-    const writer = new SPFxTemplateWriter(mockTerminal as any);
+    const writer = new SPFxTemplateWriter();
     await writer.writeAsync(mockEditor, tempDir);
 
     expect(mockEditor.write).toHaveBeenCalledTimes(1);
@@ -140,7 +133,7 @@ describe('SPFxTemplateWriter integration', () => {
       'config/package-solution.json': { contents: incomingPkgSolution, state: 'modified' }
     });
 
-    const writer = new SPFxTemplateWriter(mockTerminal as any);
+    const writer = new SPFxTemplateWriter();
     await writer.writeAsync(mockEditor, tempDir);
 
     expect(mockEditor.write).toHaveBeenCalledTimes(1);
@@ -179,7 +172,7 @@ describe('SPFxTemplateWriter integration', () => {
       'config/serve.json': { contents: incomingServe, state: 'modified' }
     });
 
-    const writer = new SPFxTemplateWriter(mockTerminal as any);
+    const writer = new SPFxTemplateWriter();
     await writer.writeAsync(mockEditor, tempDir);
 
     expect(mockEditor.write).toHaveBeenCalledTimes(1);
@@ -195,7 +188,7 @@ describe('SPFxTemplateWriter integration', () => {
       'package.json': { contents: '{"name":"new"}', state: 'modified' }
     });
 
-    const writer = new SPFxTemplateWriter(mockTerminal as any);
+    const writer = new SPFxTemplateWriter();
     await writer.writeAsync(mockEditor, tempDir);
 
     expect(mockEditor.write).not.toHaveBeenCalled();
@@ -234,7 +227,7 @@ describe('SPFxTemplateWriter integration', () => {
       }
     });
 
-    const writer = new SPFxTemplateWriter(mockTerminal as any);
+    const writer = new SPFxTemplateWriter();
     await writer.writeAsync(mockEditor, tempDir);
 
     expect(mockEditor.write).toHaveBeenCalledTimes(3);
@@ -261,17 +254,33 @@ describe('SPFxTemplateWriter integration', () => {
     expect(mergedServe.serveConfigurations.new).toBeDefined();
   });
 
-  it('should warn for unregistered file type on disk', async () => {
-    fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), '{}');
+  it('should preserve existing content for unregistered file with different content on disk', async () => {
+    const existingContent = '{"existing": true}';
+    fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), existingContent);
 
     (mockEditor.dump as jest.Mock).mockReturnValue({
       'tsconfig.json': { contents: '{"compilerOptions":{}}', state: 'modified' }
     });
 
-    const writer = new SPFxTemplateWriter(mockTerminal as any);
+    const writer = new SPFxTemplateWriter();
     await writer.writeAsync(mockEditor, tempDir);
 
-    expect(mockTerminal.writeWarningLine).toHaveBeenCalledWith(expect.stringContaining('tsconfig.json'));
+    // Should write existing content into the editor to prevent overwrite
+    expect(mockEditor.write).toHaveBeenCalledWith(expect.stringContaining('tsconfig.json'), existingContent);
+    expect(mockEditor.commit).toHaveBeenCalled();
+  });
+
+  it('should skip silently for unregistered file with same content on disk', async () => {
+    const sameContent = '{"compilerOptions":{}}';
+    fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), sameContent);
+
+    (mockEditor.dump as jest.Mock).mockReturnValue({
+      'tsconfig.json': { contents: sameContent, state: 'modified' }
+    });
+
+    const writer = new SPFxTemplateWriter();
+    await writer.writeAsync(mockEditor, tempDir);
+
     expect(mockEditor.write).not.toHaveBeenCalled();
     expect(mockEditor.commit).toHaveBeenCalled();
   });
