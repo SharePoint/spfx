@@ -3,7 +3,7 @@
     {
       "packageName": "@microsoft/spfx-cli",
       "comment": "Initial release.",
-      "type": "minor"
+      "type": "none"
     }
   ],
   "packageName": "@microsoft/spfx-cli"

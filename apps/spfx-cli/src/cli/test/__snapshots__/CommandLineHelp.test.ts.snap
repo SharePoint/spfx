@@ -17,7 +17,7 @@ Optional arguments:
   --target-dir TARGET_DIR
                         The directory to create the solution (or where the
                         solution already exists) The default value is
-                        \\"/workspaces/spfx-samples/apps/spfx-cli\\".
+                        \\"<cwd>\\".
   --local-template TEMPLATE_PATH
                         Path to a local template folder
   --template TEMPLATE_NAME
@@ -50,7 +50,7 @@ Positional arguments:
 Optional arguments:
   -h, --help  Show this help message and exit.
 
-[bold]For detailed help about a specific command, use: spfx-cli <command> 
+[bold]For detailed help about a specific command, use: spfx-cli <command>
 -h[normal]
 "
 `;
