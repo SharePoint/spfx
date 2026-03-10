@@ -12,7 +12,8 @@ export {
   isBinaryFile as _isBinaryFile,
   type ISPFxTemplateJson,
   SPFxTemplateDefinitionSchema,
-  SPFxTemplateJsonFile
+  SPFxTemplateJsonFile,
+  type IRenderOptions
 } from './templating/index';
 export {
   SPFxTemplateRepositoryManager,

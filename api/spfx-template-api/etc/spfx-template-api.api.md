@@ -29,6 +29,11 @@ export class ConfigJsonMergeHelper extends JsonMergeHelper {
     merge(existingContent: string, newContent: string): string;
 }
 
+// @public (undocumented)
+export interface IRenderOptions {
+    retainPhaseScripts?: boolean;
+}
+
 // @internal
 export function _isBinaryFile(filePath: string): boolean;
 
@@ -98,7 +103,7 @@ export class SPFxTemplate {
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
     get name(): string;
-    renderAsync(context: object, destinationDir: string): Promise<MemFsEditor>;
+    renderAsync(context: object, destinationDir: string, options?: IRenderOptions): Promise<MemFsEditor>;
     get spfxVersion(): string;
     toString(): string;
     get version(): string;

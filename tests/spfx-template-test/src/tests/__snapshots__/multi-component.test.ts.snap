@@ -153,6 +153,9 @@ Object {
   "name": "@spfx-template/multi-component-test",
   "private": true,
   "scripts": Object {
+    "_phase:build": "heft run --only build -- --clean",
+    "_phase:package-solution": "heft run --only package-solution -- --clean",
+    "_phase:test": "heft run --only test -- --clean",
     "build": "heft test --clean --production && heft package-solution --production",
     "clean": "heft clean",
     "eject-webpack": "heft eject-webpack",

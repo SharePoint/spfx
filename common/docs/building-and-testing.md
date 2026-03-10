@@ -23,6 +23,25 @@ cd tests/spfx-template-test
 rushx build
 ```
 
+## Rush Phased Commands
+
+This repo uses explicit Rush phases defined in `common/config/rush/command-line.json`:
+
+- `_phase:build`
+- `_phase:test`
+- `_phase:package-solution`
+
+Script expectations by project type:
+
+- All Rush projects should define a `_phase:build` `package.json` script.
+- SPFx solution projects should also define `_phase:package-solution`.
+- Non-SPFx projects (for example, API/tooling packages) should not add `_phase:package-solution`.
+- Projects with tests should define `_phase:test`.
+
+When a template is scaffolded in non-CI mode, these scripts will be stripped out.
+
+For projects where a phase does not apply but is still expected, use an empty script (`""`) as an explicit no-op.
+
 ## How Template Snapshot Testing Works
 
 The test suite uses a **golden-master snapshot** approach:

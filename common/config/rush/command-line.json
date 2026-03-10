@@ -11,6 +11,48 @@
    * "rush my-global-command --help".
    */
   "commands": [
+    {
+      "commandKind": "phased",
+      "name": "build",
+      "phases": ["_phase:build"]
+    },
+
+    {
+      "commandKind": "phased",
+      "name": "test",
+      "summary": "Builds all projects and runs their tests.",
+      "phases": ["_phase:build", "_phase:test"],
+      "enableParallelism": true,
+      "incremental": true
+    },
+
+    {
+      "commandKind": "phased",
+      "name": "retest",
+      "summary": "Rebuilds all projects and reruns their tests.",
+      "phases": ["_phase:build", "_phase:test"],
+      "enableParallelism": true,
+      "incremental": false
+    },
+
+    {
+      "commandKind": "phased",
+      "name": "package-solution",
+      "summary": "Builds all projects and packages the solution.",
+      "phases": ["_phase:build", "_phase:package-solution"],
+      "enableParallelism": true,
+      "incremental": true
+    },
+
+    {
+      "commandKind": "phased",
+      "name": "test-and-package-solution",
+      "summary": "Builds all projects, runs their tests, and packages the solution.",
+      "phases": ["_phase:build", "_phase:test", "_phase:package-solution"],
+      "enableParallelism": true,
+      "incremental": true
+    },
+
     // {
     //   /**
     //    * (Required) Determines the type of custom command.
@@ -187,6 +229,33 @@
       "shellCommand": "pretty-quick --staged",
 
       "safeForSimultaneousRushProcesses": true
+    }
+  ],
+
+  "phases": [
+    {
+      "name": "_phase:build",
+      "dependencies": {
+        "upstream": ["_phase:build"]
+      },
+      "missingScriptBehavior": "log",
+      "allowWarningsOnSuccess": false
+    },
+    {
+      "name": "_phase:test",
+      "dependencies": {
+        "self": ["_phase:build"]
+      },
+      "missingScriptBehavior": "silent",
+      "allowWarningsOnSuccess": false
+    },
+    {
+      "name": "_phase:package-solution",
+      "dependencies": {
+        "self": ["_phase:build"]
+      },
+      "missingScriptBehavior": "silent",
+      "allowWarningsOnSuccess": false
     }
   ],
 
@@ -408,5 +477,34 @@
     //     }
     //   ]
     // }
+
+    {
+      "longName": "--production",
+      "parameterKind": "flag",
+      "description": "Perform a production build, including minification and localization steps",
+      "associatedPhases": ["_phase:build", "_phase:test", "_phase:package-solution"],
+      "associatedCommands": [
+        "build",
+        "rebuild",
+        "test",
+        "retest",
+        "package-solution",
+        "test-and-package-solution"
+      ]
+    },
+    {
+      "longName": "--update-snapshots",
+      "parameterKind": "flag",
+      "description": "Update Jest snapshots",
+      "associatedPhases": ["_phase:test"],
+      "associatedCommands": ["test", "retest", "test-and-package-solution"]
+    },
+    {
+      "longName": "--fix",
+      "parameterKind": "flag",
+      "description": "Automatically fix problems encountered while linting",
+      "associatedPhases": ["_phase:build"],
+      "associatedCommands": ["build", "rebuild", "test", "retest", "test-and-package-solution"]
+    }
   ]
 }

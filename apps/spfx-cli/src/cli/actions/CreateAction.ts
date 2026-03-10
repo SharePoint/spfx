@@ -196,8 +196,10 @@ export class CreateAction extends CommandLineAction {
           componentNameAllCaps: componentNameAllCaps,
           componentDescription: componentDescription
         },
-        targetDir
+        targetDir,
+        { retainPhaseScripts: ciMode }
       );
+
       _printFileChanges(this._terminal, fs, targetDir);
       const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
       await writer.writeAsync(fs, targetDir);

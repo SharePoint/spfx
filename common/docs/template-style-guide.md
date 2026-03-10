@@ -134,6 +134,7 @@ Example READMEs should have real content: a component name header, an actual sum
 - [ ] All version references use `<%= spfxVersion %>`
 - [ ] No "undefined" strings in generated output
 - [ ] No template syntax (`<%= %>`) remains in rendered examples
+- [ ] SPFx solution examples include `_phase:build`, `_phase:test`, and `_phase:package-solution` scripts
 - [ ] No extra blank lines
 - [ ] Generated example matches template output exactly
 
