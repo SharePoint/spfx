@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type * as child_process from 'node:child_process';
+import type { ChildProcess } from 'node:child_process';
 import * as fs from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 
@@ -76,7 +76,7 @@ export class AzDoClient {
 
     // Pipeline artifact downloads are zip archives. The Linux agents used by
     // this pipeline always have "unzip" available.
-    const unzipProcess: child_process.ChildProcess = Executable.spawn(UNZIP_BIN_NAME, unzipArgs, {
+    const unzipProcess: ChildProcess = Executable.spawn(UNZIP_BIN_NAME, unzipArgs, {
       stdio: ['ignore', 'pipe', 'pipe']
     });
     await Executable.waitForExitAsync(unzipProcess, {
