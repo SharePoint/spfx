@@ -15,7 +15,7 @@ steps:
     workingDirectory: '$(Agent.TempDirectory)/rushstack'
 
   - script: 'node common/scripts/install-run-rush.js build --verbose --production --to repo-toolbox'
-    displayName: 'Rush Rebuild (rushstack)'
+    displayName: 'Rush Build (rushstack)'
     workingDirectory: '$(Agent.TempDirectory)/rushstack'
 
   - script: 'node $(Agent.TempDirectory)/rushstack/repo-scripts/repo-toolbox/lib-commonjs/start.js record-versions --out-file $(Build.ArtifactStagingDirectory)/package-versions/published-versions.json'
