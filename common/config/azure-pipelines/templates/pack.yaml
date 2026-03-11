@@ -1,6 +1,11 @@
 # Template: Pack publishable packages into tarballs
 # Creates .tgz files for all packages with a versionPolicyName.
 
+parameters:
+  - name: RepoPath
+    type: string
+    default: '$(Build.SourcesDirectory)'
+
 steps:
   - script: >
       node common/scripts/install-run-rush.js publish
@@ -9,3 +14,4 @@ steps:
       --include-all
       --release-folder $(Build.ArtifactStagingDirectory)/packages
     displayName: 'Rush Pack'
+    workingDirectory: ${{ parameters.RepoPath }}

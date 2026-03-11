@@ -62,25 +62,33 @@ extends:
                 - output: pipelineArtifact
                   targetPath: $(Build.ArtifactStagingDirectory)/package-versions
                   artifactName: package-versions
+            variables:
+              SelfRepoPath: $(Pipeline.Workspace)/s/self
             steps:
               - checkout: self
                 persistCredentials: true
+                path: s/self
 
               - template: /common/config/azure-pipelines/templates/configure-git-user.yaml@self
+                parameters:
+                  RepoPath: $(SelfRepoPath)
 
               - bash: |
                   git checkout -b $(FeatureBranch)
                   echo "Created feature branch: $(FeatureBranch)"
                 displayName: 'Create Feature Branch'
+                workingDirectory: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
               - script: node common/scripts/install-run-rush.js install
                 displayName: 'Rush Install'
+                workingDirectory: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/bump-versions.yaml@self
                 parameters:
                   VersionPolicyName: spfx
+                  RepoPath: $(SelfRepoPath)
 
               - script: >
                   node common/scripts/install-run-rush.js
@@ -89,8 +97,11 @@ extends:
                   --timeline
                   --verbose
                 displayName: 'Rush Rebuild'
+                workingDirectory: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/pack.yaml@self
+                parameters:
+                  RepoPath: $(SelfRepoPath)
 
               # Check for changes and commit
               - bash: |
@@ -109,6 +120,7 @@ extends:
                     echo "##vso[task.setvariable variable=HasChanges]false"
                   fi
                 displayName: 'Commit Version Bumps'
+                workingDirectory: $(SelfRepoPath)
 
               # Push to remote
               - bash: |
@@ -117,6 +129,7 @@ extends:
                   echo "Pushed to $(FeatureBranch)"
                 displayName: 'Push Feature Branch'
                 condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
+                workingDirectory: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/prepare-publish-artifacts.yaml@self
 
@@ -134,3 +147,4 @@ extends:
 
                     **Pipeline Run:** $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
                   SourceBuildLabel: 'SourceBuild:$(Build.BuildId)'
+                  RepoPath: $(SelfRepoPath)
