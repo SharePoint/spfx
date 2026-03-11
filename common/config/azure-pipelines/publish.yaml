@@ -63,6 +63,8 @@ extends:
               - checkout: self
                 persistCredentials: true
 
+              - template: /common/config/azure-pipelines/templates/configure-git-user.yaml@self
+
               - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
               - script: node common/scripts/install-run-rush.js install --to repo-toolbox

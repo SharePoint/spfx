@@ -1,0 +1,6 @@
+steps:
+  - script: git config --local user.email "spfx-cli-bot@users.noreply.github.com"
+    displayName: 'git config email'
+
+  - script: git config --local user.name "SPFx CLI Bot"
+    displayName: 'git config name'
