@@ -66,11 +66,7 @@ extends:
               - checkout: self
                 persistCredentials: true
 
-              - script: git config --local user.email "spfx-cli-bot@users.noreply.github.com"
-                displayName: 'git config email'
-
-              - script: git config --local user.name "SPFx CLI Bot"
-                displayName: 'git config name'
+              - template: /common/config/azure-pipelines/templates/configure-git-user.yaml@self
 
               - bash: |
                   git checkout -b $(FeatureBranch)
