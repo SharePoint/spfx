@@ -2,6 +2,9 @@ parameters:
   - name: RushstackRepoPath
     type: string
     default: '$(Pipeline.Workspace)/s/rushstack'
+  - name: RepoPath
+    type: string
+    default: '$(Build.SourcesDirectory)'
 
 steps:
   - checkout: RushstackRepo
@@ -25,4 +28,4 @@ steps:
 
   - script: 'node ${{ parameters.RushstackRepoPath }}/repo-scripts/repo-toolbox/lib-commonjs/start.js record-versions --out-file $(Build.ArtifactStagingDirectory)/package-versions/published-versions.json'
     displayName: 'Record Published Versions'
-    workingDirectory: '${{ parameters.RushstackRepoPath }}'
+    workingDirectory: '${{ parameters.RepoPath }}'
