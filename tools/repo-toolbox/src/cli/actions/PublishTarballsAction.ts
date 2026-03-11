@@ -75,7 +75,7 @@ export class PublishTarballsAction extends CommandLineAction {
     const npmrcPublishPath: string = `${rushConfiguration.commonRushConfigFolder}/.npmrc-publish`;
 
     // Find all .tgz files
-    const tgzFiles: AsyncIterable<string> = await this._findTgzFilesAsync(artifactPath);
+    const tgzFiles: AsyncIterable<string> = this._findTgzFilesAsync(artifactPath);
 
     // Publish each package
     let successCount: number = 0;
