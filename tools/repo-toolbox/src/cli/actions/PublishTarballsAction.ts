@@ -13,6 +13,8 @@ import {
 } from '@rushstack/ts-command-line';
 import { RushConfiguration } from '@rushstack/rush-sdk';
 
+const NPM_BIN_NAME: 'npm' = 'npm';
+
 export class PublishTarballsAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
 
@@ -81,7 +83,15 @@ export class PublishTarballsAction extends CommandLineAction {
 
     for await (const tgzFile of tgzFiles) {
       const fileBasename: string = path.basename(tgzFile);
-      terminal.writeLine(`Publishing: ${fileBasename}`);
+      const publishArgs: string[] = [
+        'publish',
+        tgzFile,
+        '--access',
+        'public',
+        '--userconfig',
+        npmrcPublishPath
+      ];
+      terminal.writeLine(`> ${NPM_BIN_NAME} ${publishArgs.join(' ')}`);
 
       if (dryRun) {
         terminal.writeLine(`[dry-run] Skipped: ${fileBasename}`);
@@ -89,14 +99,10 @@ export class PublishTarballsAction extends CommandLineAction {
         terminal.writeLine('');
       } else {
         try {
-          const proc: child_process.ChildProcess = Executable.spawn(
-            'npm',
-            ['publish', tgzFile, '--access', 'public', '--userconfig', npmrcPublishPath],
-            {
-              stdio: ['ignore', 'pipe', 'pipe'],
-              environment: { NPM_AUTH_TOKEN: npmToken }
-            }
-          );
+          const proc: child_process.ChildProcess = Executable.spawn(NPM_BIN_NAME, publishArgs, {
+            stdio: ['ignore', 'pipe', 'pipe'],
+            environment: { NPM_AUTH_TOKEN: npmToken }
+          });
           const { stdout } = await Executable.waitForExitAsync(proc, {
             encoding: 'utf8',
             throwOnNonZeroExitCode: true,
