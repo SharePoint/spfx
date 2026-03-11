@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GitUtilities getGitAuthorizationHeaderAsync extracts authorization header value from git config entry 1`] = `
+Array [
+  "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
+]
+`;
+
+exports[`GitUtilities getGitAuthorizationHeaderAsync throws when git config output has no header value 1`] = `
+Array [
+  "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
+]
+`;
+
+exports[`GitUtilities getGitAuthorizationHeaderAsync throws when header line is missing colon 1`] = `
+Array [
+  "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
+]
+`;
+
+exports[`GitUtilities getRepoSlugAsync extracts slug from HTTPS remote without .git suffix 1`] = `
+Array [
+  "[    log] > git remote get-url origin[n]",
+]
+`;
+
+exports[`GitUtilities getRepoSlugAsync extracts slug from SSH remote with dotted repository name 1`] = `
+Array [
+  "[    log] > git remote get-url origin[n]",
+]
+`;
+
+exports[`GitUtilities getRepoSlugAsync throws for non-GitHub remote URL 1`] = `
+Array [
+  "[    log] > git remote get-url origin[n]",
+]
+`;

@@ -67,7 +67,7 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
   protected override async onExecuteAsync(): Promise<void> {
     const terminal: ITerminal = this._terminal;
 
-    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync();
+    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync(terminal);
 
     // Check for existing open PR from this branch
     const branchName: string = this._branchNameParameter.value;

@@ -88,7 +88,7 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
 
     // --- Check whether this commit is a version bump merge ---
 
-    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync();
+    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync(terminal);
 
     const pr: ICommitPr | undefined = await gitHubClient.getPrForCommitAsync(commitSha);
     if (!pr) {
