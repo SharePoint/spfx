@@ -6,7 +6,11 @@ import * as path from 'node:path';
 
 import { Executable, FileSystem, type FolderItem } from '@rushstack/node-core-library';
 import type { ITerminal } from '@rushstack/terminal';
-import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
+import {
+  type IRequiredCommandLineStringParameter,
+  type CommandLineFlagParameter,
+  CommandLineAction
+} from '@rushstack/ts-command-line';
 import { RushConfiguration } from '@rushstack/rush-sdk';
 
 export class PublishTarballsAction extends CommandLineAction {
@@ -14,6 +18,7 @@ export class PublishTarballsAction extends CommandLineAction {
 
   private readonly _artifactPathParameter: IRequiredCommandLineStringParameter;
   private readonly _npmTokenParameter: IRequiredCommandLineStringParameter;
+  private readonly _dryRunParameter: CommandLineFlagParameter;
 
   public constructor(terminal: ITerminal) {
     super({
@@ -40,6 +45,11 @@ export class PublishTarballsAction extends CommandLineAction {
       required: true,
       environmentVariable: 'NPM_AUTH_TOKEN'
     });
+
+    this._dryRunParameter = this.defineFlagParameter({
+      parameterLongName: '--dry-run',
+      description: 'Perform all steps except actually publishing to npm'
+    });
   }
 
   protected override async onExecuteAsync(): Promise<void> {
@@ -49,6 +59,12 @@ export class PublishTarballsAction extends CommandLineAction {
     // Resolve the .npmrc-publish config that contains the registry and token placeholder.
     // npm's --userconfig flag points directly at it; the token is passed via the environment.
     const npmToken: string = this._npmTokenParameter.value;
+    const dryRun: boolean = this._dryRunParameter.value;
+
+    if (dryRun) {
+      terminal.writeLine('*** DRY RUN MODE — packages will not be published ***');
+      terminal.writeLine('');
+    }
 
     const rushConfiguration: RushConfiguration = RushConfiguration.loadFromDefaultLocation({
       startingFolder: __dirname
@@ -66,32 +82,39 @@ export class PublishTarballsAction extends CommandLineAction {
     for await (const tgzFile of tgzFiles) {
       const fileBasename: string = path.basename(tgzFile);
       terminal.writeLine(`Publishing: ${fileBasename}`);
-      try {
-        const proc: child_process.ChildProcess = Executable.spawn(
-          'npm',
-          ['publish', tgzFile, '--access', 'public', '--userconfig', npmrcPublishPath],
-          {
-            stdio: ['ignore', 'pipe', 'pipe'],
-            environment: { NPM_AUTH_TOKEN: npmToken }
-          }
-        );
-        const { stdout } = await Executable.waitForExitAsync(proc, {
-          encoding: 'utf8',
-          throwOnNonZeroExitCode: true,
-          throwOnSignal: true
-        });
-        if (stdout) {
-          terminal.writeLine(stdout);
-        }
 
-        terminal.writeLine(`Successfully published: ${fileBasename}`);
+      if (dryRun) {
+        terminal.writeLine(`[dry-run] Skipped: ${fileBasename}`);
         successCount++;
-      } catch (error) {
-        terminal.writeErrorLine(`Failed to publish: ${fileBasename}`);
-        terminal.writeErrorLine(String(error));
-        failCount++;
+        terminal.writeLine('');
+      } else {
+        try {
+          const proc: child_process.ChildProcess = Executable.spawn(
+            'npm',
+            ['publish', tgzFile, '--access', 'public', '--userconfig', npmrcPublishPath],
+            {
+              stdio: ['ignore', 'pipe', 'pipe'],
+              environment: { NPM_AUTH_TOKEN: npmToken }
+            }
+          );
+          const { stdout } = await Executable.waitForExitAsync(proc, {
+            encoding: 'utf8',
+            throwOnNonZeroExitCode: true,
+            throwOnSignal: true
+          });
+          if (stdout) {
+            terminal.writeLine(stdout);
+          }
+
+          terminal.writeLine(`Successfully published: ${fileBasename}`);
+          successCount++;
+        } catch (error) {
+          terminal.writeErrorLine(`Failed to publish: ${fileBasename}`);
+          terminal.writeErrorLine(String(error));
+          failCount++;
+        }
+        terminal.writeLine('');
       }
-      terminal.writeLine('');
     }
 
     if (successCount === 0 && failCount === 0) {

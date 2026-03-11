@@ -15,6 +15,12 @@ trigger:
 
 pr: none
 
+parameters:
+  - name: dryRun
+    displayName: 'Dry run (skip npm publish)'
+    type: boolean
+    default: false
+
 variables:
   - name: FORCE_COLOR
     value: 1
@@ -41,6 +47,12 @@ extends:
             pool:
               name: publish-rushstack
               os: linux
+            variables:
+              - name: dryRunFlag
+                ${{ if eq(parameters.dryRun, true) }}:
+                  value: '--dry-run'
+                ${{ else }}:
+                  value: ''
             templateContext:
               outputParentDirectory: $(Build.ArtifactStagingDirectory)
               outputs:
@@ -77,6 +89,7 @@ extends:
               - script: >-
                   node tools/repo-toolbox/lib/start.js publish-tarballs
                   --artifact-path $(Pipeline.Workspace)/packages
+                  $(dryRunFlag)
                 condition: eq(variables['DownloadArtifacts.IsVersionBumpMerge'], 'true')
                 displayName: 'Publish Packages to npm'
                 env:
