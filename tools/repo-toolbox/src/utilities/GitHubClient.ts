@@ -3,6 +3,8 @@
 
 import { Octokit, type RestEndpointMethodTypes } from '@octokit/rest';
 
+import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from './GitUtilities';
+
 export type IGitHubPr = RestEndpointMethodTypes['pulls']['list']['response']['data'][number];
 export type IGitHubLabel = RestEndpointMethodTypes['issues']['listLabelsOnIssue']['response']['data'][number];
 export type IGitHubCreationResult = RestEndpointMethodTypes['pulls']['create']['response']['data'];
@@ -59,6 +61,21 @@ export class GitHubClient {
     this._octokit.hook.before('request', (requestOptions) => {
       requestOptions.headers.authorization = authorizationHeader;
     });
+  }
+
+  /**
+   * Creates a {@link GitHubClient} by reading the repository slug and authorization
+   * header from the local git configuration.
+   */
+  public static async createGitHubClientAsync(): Promise<GitHubClient> {
+    const repoSlug: string = await getRepoSlugAsync();
+    const [owner, repo] = repoSlug.split('/');
+    if (!owner || !repo) {
+      throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
+    }
+
+    const authorizationHeader: string = await getGitAuthorizationHeaderAsync();
+    return new GitHubClient({ authorizationHeader, owner, repo });
   }
 
   public async getPrForBranchAsync(options: IGetPrForBranchOptions): Promise<IGitHubPr | undefined> {

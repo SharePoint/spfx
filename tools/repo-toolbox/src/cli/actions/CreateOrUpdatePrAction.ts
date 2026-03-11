@@ -5,8 +5,7 @@ import type { ITerminal } from '@rushstack/terminal';
 import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
 import { Async } from '@rushstack/node-core-library';
 
-import { createGitHubClientAsync } from '../../utilities/GitUtilities';
-import type { GitHubClient, IGitHubLabel, IGitHubPr } from '../../utilities/GitHubClient';
+import { GitHubClient, type IGitHubLabel, type IGitHubPr } from '../../utilities/GitHubClient';
 
 export class CreateOrUpdatePrAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
@@ -68,7 +67,7 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
   protected override async onExecuteAsync(): Promise<void> {
     const terminal: ITerminal = this._terminal;
 
-    const gitHubClient: GitHubClient = await createGitHubClientAsync();
+    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync();
 
     // Check for existing open PR from this branch
     const branchName: string = this._branchNameParameter.value;
