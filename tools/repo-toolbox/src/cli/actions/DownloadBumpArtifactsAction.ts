@@ -96,22 +96,34 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
       terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
       return;
     }
+
     terminal.writeLine(`Found PR #${pr.number}`);
 
-    const sourceBuildLabel: { name?: string } | undefined = pr.labels.find((l: { name?: string }) =>
-      l.name?.startsWith('SourceBuild:')
-    );
-    if (!sourceBuildLabel?.name) {
+    let sourceBuildLabel: string | undefined;
+    for (const { name } of pr.labels) {
+      if (name?.startsWith('SourceBuild:')) {
+        if (!sourceBuildLabel) {
+          sourceBuildLabel = name;
+        } else {
+          throw new Error(
+            `Multiple SourceBuild: labels found on PR #${pr.number}. Unable to determine originating pipeline run.`
+          );
+        }
+      }
+    }
+
+    if (!sourceBuildLabel) {
       terminal.writeLine(`PR #${pr.number} does not have a SourceBuild: label. Skipping publish.`);
       terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
       return;
     }
 
-    const buildIdString: string | undefined = sourceBuildLabel.name.split(':')[1];
-    const buildId: number = parseInt(buildIdString ?? '', 10);
+    const buildIdString: string = sourceBuildLabel.slice(sourceBuildLabel.indexOf(':') + 1);
+    const buildId: number = parseInt(buildIdString, 10);
     if (isNaN(buildId)) {
-      throw new Error(`Could not parse build ID from label: ${sourceBuildLabel.name}`);
+      throw new Error(`Could not parse build ID from label: ${sourceBuildLabel}`);
     }
+
     terminal.writeLine(`Bump pipeline run ID: ${buildId}`);
 
     // --- Download artifacts via AzDO API ---
