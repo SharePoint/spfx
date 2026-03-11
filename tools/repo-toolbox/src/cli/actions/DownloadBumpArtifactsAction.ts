@@ -8,8 +8,7 @@ import {
   CommandLineAction
 } from '@rushstack/ts-command-line';
 
-import { createGitHubClientAsync } from '../../utilities/GitUtilities';
-import type { GitHubClient, ICommitPr } from '../../utilities/GitHubClient';
+import { GitHubClient, type ICommitPr } from '../../utilities/GitHubClient';
 import { AzDoClient } from '../../utilities/AzDoClient';
 
 export class DownloadBumpArtifactsAction extends CommandLineAction {
@@ -89,7 +88,7 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
 
     // --- Check whether this commit is a version bump merge ---
 
-    const gitHubClient: GitHubClient = await createGitHubClientAsync();
+    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync();
 
     const pr: ICommitPr | undefined = await gitHubClient.getPrForCommitAsync(commitSha);
     if (!pr) {
