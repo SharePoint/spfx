@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type * as child_process from 'node:child_process';
+import type { ChildProcess } from 'node:child_process';
 import * as path from 'node:path';
 
 import { Executable, FileSystem, type FolderItem } from '@rushstack/node-core-library';
@@ -99,7 +99,7 @@ export class PublishTarballsAction extends CommandLineAction {
         terminal.writeLine('');
       } else {
         try {
-          const proc: child_process.ChildProcess = Executable.spawn(NPM_BIN_NAME, publishArgs, {
+          const proc: ChildProcess = Executable.spawn(NPM_BIN_NAME, publishArgs, {
             stdio: ['ignore', 'pipe', 'pipe'],
             environment: { NPM_AUTH_TOKEN: npmToken }
           });
