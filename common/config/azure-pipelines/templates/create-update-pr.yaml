@@ -16,6 +16,9 @@ parameters:
     default: ''
   - name: SourceBuildLabel
     type: string
+  - name: RepoPath
+    type: string
+    default: '$(Build.SourcesDirectory)'
 
 steps:
   - script: >
@@ -25,6 +28,7 @@ steps:
       --source-build-label "${{ parameters.SourceBuildLabel }}"
     displayName: 'Create or update GitHub PR'
     condition: and(succeeded(), ne(variables['HasChanges'], 'false'))
+    workingDirectory: ${{ parameters.RepoPath }}
     env:
       PR_TITLE: ${{ parameters.Title }}
       PR_BODY: ${{ parameters.Body }}

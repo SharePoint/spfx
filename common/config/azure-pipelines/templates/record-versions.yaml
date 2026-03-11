@@ -1,23 +1,28 @@
+parameters:
+  - name: RushstackRepoPath
+    type: string
+    default: '$(Pipeline.Workspace)/s/rushstack'
+
 steps:
   - checkout: RushstackRepo
-    path: $(Agent.TempDirectory)/rushstack
+    path: s/rushstack
 
   - script: 'git config --local user.email rushbot@users.noreply.github.com'
-    displayName: 'git config email'
-    workingDirectory: '$(Agent.TempDirectory)/rushstack'
+    displayName: 'git config email (rushstack)'
+    workingDirectory: '${{ parameters.RushstackRepoPath }}'
 
   - script: 'git config --local user.name Rushbot'
-    displayName: 'git config name'
-    workingDirectory: '$(Agent.TempDirectory)/rushstack'
+    displayName: 'git config name (rushstack)'
+    workingDirectory: '${{ parameters.RushstackRepoPath }}'
 
   - script: 'node common/scripts/install-run-rush.js install --to repo-toolbox'
     displayName: 'Rush Install (rushstack)'
-    workingDirectory: '$(Agent.TempDirectory)/rushstack'
+    workingDirectory: '${{ parameters.RushstackRepoPath }}'
 
   - script: 'node common/scripts/install-run-rush.js build --verbose --production --to repo-toolbox'
     displayName: 'Rush Build (rushstack)'
-    workingDirectory: '$(Agent.TempDirectory)/rushstack'
+    workingDirectory: '${{ parameters.RushstackRepoPath }}'
 
-  - script: 'node $(Agent.TempDirectory)/rushstack/repo-scripts/repo-toolbox/lib-commonjs/start.js record-versions --out-file $(Build.ArtifactStagingDirectory)/package-versions/published-versions.json'
+  - script: 'node ${{ parameters.RushstackRepoPath }}/repo-scripts/repo-toolbox/lib-commonjs/start.js record-versions --out-file $(Build.ArtifactStagingDirectory)/package-versions/published-versions.json'
     displayName: 'Record Published Versions'
-    workingDirectory: '$(Agent.BuildDirectory)'
+    workingDirectory: '${{ parameters.RushstackRepoPath }}'
