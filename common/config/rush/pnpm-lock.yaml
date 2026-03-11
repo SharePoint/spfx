@@ -7,6 +7,8 @@ settings:
 overrides:
   baseline-browser-mapping: ^2.9.19
 
+packageExtensionsChecksum: sha256-6R0LZgepyPJVw81HMQ/3O4ZbifJ1cb0gItdR12MAr8w=
+
 pnpmfileChecksum: sha256-E1T7OJ3DLTjpDqf4RdJzK9VDtAxgm4gDEQCLYdHD8nI=
 
 patchedDependencies:
@@ -9194,9 +9196,11 @@ snapshots:
       '@microsoft/eslint-plugin-spfx': 1.22.2(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/eslint-config': 4.5.2(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/eslint-plugin': 0.22.0(eslint@8.57.1)(typescript@5.8.3)
+      '@rushstack/eslint-plugin-security': 0.14.2(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/eslint-plugin': 8.46.2(@typescript-eslint/parser@8.48.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/utils': 8.46.2(eslint@8.57.1)(typescript@5.8.3)
       eslint: 8.57.1
+      eslint-plugin-promise: 7.2.1(eslint@8.57.1)
     transitivePeerDependencies:
       - '@typescript-eslint/parser'
       - supports-color

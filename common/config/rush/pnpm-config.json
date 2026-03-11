@@ -251,6 +251,16 @@
     //     }
     //   }
     // }
+
+    // @microsoft/eslint-config-spfx uses @rushstack/eslint-plugin-security and eslint-plugin-promise but doesn't
+    // declare them as dependencies. Patch it here to avoid a phantom dependency. This will be fixed
+    // in the upstream package.
+    "@microsoft/eslint-config-spfx": {
+      "dependencies": {
+        "@rushstack/eslint-plugin-security": "*",
+        "eslint-plugin-promise": "*"
+      }
+    }
   },
 
   /**
