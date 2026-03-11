@@ -4,6 +4,9 @@
 import type { ChildProcess } from 'node:child_process';
 
 import { Executable } from '@rushstack/node-core-library';
+import type { ITerminal } from '@rushstack/terminal';
+
+const GIT_BIN_NAME: 'git' = 'git';
 
 export async function getRepoSlugAsync(): Promise<string> {
   const result: string = await execGitAsync(['remote', 'get-url', 'origin']);
@@ -37,8 +40,9 @@ export async function getGitAuthorizationHeaderAsync(): Promise<string> {
   return headerLine.substring(colonIndex + 1).trim();
 }
 
-export async function execGitAsync(args: string[]): Promise<string> {
-  const result: ChildProcess = Executable.spawn('git', args, {
+export async function execGitAsync(args: string[], terminal?: ITerminal): Promise<string> {
+  terminal?.writeLine(`> ${GIT_BIN_NAME} ${args.join(' ')}`);
+  const result: ChildProcess = Executable.spawn(GIT_BIN_NAME, args, {
     stdio: ['ignore', 'pipe', 'pipe']
   });
   const { stdout } = await Executable.waitForExitAsync(result, {

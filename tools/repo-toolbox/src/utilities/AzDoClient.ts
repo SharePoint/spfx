@@ -27,6 +27,8 @@ export interface IDownloadArtifactOptions {
   targetPath: string;
 }
 
+const UNZIP_BIN_NAME: 'unzip' = 'unzip';
+
 export class AzDoClient {
   private readonly _connection: WebApi;
   private readonly _project: string;
@@ -93,15 +95,15 @@ export class AzDoClient {
 
     terminal.writeLine(`Extracting artifact to ${targetPath}...`);
 
+    const unzipArgs: string[] = ['-o', '-q', zipPath, '-d', targetPath];
+
+    terminal.writeLine(`> ${UNZIP_BIN_NAME} ${unzipArgs.join(' ')}`);
+
     // Pipeline artifact downloads are zip archives. The Linux agents used by
     // this pipeline always have "unzip" available.
-    const unzipProcess: child_process.ChildProcess = Executable.spawn(
-      'unzip',
-      ['-o', '-q', zipPath, '-d', targetPath],
-      {
-        stdio: ['ignore', 'pipe', 'pipe']
-      }
-    );
+    const unzipProcess: child_process.ChildProcess = Executable.spawn(UNZIP_BIN_NAME, unzipArgs, {
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
     await Executable.waitForExitAsync(unzipProcess, {
       encoding: 'utf8',
       throwOnNonZeroExitCode: true,
