@@ -73,6 +73,12 @@ extends:
               - script: node common/scripts/install-run-rush.js build --to repo-toolbox
                 displayName: 'Rush Build (repo-toolbox)'
 
+              # Ensure the published-versions directory exists even when the
+              # commit turns out not to be a version bump merge, because the
+              # 1ES templateContext output always attempts to publish it.
+              - script: mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
+                displayName: 'Create published-versions staging directory'
+
               # Check if this commit is a version bump merge and, if so, download
               # the pre-packed tarballs and metadata from the originating bump
               # pipeline run. Sets IsVersionBumpMerge output variable.

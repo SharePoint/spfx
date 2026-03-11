@@ -134,6 +134,8 @@ extends:
               - template: /common/config/azure-pipelines/templates/prepare-publish-artifacts.yaml@self
 
               - template: /common/config/azure-pipelines/templates/record-versions.yaml@self
+                parameters:
+                  RepoPath: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/create-update-pr.yaml@self
                 parameters:
