@@ -1,0 +1,13 @@
+parameters:
+  - name: RepoPath
+    type: string
+    default: '$(Build.SourcesDirectory)'
+
+steps:
+  - script: git config --local user.email "spfx-cli-bot@users.noreply.github.com"
+    displayName: 'git config email'
+    workingDirectory: ${{ parameters.RepoPath }}
+
+  - script: git config --local user.name "SPFx CLI Bot"
+    displayName: 'git config name'
+    workingDirectory: ${{ parameters.RepoPath }}

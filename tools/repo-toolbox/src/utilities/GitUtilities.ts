@@ -4,9 +4,12 @@
 import type { ChildProcess } from 'node:child_process';
 
 import { Executable } from '@rushstack/node-core-library';
+import type { ITerminal } from '@rushstack/terminal';
 
-export async function getRepoSlugAsync(): Promise<string> {
-  const result: string = await execGitAsync(['remote', 'get-url', 'origin']);
+const GIT_BIN_NAME: 'git' = 'git';
+
+export async function getRepoSlugAsync(terminal: ITerminal): Promise<string> {
+  const result: string = await execGitAsync(['remote', 'get-url', 'origin'], terminal);
   const match: RegExpMatchArray | null = result.match(/github\.com[:/]([^/]+\/[^/]+?)(?:\.git)?$/);
   if (!match) {
     throw new Error(`Could not extract repository slug from remote URL: ${result}`);
@@ -15,10 +18,10 @@ export async function getRepoSlugAsync(): Promise<string> {
   return match[1]!;
 }
 
-export async function getGitAuthorizationHeaderAsync(): Promise<string> {
+export async function getGitAuthorizationHeaderAsync(terminal: ITerminal): Promise<string> {
   // The checkout with persistCredentials sets an extraheader in git config
   // Format: "http.<url>.extraheader AUTHORIZATION: basic <token>"
-  const result: string = await execGitAsync(['config', '--get-regexp', 'http\\..*\\.extraheader']);
+  const result: string = await execGitAsync(['config', '--get-regexp', 'http\\..*\\.extraheader'], terminal);
   const headerLine: string | undefined = result.split(/\s+(.+)/)[1];
   if (!headerLine) {
     throw new Error(
@@ -37,8 +40,9 @@ export async function getGitAuthorizationHeaderAsync(): Promise<string> {
   return headerLine.substring(colonIndex + 1).trim();
 }
 
-export async function execGitAsync(args: string[]): Promise<string> {
-  const result: ChildProcess = Executable.spawn('git', args, {
+export async function execGitAsync(args: string[], terminal: ITerminal): Promise<string> {
+  terminal.writeLine(`> ${GIT_BIN_NAME} ${args.join(' ')}`);
+  const result: ChildProcess = Executable.spawn(GIT_BIN_NAME, args, {
     stdio: ['ignore', 'pipe', 'pipe']
   });
   const { stdout } = await Executable.waitForExitAsync(result, {

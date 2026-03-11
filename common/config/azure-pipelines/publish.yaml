@@ -1,7 +1,30 @@
 # Pipeline: Publish Packages
+# Trigger: When CHANGELOG files change on main (indicating a bump PR was merged).
+# Purpose: Detect version bump merges, download pre-packed artifacts from the
+#          bump pipeline, and publish to npm.
 
-trigger: none
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - 'apps/spfx-cli/CHANGELOG.md'
+      - 'api/spfx-template-api/CHANGELOG.md'
+      - 'common/config/rush/version-policies.json'
+
 pr: none
+
+parameters:
+  - name: dryRun
+    displayName: 'Dry run (skip npm publish)'
+    type: boolean
+    default: true
+
+variables:
+  - name: FORCE_COLOR
+    value: 1
+
 resources:
   repositories:
     - repository: 1esPipelines
@@ -17,10 +40,73 @@ extends:
       os: windows
     stages:
       - stage: Publish
+        displayName: 'Publish Packages'
         jobs:
-          - job: PublishJob
+          - job: PublishPackages
+            displayName: 'Publish to npm'
             pool:
               name: publish-rushstack
               os: linux
+            variables:
+              - name: dryRunFlag
+                ${{ if eq(parameters.dryRun, true) }}:
+                  value: '--dry-run'
+                ${{ else }}:
+                  value: ''
+            templateContext:
+              outputParentDirectory: $(Build.ArtifactStagingDirectory)
+              outputs:
+                - output: pipelineArtifact
+                  targetPath: $(Build.ArtifactStagingDirectory)/published-versions
+                  artifactName: published-versions
             steps:
               - checkout: self
+                persistCredentials: true
+
+              - template: /common/config/azure-pipelines/templates/configure-git-user.yaml@self
+
+              - template: /common/config/azure-pipelines/templates/install-node.yaml@self
+
+              - script: node common/scripts/install-run-rush.js install --to repo-toolbox
+                displayName: 'Rush Install (repo-toolbox)'
+
+              - script: node common/scripts/install-run-rush.js build --to repo-toolbox
+                displayName: 'Rush Build (repo-toolbox)'
+
+              # Ensure the published-versions directory exists even when the
+              # commit turns out not to be a version bump merge, because the
+              # 1ES templateContext output always attempts to publish it.
+              - script: mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
+                displayName: 'Create published-versions staging directory'
+
+              # Check if this commit is a version bump merge and, if so, download
+              # the pre-packed tarballs and metadata from the originating bump
+              # pipeline run. Sets IsVersionBumpMerge output variable.
+              - script: >-
+                  node tools/repo-toolbox/lib/start.js download-bump-artifacts
+                  --artifact-name packages
+                  --artifact-name metadata
+                  --artifact-name package-versions
+                  --target-path $(Pipeline.Workspace)
+                name: DownloadArtifacts
+                displayName: 'Download Bump Pipeline Artifacts'
+                env:
+                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+              # Publish the downloaded tarballs to npm
+              - script: >-
+                  node tools/repo-toolbox/lib/start.js publish-tarballs
+                  --artifact-path $(Pipeline.Workspace)/packages
+                  $(dryRunFlag)
+                condition: eq(variables['DownloadArtifacts.IsVersionBumpMerge'], 'true')
+                displayName: 'Publish Packages to npm'
+                env:
+                  NPM_AUTH_TOKEN: $(npmToken)
+
+              # Copy the published-versions artifact from the bump pipeline so it can
+              # be re-published as an artifact of this pipeline run.
+              - script: |
+                  mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
+                  cp $(Pipeline.Workspace)/package-versions/* $(Build.ArtifactStagingDirectory)/published-versions/
+                condition: eq(variables['DownloadArtifacts.IsVersionBumpMerge'], 'true')
+                displayName: 'Stage Published Versions Artifact'

@@ -4,6 +4,9 @@
 parameters:
   - name: VersionPolicyName
     type: string
+  - name: RepoPath
+    type: string
+    default: '$(Build.SourcesDirectory)'
 
 steps:
   - script: >
@@ -11,3 +14,4 @@ steps:
       --bump
       --version-policy ${{ parameters.VersionPolicyName }}
     displayName: 'Rush Version Bump (Policy: ${{ parameters.VersionPolicyName }})'
+    workingDirectory: ${{ parameters.RepoPath }}

@@ -5,7 +5,6 @@ import type { ITerminal } from '@rushstack/terminal';
 import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
 import { Async } from '@rushstack/node-core-library';
 
-import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
 import { GitHubClient, type IGitHubLabel, type IGitHubPr } from '../../utilities/GitHubClient';
 
 export class CreateOrUpdatePrAction extends CommandLineAction {
@@ -68,16 +67,7 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
   protected override async onExecuteAsync(): Promise<void> {
     const terminal: ITerminal = this._terminal;
 
-    const repoSlug: string = await getRepoSlugAsync();
-    const [owner, repo] = repoSlug.split('/');
-    if (!owner || !repo) {
-      throw new Error(`Unable to determine repository owner or name from slug: ${repoSlug}`);
-    }
-
-    terminal.writeLine(`Repository: ${repoSlug}`);
-
-    const authorizationHeader: string = await getGitAuthorizationHeaderAsync();
-    const gitHubClient: GitHubClient = new GitHubClient({ authorizationHeader, owner, repo });
+    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync(terminal);
 
     // Check for existing open PR from this branch
     const branchName: string = this._branchNameParameter.value;
