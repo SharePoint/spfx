@@ -3,8 +3,7 @@
 
 import type { ChildProcess } from 'node:child_process';
 import * as fs from 'node:fs';
-import * as http from 'node:http';
-import * as https from 'node:https';
+import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 
 import { WebApi, getBearerHandler } from 'azure-devops-node-api';
@@ -30,9 +29,6 @@ const UNZIP_BIN_NAME: 'unzip' = 'unzip';
 
 /** Report download progress to the terminal at this interval. */
 const PROGRESS_LOG_INTERVAL_BYTES: number = 10 * 1024 * 1024; // 10 MB
-
-/** Maximum number of HTTP redirects to follow before aborting. */
-const MAX_REDIRECTS: number = 5;
 
 function _formatBytes(bytes: number): string {
   if (bytes < 1024) {
@@ -111,7 +107,7 @@ export class AzDoClient {
     const zipPath: string = `${targetPath}/_${artifactName}.zip`;
     await FileSystem.ensureFolderAsync(targetPath);
 
-    // Stream the artifact content to disk, following redirects as needed.
+    // Stream the artifact content to disk.
     await this._downloadToFileAsync(downloadUrl, zipPath);
 
     terminal.writeLine(`Extracting artifact to ${targetPath}...`);
@@ -138,37 +134,33 @@ export class AzDoClient {
 
   /**
    * Downloads a file from the given URL with Bearer authentication and writes it to disk.
-   * Redirects are followed automatically; the Authorization header is intentionally stripped
-   * on redirect hops to avoid leaking credentials to third-party hosts (e.g. Azure Blob
-   * Storage signed URLs).
+   *
+   * Uses the native `fetch` API (Node 22+), which automatically follows redirects and
+   * strips the Authorization header on cross-origin hops per the Fetch spec — preventing
+   * credential leakage to third-party hosts (e.g. Azure Blob Storage signed URLs).
    */
   private async _downloadToFileAsync(url: string, filePath: string): Promise<void> {
     const terminal: ITerminal = this._terminal;
 
-    const response: http.IncomingMessage = await this._getWithRedirectsAsync(url);
+    const response: Response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${this._accessToken}`,
+        Accept: 'application/octet-stream'
+      },
+      redirect: 'follow'
+    });
 
-    if (!response.statusCode || response.statusCode < 200 || response.statusCode >= 300) {
-      // Attempt to read the response body for diagnostics.
-      let body: string = '';
-      const chunks: Buffer[] = [];
-      for await (const chunk of response) {
-        chunks.push(chunk as Buffer);
-        if (chunks.length > 10) {
-          break; // Limit how much we read
-        }
-      }
-
-      body = Buffer.concat(chunks).toString('utf8').slice(0, 500);
-
+    if (!response.ok) {
+      const body: string = await response.text().catch(() => '');
       throw new Error(
-        `Artifact download failed with HTTP ${response.statusCode} ${response.statusMessage}.` +
-          (body ? ` Response body (truncated): ${body}` : '')
+        `Artifact download failed with HTTP ${response.status} ${response.statusText}.` +
+          (body ? ` Response body (truncated): ${body.slice(0, 500)}` : '')
       );
     }
 
-    terminal.writeLine(`HTTP ${response.statusCode} — streaming response to disk...`);
+    terminal.writeLine(`HTTP ${response.status} — streaming response to disk...`);
 
-    const contentLengthHeader: string | undefined = response.headers['content-length'];
+    const contentLengthHeader: string | null = response.headers.get('content-length');
     const totalBytes: number | undefined = contentLengthHeader
       ? parseInt(contentLengthHeader, 10)
       : undefined;
@@ -179,11 +171,18 @@ export class AzDoClient {
       terminal.writeLine(`Content-Length not provided; downloading until stream ends.`);
     }
 
+    if (!response.body) {
+      throw new Error('Artifact download response has no body.');
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const nodeStream: Readable = Readable.fromWeb(response.body as any);
+
     // Track progress and log periodically during the download.
     let bytesReceived: number = 0;
     let lastLoggedAt: number = 0;
 
-    response.on('data', (chunk: Buffer) => {
+    nodeStream.on('data', (chunk: Buffer) => {
       bytesReceived += chunk.length;
       if (bytesReceived - lastLoggedAt >= PROGRESS_LOG_INTERVAL_BYTES) {
         const progress: string =
@@ -194,62 +193,9 @@ export class AzDoClient {
     });
 
     const writeStream: fs.WriteStream = fs.createWriteStream(filePath);
-    await pipeline(response, writeStream);
+    await pipeline(nodeStream, writeStream);
 
     terminal.writeLine(`Download complete: ${_formatBytes(bytesReceived)} written to ${filePath}`);
-  }
-
-  /**
-   * Performs an HTTPS GET request, following up to {@link MAX_REDIRECTS} redirects.
-   *
-   * The `Authorization` header is included on the initial request to the Azure DevOps
-   * API but is intentionally omitted on subsequent redirect hops (which typically
-   * target pre-signed Azure Blob Storage URLs).
-   */
-  private async _getWithRedirectsAsync(url: string): Promise<http.IncomingMessage> {
-    const terminal: ITerminal = this._terminal;
-    let currentUrl: string = url;
-    let includeAuth: boolean = true;
-
-    for (let attempt: number = 0; attempt <= MAX_REDIRECTS; attempt++) {
-      const response: http.IncomingMessage = await this._httpGetAsync(currentUrl, includeAuth);
-
-      const statusCode: number | undefined = response.statusCode;
-      if ((statusCode === 301 || statusCode === 302 || statusCode === 307) && response.headers.location) {
-        // Consume the redirect body so the socket is released.
-        response.resume();
-        terminal.writeLine(`  HTTP ${statusCode} redirect → following Location header...`);
-        currentUrl = response.headers.location;
-        // Do not forward credentials to redirect targets.
-        includeAuth = false;
-        continue;
-      }
-
-      return response;
-    }
-
-    throw new Error(`Too many redirects (>${MAX_REDIRECTS}) while downloading from: ${url}`);
-  }
-
-  /**
-   * Issues a single HTTP(S) GET and returns the response.
-   */
-  private async _httpGetAsync(url: string, includeAuth: boolean): Promise<http.IncomingMessage> {
-    const headers: Record<string, string> = {
-      Accept: 'application/octet-stream'
-    };
-    if (includeAuth) {
-      // eslint-disable-next-line dot-notation
-      headers['Authorization'] = `Bearer ${this._accessToken}`;
-    }
-
-    const parsedUrl: URL = new URL(url);
-    const transport: typeof https | typeof http = parsedUrl.protocol === 'https:' ? https : http;
-
-    return await new Promise<http.IncomingMessage>((resolve, reject) => {
-      const request: http.ClientRequest = transport.get(url, { headers }, resolve);
-      request.on('error', reject);
-    });
   }
 
   private async _getBuildApiAsync(): Promise<IBuildApi> {
