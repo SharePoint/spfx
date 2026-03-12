@@ -88,6 +88,7 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
 
     // --- Check whether this commit is a version bump merge ---
 
+    terminal.writeLine('Looking up associated pull request via GitHub API...');
     const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync(terminal);
 
     const pr: ICommitPr | undefined = await gitHubClient.getPrForCommitAsync(commitSha);
@@ -97,7 +98,11 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
       return;
     }
 
-    terminal.writeLine(`Found PR #${pr.number}`);
+    terminal.writeLine(`Found PR #${pr.number}: "${pr.title}"`);
+
+    // Log all labels on the PR to aid debugging.
+    const labelNames: string[] = pr.labels.map(({ name }) => name ?? '(unnamed)');
+    terminal.writeLine(labelNames.length > 0 ? `PR labels: ${labelNames.join(', ')}` : 'PR has no labels.');
 
     let sourceBuildLabel: string | undefined;
     for (const { name } of pr.labels) {
@@ -121,10 +126,13 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
     const buildIdString: string = sourceBuildLabel.slice(sourceBuildLabel.indexOf(':') + 1);
     const buildId: number = parseInt(buildIdString, 10);
     if (isNaN(buildId)) {
-      throw new Error(`Could not parse build ID from label: ${sourceBuildLabel}`);
+      throw new Error(
+        `Could not parse build ID from label "${sourceBuildLabel}". ` +
+          `Expected format: "SourceBuild:<number>", got value after colon: "${buildIdString}".`
+      );
     }
 
-    terminal.writeLine(`Bump pipeline run ID: ${buildId}`);
+    terminal.writeLine(`Bump pipeline run ID: ${buildId} (from label "${sourceBuildLabel}")`);
 
     // --- Download artifacts via AzDO API ---
 
@@ -133,23 +141,32 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
       throw new Error('At least one --artifact-name must be specified.');
     }
 
+    terminal.writeLine(`Artifacts to download: ${artifactNames.join(', ')}`);
+
     const orgUrl: string = this._orgUrlParameter.value;
     const project: string = this._projectParameter.value;
     const accessToken: string = this._accessTokenParameter.value;
 
+    terminal.writeLine(`AzDO organization: ${orgUrl}`);
+    terminal.writeLine(`AzDO project: ${project}`);
+
     const azDoClient: AzDoClient = new AzDoClient({ orgUrl, project, accessToken }, terminal);
 
     const targetPath: string = this._targetPathParameter.value;
+    terminal.writeLine(`Target path: ${targetPath}`);
+    terminal.writeLine('');
 
     for (const artifactName of artifactNames) {
+      terminal.writeLine(`--- Downloading artifact: ${artifactName} ---`);
       await azDoClient.downloadArtifactAsync({
         buildId,
         artifactName,
         targetPath: `${targetPath}/${artifactName}`
       });
+      terminal.writeLine('');
     }
 
-    terminal.writeLine('All artifacts downloaded successfully.');
+    terminal.writeLine(`All ${artifactNames.length} artifact(s) downloaded successfully.`);
     terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]true');
   }
 }

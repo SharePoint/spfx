@@ -131,6 +131,15 @@ extends:
                 condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
                 workingDirectory: $(SelfRepoPath)
 
+              # Ensure artifact directories exist unconditionally. The 1ES
+              # templateContext.outputs always attempts to publish declared
+              # artifacts, so the directories must be present even when earlier
+              # steps fail.
+              - bash: |
+                  mkdir -p "$(Build.ArtifactStagingDirectory)/packages"
+                  mkdir -p "$(Build.ArtifactStagingDirectory)/package-versions"
+                displayName: 'Create artifact staging directories'
+
               - template: /common/config/azure-pipelines/templates/prepare-publish-artifacts.yaml@self
 
               - template: /common/config/azure-pipelines/templates/record-versions.yaml@self
