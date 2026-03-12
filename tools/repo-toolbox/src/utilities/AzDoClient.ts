@@ -8,7 +8,7 @@ import { pipeline } from 'node:stream/promises';
 
 import { WebApi, getBearerHandler } from 'azure-devops-node-api';
 import type { IBuildApi } from 'azure-devops-node-api/BuildApi';
-import type { BuildArtifact } from 'azure-devops-node-api/interfaces/BuildInterfaces';
+import type { ArtifactResource, BuildArtifact } from 'azure-devops-node-api/interfaces/BuildInterfaces';
 
 import { Executable, FileSystem } from '@rushstack/node-core-library';
 import type { ITerminal } from '@rushstack/terminal';
@@ -55,11 +55,8 @@ export class AzDoClient {
    * (PipelineArtifact).
    *
    * @remarks
-   * The previous implementation used {@link IBuildApi.getArtifactContentZip} which only
-   * works for legacy build artifacts published via `PublishBuildArtifacts`. For pipeline
-   * artifacts published via `PublishPipelineArtifact` (including 1ES template outputs),
-   * that endpoint returns empty or invalid content, causing `unzip` to fail with exit
-   * code 9 ("specified zipfiles were not found").
+   * This only works for artifacts published via `PublishPipelineArtifact`. It does not support
+   * legacy build artifacts published via `PublishBuildArtifacts`.
    */
   public async downloadArtifactAsync(options: IDownloadArtifactOptions): Promise<void> {
     const { buildId, artifactName, targetPath } = options;
@@ -72,9 +69,9 @@ export class AzDoClient {
     terminal.writeLine(`Querying artifact metadata from Build API...`);
     const buildApi: IBuildApi = await this._getBuildApiAsync();
 
-    let artifact: BuildArtifact;
+    let artifact: ArtifactResource | undefined;
     try {
-      artifact = await buildApi.getArtifact(this._project, buildId, artifactName);
+      ({ resource: artifact } = await buildApi.getArtifact(this._project, buildId, artifactName));
     } catch (error) {
       throw new Error(
         `Failed to retrieve metadata for artifact "${artifactName}" from build ${buildId}. ` +
@@ -82,9 +79,13 @@ export class AzDoClient {
       );
     }
 
-    const resourceType: string = artifact.resource?.type ?? 'unknown';
-    const downloadUrl: string | undefined = artifact.resource?.downloadUrl;
+    if (!artifact) {
+      throw new Error(
+        `Artifact "${artifactName}" not found in build ${buildId}. Verify the artifact name and build ID are correct.`
+      );
+    }
 
+    const { type: resourceType = 'unknown', downloadUrl } = artifact;
     terminal.writeLine(`Artifact "${artifactName}" found (resource type: ${resourceType}).`);
 
     if (!downloadUrl) {
@@ -141,18 +142,25 @@ export class AzDoClient {
       },
       redirect: 'follow'
     });
+    const { ok, status, statusText, headers, body } = response;
 
-    if (!response.ok) {
-      const body: string = await response.text().catch(() => '');
+    if (!ok) {
+      let bodyText: string | undefined;
+      try {
+        bodyText = await response.text();
+      } catch (error) {
+        terminal.writeErrorLine(`Failed to read error response body: ${error}`);
+      }
+
       throw new Error(
-        `Artifact download failed with HTTP ${response.status} ${response.statusText}.` +
-          (body ? ` Response body (truncated): ${body.slice(0, 500)}` : '')
+        `Artifact download failed with HTTP ${status} ${statusText}.` +
+          (bodyText ? ` Response body (truncated): ${bodyText.slice(0, 500)}` : '')
       );
     }
 
-    terminal.writeLine(`HTTP ${response.status} — streaming response to disk...`);
+    terminal.writeLine(`HTTP ${status} — streaming response to disk...`);
 
-    const contentLengthHeader: string | null = response.headers.get('content-length');
+    const contentLengthHeader: string | null = headers.get('content-length');
     const totalBytes: number | undefined = contentLengthHeader
       ? parseInt(contentLengthHeader, 10)
       : undefined;
@@ -163,11 +171,11 @@ export class AzDoClient {
       terminal.writeLine(`Content-Length not provided; downloading until stream ends.`);
     }
 
-    if (!response.body) {
+    if (!body) {
       throw new Error('Artifact download response has no body.');
     }
 
-    const bodyStream: Readable = Readable.fromWeb(response.body);
+    const bodyStream: Readable = Readable.fromWeb(body);
 
     // Track progress and log periodically during the download.
     let bytesReceived: number = 0;
