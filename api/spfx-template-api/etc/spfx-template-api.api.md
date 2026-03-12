@@ -9,12 +9,6 @@ import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
 // @public
-export abstract class BaseMergeHelper {
-    abstract get fileRelativePath(): string;
-    abstract merge(existingContent: string, newContent: string): string;
-}
-
-// @public
 export abstract class BaseSPFxTemplateRepositorySource {
     constructor(type: SPFxTemplateRepositorySourceTypes);
     abstract getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
@@ -24,8 +18,14 @@ export abstract class BaseSPFxTemplateRepositorySource {
 // @public
 export class ConfigJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
-    get fileRelativePath(): string;
+    readonly fileRelativePath: string;
     // (undocumented)
+    merge(existingContent: string, newContent: string): string;
+}
+
+// @public
+export interface IMergeHelper {
+    readonly fileRelativePath: string;
     merge(existingContent: string, newContent: string): string;
 }
 
@@ -51,7 +51,11 @@ export interface ISPFxTemplateJson {
 }
 
 // @public
-export abstract class JsonMergeHelper extends BaseMergeHelper {
+export abstract class JsonMergeHelper implements IMergeHelper {
+    // (undocumented)
+    abstract readonly fileRelativePath: string;
+    // (undocumented)
+    abstract merge(existingContent: string, newContent: string): string;
     protected parseJson<T>(content: string): T;
     protected serializeJson(value: unknown): string;
 }
@@ -66,7 +70,7 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
 // @public
 export class PackageJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
-    get fileRelativePath(): string;
+    readonly fileRelativePath: string;
     // (undocumented)
     merge(existingContent: string, newContent: string): string;
 }
@@ -74,7 +78,7 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
 // @public
 export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
-    get fileRelativePath(): string;
+    readonly fileRelativePath: string;
     // (undocumented)
     merge(existingContent: string, newContent: string): string;
 }
@@ -88,7 +92,7 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
 // @public
 export class ServeJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
-    get fileRelativePath(): string;
+    readonly fileRelativePath: string;
     // (undocumented)
     merge(existingContent: string, newContent: string): string;
 }
@@ -148,7 +152,7 @@ export type SPFxTemplateRepositorySourceTypes = 'local' | 'github';
 // @public
 export class SPFxTemplateWriter {
     constructor();
-    addMergeHelper(helper: BaseMergeHelper): void;
+    addMergeHelper(helper: IMergeHelper): void;
     writeAsync(editor: MemFsEditor, targetDir: string): Promise<void>;
 }
 

@@ -25,7 +25,7 @@ export {
   PublicGitHubRepositorySource
 } from './repositories/index';
 export {
-  BaseMergeHelper,
+  IMergeHelper,
   JsonMergeHelper,
   PackageJsonMergeHelper,
   ConfigJsonMergeHelper,

@@ -24,9 +24,7 @@ interface IConfigJson {
  * @public
  */
 export class ConfigJsonMergeHelper extends JsonMergeHelper {
-  public get fileRelativePath(): string {
-    return 'config/config.json';
-  }
+  public readonly fileRelativePath: string = 'config/config.json';
 
   public merge(existingContent: string, newContent: string): string {
     const existing: IConfigJson = this.parseJson<IConfigJson>(existingContent);

@@ -17,7 +17,7 @@ import { SPFxTemplateWriter } from '../SPFxTemplateWriter';
  * with incoming content. The MemFsEditor is still mocked (dump/write/commit),
  * but the writer uses real async file reads via node:fs/promises.
  */
-describe('SPFxTemplateWriter integration', () => {
+describe(`${SPFxTemplateWriter.name} integration`, () => {
   let tempDir: string;
   let mockEditor: MemFsEditor;
 

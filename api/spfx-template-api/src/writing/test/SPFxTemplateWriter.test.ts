@@ -8,7 +8,7 @@ import type { MemFsEditor } from 'mem-fs-editor';
 
 import { SPFxTemplateWriter } from '../SPFxTemplateWriter';
 
-describe('SPFxTemplateWriter', () => {
+describe(SPFxTemplateWriter.name, () => {
   let mockEditor: MemFsEditor;
 
   beforeEach(() => {
@@ -199,7 +199,7 @@ describe('SPFxTemplateWriter', () => {
     });
   });
 
-  describe('addMergeHelper behavior', () => {
+  describe(`${SPFxTemplateWriter.prototype.addMergeHelper.name} behavior`, () => {
     it('should replace a built-in helper when registering for the same path', async () => {
       const existingPkg = JSON.stringify({ name: 'existing', dependencies: {} });
       const incomingPkg = JSON.stringify({ name: 'incoming', dependencies: {} });

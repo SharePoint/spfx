@@ -20,9 +20,7 @@ interface IPackageJson {
  * @public
  */
 export class PackageJsonMergeHelper extends JsonMergeHelper {
-  public get fileRelativePath(): string {
-    return 'package.json';
-  }
+  public readonly fileRelativePath: string = 'package.json';
 
   public merge(existingContent: string, newContent: string): string {
     const existing: IPackageJson = this.parseJson<IPackageJson>(existingContent);
@@ -80,15 +78,18 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
     existing: Map<string, string>,
     incoming: Map<string, string>
   ): void {
+    const mismatches: string[] = [];
     for (const [pkg, incomingVersion] of incoming) {
       const existingVersion: string | undefined = existing.get(pkg);
       if (existingVersion !== undefined && existingVersion !== incomingVersion) {
-        throw new Error(
-          `SPFx version mismatch for "${pkg}": existing project uses ${existingVersion} ` +
-            `but the incoming template requires ${incomingVersion}. ` +
-            `All components in a project must use the same SPFx version.`
-        );
+        mismatches.push(`  "${pkg}": existing ${existingVersion}, incoming ${incomingVersion}`);
       }
+    }
+    if (mismatches.length > 0) {
+      throw new Error(
+        `SPFx version mismatch detected. All components in a project must use the same SPFx version.\n` +
+          mismatches.join('\n')
+      );
     }
   }
 

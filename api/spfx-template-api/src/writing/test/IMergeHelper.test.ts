@@ -1,19 +1,17 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { BaseMergeHelper } from '../BaseMergeHelper';
+import type { IMergeHelper } from '../IMergeHelper';
 
-class ConcreteMergeHelper extends BaseMergeHelper {
-  public get fileRelativePath(): string {
-    return 'test/file.txt';
-  }
+class ConcreteMergeHelper implements IMergeHelper {
+  public readonly fileRelativePath: string = 'test/file.txt';
 
   public merge(existingContent: string, newContent: string): string {
     return `${existingContent}\n${newContent}`;
   }
 }
 
-describe('BaseMergeHelper', () => {
+describe('IMergeHelper', () => {
   let helper: ConcreteMergeHelper;
 
   beforeEach(() => {

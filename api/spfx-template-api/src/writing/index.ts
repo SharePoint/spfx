@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-export { BaseMergeHelper } from './BaseMergeHelper';
+export { IMergeHelper } from './IMergeHelper';
 export { JsonMergeHelper } from './JsonMergeHelper';
 export { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 export { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';

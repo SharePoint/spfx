@@ -30,9 +30,7 @@ interface IPackageSolutionJson {
  * @public
  */
 export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
-  public get fileRelativePath(): string {
-    return 'config/package-solution.json';
-  }
+  public readonly fileRelativePath: string = 'config/package-solution.json';
 
   public merge(existingContent: string, newContent: string): string {
     const existing: IPackageSolutionJson = this.parseJson<IPackageSolutionJson>(existingContent);

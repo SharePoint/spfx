@@ -27,7 +27,7 @@ class TestJsonMergeHelper extends JsonMergeHelper {
   }
 }
 
-describe('JsonMergeHelper', () => {
+describe(JsonMergeHelper.name, () => {
   let helper: TestJsonMergeHelper;
 
   beforeEach(() => {

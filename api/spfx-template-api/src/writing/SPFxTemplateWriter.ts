@@ -6,7 +6,7 @@ import * as path from 'node:path';
 
 import type { MemFsEditor } from 'mem-fs-editor';
 
-import type { BaseMergeHelper } from './BaseMergeHelper';
+import type { IMergeHelper } from './IMergeHelper';
 import { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 import { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';
 import { PackageSolutionJsonMergeHelper } from './PackageSolutionJsonMergeHelper';
@@ -26,10 +26,10 @@ interface IDumpEntry {
  * @public
  */
 export class SPFxTemplateWriter {
-  private readonly _mergeHelpers: Map<string, BaseMergeHelper>;
+  private readonly _mergeHelpers: Map<string, IMergeHelper>;
 
   public constructor() {
-    this._mergeHelpers = new Map<string, BaseMergeHelper>();
+    this._mergeHelpers = new Map<string, IMergeHelper>();
 
     // Register built-in helpers
     this.addMergeHelper(new PackageJsonMergeHelper());
@@ -42,7 +42,7 @@ export class SPFxTemplateWriter {
    * Registers a merge helper. If a helper for the same path already exists,
    * it is replaced.
    */
-  public addMergeHelper(helper: BaseMergeHelper): void {
+  public addMergeHelper(helper: IMergeHelper): void {
     this._mergeHelpers.set(helper.fileRelativePath, helper);
   }
 
@@ -84,7 +84,7 @@ export class SPFxTemplateWriter {
         continue;
       }
 
-      const helper: BaseMergeHelper | undefined = this._mergeHelpers.get(relativePath);
+      const helper: IMergeHelper | undefined = this._mergeHelpers.get(relativePath);
       if (helper) {
         const mergedContent: string = helper.merge(existingContent, entry.contents);
         editor.write(absolutePath, mergedContent);

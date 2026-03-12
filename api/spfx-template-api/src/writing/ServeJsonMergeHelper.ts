@@ -22,9 +22,7 @@ interface IServeJson {
  * @public
  */
 export class ServeJsonMergeHelper extends JsonMergeHelper {
-  public get fileRelativePath(): string {
-    return 'config/serve.json';
-  }
+  public readonly fileRelativePath: string = 'config/serve.json';
 
   public merge(existingContent: string, newContent: string): string {
     const existing: IServeJson = this.parseJson<IServeJson>(existingContent);

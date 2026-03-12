@@ -3,7 +3,7 @@
 
 import { ConfigJsonMergeHelper } from '../ConfigJsonMergeHelper';
 
-describe('ConfigJsonMergeHelper', () => {
+describe(ConfigJsonMergeHelper.name, () => {
   let helper: ConfigJsonMergeHelper;
 
   beforeEach(() => {

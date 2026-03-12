@@ -3,7 +3,7 @@
 
 import { PackageSolutionJsonMergeHelper } from '../PackageSolutionJsonMergeHelper';
 
-describe('PackageSolutionJsonMergeHelper', () => {
+describe(PackageSolutionJsonMergeHelper.name, () => {
   let helper: PackageSolutionJsonMergeHelper;
 
   beforeEach(() => {

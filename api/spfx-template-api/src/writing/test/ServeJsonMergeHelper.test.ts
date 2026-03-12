@@ -3,7 +3,7 @@
 
 import { ServeJsonMergeHelper } from '../ServeJsonMergeHelper';
 
-describe('ServeJsonMergeHelper', () => {
+describe(ServeJsonMergeHelper.name, () => {
   let helper: ServeJsonMergeHelper;
 
   beforeEach(() => {

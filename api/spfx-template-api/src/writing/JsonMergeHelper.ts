@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { BaseMergeHelper } from './BaseMergeHelper';
+import type { IMergeHelper } from './IMergeHelper';
 
 /**
  * Abstract base class for merge helpers that deal with JSON files.
@@ -9,7 +9,11 @@ import { BaseMergeHelper } from './BaseMergeHelper';
  *
  * @public
  */
-export abstract class JsonMergeHelper extends BaseMergeHelper {
+export abstract class JsonMergeHelper implements IMergeHelper {
+  public abstract readonly fileRelativePath: string;
+
+  public abstract merge(existingContent: string, newContent: string): string;
+
   /**
    * Parses a JSON string into a typed object.
    * @param content - The JSON string to parse

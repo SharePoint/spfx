@@ -3,7 +3,7 @@
 
 import { PackageJsonMergeHelper } from '../PackageJsonMergeHelper';
 
-describe('PackageJsonMergeHelper', () => {
+describe(PackageJsonMergeHelper.name, () => {
   let helper: PackageJsonMergeHelper;
 
   beforeEach(() => {
@@ -131,9 +131,7 @@ describe('PackageJsonMergeHelper', () => {
         dependencies: { '@microsoft/sp-core-library': '1.23.0' }
       });
 
-      expect(() => helper.merge(existing, incoming)).toThrow(
-        /SPFx version mismatch for "@microsoft\/sp-core-library"/
-      );
+      expect(() => helper.merge(existing, incoming)).toThrow(/SPFx version mismatch/);
     });
 
     it('should throw when @microsoft/* devDependency versions differ', () => {
@@ -145,9 +143,7 @@ describe('PackageJsonMergeHelper', () => {
         devDependencies: { '@microsoft/spfx-heft-plugins': '1.23.0' }
       });
 
-      expect(() => helper.merge(existing, incoming)).toThrow(
-        /SPFx version mismatch for "@microsoft\/spfx-heft-plugins"/
-      );
+      expect(() => helper.merge(existing, incoming)).toThrow(/SPFx version mismatch/);
     });
 
     it('should allow non-@microsoft dependency version conflicts', () => {
@@ -189,9 +185,7 @@ describe('PackageJsonMergeHelper', () => {
         devDependencies: { '@microsoft/sp-core-library': '1.23.0' }
       });
 
-      expect(() => helper.merge(existing, incoming)).toThrow(
-        /SPFx version mismatch for "@microsoft\/sp-core-library"/
-      );
+      expect(() => helper.merge(existing, incoming)).toThrow(/SPFx version mismatch/);
     });
 
     it('should throw when @microsoft/* version differs across dep types (devDep vs dep)', () => {
@@ -203,9 +197,7 @@ describe('PackageJsonMergeHelper', () => {
         dependencies: { '@microsoft/spfx-heft-plugins': '1.23.0' }
       });
 
-      expect(() => helper.merge(existing, incoming)).toThrow(
-        /SPFx version mismatch for "@microsoft\/spfx-heft-plugins"/
-      );
+      expect(() => helper.merge(existing, incoming)).toThrow(/SPFx version mismatch/);
     });
 
     it('should include both versions in error message', () => {
