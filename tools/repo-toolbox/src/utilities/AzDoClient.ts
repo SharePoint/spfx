@@ -34,6 +34,14 @@ const PROGRESS_LOG_INTERVAL_BYTES: number = 10 * 1024 * 1024; // 10 MB
 /** Maximum number of HTTP redirects to follow before aborting. */
 const MAX_REDIRECTS: number = 5;
 
+function _formatBytes(bytes: number): string {
+  if (bytes < 1024) {
+    return `${bytes} bytes`;
+  }
+  const mb: number = bytes / (1024 * 1024);
+  return `${mb.toFixed(1)} MB`;
+}
+
 export class AzDoClient {
   private readonly _connection: WebApi;
   private readonly _project: string;
@@ -79,11 +87,10 @@ export class AzDoClient {
     let artifact: BuildArtifact;
     try {
       artifact = await buildApi.getArtifact(this._project, buildId, artifactName);
-    } catch (error: unknown) {
-      const message: string = error instanceof Error ? error.message : String(error);
+    } catch (error) {
       throw new Error(
         `Failed to retrieve metadata for artifact "${artifactName}" from build ${buildId}. ` +
-          `Verify the artifact name and build ID are correct. API error: ${message}`
+          `Verify the artifact name and build ID are correct. API error: ${error}`
       );
     }
 
@@ -106,10 +113,6 @@ export class AzDoClient {
 
     // Stream the artifact content to disk, following redirects as needed.
     await this._downloadToFileAsync(downloadUrl, zipPath);
-
-    // Sanity-check: make sure the file is a valid zip archive before invoking unzip.
-    // This produces a clear error message instead of the opaque "exit code 9".
-    await AzDoClient._validateZipFileAsync(zipPath, terminal);
 
     terminal.writeLine(`Extracting artifact to ${targetPath}...`);
 
@@ -147,16 +150,16 @@ export class AzDoClient {
     if (!response.statusCode || response.statusCode < 200 || response.statusCode >= 300) {
       // Attempt to read the response body for diagnostics.
       let body: string = '';
-      try {
-        const chunks: Buffer[] = [];
-        for await (const chunk of response) {
-          chunks.push(chunk as Buffer);
-          if (chunks.length > 10) break; // Limit how much we read
+      const chunks: Buffer[] = [];
+      for await (const chunk of response) {
+        chunks.push(chunk as Buffer);
+        if (chunks.length > 10) {
+          break; // Limit how much we read
         }
-        body = Buffer.concat(chunks).toString('utf8').slice(0, 500);
-      } catch {
-        // Ignore errors reading the error body.
       }
+
+      body = Buffer.concat(chunks).toString('utf8').slice(0, 500);
+
       throw new Error(
         `Artifact download failed with HTTP ${response.statusCode} ${response.statusMessage}.` +
           (body ? ` Response body (truncated): ${body}` : '')
@@ -171,7 +174,7 @@ export class AzDoClient {
       : undefined;
 
     if (totalBytes !== undefined) {
-      terminal.writeLine(`Content-Length: ${AzDoClient._formatBytes(totalBytes)}`);
+      terminal.writeLine(`Content-Length: ${_formatBytes(totalBytes)}`);
     } else {
       terminal.writeLine(`Content-Length not provided; downloading until stream ends.`);
     }
@@ -185,7 +188,7 @@ export class AzDoClient {
       if (bytesReceived - lastLoggedAt >= PROGRESS_LOG_INTERVAL_BYTES) {
         const progress: string =
           totalBytes !== undefined ? ` (${((bytesReceived / totalBytes) * 100).toFixed(0)}%)` : '';
-        terminal.writeLine(`  Downloaded ${AzDoClient._formatBytes(bytesReceived)}${progress}...`);
+        terminal.writeLine(`  Downloaded ${_formatBytes(bytesReceived)}${progress}...`);
         lastLoggedAt = bytesReceived;
       }
     });
@@ -193,7 +196,7 @@ export class AzDoClient {
     const writeStream: fs.WriteStream = fs.createWriteStream(filePath);
     await pipeline(response, writeStream);
 
-    terminal.writeLine(`Download complete: ${AzDoClient._formatBytes(bytesReceived)} written to ${filePath}`);
+    terminal.writeLine(`Download complete: ${_formatBytes(bytesReceived)} written to ${filePath}`);
   }
 
   /**
@@ -231,68 +234,22 @@ export class AzDoClient {
   /**
    * Issues a single HTTP(S) GET and returns the response.
    */
-  private _httpGetAsync(url: string, includeAuth: boolean): Promise<http.IncomingMessage> {
-    return new Promise<http.IncomingMessage>((resolve, reject) => {
-      const headers: Record<string, string> = {
-        Accept: 'application/octet-stream'
-      };
-      if (includeAuth) {
-        headers['Authorization'] = `Bearer ${this._accessToken}`; // eslint-disable-line dot-notation
-      }
+  private async _httpGetAsync(url: string, includeAuth: boolean): Promise<http.IncomingMessage> {
+    const headers: Record<string, string> = {
+      Accept: 'application/octet-stream'
+    };
+    if (includeAuth) {
+      // eslint-disable-next-line dot-notation
+      headers['Authorization'] = `Bearer ${this._accessToken}`;
+    }
 
-      const parsedUrl: URL = new URL(url);
-      const transport: typeof https | typeof http = parsedUrl.protocol === 'https:' ? https : http;
+    const parsedUrl: URL = new URL(url);
+    const transport: typeof https | typeof http = parsedUrl.protocol === 'https:' ? https : http;
 
+    return await new Promise<http.IncomingMessage>((resolve, reject) => {
       const request: http.ClientRequest = transport.get(url, { headers }, resolve);
       request.on('error', reject);
     });
-  }
-
-  /**
-   * Verifies that the file at {@link zipPath} begins with the ZIP local file header
-   * signature (`PK\x03\x04`). Throws a descriptive error if the file is empty or not
-   * a valid zip archive—this catches issues such as the server returning an HTML error
-   * page instead of artifact content.
-   */
-  private static async _validateZipFileAsync(zipPath: string, terminal: ITerminal): Promise<void> {
-    const stats: fs.Stats = await fs.promises.stat(zipPath);
-
-    terminal.writeLine(`Validating downloaded file: ${zipPath} (${AzDoClient._formatBytes(stats.size)})`);
-
-    if (stats.size === 0) {
-      throw new Error(
-        `Downloaded artifact file is empty (0 bytes): ${zipPath}. ` +
-          `The artifact may not exist or the download URL may have expired.`
-      );
-    }
-
-    // ZIP files start with the local file header signature: 0x504B0304 ("PK\x03\x04").
-    const ZIP_MAGIC: Buffer = Buffer.from([0x50, 0x4b, 0x03, 0x04]);
-    const fd: fs.promises.FileHandle = await fs.promises.open(zipPath, 'r');
-    try {
-      const header: Buffer = Buffer.alloc(4);
-      await fd.read(header, 0, 4, 0);
-
-      if (!header.subarray(0, 4).equals(ZIP_MAGIC)) {
-        throw new Error(
-          `Downloaded file is not a valid ZIP archive: ${zipPath}. ` +
-            `Expected ZIP magic bytes (504b0304) but got: ${header.toString('hex')}. ` +
-            `The server may have returned an error page instead of artifact content.`
-        );
-      }
-    } finally {
-      await fd.close();
-    }
-
-    terminal.writeLine(`ZIP file validated successfully.`);
-  }
-
-  private static _formatBytes(bytes: number): string {
-    if (bytes < 1024) {
-      return `${bytes} bytes`;
-    }
-    const mb: number = bytes / (1024 * 1024);
-    return `${mb.toFixed(1)} MB`;
   }
 
   private async _getBuildApiAsync(): Promise<IBuildApi> {
