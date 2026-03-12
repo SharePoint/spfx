@@ -1,0 +1,17 @@
+{
+  "name": "@microsoft/spfx-cli",
+  "entries": [
+    {
+      "version": "0.1.0",
+      "tag": "@microsoft/spfx-cli_v0.1.0",
+      "date": "Thu, 12 Mar 2026 03:56:00 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "Initial release."
+          }
+        ]
+      }
+    }
+  ]
+}
