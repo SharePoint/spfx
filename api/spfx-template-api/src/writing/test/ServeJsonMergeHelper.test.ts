@@ -31,14 +31,14 @@ describe(ServeJsonMergeHelper.name, () => {
       https: false,
       initialPage: 'https://other',
       serveConfigurations: {
-        goodbyeWorld: { pageUrl: 'https://localhost/goodbye' }
+        weatherWidget: { pageUrl: 'https://localhost/weather' }
       }
     });
 
     const result = JSON.parse(helper.merge(existing, incoming));
 
     expect(result.serveConfigurations.helloWorld).toBeDefined();
-    expect(result.serveConfigurations.goodbyeWorld).toBeDefined();
+    expect(result.serveConfigurations.weatherWidget).toBeDefined();
   });
 
   it('should preserve port, https, and initialPage from existing', () => {

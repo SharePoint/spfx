@@ -27,14 +27,14 @@ describe(ConfigJsonMergeHelper.name, () => {
       $schema: 'https://schema.example.com',
       version: '2.0',
       bundles: {
-        'goodbye-world-bundle': { components: [{ entrypoint: './lib/goodbye.js' }] }
+        'weather-widget-bundle': { components: [{ entrypoint: './lib/weather.js' }] }
       }
     });
 
     const result = JSON.parse(helper.merge(existing, incoming));
 
     expect(result.bundles['hello-world-bundle']).toBeDefined();
-    expect(result.bundles['goodbye-world-bundle']).toBeDefined();
+    expect(result.bundles['weather-widget-bundle']).toBeDefined();
   });
 
   it('should merge localizedResources by key', () => {
@@ -46,14 +46,14 @@ describe(ConfigJsonMergeHelper.name, () => {
 
     const incoming = JSON.stringify({
       localizedResources: {
-        GoodbyeWorldStrings: 'lib/loc/{locale}.js'
+        WeatherWidgetStrings: 'lib/loc/{locale}.js'
       }
     });
 
     const result = JSON.parse(helper.merge(existing, incoming));
 
     expect(result.localizedResources.HelloWorldStrings).toBe('lib/loc/{locale}.js');
-    expect(result.localizedResources.GoodbyeWorldStrings).toBe('lib/loc/{locale}.js');
+    expect(result.localizedResources.WeatherWidgetStrings).toBe('lib/loc/{locale}.js');
   });
 
   it('should merge externals by key', () => {
