@@ -58,10 +58,18 @@ export class PublishTarballsAction extends CommandLineAction {
     const terminal: ITerminal = this._terminal;
     const artifactPath: string = this._artifactPathParameter.value;
 
+    terminal.writeLine(`Artifact path: ${artifactPath}`);
+
     // Resolve the .npmrc-publish config that contains the registry and token placeholder.
     // npm's --userconfig flag points directly at it; the token is passed via the environment.
     const npmToken: string = this._npmTokenParameter.value;
     const dryRun: boolean = this._dryRunParameter.value;
+
+    if (!npmToken) {
+      throw new Error(
+        'npm authentication token is empty. Set the NPM_AUTH_TOKEN environment variable or provide --npm-token.'
+      );
+    }
 
     if (dryRun) {
       terminal.writeLine('*** DRY RUN MODE — packages will not be published ***');
@@ -73,6 +81,22 @@ export class PublishTarballsAction extends CommandLineAction {
     });
 
     const npmrcPublishPath: string = `${rushConfiguration.commonRushConfigFolder}/.npmrc-publish`;
+
+    if (!FileSystem.exists(npmrcPublishPath)) {
+      throw new Error(
+        `Required npm publish configuration not found: ${npmrcPublishPath}. ` +
+          `Ensure that .npmrc-publish exists in ${rushConfiguration.commonRushConfigFolder}.`
+      );
+    }
+
+    terminal.writeLine(`Using npm config: ${npmrcPublishPath}`);
+
+    // Verify the artifact directory exists.
+    if (!FileSystem.exists(artifactPath)) {
+      throw new Error(`Artifact directory does not exist: ${artifactPath}`);
+    }
+
+    terminal.writeLine(`Scanning for .tgz files in: ${artifactPath}`);
 
     // Find all .tgz files
     const tgzFiles: AsyncIterable<string> = this._findTgzFilesAsync(artifactPath);
