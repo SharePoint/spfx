@@ -30,14 +30,6 @@ const UNZIP_BIN_NAME: 'unzip' = 'unzip';
 /** Report download progress to the terminal at this interval. */
 const PROGRESS_LOG_INTERVAL_BYTES: number = 10 * 1024 * 1024; // 10 MB
 
-function _formatBytes(bytes: number): string {
-  if (bytes < 1024) {
-    return `${bytes} bytes`;
-  }
-  const mb: number = bytes / (1024 * 1024);
-  return `${mb.toFixed(1)} MB`;
-}
-
 export class AzDoClient {
   private readonly _connection: WebApi;
   private readonly _project: string;
@@ -166,7 +158,7 @@ export class AzDoClient {
       : undefined;
 
     if (totalBytes !== undefined) {
-      terminal.writeLine(`Content-Length: ${_formatBytes(totalBytes)}`);
+      terminal.writeLine(`Content-Length: ${totalBytes}`);
     } else {
       terminal.writeLine(`Content-Length not provided; downloading until stream ends.`);
     }
@@ -175,27 +167,26 @@ export class AzDoClient {
       throw new Error('Artifact download response has no body.');
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const nodeStream: Readable = Readable.fromWeb(response.body as any);
+    const bodyStream: Readable = Readable.fromWeb(response.body);
 
     // Track progress and log periodically during the download.
     let bytesReceived: number = 0;
     let lastLoggedAt: number = 0;
 
-    nodeStream.on('data', (chunk: Buffer) => {
+    bodyStream.on('data', (chunk: Buffer) => {
       bytesReceived += chunk.length;
       if (bytesReceived - lastLoggedAt >= PROGRESS_LOG_INTERVAL_BYTES) {
         const progress: string =
           totalBytes !== undefined ? ` (${((bytesReceived / totalBytes) * 100).toFixed(0)}%)` : '';
-        terminal.writeLine(`  Downloaded ${_formatBytes(bytesReceived)}${progress}...`);
+        terminal.writeLine(`  Downloaded ${bytesReceived}B${progress}...`);
         lastLoggedAt = bytesReceived;
       }
     });
 
     const writeStream: fs.WriteStream = fs.createWriteStream(filePath);
-    await pipeline(nodeStream, writeStream);
+    await pipeline(bodyStream, writeStream);
 
-    terminal.writeLine(`Download complete: ${_formatBytes(bytesReceived)} written to ${filePath}`);
+    terminal.writeLine(`Download complete: ${bytesReceived}B written to ${filePath}`);
   }
 
   private async _getBuildApiAsync(): Promise<IBuildApi> {
