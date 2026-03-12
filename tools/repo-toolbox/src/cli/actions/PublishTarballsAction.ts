@@ -81,18 +81,11 @@ export class PublishTarballsAction extends CommandLineAction {
     });
 
     const npmrcPublishPath: string = `${rushConfiguration.commonRushConfigFolder}/.npmrc-publish`;
-
-    if (!FileSystem.exists(npmrcPublishPath)) {
-      throw new Error(
-        `Required npm publish configuration not found: ${npmrcPublishPath}. ` +
-          `Ensure that .npmrc-publish exists in ${rushConfiguration.commonRushConfigFolder}.`
-      );
-    }
-
     terminal.writeLine(`Using npm config: ${npmrcPublishPath}`);
 
+    const artifactsFolderExists: boolean = await FileSystem.existsAsync(artifactPath);
     // Verify the artifact directory exists.
-    if (!FileSystem.exists(artifactPath)) {
+    if (!artifactsFolderExists) {
       throw new Error(`Artifact directory does not exist: ${artifactPath}`);
     }
 
