@@ -8,7 +8,7 @@ import { pipeline } from 'node:stream/promises';
 
 import { WebApi, getBearerHandler } from 'azure-devops-node-api';
 import type { IBuildApi } from 'azure-devops-node-api/BuildApi';
-import type { ArtifactResource, BuildArtifact } from 'azure-devops-node-api/interfaces/BuildInterfaces';
+import type { ArtifactResource } from 'azure-devops-node-api/interfaces/BuildInterfaces';
 
 import { Executable, FileSystem } from '@rushstack/node-core-library';
 import type { ITerminal } from '@rushstack/terminal';
