@@ -107,6 +107,6 @@ extends:
               # be re-published as an artifact of this pipeline run.
               - script: |
                   mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
-                  cp $(Pipeline.Workspace)/package-versions/* $(Build.ArtifactStagingDirectory)/published-versions/
+                  cp -r $(Pipeline.Workspace)/package-versions/* $(Build.ArtifactStagingDirectory)/published-versions/
                 condition: eq(variables['DownloadArtifacts.IsVersionBumpMerge'], 'true')
                 displayName: 'Stage Published Versions Artifact'
