@@ -100,9 +100,9 @@ extends:
                   node tools/repo-toolbox/lib/start.js download-bump-artifacts
                   --build-id $(FindBumpRun.BumpPipelineRunId)
                   --artifact-name package-versions
-                  --target-path $(Build.ArtifactStagingDirectory)/published-versions
+                  --target-path $(Pipeline.Workspace)
                 condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
-                displayName: 'Download Packaged Packages'
+                displayName: 'Download Package Versions'
                 env:
                   SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
@@ -114,3 +114,13 @@ extends:
                 displayName: 'Publish Packages to npm'
                 env:
                   NPM_AUTH_TOKEN: $(npmToken)
+
+              # Copy only the JSON files from the downloaded package-versions artifact into
+              # the published-versions staging directory. The artifact zip also contains a
+              # _metadata folder added by the 1ES template, which must be excluded here so
+              # it is not duplicated when 1ES publishes this pipeline's artifact.
+              - script: >-
+                  cp $(Pipeline.Workspace)/package-versions/*.json
+                  $(Build.ArtifactStagingDirectory)/published-versions/
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                displayName: 'Stage Published Versions Artifact'

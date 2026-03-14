@@ -47,7 +47,9 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
     this._targetPathParameter = this.defineStringParameter({
       parameterLongName: '--target-path',
       argumentName: 'PATH',
-      description: 'Target directory for downloaded artifacts (each artifact is placed in a subdirectory)',
+      description:
+        'Target directory for downloaded artifacts. Each artifact zip is extracted here; ' +
+        'the zip root folder (named after the artifact) becomes a subdirectory of this path.',
       required: true
     });
 
@@ -107,7 +109,7 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
       await azDoClient.downloadArtifactAsync({
         buildId,
         artifactName,
-        targetPath: `${targetPath}/${artifactName}`
+        targetPath
       });
       terminal.writeLine('');
     }
