@@ -79,34 +79,43 @@ extends:
               - script: mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
                 displayName: 'Create published-versions staging directory'
 
-              # Check if this commit is a version bump merge and, if so, download
-              # the pre-packed tarballs and metadata from the originating bump
-              # pipeline run. Sets IsVersionBumpMerge output variable.
+              # Check if this commit is a version bump merge. Sets
+              # IsVersionBumpMerge and BumpPipelineRunId output variables.
+              - script: >-
+                  node tools/repo-toolbox/lib/start.js find-bump-pipeline-run
+                name: FindBumpRun
+                displayName: 'Find Bump Pipeline Run'
+
               - script: >-
                   node tools/repo-toolbox/lib/start.js download-bump-artifacts
+                  --build-id $(FindBumpRun.BumpPipelineRunId)
                   --artifact-name packages
-                  --artifact-name metadata
-                  --artifact-name package-versions
                   --target-path $(Pipeline.Workspace)
-                name: DownloadArtifacts
-                displayName: 'Download Bump Pipeline Artifacts'
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                displayName: 'Download Packaged Packages'
                 env:
                   SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
-              # Publish the downloaded tarballs to npm
+              - script: >-
+                  node tools/repo-toolbox/lib/start.js download-bump-artifacts
+                  --build-id $(FindBumpRun.BumpPipelineRunId)
+                  --artifact-name package-versions
+                  --target-path $(Build.ArtifactStagingDirectory)/published-versions
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                displayName: 'Download Packaged Packages'
+                env:
+                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+              - script: |
+                  mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
+                condition: ne(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                displayName: 'Create empty published-versions artifact'
+
               - script: >-
                   node tools/repo-toolbox/lib/start.js publish-tarballs
                   --artifact-path $(Pipeline.Workspace)/packages
                   $(dryRunFlag)
-                condition: eq(variables['DownloadArtifacts.IsVersionBumpMerge'], 'true')
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
                 displayName: 'Publish Packages to npm'
                 env:
                   NPM_AUTH_TOKEN: $(npmToken)
-
-              # Copy the published-versions artifact from the bump pipeline so it can
-              # be re-published as an artifact of this pipeline run.
-              - script: |
-                  mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
-                  cp -r $(Pipeline.Workspace)/package-versions/* $(Build.ArtifactStagingDirectory)/published-versions/
-                condition: eq(variables['DownloadArtifacts.IsVersionBumpMerge'], 'true')
-                displayName: 'Stage Published Versions Artifact'
