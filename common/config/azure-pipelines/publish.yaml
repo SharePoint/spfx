@@ -95,25 +95,29 @@ extends:
                 env:
                   SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
-              - script: >-
-                  node tools/repo-toolbox/lib/start.js download-bump-artifacts
-                  --build-id $(FindBumpRun.BumpPipelineRunId)
-                  --artifact-name packages
-                  --target-path $(Pipeline.Workspace)
+              - task: DownloadPipelineArtifact@2
                 condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
                 displayName: 'Download Packaged Packages'
-                env:
-                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+                inputs:
+                  buildType: specific
+                  project: $(System.TeamProject)
+                  definition: $(SpfxVersioningPipelineId)
+                  buildVersionToDownload: specific
+                  pipelineId: $(FindBumpRun.BumpPipelineRunId)
+                  artifactName: packages
+                  targetPath: $(Pipeline.Workspace)/packages
 
-              - script: >-
-                  node tools/repo-toolbox/lib/start.js download-bump-artifacts
-                  --build-id $(FindBumpRun.BumpPipelineRunId)
-                  --artifact-name package-versions
-                  --target-path $(Pipeline.Workspace)
+              - task: DownloadPipelineArtifact@2
                 condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
                 displayName: 'Download Package Versions'
-                env:
-                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+                inputs:
+                  buildType: specific
+                  project: $(System.TeamProject)
+                  definition: $(SpfxVersioningPipelineId)
+                  buildVersionToDownload: specific
+                  pipelineId: $(FindBumpRun.BumpPipelineRunId)
+                  artifactName: package-versions
+                  targetPath: $(Pipeline.Workspace)/package-versions
 
               - script: >-
                   node tools/repo-toolbox/lib/start.js publish-tarballs
