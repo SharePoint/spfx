@@ -157,5 +157,14 @@ extends:
                     This PR contains version bumps for the "spfx" lockstep version policy.
 
                     **Pipeline Run:** $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
-                  SourceBuildId: '$(Build.BuildId)'
                   RepoPath: $(SelfRepoPath)
+
+              # Tag this pipeline run with the version bump commit SHA so the
+              # publish pipeline can find this exact run via the AzDO Build API.
+              - bash: |
+                  BUMP_SHA=$(git rev-parse HEAD)
+                  echo "Tagging build with commit SHA: $BUMP_SHA"
+                  echo "##vso[build.addbuildtag]$BUMP_SHA"
+                displayName: 'Tag build with bump commit SHA'
+                condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
+                workingDirectory: $(SelfRepoPath)

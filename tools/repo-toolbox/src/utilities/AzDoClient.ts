@@ -8,7 +8,13 @@ import { pipeline } from 'node:stream/promises';
 
 import { WebApi, getBearerHandler } from 'azure-devops-node-api';
 import type { IBuildApi } from 'azure-devops-node-api/BuildApi';
-import type { ArtifactResource } from 'azure-devops-node-api/interfaces/BuildInterfaces';
+import {
+  type ArtifactResource,
+  type Build,
+  BuildQueryOrder,
+  BuildResult,
+  BuildStatus
+} from 'azure-devops-node-api/interfaces/BuildInterfaces';
 
 import { Executable, FileSystem } from '@rushstack/node-core-library';
 import type { ITerminal } from '@rushstack/terminal';
@@ -23,6 +29,11 @@ export interface IDownloadArtifactOptions {
   buildId: number;
   artifactName: string;
   targetPath: string;
+}
+
+export interface IFindBuildByTagOptions {
+  pipelineId: number;
+  tag: string;
 }
 
 const UNZIP_BIN_NAME: 'unzip' = 'unzip';
@@ -43,6 +54,39 @@ export class AzDoClient {
     this._terminal = terminal;
     this._accessToken = accessToken;
     this._connection = new WebApi(orgUrl, getBearerHandler(accessToken));
+  }
+
+  /**
+   * Finds the most recent successful completed build for the specified pipeline
+   * definition that has the given tag.
+   *
+   * @returns The matching build, or `undefined` if no build was found.
+   */
+  public async findLatestBuildByTagAsync(options: IFindBuildByTagOptions): Promise<Build | undefined> {
+    const { pipelineId, tag } = options;
+    const buildApi: IBuildApi = await this._getBuildApiAsync();
+
+    const builds: Build[] = await buildApi.getBuilds(
+      this._project,
+      /* definitions */ [pipelineId],
+      /* queues */ undefined,
+      /* buildNumber */ undefined,
+      /* minTime */ undefined,
+      /* maxTime */ undefined,
+      /* requestedFor */ undefined,
+      /* reasonFilter */ undefined,
+      /* statusFilter */ BuildStatus.Completed,
+      /* resultFilter */ BuildResult.Succeeded,
+      /* tagFilters */ [tag],
+      /* properties */ undefined,
+      /* top */ 1,
+      /* continuationToken */ undefined,
+      /* maxBuildsPerDefinition */ undefined,
+      /* deletedFilter */ undefined,
+      /* queryOrder */ BuildQueryOrder.FinishTimeDescending
+    );
+
+    return builds[0];
   }
 
   /**

@@ -9,6 +9,8 @@ import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from './GitUtilities
 
 export type IGitHubPr = RestEndpointMethodTypes['pulls']['list']['response']['data'][number];
 export type IGitHubCreationResult = RestEndpointMethodTypes['pulls']['create']['response']['data'];
+export type ICommitPr =
+  RestEndpointMethodTypes['repos']['listPullRequestsAssociatedWithCommit']['response']['data'][number];
 
 export interface IGitHubClientOptions {
   authorizationHeader: string;
@@ -87,6 +89,21 @@ export class GitHubClient {
       base: baseBranch
     });
     return data;
+  }
+
+  /**
+   * Finds the merged pull request that produced the specified merge commit SHA.
+   *
+   * The GitHub API returns all PRs whose branch contains the commit, which
+   * includes open PRs. We filter to the PR whose `merge_commit_sha` matches
+   * exactly, ensuring we identify the PR that was merged to create this commit.
+   */
+  public async getMergedPrForCommitAsync(commitSha: string): Promise<ICommitPr | undefined> {
+    const { data } = await this._octokit.repos.listPullRequestsAssociatedWithCommit({
+      ...this._octokitCommonOptions,
+      commit_sha: commitSha
+    });
+    return data.find((pr) => pr.merge_commit_sha === commitSha);
   }
 
   public async updatePrDescriptionAsync(options: IUpdatePrDescriptionOptions): Promise<void> {

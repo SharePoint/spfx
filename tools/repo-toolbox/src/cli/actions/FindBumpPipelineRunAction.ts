@@ -1,23 +1,34 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { ITerminal } from '@rushstack/terminal';
-import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
+import type { Build } from 'azure-devops-node-api/interfaces/BuildInterfaces';
 
-import { execGitAsync } from '../../utilities/GitUtilities';
+import type { ITerminal } from '@rushstack/terminal';
+import {
+  type IRequiredCommandLineStringParameter,
+  type IRequiredCommandLineIntegerParameter,
+  CommandLineAction
+} from '@rushstack/ts-command-line';
+
+import { AzDoClient } from '../../utilities/AzDoClient';
+import { GitHubClient, type ICommitPr } from '../../utilities/GitHubClient';
 
 export class FindBumpPipelineRunAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
 
   private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
+  private readonly _pipelineIdParameter: IRequiredCommandLineIntegerParameter;
+  private readonly _orgUrlParameter: IRequiredCommandLineStringParameter;
+  private readonly _projectParameter: IRequiredCommandLineStringParameter;
+  private readonly _accessTokenParameter: IRequiredCommandLineStringParameter;
 
   public constructor(terminal: ITerminal) {
     super({
       actionName: 'find-bump-pipeline-run',
-      summary:
-        'Checks whether the current commit is a version bump merge and, if so, outputs the originating pipeline run ID.',
+      summary: 'If the current commit is a version bump merge, finds the originating bump pipeline run.',
       documentation:
-        'Reads the commit message for the specified SHA and looks for a "SourceBuild:" trailer. ' +
+        'Finds the merged PR for the specified commit SHA via the GitHub API, then queries the ' +
+        "Azure DevOps Build API for a pipeline run tagged with the PR's head commit SHA. " +
         'Sets the AzDO output variables IsVersionBumpMerge (true/false) and BumpPipelineRunId (the build ID).'
     });
 
@@ -26,9 +37,40 @@ export class FindBumpPipelineRunAction extends CommandLineAction {
     this._commitShaParameter = this.defineStringParameter({
       parameterLongName: '--commit-sha',
       argumentName: 'SHA',
-      description: 'The merge commit SHA to inspect',
+      description: 'The merge commit SHA to look up',
       required: true,
       environmentVariable: 'BUILD_SOURCEVERSION'
+    });
+
+    this._pipelineIdParameter = this.defineIntegerParameter({
+      parameterLongName: '--pipeline-id',
+      argumentName: 'ID',
+      description: 'The pipeline definition ID of the bump versions pipeline',
+      required: true
+    });
+
+    this._orgUrlParameter = this.defineStringParameter({
+      parameterLongName: '--org-url',
+      argumentName: 'URL',
+      description: 'Azure DevOps organization URL',
+      required: true,
+      environmentVariable: 'SYSTEM_COLLECTIONURI'
+    });
+
+    this._projectParameter = this.defineStringParameter({
+      parameterLongName: '--project',
+      argumentName: 'PROJECT',
+      description: 'Azure DevOps project name',
+      required: true,
+      environmentVariable: 'SYSTEM_TEAMPROJECT'
+    });
+
+    this._accessTokenParameter = this.defineStringParameter({
+      parameterLongName: '--access-token',
+      argumentName: 'TOKEN',
+      description: 'Azure DevOps access token',
+      required: true,
+      environmentVariable: 'SYSTEM_ACCESSTOKEN'
     });
   }
 
@@ -36,27 +78,58 @@ export class FindBumpPipelineRunAction extends CommandLineAction {
     const terminal: ITerminal = this._terminal;
 
     const commitSha: string = this._commitShaParameter.value;
-    terminal.writeLine(`Commit SHA: ${commitSha}`);
+    terminal.writeLine(`Merge commit SHA: ${commitSha}`);
 
-    // Read the commit message body for the SourceBuild trailer.
-    // %b gives the body (everything after the subject line), which is where
-    // GitHub places the PR description content when squash-merging.
-    terminal.writeLine('Reading commit message...');
-    const commitBody: string = await execGitAsync(['log', '-1', '--format=%b', commitSha], terminal);
+    // Step 1: Find the merged PR that produced this commit.
+    terminal.writeLine('Looking up merged pull request via GitHub API...');
+    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync(terminal);
 
-    terminal.writeLine(`Commit body:\n${commitBody}`);
-
-    // Look for a "SourceBuild: <number>" trailer in the commit body.
-    const match: RegExpMatchArray | null = commitBody.match(/^SourceBuild:\s*(\d+)\s*$/m);
-
-    if (!match) {
-      terminal.writeLine('No SourceBuild trailer found in commit message. Skipping publish.');
+    const pr: ICommitPr | undefined = await gitHubClient.getMergedPrForCommitAsync(commitSha);
+    if (!pr) {
+      terminal.writeLine('No merged PR found for this commit. Skipping publish.');
       terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
       return;
     }
 
-    const buildId: number = parseInt(match[1]!, 10);
-    terminal.writeLine(`Bump pipeline run ID: ${buildId} (from SourceBuild trailer)`);
+    terminal.writeLine(`Found merged PR #${pr.number}: "${pr.title}"`);
+
+    // Step 2: Get the head SHA of the PR branch (the pre-squash commit tip).
+    const headSha: string | undefined = pr.head?.sha;
+    if (!headSha) {
+      terminal.writeLine(`PR #${pr.number} has no head SHA. Skipping publish.`);
+      terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
+      return;
+    }
+
+    terminal.writeLine(`PR head SHA (pre-squash): ${headSha}`);
+
+    // Step 3: Query AzDO for a bump pipeline run tagged with the head SHA.
+    const spfxVersioningPipelineId: number = this._pipelineIdParameter.value;
+    const orgUrl: string = this._orgUrlParameter.value;
+    const project: string = this._projectParameter.value;
+    const accessToken: string = this._accessTokenParameter.value;
+
+    terminal.writeLine(`AzDO organization: ${orgUrl}`);
+    terminal.writeLine(`AzDO project: ${project}`);
+    terminal.writeLine(`Versioning pipeline definition ID: ${spfxVersioningPipelineId}`);
+    terminal.writeLine(`Searching for build tagged "${headSha}"...`);
+
+    const azDoClient: AzDoClient = new AzDoClient({ orgUrl, project, accessToken }, terminal);
+
+    const build: Build | undefined = await azDoClient.findLatestBuildByTagAsync({
+      pipelineId: spfxVersioningPipelineId,
+      tag: headSha
+    });
+
+    if (build?.id === undefined) {
+      terminal.writeLine(`No build found tagged "${headSha}". Skipping publish.`);
+      terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
+      return;
+    }
+
+    const { id: buildId, buildNumber = 'N/A' } = build;
+
+    terminal.writeLine(`Found bump pipeline run: #${buildId} (build number: ${buildNumber})`);
 
     terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]true');
     terminal.writeLine(`##vso[task.setvariable variable=BumpPipelineRunId;isOutput=true]${buildId}`);

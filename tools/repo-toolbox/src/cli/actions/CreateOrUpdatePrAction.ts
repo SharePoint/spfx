@@ -13,7 +13,6 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
   private readonly _baseBranchParameter: IRequiredCommandLineStringParameter;
   private readonly _titleParameter: IRequiredCommandLineStringParameter;
   private readonly _bodyParameter: IRequiredCommandLineStringParameter;
-  private readonly _sourceBuildIdParameter: IRequiredCommandLineStringParameter;
 
   public constructor(terminal: ITerminal) {
     super({
@@ -53,15 +52,6 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       defaultValue: '',
       environmentVariable: 'PR_BODY'
     });
-
-    this._sourceBuildIdParameter = this.defineStringParameter({
-      parameterLongName: '--source-build-id',
-      argumentName: 'ID',
-      description:
-        'The originating pipeline run (build) ID. Appended as a "SourceBuild:" trailer to the PR body ' +
-        'so the publish pipeline can identify the bump run from the merge commit message.',
-      required: true
-    });
   }
 
   protected override async onExecuteAsync(): Promise<void> {
@@ -74,15 +64,7 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
     const existingPr: IGitHubPr | undefined = await gitHubClient.getPrForBranchAsync({ branchName });
 
     const title: string = this._titleParameter.value;
-    const sourceBuildId: string = this._sourceBuildIdParameter.value;
-
-    // Append the SourceBuild trailer to the body. When the PR is squash-merged,
-    // GitHub includes the PR body in the commit message, preserving the trailer
-    // so the publish pipeline can read it via `git log`.
-    const bodyBase: string = this._bodyParameter.value;
-    const body: string = bodyBase
-      ? `${bodyBase}\n\nSourceBuild: ${sourceBuildId}`
-      : `SourceBuild: ${sourceBuildId}`;
+    const body: string = this._bodyParameter.value;
 
     let prNumber: number;
     if (existingPr) {
@@ -96,7 +78,5 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       ({ number: prNumber } = await gitHubClient.openPrAsync({ title, body, branchName, baseBranch }));
       terminal.writeLine(`Created PR #${prNumber}`);
     }
-
-    terminal.writeLine(`SourceBuild trailer set to: ${sourceBuildId}`);
   }
 }

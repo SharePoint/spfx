@@ -24,6 +24,10 @@ parameters:
 variables:
   - name: FORCE_COLOR
     value: 1
+  # Pipeline definition ID of the "SPFx Versioning" pipeline in this AzDO project.
+  # Used by find-bump-pipeline-run to query for the latest tagged build.
+  - name: SpfxVersioningPipelineId
+    value: 39
 
 resources:
   repositories:
@@ -79,12 +83,17 @@ extends:
               - script: mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
                 displayName: 'Create published-versions staging directory'
 
-              # Check if this commit is a version bump merge. Sets
-              # IsVersionBumpMerge and BumpPipelineRunId output variables.
+              # Find the bump pipeline run that produced the version bump
+              # commit merged by this PR. Uses the PR's head SHA to look up a
+              # build tagged with that commit. Sets IsVersionBumpMerge and
+              # BumpPipelineRunId output variables.
               - script: >-
                   node tools/repo-toolbox/lib/start.js find-bump-pipeline-run
+                  --pipeline-id $(SpfxVersioningPipelineId)
                 name: FindBumpRun
                 displayName: 'Find Bump Pipeline Run'
+                env:
+                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
               - script: >-
                   node tools/repo-toolbox/lib/start.js download-bump-artifacts
