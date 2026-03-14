@@ -2,34 +2,27 @@
 // See LICENSE in the project root for license information.
 
 import type { ITerminal } from '@rushstack/terminal';
-import {
-  type IRequiredCommandLineStringParameter,
-  type CommandLineStringListParameter,
-  type IRequiredCommandLineIntegerParameter,
-  CommandLineAction
+import type {
+  IRequiredCommandLineStringParameter,
+  CommandLineStringListParameter,
+  IRequiredCommandLineIntegerParameter
 } from '@rushstack/ts-command-line';
 
-import { AzDoClient } from '../../utilities/AzDoClient';
+import type { AzDoClient } from '../../utilities/AzDoClient';
+import { AzDoActionBase } from './AzDoActionBase';
 
-export class DownloadBumpArtifactsAction extends CommandLineAction {
-  private readonly _terminal: ITerminal;
-
+export class DownloadBumpArtifactsAction extends AzDoActionBase {
   private readonly _buildIdParameter: IRequiredCommandLineIntegerParameter;
   private readonly _artifactNamesParameter: CommandLineStringListParameter;
   private readonly _targetPathParameter: IRequiredCommandLineStringParameter;
-  private readonly _orgUrlParameter: IRequiredCommandLineStringParameter;
-  private readonly _projectParameter: IRequiredCommandLineStringParameter;
-  private readonly _accessTokenParameter: IRequiredCommandLineStringParameter;
 
   public constructor(terminal: ITerminal) {
-    super({
+    super(terminal, {
       actionName: 'download-bump-artifacts',
       summary: 'Downloads artifacts from the specified pipeline run.',
       documentation:
         'Downloads the specified artifacts from the given Azure DevOps pipeline run via the Pipelines API.'
     });
-
-    this._terminal = terminal;
 
     this._buildIdParameter = this.defineIntegerParameter({
       parameterLongName: '--build-id',
@@ -52,30 +45,6 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
         'the zip root folder (named after the artifact) becomes a subdirectory of this path.',
       required: true
     });
-
-    this._orgUrlParameter = this.defineStringParameter({
-      parameterLongName: '--org-url',
-      argumentName: 'URL',
-      description: 'Azure DevOps organization URL',
-      required: true,
-      environmentVariable: 'SYSTEM_COLLECTIONURI'
-    });
-
-    this._projectParameter = this.defineStringParameter({
-      parameterLongName: '--project',
-      argumentName: 'PROJECT',
-      description: 'Azure DevOps project name',
-      required: true,
-      environmentVariable: 'SYSTEM_TEAMPROJECT'
-    });
-
-    this._accessTokenParameter = this.defineStringParameter({
-      parameterLongName: '--access-token',
-      argumentName: 'TOKEN',
-      description: 'Azure DevOps access token',
-      required: true,
-      environmentVariable: 'SYSTEM_ACCESSTOKEN'
-    });
   }
 
   protected override async onExecuteAsync(): Promise<void> {
@@ -91,14 +60,7 @@ export class DownloadBumpArtifactsAction extends CommandLineAction {
 
     terminal.writeLine(`Artifacts to download: ${artifactNames.join(', ')}`);
 
-    const orgUrl: string = this._orgUrlParameter.value;
-    const project: string = this._projectParameter.value;
-    const accessToken: string = this._accessTokenParameter.value;
-
-    terminal.writeLine(`AzDO organization: ${orgUrl}`);
-    terminal.writeLine(`AzDO project: ${project}`);
-
-    const azDoClient: AzDoClient = new AzDoClient({ orgUrl, project, accessToken }, terminal);
+    const azDoClient: AzDoClient = this._createAzDoClient();
 
     const targetPath: string = this._targetPathParameter.value;
     terminal.writeLine(`Target path: ${targetPath}`);
