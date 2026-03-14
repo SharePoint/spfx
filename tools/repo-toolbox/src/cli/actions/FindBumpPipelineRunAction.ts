@@ -38,17 +38,17 @@ export class FindBumpPipelineRunAction extends CommandLineAction {
     const commitSha: string = this._commitShaParameter.value;
     terminal.writeLine(`Merge commit SHA: ${commitSha}`);
 
-    terminal.writeLine('Looking up associated pull request via GitHub API...');
+    terminal.writeLine('Looking up merged pull request for this commit via GitHub API...');
     const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync(terminal);
 
-    const pr: ICommitPr | undefined = await gitHubClient.getPrForCommitAsync(commitSha);
+    const pr: ICommitPr | undefined = await gitHubClient.getMergedPrForCommitAsync(commitSha);
     if (!pr) {
-      terminal.writeLine('No PR found for this commit. Skipping publish.');
+      terminal.writeLine('No merged PR found for this commit. Skipping publish.');
       terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
       return;
     }
 
-    terminal.writeLine(`Found PR #${pr.number}: "${pr.title}"`);
+    terminal.writeLine(`Found merged PR #${pr.number}: "${pr.title}"`);
 
     // Log all labels on the PR to aid debugging.
     const labelNames: string[] = pr.labels.map(({ name }) => name ?? '(unnamed)');
