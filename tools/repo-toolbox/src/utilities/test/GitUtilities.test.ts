@@ -4,9 +4,9 @@
 import type { ChildProcess } from 'node:child_process';
 
 import { Executable } from '@rushstack/node-core-library';
+import { StringBufferTerminalProvider, Terminal } from '@rushstack/terminal';
 
 import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../GitUtilities';
-import { StringBufferTerminalProvider, Terminal } from '@rushstack/terminal';
 
 describe('GitUtilities', () => {
   let terminalProvider: StringBufferTerminalProvider;
