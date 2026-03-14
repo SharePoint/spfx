@@ -13,6 +13,8 @@ import type { AzDoClient } from '../../utilities/AzDoClient';
 import { GitHubClient, type ICommitPr } from '../../utilities/GitHubClient';
 import { AzDoActionBase } from './AzDoActionBase';
 
+const BUMP_BUILD_TAG_PREFIX: 'spfx-version-bump-sha:' = 'spfx-version-bump-sha:';
+
 export class FindBumpPipelineRunAction extends AzDoActionBase {
   private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
   private readonly _pipelineIdParameter: IRequiredCommandLineIntegerParameter;
@@ -73,19 +75,20 @@ export class FindBumpPipelineRunAction extends AzDoActionBase {
     terminal.writeLine(`PR head SHA (pre-squash): ${headSha}`);
 
     // Step 3: Query AzDO for a bump pipeline run tagged with the head SHA.
+    const bumpBuildTag: string = `${BUMP_BUILD_TAG_PREFIX}${headSha}`;
     const spfxVersioningPipelineId: number = this._pipelineIdParameter.value;
     terminal.writeLine(`Versioning pipeline definition ID: ${spfxVersioningPipelineId}`);
-    terminal.writeLine(`Searching for build tagged "${headSha}"...`);
+    terminal.writeLine(`Searching for build tagged "${bumpBuildTag}"...`);
 
     const azDoClient: AzDoClient = this._createAzDoClient();
 
     const build: Build | undefined = await azDoClient.findLatestBuildByTagAsync({
       pipelineId: spfxVersioningPipelineId,
-      tag: headSha
+      tag: bumpBuildTag
     });
 
     if (build?.id === undefined) {
-      terminal.writeLine(`No build found tagged "${headSha}". Skipping publish.`);
+      terminal.writeLine(`No build found tagged "${bumpBuildTag}". Skipping publish.`);
       terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
       return;
     }

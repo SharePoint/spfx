@@ -163,8 +163,9 @@ extends:
               # publish pipeline can find this exact run via the AzDO Build API.
               - bash: |
                   BUMP_SHA=$(git rev-parse HEAD)
-                  echo "Tagging build with commit SHA: $BUMP_SHA"
-                  echo "##vso[build.addbuildtag]$BUMP_SHA"
+                  BUMP_TAG="spfx-version-bump-sha:$BUMP_SHA"
+                  echo "Tagging build with bump commit tag: $BUMP_TAG"
+                  echo "##vso[build.addbuildtag]$BUMP_TAG"
                 displayName: 'Tag build with bump commit SHA'
                 condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
                 workingDirectory: $(SelfRepoPath)
