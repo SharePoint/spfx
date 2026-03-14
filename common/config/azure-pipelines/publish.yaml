@@ -106,11 +106,6 @@ extends:
                 env:
                   SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
-              - script: |
-                  mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
-                condition: ne(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
-                displayName: 'Create empty published-versions artifact'
-
               - script: >-
                   node tools/repo-toolbox/lib/start.js publish-tarballs
                   --artifact-path $(Pipeline.Workspace)/packages
