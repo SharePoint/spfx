@@ -157,5 +157,5 @@ extends:
                     This PR contains version bumps for the "spfx" lockstep version policy.
 
                     **Pipeline Run:** $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
-                  SourceBuildLabel: 'SourceBuild:$(Build.BuildId)'
+                  SourceBuildId: '$(Build.BuildId)'
                   RepoPath: $(SelfRepoPath)

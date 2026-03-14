@@ -3,9 +3,8 @@
 
 import type { ITerminal } from '@rushstack/terminal';
 import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
-import { Async } from '@rushstack/node-core-library';
 
-import { GitHubClient, type IGitHubLabel, type IGitHubPr } from '../../utilities/GitHubClient';
+import { GitHubClient, type IGitHubPr } from '../../utilities/GitHubClient';
 
 export class CreateOrUpdatePrAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
@@ -14,7 +13,7 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
   private readonly _baseBranchParameter: IRequiredCommandLineStringParameter;
   private readonly _titleParameter: IRequiredCommandLineStringParameter;
   private readonly _bodyParameter: IRequiredCommandLineStringParameter;
-  private readonly _sourceBuildLabelParameter: IRequiredCommandLineStringParameter;
+  private readonly _sourceBuildIdParameter: IRequiredCommandLineStringParameter;
 
   public constructor(terminal: ITerminal) {
     super({
@@ -55,11 +54,12 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       environmentVariable: 'PR_BODY'
     });
 
-    this._sourceBuildLabelParameter = this.defineStringParameter({
-      parameterLongName: '--source-build-label',
-      argumentName: 'LABEL',
+    this._sourceBuildIdParameter = this.defineStringParameter({
+      parameterLongName: '--source-build-id',
+      argumentName: 'ID',
       description:
-        'A label to apply to the PR to track the originating pipeline run (e.g., SourceBuild:12345)',
+        'The originating pipeline run (build) ID. Appended as a "SourceBuild:" trailer to the PR body ' +
+        'so the publish pipeline can identify the bump run from the merge commit message.',
       required: true
     });
   }
@@ -74,7 +74,15 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
     const existingPr: IGitHubPr | undefined = await gitHubClient.getPrForBranchAsync({ branchName });
 
     const title: string = this._titleParameter.value;
-    const body: string = this._bodyParameter.value;
+    const sourceBuildId: string = this._sourceBuildIdParameter.value;
+
+    // Append the SourceBuild trailer to the body. When the PR is squash-merged,
+    // GitHub includes the PR body in the commit message, preserving the trailer
+    // so the publish pipeline can read it via `git log`.
+    const bodyBase: string = this._bodyParameter.value;
+    const body: string = bodyBase
+      ? `${bodyBase}\n\nSourceBuild: ${sourceBuildId}`
+      : `SourceBuild: ${sourceBuildId}`;
 
     let prNumber: number;
     if (existingPr) {
@@ -89,26 +97,6 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       terminal.writeLine(`Created PR #${prNumber}`);
     }
 
-    // Apply SourceBuild label
-    const sourceBuildLabel: string = this._sourceBuildLabelParameter.value;
-    terminal.writeLine(`Applying label: ${sourceBuildLabel}`);
-
-    // Remove any existing SourceBuild: labels
-    const existingLabels: IGitHubLabel[] = await gitHubClient.getPrLabelsAsync(prNumber);
-
-    await Async.forEachAsync(
-      existingLabels,
-      async ({ name: labelName }) => {
-        if (labelName.startsWith('SourceBuild:')) {
-          await gitHubClient.deletePrLabelAsync({ prNumber, labelName });
-        }
-      },
-      { concurrency: 5 }
-    );
-
-    // Add the new label
-    await gitHubClient.addPrLabelAsync({ prNumber, labelName: sourceBuildLabel });
-
-    terminal.writeLine('Label applied.');
+    terminal.writeLine(`SourceBuild trailer set to: ${sourceBuildId}`);
   }
 }

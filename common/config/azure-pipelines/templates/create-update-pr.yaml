@@ -1,6 +1,6 @@
 # Template: Create or update a GitHub pull request
 # Creates a new PR or updates an existing one for the version bump branch.
-# Applies a SourceBuild label to track the originating pipeline run.
+# Appends a SourceBuild trailer to the PR body to track the originating pipeline run.
 # Requires checkout with persistCredentials: true and rush install and build to have been run.
 
 parameters:
@@ -14,7 +14,7 @@ parameters:
   - name: Body
     type: string
     default: ''
-  - name: SourceBuildLabel
+  - name: SourceBuildId
     type: string
   - name: RepoPath
     type: string
@@ -25,7 +25,7 @@ steps:
       node tools/repo-toolbox/lib/start.js create-or-update-pr
       --branch-name "${{ parameters.BranchName }}"
       --base-branch "${{ parameters.BaseBranch }}"
-      --source-build-label "${{ parameters.SourceBuildLabel }}"
+      --source-build-id "${{ parameters.SourceBuildId }}"
     displayName: 'Create or update GitHub PR'
     condition: and(succeeded(), ne(variables['HasChanges'], 'false'))
     workingDirectory: ${{ parameters.RepoPath }}

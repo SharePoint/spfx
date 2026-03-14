@@ -4,7 +4,7 @@
 import type { ITerminal } from '@rushstack/terminal';
 import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
 
-import { GitHubClient, type ICommitPr } from '../../utilities/GitHubClient';
+import { execGitAsync } from '../../utilities/GitUtilities';
 
 export class FindBumpPipelineRunAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
@@ -17,8 +17,8 @@ export class FindBumpPipelineRunAction extends CommandLineAction {
       summary:
         'Checks whether the current commit is a version bump merge and, if so, outputs the originating pipeline run ID.',
       documentation:
-        'Looks up the PR associated with the specified commit SHA. If a SourceBuild: label is found, ' +
-        'sets the AzDO output variables IsVersionBumpMerge (true/false) and BumpPipelineRunId (the build ID).'
+        'Reads the commit message for the specified SHA and looks for a "SourceBuild:" trailer. ' +
+        'Sets the AzDO output variables IsVersionBumpMerge (true/false) and BumpPipelineRunId (the build ID).'
     });
 
     this._terminal = terminal;
@@ -26,7 +26,7 @@ export class FindBumpPipelineRunAction extends CommandLineAction {
     this._commitShaParameter = this.defineStringParameter({
       parameterLongName: '--commit-sha',
       argumentName: 'SHA',
-      description: 'The merge commit SHA to look up',
+      description: 'The merge commit SHA to inspect',
       required: true,
       environmentVariable: 'BUILD_SOURCEVERSION'
     });
@@ -36,53 +36,27 @@ export class FindBumpPipelineRunAction extends CommandLineAction {
     const terminal: ITerminal = this._terminal;
 
     const commitSha: string = this._commitShaParameter.value;
-    terminal.writeLine(`Merge commit SHA: ${commitSha}`);
+    terminal.writeLine(`Commit SHA: ${commitSha}`);
 
-    terminal.writeLine('Looking up merged pull request for this commit via GitHub API...');
-    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync(terminal);
+    // Read the commit message body for the SourceBuild trailer.
+    // %b gives the body (everything after the subject line), which is where
+    // GitHub places the PR description content when squash-merging.
+    terminal.writeLine('Reading commit message...');
+    const commitBody: string = await execGitAsync(['log', '-1', '--format=%b', commitSha], terminal);
 
-    const pr: ICommitPr | undefined = await gitHubClient.getMergedPrForCommitAsync(commitSha);
-    if (!pr) {
-      terminal.writeLine('No merged PR found for this commit. Skipping publish.');
+    terminal.writeLine(`Commit body:\n${commitBody}`);
+
+    // Look for a "SourceBuild: <number>" trailer in the commit body.
+    const match: RegExpMatchArray | null = commitBody.match(/^SourceBuild:\s*(\d+)\s*$/m);
+
+    if (!match) {
+      terminal.writeLine('No SourceBuild trailer found in commit message. Skipping publish.');
       terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
       return;
     }
 
-    terminal.writeLine(`Found merged PR #${pr.number}: "${pr.title}"`);
-
-    // Log all labels on the PR to aid debugging.
-    const labelNames: string[] = pr.labels.map(({ name }) => name ?? '(unnamed)');
-    terminal.writeLine(labelNames.length > 0 ? `PR labels: ${labelNames.join(', ')}` : 'PR has no labels.');
-
-    let sourceBuildLabel: string | undefined;
-    for (const { name } of pr.labels) {
-      if (name?.startsWith('SourceBuild:')) {
-        if (!sourceBuildLabel) {
-          sourceBuildLabel = name;
-        } else {
-          throw new Error(
-            `Multiple SourceBuild: labels found on PR #${pr.number}. Unable to determine originating pipeline run.`
-          );
-        }
-      }
-    }
-
-    if (!sourceBuildLabel) {
-      terminal.writeLine(`PR #${pr.number} does not have a SourceBuild: label. Skipping publish.`);
-      terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]false');
-      return;
-    }
-
-    const buildIdString: string = sourceBuildLabel.slice(sourceBuildLabel.indexOf(':') + 1);
-    const buildId: number = parseInt(buildIdString, 10);
-    if (isNaN(buildId)) {
-      throw new Error(
-        `Could not parse build ID from label "${sourceBuildLabel}". ` +
-          `Expected format: "SourceBuild:<number>", got value after colon: "${buildIdString}".`
-      );
-    }
-
-    terminal.writeLine(`Bump pipeline run ID: ${buildId} (from label "${sourceBuildLabel}")`);
+    const buildId: number = parseInt(match[1]!, 10);
+    terminal.writeLine(`Bump pipeline run ID: ${buildId} (from SourceBuild trailer)`);
 
     terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]true');
     terminal.writeLine(`##vso[task.setvariable variable=BumpPipelineRunId;isOutput=true]${buildId}`);
