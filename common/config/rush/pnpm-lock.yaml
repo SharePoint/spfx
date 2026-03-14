@@ -26,10 +26,10 @@ importers:
         specifier: 1.22.2
         version: 1.22.2(patch_hash=24d1150069b5b5d5f0ff4aabd70e56d05d64ea1774454ac189298673ea1a9d42)(@rushstack/heft@1.2.7(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/node-core-library':
-        specifier: 5.20.3
+        specifier: ~5.20.3
         version: 5.20.3(@types/node@22.19.13)
       '@rushstack/terminal':
-        specifier: 0.22.3
+        specifier: ~0.22.3
         version: 0.22.3(@types/node@22.19.13)
       adm-zip:
         specifier: ^0.5.16
@@ -75,10 +75,10 @@ importers:
         specifier: workspace:*
         version: link:../../api/spfx-template-api
       '@rushstack/terminal':
-        specifier: 0.22.3
+        specifier: ~0.22.3
         version: 0.22.3(@types/node@22.19.13)
       '@rushstack/ts-command-line':
-        specifier: 5.3.3
+        specifier: ~5.3.3
         version: 5.3.3(@types/node@22.19.13)
       lodash:
         specifier: ^4.17.23
@@ -1152,10 +1152,10 @@ importers:
         specifier: workspace:*
         version: link:../../api/spfx-template-api
       '@rushstack/terminal':
-        specifier: 0.22.3
+        specifier: ~0.22.3
         version: 0.22.3(@types/node@22.19.13)
       '@rushstack/ts-command-line':
-        specifier: 5.3.3
+        specifier: ~5.3.3
         version: 5.3.3(@types/node@22.19.13)
       ignore:
         specifier: ^5.3.0
@@ -1177,16 +1177,16 @@ importers:
         specifier: ^22.0.0
         version: 22.0.1
       '@rushstack/node-core-library':
-        specifier: 5.20.3
+        specifier: ~5.20.3
         version: 5.20.3(@types/node@22.19.13)
       '@rushstack/rush-sdk':
         specifier: ~5.169.3
         version: 5.169.3(@types/node@22.19.13)
       '@rushstack/terminal':
-        specifier: 0.22.3
+        specifier: ~0.22.3
         version: 0.22.3(@types/node@22.19.13)
       '@rushstack/ts-command-line':
-        specifier: 5.3.3
+        specifier: ~5.3.3
         version: 5.3.3(@types/node@22.19.13)
       azure-devops-node-api:
         specifier: ^14.1.0
