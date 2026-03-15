@@ -39,7 +39,7 @@ extends:
       os: windows
     sdl:
       sourceRepositoriesToScan:
-        include:
+        exclude:
           - repository: RushstackRepo
     stages:
       - stage: BumpVersions
