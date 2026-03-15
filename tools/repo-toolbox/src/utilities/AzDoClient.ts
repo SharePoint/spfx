@@ -21,6 +21,9 @@ export interface IFindBuildByTagOptions {
   tag: string;
 }
 
+// eslint-disable-next-line no-bitwise
+const SUCCEEDED_OR_PARTIALLY_SUCCEEDED: BuildResult = BuildResult.Succeeded | BuildResult.PartiallySucceeded;
+
 export class AzDoClient {
   private readonly _connection: WebApi;
   private readonly _project: string;
@@ -52,7 +55,7 @@ export class AzDoClient {
       /* requestedFor */ undefined,
       /* reasonFilter */ undefined,
       /* statusFilter */ BuildStatus.Completed,
-      /* resultFilter */ BuildResult.Succeeded,
+      /* resultFilter */ SUCCEEDED_OR_PARTIALLY_SUCCEEDED,
       /* tagFilters */ [tag],
       /* properties */ undefined,
       /* top */ 1,
