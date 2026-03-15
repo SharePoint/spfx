@@ -120,17 +120,23 @@ export class PublishTarballsAction extends CommandLineAction {
             stdio: ['ignore', 'pipe', 'pipe'],
             environment: { NPM_AUTH_TOKEN: npmToken }
           });
-          const { stdout } = await Executable.waitForExitAsync(proc, {
-            encoding: 'utf8',
-            throwOnNonZeroExitCode: true,
-            throwOnSignal: true
+          const { stdout, stderr, exitCode } = await Executable.waitForExitAsync(proc, {
+            encoding: 'utf8'
           });
           if (stdout) {
             terminal.writeLine(stdout);
           }
+          if (stderr) {
+            terminal.writeErrorLine(stderr);
+          }
 
-          terminal.writeLine(`Successfully published: ${fileBasename}`);
-          successCount++;
+          if (exitCode !== 0) {
+            terminal.writeErrorLine(`Failed to publish: ${fileBasename} (exit code ${exitCode})`);
+            failCount++;
+          } else {
+            terminal.writeLine(`Successfully published: ${fileBasename}`);
+            successCount++;
+          }
         } catch (error) {
           terminal.writeErrorLine(`Failed to publish: ${fileBasename}`);
           terminal.writeErrorLine(String(error));
