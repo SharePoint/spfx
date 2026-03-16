@@ -1,16 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { JsonMergeHelper } from './JsonMergeHelper';
+import type { IConfigJson } from '@microsoft/spfx-heft-plugins';
 
-interface IConfigJson {
-  $schema?: string;
-  version?: string;
-  bundles?: Record<string, unknown>;
-  localizedResources?: Record<string, string>;
-  externals?: Record<string, unknown>;
-  [key: string]: unknown;
-}
+import { JsonMergeHelper } from './JsonMergeHelper';
 
 /**
  * Merge helper for `config/config.json`.
@@ -27,17 +20,23 @@ export class ConfigJsonMergeHelper extends JsonMergeHelper {
   public readonly fileRelativePath: string = 'config/config.json';
 
   public merge(existingContent: string, newContent: string): string {
-    const existing: IConfigJson = this.parseJson<IConfigJson>(existingContent);
-    const incoming: IConfigJson = this.parseJson<IConfigJson>(newContent);
+    const existing: Partial<IConfigJson> = this.parseJson<Partial<IConfigJson>>(existingContent);
+    const incoming: Partial<IConfigJson> = this.parseJson<Partial<IConfigJson>>(newContent);
 
-    const merged: IConfigJson = { ...existing };
+    const merged: Partial<IConfigJson> = { ...existing };
 
     // Incoming wins on key collision — each component contributes unique bundle
     // names, so collisions indicate a re-scaffold of the same component.
-    merged.bundles = { ...existing.bundles, ...incoming.bundles };
-    merged.localizedResources = { ...existing.localizedResources, ...incoming.localizedResources };
-    merged.externals = { ...existing.externals, ...incoming.externals };
+    if (existing.bundles || incoming.bundles) {
+      merged.bundles = { ...existing.bundles, ...incoming.bundles };
+    }
+    if (existing.localizedResources || incoming.localizedResources) {
+      merged.localizedResources = { ...existing.localizedResources, ...incoming.localizedResources };
+    }
+    if (existing.externals || incoming.externals) {
+      merged.externals = { ...existing.externals, ...incoming.externals };
+    }
 
-    return this.serializeJson(merged);
+    return this.serializeJson(merged, existingContent);
   }
 }

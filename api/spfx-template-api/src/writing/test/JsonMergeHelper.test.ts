@@ -14,7 +14,7 @@ class TestJsonMergeHelper extends JsonMergeHelper {
   public merge(existingContent: string, newContent: string): string {
     const existing = this.parseJson<Record<string, unknown>>(existingContent);
     const incoming = this.parseJson<Record<string, unknown>>(newContent);
-    return this.serializeJson({ ...existing, ...incoming });
+    return this.serializeJson({ ...existing, ...incoming }, existingContent);
   }
 
   // Expose protected methods for direct testing
@@ -22,8 +22,8 @@ class TestJsonMergeHelper extends JsonMergeHelper {
     return this.parseJson<T>(content);
   }
 
-  public testSerializeJson(value: unknown): string {
-    return this.serializeJson(value);
+  public testSerializeJson(value: unknown, originalContent: string): string {
+    return this.serializeJson(value, originalContent);
   }
 }
 
@@ -46,12 +46,12 @@ describe(JsonMergeHelper.name, () => {
       expect(result).toEqual({ a: { b: { c: [1, 2, 3] } } });
     });
 
-    it('should throw SyntaxError for invalid JSON', () => {
-      expect(() => helper.testParseJson('not json')).toThrow(SyntaxError);
+    it('should throw for invalid JSON', () => {
+      expect(() => helper.testParseJson('not json')).toThrow();
     });
 
-    it('should throw SyntaxError for empty string', () => {
-      expect(() => helper.testParseJson('')).toThrow(SyntaxError);
+    it('should throw for empty string', () => {
+      expect(() => helper.testParseJson('')).toThrow();
     });
 
     it('should handle special characters in keys and values', () => {
@@ -59,37 +59,46 @@ describe(JsonMergeHelper.name, () => {
       const result = helper.testParseJson<Record<string, string>>(input);
       expect(result['key with "quotes"']).toBe('value with \u00e9\u00e8\u00ea');
     });
+
+    it('should parse JSONC (JSON with comments)', () => {
+      const input = '{\n  // This is a comment\n  "a": 1\n}';
+      const result = helper.testParseJson<{ a: number }>(input);
+      expect(result).toEqual({ a: 1 });
+    });
   });
 
   describe('serializeJson', () => {
-    it('should serialize with 2-space indentation', () => {
-      const result = helper.testSerializeJson({ a: 1, b: 2 });
-      expect(result).toBe(JSON.stringify({ a: 1, b: 2 }, undefined, 2) + '\n');
+    it('should produce valid JSON output', () => {
+      const original = JSON.stringify({ a: 1, b: 2 }, undefined, 2) + '\n';
+      const result = helper.testSerializeJson({ a: 1, b: 2 }, original);
+      expect(JSON.parse(result)).toEqual({ a: 1, b: 2 });
     });
 
     it('should append a trailing newline', () => {
-      const result = helper.testSerializeJson({});
+      const original = JSON.stringify({}, undefined, 2) + '\n';
+      const result = helper.testSerializeJson({}, original);
       expect(result.endsWith('\n')).toBe(true);
-    });
-
-    it('should serialize null', () => {
-      const result = helper.testSerializeJson(null);
-      expect(result).toBe('null\n');
-    });
-
-    it('should serialize arrays', () => {
-      const result = helper.testSerializeJson([1, 2]);
-      expect(result).toBe(JSON.stringify([1, 2], undefined, 2) + '\n');
     });
   });
 
   describe('round-trip', () => {
     it('should produce deterministic output when parsing then serializing', () => {
-      const original = { name: 'test', version: '1.0.0', nested: { a: [1, 2] } };
-      const serialized = helper.testSerializeJson(original);
-      const parsed = helper.testParseJson<typeof original>(serialized);
-      const reSerialized = helper.testSerializeJson(parsed);
-      expect(reSerialized).toBe(serialized);
+      const original = JSON.stringify(
+        { name: 'test', version: '1.0.0', nested: { a: [1, 2] } },
+        undefined,
+        2
+      );
+      const parsed = helper.testParseJson<Record<string, unknown>>(original);
+      const reSerialized = helper.testSerializeJson(parsed, original);
+      const reParsed = helper.testParseJson<Record<string, unknown>>(reSerialized);
+      expect(reParsed).toEqual(parsed);
+    });
+
+    it('should preserve JSONC comments in round-trip', () => {
+      const original = '{\n  // This is a comment\n  "a": 1\n}\n';
+      const result = helper.testSerializeJson({ a: 1, b: 2 }, original);
+      expect(result).toContain('// This is a comment');
+      expect(helper.testParseJson<Record<string, unknown>>(result)).toEqual({ a: 1, b: 2 });
     });
   });
 });

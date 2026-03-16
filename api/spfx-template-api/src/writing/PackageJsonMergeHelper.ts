@@ -45,7 +45,23 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
       incoming.devDependencies
     );
 
-    return this.serializeJson(merged);
+    return this.serializeJson(merged, existingContent);
+  }
+
+  /**
+   * Collects all `@microsoft/*` packages from a single dependency map into the result.
+   */
+  private static _collectMicrosoftPackages(
+    depMap: Record<string, string> | undefined,
+    result: Map<string, string>
+  ): void {
+    if (depMap) {
+      for (const [pkg, version] of Object.entries(depMap)) {
+        if (pkg.startsWith('@microsoft/')) {
+          result.set(pkg, version);
+        }
+      }
+    }
   }
 
   /**
@@ -57,15 +73,8 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
     devDeps?: Record<string, string>
   ): Map<string, string> {
     const result: Map<string, string> = new Map();
-    for (const map of [deps, devDeps]) {
-      if (map) {
-        for (const [pkg, version] of Object.entries(map)) {
-          if (pkg.startsWith('@microsoft/')) {
-            result.set(pkg, version);
-          }
-        }
-      }
-    }
+    PackageJsonMergeHelper._collectMicrosoftPackages(deps, result);
+    PackageJsonMergeHelper._collectMicrosoftPackages(devDeps, result);
     return result;
   }
 

@@ -1,24 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
+import type { IFeature, IPackageSolution, ISolution } from '@microsoft/spfx-heft-plugins';
+
 import { JsonMergeHelper } from './JsonMergeHelper';
-
-interface IFeature {
-  id: string;
-  [key: string]: unknown;
-}
-
-interface ISolution {
-  features?: IFeature[];
-  [key: string]: unknown;
-}
-
-interface IPackageSolutionJson {
-  $schema?: string;
-  solution?: ISolution;
-  paths?: Record<string, string>;
-  [key: string]: unknown;
-}
 
 /**
  * Merge helper for `config/package-solution.json`.
@@ -33,14 +18,14 @@ export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
   public readonly fileRelativePath: string = 'config/package-solution.json';
 
   public merge(existingContent: string, newContent: string): string {
-    const existing: IPackageSolutionJson = this.parseJson<IPackageSolutionJson>(existingContent);
-    const incoming: IPackageSolutionJson = this.parseJson<IPackageSolutionJson>(newContent);
+    const existing: Partial<IPackageSolution> = this.parseJson<Partial<IPackageSolution>>(existingContent);
+    const incoming: Partial<IPackageSolution> = this.parseJson<Partial<IPackageSolution>>(newContent);
 
-    const merged: IPackageSolutionJson = { ...existing };
+    const merged: Partial<IPackageSolution> = { ...existing };
 
     if (existing.solution || incoming.solution) {
       // Spread existing first, then overlay incoming metadata for keys absent in existing
-      merged.solution = { ...incoming.solution, ...existing.solution };
+      merged.solution = { ...incoming.solution, ...existing.solution } as ISolution;
 
       const existingFeatures: IFeature[] = existing.solution?.features ?? [];
       const incomingFeatures: IFeature[] = incoming.solution?.features ?? [];
@@ -51,6 +36,6 @@ export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
       merged.solution.features = [...existingFeatures, ...newFeatures];
     }
 
-    return this.serializeJson(merged);
+    return this.serializeJson(merged, existingContent);
   }
 }

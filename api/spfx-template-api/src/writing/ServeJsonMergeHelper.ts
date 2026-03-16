@@ -34,6 +34,6 @@ export class ServeJsonMergeHelper extends JsonMergeHelper {
       merged.serveConfigurations = { ...existing.serveConfigurations, ...incoming.serveConfigurations };
     }
 
-    return this.serializeJson(merged);
+    return this.serializeJson(merged, existingContent);
   }
 }

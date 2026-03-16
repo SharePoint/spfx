@@ -57,7 +57,7 @@ export abstract class JsonMergeHelper implements IMergeHelper {
     // (undocumented)
     abstract merge(existingContent: string, newContent: string): string;
     protected parseJson<T>(content: string): T;
-    protected serializeJson(value: unknown): string;
+    protected serializeJson(value: unknown, originalContent: string): string;
 }
 
 // @public
