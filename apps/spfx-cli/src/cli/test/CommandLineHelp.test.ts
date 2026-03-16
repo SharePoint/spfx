@@ -11,6 +11,8 @@ describe('CommandLineHelp', () => {
     jest.spyOn(process, 'exit').mockImplementation((code) => {
       throw new Error(`Test code called process.exit(${code})`);
     });
+
+    jest.spyOn(process, 'cwd').mockReturnValue('<cwd>');
   });
 
   afterEach(() => {
@@ -28,9 +30,10 @@ describe('CommandLineHelp', () => {
     expect(globalHelpText).toMatchSnapshot('global help');
 
     for (const action of parser.actions) {
-      const actionHelpText: string = AnsiEscape.formatForTests(action.renderHelpText())
-        .replace(process.cwd(), '<cwd>')
-        .replace(/[ \t]+$/gm, '');
+      const actionHelpText: string = AnsiEscape.formatForTests(action.renderHelpText()).replace(
+        /[ \t]+$/gm,
+        ''
+      );
       expect(actionHelpText).toMatchSnapshot(action.actionName);
     }
   });
