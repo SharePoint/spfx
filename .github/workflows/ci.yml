@@ -14,7 +14,7 @@ jobs:
         include:
           - os: ubuntu-latest
             displayName: Ubuntu
-          - os: windows-latest-large
+          - os: windows-latest
             displayName: Windows
 
     name: Build on ${{ matrix.displayName }}
