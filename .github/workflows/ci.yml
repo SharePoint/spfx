@@ -13,8 +13,11 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
+            displayName: Ubuntu
           - os: windows-latest-large
-    name: Build on ${{ matrix.os }}
+            displayName: Windows
+
+    name: Build on ${{ matrix.displayName }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     steps:
