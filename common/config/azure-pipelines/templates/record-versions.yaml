@@ -1,0 +1,27 @@
+parameters:
+  - name: RushstackRepoPath
+    type: string
+    default: '$(Pipeline.Workspace)/s/rushstack'
+  - name: RepoPath
+    type: string
+    default: '$(Build.SourcesDirectory)'
+
+steps:
+  - checkout: RushstackRepo
+    path: s/rushstack
+
+  - template: /common/config/azure-pipelines/templates/configure-git-user.yaml@self
+    parameters:
+      RepoPath: '${{ parameters.RushstackRepoPath }}'
+
+  - script: 'node common/scripts/install-run-rush.js install --to repo-toolbox'
+    displayName: 'Rush Install (rushstack)'
+    workingDirectory: '${{ parameters.RushstackRepoPath }}'
+
+  - script: 'node common/scripts/install-run-rush.js build --verbose --production --to repo-toolbox'
+    displayName: 'Rush Build (rushstack)'
+    workingDirectory: '${{ parameters.RushstackRepoPath }}'
+
+  - script: 'node ${{ parameters.RushstackRepoPath }}/repo-scripts/repo-toolbox/lib-commonjs/start.js record-versions --out-file $(Build.ArtifactStagingDirectory)/package-versions/published-versions.json'
+    displayName: 'Record Published Versions'
+    workingDirectory: '${{ parameters.RepoPath }}'

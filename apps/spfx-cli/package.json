@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "@microsoft/spfx-template-api": "workspace:*",
-    "@rushstack/ts-command-line": "5.3.3",
-    "@rushstack/terminal": "0.22.3",
+    "@rushstack/ts-command-line": "~5.3.3",
+    "@rushstack/terminal": "~0.22.3",
     "lodash": "^4.17.23",
     "mem-fs-editor": "^11.1.4",
     "uuid": "^11.0.5",

@@ -16,8 +16,7 @@ Optional arguments:
   -h, --help            Show this help message and exit.
   --target-dir TARGET_DIR
                         The directory to create the solution (or where the
-                        solution already exists) The default value is
-                        \\"<cwd>\\".
+                        solution already exists) The default value is \\"<cwd>\\".
   --local-template TEMPLATE_PATH
                         Path to a local template folder
   --template TEMPLATE_NAME

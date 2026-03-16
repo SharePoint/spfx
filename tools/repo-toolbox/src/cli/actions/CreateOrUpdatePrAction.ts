@@ -3,10 +3,8 @@
 
 import type { ITerminal } from '@rushstack/terminal';
 import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
-import { Async } from '@rushstack/node-core-library';
 
-import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
-import { GitHubClient, type IGitHubLabel, type IGitHubPr } from '../../utilities/GitHubClient';
+import { GitHubClient, type IGitHubPr } from '../../utilities/GitHubClient';
 
 export class CreateOrUpdatePrAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
@@ -15,7 +13,6 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
   private readonly _baseBranchParameter: IRequiredCommandLineStringParameter;
   private readonly _titleParameter: IRequiredCommandLineStringParameter;
   private readonly _bodyParameter: IRequiredCommandLineStringParameter;
-  private readonly _sourceBuildLabelParameter: IRequiredCommandLineStringParameter;
 
   public constructor(terminal: ITerminal) {
     super({
@@ -55,29 +52,12 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       defaultValue: '',
       environmentVariable: 'PR_BODY'
     });
-
-    this._sourceBuildLabelParameter = this.defineStringParameter({
-      parameterLongName: '--source-build-label',
-      argumentName: 'LABEL',
-      description:
-        'A label to apply to the PR to track the originating pipeline run (e.g., SourceBuild:12345)',
-      required: true
-    });
   }
 
   protected override async onExecuteAsync(): Promise<void> {
     const terminal: ITerminal = this._terminal;
 
-    const repoSlug: string = await getRepoSlugAsync();
-    const [owner, repo] = repoSlug.split('/');
-    if (!owner || !repo) {
-      throw new Error(`Unable to determine repository owner or name from slug: ${repoSlug}`);
-    }
-
-    terminal.writeLine(`Repository: ${repoSlug}`);
-
-    const authorizationHeader: string = await getGitAuthorizationHeaderAsync();
-    const gitHubClient: GitHubClient = new GitHubClient({ authorizationHeader, owner, repo });
+    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync(terminal);
 
     // Check for existing open PR from this branch
     const branchName: string = this._branchNameParameter.value;
@@ -98,27 +78,5 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       ({ number: prNumber } = await gitHubClient.openPrAsync({ title, body, branchName, baseBranch }));
       terminal.writeLine(`Created PR #${prNumber}`);
     }
-
-    // Apply SourceBuild label
-    const sourceBuildLabel: string = this._sourceBuildLabelParameter.value;
-    terminal.writeLine(`Applying label: ${sourceBuildLabel}`);
-
-    // Remove any existing SourceBuild: labels
-    const existingLabels: IGitHubLabel[] = await gitHubClient.getPrLabelsAsync(prNumber);
-
-    await Async.forEachAsync(
-      existingLabels,
-      async ({ name: labelName }) => {
-        if (labelName.startsWith('SourceBuild:')) {
-          await gitHubClient.deletePrLabelAsync({ prNumber, labelName });
-        }
-      },
-      { concurrency: 5 }
-    );
-
-    // Add the new label
-    await gitHubClient.addPrLabelAsync({ prNumber, labelName: sourceBuildLabel });
-
-    terminal.writeLine('Label applied.');
   }
 }

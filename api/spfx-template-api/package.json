@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@microsoft/spfx-heft-plugins": "1.22.2",
-    "@rushstack/node-core-library": "5.20.3",
-    "@rushstack/terminal": "0.22.3",
+    "@rushstack/node-core-library": "~5.20.3",
+    "@rushstack/terminal": "~0.22.3",
     "adm-zip": "^0.5.16",
     "ejs": "^3.1.10",
     "mem-fs": "^4.1.2",

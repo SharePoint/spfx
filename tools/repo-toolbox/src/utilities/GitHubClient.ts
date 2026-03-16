@@ -3,9 +3,14 @@
 
 import { Octokit, type RestEndpointMethodTypes } from '@octokit/rest';
 
+import type { ITerminal } from '@rushstack/terminal';
+
+import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from './GitUtilities';
+
 export type IGitHubPr = RestEndpointMethodTypes['pulls']['list']['response']['data'][number];
-export type IGitHubLabel = RestEndpointMethodTypes['issues']['listLabelsOnIssue']['response']['data'][number];
 export type IGitHubCreationResult = RestEndpointMethodTypes['pulls']['create']['response']['data'];
+export type ICommitPr =
+  RestEndpointMethodTypes['repos']['listPullRequestsAssociatedWithCommit']['response']['data'][number];
 
 export interface IGitHubClientOptions {
   authorizationHeader: string;
@@ -22,16 +27,6 @@ export interface IOpenPrOptions {
   body: string;
   branchName: string;
   baseBranch: string;
-}
-
-export interface IAddPrLabelOptions {
-  prNumber: number;
-  labelName: string;
-}
-
-export interface IDeletePrLabelOptions {
-  prNumber: number;
-  labelName: string;
 }
 
 export interface IUpdatePrDescriptionOptions {
@@ -59,6 +54,21 @@ export class GitHubClient {
     });
   }
 
+  /**
+   * Creates a {@link GitHubClient} by reading the repository slug and authorization
+   * header from the local git configuration.
+   */
+  public static async createGitHubClientAsync(terminal: ITerminal): Promise<GitHubClient> {
+    const repoSlug: string = await getRepoSlugAsync(terminal);
+    const [owner, repo] = repoSlug.split('/');
+    if (!owner || !repo) {
+      throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
+    }
+
+    const authorizationHeader: string = await getGitAuthorizationHeaderAsync(terminal);
+    return new GitHubClient({ authorizationHeader, owner, repo });
+  }
+
   public async getPrForBranchAsync(options: IGetPrForBranchOptions): Promise<IGitHubPr | undefined> {
     const { branchName } = options;
     const { data } = await this._octokit.pulls.list({
@@ -81,29 +91,19 @@ export class GitHubClient {
     return data;
   }
 
-  public async getPrLabelsAsync(prNumber: number): Promise<IGitHubLabel[]> {
-    return await this._octokit.paginate(this._octokit.issues.listLabelsOnIssue, {
+  /**
+   * Finds the merged pull request that produced the specified merge commit SHA.
+   *
+   * The GitHub API returns all PRs whose branch contains the commit, which
+   * includes open PRs. We filter to the PR whose `merge_commit_sha` matches
+   * exactly, ensuring we identify the PR that was merged to create this commit.
+   */
+  public async getMergedPrForCommitAsync(commitSha: string): Promise<ICommitPr | undefined> {
+    const { data } = await this._octokit.repos.listPullRequestsAssociatedWithCommit({
       ...this._octokitCommonOptions,
-      issue_number: prNumber
+      commit_sha: commitSha
     });
-  }
-
-  public async addPrLabelAsync(options: IAddPrLabelOptions): Promise<void> {
-    const { prNumber, labelName } = options;
-    await this._octokit.issues.addLabels({
-      ...this._octokitCommonOptions,
-      issue_number: prNumber,
-      labels: [labelName]
-    });
-  }
-
-  public async deletePrLabelAsync(options: IDeletePrLabelOptions): Promise<void> {
-    const { prNumber, labelName } = options;
-    await this._octokit.issues.removeLabel({
-      ...this._octokitCommonOptions,
-      issue_number: prNumber,
-      name: labelName
-    });
+    return data.find((pr) => pr.merge_commit_sha === commitSha);
   }
 
   public async updatePrDescriptionAsync(options: IUpdatePrDescriptionOptions): Promise<void> {

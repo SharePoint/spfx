@@ -1,7 +1,34 @@
 # Pipeline: Publish Packages
+# Trigger: When CHANGELOG files change on main (indicating a bump PR was merged).
+# Purpose: Detect version bump merges, download pre-packed artifacts from the
+#          bump pipeline, and publish to npm.
 
-trigger: none
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - 'apps/spfx-cli/CHANGELOG.md'
+      - 'api/spfx-template-api/CHANGELOG.md'
+      - 'common/config/rush/version-policies.json'
+
 pr: none
+
+parameters:
+  - name: dryRun
+    displayName: 'Dry run (skip npm publish)'
+    type: boolean
+    default: true
+
+variables:
+  - name: FORCE_COLOR
+    value: 1
+  # Pipeline definition ID of the "SPFx Versioning" pipeline in this AzDO project.
+  # Used by find-bump-pipeline-run to query for the latest tagged build.
+  - name: SpfxVersioningPipelineId
+    value: 39
+
 resources:
   repositories:
     - repository: 1esPipelines
@@ -17,10 +44,96 @@ extends:
       os: windows
     stages:
       - stage: Publish
+        displayName: 'Publish Packages'
         jobs:
-          - job: PublishJob
+          - job: PublishPackages
+            displayName: 'Publish to npm'
             pool:
               name: publish-rushstack
               os: linux
+            variables:
+              - name: dryRunFlag
+                ${{ if eq(parameters.dryRun, true) }}:
+                  value: '--dry-run'
+                ${{ else }}:
+                  value: ''
+            templateContext:
+              outputParentDirectory: $(Build.ArtifactStagingDirectory)
+              outputs:
+                - output: pipelineArtifact
+                  targetPath: $(Build.ArtifactStagingDirectory)/published-versions
+                  artifactName: published-versions
             steps:
               - checkout: self
+                persistCredentials: true
+
+              - template: /common/config/azure-pipelines/templates/configure-git-user.yaml@self
+
+              - template: /common/config/azure-pipelines/templates/install-node.yaml@self
+
+              - script: node common/scripts/install-run-rush.js install --to repo-toolbox
+                displayName: 'Rush Install (repo-toolbox)'
+
+              - script: node common/scripts/install-run-rush.js build --to repo-toolbox
+                displayName: 'Rush Build (repo-toolbox)'
+
+              # Ensure the published-versions directory exists even when the
+              # commit turns out not to be a version bump merge, because the
+              # 1ES templateContext output always attempts to publish it.
+              - script: mkdir -p $(Build.ArtifactStagingDirectory)/published-versions
+                displayName: 'Create published-versions staging directory'
+
+              # Find the bump pipeline run that produced the version bump
+              # commit merged by this PR. Uses the PR's head SHA to look up a
+              # build tagged with that commit. Sets IsVersionBumpMerge and
+              # BumpPipelineRunId output variables.
+              - script: >-
+                  node tools/repo-toolbox/lib/start.js find-bump-pipeline-run
+                  --pipeline-id $(SpfxVersioningPipelineId)
+                name: FindBumpRun
+                displayName: 'Find Bump Pipeline Run'
+                env:
+                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+              - task: DownloadPipelineArtifact@2
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                displayName: 'Download Packaged Packages'
+                inputs:
+                  buildType: specific
+                  project: $(System.TeamProject)
+                  definition: $(SpfxVersioningPipelineId)
+                  buildVersionToDownload: specific
+                  pipelineId: $(FindBumpRun.BumpPipelineRunId)
+                  artifactName: packages
+                  targetPath: $(Pipeline.Workspace)/packages
+
+              - task: DownloadPipelineArtifact@2
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                displayName: 'Download Package Versions'
+                inputs:
+                  buildType: specific
+                  project: $(System.TeamProject)
+                  definition: $(SpfxVersioningPipelineId)
+                  buildVersionToDownload: specific
+                  pipelineId: $(FindBumpRun.BumpPipelineRunId)
+                  artifactName: package-versions
+                  targetPath: $(Pipeline.Workspace)/package-versions
+
+              - script: >-
+                  node tools/repo-toolbox/lib/start.js publish-tarballs
+                  --artifact-path $(Pipeline.Workspace)/packages
+                  $(dryRunFlag)
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                displayName: 'Publish Packages to npm'
+                env:
+                  NPM_AUTH_TOKEN: $(npmToken)
+
+              # Copy only the JSON files from the downloaded package-versions artifact into
+              # the published-versions staging directory. The artifact zip also contains a
+              # _metadata folder added by the 1ES template, which must be excluded here so
+              # it is not duplicated when 1ES publishes this pipeline's artifact.
+              - script: >-
+                  cp $(Pipeline.Workspace)/package-versions/*.json
+                  $(Build.ArtifactStagingDirectory)/published-versions/
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                displayName: 'Stage Published Versions Artifact'

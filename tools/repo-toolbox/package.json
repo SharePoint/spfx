@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@octokit/rest": "^22.0.0",
-    "@rushstack/node-core-library": "5.20.3",
-    "@rushstack/terminal": "0.22.3",
-    "@rushstack/ts-command-line": "5.3.3"
+    "@rushstack/node-core-library": "~5.20.3",
+    "@rushstack/rush-sdk": "~5.169.3",
+    "@rushstack/terminal": "~0.22.3",
+    "@rushstack/ts-command-line": "~5.3.3",
+    "azure-devops-node-api": "^14.1.0"
   },
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",
