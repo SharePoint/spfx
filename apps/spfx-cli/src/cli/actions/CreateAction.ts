@@ -178,7 +178,6 @@ export class CreateAction extends CommandLineAction {
       const solutionName: string = rawSolutionName || componentNameHyphenCase;
 
       const fs: MemFsEditor = await template.renderAsync(
-        this._terminal,
         {
           solution_name: solutionName,
           eslintProfile: 'react',
@@ -200,9 +199,7 @@ export class CreateAction extends CommandLineAction {
       );
 
       _printFileChanges(this._terminal, fs, targetDir);
-      this._terminal.writeLine(Colorize.green('Scaffolding complete! Writing files to disk...'));
       await template.write(fs);
-      this._terminal.writeLine(Colorize.green('All files written successfully!'));
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
       this._terminal.writeErrorLine(`Error creating SPFx component: ${message}`);

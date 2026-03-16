@@ -4,7 +4,6 @@
 
 ```ts
 
-import type { ITerminal } from '@rushstack/terminal';
 import type { MemFsEditor } from 'mem-fs-editor';
 import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
@@ -60,7 +59,7 @@ export class SPFxTemplate {
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
     get name(): string;
-    renderAsync(terminal: ITerminal, context: object, destinationDir: string, options?: IRenderOptions): Promise<MemFsEditor>;
+    renderAsync(context: object, destinationDir: string, options?: IRenderOptions): Promise<MemFsEditor>;
     get spfxVersion(): string;
     toString(): string;
     get version(): string;

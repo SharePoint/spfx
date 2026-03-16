@@ -11,13 +11,11 @@ import { Async, FileSystem, type FolderItem } from '@rushstack/node-core-library
 
 import { SPFxTemplate } from '../SPFxTemplate';
 import { SPFxTemplateJsonFile } from '../SPFxTemplateJsonFile';
-import { StringBufferTerminalProvider, Terminal } from '@rushstack/terminal';
 
 describe('SPFxTemplate', () => {
   const mockReadFileAsync = jest.mocked(FileSystem.readFileAsync);
   const mockReadFolderItemsAsync = jest.mocked(FileSystem.readFolderItemsAsync);
   const mockForEachAsync = jest.mocked(Async.forEachAsync);
-  let terminal: Terminal;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -27,8 +25,6 @@ describe('SPFxTemplate', () => {
         await callback(item as never, 0);
       }
     });
-
-    terminal = new Terminal(new StringBufferTerminalProvider());
   });
 
   describe('constructor', () => {
@@ -308,7 +304,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { name: 'MyApp', title: 'My Application' };
 
-      const editor: MemFsEditor = await template.renderAsync(terminal, context, '/output');
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
 
       expect(editor.read('/output/src/index.ts')).toBe('const name = "MyApp";');
       expect(editor.read('/output/README.md')).toBe('# My Application');
@@ -334,7 +330,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
 
-      const editor: MemFsEditor = await template.renderAsync(terminal, context, '/output');
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
 
       expect(editor.read('/output/src/index.ts')).toBe('const name = "MyComponent";');
     });
@@ -357,9 +353,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const invalidContext = { wrongField: 'value' };
 
-      await expect(template.renderAsync(terminal, invalidContext, '/output')).rejects.toThrow(
-        /Invalid context object/
-      );
+      await expect(template.renderAsync(invalidContext, '/output')).rejects.toThrow(/Invalid context object/);
     });
 
     it('should replace placeholders in filenames', async () => {
@@ -376,7 +370,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
 
-      const editor: MemFsEditor = await template.renderAsync(terminal, context, '/output');
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
 
       expect(editor.read('/output/src/MyComponent.ts')).toBe('export class MyComponent {}');
     });
@@ -396,7 +390,7 @@ describe('SPFxTemplate', () => {
       const template = new SPFxTemplate(definition, files);
       const context = { name: 'World', version: '1.0.0' };
 
-      const editor: MemFsEditor = await template.renderAsync(terminal, context, '/output');
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
 
       expect(editor.read('/output/file.txt')).toBe('Hello World!');
       expect(editor.read('/output/config.json')).toBe('{"version": "1.0.0"}');
@@ -410,7 +404,7 @@ describe('SPFxTemplate', () => {
       });
 
       const template = new SPFxTemplate(definition, new Map());
-      const result: MemFsEditor = await template.renderAsync(terminal, {}, '/output');
+      const result: MemFsEditor = await template.renderAsync({}, '/output');
 
       expect(result).toBeDefined();
       expect(typeof result.read).toBe('function');
