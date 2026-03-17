@@ -4,6 +4,7 @@
 jest.mock('node:fs/promises');
 
 import { readFile } from 'node:fs/promises';
+import * as path from 'node:path';
 import type { MemFsEditor } from 'mem-fs-editor';
 
 import { SPFxTemplateWriter } from '../SPFxTemplateWriter';
@@ -73,7 +74,7 @@ describe(SPFxTemplateWriter.name, () => {
 
     // Should write the existing content into the editor to prevent overwrite
     expect(mockEditor.write).toHaveBeenCalledWith(
-      expect.stringContaining('some/unknown/file.json'),
+      path.join('/target', 'some/unknown/file.json'),
       existingContent
     );
     expect(mockEditor.commit).toHaveBeenCalled();
@@ -160,7 +161,7 @@ describe(SPFxTemplateWriter.name, () => {
     await writer.writeAsync(mockEditor, '/target');
 
     expect(mockEditor.write).toHaveBeenCalledWith(
-      expect.stringContaining('custom/file.txt'),
+      path.join('/target', 'custom/file.txt'),
       'existing+incoming'
     );
   });
