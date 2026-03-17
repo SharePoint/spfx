@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-extension-manifest.schema.json",
 
-  "id": "11111111-1111-1111-1111-111111111111",
+  "id": "7944a760-1306-56fb-9ce9-f7fe8733ab88",
   "alias": "ReactFormCustomizerFormCustomizer",
   "componentType": "Extension",
   "extensionType": "FormCustomizer",

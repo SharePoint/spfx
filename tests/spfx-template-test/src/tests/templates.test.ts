@@ -8,14 +8,13 @@ import { promisify } from 'node:util';
 import ignore from 'ignore';
 import { _isBinaryFile as isBinaryFile } from '@microsoft/spfx-template-api';
 
+import { REPO_ROOT, CLI_PATH } from './constants';
+
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
 
-// Path to the root of the monorepo
-const REPO_ROOT = path.resolve(__dirname, '../../../../');
-const EXAMPLES_DIR = path.join(REPO_ROOT, 'examples');
-const OUTPUT_DIR = path.join(REPO_ROOT, 'common/temp/examples');
-const CLI_PATH = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
+const EXAMPLES_DIR: string = `${REPO_ROOT}/examples`;
+const OUTPUT_DIR: string = `${REPO_ROOT}/common/temp/examples`;
 
 // Predefined template configuration
 interface ITemplateConfig {

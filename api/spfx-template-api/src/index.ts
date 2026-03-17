@@ -24,3 +24,12 @@ export {
   LocalFileSystemRepositorySource,
   PublicGitHubRepositorySource
 } from './repositories/index';
+export {
+  IMergeHelper,
+  JsonMergeHelper,
+  PackageJsonMergeHelper,
+  ConfigJsonMergeHelper,
+  PackageSolutionJsonMergeHelper,
+  ServeJsonMergeHelper,
+  SPFxTemplateWriter
+} from './writing/index';

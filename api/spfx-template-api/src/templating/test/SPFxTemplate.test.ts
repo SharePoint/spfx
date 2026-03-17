@@ -413,42 +413,6 @@ describe('SPFxTemplate', () => {
     });
   });
 
-  describe('write', () => {
-    it('should commit the MemFsEditor', async () => {
-      const definition = new SPFxTemplateJsonFile({
-        name: 'Test',
-        version: '1.0.0',
-        spfxVersion: '1.18.0'
-      });
-
-      const mockEditor: MemFsEditor = {
-        commit: jest.fn().mockResolvedValue(undefined)
-      } as unknown as MemFsEditor;
-
-      const template = new SPFxTemplate(definition, new Map());
-
-      await template.write(mockEditor);
-
-      expect(mockEditor.commit).toHaveBeenCalled();
-    });
-
-    it('should return a promise that resolves', async () => {
-      const definition = new SPFxTemplateJsonFile({
-        name: 'Test',
-        version: '1.0.0',
-        spfxVersion: '1.18.0'
-      });
-
-      const mockEditor: MemFsEditor = {
-        commit: jest.fn().mockResolvedValue(undefined)
-      } as unknown as MemFsEditor;
-
-      const template = new SPFxTemplate(definition, new Map());
-
-      await expect(template.write(mockEditor)).resolves.toBeUndefined();
-    });
-  });
-
   describe('toString', () => {
     it('should return formatted template information', () => {
       const definition = new SPFxTemplateJsonFile({

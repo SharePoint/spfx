@@ -223,15 +223,6 @@ export class SPFxTemplate {
   }
 
   /**
-   * Commits the rendered files to disk.
-   * @param memFs - The MemFsEditor instance containing the files to write
-   * @returns A Promise that resolves when all files have been written
-   */
-  public write(memFs: MemFsEditor): Promise<void> {
-    return memFs.commit();
-  }
-
-  /**
    * Returns a string representation of the template including its metadata.
    * @returns A formatted string with template details
    */

@@ -1,0 +1,9 @@
+{
+  "operationSettings": [
+    {
+      "operationName": "_phase:test",
+      "outputFolderNames": ["coverage"],
+      "dependsOnAdditionalFiles": ["../../templates/**/*"]
+    }
+  ]
+}
