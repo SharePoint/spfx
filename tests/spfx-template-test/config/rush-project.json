@@ -3,7 +3,7 @@
     {
       "operationName": "_phase:test",
       "outputFolderNames": ["coverage"],
-      "additionalInputGlobPatterns": ["../../templates/**/*"]
+      "dependsOnAdditionalFiles": ["../../templates/**/*"]
     }
   ]
 }
