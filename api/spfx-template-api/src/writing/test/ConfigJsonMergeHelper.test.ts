@@ -75,7 +75,7 @@ describe(ConfigJsonMergeHelper.name, () => {
     expect(result.externals.lodash).toBe('https://cdn.example.com/lodash.js');
   });
 
-  it('should preserve $schema and version from existing', () => {
+  it('should use incoming $schema and version over existing', () => {
     const existing = JSON.stringify({
       $schema: 'https://existing-schema.example.com',
       version: '2.0',
@@ -90,8 +90,9 @@ describe(ConfigJsonMergeHelper.name, () => {
 
     const result = JSON.parse(helper.merge(existing, incoming));
 
-    expect(result.$schema).toBe('https://existing-schema.example.com');
-    expect(result.version).toBe('2.0');
+    // Incoming wins for scalar fields
+    expect(result.$schema).toBe('https://new-schema.example.com');
+    expect(result.version).toBe('3.0');
   });
 
   describe('error handling', () => {

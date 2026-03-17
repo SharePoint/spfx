@@ -12,7 +12,7 @@ import { JsonMergeHelper } from './JsonMergeHelper';
  * - Merge `bundles` by key (each component has a unique bundle name)
  * - Merge `localizedResources` by key
  * - Merge `externals` by key
- * - Preserve `$schema`, `version`, and other fields from existing
+ * - Incoming wins for scalar fields (`$schema`, `version`, etc.)
  *
  * @public
  */
@@ -23,7 +23,7 @@ export class ConfigJsonMergeHelper extends JsonMergeHelper {
     const existing: Partial<IConfigJson> = this.parseJson<Partial<IConfigJson>>(existingContent);
     const incoming: Partial<IConfigJson> = this.parseJson<Partial<IConfigJson>>(newContent);
 
-    const merged: Partial<IConfigJson> = { ...existing };
+    const merged: Partial<IConfigJson> = { ...existing, ...incoming };
 
     // Incoming wins on key collision — each component contributes unique bundle
     // names, so collisions indicate a re-scaffold of the same component.
