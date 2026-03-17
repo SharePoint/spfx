@@ -4,6 +4,7 @@
 
 ```ts
 
+import { JsonObject } from '@rushstack/node-core-library';
 import type { MemFsEditor } from 'mem-fs-editor';
 import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
@@ -57,7 +58,7 @@ export abstract class JsonMergeHelper implements IMergeHelper {
     // (undocumented)
     abstract merge(existingContent: string, newContent: string): string;
     protected parseJson<T>(content: string): T;
-    protected serializeJson(value: unknown, originalContent: string): string;
+    protected serializeJson<T extends JsonObject>(value: T, originalContent: string): string;
 }
 
 // @public

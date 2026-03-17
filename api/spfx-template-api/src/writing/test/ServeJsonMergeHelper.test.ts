@@ -41,7 +41,7 @@ describe(ServeJsonMergeHelper.name, () => {
     expect(result.serveConfigurations.weatherWidget).toBeDefined();
   });
 
-  it('should preserve port, https, and initialPage from existing', () => {
+  it('should use incoming scalar fields over existing', () => {
     const existing = JSON.stringify({
       port: 4321,
       https: true,
@@ -58,9 +58,10 @@ describe(ServeJsonMergeHelper.name, () => {
 
     const result = JSON.parse(helper.merge(existing, incoming));
 
-    expect(result.port).toBe(4321);
-    expect(result.https).toBe(true);
-    expect(result.initialPage).toBe('https://localhost/existing');
+    // Incoming wins for scalar fields
+    expect(result.port).toBe(9999);
+    expect(result.https).toBe(false);
+    expect(result.initialPage).toBe('https://localhost/incoming');
   });
 
   it('should handle missing serveConfigurations in existing', () => {
@@ -132,7 +133,8 @@ describe(ServeJsonMergeHelper.name, () => {
 
       const result = JSON.parse(helper.merge(existing, incoming));
 
-      expect(result.port).toBe(4321);
+      // Incoming wins for scalar fields
+      expect(result.port).toBe(9999);
       expect(result.serveConfigurations).toBeUndefined();
     });
 
@@ -143,7 +145,8 @@ describe(ServeJsonMergeHelper.name, () => {
       const result = JSON.parse(helper.merge(existing, incoming));
 
       expect(result.serveConfigurations).toEqual({});
-      expect(result.port).toBe(4321);
+      // Incoming wins for scalar fields
+      expect(result.port).toBe(5000);
     });
 
     it('should preserve unknown top-level fields from existing', () => {

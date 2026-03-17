@@ -177,7 +177,8 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
 
     expect(mockEditor.write).toHaveBeenCalledTimes(1);
     const merged = JSON.parse((mockEditor.write as jest.Mock).mock.calls[0][1]);
-    expect(merged.port).toBe(4321);
+    // Incoming wins for scalar fields
+    expect(merged.port).toBe(9999);
     expect(merged.https).toBe(true);
     expect(merged.serveConfigurations.webpart).toBeDefined();
     expect(merged.serveConfigurations.extension).toBeDefined();

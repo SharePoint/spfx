@@ -4,7 +4,6 @@
 jest.mock('node:fs/promises');
 
 import { readFile } from 'node:fs/promises';
-import * as path from 'node:path';
 import type { MemFsEditor } from 'mem-fs-editor';
 
 import { SPFxTemplateWriter } from '../SPFxTemplateWriter';
@@ -73,10 +72,7 @@ describe(SPFxTemplateWriter.name, () => {
     await writer.writeAsync(mockEditor, '/target');
 
     // Should write the existing content into the editor to prevent overwrite
-    expect(mockEditor.write).toHaveBeenCalledWith(
-      path.join('/target', 'some/unknown/file.json'),
-      existingContent
-    );
+    expect(mockEditor.write).toHaveBeenCalledWith('/target/some/unknown/file.json', existingContent);
     expect(mockEditor.commit).toHaveBeenCalled();
   });
 
@@ -160,10 +156,7 @@ describe(SPFxTemplateWriter.name, () => {
     });
     await writer.writeAsync(mockEditor, '/target');
 
-    expect(mockEditor.write).toHaveBeenCalledWith(
-      path.join('/target', 'custom/file.txt'),
-      'existing+incoming'
-    );
+    expect(mockEditor.write).toHaveBeenCalledWith('/target/custom/file.txt', 'existing+incoming');
   });
 
   it('should skip files with null contents', async () => {

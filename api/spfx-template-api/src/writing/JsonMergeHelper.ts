@@ -31,8 +31,8 @@ export abstract class JsonMergeHelper implements IMergeHelper {
    * @param originalContent - The original JSON string whose formatting should be preserved
    * @returns A JSON string preserving the original formatting
    */
-  protected serializeJson(value: unknown, originalContent: string): string {
-    return JsonFile.updateString(originalContent, value as JsonObject, {
+  protected serializeJson<T extends JsonObject>(value: T, originalContent: string): string {
+    return JsonFile.updateString(originalContent, value, {
       ignoreUndefinedValues: true,
       jsonSyntax: JsonSyntax.JsonWithComments
     });

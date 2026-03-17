@@ -2,7 +2,6 @@
 // See LICENSE in the project root for license information.
 
 import { readFile } from 'node:fs/promises';
-import * as path from 'node:path';
 
 import type { MemFsEditor } from 'mem-fs-editor';
 
@@ -69,7 +68,7 @@ export class SPFxTemplateWriter {
         continue;
       }
 
-      const absolutePath: string = path.join(targetDir, relativePath);
+      const absolutePath: string = `${targetDir}/${relativePath}`;
 
       let existingContent: string;
       try {

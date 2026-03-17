@@ -3,13 +3,10 @@
 
 import * as fs from 'node:fs';
 import * as os from 'node:os';
-import * as path from 'node:path';
-import { execSync } from 'node:child_process';
 
-// Path to the root of the monorepo
-const REPO_ROOT: string = path.resolve(__dirname, '../../../../');
-const CLI_PATH: string = path.join(REPO_ROOT, 'apps/spfx-cli/bin/spfx');
-const TEMPLATES_DIR: string = path.join(REPO_ROOT, 'templates');
+import { Executable } from '@rushstack/node-core-library';
+
+import { REPO_ROOT, CLI_PATH, TEMPLATES_DIR } from './constants';
 
 /**
  * Helper to run the scaffolding CLI for a given template into a target directory.
@@ -22,29 +19,38 @@ function scaffold(options: {
   componentAlias?: string;
   componentDescription?: string;
 }): void {
-  const commandParts: string[] = [
-    `node "${CLI_PATH}" create`,
-    `--template ${options.templateName}`,
-    `--target-dir "${options.targetDir}"`,
-    `--local-template "${TEMPLATES_DIR}"`,
-    `--library-name "${options.libraryName}"`,
-    `--component-name "${options.componentName}"`
+  const args: string[] = [
+    CLI_PATH,
+    'create',
+    '--template',
+    options.templateName,
+    '--target-dir',
+    options.targetDir,
+    '--local-template',
+    TEMPLATES_DIR,
+    '--library-name',
+    options.libraryName,
+    '--component-name',
+    options.componentName
   ];
 
   if (options.componentAlias) {
-    commandParts.push(`--component-alias "${options.componentAlias}"`);
+    args.push('--component-alias', options.componentAlias);
   }
 
   if (options.componentDescription) {
-    commandParts.push(`--component-description "${options.componentDescription}"`);
+    args.push('--component-description', options.componentDescription);
   }
 
-  const command: string = commandParts.join(' ');
-  execSync(command, {
+  const result = Executable.spawnSync('node', args, {
+    currentWorkingDirectory: REPO_ROOT,
     stdio: 'inherit',
-    cwd: REPO_ROOT,
-    env: { ...process.env, SPFX_CI_MODE: '1' }
+    environment: { ...process.env, SPFX_CI_MODE: '1' }
   });
+
+  if (result.status !== 0) {
+    throw new Error(`Scaffold failed with exit code ${result.status}`);
+  }
 }
 
 describe('Multi-component scaffolding', () => {
@@ -53,7 +59,7 @@ describe('Multi-component scaffolding', () => {
   let tempDir: string;
 
   beforeEach(() => {
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'spfx-multi-'));
+    tempDir = fs.mkdtempSync(`${os.tmpdir()}/spfx-multi-`);
   });
 
   afterEach(() => {
@@ -82,13 +88,10 @@ describe('Multi-component scaffolding', () => {
     });
 
     // Step 3: Snapshot the 4 key merged config files
-    const packageJson: string = fs.readFileSync(path.join(tempDir, 'package.json'), 'utf-8');
-    const configJson: string = fs.readFileSync(path.join(tempDir, 'config', 'config.json'), 'utf-8');
-    const packageSolutionJson: string = fs.readFileSync(
-      path.join(tempDir, 'config', 'package-solution.json'),
-      'utf-8'
-    );
-    const serveJson: string = fs.readFileSync(path.join(tempDir, 'config', 'serve.json'), 'utf-8');
+    const packageJson: string = fs.readFileSync(`${tempDir}/package.json`, 'utf-8');
+    const configJson: string = fs.readFileSync(`${tempDir}/config/config.json`, 'utf-8');
+    const packageSolutionJson: string = fs.readFileSync(`${tempDir}/config/package-solution.json`, 'utf-8');
+    const serveJson: string = fs.readFileSync(`${tempDir}/config/serve.json`, 'utf-8');
 
     expect(JSON.parse(packageJson)).toMatchSnapshot('merged package.json');
     expect(JSON.parse(configJson)).toMatchSnapshot('merged config/config.json');
@@ -96,18 +99,10 @@ describe('Multi-component scaffolding', () => {
     expect(JSON.parse(serveJson)).toMatchSnapshot('merged config/serve.json');
 
     // Step 4: Verify source file coexistence
-    expect(fs.existsSync(path.join(tempDir, 'src', 'webparts', 'minimalWebPart', 'MinimalWebPart.ts'))).toBe(
-      true
-    );
+    expect(fs.existsSync(`${tempDir}/src/webparts/minimalWebPart/MinimalWebPart.ts`)).toBe(true);
     expect(
       fs.existsSync(
-        path.join(
-          tempDir,
-          'src',
-          'extensions',
-          'appCustomizerApplicationCustomizer',
-          'AppCustomizerApplicationCustomizer.ts'
-        )
+        `${tempDir}/src/extensions/appCustomizerApplicationCustomizer/AppCustomizerApplicationCustomizer.ts`
       )
     ).toBe(true);
   });
