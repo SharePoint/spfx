@@ -53,6 +53,7 @@ export class CreateAction extends CommandLineAction {
   private readonly _componentAlias: CommandLineStringParameter;
   private readonly _componentDescription: CommandLineStringParameter;
   private readonly _solutionName: CommandLineStringParameter;
+  private readonly _templateUrl: CommandLineStringParameter;
   private readonly _spfxVersion: CommandLineStringParameter;
 
   public constructor(terminal: Terminal) {
@@ -116,6 +117,16 @@ export class CreateAction extends CommandLineAction {
       description: 'The solution name. If not provided, defaults to the kebab-case component name.'
     });
 
+    this._templateUrl = this.defineStringParameter({
+      parameterLongName: '--template-url',
+      argumentName: 'URL',
+      description:
+        'URL of the GitHub template repository. ' +
+        `Defaults to ${DEFAULT_GITHUB_REPO}. ` +
+        'Can also be set via the SPFX_TEMPLATE_REPO_URL environment variable.',
+      environmentVariable: 'SPFX_TEMPLATE_REPO_URL'
+    });
+
     this._spfxVersion = this.defineStringParameter({
       parameterLongName: '--spfx-version',
       argumentName: 'VERSION',
@@ -145,25 +156,20 @@ export class CreateAction extends CommandLineAction {
 
       if (this._localTemplateSources.values.length > 0) {
         if (this._spfxVersion.value !== undefined) {
-          this._terminal.writeWarningLine(
-            'Warning: --spfx-version is ignored when --local-template is specified.'
-          );
+          this._terminal.writeWarningLine('--spfx-version is ignored when --local-template is specified.');
         }
         for (const localPath of this._localTemplateSources.values) {
           this._terminal.writeLine(`Adding local template source: ${localPath}`);
           manager.addSource(new LocalFileSystemRepositorySource(localPath));
         }
       } else {
-        // Trim before || so a whitespace-only env var falls back to the default
-        // eslint-disable-next-line dot-notation
-        const envUrl: string = (process.env['SPFX_TEMPLATE_REPO_URL'] || '').trim();
-        const rawUrl: string = envUrl || DEFAULT_GITHUB_REPO;
-        const { repoUrl, urlBranch } = _parseGitHubUrlAndRef(rawUrl);
+        const rawUrl: string = (this._templateUrl.value ?? '').trim() || DEFAULT_GITHUB_REPO;
+        const { repoUrl, urlBranch } = parseGitHubUrlAndRef(rawUrl);
 
         const spfxVersion: string | undefined = this._spfxVersion.value;
         if (spfxVersion !== undefined && urlBranch !== undefined) {
           this._terminal.writeWarningLine(
-            `Warning: SPFX_TEMPLATE_REPO_URL contains a branch ('/tree/${urlBranch}'). ` +
+            `--template-url contains a branch ('/tree/${urlBranch}'). ` +
               `--spfx-version "${spfxVersion}" will take precedence.`
           );
         }
@@ -263,14 +269,15 @@ export class CreateAction extends CommandLineAction {
  * Parses a GitHub URL that may contain a `/tree/<ref>` path segment.
  * Returns the clean repository URL (without `.git` or trailing slashes) and the optional branch ref.
  */
-function _parseGitHubUrlAndRef(rawUrl: string): { repoUrl: string; urlBranch: string | undefined } {
+function parseGitHubUrlAndRef(rawUrl: string): { repoUrl: string; urlBranch: string | undefined } {
   const normalized: string = rawUrl.trim().replace(/\/+$/, '');
   // Match https://github.com/owner/repo[.git]/tree/ref
   const treeMatch: RegExpMatchArray | null = normalized.match(
-    /^(https:\/\/github\.com\/[^/]+\/[^/]+?)(?:\.git)?\/tree\/(.+)$/
+    /^(?<repo>https:\/\/github\.com\/[^/]+\/[^/]+?)(?:\.git)?\/tree\/(?<ref>.+)$/
   );
-  if (treeMatch) {
-    return { repoUrl: treeMatch[1] as string, urlBranch: treeMatch[2] as string };
+  if (treeMatch?.groups) {
+    const { repo, ref } = treeMatch.groups as { repo: string; ref: string };
+    return { repoUrl: repo, urlBranch: ref };
   }
   return { repoUrl: normalized.replace(/\.git$/, ''), urlBranch: undefined };
 }
