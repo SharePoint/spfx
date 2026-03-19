@@ -28,6 +28,7 @@ const mockTemplate = {
   spfxVersion: '1.22.1'
 };
 const mockCollection = new Map([['webpart-minimal', mockTemplate]]);
+mockCollection.toString = () => '[Mocked SPFxTemplateCollection]';
 
 const REQUIRED_ARGS: string[] = [
   '--template',
