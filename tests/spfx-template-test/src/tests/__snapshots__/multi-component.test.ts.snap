@@ -166,7 +166,7 @@ Object {
 `;
 
 exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 1`] = `
-"Adding local template source: /Users/ianc/code/spfx1/tests/spfx-template-test/lib/tests/../../../../templates
+"Adding local template source: <REPO_ROOT>/templates
 # of templates: 17
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
@@ -270,38 +270,38 @@ Version: 0.0.1
 SPFx Version: 1.22.2
 Number of Files: 27
 
-targetDir: /var/folders/_8/0vgbfg294ys50r2nlh2vlrjw0000gn/T/spfx-multi-NhKAuN
+targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
 [yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
-[yellow]Modified: package.json[default]
 [yellow]Modified: .npmignore[default]
-[yellow]Modified: tsconfig.json[default]
+[yellow]Modified: .vscode/launch.json[default]
+[yellow]Modified: .vscode/settings.json[default]
 [yellow]Modified: README.md[default]
-[yellow]Modified: teams/838638c8-36e9-53b5-a8c3-37a22b55fa22_outline.png[default]
-[yellow]Modified: teams/838638c8-36e9-53b5-a8c3-37a22b55fa22_color.png[default]
-[yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.module.scss[default]
+[yellow]Modified: config/config.json[default]
+[yellow]Modified: config/deploy-azure-storage.json[default]
+[yellow]Modified: config/package-solution.json[default]
+[yellow]Modified: config/rig.json[default]
+[yellow]Modified: config/sass.json[default]
+[yellow]Modified: config/serve.json[default]
+[yellow]Modified: config/typescript.json[default]
+[yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: package.json[default]
 [yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.manifest.json[default]
+[yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.module.scss[default]
 [yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.ts[default]
 [yellow]Modified: src/webparts/minimalWebPart/loc/en-us.js[default]
 [yellow]Modified: src/webparts/minimalWebPart/loc/minimalWebPartStrings.d.ts[default]
-[yellow]Modified: config/deploy-azure-storage.json[default]
-[yellow]Modified: config/config.json[default]
-[yellow]Modified: config/rig.json[default]
-[yellow]Modified: config/serve.json[default]
-[yellow]Modified: config/sass.json[default]
-[yellow]Modified: config/write-manifests.json[default]
-[yellow]Modified: config/typescript.json[default]
-[yellow]Modified: config/package-solution.json[default]
-[yellow]Modified: .vscode/settings.json[default]
-[yellow]Modified: .vscode/launch.json[default]
+[yellow]Modified: teams/838638c8-36e9-53b5-a8c3-37a22b55fa22_color.png[default]
+[yellow]Modified: teams/838638c8-36e9-53b5-a8c3-37a22b55fa22_outline.png[default]
+[yellow]Modified: tsconfig.json[default]
 
 "
 `;
 
 exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 2`] = `
-"Adding local template source: /Users/ianc/code/spfx1/tests/spfx-template-test/lib/tests/../../../../templates
+"Adding local template source: <REPO_ROOT>/templates
 # of templates: 17
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
@@ -405,21 +405,15 @@ Version: 0.0.1
 SPFx Version: 1.22.2
 Number of Files: 27
 
-targetDir: /var/folders/_8/0vgbfg294ys50r2nlh2vlrjw0000gn/T/spfx-multi-NhKAuN
+targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .gitignore[default]
-[yellow]Modified: README.md[default]
-[yellow]Modified: .npmignore[default]
-[yellow]Modified: tsconfig.json[default]
-[yellow]Modified: package.json[default]
 [yellow]Modified: .eslintrc.js[default]
-[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/AppCustomizerApplicationCustomizer.ts[default]
-[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/AppCustomizerApplicationCustomizer.manifest.json[default]
-[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/loc/appCustomizerApplicationCustomizerStrings.d.ts[default]
-[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/loc/en-us.js[default]
-[yellow]Modified: sharepoint/assets/ClientSideInstance.xml[default]
-[yellow]Modified: sharepoint/assets/elements.xml[default]
+[yellow]Modified: .gitignore[default]
+[yellow]Modified: .npmignore[default]
+[yellow]Modified: .vscode/launch.json[default]
+[yellow]Modified: .vscode/settings.json[default]
+[yellow]Modified: README.md[default]
 [yellow]Modified: config/config.json[default]
 [yellow]Modified: config/deploy-azure-storage.json[default]
 [yellow]Modified: config/package-solution.json[default]
@@ -428,8 +422,14 @@ targetDir: /var/folders/_8/0vgbfg294ys50r2nlh2vlrjw0000gn/T/spfx-multi-NhKAuN
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
-[yellow]Modified: .vscode/launch.json[default]
-[yellow]Modified: .vscode/settings.json[default]
+[yellow]Modified: package.json[default]
+[yellow]Modified: sharepoint/assets/ClientSideInstance.xml[default]
+[yellow]Modified: sharepoint/assets/elements.xml[default]
+[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/AppCustomizerApplicationCustomizer.manifest.json[default]
+[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/AppCustomizerApplicationCustomizer.ts[default]
+[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/loc/appCustomizerApplicationCustomizerStrings.d.ts[default]
+[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/loc/en-us.js[default]
+[yellow]Modified: tsconfig.json[default]
 
 "
 `;

@@ -292,12 +292,20 @@ function parseGitHubUrlAndRef(rawUrl: string): { repoUrl: string; urlBranch: str
  */
 function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: string): void {
   terminal.writeLine(`targetDir: ${targetDir}`);
-  const changed: { [key: string]: { state: 'modified' | 'deleted'; isNew: boolean } } = fs.dump(targetDir);
+  interface IChangedFile {
+    state: 'modified' | 'deleted';
+    isNew: boolean;
+  }
+  const changed: { [key: string]: IChangedFile } = fs.dump(targetDir);
 
   terminal.writeLine();
   terminal.writeLine(Colorize.cyan('The following files will be modified:'));
 
-  for (const [file, data] of Object.entries(changed)) {
+  const changedEntries: [string, IChangedFile][] = Object.entries(changed).sort(([a], [b]) =>
+    a < b ? -1 : a > b ? 1 : 0
+  );
+
+  for (const [file, data] of changedEntries) {
     const { state, isNew } = data;
     if (isNew) {
       terminal.writeLine(Colorize.green(`Added: ${file}`));

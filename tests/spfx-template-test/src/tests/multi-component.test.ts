@@ -5,7 +5,9 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 
 import { FileSystem } from '@rushstack/node-core-library';
+
 import { scaffoldAsync } from './testUtilities';
+import { TEMPLATES_DIR } from './constants';
 
 describe('Multi-component scaffolding', () => {
   jest.setTimeout(120000);
@@ -25,6 +27,7 @@ describe('Multi-component scaffolding', () => {
     await scaffoldAsync({
       templateName: 'webpart-minimal',
       targetDir: tempDir,
+      localTemplatePath: TEMPLATES_DIR,
       libraryName: '@spfx-template/multi-component-test',
       componentName: 'Minimal',
       componentAlias: 'Minimal',
@@ -35,6 +38,7 @@ describe('Multi-component scaffolding', () => {
     await scaffoldAsync({
       templateName: 'extension-application-customizer',
       targetDir: tempDir,
+      localTemplatePath: TEMPLATES_DIR,
       libraryName: '@spfx-template/multi-component-test',
       componentName: 'AppCustomizer',
       componentAlias: 'AppCustomizer',
