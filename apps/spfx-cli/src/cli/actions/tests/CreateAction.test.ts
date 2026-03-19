@@ -285,7 +285,7 @@ describe('CreateAction', () => {
 
     it('extracts branch from /tree/ on a GHE host', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.mycompany.com/org/repo/tree/my-branch';
-      await runCreate();
+      await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.mycompany.com/org/repo',
         'my-branch',
@@ -295,7 +295,7 @@ describe('CreateAction', () => {
 
     it('ignores subdirectory suffix after the branch name in /tree/ path', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx/tree/main/some/subdir';
-      await runCreate();
+      await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
         'main',
