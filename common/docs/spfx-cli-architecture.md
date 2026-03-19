@@ -54,9 +54,10 @@ and merging, and a new CLI (or any other front-end) is a thin consumer of that A
 **Package:** `@microsoft/spfx-cli`
 **Binary:** `spfx`
 
-The CLI is a thin front-end over the scaffolding API. It handles argument parsing,
-interactive prompts, and user-facing output, but delegates all template loading,
-rendering, and writing to `@microsoft/spfx-template-api`.
+The CLI is a thin front-end over the scaffolding API. It handles argument parsing
+and user-facing output, but delegates all template loading, rendering, and writing
+to `@microsoft/spfx-template-api`. All flows are non-interactive — every parameter
+must be supplied via flags.
 
 This separation means additional front-ends (e.g. `npm create`, an MCP server, or a
 Yeoman compatibility shim) can be built without duplicating core logic.
@@ -92,8 +93,7 @@ render the template in-memory, and write to disk — routing modified files thro
 helpers when scaffolding onto an existing project. After writing, the CLI will run
 dependency installation (via the selected package manager) so the project is immediately
 buildable. The CLI will also validate that the current Node.js version meets SPFx
-requirements before proceeding and, for parameters not specified on the command line
-(e.g. component name, solution name), will fall back to an interactive prompt flow.
+requirements before proceeding.
 
 #### `spfx list-templates` (planned)
 
@@ -411,7 +411,6 @@ The following are explicitly out of scope for the initial release:
 - **CI coverage:** Run rendered examples against public SPFx releases. Additionally,
   validate templates against the latest internal SharePoint builds to catch regressions
   before release.
-- **Interactive fallback flow** for missing CLI params (solution name, component name).
 - **MergeHelpers:** Robust merge handlers (`package.json`, `config.json`,
   `package-solution.json`, `serve.json`, Teams manifest).
 - **`list-templates` command.**
