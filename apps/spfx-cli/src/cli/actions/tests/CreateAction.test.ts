@@ -11,8 +11,9 @@ import {
 } from '@microsoft/spfx-template-api';
 import type { SPFxTemplateCollection } from '@microsoft/spfx-template-api';
 
-import { SOLUTION_NAME_PATTERN } from '../../../utilcities/validation';
+import { SOLUTION_NAME_PATTERN } from '../../../utilities/validation';
 import { SPFxCommandLineParser } from '../../SPFxCommandLineParser';
+import { SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME } from '../CreateAction';
 
 const MockedManager = SPFxTemplateRepositoryManager as jest.MockedClass<typeof SPFxTemplateRepositoryManager>;
 const MockedGitHub = PublicGitHubRepositorySource as jest.MockedClass<typeof PublicGitHubRepositorySource>;
@@ -27,9 +28,6 @@ const mockTemplate = {
   spfxVersion: '1.22.1'
 };
 const mockCollection = new Map([['webpart-minimal', mockTemplate]]);
-
-// Use a variable key to satisfy both ESLint dot-notation and TypeScript noPropertyAccessFromIndexSignature
-const SPFX_TEMPLATE_REPO_URL_KEY: string = 'SPFX_TEMPLATE_REPO_URL';
 
 const REQUIRED_ARGS: string[] = [
   '--template',
@@ -94,7 +92,7 @@ describe('CreateAction', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     process.env = { ...originalEnv };
-    delete process.env[SPFX_TEMPLATE_REPO_URL_KEY];
+    delete process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME];
 
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(
       mockCollection as unknown as SPFxTemplateCollection
@@ -120,7 +118,7 @@ describe('CreateAction', () => {
       });
 
       it('should use SPFX_TEMPLATE_REPO_URL when set', async () => {
-        process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/my-org/my-templates';
+        process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/my-org/my-templates';
         await runCreateAsync();
         expect(MockedGitHub).toHaveBeenCalledWith(
           'https://github.com/my-org/my-templates',
@@ -155,7 +153,7 @@ describe('CreateAction', () => {
 
   describe('URL normalization', () => {
     it('strips trailing slash', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx/';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx/';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -165,7 +163,7 @@ describe('CreateAction', () => {
     });
 
     it('strips multiple trailing slashes', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx///';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx///';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -175,7 +173,7 @@ describe('CreateAction', () => {
     });
 
     it('strips .git suffix', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx.git';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx.git';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -185,7 +183,7 @@ describe('CreateAction', () => {
     });
 
     it('trims whitespace', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = '  https://github.com/SharePoint/spfx  ';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = '  https://github.com/SharePoint/spfx  ';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -195,7 +193,7 @@ describe('CreateAction', () => {
     });
 
     it('handles .git then slash together', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx.git/';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx.git/';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -216,7 +214,7 @@ describe('CreateAction', () => {
     });
 
     it('passes ref when SPFX_TEMPLATE_REPO_URL and --spfx-version are both set', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/my-org/my-templates';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/my-org/my-templates';
       await runCreateAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/my-org/my-templates',
@@ -226,7 +224,8 @@ describe('CreateAction', () => {
     });
 
     it('uses --spfx-version over branch encoded in SPFX_TEMPLATE_REPO_URL /tree/ path', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx/tree/pending-fixes';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
+        'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runCreateAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -244,7 +243,8 @@ describe('CreateAction', () => {
 
   describe('URL /tree/ branch extraction', () => {
     it('extracts branch from /tree/ in SPFX_TEMPLATE_REPO_URL', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx/tree/pending-fixes';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
+        'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -254,7 +254,7 @@ describe('CreateAction', () => {
     });
 
     it('handles version-like branch name in /tree/ path', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx/tree/1.22';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx/tree/1.22';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -264,7 +264,7 @@ describe('CreateAction', () => {
     });
 
     it('handles .git before /tree/', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx.git/tree/1.22';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx.git/tree/1.22';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -274,7 +274,7 @@ describe('CreateAction', () => {
     });
 
     it('passes undefined ref when URL has no /tree/ and no --spfx-version', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -284,7 +284,8 @@ describe('CreateAction', () => {
     });
 
     it('extracts branch from /tree/ on a GHE host', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.mycompany.com/org/repo/tree/my-branch';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
+        'https://github.mycompany.com/org/repo/tree/my-branch';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.mycompany.com/org/repo',
@@ -294,7 +295,8 @@ describe('CreateAction', () => {
     });
 
     it('ignores subdirectory suffix after the branch name in /tree/ path', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx/tree/main/some/subdir';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
+        'https://github.com/SharePoint/spfx/tree/main/some/subdir';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
@@ -306,7 +308,7 @@ describe('CreateAction', () => {
 
   describe('whitespace env var fix', () => {
     it('falls back to default URL when SPFX_TEMPLATE_REPO_URL is whitespace-only', async () => {
-      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = '   ';
+      process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = '   ';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
