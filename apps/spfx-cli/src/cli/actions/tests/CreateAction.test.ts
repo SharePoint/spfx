@@ -89,9 +89,13 @@ describe('SOLUTION_NAME_PATTERN', () => {
 });
 
 describe('CreateAction', () => {
+  const originalEnv = process.env;
+
   beforeEach(() => {
     jest.clearAllMocks();
+    process.env = { ...originalEnv };
     delete process.env[SPFX_TEMPLATE_REPO_URL_KEY];
+
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(
       mockCollection as unknown as SPFxTemplateCollection
     );
@@ -99,8 +103,8 @@ describe('CreateAction', () => {
   });
 
   afterEach(() => {
+    process.env = originalEnv;
     jest.restoreAllMocks();
-    delete process.env[SPFX_TEMPLATE_REPO_URL_KEY];
   });
 
   describe('source selection', () => {
