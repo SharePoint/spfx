@@ -65,16 +65,18 @@ export async function scaffoldAsync(options: IScaffoldOptions): Promise<void> {
     currentWorkingDirectory: REPO_ROOT,
     environment: { ...process.env, SPFX_CI_MODE: '1' }
   });
-  const { stdout, stderr } = await Executable.waitForExitAsync(childProcess, {
-    throwOnNonZeroExitCode: true,
-    throwOnSignal: true,
+  // Explicitly don't use `throwOnNonZeroExitCode` and `throwOnSignal` so we can see
+  // error output during test failures
+  const { stdout, stderr, exitCode, signal } = await Executable.waitForExitAsync(childProcess, {
     encoding: 'utf8'
   });
 
-  let normalizedStdout: string = stdout.replaceAll(REPO_ROOT, '<REPO_ROOT>');
-  normalizedStdout = normalizedStdout.replaceAll(targetDir, '<TARGET_DIR>');
+  let normalizedStdout: string = stdout.replaceAll(targetDir, '<TARGET_DIR>');
+  normalizedStdout = normalizedStdout.replaceAll(localTemplatePath, '<LOCAL_TEMPLATE_PATH>');
   normalizedStdout = AnsiEscape.formatForTests(normalizedStdout);
   expect(normalizedStdout).toMatchSnapshot('stdout');
 
   expect(stderr).toBe('');
+  expect(exitCode).toBe(0);
+  expect(signal).toBeNull();
 }

@@ -1,17 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { execSync } from 'node:child_process';
-import { promisify } from 'node:util';
 import ignore from 'ignore';
+
 import { _isBinaryFile as isBinaryFile } from '@microsoft/spfx-template-api';
+import { FileSystem, NewlineKind } from '@rushstack/node-core-library';
 
-import { REPO_ROOT, CLI_PATH } from './constants';
+import { REPO_ROOT, TEMPLATES_DIR } from './constants';
 
-const readdir = promisify(fs.readdir);
-const readFile = promisify(fs.readFile);
+import { scaffoldAsync } from './testUtilities';
 
 const EXAMPLES_DIR: string = `${REPO_ROOT}/examples`;
 const OUTPUT_DIR: string = `${REPO_ROOT}/common/temp/examples`;
@@ -32,8 +30,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/hello-world-test',
     templateName: 'test',
-    templatePath: path.join(REPO_ROOT, 'tests/spfx-template-test/test-template'),
-    localTemplatePath: path.join(REPO_ROOT, 'tests/spfx-template-test'),
+    templatePath: `${REPO_ROOT}/tests/spfx-template-test/test-template`,
+    localTemplatePath: `${REPO_ROOT}/tests/spfx-template-test`,
     componentName: 'Hello World',
     componentAlias: 'HelloWorld',
     componentDescription: 'A hello world test component',
@@ -42,8 +40,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/library',
     templateName: 'library',
-    templatePath: path.join(REPO_ROOT, 'templates/library'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/library`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'Example',
     componentAlias: 'ExampleLibrary',
     componentDescription: 'Library Description'
@@ -51,8 +49,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/webpart-minimal',
     templateName: 'webpart-minimal',
-    templatePath: path.join(REPO_ROOT, 'templates/webpart-minimal'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/webpart-minimal`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Web Part Description'
@@ -60,8 +58,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/webpart-noframework',
     templateName: 'webpart-noframework',
-    templatePath: path.join(REPO_ROOT, 'templates/webpart-noframework'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/webpart-noframework`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'NoFramework',
     componentAlias: 'NoFramework',
     componentDescription: 'No Framework Web Part Description'
@@ -69,8 +67,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/ace-data-visualization',
     templateName: 'ace-data-visualization',
-    templatePath: path.join(REPO_ROOT, 'templates/ace-data-visualization'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/ace-data-visualization`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'DataVisualization',
     componentAlias: 'DataVisualizationCard',
     componentDescription: 'DataVisualizationCard Description'
@@ -78,8 +76,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/ace-generic-card',
     templateName: 'ace-generic-card',
-    templatePath: path.join(REPO_ROOT, 'templates/ace-generic-card'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/ace-generic-card`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'GenericCard',
     componentAlias: 'GenericCard',
     componentDescription: 'GenericCard Description'
@@ -87,8 +85,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/ace-generic-image-card',
     templateName: 'ace-generic-image-card',
-    templatePath: path.join(REPO_ROOT, 'templates/ace-generic-image-card'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/ace-generic-image-card`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'GenericImage',
     componentAlias: 'GenericImageCard',
     componentDescription: 'GenericImageCard Description'
@@ -96,8 +94,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/ace-generic-primarytext-card',
     templateName: 'ace-generic-primarytext-card',
-    templatePath: path.join(REPO_ROOT, 'templates/ace-generic-primarytext-card'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/ace-generic-primarytext-card`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'GenericPrimaryText',
     componentAlias: 'GenericPrimaryTextCard',
     componentDescription: 'GenericPrimaryTextCard Description'
@@ -105,8 +103,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/ace-search-card',
     templateName: 'ace-search-card',
-    templatePath: path.join(REPO_ROOT, 'templates/ace-search-card'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/ace-search-card`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'Minimal',
     componentAlias: 'SearchCard',
     componentDescription: 'SearchCard Description'
@@ -114,8 +112,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/extension-application-customizer',
     templateName: 'extension-application-customizer',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-application-customizer'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/extension-application-customizer`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'ApplicationCustomizer Description'
@@ -123,8 +121,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/extension-fieldcustomizer-minimal',
     templateName: 'extension-fieldcustomizer-minimal',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-minimal'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/extension-fieldcustomizer-minimal`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Description'
@@ -132,8 +130,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/extension-fieldcustomizer-noframework',
     templateName: 'extension-fieldcustomizer-noframework',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-noframework'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/extension-fieldcustomizer-noframework`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'NoFramework',
     componentAlias: 'NoFramework',
     componentDescription: 'NoFramework Description'
@@ -141,8 +139,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/extension-fieldcustomizer-react',
     templateName: 'extension-fieldcustomizer-react',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-fieldcustomizer-react'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/extension-fieldcustomizer-react`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'ReactFieldCustomizer',
     componentAlias: 'ReactFieldCustomizerFieldCustomizer',
     componentDescription: 'ReactFieldCustomizer Description'
@@ -150,8 +148,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/extension-formcustomizer-noframework',
     templateName: 'extension-formcustomizer-noframework',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-noframework'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/extension-formcustomizer-noframework`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'NoFramework',
     componentAlias: 'NoFramework',
     componentDescription: 'NoFramework Description'
@@ -159,8 +157,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/extension-formcustomizer-react',
     templateName: 'extension-formcustomizer-react',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-formcustomizer-react'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/extension-formcustomizer-react`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'ReactFormCustomizer',
     componentAlias: 'ReactFormCustomizerFormCustomizer',
     componentDescription: 'ReactFormCustomizer Description'
@@ -168,8 +166,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/extension-listviewcommandset',
     templateName: 'extension-listviewcommandset',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-listviewcommandset'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/extension-listviewcommandset`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Description'
@@ -177,8 +175,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/extension-search-query-modifier',
     templateName: 'extension-search-query-modifier',
-    templatePath: path.join(REPO_ROOT, 'templates/extension-search-query-modifier'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/extension-search-query-modifier`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Description'
@@ -186,8 +184,8 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
   {
     libraryName: '@spfx-template/webpart-react',
     templateName: 'webpart-react',
-    templatePath: path.join(REPO_ROOT, 'templates/webpart-react'),
-    localTemplatePath: path.join(REPO_ROOT, 'templates'),
+    templatePath: `${REPO_ROOT}/templates/webpart-react`,
+    localTemplatePath: TEMPLATES_DIR,
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Web Part Description'
@@ -195,20 +193,21 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
 ];
 
 // Check for --update or -u flag
-const UPDATE_MODE = process.argv.includes('--update') || process.argv.includes('-u');
+// eslint-disable-next-line dot-notation
+const UPDATE_MODE = expect.getState()['snapshotState']._updateSnapshot === 'all';
 
 /**
  * Parse .gitignore file and return ignore matcher
  */
 async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ignore>> {
-  const gitignorePath = path.join(templateDir, '.gitignore');
+  const gitignorePath = `${templateDir}/.gitignore`;
   const ig = ignore();
 
   // Add default ignores that should always be excluded
   ig.add(['node_modules', 'lib', 'lib-commonjs', 'rush-logs', 'temp', 'dist', '.rush']);
 
   try {
-    const gitignoreContent = await readFile(gitignorePath, 'utf-8');
+    const gitignoreContent = await FileSystem.readFileAsync(gitignorePath);
     ig.add(gitignoreContent);
   } catch {
     // If .gitignore doesn't exist, just use default ignores
@@ -226,10 +225,10 @@ async function getAllFiles(
   baseDir: string = dir,
   ignoreMatcher?: ReturnType<typeof ignore>
 ): Promise<string[]> {
-  const entries = await readdir(dir, { withFileTypes: true });
+  const entries = await FileSystem.readFolderItemsAsync(dir);
   const files = await Promise.all(
     entries.map(async (entry) => {
-      const fullPath = path.join(dir, entry.name);
+      const fullPath = `${dir}/${entry.name}`;
       const relativePath = path.relative(baseDir, fullPath).replace(/\\/g, '/');
 
       // Check if this path should be ignored
@@ -254,22 +253,22 @@ async function getAllFiles(
  */
 async function readFileContent(filePath: string): Promise<string | undefined> {
   try {
-    const content = await readFile(filePath, 'utf-8');
-    // Normalize line endings to \n
-    return content.replace(/\r\n/g, '\n');
-  } catch {
-    return undefined;
+    return await FileSystem.readFileAsync(filePath, { convertLineEndings: NewlineKind.Lf });
+  } catch (error) {
+    if (FileSystem.isNotExistError(error)) {
+      return undefined;
+    } else {
+      throw error;
+    }
   }
 }
 
 /**
  * Clean up the output directory before scaffolding
  */
-function cleanOutputDir(templateName: string): void {
-  const outputPath = path.join(OUTPUT_DIR, templateName);
-  if (fs.existsSync(outputPath)) {
-    fs.rmSync(outputPath, { recursive: true, force: true });
-  }
+async function cleanOutputDirAsync(templateName: string): Promise<void> {
+  const outputPath = `${OUTPUT_DIR}/${templateName}`;
+  await FileSystem.deleteFolderAsync(outputPath);
 }
 
 describe('SPFx Template Scaffolding', () => {
@@ -277,77 +276,65 @@ describe('SPFx Template Scaffolding', () => {
   jest.setTimeout(120000);
 
   beforeAll(async () => {
-    // Ensure output directory exists
-    if (!fs.existsSync(OUTPUT_DIR)) {
-      fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-    }
+    await FileSystem.ensureFolderAsync(OUTPUT_DIR);
   });
 
   // Create a test for each template configuration
   describe('Template scaffolding and comparison', () => {
-    TEMPLATE_CONFIGS.forEach((config) => {
-      it(`should scaffold ${config.templateName} template and match example output`, async () => {
-        const examplePath = path.join(EXAMPLES_DIR, config.templateName);
+    it.each(TEMPLATE_CONFIGS)(
+      'should scaffold $templateName template and match example output',
+      async (config) => {
+        const {
+          templateName,
+          libraryName,
+          componentName,
+          componentAlias,
+          componentDescription,
+          solutionName,
+          templatePath,
+          localTemplatePath
+        } = config;
+
+        const examplePath = `${EXAMPLES_DIR}/${templateName}`;
         // In update mode, scaffold directly to examples directory
         // In normal mode, scaffold to temp directory for comparison
-        const outputPath = UPDATE_MODE ? examplePath : path.join(OUTPUT_DIR, config.templateName);
+        const outputPath = UPDATE_MODE ? examplePath : `${OUTPUT_DIR}/${templateName}`;
 
         // Check if example exists (only in normal mode)
-        if (!UPDATE_MODE && !fs.existsSync(examplePath)) {
-          console.info(`Warning: No example found for template '${config.templateName}' at ${examplePath}`);
-          return;
+        const exampleExists = await FileSystem.existsAsync(examplePath);
+        if (!UPDATE_MODE && !exampleExists) {
+          throw new Error(`No example found for template '${templateName}' at ${examplePath}`);
         }
 
         // Clean up output directory
-        cleanOutputDir(config.templateName);
+        await cleanOutputDirAsync(templateName);
 
         // Ensure output directory exists
-        if (!fs.existsSync(outputPath)) {
-          fs.mkdirSync(outputPath, { recursive: true });
-        }
+        await FileSystem.ensureFolderAsync(outputPath);
 
         // Run the scaffolding CLI with library name and fixed component ID
         try {
-          const commandParts = [
-            `node "${CLI_PATH}" create`,
-            `--template ${config.templateName}`,
-            `--target-dir "${outputPath}"`,
-            `--local-template "${config.localTemplatePath}"`,
-            `--library-name "${config.libraryName}"`,
-            `--component-name "${config.componentName}"`
-          ];
-
-          if (config.componentAlias) {
-            commandParts.push(`--component-alias "${config.componentAlias}"`);
-          }
-
-          if (config.componentDescription) {
-            commandParts.push(`--component-description "${config.componentDescription}"`);
-          }
-
-          if (config.solutionName) {
-            commandParts.push(`--solution-name "${config.solutionName}"`);
-          }
-
-          const command = commandParts.join(' ');
-          console.info(`Running: ${command}`);
-
-          execSync(command, {
-            stdio: 'inherit',
-            cwd: REPO_ROOT,
-            env: { ...process.env, SPFX_CI_MODE: '1' }
+          await scaffoldAsync({
+            templateName,
+            targetDir: outputPath,
+            localTemplatePath,
+            libraryName,
+            componentName,
+            componentAlias,
+            componentDescription,
+            solutionName
           });
         } catch (error: unknown) {
           const message = error instanceof Error ? error.message : String(error);
-          throw new Error(`Failed to scaffold template '${config.templateName}': ${message}`);
+          throw new Error(`Failed to scaffold template '${templateName}': ${message}`);
         }
 
         // Parse .gitignore from template
-        const ignoreMatcher = await parseGitignore(config.templatePath);
+        const ignoreMatcher = await parseGitignore(templatePath);
 
         // If update mode, skip comparison (we scaffolded directly to examples)
         if (UPDATE_MODE) {
-          console.info(`[UPDATE MODE] Scaffolded ${config.templateName} to ${examplePath}`);
+          console.info(`[UPDATE MODE] Scaffolded ${templateName} to ${examplePath}`);
           return;
         }
 
@@ -397,8 +384,8 @@ describe('SPFx Template Scaffolding', () => {
           if (isBinaryFile(file)) {
             // Compare binary files as raw buffers
             try {
-              const scaffoldedBuffer = await readFile(scaffoldedFile);
-              const exampleBuffer = await readFile(exampleFile);
+              const scaffoldedBuffer = await FileSystem.readFileAsync(scaffoldedFile);
+              const exampleBuffer = await FileSystem.readFileAsync(exampleFile);
               expect(scaffoldedBuffer).toEqual(exampleBuffer);
             } catch (error: unknown) {
               if (error instanceof Error) {
@@ -423,7 +410,7 @@ describe('SPFx Template Scaffolding', () => {
             }
           }
         }
-      });
-    });
+      }
+    );
   });
 });

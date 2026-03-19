@@ -166,7 +166,7 @@ Object {
 `;
 
 exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 1`] = `
-"Adding local template source: <REPO_ROOT>/templates
+"Adding local template source: <LOCAL_TEMPLATE_PATH>
 # of templates: 17
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
@@ -301,7 +301,7 @@ targetDir: <TARGET_DIR>
 `;
 
 exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 2`] = `
-"Adding local template source: <REPO_ROOT>/templates
+"Adding local template source: <LOCAL_TEMPLATE_PATH>
 # of templates: 17
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
