@@ -19,7 +19,7 @@ parameters:
   - name: dryRun
     displayName: 'Dry run (skip npm publish)'
     type: boolean
-    default: true
+    default: false
 
 variables:
   - name: FORCE_COLOR
