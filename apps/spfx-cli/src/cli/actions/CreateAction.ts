@@ -303,6 +303,7 @@ function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: strin
       terminal.writeLine(Colorize.green(`Added: ${file}`));
       continue;
     }
+
     switch (state) {
       case 'modified':
         terminal.writeLine(Colorize.yellow(`Modified: ${file}`));
