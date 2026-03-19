@@ -136,7 +136,7 @@ export class PublishTarballsAction extends CommandLineAction {
         try {
           const proc: ChildProcess = Executable.spawn(packageManagerToolFilename, publishArgs, {
             stdio: ['ignore', 'pipe', 'pipe'],
-            environment: { NPM_AUTH_TOKEN: npmToken }
+            environment: { ...process.env, NPM_AUTH_TOKEN: npmToken }
           });
           const { stdout, stderr, exitCode } = await Executable.waitForExitAsync(proc, {
             encoding: 'utf8'
