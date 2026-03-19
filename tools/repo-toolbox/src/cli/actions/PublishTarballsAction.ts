@@ -13,8 +13,6 @@ import {
 } from '@rushstack/ts-command-line';
 import { RushConfiguration } from '@rushstack/rush-sdk';
 
-const NPM_BIN_NAME: 'npm' = 'npm';
-
 export class PublishTarballsAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
 
