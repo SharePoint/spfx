@@ -36,15 +36,13 @@ Optional arguments:
                         The solution name. If not provided, defaults to the
                         kebab-case component name.
   --template-url URL    URL of the GitHub template repository. Defaults to
-                        https://github.com/SharePoint/spfx. Can also be set
-                        via the SPFX_TEMPLATE_REPO_URL environment variable.
-                        This parameter may alternatively be specified via the
+                        https://github.com/SharePoint/spfx. This parameter
+                        may alternatively be specified via the
                         SPFX_TEMPLATE_REPO_URL environment variable.
   --spfx-version VERSION
-                        The SPFx version to use (e.g., \\"1.22\\", \\"1.23-rc.0\\").
-                        Selects the corresponding branch from the template
-                        repository. Defaults to the repository's default
-                        branch (main).
+                        The branch name in the template repository to use (e.
+                        g., \\"1.22\\", \\"1.23-rc.0\\"). Defaults to the
+                        repository's default branch (main).
 "
 `;
 

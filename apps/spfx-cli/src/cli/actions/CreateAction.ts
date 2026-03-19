@@ -120,10 +120,7 @@ export class CreateAction extends CommandLineAction {
     this._templateUrl = this.defineStringParameter({
       parameterLongName: '--template-url',
       argumentName: 'URL',
-      description:
-        'URL of the GitHub template repository. ' +
-        `Defaults to ${DEFAULT_GITHUB_REPO}. ` +
-        'Can also be set via the SPFX_TEMPLATE_REPO_URL environment variable.',
+      description: 'URL of the GitHub template repository. ' + `Defaults to ${DEFAULT_GITHUB_REPO}.`,
       environmentVariable: 'SPFX_TEMPLATE_REPO_URL'
     });
 
@@ -131,8 +128,7 @@ export class CreateAction extends CommandLineAction {
       parameterLongName: '--spfx-version',
       argumentName: 'VERSION',
       description:
-        'The SPFx version to use (e.g., "1.22", "1.23-rc.0"). ' +
-        'Selects the corresponding branch from the template repository. ' +
+        'The branch name in the template repository to use (e.g., "1.22", "1.23-rc.0"). ' +
         "Defaults to the repository's default branch (main)."
     });
   }
@@ -156,7 +152,9 @@ export class CreateAction extends CommandLineAction {
 
       if (this._localTemplateSources.values.length > 0) {
         if (this._spfxVersion.value !== undefined) {
-          this._terminal.writeWarningLine('--spfx-version is ignored when --local-template is specified.');
+          this._terminal.writeWarningLine(
+            `${this._spfxVersion.longName} is ignored when ${this._localTemplateSources.longName} is specified.`
+          );
         }
         for (const localPath of this._localTemplateSources.values) {
           this._terminal.writeLine(`Adding local template source: ${localPath}`);
@@ -169,8 +167,8 @@ export class CreateAction extends CommandLineAction {
         const spfxVersion: string | undefined = this._spfxVersion.value;
         if (spfxVersion !== undefined && urlBranch !== undefined) {
           this._terminal.writeWarningLine(
-            `--template-url contains a branch ('/tree/${urlBranch}'). ` +
-              `--spfx-version "${spfxVersion}" will take precedence.`
+            `${this._templateUrl.longName} contains a branch ('/tree/${urlBranch}'). ` +
+              `${this._spfxVersion.longName} "${spfxVersion}" will take precedence.`
           );
         }
         const ref: string | undefined = spfxVersion ?? urlBranch;
@@ -186,7 +184,7 @@ export class CreateAction extends CommandLineAction {
         const fetchMessage: string = fetchError instanceof Error ? fetchError.message : String(fetchError);
         throw new Error(
           `Failed to fetch templates. If you are offline or behind a firewall, ` +
-            `use --local-template to specify a local template source. Details: ${fetchMessage}`,
+            `use ${this._localTemplateSources.longName} to specify a local template source. Details: ${fetchMessage}`,
           { cause: fetchError }
         );
       }
@@ -266,14 +264,16 @@ export class CreateAction extends CommandLineAction {
 }
 
 /**
- * Parses a GitHub URL that may contain a `/tree/<ref>` path segment.
+ * Parses a GitHub (or GHE) URL that may contain a `/tree/<ref>` path segment.
  * Returns the clean repository URL (without `.git` or trailing slashes) and the optional branch ref.
  */
 function parseGitHubUrlAndRef(rawUrl: string): { repoUrl: string; urlBranch: string | undefined } {
   const normalized: string = rawUrl.trim().replace(/\/+$/, '');
-  // Match https://github.com/owner/repo[.git]/tree/ref
+  // Match https://<host>/owner/repo[.git]/tree/<ref> — host-agnostic to support GHE.
+  // Only the first path segment after /tree/ is captured as the ref; subdirectory
+  // suffixes (e.g. /tree/main/some/subdir) are ignored.
   const treeMatch: RegExpMatchArray | null = normalized.match(
-    /^(?<repo>https:\/\/github\.com\/[^/]+\/[^/]+?)(?:\.git)?\/tree\/(?<ref>.+)$/
+    /^(?<repo>https?:\/\/[^/]+\/[^/]+\/[^/]+?)(?:\.git)?\/tree\/(?<ref>[^/]+)/
   );
   if (treeMatch?.groups) {
     const { repo, ref } = treeMatch.groups as { repo: string; ref: string };

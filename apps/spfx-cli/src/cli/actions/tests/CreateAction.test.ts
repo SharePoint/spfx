@@ -280,6 +280,26 @@ describe('CreateAction', () => {
         expect.anything()
       );
     });
+
+    it('extracts branch from /tree/ on a GHE host', async () => {
+      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.mycompany.com/org/repo/tree/my-branch';
+      await runCreate();
+      expect(MockedGitHub).toHaveBeenCalledWith(
+        'https://github.mycompany.com/org/repo',
+        'my-branch',
+        expect.anything()
+      );
+    });
+
+    it('ignores subdirectory suffix after the branch name in /tree/ path', async () => {
+      process.env[SPFX_TEMPLATE_REPO_URL_KEY] = 'https://github.com/SharePoint/spfx/tree/main/some/subdir';
+      await runCreate();
+      expect(MockedGitHub).toHaveBeenCalledWith(
+        'https://github.com/SharePoint/spfx',
+        'main',
+        expect.anything()
+      );
+    });
   });
 
   describe('whitespace env var fix', () => {
