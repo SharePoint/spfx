@@ -6,7 +6,6 @@ import { ConsoleTerminalProvider, type ITerminal, Terminal } from '@rushstack/te
 
 import { CreateOrUpdatePrAction } from './actions/CreateOrUpdatePrAction';
 import { FindBumpPipelineRunAction } from './actions/FindBumpPipelineRunAction';
-import { PublishTarballsAction } from './actions/PublishTarballsAction';
 
 export class ToolboxCommandLine extends CommandLineParser {
   public readonly terminal: ITerminal;
@@ -22,6 +21,5 @@ export class ToolboxCommandLine extends CommandLineParser {
 
     this.addAction(new CreateOrUpdatePrAction(terminal));
     this.addAction(new FindBumpPipelineRunAction(terminal));
-    this.addAction(new PublishTarballsAction(terminal));
   }
 }
