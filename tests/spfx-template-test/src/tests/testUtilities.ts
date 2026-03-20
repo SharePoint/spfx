@@ -63,7 +63,12 @@ export async function scaffoldAsync(options: IScaffoldOptions): Promise<void> {
 
   const childProcess: ChildProcess = Executable.spawn(process.argv0, args, {
     currentWorkingDirectory: REPO_ROOT,
-    environment: { ...process.env, SPFX_CI_MODE: '1' }
+    environment: {
+      ...process.env,
+      SPFX_CI_MODE: '1',
+      // Force color output to ensure snapshots include ANSI escape codes for colors
+      FORCE_COLOR: '1'
+    }
   });
   // Explicitly don't use `throwOnNonZeroExitCode` and `throwOnSignal` so we can see
   // error output during test failures
