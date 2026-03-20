@@ -13,6 +13,8 @@ import {
 } from '@rushstack/ts-command-line';
 import { RushConfiguration } from '@rushstack/rush-sdk';
 
+const NPM_BIN_NAME: 'npm' = 'npm';
+
 export class PublishTarballsAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
 
@@ -77,29 +79,9 @@ export class PublishTarballsAction extends CommandLineAction {
     const rushConfiguration: RushConfiguration = RushConfiguration.loadFromDefaultLocation({
       startingFolder: __dirname
     });
-    const { commonRushConfigFolder, packageManager, packageManagerToolFilename } = rushConfiguration;
 
-    const npmrcPublishPath: string = `${commonRushConfigFolder}/.npmrc-publish`;
+    const npmrcPublishPath: string = `${rushConfiguration.commonRushConfigFolder}/.npmrc-publish`;
     terminal.writeLine(`Using npm config: ${npmrcPublishPath}`);
-
-    let pnpmVersion: string;
-    try {
-      const pnpmProcess: ChildProcess = Executable.spawn(packageManagerToolFilename, ['--version']);
-
-      ({ stdout: pnpmVersion } = await Executable.waitForExitAsync(pnpmProcess, {
-        encoding: 'utf8',
-        throwOnNonZeroExitCode: true,
-        throwOnSignal: true
-      }));
-    } catch (error) {
-      terminal.writeErrorLine(`Failed to determine ${packageManagerToolFilename} version.`);
-      terminal.writeErrorLine(String(error));
-      throw error;
-    }
-
-    terminal.writeLine(
-      `Using package manager "${packageManager}" version ${pnpmVersion.trim()} at ${packageManagerToolFilename}`
-    );
 
     const artifactsFolderExists: boolean = await FileSystem.existsAsync(artifactPath);
     // Verify the artifact directory exists.
@@ -126,7 +108,7 @@ export class PublishTarballsAction extends CommandLineAction {
         '--userconfig',
         npmrcPublishPath
       ];
-      terminal.writeLine(`> ${packageManagerToolFilename} ${publishArgs.join(' ')}`);
+      terminal.writeLine(`> ${NPM_BIN_NAME} ${publishArgs.join(' ')}`);
 
       if (dryRun) {
         terminal.writeLine(`[dry-run] Skipped: ${fileBasename}`);
@@ -134,7 +116,7 @@ export class PublishTarballsAction extends CommandLineAction {
         terminal.writeLine('');
       } else {
         try {
-          const proc: ChildProcess = Executable.spawn(packageManagerToolFilename, publishArgs, {
+          const proc: ChildProcess = Executable.spawn(NPM_BIN_NAME, publishArgs, {
             stdio: ['ignore', 'pipe', 'pipe'],
             environment: { ...process.env, NPM_AUTH_TOKEN: npmToken }
           });
