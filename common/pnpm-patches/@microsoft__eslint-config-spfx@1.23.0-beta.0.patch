@@ -1,0 +1,42 @@
+diff --git a/lib-commonjs/flat-profiles/default.js b/lib-commonjs/flat-profiles/default.js
+index d7b929088fa16f6038bca799ef0e57b6ab52547c..0c10864b8a486ebae4e79fccb9da99534af401fe 100644
+--- a/lib-commonjs/flat-profiles/default.js
++++ b/lib-commonjs/flat-profiles/default.js
+@@ -49,7 +49,6 @@ const config = [
+             // ---------------------------------------------------------------
+             '@rushstack/import-requires-chunk-name': 'warn',
+             '@rushstack/pair-react-dom-render-unmount': 'warn',
+-            '@typescript-eslint/no-var-requires': 'error',
+             '@typescript-eslint/no-inferrable-types': 'off',
+             '@typescript-eslint/no-empty-interface': 'off',
+             '@microsoft/spfx/no-require-ensure': 'error',
+@@ -92,7 +91,7 @@ const config = [
+             '**/*.tsx'
+         ],
+         rules: {
+-            '@typescript-eslint/no-require-imports': 'off',
++            '@typescript-eslint/no-require-imports': ['error', { allowAsImport: true }],
+             '@typescript-eslint/no-empty-object-type': 'off'
+         }
+     }
+diff --git a/lib-esm/flat-profiles/default.js b/lib-esm/flat-profiles/default.js
+index 9fed983aef4e0d23e03b4818edbf6541341d89ca..9cd09c7a18dcfecb715588a8b968c1a36b93ce23 100644
+--- a/lib-esm/flat-profiles/default.js
++++ b/lib-esm/flat-profiles/default.js
+@@ -45,7 +45,6 @@ const config = [
+             // ---------------------------------------------------------------
+             '@rushstack/import-requires-chunk-name': 'warn',
+             '@rushstack/pair-react-dom-render-unmount': 'warn',
+-            '@typescript-eslint/no-var-requires': 'error',
+             '@typescript-eslint/no-inferrable-types': 'off',
+             '@typescript-eslint/no-empty-interface': 'off',
+             '@microsoft/spfx/no-require-ensure': 'error',
+@@ -88,7 +87,7 @@ const config = [
+             '**/*.tsx'
+         ],
+         rules: {
+-            '@typescript-eslint/no-require-imports': 'off',
++            '@typescript-eslint/no-require-imports': ['error', { allowAsImport: true }],
+             '@typescript-eslint/no-empty-object-type': 'off'
+         }
+     }
