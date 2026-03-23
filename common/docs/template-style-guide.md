@@ -96,7 +96,7 @@ Always use the `spfxVersion` variable — never hardcode version numbers.
 In README badges:
 
 ```markdown
-![version](https://img.shields.io/badge/version-<%= spfxVersion %>-blue)
+![version](https://img.shields.io/badge/version-<%= spfxVersionForBadgeUrl %>-blue)
 ```
 
 In `package-solution.json`:
