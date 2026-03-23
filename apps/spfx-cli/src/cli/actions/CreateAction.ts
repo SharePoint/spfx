@@ -280,7 +280,7 @@ export class CreateAction extends CommandLineAction {
 
       const packageManager: string = this._packageManagerParameter.value ?? 'none';
       if (packageManager !== 'none') {
-        await _runInstallAsync(packageManager, targetDir, terminal);
+        await _runInstallAsync(packageManager as PackageManager, targetDir, terminal);
       }
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
@@ -290,12 +290,14 @@ export class CreateAction extends CommandLineAction {
   }
 }
 
+type PackageManager = 'npm' | 'pnpm' | 'yarn';
+
 /**
  * Spawns the chosen package manager's install command in targetDir and waits for it to finish.
  * Files are already written before this is called, so a failure here does not undo scaffolding.
  */
 async function _runInstallAsync(
-  packageManager: string,
+  packageManager: PackageManager,
   targetDir: string,
   terminal: Terminal
 ): Promise<void> {
@@ -306,12 +308,14 @@ async function _runInstallAsync(
     stdio: 'inherit'
   });
 
-  const { exitCode } = await Executable.waitForExitAsync(child, {
+  const { exitCode, signal } = await Executable.waitForExitAsync(child, {
     throwOnNonZeroExitCode: false,
     throwOnSignal: false
   });
 
-  if (exitCode !== 0) {
+  if (signal !== null && signal !== undefined) {
+    throw new Error(`${packageManager} install was terminated by signal ${signal}`);
+  } else if (exitCode !== 0) {
     throw new Error(`${packageManager} install exited with code ${exitCode}`);
   }
 

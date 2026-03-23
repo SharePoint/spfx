@@ -446,6 +446,18 @@ describe('CreateAction', () => {
         /npm install exited with code 1/
       );
     });
+
+    it('surfaces signal termination with the signal name in the error message', async () => {
+      MockedExecutable.waitForExitAsync.mockResolvedValue({
+        exitCode: null,
+        stdout: '',
+        stderr: '',
+        signal: 'SIGTERM'
+      });
+      await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow(
+        /npm install was terminated by signal SIGTERM/
+      );
+    });
   });
 
   describe('error handling', () => {
