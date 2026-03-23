@@ -10,7 +10,7 @@
     "_phase:test": "heft run --only test -- --clean"
   },
   "dependencies": {
-    "@microsoft/spfx-heft-plugins": "1.22.2",
+    "@microsoft/spfx-heft-plugins": "1.23.0-beta.0",
     "@rushstack/node-core-library": "~5.20.3",
     "@rushstack/terminal": "~0.22.3",
     "adm-zip": "^0.5.16",
