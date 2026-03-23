@@ -156,9 +156,27 @@ When filing issues, use the appropriate template from `.github/ISSUE_TEMPLATE/`:
 - **Bug report**: Include reproduction steps, expected vs actual behavior, CLI/Node versions, and the affected template if applicable
 - **Feature request**: Include a description, use case, and alternatives considered
 
+## README Maintenance
+
+The two published packages each have a README that is displayed on NPM:
+
+- `apps/spfx-cli/README.md`
+- `api/spfx-template-api/README.md`
+
+**Whenever you make a change to a published package, update its README to reflect the change.** This includes:
+
+- New CLI flags or changed flag behaviour → update the `spfx-cli` README flag tables and examples
+- New or removed templates → update the templates table in the `spfx-cli` README
+- New exported classes, types, or functions → update the API reference table in the `spfx-template-api` README
+- Changed usage patterns or render context fields → update code examples in the `spfx-template-api` README
+- Changed Node.js version requirements → update the requirements line in both READMEs
+
+These READMEs are written for NPM viewers — keep them practical and example-driven. Do not add internal monorepo details or contributor instructions.
+
 ## Important Notes
 
 1. **Always use the correct Node version** - This is the #1 cause of build failures
 2. **Rush manages dependencies** - Don't run npm/pnpm directly in project folders
 3. **Peer dependency warnings are OK** - The SPFx packages have peer deps we intentionally don't install
 4. **Templates must match examples** - Keep them synchronized
+5. **READMEs must stay current** - Update `apps/spfx-cli/README.md` and `api/spfx-template-api/README.md` whenever the published packages change
