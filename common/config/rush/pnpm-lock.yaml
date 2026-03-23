@@ -142,6 +142,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -185,6 +191,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -228,6 +240,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -271,6 +289,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -314,6 +338,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -360,6 +390,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -403,6 +439,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -446,6 +488,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -498,12 +546,18 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/react':
         specifier: 17.0.45
         version: 17.0.45
       '@types/react-dom':
         specifier: 17.0.17
         version: 17.0.17
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -559,6 +613,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -617,12 +677,18 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/react':
         specifier: 17.0.45
         version: 17.0.45
       '@types/react-dom':
         specifier: 17.0.17
         version: 17.0.17
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -675,6 +741,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -718,6 +790,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -752,6 +830,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -804,6 +888,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -856,6 +946,12 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
@@ -917,12 +1013,18 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/react':
         specifier: 17.0.45
         version: 17.0.45
       '@types/react-dom':
         specifier: 17.0.17
         version: 17.0.17
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
       '@typescript-eslint/parser':
         specifier: 8.48.1
         version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
