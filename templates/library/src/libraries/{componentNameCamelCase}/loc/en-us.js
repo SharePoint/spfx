@@ -1,7 +1,7 @@
-define([], function() {
+define([], function () {
   return {
-    "PropertyPaneDescription": "<%= componentDescription %>",
-    "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field"
-  }
+    PropertyPaneDescription: '<%= componentDescription %>',
+    BasicGroupName: 'Group Name',
+    DescriptionFieldLabel: 'Description Field'
+  };
 });

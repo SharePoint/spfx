@@ -1,40 +1,40 @@
 {
-    "name": "extension-listviewcommandset",
-    "description": "SharePoint Framework list view command set extension template",
-    "version": "1.0.0",
-    "spfxVersion": "1.22.2",
-    "contextSchema": {
-        "libraryName": {
-            "type": "string",
-            "description": "The library name (kebab-case)"
-        },
-        "componentNameCamelCase": {
-            "type": "string",
-            "description": "The component name in camelCase"
-        },
-        "componentNameCapitalCase": {
-            "type": "string",
-            "description": "The component name in CapitalCase"
-        },
-        "componentNameHyphenCase": {
-            "type": "string",
-            "description": "The component name in hyphen-case"
-        },
-        "componentId": {
-            "type": "string",
-            "description": "The component ID (GUID)"
-        },
-        "solutionId": {
-            "type": "string",
-            "description": "The solution ID (GUID)"
-        },
-        "featureId": {
-            "type": "string",
-            "description": "The feature ID (GUID)"
-        },
-        "componentDescription": {
-            "type": "string",
-            "description": "The component description"
-        }
+  "name": "extension-listviewcommandset",
+  "description": "SharePoint Framework list view command set extension template",
+  "version": "1.0.0",
+  "spfxVersion": "1.22.2",
+  "contextSchema": {
+    "libraryName": {
+      "type": "string",
+      "description": "The library name (kebab-case)"
+    },
+    "componentNameCamelCase": {
+      "type": "string",
+      "description": "The component name in camelCase"
+    },
+    "componentNameCapitalCase": {
+      "type": "string",
+      "description": "The component name in CapitalCase"
+    },
+    "componentNameHyphenCase": {
+      "type": "string",
+      "description": "The component name in hyphen-case"
+    },
+    "componentId": {
+      "type": "string",
+      "description": "The component ID (GUID)"
+    },
+    "solutionId": {
+      "type": "string",
+      "description": "The solution ID (GUID)"
+    },
+    "featureId": {
+      "type": "string",
+      "description": "The feature ID (GUID)"
+    },
+    "componentDescription": {
+      "type": "string",
+      "description": "The component description"
     }
+  }
 }

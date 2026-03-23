@@ -1,40 +1,40 @@
 {
-    "name": "extension-search-query-modifier",
-    "description": "A SharePoint Framework search query modifier extension",
-    "version": "1.0.0",
-    "spfxVersion": "1.22.2",
-    "contextSchema": {
-        "libraryName": {
-            "type": "string",
-            "description": "Name of the library/solution"
-        },
-        "componentNameCapitalCase": {
-            "type": "string",
-            "description": "Component name in capital case"
-        },
-        "componentNameCamelCase": {
-            "type": "string",
-            "description": "Component name in camel case"
-        },
-        "componentNameHyphenCase": {
-            "type": "string",
-            "description": "Component name in hyphen case"
-        },
-        "componentId": {
-            "type": "string",
-            "description": "Unique ID for the component"
-        },
-        "solutionId": {
-            "type": "string",
-            "description": "Solution ID"
-        },
-        "featureId": {
-            "type": "string",
-            "description": "Feature ID"
-        },
-        "componentDescription": {
-            "type": "string",
-            "description": "The component description"
-        }
+  "name": "extension-search-query-modifier",
+  "description": "A SharePoint Framework search query modifier extension",
+  "version": "1.0.0",
+  "spfxVersion": "1.22.2",
+  "contextSchema": {
+    "libraryName": {
+      "type": "string",
+      "description": "Name of the library/solution"
+    },
+    "componentNameCapitalCase": {
+      "type": "string",
+      "description": "Component name in capital case"
+    },
+    "componentNameCamelCase": {
+      "type": "string",
+      "description": "Component name in camel case"
+    },
+    "componentNameHyphenCase": {
+      "type": "string",
+      "description": "Component name in hyphen case"
+    },
+    "componentId": {
+      "type": "string",
+      "description": "Unique ID for the component"
+    },
+    "solutionId": {
+      "type": "string",
+      "description": "Solution ID"
+    },
+    "featureId": {
+      "type": "string",
+      "description": "Feature ID"
+    },
+    "componentDescription": {
+      "type": "string",
+      "description": "The component description"
     }
+  }
 }

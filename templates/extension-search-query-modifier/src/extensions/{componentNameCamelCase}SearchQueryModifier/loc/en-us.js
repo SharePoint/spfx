@@ -1,5 +1,5 @@
-define([], function() {
+define([], function () {
   return {
-    "Title": "<%= componentNameCapitalCase %>SearchQueryModifier"
-  }
+    Title: '<%= componentNameCapitalCase %>SearchQueryModifier'
+  };
 });

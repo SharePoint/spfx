@@ -1,9 +1,9 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
-.<%= componentNameCamelCase %>WebPart {
+.<%= componentNameCamelCase % > WebPart {
   overflow: hidden;
   padding: 1em;
-  color: "[theme:bodyText, default: #323130]";
+  color: '[theme:bodyText, default: #323130]';
   color: var(--bodyText);
   &.teams {
     font-family: $ms-font-family-fallbacks;
@@ -22,12 +22,12 @@
 .links {
   a {
     text-decoration: none;
-    color: "[theme:link, default:#03787c]";
+    color: '[theme:link, default:#03787c]';
     color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
 
     &:hover {
       text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
+      color: '[theme:linkHovered, default: #014446]';
       color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
     }
   }

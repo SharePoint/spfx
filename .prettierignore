@@ -142,7 +142,8 @@ pnpm-lock.yaml
 *.md
 
 # These aren't valid code, they're templates for code, and many can't be parsed as expected
-templates/*
+templates/**/*.ts
+templates/**/*.tsx
 
 # These are generated from templates, and are validated to match exactly
 examples/*

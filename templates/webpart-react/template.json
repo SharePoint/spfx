@@ -1,48 +1,48 @@
 {
-    "name": "webpart-react",
-    "description": "A React-based web part template for SPFx",
-    "version": "0.0.1",
-    "spfxVersion": "1.22.2",
-    "contextSchema": {
-        "libraryName": {
-            "type": "string",
-            "description": "The name of the library (also used as the package name)"
-        },
-        "featureId": {
-            "type": "string",
-            "description": "The feature ID (GUID) for the solution feature"
-        },
-        "solutionId": {
-            "type": "string",
-            "description": "The solution ID (GUID) for the SharePoint solution"
-        },
-        "componentId": {
-            "type": "string",
-            "description": "The component ID (GUID) for the web part"
-        },
-        "componentAlias": {
-            "type": "string",
-            "description": "The component alias (in manifest) for the web part"
-        },
-        "componentNameUnescaped": {
-            "type": "string",
-            "description": "The component name (in manifest) for the web part, unescaped"
-        },
-        "componentNameCamelCase": {
-            "type": "string",
-            "description": "The component name (in manifest) for the web part, in camel case"
-        },
-        "componentNameHyphenCase": {
-            "type": "string",
-            "description": "The component name (in manifest) for the web part, in hyphen case"
-        },
-        "componentNameCapitalCase": {
-            "type": "string",
-            "description": "The component class name for the web part"
-        },
-        "componentDescription": {
-            "type": "string",
-            "description": "The description of the component"
-        }
+  "name": "webpart-react",
+  "description": "A React-based web part template for SPFx",
+  "version": "0.0.1",
+  "spfxVersion": "1.22.2",
+  "contextSchema": {
+    "libraryName": {
+      "type": "string",
+      "description": "The name of the library (also used as the package name)"
+    },
+    "featureId": {
+      "type": "string",
+      "description": "The feature ID (GUID) for the solution feature"
+    },
+    "solutionId": {
+      "type": "string",
+      "description": "The solution ID (GUID) for the SharePoint solution"
+    },
+    "componentId": {
+      "type": "string",
+      "description": "The component ID (GUID) for the web part"
+    },
+    "componentAlias": {
+      "type": "string",
+      "description": "The component alias (in manifest) for the web part"
+    },
+    "componentNameUnescaped": {
+      "type": "string",
+      "description": "The component name (in manifest) for the web part, unescaped"
+    },
+    "componentNameCamelCase": {
+      "type": "string",
+      "description": "The component name (in manifest) for the web part, in camel case"
+    },
+    "componentNameHyphenCase": {
+      "type": "string",
+      "description": "The component name (in manifest) for the web part, in hyphen case"
+    },
+    "componentNameCapitalCase": {
+      "type": "string",
+      "description": "The component class name for the web part"
+    },
+    "componentDescription": {
+      "type": "string",
+      "description": "The description of the component"
     }
+  }
 }
