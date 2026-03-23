@@ -74,6 +74,9 @@ importers:
       '@microsoft/spfx-template-api':
         specifier: workspace:*
         version: link:../../api/spfx-template-api
+      '@rushstack/node-core-library':
+        specifier: ~5.20.3
+        version: 5.20.3(@types/node@22.19.13)
       '@rushstack/terminal':
         specifier: ~0.22.3
         version: 0.22.3(@types/node@22.19.13)

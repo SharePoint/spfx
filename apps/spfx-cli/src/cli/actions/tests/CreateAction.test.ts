@@ -2,7 +2,21 @@
 // See LICENSE in the project root for license information.
 
 jest.mock('@microsoft/spfx-template-api');
+jest.mock('@rushstack/node-core-library', () => {
+  const actual = jest.requireActual('@rushstack/node-core-library');
+  return {
+    ...actual,
+    Executable: {
+      // Only spawn and waitForExitAsync are called by CreateAction; other methods
+      // fall through to the real implementation via the ...actual.Executable spread.
+      ...actual.Executable,
+      spawn: jest.fn(),
+      waitForExitAsync: jest.fn()
+    }
+  };
+});
 
+import { Executable } from '@rushstack/node-core-library';
 import { Terminal, StringBufferTerminalProvider } from '@rushstack/terminal';
 import {
   LocalFileSystemRepositorySource,
@@ -20,6 +34,7 @@ const MockedGitHub = PublicGitHubRepositorySource as jest.MockedClass<typeof Pub
 const MockedLocal = LocalFileSystemRepositorySource as jest.MockedClass<
   typeof LocalFileSystemRepositorySource
 >;
+const MockedExecutable = Executable as unknown as { spawn: jest.Mock; waitForExitAsync: jest.Mock };
 
 // Minimal mocks for a happy-path run
 const mockMemFs = { dump: jest.fn().mockReturnValue({}) };
@@ -346,6 +361,103 @@ describe('CreateAction', () => {
         }),
         expect.anything(),
         expect.anything()
+      );
+    });
+  });
+
+  describe('--package-manager', () => {
+    beforeEach(() => {
+      MockedExecutable.spawn.mockReturnValue({});
+      MockedExecutable.waitForExitAsync.mockResolvedValue({
+        exitCode: 0,
+        stdout: '',
+        stderr: '',
+        signal: null
+      });
+    });
+
+    it('runs npm install when --package-manager npm is passed', async () => {
+      await runCreateAsync(['--package-manager', 'npm']);
+      expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+        'npm',
+        ['install'],
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test' })
+      );
+    });
+
+    it('runs pnpm install when --package-manager pnpm is passed', async () => {
+      await runCreateAsync(['--package-manager', 'pnpm']);
+      expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+        'pnpm',
+        ['install'],
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test' })
+      );
+    });
+
+    it('runs yarn install when --package-manager yarn is passed', async () => {
+      await runCreateAsync(['--package-manager', 'yarn']);
+      expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+        'yarn',
+        ['install'],
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test' })
+      );
+    });
+
+    it('uses stdio: inherit so package manager output reaches the user', async () => {
+      await runCreateAsync(['--package-manager', 'npm']);
+      expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+        'npm',
+        ['install'],
+        expect.objectContaining({ stdio: 'inherit' })
+      );
+    });
+
+    it('installs into --target-dir when explicitly provided', async () => {
+      await runCreateAsync(['--package-manager', 'npm', '--target-dir', '/custom/dir']);
+      expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+        'npm',
+        ['install'],
+        expect.objectContaining({ currentWorkingDirectory: '/custom/dir' })
+      );
+    });
+
+    it('does not run install when --package-manager none is passed', async () => {
+      await runCreateAsync(['--package-manager', 'none']);
+      expect(MockedExecutable.spawn).not.toHaveBeenCalled();
+    });
+
+    it('does not run install when --package-manager is omitted', async () => {
+      await runCreateAsync();
+      expect(MockedExecutable.spawn).not.toHaveBeenCalled();
+    });
+
+    it('does not run install when scaffolding fails before writing', async () => {
+      MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('network error'));
+      await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow();
+      expect(MockedExecutable.spawn).not.toHaveBeenCalled();
+    });
+
+    it('surfaces install failure but leaves scaffolded files intact', async () => {
+      MockedExecutable.waitForExitAsync.mockResolvedValue({
+        exitCode: 1,
+        stdout: '',
+        stderr: '',
+        signal: null
+      });
+      await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow(
+        /npm install exited with code 1/
+      );
+    });
+
+    it('surfaces signal termination with the signal name in the error message', async () => {
+      MockedExecutable.waitForExitAsync.mockResolvedValue({
+        exitCode: null,
+        stdout: '',
+        stderr: '',
+        signal: 'SIGTERM'
+      });
+      await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow(
+        /npm install was terminated by signal SIGTERM/
       );
     });
   });

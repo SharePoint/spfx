@@ -1,5 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CreateAction --package-manager does not run install when --package-manager is omitted 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --package-manager does not run install when --package-manager none is passed 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --package-manager installs into --target-dir when explicitly provided 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /custom/dir[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /custom/dir...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager runs npm install when --package-manager npm is passed 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager runs pnpm install when --package-manager pnpm is passed 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+  "[    log] Running pnpm install in /tmp/test...[n]",
+  "[    log] pnpm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager runs yarn install when --package-manager yarn is passed 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+  "[    log] Running yarn install in /tmp/test...[n]",
+  "[    log] yarn install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager uses stdio: inherit so package manager output reaches the user 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
 exports[`CreateAction --spfx-version is ignored (with no throw) when --local-template is also provided 1`] = `
 Array [
   "[warning] --spfx-version is ignored when --local-template is specified.[n]",
