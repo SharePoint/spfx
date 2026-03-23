@@ -13,7 +13,7 @@
     "_phase:build": "heft run --only build -- --clean",
     "_phase:test": "heft run --only test -- --clean",
     "_phase:package-solution": "heft run --only package-solution -- --clean"
-},
+  },
   "dependencies": {
     "@microsoft/sp-adaptive-card-extension-base": "<%= spfxVersion %>",
     "@microsoft/sp-core-library": "<%= spfxVersion %>",
@@ -24,14 +24,12 @@
     "@microsoft/eslint-config-spfx": "<%= spfxVersion %>",
     "@microsoft/eslint-plugin-spfx": "<%= spfxVersion %>",
     "@microsoft/sp-module-interfaces": "<%= spfxVersion %>",
-    "@microsoft/spfx-heft-plugins": "<%= spfxVersion %>",
     "@microsoft/spfx-web-build-rig": "<%= spfxVersion %>",
     "@rushstack/eslint-config": "4.6.4",
     "@rushstack/heft": "^1.2.7",
     "@types/heft-jest": "^1.0.6",
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.48.1",
-    "css-loader": "~7.1.2",
     "eslint": "8.57.1",
     "typescript": "~5.8.3"
   }
