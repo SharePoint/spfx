@@ -23,12 +23,6 @@ const MockedLocal = LocalFileSystemRepositorySource as jest.MockedClass<
 
 // Minimal mocks for a happy-path run
 const mockMemFs = { dump: jest.fn().mockReturnValue({}) };
-const mockTemplate = {
-  renderAsync: jest.fn().mockResolvedValue(mockMemFs),
-  spfxVersion: '1.22.1'
-};
-const mockCollection = new Map([['webpart-minimal', mockTemplate]]);
-mockCollection.toString = () => '[Mocked SPFxTemplateCollection]';
 
 const REQUIRED_ARGS: string[] = [
   '--template',
@@ -89,11 +83,19 @@ describe('SOLUTION_NAME_PATTERN', () => {
 
 describe('CreateAction', () => {
   const originalEnv = process.env;
+  let mockTemplate: { renderAsync: jest.Mock; spfxVersion: string };
 
   beforeEach(() => {
     jest.clearAllMocks();
     process.env = { ...originalEnv };
     delete process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME];
+
+    mockTemplate = {
+      renderAsync: jest.fn().mockResolvedValue(mockMemFs),
+      spfxVersion: '1.22.1'
+    };
+    const mockCollection = new Map([['webpart-minimal', mockTemplate]]);
+    mockCollection.toString = () => '[Mocked SPFxTemplateCollection]';
 
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(
       mockCollection as unknown as SPFxTemplateCollection
@@ -314,6 +316,35 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
         undefined,
+        expect.anything()
+      );
+    });
+  });
+
+  describe('spfxVersionForBadgeUrl', () => {
+    it('escapes hyphens in prerelease versions for shields.io badge URLs', async () => {
+      mockTemplate.spfxVersion = '1.23.0-beta.0';
+      await runCreateAsync();
+      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
+        expect.objectContaining({
+          spfxVersion: '1.23.0-beta.0',
+          spfxVersionForBadgeUrl: '1.23.0--beta.0'
+        }),
+        expect.anything(),
+        expect.anything()
+      );
+      mockTemplate.spfxVersion = '1.22.1';
+    });
+
+    it('leaves stable versions unchanged', async () => {
+      mockTemplate.spfxVersion = '1.22.1';
+      await runCreateAsync();
+      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
+        expect.objectContaining({
+          spfxVersion: '1.22.1',
+          spfxVersionForBadgeUrl: '1.22.1'
+        }),
+        expect.anything(),
         expect.anything()
       );
     });

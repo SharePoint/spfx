@@ -212,6 +212,28 @@ Array [
 ]
 `;
 
+exports[`CreateAction spfxVersionForBadgeUrl escapes hyphens in prerelease versions for shields.io badge URLs 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction spfxVersionForBadgeUrl leaves stable versions unchanged 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
 exports[`CreateAction whitespace env var fix falls back to default URL when SPFX_TEMPLATE_REPO_URL is whitespace-only 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",

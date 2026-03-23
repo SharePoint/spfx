@@ -8,7 +8,7 @@ Short summary on functionality and used technologies.
 
 ## Used SharePoint Framework Version
 
-[![version](https://img.shields.io/badge/version-<%= spfxVersion %>-green.svg)](https://img.shields.io/badge/version-<%= spfxVersion %>-green.svg)
+[![version](https://img.shields.io/badge/version-<%= spfxVersionForBadgeUrl %>-green.svg)](https://img.shields.io/badge/version-<%= spfxVersionForBadgeUrl %>-green.svg)
 
 ## Applies to
 
