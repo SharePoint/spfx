@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { escape } from '@microsoft/sp-lodash-subset';
+
 import styles from './<%= componentNameCapitalCase %>.module.scss';
 import type { I<%= componentNameCapitalCase %>Props } from './I<%= componentNameCapitalCase %>Props';
-import { escape } from '@microsoft/sp-lodash-subset';
+import welcomeDarkImage from '../assets/welcome-dark.png';
+import welcomeLightImage from '../assets/welcome-light.png';
 
 export default class <%= componentNameCapitalCase %> extends React.Component<I<%= componentNameCapitalCase %>Props> {
   public render(): React.ReactElement<I<%= componentNameCapitalCase %>Props> {
@@ -16,7 +19,7 @@ export default class <%= componentNameCapitalCase %> extends React.Component<I<%
     return (
       <section className={`${styles.<%= componentNameCamelCase %>} ${hasTeamsContext ? styles.teams : ''}`}>
         <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
+          <img alt="" src={isDarkTheme ? welcomeDarkImage : welcomeLightImage} className={styles.welcomeImage} />
           <h2>Well done, {escape(userDisplayName)}!</h2>
           <div>{environmentMessage}</div>
           <div>Web part property value: <strong>{escape(description)}</strong></div>
