@@ -75,13 +75,12 @@ Yeoman compatibility shim) can be built without duplicating core logic.
 | `--component-alias ALIAS` | No | The component alias. Defaults to the component name. |
 | `--component-description DESC` | No | The component description. Auto-generated from component name if omitted. |
 | `--solution-name NAME` | No | The solution name. Defaults to the kebab-case component name. |
+| `--package-manager {npm,pnpm,yarn,none}` | No | Package manager for dependency installation after scaffolding. `none` skips installation (default). See [#165](https://github.com/SharePoint/spfx/issues/165) for the planned restriction to new projects only. |
 
 **Planned parameters (not yet implemented):**
 
 | Parameter | Description |
 |-----------|-------------|
-| `--package-manager {npm, pnpm, yarn}` | Sets the package manager for dependency installation. Defaults to npm. Only on new projects. |
-| `--skip-install` | Skips the automatic dependency installation step after scaffolding. |
 | `--spfx-version SEMVER` | Selects the branch from the public template repo. Only for first creation. |
 | `--github-source URL` | Registers additional public GitHub template sources. |
 

@@ -9,6 +9,7 @@ exports[`CommandLineHelp prints the help: create 1`] = `
                        [--component-description COMPONENT_DESCRIPTION]
                        [--solution-name SOLUTION_NAME] [--template-url URL]
                        [--spfx-version VERSION]
+                       [--package-manager {npm,pnpm,yarn,none}]
 
 
 This command creates a new SPFx component.
@@ -43,6 +44,10 @@ Optional arguments:
                         The branch name in the template repository to use (e.
                         g., \\"1.22\\", \\"1.23-rc.0\\"). Defaults to the
                         repository's default branch (main).
+  --package-manager {npm,pnpm,yarn,none}
+                        Package manager to use for dependency installation
+                        after scaffolding. Use \\"none\\" to skip installation.
+                        The default value is \\"none\\".
 "
 `;
 
