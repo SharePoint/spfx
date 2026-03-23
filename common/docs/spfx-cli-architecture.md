@@ -56,8 +56,9 @@ and merging, and a new CLI (or any other front-end) is a thin consumer of that A
 
 The CLI is a thin front-end over the scaffolding API. It handles argument parsing
 and user-facing output, but delegates all template loading, rendering, and writing
-to `@microsoft/spfx-template-api`. All flows are non-interactive — every parameter
-must be supplied via flags.
+to `@microsoft/spfx-template-api`. All flows are non-interactive — there is no prompting;
+any required parameters must be supplied via flags, and optional parameters use documented
+defaults when omitted.
 
 This separation means additional front-ends (e.g. `npm create`, an MCP server, or a
 Yeoman compatibility shim) can be built without duplicating core logic.
