@@ -1,0 +1,23 @@
+# Template: Run install-run-rush.js with INSTALL_RUN_RUSH_LOCKFILE_PATH set.
+# This pins the Rush version used in CI to the one recorded in rush-package-lock.json.
+
+parameters:
+  - name: Arguments
+    type: string
+  - name: DisplayName
+    type: string
+  - name: Condition
+    type: string
+    default: ''
+  - name: RepoPath
+    type: string
+    default: '$(Build.SourcesDirectory)'
+
+steps:
+  - script: 'node common/scripts/install-run-rush.js ${{ parameters.Arguments }}'
+    displayName: '${{ parameters.DisplayName }}'
+    workingDirectory: ${{ parameters.RepoPath }}
+    ${{ if ne(parameters.Condition, '') }}:
+      condition: ${{ parameters.Condition }}
+    env:
+      INSTALL_RUN_RUSH_LOCKFILE_PATH: $(Build.SourcesDirectory)/common/config/validation/rush-package-lock.json

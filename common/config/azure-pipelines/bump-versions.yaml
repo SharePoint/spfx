@@ -81,23 +81,26 @@ extends:
 
               - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
-              - script: node common/scripts/install-run-rush.js install
-                displayName: 'Rush Install'
-                workingDirectory: $(SelfRepoPath)
+              - template: /common/config/azure-pipelines/templates/install-run-rush.yaml@self
+                parameters:
+                  Arguments: 'install'
+                  DisplayName: 'Rush Install'
+                  RepoPath: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/bump-versions.yaml@self
                 parameters:
                   VersionPolicyName: spfx
                   RepoPath: $(SelfRepoPath)
 
-              - script: >
-                  node common/scripts/install-run-rush.js
-                  test-and-package-solution
-                  --production
-                  --timeline
-                  --verbose
-                displayName: 'Rush Rebuild'
-                workingDirectory: $(SelfRepoPath)
+              - template: /common/config/azure-pipelines/templates/install-run-rush.yaml@self
+                parameters:
+                  Arguments: >
+                    test-and-package-solution
+                    --production
+                    --timeline
+                    --verbose
+                  DisplayName: 'Rush Rebuild'
+                  RepoPath: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/pack.yaml@self
                 parameters:
