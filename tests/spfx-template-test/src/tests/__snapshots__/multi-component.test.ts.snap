@@ -142,7 +142,7 @@ Object {
     "@types/heft-jest": "^1.0.6",
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.48.1",
-    "eslint": "8.57.1",
+    "eslint": "9.37.0",
     "typescript": "~5.8.3",
   },
   "engines": Object {
