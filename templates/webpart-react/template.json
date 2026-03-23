@@ -4,10 +4,6 @@
     "version": "0.0.1",
     "spfxVersion": "1.22.2",
     "contextSchema": {
-        "eslintProfile": {
-            "type": "string",
-            "description": "The ESLint profile from `@microsoft/eslint-config-spfx` to use"
-        },
         "libraryName": {
             "type": "string",
             "description": "The name of the library (also used as the package name)"

@@ -239,7 +239,6 @@ export class CreateAction extends CommandLineAction {
       const fs: MemFsEditor = await template.renderAsync(
         {
           solution_name: solutionName,
-          eslintProfile: 'react',
           libraryName: this._libraryNameParameter.value,
           spfxVersion: template.spfxVersion,
           // The shields.io badge URL uses dashes as separators, so dashes in version numbers
