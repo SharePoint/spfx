@@ -243,7 +243,7 @@ export class CreateAction extends CommandLineAction {
           libraryName: this._libraryNameParameter.value,
           spfxVersion: template.spfxVersion,
           // The shields.io badge URL uses dashes as separators, so dashes in version numbers
-          // need to be escaped as double dashes to avoid ambiguity. For example, "1.23.0-beta.0" becomes "1.23.--beta.0".
+          // need to be escaped as double dashes to avoid ambiguity. For example, "1.23.0-beta.0" becomes "1.23.0--beta.0".
           spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
           componentId: componentId,
           featureId: featureId,
