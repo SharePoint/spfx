@@ -4,6 +4,7 @@ import {
   IGenericPrimaryTextAdaptiveCardExtensionProps,
   IGenericPrimaryTextAdaptiveCardExtensionState
 } from '../GenericPrimaryTextAdaptiveCardExtension';
+import template from './template/QuickViewTemplate.json';
 
 export interface IQuickViewData {
   subTitle: string;
@@ -15,15 +16,12 @@ export class QuickView extends BaseAdaptiveCardQuickView<
   IGenericPrimaryTextAdaptiveCardExtensionState,
   IQuickViewData
 > {
+  public readonly template: ISPFxAdaptiveCard = template;
+
   public get data(): IQuickViewData {
     return {
       subTitle: strings.SubTitle,
       title: strings.Title
     };
-  }
-
-  public get template(): ISPFxAdaptiveCard {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    return require('./template/QuickViewTemplate.json');
   }
 }
