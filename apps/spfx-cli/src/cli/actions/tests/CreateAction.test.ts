@@ -23,12 +23,6 @@ const MockedLocal = LocalFileSystemRepositorySource as jest.MockedClass<
 
 // Minimal mocks for a happy-path run
 const mockMemFs = { dump: jest.fn().mockReturnValue({}) };
-const mockTemplate = {
-  renderAsync: jest.fn().mockResolvedValue(mockMemFs),
-  spfxVersion: '1.22.1'
-};
-const mockCollection = new Map([['webpart-minimal', mockTemplate]]);
-mockCollection.toString = () => '[Mocked SPFxTemplateCollection]';
 
 const REQUIRED_ARGS: string[] = [
   '--template',
@@ -89,11 +83,19 @@ describe('SOLUTION_NAME_PATTERN', () => {
 
 describe('CreateAction', () => {
   const originalEnv = process.env;
+  let mockTemplate: { renderAsync: jest.Mock; spfxVersion: string };
 
   beforeEach(() => {
     jest.clearAllMocks();
     process.env = { ...originalEnv };
     delete process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME];
+
+    mockTemplate = {
+      renderAsync: jest.fn().mockResolvedValue(mockMemFs),
+      spfxVersion: '1.22.1'
+    };
+    const mockCollection = new Map([['webpart-minimal', mockTemplate]]);
+    mockCollection.toString = () => '[Mocked SPFxTemplateCollection]';
 
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(
       mockCollection as unknown as SPFxTemplateCollection
