@@ -20,6 +20,8 @@ jobs:
     name: Build on ${{ matrix.displayName }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
+    env:
+      INSTALL_RUN_RUSH_LOCKFILE_PATH: ${{ github.workspace }}/common/config/validation/rush-package-lock.json
     steps:
       - uses: actions/checkout@v4
         with:

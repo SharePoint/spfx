@@ -9,9 +9,11 @@ parameters:
     default: '$(Build.SourcesDirectory)'
 
 steps:
-  - script: >
-      node common/scripts/install-run-rush.js version
-      --bump
-      --version-policy ${{ parameters.VersionPolicyName }}
-    displayName: 'Rush Version Bump (Policy: ${{ parameters.VersionPolicyName }})'
-    workingDirectory: ${{ parameters.RepoPath }}
+  - template: /common/config/azure-pipelines/templates/install-run-rush.yaml@self
+    parameters:
+      Arguments: >
+        version
+        --bump
+        --version-policy ${{ parameters.VersionPolicyName }}
+      DisplayName: 'Rush Version Bump (Policy: ${{ parameters.VersionPolicyName }})'
+      RepoPath: ${{ parameters.RepoPath }}
