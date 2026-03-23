@@ -2,7 +2,7 @@
   "name": "ace-data-visualization",
   "description": "A SharePoint Framework Adaptive Card Extension with Data Visualization",
   "version": "1.0.0",
-  "spfxVersion": "1.22.2",
+  "spfxVersion": "1.23.0-beta.0",
   "contextSchema": {
     "componentNameCapitalCase": {
       "type": "string",

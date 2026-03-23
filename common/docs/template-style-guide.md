@@ -9,7 +9,7 @@ Template variables are defined in each template's `template.json` under `context
 ```json
 {
   "context": {
-    "spfxVersion": "1.22.2"
+    "spfxVersion": "1.23.0-beta.0"
   }
 }
 ```
@@ -23,7 +23,7 @@ Template variables are defined in each template's `template.json` under `context
 | `componentNameAllCaps` | UPPER_CASE | String literal IDs | "GENERICCARD" |
 | `libraryName` | scoped | Package name | "@spfx-template/generic-card" |
 | `description` | — | User-provided description | User's text |
-| `spfxVersion` | — | SPFx framework version | "1.22.2" |
+| `spfxVersion` | — | SPFx framework version | "1.23.0-beta.0" |
 
 If you need a case transformation that doesn't exist, either:
 1. Add it to the template.json `contextSchema`
