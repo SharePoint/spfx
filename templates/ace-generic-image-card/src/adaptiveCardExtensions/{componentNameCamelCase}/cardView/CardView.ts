@@ -11,6 +11,7 @@ import {
   I<%= componentNameCapitalCase %>AdaptiveCardExtensionState,
   QUICK_VIEW_REGISTRY_ID
 } from '../<%= componentNameCapitalCase %>AdaptiveCardExtension';
+import microsoftLogoImage from '../assets/MicrosoftLogo.png';
 
 export class CardView extends BaseImageCardView<
   I<%= componentNameCapitalCase %>AdaptiveCardExtensionProps,
@@ -37,7 +38,7 @@ export class CardView extends BaseImageCardView<
   public get data(): IImageCardParameters {
     return {
       primaryText: strings.PrimaryText,
-      imageUrl: require('../assets/MicrosoftLogo.png'),
+      imageUrl: microsoftLogoImage,
       title: this.properties.title
     };
   }
