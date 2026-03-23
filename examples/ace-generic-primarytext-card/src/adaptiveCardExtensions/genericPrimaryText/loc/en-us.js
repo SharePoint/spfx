@@ -1,11 +1,11 @@
-define([], function() {
+define([], function () {
   return {
-    "PropertyPaneDescription": "GenericPrimaryTextCard Description",
-    "TitleFieldLabel": "Card title",
-    "Title": "Adaptive Card Extension",
-    "SubTitle": "Quick view",
-    "PrimaryText": "SPFx Adaptive Card Extension",
-    "Description": "Create your SPFx Adaptive Card Extension solution!",
-    "QuickViewButton": "Quick view"
-  }
+    PropertyPaneDescription: 'GenericPrimaryTextCard Description',
+    TitleFieldLabel: 'Card title',
+    Title: 'Adaptive Card Extension',
+    SubTitle: 'Quick view',
+    PrimaryText: 'SPFx Adaptive Card Extension',
+    Description: 'Create your SPFx Adaptive Card Extension solution!',
+    QuickViewButton: 'Quick view'
+  };
 });

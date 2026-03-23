@@ -1,7 +1,7 @@
-define([], function() {
+define([], function () {
   return {
-    "Save": "Save",
-    "Cancel": "Cancel",
-    "Close": "Close"
-  }
+    Save: 'Save',
+    Cancel: 'Cancel',
+    Close: 'Close'
+  };
 });
