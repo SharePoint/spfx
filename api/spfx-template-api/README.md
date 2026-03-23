@@ -8,7 +8,7 @@ Programmatic API for loading, rendering, and writing [SharePoint Framework (SPFx
 npm install @microsoft/spfx-template-api
 ```
 
-**Requires Node.js `>=22.14.0 <23.0.0`**
+**Requires Node.js `>=22.14.0 <23.0.0` or `>=24.5.0 <25.0.0`**
 
 ---
 

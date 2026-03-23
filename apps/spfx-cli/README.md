@@ -8,7 +8,7 @@ The official CLI for scaffolding [SharePoint Framework (SPFx)](https://aka.ms/sp
 npm install -g @microsoft/spfx-cli
 ```
 
-**Requires Node.js `>=22.14.0 <23.0.0`**
+**Requires Node.js `>=22.14.0 <23.0.0` or `>=24.5.0 <25.0.0`**
 
 ---
 
