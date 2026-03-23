@@ -14,9 +14,9 @@ import { Executable } from '@rushstack/node-core-library';
 import { Colorize, type Terminal } from '@rushstack/terminal';
 import {
   CommandLineAction,
-  type CommandLineChoiceParameter,
   type CommandLineStringListParameter,
   type CommandLineStringParameter,
+  type IRequiredCommandLineChoiceParameter,
   type IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
 import {
@@ -63,7 +63,7 @@ export class CreateAction extends CommandLineAction {
   private readonly _solutionNameParameter: CommandLineStringParameter;
   private readonly _templateUrlParameter: CommandLineStringParameter;
   private readonly _spfxVersionParameter: CommandLineStringParameter;
-  private readonly _packageManagerParameter: CommandLineChoiceParameter;
+  private readonly _packageManagerParameter: IRequiredCommandLineChoiceParameter<PackageManager | 'none'>;
 
   public constructor(terminal: Terminal) {
     super({
@@ -280,9 +280,7 @@ export class CreateAction extends CommandLineAction {
       const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
       await writer.writeAsync(fs, targetDir);
 
-      const packageManager: PackageManager | 'none' = this._packageManagerParameter.value as
-        | PackageManager
-        | 'none';
+      const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
       if (packageManager !== 'none') {
         await _runInstallAsync(packageManager, targetDir, terminal);
       }
