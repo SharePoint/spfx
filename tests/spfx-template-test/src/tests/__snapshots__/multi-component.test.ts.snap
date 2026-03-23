@@ -164,3 +164,272 @@ Object {
   "version": "0.0.1",
 }
 `;
+
+exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 1`] = `
+"Adding local template source: <LOCAL_TEMPLATE_PATH>
+# of templates: 17
+Template Name: ace-data-visualization
+Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: ace-generic-card
+Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: ace-generic-image-card
+Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: ace-generic-primarytext-card
+Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: ace-search-card
+Description: Adaptive Card Extension with Search Card template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: extension-application-customizer
+Description: A SharePoint Framework Application Customizer extension template
+Version: 0.0.1
+SPFx Version: 1.22.2
+Number of Files: 22
+
+Template Name: extension-fieldcustomizer-minimal
+Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 22
+
+Template Name: extension-fieldcustomizer-noframework
+Description: A SharePoint Framework field customizer extension with no framework
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 22
+
+Template Name: extension-fieldcustomizer-react
+Description: SharePoint Framework Field Customizer extension with React framework
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 23
+
+Template Name: extension-formcustomizer-noframework
+Description: A SharePoint Framework Form Customizer extension with no framework
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 21
+
+Template Name: extension-formcustomizer-react
+Description: A SharePoint Framework Form Customizer extension with React
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 20
+
+Template Name: extension-listviewcommandset
+Description: SharePoint Framework list view command set extension template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 24
+
+Template Name: extension-search-query-modifier
+Description: A SharePoint Framework search query modifier extension
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 22
+
+Template Name: library
+Description: A SharePoint Framework Library Component
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 21
+
+Template Name: webpart-minimal
+Description: A minimal web part template (no framework) for SPFx
+Version: 0.0.1
+SPFx Version: 1.22.2
+Number of Files: 23
+
+Template Name: webpart-noframework
+Description: A web part template with no framework (plain TypeScript) for SPFx
+Version: 0.0.1
+SPFx Version: 1.22.2
+Number of Files: 26
+
+Template Name: webpart-react
+Description: A React-based web part template for SPFx
+Version: 0.0.1
+SPFx Version: 1.22.2
+Number of Files: 27
+
+targetDir: <TARGET_DIR>
+
+[cyan]The following files will be modified:[default]
+[yellow]Modified: .eslintrc.js[default]
+[yellow]Modified: .gitignore[default]
+[yellow]Modified: .npmignore[default]
+[yellow]Modified: .vscode/launch.json[default]
+[yellow]Modified: .vscode/settings.json[default]
+[yellow]Modified: README.md[default]
+[yellow]Modified: config/config.json[default]
+[yellow]Modified: config/deploy-azure-storage.json[default]
+[yellow]Modified: config/package-solution.json[default]
+[yellow]Modified: config/rig.json[default]
+[yellow]Modified: config/sass.json[default]
+[yellow]Modified: config/serve.json[default]
+[yellow]Modified: config/typescript.json[default]
+[yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: package.json[default]
+[yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.manifest.json[default]
+[yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.module.scss[default]
+[yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.ts[default]
+[yellow]Modified: src/webparts/minimalWebPart/loc/en-us.js[default]
+[yellow]Modified: src/webparts/minimalWebPart/loc/minimalWebPartStrings.d.ts[default]
+[yellow]Modified: teams/838638c8-36e9-53b5-a8c3-37a22b55fa22_color.png[default]
+[yellow]Modified: teams/838638c8-36e9-53b5-a8c3-37a22b55fa22_outline.png[default]
+[yellow]Modified: tsconfig.json[default]
+
+"
+`;
+
+exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 2`] = `
+"Adding local template source: <LOCAL_TEMPLATE_PATH>
+# of templates: 17
+Template Name: ace-data-visualization
+Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: ace-generic-card
+Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: ace-generic-image-card
+Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: ace-generic-primarytext-card
+Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: ace-search-card
+Description: Adaptive Card Extension with Search Card template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 25
+
+Template Name: extension-application-customizer
+Description: A SharePoint Framework Application Customizer extension template
+Version: 0.0.1
+SPFx Version: 1.22.2
+Number of Files: 22
+
+Template Name: extension-fieldcustomizer-minimal
+Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 22
+
+Template Name: extension-fieldcustomizer-noframework
+Description: A SharePoint Framework field customizer extension with no framework
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 22
+
+Template Name: extension-fieldcustomizer-react
+Description: SharePoint Framework Field Customizer extension with React framework
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 23
+
+Template Name: extension-formcustomizer-noframework
+Description: A SharePoint Framework Form Customizer extension with no framework
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 21
+
+Template Name: extension-formcustomizer-react
+Description: A SharePoint Framework Form Customizer extension with React
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 20
+
+Template Name: extension-listviewcommandset
+Description: SharePoint Framework list view command set extension template
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 24
+
+Template Name: extension-search-query-modifier
+Description: A SharePoint Framework search query modifier extension
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 22
+
+Template Name: library
+Description: A SharePoint Framework Library Component
+Version: 1.0.0
+SPFx Version: 1.22.2
+Number of Files: 21
+
+Template Name: webpart-minimal
+Description: A minimal web part template (no framework) for SPFx
+Version: 0.0.1
+SPFx Version: 1.22.2
+Number of Files: 23
+
+Template Name: webpart-noframework
+Description: A web part template with no framework (plain TypeScript) for SPFx
+Version: 0.0.1
+SPFx Version: 1.22.2
+Number of Files: 26
+
+Template Name: webpart-react
+Description: A React-based web part template for SPFx
+Version: 0.0.1
+SPFx Version: 1.22.2
+Number of Files: 27
+
+targetDir: <TARGET_DIR>
+
+[cyan]The following files will be modified:[default]
+[yellow]Modified: .eslintrc.js[default]
+[yellow]Modified: .gitignore[default]
+[yellow]Modified: .npmignore[default]
+[yellow]Modified: .vscode/launch.json[default]
+[yellow]Modified: .vscode/settings.json[default]
+[yellow]Modified: README.md[default]
+[yellow]Modified: config/config.json[default]
+[yellow]Modified: config/deploy-azure-storage.json[default]
+[yellow]Modified: config/package-solution.json[default]
+[yellow]Modified: config/rig.json[default]
+[yellow]Modified: config/sass.json[default]
+[yellow]Modified: config/serve.json[default]
+[yellow]Modified: config/typescript.json[default]
+[yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: package.json[default]
+[yellow]Modified: sharepoint/assets/ClientSideInstance.xml[default]
+[yellow]Modified: sharepoint/assets/elements.xml[default]
+[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/AppCustomizerApplicationCustomizer.manifest.json[default]
+[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/AppCustomizerApplicationCustomizer.ts[default]
+[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/loc/appCustomizerApplicationCustomizerStrings.d.ts[default]
+[yellow]Modified: src/extensions/appCustomizerApplicationCustomizer/loc/en-us.js[default]
+[yellow]Modified: tsconfig.json[default]
+
+"
+`;

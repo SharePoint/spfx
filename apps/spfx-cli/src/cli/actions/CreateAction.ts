@@ -22,9 +22,10 @@ import {
   SPFxTemplateWriter
 } from '@microsoft/spfx-template-api';
 
-import { SOLUTION_NAME_PATTERN } from '../../utilcities/validation';
+import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
 
 const DEFAULT_GITHUB_REPO: string = 'https://github.com/SharePoint/spfx';
+export const SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME: string = 'SPFX_TEMPLATE_REPO_URL';
 
 // Deterministic namespace for CI mode GUIDs, derived from the well-known URL
 // namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
@@ -44,17 +45,18 @@ const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile> = z.object({
 });
 
 export class CreateAction extends CommandLineAction {
-  private _terminal: Terminal;
-  private readonly _targetDir: IRequiredCommandLineStringParameter;
-  private readonly _template: IRequiredCommandLineStringParameter;
-  private readonly _localTemplateSources: CommandLineStringListParameter;
-  private readonly _libraryName: IRequiredCommandLineStringParameter;
-  private readonly _componentName: IRequiredCommandLineStringParameter;
-  private readonly _componentAlias: CommandLineStringParameter;
-  private readonly _componentDescription: CommandLineStringParameter;
-  private readonly _solutionName: CommandLineStringParameter;
-  private readonly _templateUrl: CommandLineStringParameter;
-  private readonly _spfxVersion: CommandLineStringParameter;
+  private readonly _terminal: Terminal;
+
+  private readonly _targetDirParameter: IRequiredCommandLineStringParameter;
+  private readonly _templateParameter: IRequiredCommandLineStringParameter;
+  private readonly _localTemplateSourcesParameter: CommandLineStringListParameter;
+  private readonly _libraryNameParameter: IRequiredCommandLineStringParameter;
+  private readonly _componentNameParameter: IRequiredCommandLineStringParameter;
+  private readonly _componentAliasParameter: CommandLineStringParameter;
+  private readonly _componentDescriptionParameter: CommandLineStringParameter;
+  private readonly _solutionNameParameter: CommandLineStringParameter;
+  private readonly _templateUrlParameter: CommandLineStringParameter;
+  private readonly _spfxVersionParameter: CommandLineStringParameter;
 
   public constructor(terminal: Terminal) {
     super({
@@ -65,66 +67,66 @@ export class CreateAction extends CommandLineAction {
 
     this._terminal = terminal;
 
-    this._targetDir = this.defineStringParameter({
+    this._targetDirParameter = this.defineStringParameter({
       parameterLongName: '--target-dir',
       argumentName: 'TARGET_DIR',
       description: 'The directory to create the solution (or where the solution already exists)',
       defaultValue: process.cwd()
     });
 
-    this._localTemplateSources = this.defineStringListParameter({
+    this._localTemplateSourcesParameter = this.defineStringListParameter({
       parameterLongName: '--local-template',
       argumentName: 'TEMPLATE_PATH',
       description: 'Path to a local template folder'
     });
 
-    this._template = this.defineStringParameter({
+    this._templateParameter = this.defineStringParameter({
       parameterLongName: '--template',
       argumentName: 'TEMPLATE_NAME',
       description: 'The template to use for scaffolding',
       required: true
     });
 
-    this._libraryName = this.defineStringParameter({
+    this._libraryNameParameter = this.defineStringParameter({
       parameterLongName: '--library-name',
       argumentName: 'LIBRARY_NAME',
       description: 'The library name for the component',
       required: true
     });
 
-    this._componentName = this.defineStringParameter({
+    this._componentNameParameter = this.defineStringParameter({
       parameterLongName: '--component-name',
       argumentName: 'COMPONENT_NAME',
       description: 'The component name (e.g., "Hello World")',
       required: true
     });
 
-    this._componentAlias = this.defineStringParameter({
+    this._componentAliasParameter = this.defineStringParameter({
       parameterLongName: '--component-alias',
       argumentName: 'COMPONENT_ALIAS',
       description: 'The component alias. If not provided, will use the component name.'
     });
 
-    this._componentDescription = this.defineStringParameter({
+    this._componentDescriptionParameter = this.defineStringParameter({
       parameterLongName: '--component-description',
       argumentName: 'COMPONENT_DESCRIPTION',
       description: 'The component description. If not provided, will generate from component name.'
     });
 
-    this._solutionName = this.defineStringParameter({
+    this._solutionNameParameter = this.defineStringParameter({
       parameterLongName: '--solution-name',
       argumentName: 'SOLUTION_NAME',
       description: 'The solution name. If not provided, defaults to the kebab-case component name.'
     });
 
-    this._templateUrl = this.defineStringParameter({
+    this._templateUrlParameter = this.defineStringParameter({
       parameterLongName: '--template-url',
       argumentName: 'URL',
       description: `URL of the GitHub template repository. Defaults to ${DEFAULT_GITHUB_REPO}.`,
-      environmentVariable: 'SPFX_TEMPLATE_REPO_URL'
+      environmentVariable: SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME
     });
 
-    this._spfxVersion = this.defineStringParameter({
+    this._spfxVersionParameter = this.defineStringParameter({
       parameterLongName: '--spfx-version',
       argumentName: 'VERSION',
       description:
@@ -134,11 +136,13 @@ export class CreateAction extends CommandLineAction {
   }
 
   protected async onExecuteAsync(): Promise<void> {
+    const terminal: Terminal = this._terminal;
+
     try {
       const options: IScaffoldProfile = {
-        localTemplateSources: this._localTemplateSources.values,
-        templateName: this._template.value,
-        targetDir: this._targetDir.value
+        localTemplateSources: this._localTemplateSourcesParameter.values,
+        templateName: this._templateParameter.value,
+        targetDir: this._targetDirParameter.value
       };
 
       const validationResult: z.ZodSafeParseResult<IScaffoldProfile> =
@@ -150,30 +154,30 @@ export class CreateAction extends CommandLineAction {
 
       const manager: SPFxTemplateRepositoryManager = new SPFxTemplateRepositoryManager();
 
-      if (this._localTemplateSources.values.length > 0) {
-        if (this._spfxVersion.value !== undefined) {
-          this._terminal.writeWarningLine(
-            `${this._spfxVersion.longName} is ignored when ${this._localTemplateSources.longName} is specified.`
+      if (this._localTemplateSourcesParameter.values.length > 0) {
+        if (this._spfxVersionParameter.value !== undefined) {
+          terminal.writeWarningLine(
+            `${this._spfxVersionParameter.longName} is ignored when ${this._localTemplateSourcesParameter.longName} is specified.`
           );
         }
-        for (const localPath of this._localTemplateSources.values) {
-          this._terminal.writeLine(`Adding local template source: ${localPath}`);
+        for (const localPath of this._localTemplateSourcesParameter.values) {
+          terminal.writeLine(`Adding local template source: ${localPath}`);
           manager.addSource(new LocalFileSystemRepositorySource(localPath));
         }
       } else {
-        const rawUrl: string = (this._templateUrl.value ?? '').trim() || DEFAULT_GITHUB_REPO;
+        const rawUrl: string = (this._templateUrlParameter.value ?? '').trim() || DEFAULT_GITHUB_REPO;
         const { repoUrl, urlBranch } = parseGitHubUrlAndRef(rawUrl);
 
-        const spfxVersion: string | undefined = this._spfxVersion.value;
+        const spfxVersion: string | undefined = this._spfxVersionParameter.value;
         if (spfxVersion !== undefined && urlBranch !== undefined) {
-          this._terminal.writeWarningLine(
-            `${this._templateUrl.longName} contains a branch ('/tree/${urlBranch}'). ` +
-              `${this._spfxVersion.longName} "${spfxVersion}" will take precedence.`
+          terminal.writeWarningLine(
+            `${this._templateUrlParameter.longName} contains a branch ('/tree/${urlBranch}'). ` +
+              `${this._spfxVersionParameter.longName} "${spfxVersion}" will take precedence.`
           );
         }
         const ref: string | undefined = spfxVersion ?? urlBranch;
 
-        this._terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
+        terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
         manager.addSource(new PublicGitHubRepositorySource(repoUrl, ref, this._terminal));
       }
 
@@ -184,12 +188,12 @@ export class CreateAction extends CommandLineAction {
         const fetchMessage: string = fetchError instanceof Error ? fetchError.message : String(fetchError);
         throw new Error(
           `Failed to fetch templates. If you are offline or behind a firewall, ` +
-            `use ${this._localTemplateSources.longName} to specify a local template source. Details: ${fetchMessage}`,
+            `use ${this._localTemplateSourcesParameter.longName} to specify a local template source. Details: ${fetchMessage}`,
           { cause: fetchError }
         );
       }
 
-      this._terminal.writeLine(templates.toString());
+      terminal.writeLine(templates.toString());
 
       const template: SPFxTemplate | undefined = templates.get(templateName);
 
@@ -200,12 +204,12 @@ export class CreateAction extends CommandLineAction {
       }
 
       // Get component name and validate
-      const componentName: string = this._componentName.value;
+      const componentName: string = this._componentNameParameter.value;
       if (!componentName || componentName.trim().length === 0) {
         throw new Error('Component name is required and cannot be empty or only whitespace.');
       }
 
-      const componentAlias: string = this._componentAlias.value || componentName;
+      const componentAlias: string = this._componentAliasParameter.value || componentName;
 
       // CI mode is read from an environment variable instead of a ts-command-line
       // parameter so it stays out of --help output. It is an internal/undocumented
@@ -215,7 +219,8 @@ export class CreateAction extends CommandLineAction {
       const componentId: string = ciMode ? uuidv5(`component:${componentAlias}`, CI_NAMESPACE) : uuidv4();
       const solutionId: string = ciMode ? CI_SOLUTION_ID : uuidv4();
       const featureId: string = ciMode ? uuidv5(`feature:${componentAlias}`, CI_NAMESPACE) : uuidv4();
-      const componentDescription: string = this._componentDescription.value || `${componentName} description`;
+      const componentDescription: string =
+        this._componentDescriptionParameter.value || `${componentName} description`;
 
       // Compute name variants using lodash
       const componentNameCamelCase: string = camelCase(componentName);
@@ -223,7 +228,7 @@ export class CreateAction extends CommandLineAction {
       const componentNameCapitalCase: string = upperFirst(camelCase(componentName));
       const componentNameAllCaps: string = snakeCase(componentName).toUpperCase();
 
-      const rawSolutionName: string | undefined = this._solutionName.value?.trim();
+      const rawSolutionName: string | undefined = this._solutionNameParameter.value?.trim();
       if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
         throw new Error(
           `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
@@ -235,7 +240,7 @@ export class CreateAction extends CommandLineAction {
         {
           solution_name: solutionName,
           eslintProfile: 'react',
-          libraryName: this._libraryName.value,
+          libraryName: this._libraryNameParameter.value,
           spfxVersion: template.spfxVersion,
           componentId: componentId,
           featureId: featureId,
@@ -257,7 +262,7 @@ export class CreateAction extends CommandLineAction {
       await writer.writeAsync(fs, targetDir);
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
-      this._terminal.writeErrorLine(`Error creating SPFx component: ${message}`);
+      terminal.writeErrorLine(`Error creating SPFx component: ${message}`);
       throw error;
     }
   }
@@ -287,17 +292,26 @@ function parseGitHubUrlAndRef(rawUrl: string): { repoUrl: string; urlBranch: str
  */
 function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: string): void {
   terminal.writeLine(`targetDir: ${targetDir}`);
-  const changed: { [key: string]: { state: 'modified' | 'deleted'; isNew: boolean } } = fs.dump(targetDir);
+  interface IChangedFile {
+    state: 'modified' | 'deleted';
+    isNew: boolean;
+  }
+  const changed: { [key: string]: IChangedFile } = fs.dump(targetDir);
 
   terminal.writeLine();
   terminal.writeLine(Colorize.cyan('The following files will be modified:'));
 
-  for (const [file, data] of Object.entries(changed)) {
+  const changedEntries: [string, IChangedFile][] = Object.entries(changed).sort(([a], [b]) =>
+    a < b ? -1 : a > b ? 1 : 0
+  );
+
+  for (const [file, data] of changedEntries) {
     const { state, isNew } = data;
     if (isNew) {
       terminal.writeLine(Colorize.green(`Added: ${file}`));
       continue;
     }
+
     switch (state) {
       case 'modified':
         terminal.writeLine(Colorize.yellow(`Modified: ${file}`));

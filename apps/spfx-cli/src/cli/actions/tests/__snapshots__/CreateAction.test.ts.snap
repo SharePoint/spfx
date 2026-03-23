@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateAction --spfx-version is ignored (with no throw) when --local-template is also provided 1`] = `
+Array [
+  "[warning] --spfx-version is ignored when --local-template is specified.[n]",
+  "[    log] Adding local template source: /a[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --spfx-version passes ref to PublicGitHubRepositorySource when --spfx-version is set 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --spfx-version passes ref when SPFX_TEMPLATE_REPO_URL and --spfx-version are both set 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/my-org/my-templates (branch: 1.22)[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --spfx-version uses --spfx-version over branch encoded in SPFX_TEMPLATE_REPO_URL /tree/ path 1`] = `
+Array [
+  "[warning] --template-url contains a branch ('/tree/pending-fixes'). --spfx-version \\"1.22\\" will take precedence.[n]",
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL /tree/ branch extraction extracts branch from /tree/ in SPFX_TEMPLATE_REPO_URL 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: pending-fixes)[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL /tree/ branch extraction extracts branch from /tree/ on a GHE host 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.mycompany.com/org/repo (branch: my-branch)[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL /tree/ branch extraction handles .git before /tree/ 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL /tree/ branch extraction handles version-like branch name in /tree/ path 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL /tree/ branch extraction ignores subdirectory suffix after the branch name in /tree/ path 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: main)[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL /tree/ branch extraction passes undefined ref when URL has no /tree/ and no --spfx-version 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL normalization handles .git then slash together 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL normalization strips .git suffix 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL normalization strips multiple trailing slashes 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL normalization strips trailing slash 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction URL normalization trims whitespace 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction source selection with --local-template should add a LocalFileSystemRepositorySource for the provided path 1`] = `
+Array [
+  "[    log] Adding local template source: /path/to/templates[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction source selection with --local-template should add multiple sources for multiple --local-template flags 1`] = `
+Array [
+  "[    log] Adding local template source: /a[n]",
+  "[    log] Adding local template source: /b[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction source selection without --local-template should add a PublicGitHubRepositorySource with the default URL 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction source selection without --local-template should use SPFX_TEMPLATE_REPO_URL when set 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/my-org/my-templates[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction whitespace env var fix falls back to default URL when SPFX_TEMPLATE_REPO_URL is whitespace-only 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
