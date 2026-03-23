@@ -319,6 +319,35 @@ describe('CreateAction', () => {
     });
   });
 
+  describe('spfxVersionForBadgeUrl', () => {
+    it('escapes hyphens in prerelease versions for shields.io badge URLs', async () => {
+      mockTemplate.spfxVersion = '1.23.0-beta.0';
+      await runCreateAsync();
+      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
+        expect.objectContaining({
+          spfxVersion: '1.23.0-beta.0',
+          spfxVersionForBadgeUrl: '1.23.0--beta.0'
+        }),
+        expect.anything(),
+        expect.anything()
+      );
+      mockTemplate.spfxVersion = '1.22.1';
+    });
+
+    it('leaves stable versions unchanged', async () => {
+      mockTemplate.spfxVersion = '1.22.1';
+      await runCreateAsync();
+      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
+        expect.objectContaining({
+          spfxVersion: '1.22.1',
+          spfxVersionForBadgeUrl: '1.22.1'
+        }),
+        expect.anything(),
+        expect.anything()
+      );
+    });
+  });
+
   describe('error handling', () => {
     it('throws with a message mentioning --local-template when fetch fails', async () => {
       MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOTFOUND'));
