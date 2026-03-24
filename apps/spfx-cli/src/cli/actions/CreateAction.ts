@@ -56,6 +56,7 @@ export class CreateAction extends CommandLineAction {
   private readonly _targetDirParameter: IRequiredCommandLineStringParameter;
   private readonly _templateParameter: IRequiredCommandLineStringParameter;
   private readonly _localTemplateSourcesParameter: CommandLineStringListParameter;
+  private readonly _remoteSourcesParameter: CommandLineStringListParameter;
   private readonly _libraryNameParameter: IRequiredCommandLineStringParameter;
   private readonly _componentNameParameter: IRequiredCommandLineStringParameter;
   private readonly _componentAliasParameter: CommandLineStringParameter;
@@ -85,6 +86,12 @@ export class CreateAction extends CommandLineAction {
       parameterLongName: '--local-template',
       argumentName: 'TEMPLATE_PATH',
       description: 'Path to a local template folder'
+    });
+
+    this._remoteSourcesParameter = this.defineStringListParameter({
+      parameterLongName: '--remote-source',
+      argumentName: 'URL',
+      description: 'Public GitHub repository URL to use as an additional template source (repeatable)'
     });
 
     this._templateParameter = this.defineStringParameter({
@@ -205,6 +212,17 @@ export class CreateAction extends CommandLineAction {
 
         terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
         manager.addSource(new PublicGitHubRepositorySource(repoUrl, ref, this._terminal));
+      }
+
+      // Always process --remote-source URLs (additive with either local or default sources)
+      for (const remoteUrl of this._remoteSourcesParameter.values) {
+        const { repoUrl: additionalRepoUrl, urlBranch: additionalUrlBranch } =
+          parseGitHubUrlAndRef(remoteUrl);
+        terminal.writeLine(
+          `Adding remote template source: ${additionalRepoUrl}` +
+            `${additionalUrlBranch ? ` (branch: ${additionalUrlBranch})` : ''}`
+        );
+        manager.addSource(new PublicGitHubRepositorySource(additionalRepoUrl, additionalUrlBranch, terminal));
       }
 
       let templates: SPFxTemplateCollection;

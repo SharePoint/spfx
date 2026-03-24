@@ -2,8 +2,8 @@
 
 exports[`CommandLineHelp prints the help: create 1`] = `
 "usage: spfx-cli create [-h] [--target-dir TARGET_DIR]
-                       [--local-template TEMPLATE_PATH] --template
-                       TEMPLATE_NAME --library-name LIBRARY_NAME
+                       [--local-template TEMPLATE_PATH] [--remote-source URL]
+                       --template TEMPLATE_NAME --library-name LIBRARY_NAME
                        --component-name COMPONENT_NAME
                        [--component-alias COMPONENT_ALIAS]
                        [--component-description COMPONENT_DESCRIPTION]
@@ -21,6 +21,8 @@ Optional arguments:
                         solution already exists) The default value is \\"<cwd>\\".
   --local-template TEMPLATE_PATH
                         Path to a local template folder
+  --remote-source URL   Public GitHub repository URL to use as an additional
+                        template source (repeatable)
   --template TEMPLATE_NAME
                         The template to use for scaffolding
   --library-name LIBRARY_NAME

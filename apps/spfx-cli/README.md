@@ -48,6 +48,7 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 | `--spfx-version VERSION` | repo default branch | SPFx version to use; resolves to the `version/<VERSION>` branch (e.g. `1.22`, `1.23-rc.0`) |
 | `--template-url URL` | `https://github.com/SharePoint/spfx` | Custom GitHub template repository |
 | `--local-template PATH` | — | Path to a local template folder (repeatable; bypasses GitHub) |
+| `--remote-source URL` | — | Public GitHub repo to include as an additional template source (repeatable) |
 
 ### Environment variables
 
@@ -131,6 +132,16 @@ spfx create \
   --library-name my-spfx-library \
   --component-name "My Web Part" \
   --local-template ./path/to/templates
+```
+
+Use templates from a custom GitHub repository:
+
+```bash
+spfx create \
+  --template my-custom-template \
+  --library-name my-spfx-library \
+  --component-name "My Web Part" \
+  --remote-source https://github.com/my-org/my-templates
 ```
 
 ---
