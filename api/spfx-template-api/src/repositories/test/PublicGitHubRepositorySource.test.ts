@@ -2,11 +2,10 @@
 // See LICENSE in the project root for license information.
 
 jest.mock('adm-zip');
-jest.mock('@rushstack/terminal');
 jest.mock('../../templating/SPFxTemplate');
 
 import AdmZip from 'adm-zip';
-import { Terminal } from '@rushstack/terminal';
+import { Terminal, StringBufferTerminalProvider } from '@rushstack/terminal';
 import {
   PublicGitHubRepositorySource,
   _parseTemplatesFromFileMapAsync,
@@ -23,25 +22,24 @@ describe(PublicGitHubRepositorySource.name, () => {
     typeof SPFxTemplate.fromMemoryAsync
   >;
 
-  let mockTerminal: Terminal;
+  let terminalProvider: StringBufferTerminalProvider;
+  let terminal: Terminal;
 
   beforeEach(() => {
     jest.clearAllMocks();
+    terminalProvider = new StringBufferTerminalProvider();
+    terminal = new Terminal(terminalProvider);
+  });
 
-    mockTerminal = {
-      writeWarningLine: jest.fn(),
-      writeLine: jest.fn(),
-      writeErrorLine: jest.fn()
-    } as unknown as Terminal;
-
-    (Terminal as jest.MockedClass<typeof Terminal>).mockImplementation(() => mockTerminal);
+  afterEach(() => {
+    expect(terminalProvider.getAllOutputAsChunks({ asLines: true })).toMatchSnapshot();
   });
 
   describe('constructor', () => {
     it('should create an instance with repository URI', () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
 
       expect(source['_repoUri']).toBe('https://github.com/owner/repo');
@@ -51,7 +49,7 @@ describe(PublicGitHubRepositorySource.name, () => {
     it('should use default branch "main" when not specified', () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
 
       expect(source['_ref']).toBe('main');
@@ -61,7 +59,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
         branch: 'develop',
-        terminal: mockTerminal
+        terminal
       });
 
       expect(source['_ref']).toBe('develop');
@@ -70,10 +68,10 @@ describe(PublicGitHubRepositorySource.name, () => {
     it('should use provided terminal', () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
 
-      expect(source['_terminal']).toBe(mockTerminal);
+      expect(source['_terminal']).toBe(terminal);
     });
   });
 
@@ -81,7 +79,7 @@ describe(PublicGitHubRepositorySource.name, () => {
     it('should always be "github"', () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
 
       expect(source.kind).toBe('github');
@@ -92,7 +90,7 @@ describe(PublicGitHubRepositorySource.name, () => {
     it('should parse valid GitHub HTTPS URL', () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
       const result = source['_parseGitHubUrl']();
 
@@ -102,7 +100,7 @@ describe(PublicGitHubRepositorySource.name, () => {
     it('should parse GitHub URL with .git extension', () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo.git',
-        terminal: mockTerminal
+        terminal
       });
       const result = source['_parseGitHubUrl']();
 
@@ -112,7 +110,7 @@ describe(PublicGitHubRepositorySource.name, () => {
     it('should throw error for invalid URL', () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://invalid.com/repo',
-        terminal: mockTerminal
+        terminal
       });
 
       expect(() => source['_parseGitHubUrl']()).toThrow(/Invalid GitHub repository URL/);
@@ -121,7 +119,7 @@ describe(PublicGitHubRepositorySource.name, () => {
     it('should throw error for malformed GitHub URL', () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner',
-        terminal: mockTerminal
+        terminal
       });
 
       expect(() => source['_parseGitHubUrl']()).toThrow(/Invalid GitHub repository URL/);
@@ -133,7 +131,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
         branch: 'main',
-        terminal: mockTerminal
+        terminal
       });
       const url = source['_buildDownloadUrl']();
 
@@ -144,7 +142,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
         branch: 'feature-branch',
-        terminal: mockTerminal
+        terminal
       });
       const url = source['_buildDownloadUrl']();
 
@@ -155,7 +153,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/microsoft/spfx',
         branch: 'v1.18',
-        terminal: mockTerminal
+        terminal
       });
       const url = source['_buildDownloadUrl']();
 
@@ -187,7 +185,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
       const zipBuffer = Buffer.from('fake zip');
       const result = source['_extractZipBuffer'](zipBuffer);
@@ -219,7 +217,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
       const result = source['_extractZipBuffer'](Buffer.from('fake zip'));
 
@@ -245,7 +243,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
       const result = source['_extractZipBuffer'](Buffer.from('fake zip'));
 
@@ -265,7 +263,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       mockFromMemoryAsync.mockResolvedValue(mockTemplate);
 
-      const templates = await _parseTemplatesFromFileMapAsync(mockTerminal, fileMap);
+      const templates = await _parseTemplatesFromFileMapAsync(terminal, fileMap);
 
       expect(templates).toHaveLength(1);
       expect(mockFromMemoryAsync).toHaveBeenCalledTimes(1);
@@ -282,7 +280,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       mockFromMemoryAsync.mockResolvedValueOnce(mockTemplate1).mockResolvedValueOnce(mockTemplate2);
 
-      const templates = await _parseTemplatesFromFileMapAsync(mockTerminal, fileMap);
+      const templates = await _parseTemplatesFromFileMapAsync(terminal, fileMap);
 
       expect(templates).toHaveLength(2);
     });
@@ -296,7 +294,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       mockFromMemoryAsync.mockResolvedValue(mockTemplate);
 
-      const templates = await _parseTemplatesFromFileMapAsync(mockTerminal, fileMap);
+      const templates = await _parseTemplatesFromFileMapAsync(terminal, fileMap);
 
       expect(templates).toHaveLength(1);
     });
@@ -313,12 +311,9 @@ describe(PublicGitHubRepositorySource.name, () => {
         .mockResolvedValueOnce(mockTemplate)
         .mockRejectedValueOnce(new Error('Invalid template'));
 
-      const templates = await _parseTemplatesFromFileMapAsync(mockTerminal, fileMap);
+      const templates = await _parseTemplatesFromFileMapAsync(terminal, fileMap);
 
       expect(templates).toHaveLength(1);
-      expect(mockTerminal.writeWarningLine).toHaveBeenCalledWith(
-        expect.stringContaining('Failed to parse template from directory invalid')
-      );
     });
   });
 
@@ -421,7 +416,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
       const templates = await source.getTemplatesAsync();
 
@@ -438,7 +433,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
 
       await expect(source.getTemplatesAsync()).rejects.toThrow(
@@ -451,7 +446,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
-        terminal: mockTerminal
+        terminal
       });
 
       await expect(source.getTemplatesAsync()).rejects.toThrow(
