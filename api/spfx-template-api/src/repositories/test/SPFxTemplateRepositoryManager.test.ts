@@ -11,8 +11,8 @@ import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
 class MockRepositorySource extends BaseSPFxTemplateRepositorySource {
   private _templates: SPFxTemplate[];
 
-  public constructor(type: 'local' | 'github', templates: SPFxTemplate[] = []) {
-    super(type);
+  public constructor(kind: 'local' | 'github', templates: SPFxTemplate[] = []) {
+    super(kind);
     this._templates = templates;
   }
 

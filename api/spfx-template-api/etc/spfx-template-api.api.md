@@ -11,9 +11,9 @@ import * as z from 'zod';
 
 // @public
 export abstract class BaseSPFxTemplateRepositorySource {
-    constructor(type: SPFxTemplateRepositorySourceTypes);
+    constructor(kind: SPFxTemplateRepositorySourceKinds);
     abstract getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
-    get type(): SPFxTemplateRepositorySourceTypes;
+    get kind(): SPFxTemplateRepositorySourceKinds;
 }
 
 // @public
@@ -155,7 +155,7 @@ export class SPFxTemplateRepositoryManager {
 }
 
 // @public
-export type SPFxTemplateRepositorySourceTypes = 'local' | 'github';
+export type SPFxTemplateRepositorySourceKinds = 'local' | 'github';
 
 // @public
 export class SPFxTemplateWriter {

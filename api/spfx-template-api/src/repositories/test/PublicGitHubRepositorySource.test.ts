@@ -45,7 +45,7 @@ describe('PublicGitHubRepositorySource', () => {
       });
 
       expect(source['_repoUri']).toBe('https://github.com/owner/repo');
-      expect(source.type).toBe('github');
+      expect(source.kind).toBe('github');
     });
 
     it('should use default branch "main" when not specified', () => {
@@ -84,7 +84,7 @@ describe('PublicGitHubRepositorySource', () => {
         terminal: mockTerminal
       });
 
-      expect(source.type).toBe('github');
+      expect(source.kind).toBe('github');
     });
   });
 

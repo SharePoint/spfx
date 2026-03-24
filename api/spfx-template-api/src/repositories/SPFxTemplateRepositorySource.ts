@@ -7,24 +7,24 @@ import type { PublicGitHubRepositorySource } from './PublicGitHubRepositorySourc
 
 /**
  * @public
- * The type of SPFx template repository sources.
+ * The kind of SPFx template repository sources.
  */
-export type SPFxTemplateRepositorySourceTypes = 'local' | 'github';
+export type SPFxTemplateRepositorySourceKinds = 'local' | 'github';
 
 /**
  * @public
  * Base class for SPFx template repository sources.
  */
 export abstract class BaseSPFxTemplateRepositorySource {
-  private readonly _type: SPFxTemplateRepositorySourceTypes;
+  private readonly _kind: SPFxTemplateRepositorySourceKinds;
 
-  public constructor(type: SPFxTemplateRepositorySourceTypes) {
-    this._type = type;
+  public constructor(kind: SPFxTemplateRepositorySourceKinds) {
+    this._kind = kind;
   }
 
-  /** The type of the repository source */
-  public get type(): SPFxTemplateRepositorySourceTypes {
-    return this._type;
+  /** The kind of the repository source */
+  public get kind(): SPFxTemplateRepositorySourceKinds {
+    return this._kind;
   }
 
   /**
