@@ -184,15 +184,23 @@ export class CreateAction extends CommandLineAction {
         const rawUrl: string = (this._templateUrlParameter.value ?? '').trim() || DEFAULT_GITHUB_REPO;
         const { repoUrl, urlBranch } = parseGitHubUrlAndRef(rawUrl);
 
-        const spfxVersion: string | undefined = this._spfxVersionParameter.value;
-        if (spfxVersion !== undefined && urlBranch !== undefined) {
+        const spfxVersionRaw: string | undefined = this._spfxVersionParameter.value?.trim();
+        let spfxVersionBranch: string | undefined;
+        if (spfxVersionRaw) {
+          if (spfxVersionRaw.startsWith('version/')) {
+            spfxVersionBranch = spfxVersionRaw;
+          } else {
+            spfxVersionBranch = `version/${spfxVersionRaw}`;
+          }
+        }
+
+        if (spfxVersionBranch && urlBranch) {
           terminal.writeWarningLine(
             `${this._templateUrlParameter.longName} contains a branch ('/tree/${urlBranch}'). ` +
-              `${this._spfxVersionParameter.longName} "${spfxVersion}" will take precedence.`
+              `${this._spfxVersionParameter.longName} "${spfxVersionRaw}" will take precedence.`
           );
         }
-        const spfxVersionBranch: string | undefined =
-          spfxVersion !== undefined ? `version/${spfxVersion}` : undefined;
+
         const ref: string | undefined = spfxVersionBranch ?? urlBranch;
 
         terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
