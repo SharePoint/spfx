@@ -61,82 +61,86 @@ describe('ListTemplatesAction', () => {
   describe('default source (always included)', () => {
     it('adds PublicGitHubRepositorySource with the default URL', async () => {
       await runListAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
 
     it('uses SPFX_TEMPLATE_REPO_URL when set', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/my-org/my-templates';
       await runListAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/my-org/my-templates',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/my-org/my-templates',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
 
     it('falls back to default URL when SPFX_TEMPLATE_REPO_URL is whitespace-only', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = '   ';
       await runListAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
 
     it('passes the terminal instance to PublicGitHubRepositorySource', async () => {
       const terminal: Terminal = new Terminal(new StringBufferTerminalProvider());
       const parser: SPFxCommandLineParser = new SPFxCommandLineParser(terminal);
       await parser.executeWithoutErrorHandlingAsync(['list-templates']);
-      expect(MockedGitHub).toHaveBeenCalledWith('https://github.com/SharePoint/spfx', undefined, terminal);
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal
+      });
     });
   });
 
   describe('--spfx-version', () => {
     it('passes ref to default PublicGitHubRepositorySource', async () => {
       await runListAsync(['--spfx-version', '1.22']);
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        'version/1.22',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: 'version/1.22',
+        terminal: expect.anything()
+      });
     });
 
     it('takes precedence over branch encoded in SPFX_TEMPLATE_REPO_URL /tree/ path', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
         'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runListAsync(['--spfx-version', '1.22']);
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        'version/1.22',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: 'version/1.22',
+        terminal: expect.anything()
+      });
     });
 
     it('extracts branch from /tree/ in SPFX_TEMPLATE_REPO_URL when no --spfx-version', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
         'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runListAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        'pending-fixes',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: 'pending-fixes',
+        terminal: expect.anything()
+      });
     });
   });
 
   describe('--local-source (additive)', () => {
     it('adds LocalFileSystemRepositorySource AND still includes the default GitHub source', async () => {
       await runListAsync(['--local-source', '/path/to/templates']);
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
       expect(MockedLocal).toHaveBeenCalledWith('/path/to/templates');
     });
 
@@ -153,28 +157,25 @@ describe('ListTemplatesAction', () => {
     it('adds an extra PublicGitHubRepositorySource alongside the default', async () => {
       await runListAsync(['--remote-source', 'https://github.com/my-org/my-templates']);
       expect(MockedGitHub).toHaveBeenCalledTimes(2);
-      expect(MockedGitHub).toHaveBeenNthCalledWith(
-        1,
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
-      expect(MockedGitHub).toHaveBeenNthCalledWith(
-        2,
-        'https://github.com/my-org/my-templates',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenNthCalledWith(1, {
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
+      expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
+        repoUrl: 'https://github.com/my-org/my-templates',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
 
     it('extracts branch from /tree/ in --remote-source URL', async () => {
       await runListAsync(['--remote-source', 'https://github.com/my-org/my-templates/tree/my-branch']);
-      expect(MockedGitHub).toHaveBeenNthCalledWith(
-        2,
-        'https://github.com/my-org/my-templates',
-        'my-branch',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
+        repoUrl: 'https://github.com/my-org/my-templates',
+        branch: 'my-branch',
+        terminal: expect.anything()
+      });
     });
 
     it('adds multiple remote sources for multiple --remote-source flags', async () => {

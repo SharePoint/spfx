@@ -17,12 +17,13 @@ export {
 } from './templating/index';
 export {
   SPFxTemplateRepositoryManager,
-  type SPFxTemplateRepositorySourceTypes,
+  type SPFxTemplateRepositorySourceKind,
   BaseSPFxTemplateRepositorySource,
   type SPFxRepositorySource,
   SPFxTemplateCollection,
   LocalFileSystemRepositorySource,
-  PublicGitHubRepositorySource
+  PublicGitHubRepositorySource,
+  type IPublicGitHubRepositorySourceOptions
 } from './repositories/index';
 export {
   IMergeHelper,

@@ -15,15 +15,18 @@ npm install @microsoft/spfx-template-api
 ## Quick start
 
 ```typescript
+import { Terminal, ConsoleTerminalProvider } from '@rushstack/terminal';
 import {
   SPFxTemplateRepositoryManager,
   PublicGitHubRepositorySource,
   SPFxTemplateWriter
 } from '@microsoft/spfx-template-api';
 
+const terminal = new Terminal(new ConsoleTerminalProvider());
+
 // 1. Load templates from GitHub
 const manager = new SPFxTemplateRepositoryManager();
-manager.addSource(new PublicGitHubRepositorySource('https://github.com/SharePoint/spfx'));
+manager.addSource(new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal }));
 
 const templates = await manager.getTemplatesAsync();
 const template = templates.get('webpart-react');
@@ -64,13 +67,16 @@ await writer.writeAsync(fs, '/path/to/output');
 Fetches templates from a public GitHub repository. Pin a specific SPFx version with an optional branch/tag ref.
 
 ```typescript
+import { Terminal, ConsoleTerminalProvider } from '@rushstack/terminal';
 import { PublicGitHubRepositorySource } from '@microsoft/spfx-template-api';
 
-// Latest (default branch)
-new PublicGitHubRepositorySource('https://github.com/SharePoint/spfx');
+const terminal = new Terminal(new ConsoleTerminalProvider());
+
+// Latest (repository's default branch)
+new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal });
 
 // Specific version
-new PublicGitHubRepositorySource('https://github.com/SharePoint/spfx', '1.22');
+new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', branch: 'version/1.22', terminal });
 ```
 
 ### `LocalFileSystemRepositorySource`
@@ -88,14 +94,16 @@ new LocalFileSystemRepositorySource('./path/to/templates');
 `SPFxTemplateRepositoryManager` merges templates from all registered sources. Later sources can override templates from earlier ones.
 
 ```typescript
+import { Terminal, ConsoleTerminalProvider } from '@rushstack/terminal';
 import {
   SPFxTemplateRepositoryManager,
   PublicGitHubRepositorySource,
   LocalFileSystemRepositorySource
 } from '@microsoft/spfx-template-api';
 
+const terminal = new Terminal(new ConsoleTerminalProvider());
 const manager = new SPFxTemplateRepositoryManager();
-manager.addSource(new PublicGitHubRepositorySource('https://github.com/SharePoint/spfx'));
+manager.addSource(new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal }));
 manager.addSource(new LocalFileSystemRepositorySource('./my-custom-templates'));
 
 const templates = await manager.getTemplatesAsync();
@@ -143,7 +151,8 @@ The writer uses these helpers internally. You can also import them directly for 
 | `ISPFxTemplateJson` | Shape of the `template.json` manifest |
 | `SPFxTemplateDefinitionSchema` | Zod schema for validating a `template.json` |
 | `SPFxTemplateJsonFile` | Typed wrapper around a parsed `template.json` file |
-| `SPFxTemplateRepositorySourceTypes` | Union type of all built-in repository source types |
+| `SPFxTemplateRepositorySourceKind` | Union type of all built-in repository source kinds (`'local' \| 'github'`) |
+| `IPublicGitHubRepositorySourceOptions` | Options object for constructing a `PublicGitHubRepositorySource` |
 | `IRenderOptions` | Context object passed to `template.renderAsync()` |
 
 ---

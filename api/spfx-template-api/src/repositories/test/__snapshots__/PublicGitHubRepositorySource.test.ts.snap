@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PublicGitHubRepositorySource _buildDownloadUrl should build correct download URL for custom branch 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _buildDownloadUrl should build correct download URL for main branch 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _buildDownloadUrl should build correct download URL with different owner and repo 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _createTemplateFromFileMapAsync should create template from file map 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _createTemplateFromFileMapAsync should include only files from the template directory 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _createTemplateFromFileMapAsync should return undefined if template.json not found 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _createTemplateFromFileMapAsync should throw error for invalid template.json 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _extractZipBuffer should extract files from zip buffer 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _extractZipBuffer should remove root directory prefix 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _extractZipBuffer should skip directories 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _parseGitHubUrl should parse GitHub URL with .git extension 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _parseGitHubUrl should parse valid GitHub HTTPS URL 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _parseGitHubUrl should throw error for invalid URL 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _parseGitHubUrl should throw error for malformed GitHub URL 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _parseTemplatesFromFileMapAsync should find templates with template.json files 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _parseTemplatesFromFileMapAsync should handle multiple templates 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _parseTemplatesFromFileMapAsync should handle template.json in root 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _parseTemplatesFromFileMapAsync should log warning and continue when template parsing fails 1`] = `
+Array [
+  "[warning] Failed to parse template from directory invalid: Error: Failed to parse template.json in invalid: Error: Invalid template[n]",
+]
+`;
+
+exports[`PublicGitHubRepositorySource constructor should create an instance with repository URI 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource constructor should use default branch "main" when not specified 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource constructor should use provided terminal 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource constructor should use specified branch 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource getTemplates should fetch and extract templates from GitHub 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource getTemplates should throw error when download fails 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource getTemplates should throw error when network request fails 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource kind property should always be "github" 1`] = `Array []`;

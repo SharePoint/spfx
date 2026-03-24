@@ -15,7 +15,7 @@ import {
   type ISPFxTemplateJson
 } from '../SPFxTemplateJsonFile';
 
-describe('SPFxTemplateJsonFile', () => {
+describe(SPFxTemplateJsonFile.name, () => {
   const mockReadFileAsync = FileSystem.readFileAsync as jest.MockedFunction<typeof FileSystem.readFileAsync>;
 
   beforeEach(() => {

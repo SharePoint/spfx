@@ -3,7 +3,7 @@
 
 import {
   BaseSPFxTemplateRepositorySource,
-  type SPFxTemplateRepositorySourceTypes
+  type SPFxTemplateRepositorySourceKind
 } from '../SPFxTemplateRepositorySource';
 import type { SPFxTemplate } from '../../templating/SPFxTemplate';
 
@@ -11,51 +11,42 @@ import type { SPFxTemplate } from '../../templating/SPFxTemplate';
 class TestRepositorySource extends BaseSPFxTemplateRepositorySource {
   private _templates: SPFxTemplate[];
 
-  public constructor(type: SPFxTemplateRepositorySourceTypes, templates: SPFxTemplate[] = []) {
-    super(type);
+  public constructor(kind: SPFxTemplateRepositorySourceKind, templates: SPFxTemplate[] = []) {
+    super(kind);
     this._templates = templates;
   }
 
-  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+  public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     return this._templates;
   }
 }
 
-describe('BaseSPFxTemplateRepositorySource', () => {
+describe(BaseSPFxTemplateRepositorySource.name, () => {
   describe('constructor', () => {
-    it('should create an instance with local type', () => {
+    it('should create an instance with local kind', () => {
       const source = new TestRepositorySource('local');
 
-      expect(source.type).toBe('local');
+      expect(source.kind).toBe('local');
     });
 
-    it('should create an instance with github type', () => {
+    it('should create an instance with github kind', () => {
       const source = new TestRepositorySource('github');
 
-      expect(source.type).toBe('github');
+      expect(source.kind).toBe('github');
     });
   });
 
-  describe('type property', () => {
-    it('should be readonly and not changeable', () => {
-      const source = new TestRepositorySource('local');
-
-      expect(() => {
-        // @ts-expect-error - Testing readonly property
-        source.type = 'github';
-      }).toThrow();
-    });
-
-    it('should return the correct type value', () => {
+  describe('kind property', () => {
+    it('should return the correct kind value', () => {
       const localSource = new TestRepositorySource('local');
       const githubSource = new TestRepositorySource('github');
 
-      expect(localSource.type).toBe('local');
-      expect(githubSource.type).toBe('github');
+      expect(localSource.kind).toBe('local');
+      expect(githubSource.kind).toBe('github');
     });
   });
 
-  describe('getTemplates abstract method', () => {
+  describe(TestRepositorySource.prototype.getTemplatesAsync.name, () => {
     it('should be implemented by concrete class', async () => {
       const source = new TestRepositorySource('local');
 

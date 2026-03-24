@@ -21,7 +21,7 @@ interface IFileSystemReadFolderItemsResult {
   path: string;
 }
 
-describe('LocalFileSystemRepositorySource', () => {
+describe(LocalFileSystemRepositorySource.name, () => {
   const mockReadFolderItems = FileSystem.readFolderItems as jest.MockedFunction<
     typeof FileSystem.readFolderItems
   >;
@@ -41,7 +41,7 @@ describe('LocalFileSystemRepositorySource', () => {
       const source = new LocalFileSystemRepositorySource('/path/to/templates');
 
       expect(source.path).toBe('/path/to/templates');
-      expect(source.type).toBe('local');
+      expect(source.kind).toBe('local');
     });
 
     it('should handle Windows-style paths', () => {
@@ -68,11 +68,11 @@ describe('LocalFileSystemRepositorySource', () => {
     });
   });
 
-  describe('type property', () => {
+  describe('kind property', () => {
     it('should always be "local"', () => {
       const source = new LocalFileSystemRepositorySource('/path');
 
-      expect(source.type).toBe('local');
+      expect(source.kind).toBe('local');
     });
   });
 

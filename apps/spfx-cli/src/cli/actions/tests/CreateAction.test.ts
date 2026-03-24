@@ -127,29 +127,33 @@ describe('CreateAction', () => {
     describe('without --local-template', () => {
       it('should add a PublicGitHubRepositorySource with the default URL', async () => {
         await runCreateAsync();
-        expect(MockedGitHub).toHaveBeenCalledWith(
-          'https://github.com/SharePoint/spfx',
-          undefined,
-          expect.anything()
-        );
+        expect(MockedGitHub).toHaveBeenCalledWith({
+          repoUrl: 'https://github.com/SharePoint/spfx',
+          branch: undefined,
+          terminal: expect.anything()
+        });
         expect(MockedLocal).not.toHaveBeenCalled();
       });
 
       it('should use SPFX_TEMPLATE_REPO_URL when set', async () => {
         process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/my-org/my-templates';
         await runCreateAsync();
-        expect(MockedGitHub).toHaveBeenCalledWith(
-          'https://github.com/my-org/my-templates',
-          undefined,
-          expect.anything()
-        );
+        expect(MockedGitHub).toHaveBeenCalledWith({
+          repoUrl: 'https://github.com/my-org/my-templates',
+          branch: undefined,
+          terminal: expect.anything()
+        });
       });
 
       it('should pass the terminal instance to PublicGitHubRepositorySource', async () => {
         const terminal = new Terminal(new StringBufferTerminalProvider());
         const parser = new SPFxCommandLineParser(terminal);
         await parser.executeWithoutErrorHandlingAsync(['create', ...REQUIRED_ARGS]);
-        expect(MockedGitHub).toHaveBeenCalledWith('https://github.com/SharePoint/spfx', undefined, terminal);
+        expect(MockedGitHub).toHaveBeenCalledWith({
+          repoUrl: 'https://github.com/SharePoint/spfx',
+          branch: undefined,
+          terminal
+        });
       });
     });
 
@@ -173,83 +177,83 @@ describe('CreateAction', () => {
     it('strips trailing slash', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx/';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
 
     it('strips multiple trailing slashes', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx///';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
 
     it('strips .git suffix', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx.git';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
 
     it('trims whitespace', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = '  https://github.com/SharePoint/spfx  ';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
 
     it('handles .git then slash together', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx.git/';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
   });
 
   describe('--spfx-version', () => {
     it('passes ref to PublicGitHubRepositorySource when --spfx-version is set', async () => {
       await runCreateAsync(['--spfx-version', '1.22']);
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        'version/1.22',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: 'version/1.22',
+        terminal: expect.anything()
+      });
     });
 
     it('passes ref when SPFX_TEMPLATE_REPO_URL and --spfx-version are both set', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/my-org/my-templates';
       await runCreateAsync(['--spfx-version', '1.22']);
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/my-org/my-templates',
-        'version/1.22',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/my-org/my-templates',
+        branch: 'version/1.22',
+        terminal: expect.anything()
+      });
     });
 
     it('uses --spfx-version over branch encoded in SPFX_TEMPLATE_REPO_URL /tree/ path', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
         'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runCreateAsync(['--spfx-version', '1.22']);
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        'version/1.22',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: 'version/1.22',
+        terminal: expect.anything()
+      });
     });
 
     it('is ignored (with no throw) when --local-template is also provided', async () => {
@@ -264,63 +268,63 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
         'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        'pending-fixes',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: 'pending-fixes',
+        terminal: expect.anything()
+      });
     });
 
     it('handles version-like branch name in /tree/ path', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx/tree/1.22';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        '1.22',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: '1.22',
+        terminal: expect.anything()
+      });
     });
 
     it('handles .git before /tree/', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx.git/tree/1.22';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        '1.22',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: '1.22',
+        terminal: expect.anything()
+      });
     });
 
     it('passes undefined ref when URL has no /tree/ and no --spfx-version', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
 
     it('extracts branch from /tree/ on a GHE host', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
         'https://github.mycompany.com/org/repo/tree/my-branch';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.mycompany.com/org/repo',
-        'my-branch',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.mycompany.com/org/repo',
+        branch: 'my-branch',
+        terminal: expect.anything()
+      });
     });
 
     it('ignores subdirectory suffix after the branch name in /tree/ path', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] =
         'https://github.com/SharePoint/spfx/tree/main/some/subdir';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        'main',
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: 'main',
+        terminal: expect.anything()
+      });
     });
   });
 
@@ -328,11 +332,11 @@ describe('CreateAction', () => {
     it('falls back to default URL when SPFX_TEMPLATE_REPO_URL is whitespace-only', async () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = '   ';
       await runCreateAsync();
-      expect(MockedGitHub).toHaveBeenCalledWith(
-        'https://github.com/SharePoint/spfx',
-        undefined,
-        expect.anything()
-      );
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything()
+      });
     });
   });
 
