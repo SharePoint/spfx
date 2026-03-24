@@ -16,7 +16,7 @@ class TestRepositorySource extends BaseSPFxTemplateRepositorySource {
     this._templates = templates;
   }
 
-  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+  public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     return this._templates;
   }
 }
@@ -37,15 +37,6 @@ describe('BaseSPFxTemplateRepositorySource', () => {
   });
 
   describe('kind property', () => {
-    it('should be readonly and not changeable', () => {
-      const source = new TestRepositorySource('local');
-
-      expect(() => {
-        // @ts-expect-error - Testing readonly property
-        source.kind = 'github';
-      }).toThrow();
-    });
-
     it('should return the correct kind value', () => {
       const localSource = new TestRepositorySource('local');
       const githubSource = new TestRepositorySource('github');

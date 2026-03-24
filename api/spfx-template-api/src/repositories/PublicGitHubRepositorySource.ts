@@ -135,7 +135,7 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
    * Retrieves all templates from the GitHub repository.
    * @returns A Promise that resolves to an array of SPFxTemplate instances
    */
-  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+  public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     try {
       const downloadUrl: string = this._buildDownloadUrl();
       const fileMap: Map<string, Buffer> = await this._downloadAndExtractRepositoryAsync(downloadUrl);

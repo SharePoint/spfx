@@ -31,7 +31,7 @@ export class LocalFileSystemRepositorySource extends BaseSPFxTemplateRepositoryS
    * Retrieves all templates from the local file system.
    * @returns A Promise that resolves to an array of SPFxTemplate instances
    */
-  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+  public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     try {
       const items: FolderItem[] = FileSystem.readFolderItems(this.path, {
         absolutePaths: true // get the full paths back so we don't have to reconstruct it

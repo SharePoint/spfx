@@ -19,7 +19,7 @@ class MockRepositorySource extends BaseSPFxTemplateRepositorySource {
     this._templates = templates;
   }
 
-  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+  public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     return this._templates;
   }
 }
@@ -222,7 +222,7 @@ describe('SPFxTemplateRepositoryManager', () => {
           super('local');
         }
 
-        public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+        public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
           startTimes.push(Date.now());
           await new Promise((resolve) => setTimeout(resolve, 10));
           return [];
@@ -248,7 +248,7 @@ describe('SPFxTemplateRepositoryManager', () => {
           super('local');
         }
 
-        public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+        public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
           throw new Error('Failed to fetch templates');
         }
       }
