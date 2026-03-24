@@ -2,7 +2,10 @@
 // See LICENSE in the project root for license information.
 
 import { SPFxTemplateRepositoryManager } from '../SPFxTemplateRepositoryManager';
-import { BaseSPFxTemplateRepositorySource } from '../SPFxTemplateRepositorySource';
+import {
+  BaseSPFxTemplateRepositorySource,
+  type SPFxTemplateRepositorySourceKind
+} from '../SPFxTemplateRepositorySource';
 import { SPFxTemplate } from '../../templating/SPFxTemplate';
 import { SPFxTemplateJsonFile } from '../../templating/SPFxTemplateJsonFile';
 import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
@@ -11,7 +14,7 @@ import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
 class MockRepositorySource extends BaseSPFxTemplateRepositorySource {
   private _templates: SPFxTemplate[];
 
-  public constructor(kind: 'local' | 'github', templates: SPFxTemplate[] = []) {
+  public constructor(kind: SPFxTemplateRepositorySourceKind, templates: SPFxTemplate[] = []) {
     super(kind);
     this._templates = templates;
   }

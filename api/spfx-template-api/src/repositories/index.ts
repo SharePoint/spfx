@@ -3,7 +3,7 @@
 
 export { SPFxTemplateRepositoryManager } from './SPFxTemplateRepositoryManager';
 export {
-  type SPFxTemplateRepositorySourceKinds,
+  type SPFxTemplateRepositorySourceKind,
   BaseSPFxTemplateRepositorySource,
   type SPFxRepositorySource
 } from './SPFxTemplateRepositorySource';

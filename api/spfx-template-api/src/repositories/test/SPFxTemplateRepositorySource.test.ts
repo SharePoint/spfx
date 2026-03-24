@@ -3,7 +3,7 @@
 
 import {
   BaseSPFxTemplateRepositorySource,
-  type SPFxTemplateRepositorySourceKinds
+  type SPFxTemplateRepositorySourceKind
 } from '../SPFxTemplateRepositorySource';
 import type { SPFxTemplate } from '../../templating/SPFxTemplate';
 
@@ -11,7 +11,7 @@ import type { SPFxTemplate } from '../../templating/SPFxTemplate';
 class TestRepositorySource extends BaseSPFxTemplateRepositorySource {
   private _templates: SPFxTemplate[];
 
-  public constructor(kind: SPFxTemplateRepositorySourceKinds, templates: SPFxTemplate[] = []) {
+  public constructor(kind: SPFxTemplateRepositorySourceKind, templates: SPFxTemplate[] = []) {
     super(kind);
     this._templates = templates;
   }

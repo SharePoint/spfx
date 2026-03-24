@@ -17,7 +17,7 @@ export {
 } from './templating/index';
 export {
   SPFxTemplateRepositoryManager,
-  type SPFxTemplateRepositorySourceKinds,
+  type SPFxTemplateRepositorySourceKind,
   BaseSPFxTemplateRepositorySource,
   type SPFxRepositorySource,
   SPFxTemplateCollection,
