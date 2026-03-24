@@ -22,7 +22,8 @@ export {
   type SPFxRepositorySource,
   SPFxTemplateCollection,
   LocalFileSystemRepositorySource,
-  PublicGitHubRepositorySource
+  PublicGitHubRepositorySource,
+  type IPublicGitHubRepositorySourceOptions
 } from './repositories/index';
 export {
   IMergeHelper,

@@ -4,9 +4,9 @@
 
 ```ts
 
+import type { ITerminal } from '@rushstack/terminal';
 import { JsonObject } from '@rushstack/node-core-library';
 import type { MemFsEditor } from 'mem-fs-editor';
-import { Terminal } from '@rushstack/terminal';
 import * as z from 'zod';
 
 // @public
@@ -28,6 +28,13 @@ export class ConfigJsonMergeHelper extends JsonMergeHelper {
 export interface IMergeHelper {
     readonly fileRelativePath: string;
     merge(existingContent: string, newContent: string): string;
+}
+
+// @public
+export interface IPublicGitHubRepositorySourceOptions {
+    branch?: string;
+    repoUri: string;
+    terminal: ITerminal;
 }
 
 // @public (undocumented)
@@ -86,7 +93,7 @@ export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
 
 // @public
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
-    constructor(repoUri: string, branch?: string, terminal?: Terminal);
+    constructor(options: IPublicGitHubRepositorySourceOptions);
     getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
 }
 

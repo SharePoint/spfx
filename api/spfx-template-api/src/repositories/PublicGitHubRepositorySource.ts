@@ -3,7 +3,7 @@
 
 import AdmZip from 'adm-zip';
 
-import { ConsoleTerminalProvider, Terminal } from '@rushstack/terminal';
+import type { ITerminal } from '@rushstack/terminal';
 
 import { SPFxTemplate } from '../templating/SPFxTemplate';
 import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource';
@@ -12,7 +12,7 @@ import { BaseSPFxTemplateRepositorySource } from './SPFxTemplateRepositorySource
  * @internal
  */
 export async function _parseTemplatesFromFileMapAsync(
-  terminal: Terminal,
+  terminal: ITerminal,
   fileMap: Map<string, Buffer>
 ): Promise<Array<SPFxTemplate>> {
   const templates: Array<SPFxTemplate> = [];
@@ -79,6 +79,27 @@ export async function _createTemplateFromFileMapAsync(
 
 /**
  * @public
+ * Options for constructing a {@link PublicGitHubRepositorySource}.
+ */
+export interface IPublicGitHubRepositorySourceOptions {
+  /**
+   * The GitHub repository URI (e.g., https://github.com/owner/repo).
+   */
+  repoUri: string;
+
+  /**
+   * The branch name to fetch from. Defaults to 'main' if not specified.
+   */
+  branch?: string;
+
+  /**
+   * The Terminal instance for logging.
+   */
+  terminal: ITerminal;
+}
+
+/**
+ * @public
  * A repository that is hosted on a public GitHub repository.
  *
  * SECURITY NOTE: This class intentionally fetches from mutable branch references
@@ -100,19 +121,14 @@ export async function _createTemplateFromFileMapAsync(
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
   private readonly _repoUri: string;
   private readonly _ref: string;
-  private readonly _terminal: Terminal;
+  private readonly _terminal: ITerminal;
 
-  /**
-   * Creates a new instance of PublicGitHubRepositorySource.
-   * @param repoUri - The GitHub repository URI (e.g., https://github.com/owner/repo)
-   * @param branch - The optional branch name to fetch from (defaults to 'main')
-   * @param terminal - The optional Terminal instance for logging (defaults to console terminal)
-   */
-  public constructor(repoUri: string, branch?: string, terminal?: Terminal) {
+  public constructor(options: IPublicGitHubRepositorySourceOptions) {
     super('github');
+    const { repoUri, branch, terminal } = options;
     this._repoUri = repoUri;
     this._ref = branch || 'main';
-    this._terminal = terminal || new Terminal(new ConsoleTerminalProvider());
+    this._terminal = terminal;
   }
 
   /**

@@ -9,4 +9,7 @@ export {
 } from './SPFxTemplateRepositorySource';
 export { SPFxTemplateCollection } from './SPFxTemplateCollection';
 export { LocalFileSystemRepositorySource } from './LocalFileSystemRepositorySource';
-export { PublicGitHubRepositorySource } from './PublicGitHubRepositorySource';
+export {
+  PublicGitHubRepositorySource,
+  type IPublicGitHubRepositorySourceOptions
+} from './PublicGitHubRepositorySource';
