@@ -180,3 +180,4 @@ These READMEs are written for NPM viewers — keep them practical and example-dr
 3. **Peer dependency warnings are OK** - The SPFx packages have peer deps we intentionally don't install
 4. **Templates must match examples** - Keep them synchronized
 5. **READMEs must stay current** - Update `apps/spfx-cli/README.md` and `api/spfx-template-api/README.md` whenever the published packages change
+
