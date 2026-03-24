@@ -16,10 +16,10 @@ jobs:
             nodeVersion: 22.14.x
             displayName: Ubuntu (Node 22)
           - os: ubuntu-latest
-            nodeVersion: 24.12.x
+            nodeVersion: 24.14.x
             displayName: Ubuntu
           - os: windows-latest
-            nodeVersion: 24.12.x
+            nodeVersion: 24.14.x
             displayName: Windows
 
     name: Build on ${{ matrix.displayName }}
