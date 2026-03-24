@@ -77,7 +77,7 @@ describe('PublicGitHubRepositorySource', () => {
     });
   });
 
-  describe('type property', () => {
+  describe('kind property', () => {
     it('should always be "github"', () => {
       const source = new PublicGitHubRepositorySource({
         repoUri: 'https://github.com/owner/repo',
