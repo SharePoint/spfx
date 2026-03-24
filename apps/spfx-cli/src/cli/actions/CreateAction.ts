@@ -323,5 +323,6 @@ function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: strin
         break;
     }
   }
+
   terminal.writeLine();
 }
