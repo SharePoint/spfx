@@ -137,8 +137,8 @@ export class CreateAction extends CommandLineAction {
       parameterLongName: '--spfx-version',
       argumentName: 'VERSION',
       description:
-        'The branch name in the template repository to use (e.g., "1.22", "1.23-rc.0"). ' +
-        "Defaults to the repository's default branch (main)."
+        'The SPFx version to use (e.g., "1.22", "1.23-rc.0"). Resolves to the "version/<VERSION>" branch ' +
+        "in the template repository. Defaults to the repository's default branch (main)."
     });
 
     this._packageManagerParameter = this.defineChoiceParameter({
@@ -191,7 +191,9 @@ export class CreateAction extends CommandLineAction {
               `${this._spfxVersionParameter.longName} "${spfxVersion}" will take precedence.`
           );
         }
-        const ref: string | undefined = spfxVersion ?? urlBranch;
+        const spfxVersionBranch: string | undefined =
+          spfxVersion !== undefined ? `version/${spfxVersion}` : undefined;
+        const ref: string | undefined = spfxVersionBranch ?? urlBranch;
 
         terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
         manager.addSource(new PublicGitHubRepositorySource(repoUrl, ref, this._terminal));

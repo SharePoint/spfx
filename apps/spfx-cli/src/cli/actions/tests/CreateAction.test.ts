@@ -226,7 +226,7 @@ describe('CreateAction', () => {
       await runCreateAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
-        '1.22',
+        'version/1.22',
         expect.anything()
       );
     });
@@ -236,7 +236,7 @@ describe('CreateAction', () => {
       await runCreateAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/my-org/my-templates',
-        '1.22',
+        'version/1.22',
         expect.anything()
       );
     });
@@ -247,7 +247,7 @@ describe('CreateAction', () => {
       await runCreateAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith(
         'https://github.com/SharePoint/spfx',
-        '1.22',
+        'version/1.22',
         expect.anything()
       );
     });

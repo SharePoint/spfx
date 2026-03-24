@@ -41,9 +41,10 @@ Optional arguments:
                         may alternatively be specified via the
                         SPFX_TEMPLATE_REPO_URL environment variable.
   --spfx-version VERSION
-                        The branch name in the template repository to use (e.
-                        g., \\"1.22\\", \\"1.23-rc.0\\"). Defaults to the
-                        repository's default branch (main).
+                        The SPFx version to use (e.g., \\"1.22\\", \\"1.23-rc.0\\").
+                        Resolves to the \\"version/<VERSION>\\" branch in the
+                        template repository. Defaults to the repository's
+                        default branch (main).
   --package-manager {npm,pnpm,yarn,none}
                         Package manager to use for dependency installation
                         after scaffolding. Use \\"none\\" to skip installation.

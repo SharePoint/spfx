@@ -45,7 +45,7 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 | `--solution-name NAME` | kebab-cased component name | SharePoint solution name |
 | `--component-alias ALIAS` | same as `--component-name` | Short identifier for the component |
 | `--component-description TEXT` | `"<name> description"` | Component description string |
-| `--spfx-version VERSION` | repo default branch | Branch/tag in the template repo to use (e.g. `1.22`, `1.23-rc.0`) |
+| `--spfx-version VERSION` | repo default branch | SPFx version to use; resolves to the `version/<VERSION>` branch (e.g. `1.22`, `1.23-rc.0`) |
 | `--template-url URL` | `https://github.com/SharePoint/spfx` | Custom GitHub template repository |
 | `--local-template PATH` | — | Path to a local template folder (repeatable; bypasses GitHub) |
 
@@ -60,7 +60,7 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 
 ## Templates
 
-Templates are fetched at runtime from the [SharePoint/spfx](https://github.com/SharePoint/spfx) GitHub repository. Use `--spfx-version` to target a specific release branch, or `--local-template` to use templates from disk.
+Templates are fetched at runtime from the [SharePoint/spfx](https://github.com/SharePoint/spfx) GitHub repository. Use `--spfx-version` to target a specific release branch (e.g. `--spfx-version 1.22` resolves to the `version/1.22` branch), or `--local-template` to use templates from disk.
 
 ### Web Parts
 

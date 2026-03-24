@@ -101,7 +101,7 @@ Array [
 
 exports[`CreateAction --spfx-version passes ref to PublicGitHubRepositorySource when --spfx-version is set 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test[n]",
   "[    log] [n]",
@@ -112,7 +112,7 @@ Array [
 
 exports[`CreateAction --spfx-version passes ref when SPFX_TEMPLATE_REPO_URL and --spfx-version are both set 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/my-org/my-templates (branch: 1.22)[n]",
+  "[    log] Using GitHub template source: https://github.com/my-org/my-templates (branch: version/1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test[n]",
   "[    log] [n]",
@@ -124,7 +124,7 @@ Array [
 exports[`CreateAction --spfx-version uses --spfx-version over branch encoded in SPFX_TEMPLATE_REPO_URL /tree/ path 1`] = `
 Array [
   "[warning] --template-url contains a branch ('/tree/pending-fixes'). --spfx-version \\"1.22\\" will take precedence.[n]",
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test[n]",
   "[    log] [n]",
