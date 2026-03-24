@@ -11,7 +11,7 @@ import {
 } from '@microsoft/spfx-template-api';
 
 import { parseGitHubUrlAndRef } from '../../utilities/github';
-import { SPFxActionBase } from './SPFxAction';
+import { SPFxActionBase } from './SPFxActionBase';
 
 export class ListTemplatesAction extends SPFxActionBase {
   private readonly _localSourcesParameter: CommandLineStringListParameter;
