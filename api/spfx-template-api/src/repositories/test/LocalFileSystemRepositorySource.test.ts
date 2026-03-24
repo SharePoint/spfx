@@ -21,7 +21,7 @@ interface IFileSystemReadFolderItemsResult {
   path: string;
 }
 
-describe('LocalFileSystemRepositorySource', () => {
+describe(LocalFileSystemRepositorySource.name, () => {
   const mockReadFolderItems = FileSystem.readFolderItems as jest.MockedFunction<
     typeof FileSystem.readFolderItems
   >;

@@ -24,7 +24,7 @@ class MockRepositorySource extends BaseSPFxTemplateRepositorySource {
   }
 }
 
-describe('SPFxTemplateRepositoryManager', () => {
+describe(SPFxTemplateRepositoryManager.name, () => {
   describe('constructor', () => {
     it('should create an instance with empty sources', () => {
       const manager = new SPFxTemplateRepositoryManager();

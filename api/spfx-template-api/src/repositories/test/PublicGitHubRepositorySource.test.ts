@@ -17,7 +17,7 @@ import { SPFxTemplate } from '../../templating/SPFxTemplate';
 // Mock global fetch
 global.fetch = jest.fn();
 
-describe('PublicGitHubRepositorySource', () => {
+describe(PublicGitHubRepositorySource.name, () => {
   const mockFetch = global.fetch as jest.MockedFunction<typeof fetch>;
   const mockFromMemoryAsync = SPFxTemplate.fromMemoryAsync as jest.MockedFunction<
     typeof SPFxTemplate.fromMemoryAsync

@@ -12,7 +12,7 @@ import { Async, FileSystem, type FolderItem } from '@rushstack/node-core-library
 import { SPFxTemplate } from '../SPFxTemplate';
 import { SPFxTemplateJsonFile } from '../SPFxTemplateJsonFile';
 
-describe('SPFxTemplate', () => {
+describe(SPFxTemplate.name, () => {
   const mockReadFileAsync = jest.mocked(FileSystem.readFileAsync);
   const mockReadFolderItemsAsync = jest.mocked(FileSystem.readFolderItemsAsync);
   const mockForEachAsync = jest.mocked(Async.forEachAsync);
