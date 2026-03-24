@@ -12,16 +12,14 @@ import * as z from 'zod';
 
 import { Executable } from '@rushstack/node-core-library';
 import { Colorize, type Terminal } from '@rushstack/terminal';
-import {
-  CommandLineAction,
-  type CommandLineStringListParameter,
-  type CommandLineStringParameter,
-  type IRequiredCommandLineChoiceParameter,
-  type IRequiredCommandLineStringParameter
+import type {
+  CommandLineStringListParameter,
+  CommandLineStringParameter,
+  IRequiredCommandLineChoiceParameter,
+  IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
 import {
   LocalFileSystemRepositorySource,
-  PublicGitHubRepositorySource,
   type SPFxTemplateCollection,
   SPFxTemplateRepositoryManager,
   type SPFxTemplate,
@@ -29,9 +27,7 @@ import {
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
-
-const DEFAULT_GITHUB_REPO: string = 'https://github.com/SharePoint/spfx';
-export const SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME: string = 'SPFX_TEMPLATE_REPO_URL';
+import { SPFxActionBase } from './SPFxActionBase';
 
 // Deterministic namespace for CI mode GUIDs, derived from the well-known URL
 // namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
@@ -50,9 +46,7 @@ const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile> = z.object({
   templateName: z.string().min(1)
 });
 
-export class CreateAction extends CommandLineAction {
-  private readonly _terminal: Terminal;
-
+export class CreateAction extends SPFxActionBase {
   private readonly _targetDirParameter: IRequiredCommandLineStringParameter;
   private readonly _templateParameter: IRequiredCommandLineStringParameter;
   private readonly _localTemplateSourcesParameter: CommandLineStringListParameter;
@@ -61,18 +55,17 @@ export class CreateAction extends CommandLineAction {
   private readonly _componentAliasParameter: CommandLineStringParameter;
   private readonly _componentDescriptionParameter: CommandLineStringParameter;
   private readonly _solutionNameParameter: CommandLineStringParameter;
-  private readonly _templateUrlParameter: CommandLineStringParameter;
-  private readonly _spfxVersionParameter: CommandLineStringParameter;
   private readonly _packageManagerParameter: IRequiredCommandLineChoiceParameter<PackageManager | 'none'>;
 
   public constructor(terminal: Terminal) {
-    super({
-      actionName: 'create',
-      summary: 'Scaffolds an SPFx component into the current folder',
-      documentation: 'This command creates a new SPFx component.'
-    });
-
-    this._terminal = terminal;
+    super(
+      {
+        actionName: 'create',
+        summary: 'Scaffolds an SPFx component into the current folder',
+        documentation: 'This command creates a new SPFx component.'
+      },
+      terminal
+    );
 
     this._targetDirParameter = this.defineStringParameter({
       parameterLongName: '--target-dir',
@@ -126,21 +119,6 @@ export class CreateAction extends CommandLineAction {
       description: 'The solution name. If not provided, defaults to the kebab-case component name.'
     });
 
-    this._templateUrlParameter = this.defineStringParameter({
-      parameterLongName: '--template-url',
-      argumentName: 'URL',
-      description: `URL of the GitHub template repository. Defaults to ${DEFAULT_GITHUB_REPO}.`,
-      environmentVariable: SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME
-    });
-
-    this._spfxVersionParameter = this.defineStringParameter({
-      parameterLongName: '--spfx-version',
-      argumentName: 'VERSION',
-      description:
-        'The SPFx version to use (e.g., "1.22", "1.23-rc.0"). Resolves to the "version/<VERSION>" branch ' +
-        "in the template repository. Defaults to the repository's default branch (main)."
-    });
-
     this._packageManagerParameter = this.defineChoiceParameter({
       parameterLongName: '--package-manager',
       description:
@@ -151,7 +129,7 @@ export class CreateAction extends CommandLineAction {
     });
   }
 
-  protected async onExecuteAsync(): Promise<void> {
+  protected override async onExecuteAsync(): Promise<void> {
     const terminal: Terminal = this._terminal;
 
     try {
@@ -181,30 +159,7 @@ export class CreateAction extends CommandLineAction {
           manager.addSource(new LocalFileSystemRepositorySource(localPath));
         }
       } else {
-        const rawUrl: string = (this._templateUrlParameter.value ?? '').trim() || DEFAULT_GITHUB_REPO;
-        const { repoUrl, urlBranch } = parseGitHubUrlAndRef(rawUrl);
-
-        const spfxVersionRaw: string | undefined = this._spfxVersionParameter.value?.trim();
-        let spfxVersionBranch: string | undefined;
-        if (spfxVersionRaw) {
-          if (spfxVersionRaw.startsWith('version/')) {
-            spfxVersionBranch = spfxVersionRaw;
-          } else {
-            spfxVersionBranch = `version/${spfxVersionRaw}`;
-          }
-        }
-
-        if (spfxVersionBranch && urlBranch) {
-          terminal.writeWarningLine(
-            `${this._templateUrlParameter.longName} contains a branch ('/tree/${urlBranch}'). ` +
-              `${this._spfxVersionParameter.longName} "${spfxVersionRaw}" will take precedence.`
-          );
-        }
-
-        const ref: string | undefined = spfxVersionBranch ?? urlBranch;
-
-        terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
-        manager.addSource(new PublicGitHubRepositorySource(repoUrl, ref, this._terminal));
+        this._addGitHubTemplateSource(manager);
       }
 
       let templates: SPFxTemplateCollection;
@@ -329,25 +284,6 @@ async function _runInstallAsync(
   }
 
   terminal.writeLine(`${packageManager} install completed successfully.`);
-}
-
-/**
- * Parses a GitHub (or GHE) URL that may contain a `/tree/<ref>` path segment.
- * Returns the clean repository URL (without `.git` or trailing slashes) and the optional branch ref.
- */
-function parseGitHubUrlAndRef(rawUrl: string): { repoUrl: string; urlBranch: string | undefined } {
-  const normalized: string = rawUrl.trim().replace(/\/+$/, '');
-  // Match https://<host>/owner/repo[.git]/tree/<ref> — host-agnostic to support GHE.
-  // Only the first path segment after /tree/ is captured as the ref; subdirectory
-  // suffixes (e.g. /tree/main/some/subdir) are ignored.
-  const treeMatch: RegExpMatchArray | null = normalized.match(
-    /^(?<repo>https?:\/\/[^/]+\/[^/]+\/[^/]+?)(?:\.git)?\/tree\/(?<ref>[^/]+)/
-  );
-  if (treeMatch?.groups) {
-    const { repo, ref } = treeMatch.groups as { repo: string; ref: string };
-    return { repoUrl: repo, urlBranch: ref };
-  }
-  return { repoUrl: normalized.replace(/\.git$/, ''), urlBranch: undefined };
 }
 
 /**

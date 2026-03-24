@@ -27,7 +27,7 @@ import type { SPFxTemplateCollection } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../../utilities/validation';
 import { SPFxCommandLineParser } from '../../SPFxCommandLineParser';
-import { SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME } from '../CreateAction';
+import { SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME } from '../../../utilities/github';
 
 const MockedManager = SPFxTemplateRepositoryManager as jest.MockedClass<typeof SPFxTemplateRepositoryManager>;
 const MockedGitHub = PublicGitHubRepositorySource as jest.MockedClass<typeof PublicGitHubRepositorySource>;

@@ -88,6 +88,21 @@ This must be done at the start of every bash command that uses rush or node.
 
 **Solution**: This is expected and not a problem. The Microsoft SPFx packages require these as peer dependencies, but the project uses `strictPeerDependencies: false` in `pnpm-workspace.yaml` to allow builds without them. This is intentional for the "minimal" (no-framework) template.
 
+### Updating Jest snapshots
+
+**When to use:** After making intentional changes to CLI help text, terminal output, or any
+behavior captured in `.snap` files (e.g., adding a new CLI action).
+
+**Command** (run from the project directory, e.g. `apps/spfx-cli/`):
+
+```bash
+export PATH="$HOME/AppData/Local/nvs/node/22.21.1/x64:$PATH"
+node_modules/.bin/heft test --clean -u
+```
+
+The `-u` flag is a native heft argument that passes `--updateSnapshot` to Jest. Do **not** use
+`rushx build -- -u` — the `--` separator is not supported by heft and will fail.
+
 ### Issue: nvs use command fails
 
 **Problem**: Running `nvs use 22.21.1` fails with "The 'use' command is not available when invoking this script as an executable"

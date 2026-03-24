@@ -1,21 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CommandLineHelp prints the help: create 1`] = `
-"usage: spfx-cli create [-h] [--target-dir TARGET_DIR]
-                       [--local-template TEMPLATE_PATH] --template
-                       TEMPLATE_NAME --library-name LIBRARY_NAME
-                       --component-name COMPONENT_NAME
-                       [--component-alias COMPONENT_ALIAS]
-                       [--component-description COMPONENT_DESCRIPTION]
-                       [--solution-name SOLUTION_NAME] [--template-url URL]
-                       [--spfx-version VERSION]
-                       [--package-manager {npm,pnpm,yarn,none}]
+"usage: spfx create [-h] [--template-url URL] [--spfx-version VERSION]
+                   [--target-dir TARGET_DIR] [--local-template TEMPLATE_PATH]
+                   --template TEMPLATE_NAME --library-name LIBRARY_NAME
+                   --component-name COMPONENT_NAME
+                   [--component-alias COMPONENT_ALIAS]
+                   [--component-description COMPONENT_DESCRIPTION]
+                   [--solution-name SOLUTION_NAME]
+                   [--package-manager {npm,pnpm,yarn,none}]
 
 
 This command creates a new SPFx component.
 
 Optional arguments:
   -h, --help            Show this help message and exit.
+  --template-url URL    URL of the GitHub template repository. Defaults to
+                        https://github.com/SharePoint/spfx. This parameter
+                        may alternatively be specified via the
+                        SPFX_TEMPLATE_REPO_URL environment variable.
+  --spfx-version VERSION
+                        The SPFx version to use (e.g., \\"1.22\\", \\"1.23-rc.0\\").
+                        Resolves to the \\"version/<VERSION>\\" branch in the
+                        template repository. Defaults to the repository's
+                        default branch (main).
   --target-dir TARGET_DIR
                         The directory to create the solution (or where the
                         solution already exists) The default value is \\"<cwd>\\".
@@ -36,6 +44,41 @@ Optional arguments:
   --solution-name SOLUTION_NAME
                         The solution name. If not provided, defaults to the
                         kebab-case component name.
+  --package-manager {npm,pnpm,yarn,none}
+                        Package manager to use for dependency installation
+                        after scaffolding. Use \\"none\\" to skip installation.
+                        The default value is \\"none\\".
+"
+`;
+
+exports[`CommandLineHelp prints the help: global help 1`] = `
+"usage: spfx [-h] <command> ...
+
+CLI for managing SharePoint Framework (SPFx) projects
+
+Positional arguments:
+  <command>
+    create        Scaffolds an SPFx component into the current folder
+    list-templates
+                  Lists available SPFx templates from configured sources
+
+Optional arguments:
+  -h, --help      Show this help message and exit.
+
+[bold]For detailed help about a specific command, use: spfx <command> -h[normal]
+"
+`;
+
+exports[`CommandLineHelp prints the help: list-templates 1`] = `
+"usage: spfx list-templates [-h] [--template-url URL] [--spfx-version VERSION]
+                           [--local-source PATH] [--remote-source URL]
+
+
+This command lists all available templates from the default GitHub source and
+any additional sources specified with --local-source or --remote-source.
+
+Optional arguments:
+  -h, --help            Show this help message and exit.
   --template-url URL    URL of the GitHub template repository. Defaults to
                         https://github.com/SharePoint/spfx. This parameter
                         may alternatively be specified via the
@@ -45,26 +88,9 @@ Optional arguments:
                         Resolves to the \\"version/<VERSION>\\" branch in the
                         template repository. Defaults to the repository's
                         default branch (main).
-  --package-manager {npm,pnpm,yarn,none}
-                        Package manager to use for dependency installation
-                        after scaffolding. Use \\"none\\" to skip installation.
-                        The default value is \\"none\\".
-"
-`;
-
-exports[`CommandLineHelp prints the help: global help 1`] = `
-"usage: spfx-cli [-h] <command> ...
-
-CLI for managing SharePoint Framework (SPFx) projects
-
-Positional arguments:
-  <command>
-    create    Scaffolds an SPFx component into the current folder
-
-Optional arguments:
-  -h, --help  Show this help message and exit.
-
-[bold]For detailed help about a specific command, use: spfx-cli <command>
--h[normal]
+  --local-source PATH   Path to a local template folder to include
+                        (repeatable)
+  --remote-source URL   Public GitHub repository URL to include as an
+                        additional template source (repeatable)
 "
 `;
