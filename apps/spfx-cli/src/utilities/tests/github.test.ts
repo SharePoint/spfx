@@ -3,7 +3,7 @@
 
 import { parseGitHubUrlAndRef } from '../github';
 
-describe('parseGitHubUrlAndRef', () => {
+describe(parseGitHubUrlAndRef.name, () => {
   describe('plain URLs (no /tree/ segment)', () => {
     it('returns the URL unchanged and undefined ref', () => {
       expect(parseGitHubUrlAndRef('https://github.com/owner/repo')).toEqual({

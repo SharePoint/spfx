@@ -1,12 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
+import type { CommandLineStringListParameter } from '@rushstack/ts-command-line';
 import type { Terminal } from '@rushstack/terminal';
-import {
-  CommandLineAction,
-  type CommandLineStringListParameter,
-  type CommandLineStringParameter
-} from '@rushstack/ts-command-line';
 import {
   LocalFileSystemRepositorySource,
   PublicGitHubRepositorySource,
@@ -14,36 +10,24 @@ import {
   SPFxTemplateRepositoryManager
 } from '@microsoft/spfx-template-api';
 
-import {
-  addDefaultGitHubSource,
-  DEFAULT_GITHUB_REPO,
-  TEMPLATE_URL_PARAMETER_DEFINITION,
-  SPFX_VERSION_PARAMETER_DEFINITION,
-  parseGitHubUrlAndRef
-} from '../../utilities/github';
+import { parseGitHubUrlAndRef } from '../../utilities/github';
+import { SPFxAction } from './SPFxAction';
 
-export class ListTemplatesAction extends CommandLineAction {
-  private readonly _terminal: Terminal;
-
-  private readonly _templateUrlParameter: CommandLineStringParameter;
-  private readonly _spfxVersionParameter: CommandLineStringParameter;
+export class ListTemplatesAction extends SPFxAction {
   private readonly _localSourcesParameter: CommandLineStringListParameter;
   private readonly _remoteSourcesParameter: CommandLineStringListParameter;
 
   public constructor(terminal: Terminal) {
-    super({
-      actionName: 'list-templates',
-      summary: 'Lists available SPFx templates from configured sources',
-      documentation:
-        'This command lists all available templates from the default GitHub source ' +
-        'and any additional sources specified with --local-source or --remote-source.'
-    });
-
-    this._terminal = terminal;
-
-    this._templateUrlParameter = this.defineStringParameter(TEMPLATE_URL_PARAMETER_DEFINITION);
-
-    this._spfxVersionParameter = this.defineStringParameter(SPFX_VERSION_PARAMETER_DEFINITION);
+    super(
+      {
+        actionName: 'list-templates',
+        summary: 'Lists available SPFx templates from configured sources',
+        documentation:
+          'This command lists all available templates from the default GitHub source ' +
+          'and any additional sources specified with --local-source or --remote-source.'
+      },
+      terminal
+    );
 
     this._localSourcesParameter = this.defineStringListParameter({
       parameterLongName: '--local-source',
@@ -58,15 +42,14 @@ export class ListTemplatesAction extends CommandLineAction {
     });
   }
 
-  protected async onExecuteAsync(): Promise<void> {
+  protected override async onExecuteAsync(): Promise<void> {
     const terminal: Terminal = this._terminal;
 
     try {
       const manager: SPFxTemplateRepositoryManager = new SPFxTemplateRepositoryManager();
 
       // Additive model: default GitHub source is always added first
-      const rawUrl: string = (this._templateUrlParameter.value ?? '').trim() || DEFAULT_GITHUB_REPO;
-      addDefaultGitHubSource(manager, rawUrl, this._spfxVersionParameter.value, terminal);
+      this._addGitHubTemplateSource(manager);
 
       // Additive: also include any --local-source paths
       for (const localPath of this._localSourcesParameter.values) {

@@ -12,12 +12,11 @@ import * as z from 'zod';
 
 import { Executable } from '@rushstack/node-core-library';
 import { Colorize, type Terminal } from '@rushstack/terminal';
-import {
-  CommandLineAction,
-  type CommandLineStringListParameter,
-  type CommandLineStringParameter,
-  type IRequiredCommandLineChoiceParameter,
-  type IRequiredCommandLineStringParameter
+import type {
+  CommandLineStringListParameter,
+  CommandLineStringParameter,
+  IRequiredCommandLineChoiceParameter,
+  IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
 import {
   LocalFileSystemRepositorySource,
@@ -28,12 +27,7 @@ import {
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
-import {
-  addDefaultGitHubSource,
-  DEFAULT_GITHUB_REPO,
-  TEMPLATE_URL_PARAMETER_DEFINITION,
-  SPFX_VERSION_PARAMETER_DEFINITION
-} from '../../utilities/github';
+import { SPFxAction } from './SPFxAction';
 
 // Deterministic namespace for CI mode GUIDs, derived from the well-known URL
 // namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
@@ -52,9 +46,7 @@ const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile> = z.object({
   templateName: z.string().min(1)
 });
 
-export class CreateAction extends CommandLineAction {
-  private readonly _terminal: Terminal;
-
+export class CreateAction extends SPFxAction {
   private readonly _targetDirParameter: IRequiredCommandLineStringParameter;
   private readonly _templateParameter: IRequiredCommandLineStringParameter;
   private readonly _localTemplateSourcesParameter: CommandLineStringListParameter;
@@ -63,18 +55,17 @@ export class CreateAction extends CommandLineAction {
   private readonly _componentAliasParameter: CommandLineStringParameter;
   private readonly _componentDescriptionParameter: CommandLineStringParameter;
   private readonly _solutionNameParameter: CommandLineStringParameter;
-  private readonly _templateUrlParameter: CommandLineStringParameter;
-  private readonly _spfxVersionParameter: CommandLineStringParameter;
   private readonly _packageManagerParameter: IRequiredCommandLineChoiceParameter<PackageManager | 'none'>;
 
   public constructor(terminal: Terminal) {
-    super({
-      actionName: 'create',
-      summary: 'Scaffolds an SPFx component into the current folder',
-      documentation: 'This command creates a new SPFx component.'
-    });
-
-    this._terminal = terminal;
+    super(
+      {
+        actionName: 'create',
+        summary: 'Scaffolds an SPFx component into the current folder',
+        documentation: 'This command creates a new SPFx component.'
+      },
+      terminal
+    );
 
     this._targetDirParameter = this.defineStringParameter({
       parameterLongName: '--target-dir',
@@ -128,10 +119,6 @@ export class CreateAction extends CommandLineAction {
       description: 'The solution name. If not provided, defaults to the kebab-case component name.'
     });
 
-    this._templateUrlParameter = this.defineStringParameter(TEMPLATE_URL_PARAMETER_DEFINITION);
-
-    this._spfxVersionParameter = this.defineStringParameter(SPFX_VERSION_PARAMETER_DEFINITION);
-
     this._packageManagerParameter = this.defineChoiceParameter({
       parameterLongName: '--package-manager',
       description:
@@ -142,7 +129,7 @@ export class CreateAction extends CommandLineAction {
     });
   }
 
-  protected async onExecuteAsync(): Promise<void> {
+  protected override async onExecuteAsync(): Promise<void> {
     const terminal: Terminal = this._terminal;
 
     try {
@@ -172,8 +159,7 @@ export class CreateAction extends CommandLineAction {
           manager.addSource(new LocalFileSystemRepositorySource(localPath));
         }
       } else {
-        const rawUrl: string = (this._templateUrlParameter.value ?? '').trim() || DEFAULT_GITHUB_REPO;
-        addDefaultGitHubSource(manager, rawUrl, this._spfxVersionParameter.value, terminal);
+        this._addGitHubTemplateSource(manager);
       }
 
       let templates: SPFxTemplateCollection;

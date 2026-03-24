@@ -1,30 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { Terminal } from '@rushstack/terminal';
-import type { ICommandLineStringDefinition } from '@rushstack/ts-command-line';
-import {
-  PublicGitHubRepositorySource,
-  type SPFxTemplateRepositoryManager
-} from '@microsoft/spfx-template-api';
-
 export const DEFAULT_GITHUB_REPO: string = 'https://github.com/SharePoint/spfx';
 export const SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME: string = 'SPFX_TEMPLATE_REPO_URL';
-
-export const TEMPLATE_URL_PARAMETER_DEFINITION: ICommandLineStringDefinition = {
-  parameterLongName: '--template-url',
-  argumentName: 'URL',
-  description: `URL of the GitHub template repository. Defaults to ${DEFAULT_GITHUB_REPO}.`,
-  environmentVariable: SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME
-};
-
-export const SPFX_VERSION_PARAMETER_DEFINITION: ICommandLineStringDefinition = {
-  parameterLongName: '--spfx-version',
-  argumentName: 'VERSION',
-  description:
-    'The SPFx version to use (e.g., "1.22", "1.23-rc.0"). Resolves to the "version/<VERSION>" branch ' +
-    "in the template repository. Defaults to the repository's default branch (main)."
-};
 
 /**
  * Parses a GitHub (or GHE) URL that may contain a `/tree/<ref>` path segment.
@@ -44,37 +22,4 @@ export function parseGitHubUrlAndRef(rawUrl: string): { repoUrl: string; urlBran
     return { repoUrl: repo, urlBranch: ref };
   }
   return { repoUrl: normalized.replace(/\.git$/, ''), urlBranch: undefined };
-}
-
-/**
- * Parses the default GitHub source URL, emits a warning if `--template-url` contains a `/tree/`
- * branch that conflicts with `--spfx-version`, then registers a `PublicGitHubRepositorySource`
- * on the given manager. Used by both `create` and `list-templates`.
- */
-export function addDefaultGitHubSource(
-  manager: SPFxTemplateRepositoryManager,
-  rawUrl: string,
-  spfxVersionRaw: string | undefined,
-  terminal: Terminal
-): void {
-  const { repoUrl, urlBranch } = parseGitHubUrlAndRef(rawUrl);
-
-  // Map user-supplied version like "1.22" to branch "version/1.22"; pass through
-  // if it already starts with "version/".
-  let spfxVersionBranch: string | undefined;
-  const trimmedVersion: string | undefined = spfxVersionRaw?.trim();
-  if (trimmedVersion) {
-    spfxVersionBranch = trimmedVersion.startsWith('version/') ? trimmedVersion : `version/${trimmedVersion}`;
-  }
-
-  if (spfxVersionBranch !== undefined && urlBranch !== undefined) {
-    terminal.writeWarningLine(
-      `--template-url contains a branch ('/tree/${urlBranch}'). ` +
-        `--spfx-version "${trimmedVersion}" will take precedence.`
-    );
-  }
-  const ref: string | undefined = spfxVersionBranch ?? urlBranch;
-
-  terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
-  manager.addSource(new PublicGitHubRepositorySource(repoUrl, ref, terminal));
 }
