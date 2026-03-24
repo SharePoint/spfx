@@ -45,8 +45,7 @@ const fs = await template.renderAsync(
     componentNameHyphenCase: 'my-web-part',
     componentNameCapitalCase: 'MyWebPart',
     componentNameAllCaps: 'MY_WEB_PART',
-    componentDescription: 'My Web Part description',
-    eslintProfile: 'react'
+    componentDescription: 'My Web Part description'
   },
   '/path/to/output'
 );
