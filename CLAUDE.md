@@ -117,7 +117,7 @@ Templates and examples must stay in sync - any changes to a template should be r
 
 ## Change Logs (rush change)
 
-If a PR modifies a **published** project (`apps/spfx-cli/` or `api/spfx-template-api/`), CI will fail unless a change file exists. Create one at `common/changes/@microsoft/<package-short-name>/<description>_<date>.json`:
+If a PR modifies a **published** project (`apps/spfx-cli/` or `api/spfx-template-api/`), CI will fail unless a change file exists. Both packages use the **lockstep version policy** with `@microsoft/spfx-cli` as the main project, so **always create the change file under `common/changes/@microsoft/spfx-cli/`** regardless of which package was changed. File name: `<description>_<date>.json`:
 
 ```json
 {
