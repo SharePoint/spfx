@@ -21,7 +21,7 @@ class TestRepositorySource extends BaseSPFxTemplateRepositorySource {
   }
 }
 
-describe('BaseSPFxTemplateRepositorySource', () => {
+describe(BaseSPFxTemplateRepositorySource.name, () => {
   describe('constructor', () => {
     it('should create an instance with local kind', () => {
       const source = new TestRepositorySource('local');
@@ -46,7 +46,7 @@ describe('BaseSPFxTemplateRepositorySource', () => {
     });
   });
 
-  describe('getTemplates abstract method', () => {
+  describe(TestRepositorySource.prototype.getTemplatesAsync.name, () => {
     it('should be implemented by concrete class', async () => {
       const source = new TestRepositorySource('local');
 
