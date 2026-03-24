@@ -5,7 +5,7 @@ import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
 import { SPFxTemplate } from '../../templating';
 import { SPFxTemplateJsonFile } from '../../templating';
 
-describe('SPFxTemplateCollection', () => {
+describe(SPFxTemplateCollection.name, () => {
   describe('constructor', () => {
     it('should create an empty collection from empty array', () => {
       const collection = new SPFxTemplateCollection([]);

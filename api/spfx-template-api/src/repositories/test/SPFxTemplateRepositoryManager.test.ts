@@ -2,7 +2,10 @@
 // See LICENSE in the project root for license information.
 
 import { SPFxTemplateRepositoryManager } from '../SPFxTemplateRepositoryManager';
-import { BaseSPFxTemplateRepositorySource } from '../SPFxTemplateRepositorySource';
+import {
+  BaseSPFxTemplateRepositorySource,
+  type SPFxTemplateRepositorySourceKind
+} from '../SPFxTemplateRepositorySource';
 import { SPFxTemplate } from '../../templating/SPFxTemplate';
 import { SPFxTemplateJsonFile } from '../../templating/SPFxTemplateJsonFile';
 import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
@@ -11,17 +14,17 @@ import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
 class MockRepositorySource extends BaseSPFxTemplateRepositorySource {
   private _templates: SPFxTemplate[];
 
-  public constructor(type: 'local' | 'github', templates: SPFxTemplate[] = []) {
-    super(type);
+  public constructor(kind: SPFxTemplateRepositorySourceKind, templates: SPFxTemplate[] = []) {
+    super(kind);
     this._templates = templates;
   }
 
-  public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+  public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
     return this._templates;
   }
 }
 
-describe('SPFxTemplateRepositoryManager', () => {
+describe(SPFxTemplateRepositoryManager.name, () => {
   describe('constructor', () => {
     it('should create an instance with empty sources', () => {
       const manager = new SPFxTemplateRepositoryManager();
@@ -219,7 +222,7 @@ describe('SPFxTemplateRepositoryManager', () => {
           super('local');
         }
 
-        public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+        public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
           startTimes.push(Date.now());
           await new Promise((resolve) => setTimeout(resolve, 10));
           return [];
@@ -245,7 +248,7 @@ describe('SPFxTemplateRepositoryManager', () => {
           super('local');
         }
 
-        public async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
+        public override async getTemplatesAsync(): Promise<Array<SPFxTemplate>> {
           throw new Error('Failed to fetch templates');
         }
       }

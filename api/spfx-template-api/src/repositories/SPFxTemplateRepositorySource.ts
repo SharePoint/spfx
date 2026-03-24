@@ -7,24 +7,28 @@ import type { PublicGitHubRepositorySource } from './PublicGitHubRepositorySourc
 
 /**
  * @public
- * The type of SPFx template repository sources.
+ * The kind of SPFx template repository sources.
  */
-export type SPFxTemplateRepositorySourceTypes = 'local' | 'github';
+export type SPFxTemplateRepositorySourceKind = 'local' | 'github';
+
+/**
+ * @public
+ * Represents a SharePoint Framework (SPFx) template repository source.
+ */
+export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;
 
 /**
  * @public
  * Base class for SPFx template repository sources.
  */
 export abstract class BaseSPFxTemplateRepositorySource {
-  private readonly _type: SPFxTemplateRepositorySourceTypes;
+  /**
+   * The kind of the repository source
+   */
+  public readonly kind: SPFxTemplateRepositorySourceKind;
 
-  public constructor(type: SPFxTemplateRepositorySourceTypes) {
-    this._type = type;
-  }
-
-  /** The type of the repository source */
-  public get type(): SPFxTemplateRepositorySourceTypes {
-    return this._type;
+  public constructor(kind: SPFxTemplateRepositorySourceKind) {
+    this.kind = kind;
   }
 
   /**
@@ -33,9 +37,3 @@ export abstract class BaseSPFxTemplateRepositorySource {
    */
   public abstract getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
 }
-
-/**
- * @public
- * Represents a SharePoint Framework (SPFx) template repository source.
- */
-export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;
