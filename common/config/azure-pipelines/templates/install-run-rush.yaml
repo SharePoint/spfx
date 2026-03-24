@@ -20,4 +20,4 @@ steps:
     ${{ if ne(parameters.Condition, '') }}:
       condition: ${{ parameters.Condition }}
     env:
-      INSTALL_RUN_RUSH_LOCKFILE_PATH: $(Build.SourcesDirectory)/common/config/validation/rush-package-lock.json
+      INSTALL_RUN_RUSH_LOCKFILE_PATH: ${{ parameters.RepoPath }}/common/config/validation/rush-package-lock.json
