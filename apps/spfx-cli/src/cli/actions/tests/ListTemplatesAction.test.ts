@@ -36,7 +36,17 @@ describe('ListTemplatesAction', () => {
     delete process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME];
 
     const mockCollection = new Map([['webpart-minimal', {}]]);
-    mockCollection.toString = () => '[Mocked SPFxTemplateCollection]';
+    mockCollection.toString = (): string =>
+      [
+        '# of templates: 1',
+        '',
+        'Template Name: webpart-minimal',
+        'Description: A minimal web part template (no framework) for SPFx',
+        'Version: 0.0.1',
+        'SPFx Version: 1.22.2',
+        'Number of Files: 23',
+        ''
+      ].join('\n');
 
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(
       mockCollection as unknown as SPFxTemplateCollection
