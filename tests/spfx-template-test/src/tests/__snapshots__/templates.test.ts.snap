@@ -6,109 +6,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -122,6 +121,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/dataVisualization/DataVisualizationAdaptiveCardExtension.manifest.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/dataVisualization/DataVisualizationAdaptiveCardExtension.ts[default]
@@ -143,109 +143,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -259,6 +258,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/genericCard/GenericCardAdaptiveCardExtension.manifest.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/genericCard/GenericCardAdaptiveCardExtension.ts[default]
@@ -280,109 +280,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -396,6 +395,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/genericImage/GenericImageAdaptiveCardExtension.manifest.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/genericImage/GenericImageAdaptiveCardExtension.ts[default]
@@ -417,109 +417,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -533,6 +532,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/genericPrimaryText/GenericPrimaryTextAdaptiveCardExtension.manifest.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/genericPrimaryText/GenericPrimaryTextAdaptiveCardExtension.ts[default]
@@ -554,109 +554,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -670,6 +669,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/minimal/MinimalAdaptiveCardExtension.manifest.json[default]
 [yellow]Modified: src/adaptiveCardExtensions/minimal/MinimalAdaptiveCardExtension.ts[default]
@@ -691,109 +691,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -807,6 +806,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: sharepoint/assets/ClientSideInstance.xml[default]
 [yellow]Modified: sharepoint/assets/elements.xml[default]
@@ -825,109 +825,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -941,6 +940,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: sharepoint/assets/elements.xml[default]
 [yellow]Modified: src/extensions/minimal/MinimalFieldCustomizer.manifest.json[default]
@@ -959,109 +959,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -1075,6 +1074,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: sharepoint/assets/elements.xml[default]
 [yellow]Modified: src/extensions/noFramework/NoFrameworkFieldCustomizer.manifest.json[default]
@@ -1093,109 +1093,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -1209,6 +1208,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: sharepoint/assets/elements.xml[default]
 [yellow]Modified: src/extensions/reactFieldCustomizer/ReactFieldCustomizerFieldCustomizer.manifest.json[default]
@@ -1228,109 +1228,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -1344,6 +1343,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/extensions/noFramework/NoFrameworkFormCustomizer.manifest.json[default]
 [yellow]Modified: src/extensions/noFramework/NoFrameworkFormCustomizer.module.scss[default]
@@ -1361,109 +1361,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: README.md[default]
@@ -1475,6 +1474,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/extensions/reactFormCustomizer/ReactFormCustomizerFormCustomizer.manifest.json[default]
 [yellow]Modified: src/extensions/reactFormCustomizer/ReactFormCustomizerFormCustomizer.ts[default]
@@ -1493,109 +1493,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -1609,6 +1608,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: sharepoint/assets/ClientSideInstance.xml[default]
 [yellow]Modified: sharepoint/assets/elements.xml[default]
@@ -1629,109 +1629,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -1745,6 +1744,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: sharepoint/assets/ClientSideInstance.xml[default]
 [yellow]Modified: sharepoint/assets/elements.xml[default]
@@ -1763,109 +1763,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -1879,6 +1878,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/index.ts[default]
 [yellow]Modified: src/libraries/example/ExampleLibrary.manifest.json[default]
@@ -1913,109 +1913,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -2029,6 +2028,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.manifest.json[default]
 [yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.module.scss[default]
@@ -2048,109 +2048,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -2164,6 +2163,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/webparts/noFrameworkWebPart/NoFrameworkWebPart.manifest.json[default]
 [yellow]Modified: src/webparts/noFrameworkWebPart/NoFrameworkWebPart.module.scss[default]
@@ -2186,109 +2186,108 @@ exports[`SPFx Template Scaffolding Template scaffolding and comparison should sc
 Template Name: ace-data-visualization
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-card
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-image-card
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: ace-search-card
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 25
 
 Template Name: extension-application-customizer
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 22
 
 Template Name: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 21
 
 Template Name: webpart-minimal
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 23
 
 Template Name: webpart-noframework
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 26
 
 Template Name: webpart-react
 Description: A React-based web part template for SPFx
 Version: 0.0.1
-SPFx Version: 1.22.2
+SPFx Version: 1.23.0-beta.0
 Number of Files: 27
 
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
-[yellow]Modified: .eslintrc.js[default]
 [yellow]Modified: .gitignore[default]
 [yellow]Modified: .npmignore[default]
 [yellow]Modified: .vscode/launch.json[default]
@@ -2302,6 +2301,7 @@ targetDir: <TARGET_DIR>
 [yellow]Modified: config/serve.json[default]
 [yellow]Modified: config/typescript.json[default]
 [yellow]Modified: config/write-manifests.json[default]
+[yellow]Modified: eslint.config.js[default]
 [yellow]Modified: package.json[default]
 [yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.manifest.json[default]
 [yellow]Modified: src/webparts/minimalWebPart/MinimalWebPart.ts[default]
