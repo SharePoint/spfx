@@ -7,14 +7,12 @@ settings:
 overrides:
   baseline-browser-mapping: ^2.9.19
 
-packageExtensionsChecksum: sha256-6R0LZgepyPJVw81HMQ/3O4ZbifJ1cb0gItdR12MAr8w=
-
 pnpmfileChecksum: sha256-E1T7OJ3DLTjpDqf4RdJzK9VDtAxgm4gDEQCLYdHD8nI=
 
 patchedDependencies:
-  '@microsoft/spfx-heft-plugins@1.22.2':
-    hash: 185ffebb2de7b1fb5f6ad4d92e9d8ad3b2d3207721e8db14e7ac1f3d716d0b1a
-    path: patches/@microsoft__spfx-heft-plugins@1.22.2.patch
+  '@microsoft/spfx-heft-plugins@1.23.0-beta.0':
+    hash: 30f20c21dce0a9fe2f2863834a49ae1a94c6f649ef3dcf4889617f2536f12062
+    path: patches/@microsoft__spfx-heft-plugins@1.23.0-beta.0.patch
 
 importers:
 
@@ -23,8 +21,8 @@ importers:
   ../../api/spfx-template-api:
     dependencies:
       '@microsoft/spfx-heft-plugins':
-        specifier: 1.22.2
-        version: 1.22.2(patch_hash=185ffebb2de7b1fb5f6ad4d92e9d8ad3b2d3207721e8db14e7ac1f3d716d0b1a)(@rushstack/heft@1.2.7(@types/node@22.19.13))(@types/node@22.19.13)
+        specifier: 1.23.0-beta.0
+        version: 1.23.0-beta.0(patch_hash=30f20c21dce0a9fe2f2863834a49ae1a94c6f649ef3dcf4889617f2536f12062)(@rushstack/heft@1.2.7(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/node-core-library':
         specifier: ~5.20.3
         version: 5.20.3(@types/node@22.19.13)
@@ -2416,6 +2414,11 @@ packages:
     peerDependencies:
       webpack: ^5.88.1
 
+  '@microsoft/sp-css-loader@1.23.0-beta.0':
+    resolution: {integrity: sha512-E296nrYHiLVtG0eP+k9rW6N5qg4MKQImmU2vl/E1aCbMUOnmff57w1xgtFRCc0btKVZBsazYNRQv6MC6qqky0Q==}
+    peerDependencies:
+      webpack: ^5.88.1
+
   '@microsoft/sp-diagnostics@1.22.2':
     resolution: {integrity: sha512-os2gixj4Xxl7znxbvBLvthkI8YDZopZ8zLt4x1Gkaqo4upf3P+NPCBIETSmZKT+jxXYXxjIoVVzULO/RdVLiGg==}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
@@ -2475,6 +2478,10 @@ packages:
     resolution: {integrity: sha512-s8tMPxgekZGDhr3tTcyi+Rk5KQZskGd/Xs1zqYyZ+ZwyJWXbfKg9ik2xmOTCq18xEIcc2x7XRI0PfiTP+drz3A==}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
 
+  '@microsoft/sp-module-interfaces@1.23.0-beta.0':
+    resolution: {integrity: sha512-z4wew+djhbkeL39sDvW+t6IjSRuhE7DHZCfpZAKHEy2bmvso3DIRRFPX7eUHvl8UzakciMEhYfSL7X2UMBAVpA==}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
+
   '@microsoft/sp-odata-types@1.22.2':
     resolution: {integrity: sha512-gtru9lV74B1/padXRaMf0dZNgnZpbABIc83idq4QYH9jHBdKmcdfnNbaSgUWALXHHeHBDA5Xani2YjYjxrF3EQ==}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 < 23.0.0'}
@@ -2512,6 +2519,11 @@ packages:
     resolution: {integrity: sha512-OrLZguhZlwZ6OTmruJQA1myOpToVnUMP4uVw+cNpP1niIRLfYCAjlu+oJaMgQOTxm4XcgOOkKEXwGIaUbJHvFg==}
     peerDependencies:
       '@rushstack/heft': ^1.1.2
+
+  '@microsoft/spfx-heft-plugins@1.23.0-beta.0':
+    resolution: {integrity: sha512-iNTAsQv4u9rq1+uezz/tVjo5Kd6DtE0FO0tUVA6znl6h66JFCw0wkVhSHL8BCCmIaju3j1T7gRWh6gSR2FMwBQ==}
+    peerDependencies:
+      '@rushstack/heft': ^1.1.5
 
   '@microsoft/spfx-web-build-rig@1.22.2':
     resolution: {integrity: sha512-KcJ9DPRmk5KsVxFgWk1lkt1MrAsBOVPYOl9GkigXdLq+ItI7ekdbA4CGofMyYhRvm23fFLawf6mXpg6ZIn042Q==}
@@ -2791,8 +2803,19 @@ packages:
   '@rushstack/localization-utilities@0.14.2':
     resolution: {integrity: sha512-JacmYKvRTwmdasjtCpzeYOdiUvpXlWukPj8y9RF9Zp3/2BBD5NqJckM7dwsjmQC9Od5cmDyGn9n2L98zgv0yJA==}
 
+  '@rushstack/localization-utilities@0.15.7':
+    resolution: {integrity: sha512-09H26Kley/1bCoc4tcLQjZ2rTh1AZzQ7nO6za+Qrfr5gzB63cVMZjOt6sYvslpOZwfTuZCTv7OMst5zKAPvm4g==}
+
   '@rushstack/module-minifier@0.8.2':
     resolution: {integrity: sha512-yVUFUuI7zmEzffq9/A0Unn9nV7Db/TZEg0F+fBMQnogll8wYICDEg4kYUFt6L+veWynbToebi2+cC2Fpxj0FBA==}
+    peerDependencies:
+      '@types/node': '*'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@rushstack/module-minifier@0.9.8':
+    resolution: {integrity: sha512-F1SIHFaK4PEV4DpvrVSrFGpnuLfMyZTlGhfRreGC5HtdD5HanwPZbiUBs7mhhHjdwegwAScvA9Q5yv/6lmA1Vw==}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -2873,6 +2896,15 @@ packages:
       '@types/node':
         optional: true
 
+  '@rushstack/set-webpack-public-path-plugin@5.3.8':
+    resolution: {integrity: sha512-7UhFaO0KHQpscpZUkBvqjGy+OGO7REogNW1YpYsq5PJsQx+5DLQS/1qREER3EZc1xKXPvk8BB9NCxP2Yyhy6Aw==}
+    peerDependencies:
+      '@types/node': '*'
+      webpack: ^5.68.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
   '@rushstack/terminal@0.15.2':
     resolution: {integrity: sha512-7Hmc0ysK5077R/IkLS9hYu0QuNafm+TbZbtYVzCMbeOdMjaRboLKrhryjwZSRJGJzu+TV1ON7qZHeqf58XfLpA==}
     peerDependencies:
@@ -2928,8 +2960,27 @@ packages:
       '@types/node':
         optional: true
 
+  '@rushstack/typings-generator@0.16.7':
+    resolution: {integrity: sha512-EHhjGBS+hYEmkW+USMGY+jsG2U25wYGO44EK7Bb/IF8KarTLUhleHfvmuNzLpuPPU910BBhsaREt9Q7xoRAasQ==}
+    peerDependencies:
+      '@types/node': '*'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
   '@rushstack/webpack-plugin-utilities@0.5.2':
     resolution: {integrity: sha512-ZHJfDYjlvUQ2WeF6+Wu97BPuY9NlazsIbNBXUkdbVxhuw9y3MdrQ2MNLTGZOG8oJcCr9hiRsV5AM8FqcvxDkvw==}
+    peerDependencies:
+      '@types/webpack': ^4.39.8
+      webpack: ^5.35.1 || ^4.31.0
+    peerDependenciesMeta:
+      '@types/webpack':
+        optional: true
+      webpack:
+        optional: true
+
+  '@rushstack/webpack-plugin-utilities@0.6.8':
+    resolution: {integrity: sha512-AYzrMO9lMIZLM5pt9D4Kp79QKDD3JqGQl6sBO2IP8qpcgN7UCKa7uWBmxPjgy1dyEOCy0mRkO7Y+OFvNimpwcQ==}
     peerDependencies:
       '@types/webpack': ^4.39.8
       webpack: ^5.35.1 || ^4.31.0
@@ -2948,6 +2999,15 @@ packages:
       '@types/node':
         optional: true
 
+  '@rushstack/webpack5-localization-plugin@0.16.7':
+    resolution: {integrity: sha512-l1loIp5reKCOwgpAvqpZAu1fsoMbhvdhVJsVvPA1LKbe7afORBITXsRR1tRjLDpTq5bQF7LYclzx8KVHbMhH8Q==}
+    peerDependencies:
+      '@types/node': '*'
+      webpack: ^5.68.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
   '@rushstack/webpack5-module-minifier-plugin@5.6.2':
     resolution: {integrity: sha512-1Xg+5YQGG+Bjt4Awb37tBvMD+ijAnUO6jtxAfHq0y0cJlTvltU3MFPUhccO+InXUa+58cEZf48FBcSbWjs+n+g==}
     engines: {node: '>=14.19.0'}
@@ -2959,8 +3019,27 @@ packages:
       '@types/node':
         optional: true
 
+  '@rushstack/webpack5-module-minifier-plugin@5.8.8':
+    resolution: {integrity: sha512-9SqmcUPuNUzg3sBSKzwT7LMglUCJmLjdBq67PyRw9v4qAwn1ucf+xZhVSDxVFbbdpWlu4Lk1/9hGW4kZub6CRQ==}
+    engines: {node: '>=14.19.0'}
+    peerDependencies:
+      '@rushstack/module-minifier': '*'
+      '@types/node': '*'
+      webpack: ^5.68.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
   '@rushstack/worker-pool@0.6.2':
     resolution: {integrity: sha512-27IEYsBhb6bQAyYgPl8cf8WwjDp2ZoKw30qR/jHMBgVVNWYN2NHGTEHEOy9emnWMYJQDQ3Lzsn5HVKPcNjWOiQ==}
+    peerDependencies:
+      '@types/node': '*'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@rushstack/worker-pool@0.7.7':
+    resolution: {integrity: sha512-B8uRKeYvtUQkdno1TTvp86DWcV98JOy/qf0KPr9hKfzi/l4B0hM2ES/tR+ae9dX5z1vX9AEy60n7yyrsQh3YUA==}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3025,6 +3104,12 @@ packages:
 
   '@types/ejs@3.1.5':
     resolution: {integrity: sha512-nv+GSx77ZtXiJzwKdsASqi+YQ5Z7vwHsTP0JY2SiQgjGckkBRKZnk8nIM+7oUZ1VCtuTz0+By4qVR7fqzp/Dfg==}
+
+  '@types/eslint-scope@3.7.7':
+    resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
+
+  '@types/eslint@9.6.1':
+    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -3432,6 +3517,12 @@ packages:
     resolution: {integrity: sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ==}
     peerDependencies:
       acorn: ^8
+
+  acorn-import-phases@1.0.4:
+    resolution: {integrity: sha512-wKmbr/DDiIXzEOiWrTTUcDm24kQ2vGfZQvM2fwg2vXqR5uW6aapr7ObPtj1th32b9u90/Pf4AItvdTh42fBmVQ==}
+    engines: {node: '>=10.13.0'}
+    peerDependencies:
+      acorn: ^8.14.0
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -4190,6 +4281,9 @@ packages:
 
   es-module-lexer@1.7.0:
     resolution: {integrity: sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==}
+
+  es-module-lexer@2.0.0:
+    resolution: {integrity: sha512-5POEcUuZybH7IdmGsD8wlf0AI55wMecM9rVBTI/qEAy2c1kTOm3DjFYjrBdI2K3BaJjJYfYFeRtM0t9ssnRuxw==}
 
   es-object-atoms@1.1.1:
     resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
@@ -6249,6 +6343,10 @@ packages:
   serialize-javascript@6.0.2:
     resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
 
+  serialize-javascript@7.0.3:
+    resolution: {integrity: sha512-h+cZ/XXarqDgCjo+YSyQU/ulDEESGGf8AMK9pPNmhNSl/FzPl6L8pMp1leca5z6NuG6tvV/auC8/43tmovowww==}
+    engines: {node: '>=20.0.0'}
+
   serve-index@1.9.2:
     resolution: {integrity: sha512-KDj11HScOaLmrPxl70KYNW1PksP4Nb/CLL2yvC+Qd2kHMPEEpfc4Re2e4FOay+bC/+XQl/7zAcWON3JVo5v3KQ==}
     engines: {node: '>= 0.8.0'}
@@ -6805,6 +6903,16 @@ packages:
   webpack-sources@3.3.4:
     resolution: {integrity: sha512-7tP1PdV4vF+lYPnkMR0jMY5/la2ub5Fc/8VQrrU+lXkiM6C4TjVfGw7iKfyhnTQOsD+6Q/iKw0eFciziRgD58Q==}
     engines: {node: '>=10.13.0'}
+
+  webpack@5.105.4:
+    resolution: {integrity: sha512-jTywjboN9aHxFlToqb0K0Zs9SbBoW4zRUlGzI2tYNxVYcEi/IPpn+Xi4ye5jTLvX2YeLuic/IvxNot+Q1jMoOw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
 
   webpack@5.95.0:
     resolution: {integrity: sha512-2t3XstrKULz41MNMBF+cJ97TyHdyQ8HCt//pqErqDvNjU9YQBnZxIHa11VXsi7F3mb5/aO2tuDxdeTPdU7xu9Q==}
@@ -9124,11 +9232,9 @@ snapshots:
       '@microsoft/eslint-plugin-spfx': 1.22.2(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/eslint-config': 4.5.2(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/eslint-plugin': 0.22.0(eslint@8.57.1)(typescript@5.8.3)
-      '@rushstack/eslint-plugin-security': 0.14.2(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/eslint-plugin': 8.46.2(@typescript-eslint/parser@8.48.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/utils': 8.46.2(eslint@8.57.1)(typescript@5.8.3)
       eslint: 8.57.1
-      eslint-plugin-promise: 7.2.1(eslint@8.57.1)
     transitivePeerDependencies:
       - '@typescript-eslint/parser'
       - supports-color
@@ -9283,6 +9389,24 @@ snapshots:
       postcss-modules-scope: 3.2.1(postcss@8.5.8)
       postcss-modules-values: 4.0.0(postcss@8.5.8)
       webpack: 5.95.0
+    transitivePeerDependencies:
+      - '@rspack/core'
+      - '@types/node'
+
+  '@microsoft/sp-css-loader@1.23.0-beta.0(@types/node@22.19.13)(webpack@5.105.4)':
+    dependencies:
+      '@microsoft/load-themed-styles': 1.10.292
+      '@rushstack/node-core-library': 5.20.3(@types/node@22.19.13)
+      autoprefixer: 10.4.27(postcss@8.5.8)
+      css-loader: 7.1.4(webpack@5.105.4)
+      cssnano: 5.1.15(postcss@8.5.8)
+      loader-utils: 3.2.2
+      postcss: 8.5.8
+      postcss-modules-extract-imports: 3.1.0(postcss@8.5.8)
+      postcss-modules-local-by-default: 4.2.0(postcss@8.5.8)
+      postcss-modules-scope: 3.2.1(postcss@8.5.8)
+      postcss-modules-values: 4.0.0(postcss@8.5.8)
+      webpack: 5.105.4
     transitivePeerDependencies:
       - '@rspack/core'
       - '@types/node'
@@ -9522,6 +9646,13 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
+  '@microsoft/sp-module-interfaces@1.23.0-beta.0(@types/node@22.19.13)':
+    dependencies:
+      '@rushstack/node-core-library': 5.20.3(@types/node@22.19.13)
+      ajv: 8.18.0
+    transitivePeerDependencies:
+      - '@types/node'
+
   '@microsoft/sp-odata-types@1.22.2':
     dependencies:
       '@swc/helpers': 0.5.19
@@ -9647,7 +9778,7 @@ snapshots:
       - scheduler
       - supports-color
 
-  '@microsoft/spfx-heft-plugins@1.22.2(patch_hash=185ffebb2de7b1fb5f6ad4d92e9d8ad3b2d3207721e8db14e7ac1f3d716d0b1a)(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)':
+  '@microsoft/spfx-heft-plugins@1.22.2(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)':
     dependencies:
       '@azure/storage-blob': 12.26.0
       '@microsoft/sp-css-loader': 1.22.2(@types/node@22.19.13)(webpack@5.95.0)
@@ -9692,47 +9823,43 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@microsoft/spfx-heft-plugins@1.22.2(patch_hash=185ffebb2de7b1fb5f6ad4d92e9d8ad3b2d3207721e8db14e7ac1f3d716d0b1a)(@rushstack/heft@1.2.7(@types/node@22.19.13))(@types/node@22.19.13)':
+  '@microsoft/spfx-heft-plugins@1.23.0-beta.0(patch_hash=30f20c21dce0a9fe2f2863834a49ae1a94c6f649ef3dcf4889617f2536f12062)(@rushstack/heft@1.2.7(@types/node@22.19.13))(@types/node@22.19.13)':
     dependencies:
       '@azure/storage-blob': 12.26.0
-      '@microsoft/sp-css-loader': 1.22.2(@types/node@22.19.13)(webpack@5.95.0)
-      '@microsoft/sp-module-interfaces': 1.22.2(@types/node@22.19.13)
+      '@microsoft/sp-css-loader': 1.23.0-beta.0(@types/node@22.19.13)(webpack@5.105.4)
+      '@microsoft/sp-module-interfaces': 1.23.0-beta.0(@types/node@22.19.13)
       '@rushstack/heft': 1.2.7(@types/node@22.19.13)
-      '@rushstack/heft-config-file': 0.19.2(@types/node@22.19.13)
-      '@rushstack/localization-utilities': 0.14.2(@types/node@22.19.13)
-      '@rushstack/module-minifier': 0.8.2(@types/node@22.19.13)
-      '@rushstack/node-core-library': 5.17.1(@types/node@22.19.13)
-      '@rushstack/rig-package': 0.6.0
-      '@rushstack/set-webpack-public-path-plugin': 5.2.2(@types/node@22.19.13)(webpack@5.95.0)
-      '@rushstack/terminal': 0.19.2(@types/node@22.19.13)
-      '@rushstack/webpack5-localization-plugin': 0.15.2(@types/node@22.19.13)(webpack@5.95.0)
-      '@rushstack/webpack5-module-minifier-plugin': 5.6.2(@rushstack/module-minifier@0.8.2(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.95.0)
+      '@rushstack/heft-config-file': 0.20.3(@types/node@22.19.13)
+      '@rushstack/localization-utilities': 0.15.7(@types/node@22.19.13)
+      '@rushstack/module-minifier': 0.9.8(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.20.3(@types/node@22.19.13)
+      '@rushstack/rig-package': 0.7.2
+      '@rushstack/set-webpack-public-path-plugin': 5.3.8(@types/node@22.19.13)(webpack@5.105.4)
+      '@rushstack/terminal': 0.22.3(@types/node@22.19.13)
+      '@rushstack/webpack5-localization-plugin': 0.16.7(@types/node@22.19.13)(webpack@5.105.4)
+      '@rushstack/webpack5-module-minifier-plugin': 5.8.8(@rushstack/module-minifier@0.9.8(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)
       '@types/tapable': 1.0.6
       cors: 2.8.5
       express: 4.22.1
       fast-glob: 3.2.12
       git-repo-info: 2.1.1
-      html-loader: 4.2.0(webpack@5.95.0)
+      html-loader: 4.2.0(webpack@5.105.4)
       jszip: 3.8.0
       lodash: 4.17.23
-      mem-fs: 4.1.4
-      mem-fs-editor: 11.1.4(mem-fs@4.1.4)
       mime: 2.5.2
       resolve: 1.17.0
       source-map: 0.6.1
-      source-map-loader: 4.0.2(webpack@5.95.0)
+      source-map-loader: 4.0.2(webpack@5.105.4)
       tapable: 1.1.3
       uuid: 9.0.1
-      webpack: 5.95.0
+      webpack: 5.105.4
       xml: 1.0.1
     transitivePeerDependencies:
       - '@rspack/core'
       - '@swc/core'
       - '@types/node'
       - '@types/webpack'
-      - bare-abort-controller
       - esbuild
-      - react-native-b4a
       - supports-color
       - uglify-js
       - webpack-cli
@@ -9740,7 +9867,7 @@ snapshots:
   '@microsoft/spfx-web-build-rig@1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)':
     dependencies:
       '@microsoft/api-extractor': 7.52.5(@types/node@22.19.13)
-      '@microsoft/spfx-heft-plugins': 1.22.2(patch_hash=185ffebb2de7b1fb5f6ad4d92e9d8ad3b2d3207721e8db14e7ac1f3d716d0b1a)(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)
+      '@microsoft/spfx-heft-plugins': 1.22.2(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft': 1.1.2(@types/node@22.19.13)
       '@rushstack/heft-dev-cert-plugin': 1.0.3(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft-jest-plugin': 1.1.2(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)(jest-environment-jsdom@29.5.0)(jest-environment-node@29.7.0)
@@ -10352,10 +10479,29 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
+  '@rushstack/localization-utilities@0.15.7(@types/node@22.19.13)':
+    dependencies:
+      '@rushstack/node-core-library': 5.20.3(@types/node@22.19.13)
+      '@rushstack/terminal': 0.22.3(@types/node@22.19.13)
+      '@rushstack/typings-generator': 0.16.7(@types/node@22.19.13)
+      pseudolocale: 1.1.0
+      xmldoc: 1.1.4
+    transitivePeerDependencies:
+      - '@types/node'
+
   '@rushstack/module-minifier@0.8.2(@types/node@22.19.13)':
     dependencies:
       '@rushstack/worker-pool': 0.6.2(@types/node@22.19.13)
       serialize-javascript: 6.0.2
+      source-map: 0.7.6
+      terser: 5.46.0
+    optionalDependencies:
+      '@types/node': 22.19.13
+
+  '@rushstack/module-minifier@0.9.8(@types/node@22.19.13)':
+    dependencies:
+      '@rushstack/worker-pool': 0.7.7(@types/node@22.19.13)
+      serialize-javascript: 7.0.3
       source-map: 0.7.6
       terser: 5.46.0
     optionalDependencies:
@@ -10447,6 +10593,16 @@ snapshots:
     transitivePeerDependencies:
       - '@types/webpack'
 
+  '@rushstack/set-webpack-public-path-plugin@5.3.8(@types/node@22.19.13)(webpack@5.105.4)':
+    dependencies:
+      '@rushstack/node-core-library': 5.20.3(@types/node@22.19.13)
+      '@rushstack/webpack-plugin-utilities': 0.6.8(webpack@5.105.4)
+      webpack: 5.105.4
+    optionalDependencies:
+      '@types/node': 22.19.13
+    transitivePeerDependencies:
+      - '@types/webpack'
+
   '@rushstack/terminal@0.15.2(@types/node@22.19.13)':
     dependencies:
       '@rushstack/node-core-library': 5.13.0(@types/node@22.19.13)
@@ -10519,6 +10675,15 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.13
 
+  '@rushstack/typings-generator@0.16.7(@types/node@22.19.13)':
+    dependencies:
+      '@rushstack/node-core-library': 5.20.3(@types/node@22.19.13)
+      '@rushstack/terminal': 0.22.3(@types/node@22.19.13)
+      chokidar: 3.6.0
+      fast-glob: 3.3.3
+    optionalDependencies:
+      '@types/node': 22.19.13
+
   '@rushstack/webpack-plugin-utilities@0.5.2(webpack@5.95.0)':
     dependencies:
       memfs: 4.12.0
@@ -10526,12 +10691,28 @@ snapshots:
     optionalDependencies:
       webpack: 5.95.0
 
+  '@rushstack/webpack-plugin-utilities@0.6.8(webpack@5.105.4)':
+    dependencies:
+      memfs: 4.12.0
+      webpack-merge: 5.8.0
+    optionalDependencies:
+      webpack: 5.105.4
+
   '@rushstack/webpack5-localization-plugin@0.15.2(@types/node@22.19.13)(webpack@5.95.0)':
     dependencies:
       '@rushstack/localization-utilities': 0.14.2(@types/node@22.19.13)
       '@rushstack/node-core-library': 5.17.1(@types/node@22.19.13)
       '@rushstack/terminal': 0.19.2(@types/node@22.19.13)
       webpack: 5.95.0
+    optionalDependencies:
+      '@types/node': 22.19.13
+
+  '@rushstack/webpack5-localization-plugin@0.16.7(@types/node@22.19.13)(webpack@5.105.4)':
+    dependencies:
+      '@rushstack/localization-utilities': 0.15.7(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.20.3(@types/node@22.19.13)
+      '@rushstack/terminal': 0.22.3(@types/node@22.19.13)
+      webpack: 5.105.4
     optionalDependencies:
       '@types/node': 22.19.13
 
@@ -10546,7 +10727,22 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.13
 
+  '@rushstack/webpack5-module-minifier-plugin@5.8.8(@rushstack/module-minifier@0.9.8(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)':
+    dependencies:
+      '@rushstack/module-minifier': 0.9.8(@types/node@22.19.13)
+      '@rushstack/worker-pool': 0.7.7(@types/node@22.19.13)
+      '@types/estree': 1.0.8
+      '@types/tapable': 1.0.6
+      tapable: 2.2.1
+      webpack: 5.105.4
+    optionalDependencies:
+      '@types/node': 22.19.13
+
   '@rushstack/worker-pool@0.6.2(@types/node@22.19.13)':
+    optionalDependencies:
+      '@types/node': 22.19.13
+
+  '@rushstack/worker-pool@0.7.7(@types/node@22.19.13)':
     optionalDependencies:
       '@types/node': 22.19.13
 
@@ -10620,6 +10816,16 @@ snapshots:
       '@types/node': 22.19.13
 
   '@types/ejs@3.1.5': {}
+
+  '@types/eslint-scope@3.7.7':
+    dependencies:
+      '@types/eslint': 9.6.1
+      '@types/estree': 1.0.8
+
+  '@types/eslint@9.6.1':
+    dependencies:
+      '@types/estree': 1.0.8
+      '@types/json-schema': 7.0.15
 
   '@types/estree@1.0.6': {}
 
@@ -11236,6 +11442,10 @@ snapshots:
     dependencies:
       acorn: 8.16.0
 
+  acorn-import-phases@1.0.4(acorn@8.16.0):
+    dependencies:
+      acorn: 8.16.0
+
   acorn-jsx@5.3.2(acorn@8.16.0):
     dependencies:
       acorn: 8.16.0
@@ -11740,6 +11950,19 @@ snapshots:
     dependencies:
       postcss: 8.5.8
 
+  css-loader@7.1.4(webpack@5.105.4):
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.5.8)
+      postcss: 8.5.8
+      postcss-modules-extract-imports: 3.1.0(postcss@8.5.8)
+      postcss-modules-local-by-default: 4.2.0(postcss@8.5.8)
+      postcss-modules-scope: 3.2.1(postcss@8.5.8)
+      postcss-modules-values: 4.0.0(postcss@8.5.8)
+      postcss-value-parser: 4.2.0
+      semver: 7.7.4
+    optionalDependencies:
+      webpack: 5.105.4
+
   css-loader@7.1.4(webpack@5.95.0):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.8)
@@ -12085,6 +12308,8 @@ snapshots:
       safe-array-concat: 1.1.3
 
   es-module-lexer@1.7.0: {}
+
+  es-module-lexer@2.0.0: {}
 
   es-object-atoms@1.1.1:
     dependencies:
@@ -12741,6 +12966,12 @@ snapshots:
       whatwg-encoding: 2.0.0
 
   html-escaper@2.0.2: {}
+
+  html-loader@4.2.0(webpack@5.105.4):
+    dependencies:
+      html-minifier-terser: 7.2.0
+      parse5: 7.3.0
+      webpack: 5.105.4
 
   html-loader@4.2.0(webpack@5.95.0):
     dependencies:
@@ -14615,6 +14846,8 @@ snapshots:
     dependencies:
       randombytes: 2.1.0
 
+  serialize-javascript@7.0.3: {}
+
   serve-index@1.9.2:
     dependencies:
       accepts: 1.3.8
@@ -14711,6 +14944,12 @@ snapshots:
       websocket-driver: 0.7.4
 
   source-map-js@1.2.1: {}
+
+  source-map-loader@4.0.2(webpack@5.105.4):
+    dependencies:
+      iconv-lite: 0.6.3
+      source-map-js: 1.2.1
+      webpack: 5.105.4
 
   source-map-loader@4.0.2(webpack@5.95.0):
     dependencies:
@@ -14925,6 +15164,14 @@ snapshots:
     transitivePeerDependencies:
       - bare-abort-controller
       - react-native-b4a
+
+  terser-webpack-plugin@5.3.17(webpack@5.105.4):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.31
+      jest-worker: 27.5.1
+      schema-utils: 4.3.3
+      terser: 5.46.0
+      webpack: 5.105.4
 
   terser-webpack-plugin@5.3.17(webpack@5.95.0):
     dependencies:
@@ -15246,6 +15493,38 @@ snapshots:
       wildcard: 2.0.1
 
   webpack-sources@3.3.4: {}
+
+  webpack@5.105.4:
+    dependencies:
+      '@types/eslint-scope': 3.7.7
+      '@types/estree': 1.0.8
+      '@types/json-schema': 7.0.15
+      '@webassemblyjs/ast': 1.14.1
+      '@webassemblyjs/wasm-edit': 1.14.1
+      '@webassemblyjs/wasm-parser': 1.14.1
+      acorn: 8.16.0
+      acorn-import-phases: 1.0.4(acorn@8.16.0)
+      browserslist: 4.28.1
+      chrome-trace-event: 1.0.4
+      enhanced-resolve: 5.20.0
+      es-module-lexer: 2.0.0
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.1
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 4.3.3
+      tapable: 2.3.0
+      terser-webpack-plugin: 5.3.17(webpack@5.105.4)
+      watchpack: 2.5.1
+      webpack-sources: 3.3.4
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
 
   webpack@5.95.0:
     dependencies:
