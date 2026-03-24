@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListTemplatesAction --local-source (additive) adds LocalFileSystemRepositorySource AND still includes the default GitHub source 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding local template source: /path/to/templates[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction --local-source (additive) adds multiple local sources for multiple --local-source flags 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding local template source: /a[n]",
+  "[    log] Adding local template source: /b[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction --remote-source (additive) adds an extra PublicGitHubRepositorySource alongside the default 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction --remote-source (additive) adds multiple remote sources for multiple --remote-source flags 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding remote template source: https://github.com/org1/repo1[n]",
+  "[    log] Adding remote template source: https://github.com/org2/repo2[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction --remote-source (additive) extracts branch from /tree/ in --remote-source URL 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding remote template source: https://github.com/my-org/my-templates (branch: my-branch)[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction --spfx-version extracts branch from /tree/ in SPFX_TEMPLATE_REPO_URL when no --spfx-version 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: pending-fixes)[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction --spfx-version passes ref to default PublicGitHubRepositorySource 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction --spfx-version takes precedence over branch encoded in SPFX_TEMPLATE_REPO_URL /tree/ path 1`] = `
+Array [
+  "[warning] --template-url contains a branch ('/tree/pending-fixes'). --spfx-version \\"1.22\\" will take precedence.[n]",
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction combined --local-source and --remote-source adds default GitHub, local, and remote sources all together 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding local template source: /local/path[n]",
+  "[    log] Adding remote template source: https://github.com/my-org/extra-templates[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction default source (always included) adds PublicGitHubRepositorySource with the default URL 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction default source (always included) falls back to default URL when SPFX_TEMPLATE_REPO_URL is whitespace-only 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`ListTemplatesAction default source (always included) uses SPFX_TEMPLATE_REPO_URL when set 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/my-org/my-templates[n]",
+  "[    log] # of templates: 1[n]",
+  "[    log] [n]",
+  "[    log] Template Name: webpart-minimal[n]",
+  "[    log] Description: A minimal web part template (no framework) for SPFx[n]",
+  "[    log] Version: 0.0.1[n]",
+  "[    log] SPFx Version: 1.22.2[n]",
+  "[    log] Number of Files: 23[n]",
+  "[    log] [n]",
+]
+`;
