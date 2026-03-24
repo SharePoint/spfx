@@ -26,7 +26,7 @@ const terminal = new Terminal(new ConsoleTerminalProvider());
 
 // 1. Load templates from GitHub
 const manager = new SPFxTemplateRepositoryManager();
-manager.addSource(new PublicGitHubRepositorySource({ repoUri: 'https://github.com/SharePoint/spfx', terminal }));
+manager.addSource(new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal }));
 
 const templates = await manager.getTemplatesAsync();
 const template = templates.get('webpart-react');
@@ -73,10 +73,10 @@ import { PublicGitHubRepositorySource } from '@microsoft/spfx-template-api';
 const terminal = new Terminal(new ConsoleTerminalProvider());
 
 // Latest (repository's default branch)
-new PublicGitHubRepositorySource({ repoUri: 'https://github.com/SharePoint/spfx', terminal });
+new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal });
 
 // Specific version
-new PublicGitHubRepositorySource({ repoUri: 'https://github.com/SharePoint/spfx', branch: 'version/1.22', terminal });
+new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', branch: 'version/1.22', terminal });
 ```
 
 ### `LocalFileSystemRepositorySource`
@@ -103,7 +103,7 @@ import {
 
 const terminal = new Terminal(new ConsoleTerminalProvider());
 const manager = new SPFxTemplateRepositoryManager();
-manager.addSource(new PublicGitHubRepositorySource({ repoUri: 'https://github.com/SharePoint/spfx', terminal }));
+manager.addSource(new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal }));
 manager.addSource(new LocalFileSystemRepositorySource('./my-custom-templates'));
 
 const templates = await manager.getTemplatesAsync();

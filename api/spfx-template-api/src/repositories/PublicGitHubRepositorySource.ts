@@ -83,9 +83,9 @@ export async function _createTemplateFromFileMapAsync(
  */
 export interface IPublicGitHubRepositorySourceOptions {
   /**
-   * The GitHub repository URI (e.g., https://github.com/owner/repo).
+   * The GitHub repository URL (e.g., https://github.com/owner/repo).
    */
-  repoUri: string;
+  repoUrl: string;
 
   /**
    * The branch name to fetch from. Defaults to 'main' if not specified.
@@ -119,14 +119,14 @@ export interface IPublicGitHubRepositorySourceOptions {
  * This pattern is similar to other scaffolding tools (npm create, dotnet new, etc.)
  */
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
-  private readonly _repoUri: string;
+  private readonly _repoUrl: string;
   private readonly _ref: string;
   private readonly _terminal: ITerminal;
 
   public constructor(options: IPublicGitHubRepositorySourceOptions) {
     super('github');
-    const { repoUri, branch, terminal } = options;
-    this._repoUri = repoUri;
+    const { repoUrl, branch, terminal } = options;
+    this._repoUrl = repoUrl;
     this._ref = branch || 'main';
     this._terminal = terminal;
   }
@@ -141,7 +141,7 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
       const fileMap: Map<string, Buffer> = await this._downloadAndExtractRepositoryAsync(downloadUrl);
       return await _parseTemplatesFromFileMapAsync(this._terminal, fileMap);
     } catch (error) {
-      throw new Error(`Failed to fetch templates from GitHub repository ${this._repoUri}: ${error}`);
+      throw new Error(`Failed to fetch templates from GitHub repository ${this._repoUrl}: ${error}`);
     }
   }
 
@@ -152,9 +152,9 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
 
   private _parseGitHubUrl(): { owner: string; repo: string } {
     // Parse URLs like: https://github.com/sharepoint/spfx or https://github.com/sharepoint/spfx.git
-    const match: RegExpMatchArray | null = this._repoUri.match(/github\.com\/([^\/]+)\/([^\/]+?)(\.git)?$/);
+    const match: RegExpMatchArray | null = this._repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+?)(\.git)?$/);
     if (!match) {
-      throw new Error(`Invalid GitHub repository URL: ${this._repoUri}`);
+      throw new Error(`Invalid GitHub repository URL: ${this._repoUrl}`);
     }
 
     const [, owner, repo] = match as [string, string, string];

@@ -33,7 +33,7 @@ export interface IMergeHelper {
 // @public
 export interface IPublicGitHubRepositorySourceOptions {
     branch?: string;
-    repoUri: string;
+    repoUrl: string;
     terminal: ITerminal;
 }
 

@@ -38,17 +38,17 @@ describe(PublicGitHubRepositorySource.name, () => {
   describe('constructor', () => {
     it('should create an instance with repository URI', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
 
-      expect(source['_repoUri']).toBe('https://github.com/owner/repo');
+      expect(source['_repoUrl']).toBe('https://github.com/owner/repo');
       expect(source.kind).toBe('github');
     });
 
     it('should use default branch "main" when not specified', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
 
@@ -57,7 +57,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
     it('should use specified branch', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         branch: 'develop',
         terminal
       });
@@ -67,7 +67,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
     it('should use provided terminal', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
 
@@ -78,7 +78,7 @@ describe(PublicGitHubRepositorySource.name, () => {
   describe('kind property', () => {
     it('should always be "github"', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
 
@@ -89,7 +89,7 @@ describe(PublicGitHubRepositorySource.name, () => {
   describe('_parseGitHubUrl', () => {
     it('should parse valid GitHub HTTPS URL', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
       const result = source['_parseGitHubUrl']();
@@ -99,7 +99,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
     it('should parse GitHub URL with .git extension', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo.git',
+        repoUrl: 'https://github.com/owner/repo.git',
         terminal
       });
       const result = source['_parseGitHubUrl']();
@@ -109,7 +109,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
     it('should throw error for invalid URL', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://invalid.com/repo',
+        repoUrl: 'https://invalid.com/repo',
         terminal
       });
 
@@ -118,7 +118,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
     it('should throw error for malformed GitHub URL', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner',
+        repoUrl: 'https://github.com/owner',
         terminal
       });
 
@@ -129,7 +129,7 @@ describe(PublicGitHubRepositorySource.name, () => {
   describe('_buildDownloadUrl', () => {
     it('should build correct download URL for main branch', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         branch: 'main',
         terminal
       });
@@ -140,7 +140,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
     it('should build correct download URL for custom branch', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         branch: 'feature-branch',
         terminal
       });
@@ -151,7 +151,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
     it('should build correct download URL with different owner and repo', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/microsoft/spfx',
+        repoUrl: 'https://github.com/microsoft/spfx',
         branch: 'v1.18',
         terminal
       });
@@ -184,7 +184,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       );
 
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
       const zipBuffer = Buffer.from('fake zip');
@@ -216,7 +216,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       );
 
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
       const result = source['_extractZipBuffer'](Buffer.from('fake zip'));
@@ -242,7 +242,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       );
 
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
       const result = source['_extractZipBuffer'](Buffer.from('fake zip'));
@@ -415,7 +415,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       mockFromMemoryAsync.mockResolvedValue(mockTemplate);
 
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
       const templates = await source.getTemplatesAsync();
@@ -432,7 +432,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       } as unknown as Response);
 
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
 
@@ -445,7 +445,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       mockFetch.mockRejectedValue(new Error('Network error'));
 
       const source = new PublicGitHubRepositorySource({
-        repoUri: 'https://github.com/owner/repo',
+        repoUrl: 'https://github.com/owner/repo',
         terminal
       });
 

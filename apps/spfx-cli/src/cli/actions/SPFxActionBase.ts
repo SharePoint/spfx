@@ -56,7 +56,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
    */
   protected _addGitHubTemplateSource(manager: SPFxTemplateRepositoryManager): void {
     const rawUrl: string = (this._templateUrlParameter.value ?? '').trim() || DEFAULT_GITHUB_REPO;
-    const { repoUri, urlBranch } = parseGitHubUrlAndRef(rawUrl);
+    const { repoUrl, urlBranch } = parseGitHubUrlAndRef(rawUrl);
     const terminal: Terminal = this._terminal;
 
     // Map user-supplied version like "1.22" to branch "version/1.22"; pass through
@@ -77,7 +77,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
     }
     const ref: string | undefined = spfxVersionBranch ?? urlBranch;
 
-    terminal.writeLine(`Using GitHub template source: ${repoUri}${ref ? ` (branch: ${ref})` : ''}`);
-    manager.addSource(new PublicGitHubRepositorySource({ repoUri, branch: ref, terminal }));
+    terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
+    manager.addSource(new PublicGitHubRepositorySource({ repoUrl, branch: ref, terminal }));
   }
 }

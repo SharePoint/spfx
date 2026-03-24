@@ -128,7 +128,7 @@ describe('CreateAction', () => {
       it('should add a PublicGitHubRepositorySource with the default URL', async () => {
         await runCreateAsync();
         expect(MockedGitHub).toHaveBeenCalledWith({
-          repoUri: 'https://github.com/SharePoint/spfx',
+          repoUrl: 'https://github.com/SharePoint/spfx',
           branch: undefined,
           terminal: expect.anything()
         });
@@ -139,7 +139,7 @@ describe('CreateAction', () => {
         process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/my-org/my-templates';
         await runCreateAsync();
         expect(MockedGitHub).toHaveBeenCalledWith({
-          repoUri: 'https://github.com/my-org/my-templates',
+          repoUrl: 'https://github.com/my-org/my-templates',
           branch: undefined,
           terminal: expect.anything()
         });
@@ -150,7 +150,7 @@ describe('CreateAction', () => {
         const parser = new SPFxCommandLineParser(terminal);
         await parser.executeWithoutErrorHandlingAsync(['create', ...REQUIRED_ARGS]);
         expect(MockedGitHub).toHaveBeenCalledWith({
-          repoUri: 'https://github.com/SharePoint/spfx',
+          repoUrl: 'https://github.com/SharePoint/spfx',
           branch: undefined,
           terminal
         });
@@ -178,7 +178,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx/';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -188,7 +188,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx///';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -198,7 +198,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx.git';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -208,7 +208,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = '  https://github.com/SharePoint/spfx  ';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -218,7 +218,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx.git/';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -229,7 +229,7 @@ describe('CreateAction', () => {
     it('passes ref to PublicGitHubRepositorySource when --spfx-version is set', async () => {
       await runCreateAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
         terminal: expect.anything()
       });
@@ -239,7 +239,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/my-org/my-templates';
       await runCreateAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/my-org/my-templates',
+        repoUrl: 'https://github.com/my-org/my-templates',
         branch: 'version/1.22',
         terminal: expect.anything()
       });
@@ -250,7 +250,7 @@ describe('CreateAction', () => {
         'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runCreateAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
         terminal: expect.anything()
       });
@@ -269,7 +269,7 @@ describe('CreateAction', () => {
         'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'pending-fixes',
         terminal: expect.anything()
       });
@@ -279,7 +279,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx/tree/1.22';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: '1.22',
         terminal: expect.anything()
       });
@@ -289,7 +289,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx.git/tree/1.22';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: '1.22',
         terminal: expect.anything()
       });
@@ -299,7 +299,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/SharePoint/spfx';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -310,7 +310,7 @@ describe('CreateAction', () => {
         'https://github.mycompany.com/org/repo/tree/my-branch';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.mycompany.com/org/repo',
+        repoUrl: 'https://github.mycompany.com/org/repo',
         branch: 'my-branch',
         terminal: expect.anything()
       });
@@ -321,7 +321,7 @@ describe('CreateAction', () => {
         'https://github.com/SharePoint/spfx/tree/main/some/subdir';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'main',
         terminal: expect.anything()
       });
@@ -333,7 +333,7 @@ describe('CreateAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = '   ';
       await runCreateAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });

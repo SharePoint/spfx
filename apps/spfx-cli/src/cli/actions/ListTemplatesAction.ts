@@ -59,7 +59,7 @@ export class ListTemplatesAction extends SPFxActionBase {
 
       // Additive: also include any --remote-source URLs
       for (const remoteUrl of this._remoteSourcesParameter.values) {
-        const { repoUri: additionalRepoUrl, urlBranch: additionalUrlBranch } =
+        const { repoUrl: additionalRepoUrl, urlBranch: additionalUrlBranch } =
           parseGitHubUrlAndRef(remoteUrl);
         terminal.writeLine(
           `Adding remote template source: ${additionalRepoUrl}` +
@@ -67,7 +67,7 @@ export class ListTemplatesAction extends SPFxActionBase {
         );
         manager.addSource(
           new PublicGitHubRepositorySource({
-            repoUri: additionalRepoUrl,
+            repoUrl: additionalRepoUrl,
             branch: additionalUrlBranch,
             terminal
           })

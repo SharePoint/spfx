@@ -5,7 +5,7 @@ export const DEFAULT_GITHUB_REPO: string = 'https://github.com/SharePoint/spfx';
 export const SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME: string = 'SPFX_TEMPLATE_REPO_URL';
 
 export interface IParsedGitHubUrl {
-  repoUri: string;
+  repoUrl: string;
   urlBranch: string | undefined;
 }
 
@@ -20,11 +20,11 @@ export function parseGitHubUrlAndRef(rawUrl: string): IParsedGitHubUrl {
   // names containing slashes (e.g. `feature/foo`) cannot be expressed via a /tree/ URL;
   // use the --spfx-version flag to specify such refs directly.
   const treeMatch: RegExpMatchArray | null = normalized.match(
-    /^(?<repoUri>https?:\/\/[^/]+\/[^/]+\/[^/]+?)(?:\.git)?\/tree\/(?<urlBranch>[^/]+)/
+    /^(?<repoUrl>https?:\/\/[^/]+\/[^/]+\/[^/]+?)(?:\.git)?\/tree\/(?<urlBranch>[^/]+)/
   );
   if (treeMatch?.groups) {
-    const { repoUri, urlBranch } = treeMatch.groups as { repoUri: string; urlBranch: string };
-    return { repoUri, urlBranch };
+    const { repoUrl, urlBranch } = treeMatch.groups as { repoUrl: string; urlBranch: string };
+    return { repoUrl, urlBranch };
   }
-  return { repoUri: normalized.replace(/\.git$/, ''), urlBranch: undefined };
+  return { repoUrl: normalized.replace(/\.git$/, ''), urlBranch: undefined };
 }

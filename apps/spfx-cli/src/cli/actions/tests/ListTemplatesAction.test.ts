@@ -62,7 +62,7 @@ describe('ListTemplatesAction', () => {
     it('adds PublicGitHubRepositorySource with the default URL', async () => {
       await runListAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -72,7 +72,7 @@ describe('ListTemplatesAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = 'https://github.com/my-org/my-templates';
       await runListAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/my-org/my-templates',
+        repoUrl: 'https://github.com/my-org/my-templates',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -82,7 +82,7 @@ describe('ListTemplatesAction', () => {
       process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME] = '   ';
       await runListAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -93,7 +93,7 @@ describe('ListTemplatesAction', () => {
       const parser: SPFxCommandLineParser = new SPFxCommandLineParser(terminal);
       await parser.executeWithoutErrorHandlingAsync(['list-templates']);
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal
       });
@@ -104,7 +104,7 @@ describe('ListTemplatesAction', () => {
     it('passes ref to default PublicGitHubRepositorySource', async () => {
       await runListAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
         terminal: expect.anything()
       });
@@ -115,7 +115,7 @@ describe('ListTemplatesAction', () => {
         'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runListAsync(['--spfx-version', '1.22']);
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
         terminal: expect.anything()
       });
@@ -126,7 +126,7 @@ describe('ListTemplatesAction', () => {
         'https://github.com/SharePoint/spfx/tree/pending-fixes';
       await runListAsync();
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'pending-fixes',
         terminal: expect.anything()
       });
@@ -137,7 +137,7 @@ describe('ListTemplatesAction', () => {
     it('adds LocalFileSystemRepositorySource AND still includes the default GitHub source', async () => {
       await runListAsync(['--local-source', '/path/to/templates']);
       expect(MockedGitHub).toHaveBeenCalledWith({
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -158,12 +158,12 @@ describe('ListTemplatesAction', () => {
       await runListAsync(['--remote-source', 'https://github.com/my-org/my-templates']);
       expect(MockedGitHub).toHaveBeenCalledTimes(2);
       expect(MockedGitHub).toHaveBeenNthCalledWith(1, {
-        repoUri: 'https://github.com/SharePoint/spfx',
+        repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
         terminal: expect.anything()
       });
       expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
-        repoUri: 'https://github.com/my-org/my-templates',
+        repoUrl: 'https://github.com/my-org/my-templates',
         branch: undefined,
         terminal: expect.anything()
       });
@@ -172,7 +172,7 @@ describe('ListTemplatesAction', () => {
     it('extracts branch from /tree/ in --remote-source URL', async () => {
       await runListAsync(['--remote-source', 'https://github.com/my-org/my-templates/tree/my-branch']);
       expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
-        repoUri: 'https://github.com/my-org/my-templates',
+        repoUrl: 'https://github.com/my-org/my-templates',
         branch: 'my-branch',
         terminal: expect.anything()
       });
