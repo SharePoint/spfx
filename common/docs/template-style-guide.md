@@ -87,16 +87,18 @@ PropertyPaneDescription: 'Description for property pane',
 
 ## Version Management
 
-Always use the `spfxVersion` variable — never hardcode version numbers.
+Always use the `spfxVersion` variable — never hardcode version numbers. For shields.io badge
+URLs, use `spfxVersionForBadgeUrl` instead, which escapes hyphens so the badge renders correctly
+for prerelease versions like `1.23.0-beta.0`.
 
 ```json
 "@microsoft/sp-core-library": "~<%= spfxVersion %>"
 ```
 
-In README badges:
+In README badges (use `spfxVersionForBadgeUrl` to escape hyphens for shields.io):
 
 ```markdown
-![version](https://img.shields.io/badge/version-<%= spfxVersion %>-blue)
+![version](https://img.shields.io/badge/version-<%= spfxVersionForBadgeUrl %>-blue)
 ```
 
 In `package-solution.json`:

@@ -1,5 +1,5 @@
-define([], function() {
+define([], function () {
   return {
-    "Title": "ReactFieldCustomizerFieldCustomizer"
-  }
+    Title: 'ReactFieldCustomizerFieldCustomizer'
+  };
 });

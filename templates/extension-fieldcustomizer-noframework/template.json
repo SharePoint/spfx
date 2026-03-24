@@ -1,48 +1,48 @@
 {
-    "name": "extension-fieldcustomizer-noframework",
-    "description": "A SharePoint Framework field customizer extension with no framework",
-    "version": "1.0.0",
-    "spfxVersion": "1.22.2",
-    "contextSchema": {
-        "componentNameCapitalCase": {
-            "type": "string",
-            "description": "The component name in CapitalCase (e.g., 'Minimal')"
-        },
-        "componentNameCamelCase": {
-            "type": "string",
-            "description": "The component name in camelCase (e.g., 'minimal')"
-        },
-        "componentNameHyphenCase": {
-            "type": "string",
-            "description": "The component name in hyphen-case (e.g., 'minimal')"
-        },
-        "componentNameUnescaped": {
-            "type": "string",
-            "description": "The component display name (unescaped)"
-        },
-        "componentAlias": {
-            "type": "string",
-            "description": "Short alias for the component"
-        },
-        "libraryName": {
-            "type": "string",
-            "description": "The package/library name"
-        },
-        "solutionId": {
-            "type": "string",
-            "description": "Solution GUID"
-        },
-        "componentId": {
-            "type": "string",
-            "description": "Component GUID"
-        },
-        "featureId": {
-            "type": "string",
-            "description": "Feature GUID"
-        },
-        "componentDescription": {
-            "type": "string",
-            "description": "The component description"
-        }
+  "name": "extension-fieldcustomizer-noframework",
+  "description": "A SharePoint Framework field customizer extension with no framework",
+  "version": "1.0.0",
+  "spfxVersion": "1.22.2",
+  "contextSchema": {
+    "componentNameCapitalCase": {
+      "type": "string",
+      "description": "The component name in CapitalCase (e.g., 'Minimal')"
+    },
+    "componentNameCamelCase": {
+      "type": "string",
+      "description": "The component name in camelCase (e.g., 'minimal')"
+    },
+    "componentNameHyphenCase": {
+      "type": "string",
+      "description": "The component name in hyphen-case (e.g., 'minimal')"
+    },
+    "componentNameUnescaped": {
+      "type": "string",
+      "description": "The component display name (unescaped)"
+    },
+    "componentAlias": {
+      "type": "string",
+      "description": "Short alias for the component"
+    },
+    "libraryName": {
+      "type": "string",
+      "description": "The package/library name"
+    },
+    "solutionId": {
+      "type": "string",
+      "description": "Solution GUID"
+    },
+    "componentId": {
+      "type": "string",
+      "description": "Component GUID"
+    },
+    "featureId": {
+      "type": "string",
+      "description": "Feature GUID"
+    },
+    "componentDescription": {
+      "type": "string",
+      "description": "The component description"
     }
+  }
 }

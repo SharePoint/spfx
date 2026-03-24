@@ -4,7 +4,7 @@
 parameters:
   - name: NodeVersion
     type: string
-    default: '22.x'
+    default: '24.14.x'
 
 steps:
   - task: NodeTool@0

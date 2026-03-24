@@ -1,6 +1,6 @@
-define([], function() {
+define([], function () {
   return {
-    "Command1": "Command 1",
-    "Command2": "Command 2"
-  }
+    Command1: 'Command 1',
+    Command2: 'Command 2'
+  };
 });

@@ -13,8 +13,13 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
+            nodeVersion: 22.14.x
+            displayName: Ubuntu (Node 22)
+          - os: ubuntu-latest
+            nodeVersion: 24.14.x
             displayName: Ubuntu
           - os: windows-latest
+            nodeVersion: 24.14.x
             displayName: Windows
 
     name: Build on ${{ matrix.displayName }}
@@ -31,9 +36,9 @@ jobs:
 
       - run: git config --global user.name "SPFx CLI Bot"
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22.15.0
+          node-version: ${{ matrix.nodeVersion }}
 
       - name: Verify Change Logs
         run: node common/scripts/install-run-rush.js change --verify

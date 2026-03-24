@@ -75,14 +75,14 @@ Yeoman compatibility shim) can be built without duplicating core logic.
 | `--component-alias ALIAS` | No | The component alias. Defaults to the component name. |
 | `--component-description DESC` | No | The component description. Auto-generated from component name if omitted. |
 | `--solution-name NAME` | No | The solution name. Defaults to the kebab-case component name. |
+| `--template-url URL` | No | Custom GitHub template repository URL. Defaults to `https://github.com/SharePoint/spfx`. Also accepts the `SPFX_TEMPLATE_REPO_URL` environment variable. |
+| `--spfx-version VERSION` | No | Branch/tag in the template repo to use (e.g. `1.22`, `1.23-rc.0`). Defaults to the repo's default branch. |
+| `--package-manager {npm,pnpm,yarn,none}` | No | Package manager for dependency installation after scaffolding. `none` skips installation (default). See [#165](https://github.com/SharePoint/spfx/issues/165) for the planned restriction to new projects only. |
 
 **Planned parameters (not yet implemented):**
 
 | Parameter | Description |
 |-----------|-------------|
-| `--package-manager {npm, pnpm, yarn}` | Sets the package manager for dependency installation. Defaults to npm. Only on new projects. |
-| `--skip-install` | Skips the automatic dependency installation step after scaffolding. |
-| `--spfx-version SEMVER` | Selects the branch from the public template repo. Only for first creation. |
 | `--github-source URL` | Registers additional public GitHub template sources. |
 
 In the current implementation, the `create` command reads templates from local template
@@ -285,7 +285,6 @@ async function scaffold(): Promise<void> {
       componentId: '11111111-1111-1111-1111-111111111111',
       solutionId: '22222222-2222-2222-2222-222222222222',
       featureId: '33333333-3333-3333-3333-333333333333',
-      eslintProfile: 'recommended',
       libraryName: 'my-solution',
       componentAlias: 'helloWorld',
       componentNameUnescaped: 'Hello World',

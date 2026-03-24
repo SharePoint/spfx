@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "engines": {
-    "node": ">=22.14.0 <23.0.0 || >=24.5.0 <25.0.0"
+    "node": ">=22.14.0 <23.0.0 || >=24.12.0 <25.0.0"
   },
   "scripts": {
     "build": "heft test --clean",
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@microsoft/spfx-template-api": "workspace:*",
+    "@rushstack/node-core-library": "~5.20.3",
     "@rushstack/ts-command-line": "~5.3.3",
     "@rushstack/terminal": "~0.22.3",
     "lodash": "^4.17.23",

@@ -32,9 +32,7 @@
         "id": "7d46331b-4f37-5bb4-8e4f-2dd9eb8717fa",
         "version": "1.0.0.0",
         "assets": {
-          "elementManifests": [
-            "elements.xml"
-          ]
+          "elementManifests": ["elements.xml"]
         }
       }
     ]

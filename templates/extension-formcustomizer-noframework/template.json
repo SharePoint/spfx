@@ -1,48 +1,48 @@
 {
-    "name": "extension-formcustomizer-noframework",
-    "description": "A SharePoint Framework Form Customizer extension with no framework",
-    "version": "1.0.0",
-    "spfxVersion": "1.22.2",
-    "contextSchema": {
-        "componentNameCapitalCase": {
-            "type": "string",
-            "description": "The component name in capital case (e.g., Minimal)"
-        },
-        "componentNameCamelCase": {
-            "type": "string",
-            "description": "The component name in camel case (e.g., minimal)"
-        },
-        "componentNameHyphenCase": {
-            "type": "string",
-            "description": "The component name in hyphen case (e.g., minimal)"
-        },
-        "componentNameUnescaped": {
-            "type": "string",
-            "description": "The component name unescaped"
-        },
-        "componentAlias": {
-            "type": "string",
-            "description": "The component alias"
-        },
-        "libraryName": {
-            "type": "string",
-            "description": "The library name"
-        },
-        "solutionId": {
-            "type": "string",
-            "description": "The solution GUID"
-        },
-        "componentId": {
-            "type": "string",
-            "description": "The component GUID"
-        },
-        "featureId": {
-            "type": "string",
-            "description": "The feature GUID"
-        },
-        "componentDescription": {
-            "type": "string",
-            "description": "The component description"
-        }
+  "name": "extension-formcustomizer-noframework",
+  "description": "A SharePoint Framework Form Customizer extension with no framework",
+  "version": "1.0.0",
+  "spfxVersion": "1.22.2",
+  "contextSchema": {
+    "componentNameCapitalCase": {
+      "type": "string",
+      "description": "The component name in capital case (e.g., Minimal)"
+    },
+    "componentNameCamelCase": {
+      "type": "string",
+      "description": "The component name in camel case (e.g., minimal)"
+    },
+    "componentNameHyphenCase": {
+      "type": "string",
+      "description": "The component name in hyphen case (e.g., minimal)"
+    },
+    "componentNameUnescaped": {
+      "type": "string",
+      "description": "The component name unescaped"
+    },
+    "componentAlias": {
+      "type": "string",
+      "description": "The component alias"
+    },
+    "libraryName": {
+      "type": "string",
+      "description": "The library name"
+    },
+    "solutionId": {
+      "type": "string",
+      "description": "The solution GUID"
+    },
+    "componentId": {
+      "type": "string",
+      "description": "The component GUID"
+    },
+    "featureId": {
+      "type": "string",
+      "description": "The feature GUID"
+    },
+    "componentDescription": {
+      "type": "string",
+      "description": "The component description"
     }
+  }
 }

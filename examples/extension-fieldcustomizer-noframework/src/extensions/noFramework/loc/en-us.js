@@ -1,5 +1,5 @@
-define([], function() {
+define([], function () {
   return {
-    "Title": "NoFrameworkFieldCustomizer"
-  }
+    Title: 'NoFrameworkFieldCustomizer'
+  };
 });

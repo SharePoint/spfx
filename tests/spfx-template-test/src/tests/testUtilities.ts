@@ -17,6 +17,11 @@ export interface IScaffoldOptions {
   componentAlias?: string;
   componentDescription?: string;
   solutionName?: string;
+  /**
+   * Package manager to use for dependency installation after scaffolding.
+   * Defaults to 'none' to skip installation during tests.
+   */
+  packageManager?: 'npm' | 'pnpm' | 'yarn' | 'none';
 }
 
 /**
@@ -31,7 +36,8 @@ export async function scaffoldAsync(options: IScaffoldOptions): Promise<void> {
     componentName,
     componentAlias,
     componentDescription,
-    solutionName
+    solutionName,
+    packageManager = 'none'
   } = options;
 
   const args: string[] = [
@@ -46,7 +52,9 @@ export async function scaffoldAsync(options: IScaffoldOptions): Promise<void> {
     '--library-name',
     libraryName,
     '--component-name',
-    componentName
+    componentName,
+    '--package-manager',
+    packageManager
   ];
 
   if (componentAlias) {

@@ -25,14 +25,12 @@
     "@microsoft/eslint-config-spfx": "1.22.2",
     "@microsoft/eslint-plugin-spfx": "1.22.2",
     "@microsoft/sp-module-interfaces": "1.22.2",
-    "@microsoft/spfx-heft-plugins": "1.22.2",
     "@microsoft/spfx-web-build-rig": "1.22.2",
     "@rushstack/eslint-config": "4.6.4",
     "@rushstack/heft": "^1.2.7",
     "@types/heft-jest": "^1.0.6",
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.48.1",
-    "css-loader": "~7.1.2",
     "eslint": "8.57.1",
     "typescript": "~5.8.3"
   }
