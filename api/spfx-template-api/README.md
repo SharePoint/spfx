@@ -148,12 +148,12 @@ The writer uses these helpers internally. You can also import them directly for 
 | `SPFxTemplateWriter` | Writes a rendered `MemFsEditor` to disk with merge support |
 | `IMergeHelper` | Interface for implementing custom merge helpers |
 | `ServeJsonMergeHelper` | Merges `config/serve.json` (also available standalone) |
-| `SPFxTemplateCategory` | Union type of template categories: `'webpart' \| 'extension' \| 'ace' \| 'library'` |
+| `SPFxTemplateCategory` | Union type of template categories: `'webpart' | 'extension' | 'ace' | 'library'` |
 | `SPFX_TEMPLATE_CATEGORIES` | Array of all valid category values (useful for validation/iteration) |
 | `ISPFxTemplateJson` | Shape of the `template.json` manifest (includes `category`) |
 | `SPFxTemplateDefinitionSchema` | Zod schema for validating a `template.json` |
 | `SPFxTemplateJsonFile` | Typed wrapper around a parsed `template.json` file |
-| `SPFxTemplateRepositorySourceKind` | Union type of all built-in repository source kinds (`'local' \| 'github'`) |
+| `SPFxTemplateRepositorySourceKind` | Union type of all built-in repository source kinds (`'local' | 'github'`) |
 | `IPublicGitHubRepositorySourceOptions` | Options object for constructing a `PublicGitHubRepositorySource` |
 | `IRenderOptions` | Context object passed to `template.renderAsync()` |
 

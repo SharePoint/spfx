@@ -12,6 +12,7 @@ import { FileSystem } from '@rushstack/node-core-library';
 import {
   SPFxTemplateJsonFile,
   SPFxTemplateDefinitionSchema,
+  SPFX_TEMPLATE_CATEGORIES,
   type ISPFxTemplateJson
 } from '../SPFxTemplateJsonFile';
 
@@ -393,8 +394,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     });
 
     it('should validate all valid category values', () => {
-      const categories = ['webpart', 'extension', 'ace', 'library'];
-      categories.forEach((category) => {
+      SPFX_TEMPLATE_CATEGORIES.forEach((category) => {
         const data = {
           name: 'Test',
           category,
