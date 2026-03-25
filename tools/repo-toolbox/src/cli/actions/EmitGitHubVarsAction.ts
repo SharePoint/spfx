@@ -4,7 +4,7 @@
 import type { ITerminal } from '@rushstack/terminal';
 import { CommandLineAction } from '@rushstack/ts-command-line';
 
-import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
+import { execGitAsync, getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
 
 /**
  * Emits GitHub-related pipeline variables for use by downstream stages.
@@ -12,6 +12,7 @@ import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../../utilitie
  * Outputs:
  *   - GitHubRepoSlug  — e.g. "microsoft/spfx"
  *   - GitHubToken     — Authorization header value from git credentials (secret)
+ *   - BumpSha         — HEAD commit SHA of the bump branch
  *
  * Variables are emitted via AzDO logging commands so they are available as
  * job output variables (isOutput=true) in downstream stages.
@@ -41,5 +42,9 @@ export class EmitGitHubVarsAction extends CommandLineAction {
       `##vso[task.setvariable variable=GitHubToken;isSecret=true;isOutput=true]${authHeader}`
     );
     terminal.writeLine('Emitted GitHubToken (secret)');
+
+    const bumpSha: string = await execGitAsync(['rev-parse', 'HEAD'], terminal);
+    terminal.writeLine(`##vso[task.setvariable variable=BumpSha;isOutput=true]${bumpSha}`);
+    terminal.writeLine(`Emitted BumpSha: ${bumpSha}`);
   }
 }

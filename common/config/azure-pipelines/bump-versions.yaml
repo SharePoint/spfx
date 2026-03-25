@@ -153,14 +153,11 @@ extends:
 
               # Tag this pipeline run with the version bump commit SHA so the
               # publish pipeline can find this exact run via the AzDO Build API.
-              # Also emits the SHA as an output variable for the PostGitHubStatus stage.
               - bash: |
                   BUMP_SHA=$(git rev-parse HEAD)
                   BUMP_TAG="spfx-version-bump-sha-$BUMP_SHA"
                   echo "Tagging build with bump commit tag: $BUMP_TAG"
                   echo "##vso[build.addbuildtag]$BUMP_TAG"
-                  echo "##vso[task.setvariable variable=BumpSha;isOutput=true]$BUMP_SHA"
-                name: TagBuild
                 displayName: 'Tag build with bump commit SHA'
                 condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
 
@@ -187,7 +184,7 @@ extends:
           and(
             in(dependencies.BumpVersions.result, 'Succeeded', 'SucceededWithIssues'),
             in(dependencies.SDLSources.result, 'Succeeded', 'SucceededWithIssues'),
-            ne(stageDependencies.BumpVersions.BumpVersions.outputs['TagBuild.BumpSha'], '')
+            ne(dependencies.BumpVersions.outputs['BumpVersions.EmitGitHubVars.BumpSha'], '')
           )
         jobs:
           - job: PostStatus
@@ -195,7 +192,7 @@ extends:
             pool: server
             variables:
               - name: BumpSha
-                value: $[ stageDependencies.BumpVersions.BumpVersions.outputs['TagBuild.BumpSha'] ]
+                value: $[ stageDependencies.BumpVersions.BumpVersions.outputs['EmitGitHubVars.BumpSha'] ]
               - name: GitHubRepoSlug
                 value: $[ stageDependencies.BumpVersions.BumpVersions.outputs['EmitGitHubVars.GitHubRepoSlug'] ]
               - name: GitHubToken
