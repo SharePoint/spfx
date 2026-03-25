@@ -28,7 +28,7 @@ jobs:
     env:
       INSTALL_RUN_RUSH_LOCKFILE_PATH: ${{ github.workspace }}/common/config/validation/rush-package-lock.json
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
