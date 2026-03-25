@@ -151,22 +151,12 @@ extends:
                     SYSTEM_TEAMPROJECT: $(System.TeamProject)
                     BUILD_BUILDID: $(Build.BuildId)
 
-              # Tag this pipeline run with the version bump commit SHA so the
-              # publish pipeline can find this exact run via the AzDO Build API.
-              - bash: |
-                  BUMP_SHA=$(git rev-parse HEAD)
-                  BUMP_TAG="spfx-version-bump-sha-$BUMP_SHA"
-                  echo "Tagging build with bump commit tag: $BUMP_TAG"
-                  echo "##vso[build.addbuildtag]$BUMP_TAG"
-                displayName: 'Tag build with bump commit SHA'
-                condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
-
-              # Emit GitHub repo slug and auth token as output variables for the
-              # agentless PostGitHubStatus stage to post success when done.
+              # Tag this AzDO build with the bump commit SHA and emit GitHub
+              # pipeline variables for the agentless PostGitHubStatus stage.
               - template: /common/config/azure-pipelines/templates/run-repo-toolbox.yaml@self
                 parameters:
-                  Arguments: emit-github-vars
-                  DisplayName: 'Emit GitHub pipeline variables'
+                  Arguments: emit-github-vars-and-tag-build
+                  DisplayName: 'Tag build and emit GitHub pipeline variables'
                   Name: EmitGitHubVars
                   Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
 

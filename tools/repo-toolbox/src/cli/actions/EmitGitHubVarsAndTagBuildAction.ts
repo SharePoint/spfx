@@ -4,10 +4,12 @@
 import type { ITerminal } from '@rushstack/terminal';
 import { CommandLineAction } from '@rushstack/ts-command-line';
 
+import { BUMP_BUILD_TAG_PREFIX } from '../../utilities/BumpVersionsConstants';
 import { execGitAsync, getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
 
 /**
- * Emits GitHub-related pipeline variables for use by downstream stages.
+ * Tags the current AzDO build and emits GitHub-related pipeline variables for use by
+ * downstream stages.
  *
  * Outputs:
  *   - GitHubRepoSlug  — e.g. "microsoft/spfx"
@@ -17,13 +19,14 @@ import { execGitAsync, getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '
  * Variables are emitted via AzDO logging commands so they are available as
  * job output variables (isOutput=true) in downstream stages.
  */
-export class EmitGitHubVarsAction extends CommandLineAction {
+export class EmitGitHubVarsAndTagBuildAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
 
   public constructor(terminal: ITerminal) {
     super({
-      actionName: 'emit-github-vars',
-      summary: 'Emits GitHub repo slug and auth token as AzDO output variables.',
+      actionName: 'emit-github-vars-and-tag-build',
+      summary:
+        'Tags the AzDO build and emits GitHub repo slug, auth token, and bump SHA as AzDO output variables.',
       documentation: ''
     });
 
@@ -46,5 +49,9 @@ export class EmitGitHubVarsAction extends CommandLineAction {
     const bumpSha: string = await execGitAsync(['rev-parse', 'HEAD'], terminal);
     terminal.writeLine(`##vso[task.setvariable variable=BumpSha;isOutput=true]${bumpSha}`);
     terminal.writeLine(`Emitted BumpSha: ${bumpSha}`);
+
+    const bumpTag: string = `${BUMP_BUILD_TAG_PREFIX}${bumpSha}`;
+    terminal.writeLine(`##vso[build.addbuildtag]${bumpTag}`);
+    terminal.writeLine(`Tagged build: ${bumpTag}`);
   }
 }

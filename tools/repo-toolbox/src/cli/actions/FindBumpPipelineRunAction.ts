@@ -11,9 +11,8 @@ import type {
 
 import { AzDoClient } from '../../utilities/AzDoClient';
 import { GitHubClient, type ICommitPr } from '../../utilities/GitHubClient';
+import { BUMP_BUILD_TAG_PREFIX } from '../../utilities/BumpVersionsConstants';
 import { AzDoPipelineAction } from './AzDoPipelineAction';
-
-const BUMP_BUILD_TAG_PREFIX: 'spfx-version-bump-sha-' = 'spfx-version-bump-sha-';
 
 export class FindBumpPipelineRunAction extends AzDoPipelineAction {
   private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
