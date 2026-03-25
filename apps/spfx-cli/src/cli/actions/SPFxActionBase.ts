@@ -98,7 +98,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
     for (const remoteUrl of this._remoteSourcesParameter.values) {
       const { repoUrl, urlBranch } = parseGitHubUrlAndRef(remoteUrl);
       terminal.writeLine(
-        `Adding remote template source: ${repoUrl}` + `${urlBranch ? ` (branch: ${urlBranch})` : ''}`
+        `Adding remote template source: ${repoUrl}${urlBranch ? ` (branch: ${urlBranch})` : ''}`
       );
       manager.addSource(new PublicGitHubRepositorySource({ repoUrl, branch: urlBranch, terminal }));
     }
