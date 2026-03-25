@@ -47,7 +47,7 @@ export async function scaffoldAsync(options: IScaffoldOptions): Promise<void> {
     templateName,
     '--target-dir',
     targetDir,
-    '--local-template',
+    '--local-source',
     localTemplatePath,
     '--library-name',
     libraryName,

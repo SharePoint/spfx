@@ -9,7 +9,9 @@ import {
   type ICommandLineActionOptions
 } from '@rushstack/ts-command-line';
 import {
+  LocalFileSystemRepositorySource,
   PublicGitHubRepositorySource,
+  type SPFxTemplateCollection,
   type SPFxTemplateRepositoryManager
 } from '@microsoft/spfx-template-api';
 
@@ -21,13 +23,15 @@ import {
 
 /**
  * Base class for SPFx CLI actions that work with template sources.
- * Defines the shared `--template-url`, `--spfx-version`, and `--remote-source` parameters
- * and provides helpers to register template sources on a repository manager.
+ * Defines the shared `--template-url`, `--spfx-version`, `--local-source`, and
+ * `--remote-source` parameters and provides helpers for source registration and
+ * template fetching with context-aware error messages.
  */
 export abstract class SPFxActionBase extends CommandLineAction {
   protected readonly _terminal: Terminal;
   protected readonly _templateUrlParameter: CommandLineStringParameter;
   protected readonly _spfxVersionParameter: CommandLineStringParameter;
+  protected readonly _localSourceParameter: CommandLineStringListParameter;
   protected readonly _remoteSourcesParameter: CommandLineStringListParameter;
 
   protected constructor(options: ICommandLineActionOptions, terminal: Terminal) {
@@ -48,6 +52,12 @@ export abstract class SPFxActionBase extends CommandLineAction {
       description:
         'The SPFx version to use (e.g., "1.22", "1.23-rc.0"). Resolves to the "version/<VERSION>" branch ' +
         "in the template repository. Defaults to the repository's default branch (main)."
+    });
+
+    this._localSourceParameter = this.defineStringListParameter({
+      parameterLongName: '--local-source',
+      argumentName: 'TEMPLATE_PATH',
+      description: 'Path to a local template folder (repeatable)'
     });
 
     this._remoteSourcesParameter = this.defineStringListParameter({
@@ -90,6 +100,17 @@ export abstract class SPFxActionBase extends CommandLineAction {
   }
 
   /**
+   * Registers a {@link LocalFileSystemRepositorySource} for each `--local-source` path
+   * on the given manager.
+   */
+  protected _addLocalTemplateSources(manager: SPFxTemplateRepositoryManager): void {
+    for (const localPath of this._localSourceParameter.values) {
+      this._terminal.writeLine(`Adding local template source: ${localPath}`);
+      manager.addSource(new LocalFileSystemRepositorySource(localPath));
+    }
+  }
+
+  /**
    * Processes all `--remote-source` URLs and registers a {@link PublicGitHubRepositorySource}
    * for each on the given manager. Additive with any other sources already registered.
    */
@@ -101,6 +122,34 @@ export abstract class SPFxActionBase extends CommandLineAction {
         `Adding remote template source: ${repoUrl}${urlBranch ? ` (branch: ${urlBranch})` : ''}`
       );
       manager.addSource(new PublicGitHubRepositorySource({ repoUrl, branch: urlBranch, terminal }));
+    }
+  }
+
+  /**
+   * Fetches templates from the manager, wrapping errors with a context-aware message.
+   * When `--local-source` was provided, the error tells the user to verify their paths.
+   * Otherwise, it suggests using `--local-source` as an offline fallback.
+   */
+  protected async _fetchTemplatesAsync(
+    manager: SPFxTemplateRepositoryManager
+  ): Promise<SPFxTemplateCollection> {
+    try {
+      return await manager.getTemplatesAsync();
+    } catch (fetchError: unknown) {
+      const fetchMessage: string = fetchError instanceof Error ? fetchError.message : String(fetchError);
+      if (this._localSourceParameter.values.length > 0) {
+        throw new Error(
+          `Failed to fetch templates. Verify that the specified ${this._localSourceParameter.longName} path(s) exist` +
+            ` and that your network connection to any remote sources is available. Details: ${fetchMessage}`,
+          { cause: fetchError }
+        );
+      } else {
+        throw new Error(
+          `Failed to fetch templates. If you are offline or behind a firewall, ` +
+            `use ${this._localSourceParameter.longName} to specify a local template source. Details: ${fetchMessage}`,
+          { cause: fetchError }
+        );
+      }
     }
   }
 }
