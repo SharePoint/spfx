@@ -185,7 +185,7 @@ extends:
           - SDLSources
         condition: >
           and(
-            succeeded('BumpVersions'),
+            succeeded(),
             ne(stageDependencies.BumpVersions.BumpVersions.outputs['TagBuild.BumpSha'], '')
           )
         jobs:
