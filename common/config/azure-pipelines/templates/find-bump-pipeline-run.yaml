@@ -11,7 +11,7 @@
 
 parameters:
   - name: PipelineId
-    # String because this is passed as a runtime expression
+    # String so callers can pass a runtime variable (e.g. $(PipelineId)); this template consumes it via template expressions
     type: string
   - name: CommitSha
     type: string
