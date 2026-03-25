@@ -41,6 +41,7 @@ jobs:
           node-version: ${{ matrix.nodeVersion }}
 
       - name: Verify Change Logs
+        if: github.base_ref == 'main' || github.ref == 'refs/heads/main'
         run: node common/scripts/install-run-rush.js change --verify
 
       - name: Rush Install
