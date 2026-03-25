@@ -11,7 +11,8 @@
 
 parameters:
   - name: PipelineId
-    type: number
+    # String because this is passed as a runtime expression
+    type: string
   - name: CommitSha
     type: string
   - name: TeamProject
