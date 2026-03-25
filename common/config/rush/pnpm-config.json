@@ -251,16 +251,6 @@
     //     }
     //   }
     // }
-
-    // @microsoft/eslint-config-spfx uses @rushstack/eslint-plugin-security and eslint-plugin-promise but doesn't
-    // declare them as dependencies. Patch it here to avoid a phantom dependency. This will be fixed
-    // in the upstream package.
-    "@microsoft/eslint-config-spfx": {
-      "dependencies": {
-        "@rushstack/eslint-plugin-security": "*",
-        "eslint-plugin-promise": "*"
-      }
-    }
   },
 
   /**
@@ -317,7 +307,9 @@
    * PNPM documentation: https://pnpm.io/package_json#pnpmpatcheddependencies
    */
   "globalPatchedDependencies": {
-    "@microsoft/spfx-heft-plugins@1.22.2": "patches/@microsoft__spfx-heft-plugins@1.22.2.patch"
+    "@microsoft/spfx-heft-plugins@1.23.0-beta.0": "patches/@microsoft__spfx-heft-plugins@1.23.0-beta.0.patch",
+    "@microsoft/spfx-web-build-rig@1.23.0-beta.0": "patches/@microsoft__spfx-web-build-rig@1.23.0-beta.0.patch",
+    "@microsoft/eslint-config-spfx@1.23.0-beta.0": "patches/@microsoft__eslint-config-spfx@1.23.0-beta.0.patch"
   },
 
   /**

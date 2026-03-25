@@ -1,0 +1,12 @@
+diff --git a/profiles/default/tsconfig-base.json b/profiles/default/tsconfig-base.json
+index a34b6a4ceb1ecf6421670b89381e60827fdd9eff..10bb67383dc426dcf6204dfc062e39737a1f3002 100644
+--- a/profiles/default/tsconfig-base.json
++++ b/profiles/default/tsconfig-base.json
+@@ -15,6 +15,7 @@
+     "allowUnreachableCode": false,
+     "noImplicitAny": true,
+     "skipLibCheck": true,
++    "resolveJsonModule": true,
+ 
+     "module": "esnext",
+     "moduleResolution": "node",

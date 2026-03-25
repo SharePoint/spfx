@@ -8,7 +8,7 @@ GenericPrimaryTextCard Description
 
 ## Used SharePoint Framework Version
 
-[![version](https://img.shields.io/badge/version-1.22.2-green.svg)](https://img.shields.io/badge/version-1.22.2-green.svg)
+[![version](https://img.shields.io/badge/version-1.23.0--beta.0-green.svg)](https://img.shields.io/badge/version-1.23.0--beta.0-green.svg)
 
 ## Applies to
 

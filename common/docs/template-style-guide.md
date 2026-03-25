@@ -9,7 +9,7 @@ Built-in template variables are provided automatically by `buildBuiltInContext()
 ```json
 {
   "context": {
-    "spfxVersion": "1.22.2"
+    "spfxVersion": "1.23.0-beta.0"
   }
 }
 ```
@@ -25,7 +25,7 @@ Every string value in the render context is automatically wrapped with casing he
 | `componentName.allCaps` | UPPER_SNAKE_CASE | ACE view/quick-view registry IDs, string constants | "GENERIC_CARD" |
 | `libraryName` | original | Package name (via `toString()`) | "@spfx-template/generic-card" |
 | `description` | — | User-provided description | User's text |
-| `spfxVersion` | — | SPFx framework version | "1.22.2" |
+| `spfxVersion` | — | SPFx framework version | "1.23.0-beta.0" |
 
 The same casing helpers are available on **any** string context variable — e.g. `componentAlias.pascal`, `libraryName.hyphen`, etc.
 

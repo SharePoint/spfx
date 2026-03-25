@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { escape } from '@microsoft/sp-lodash-subset';
+
 import styles from './<%= componentName.pascal %>.module.scss';
 import type { I<%= componentName.pascal %>Props } from './I<%= componentName.pascal %>Props';
-import { escape } from '@microsoft/sp-lodash-subset';
 import * as strings from '<%= componentName.pascal %>WebPartStrings';
+import welcomeDarkImage from '../assets/welcome-dark.png';
+import welcomeLightImage from '../assets/welcome-light.png';
 
 export default class <%= componentName.pascal %> extends React.Component<I<%= componentName.pascal %>Props> {
   public render(): React.ReactElement<I<%= componentName.pascal %>Props> {
@@ -17,7 +20,7 @@ export default class <%= componentName.pascal %> extends React.Component<I<%= co
     return (
       <section className={`${styles.<%= componentName.camel %>} ${hasTeamsContext ? styles.teams : ''}`}>
         <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
+          <img alt="" src={isDarkTheme ? welcomeDarkImage : welcomeLightImage} className={styles.welcomeImage} />
           <h2>{strings.GreetingMessage.replace(/\{0\}/g, escape(userDisplayName))}</h2>
           <div>{environmentMessage}</div>
           <div>{strings.PropertyValueLabel}{' '}<strong>{escape(description)}</strong></div>
