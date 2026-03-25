@@ -5,17 +5,14 @@ import type { CommandLineStringListParameter } from '@rushstack/ts-command-line'
 import type { Terminal } from '@rushstack/terminal';
 import {
   LocalFileSystemRepositorySource,
-  PublicGitHubRepositorySource,
   type SPFxTemplateCollection,
   SPFxTemplateRepositoryManager
 } from '@microsoft/spfx-template-api';
 
-import { parseGitHubUrlAndRef } from '../../utilities/github';
 import { SPFxActionBase } from './SPFxActionBase';
 
 export class ListTemplatesAction extends SPFxActionBase {
   private readonly _localSourcesParameter: CommandLineStringListParameter;
-  private readonly _remoteSourcesParameter: CommandLineStringListParameter;
 
   public constructor(terminal: Terminal) {
     super(
@@ -33,12 +30,6 @@ export class ListTemplatesAction extends SPFxActionBase {
       parameterLongName: '--local-source',
       argumentName: 'PATH',
       description: 'Path to a local template folder to include (repeatable)'
-    });
-
-    this._remoteSourcesParameter = this.defineStringListParameter({
-      parameterLongName: '--remote-source',
-      argumentName: 'URL',
-      description: 'Public GitHub repository URL to include as an additional template source (repeatable)'
     });
   }
 
@@ -58,21 +49,7 @@ export class ListTemplatesAction extends SPFxActionBase {
       }
 
       // Additive: also include any --remote-source URLs
-      for (const remoteUrl of this._remoteSourcesParameter.values) {
-        const { repoUrl: additionalRepoUrl, urlBranch: additionalUrlBranch } =
-          parseGitHubUrlAndRef(remoteUrl);
-        terminal.writeLine(
-          `Adding remote template source: ${additionalRepoUrl}` +
-            `${additionalUrlBranch ? ` (branch: ${additionalUrlBranch})` : ''}`
-        );
-        manager.addSource(
-          new PublicGitHubRepositorySource({
-            repoUrl: additionalRepoUrl,
-            branch: additionalUrlBranch,
-            terminal
-          })
-        );
-      }
+      this._addRemoteSources(manager);
 
       let templates: SPFxTemplateCollection;
       try {

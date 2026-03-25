@@ -277,6 +277,55 @@ Array [
 ]
 `;
 
+exports[`CreateAction source selection with --remote-source adds an extra PublicGitHubRepositorySource alongside the default 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction source selection with --remote-source adds multiple remote sources for multiple --remote-source flags 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding remote template source: https://github.com/org1/repo1[n]",
+  "[    log] Adding remote template source: https://github.com/org2/repo2[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction source selection with --remote-source extracts branch from /tree/ in --remote-source URL 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding remote template source: https://github.com/my-org/my-templates (branch: my-branch)[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction source selection with --remote-source works alongside --local-template without adding the default GitHub source 1`] = `
+Array [
+  "[    log] Adding local template source: /path/to/templates[n]",
+  "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be modified:[n]",
+  "[    log] [n]",
+]
+`;
+
 exports[`CreateAction source selection without --local-template should add a PublicGitHubRepositorySource with the default URL 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
