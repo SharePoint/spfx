@@ -11,8 +11,8 @@
 
 parameters:
   - name: PipelineId
-    # String so callers can pass a runtime variable (e.g. $(PipelineId)); this template consumes it via template expressions
-    type: string
+    # Object to allow numeric literals and runtime expressions without breaking callers
+    type: object
   - name: CommitSha
     type: string
   - name: TeamProject
