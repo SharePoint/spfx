@@ -2,7 +2,10 @@
 // See LICENSE in the project root for license information.
 
 import type { ITerminal } from '@rushstack/terminal';
-import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
+import type {
+  IRequiredCommandLineIntegerParameter,
+  IRequiredCommandLineStringParameter
+} from '@rushstack/ts-command-line';
 
 import { GitHubClient, type IGitHubPr } from '../../utilities/GitHubClient';
 import { execGitAsync } from '../../utilities/GitUtilities';
@@ -14,7 +17,7 @@ export class CreateOrUpdatePrAction extends AzDoPipelineAction {
   private readonly _titleParameter: IRequiredCommandLineStringParameter;
   private readonly _bodyParameter: IRequiredCommandLineStringParameter;
   private readonly _statusContextParameter: IRequiredCommandLineStringParameter;
-  private readonly _buildIdParameter: IRequiredCommandLineStringParameter;
+  private readonly _buildIdParameter: IRequiredCommandLineIntegerParameter;
 
   public constructor(terminal: ITerminal) {
     super(terminal, {
@@ -62,7 +65,7 @@ export class CreateOrUpdatePrAction extends AzDoPipelineAction {
       required: true
     });
 
-    this._buildIdParameter = this.defineStringParameter({
+    this._buildIdParameter = this.defineIntegerParameter({
       parameterLongName: '--build-id',
       argumentName: 'ID',
       description: 'The AzDO build ID, used to build the pipeline run target URL.',
@@ -100,7 +103,7 @@ export class CreateOrUpdatePrAction extends AzDoPipelineAction {
     const sha: string = await execGitAsync(['rev-parse', 'HEAD'], terminal);
     const collectionUri: string = this._collectionUriParameter.value;
     const teamProject: string = this._teamProjectParameter.value;
-    const buildId: string = this._buildIdParameter.value;
+    const buildId: number = this._buildIdParameter.value;
     const targetUrl: string = `${collectionUri}${teamProject}/_build/results?buildId=${buildId}`;
 
     await gitHubClient.postCommitStatusAsync({

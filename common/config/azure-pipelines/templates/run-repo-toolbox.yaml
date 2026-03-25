@@ -18,7 +18,7 @@ parameters:
 
 steps:
   - task: CmdLine@2
-    ${{ if parameters.Name }}:
+    ${{ if ne(parameters.Name, '') }}:
       name: ${{ parameters.Name }}
     displayName: ${{ parameters.DisplayName }}
     condition: ${{ parameters.Condition }}
