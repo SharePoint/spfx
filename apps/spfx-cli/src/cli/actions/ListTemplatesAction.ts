@@ -1,19 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { CommandLineStringListParameter } from '@rushstack/ts-command-line';
 import type { Terminal } from '@rushstack/terminal';
-import {
-  LocalFileSystemRepositorySource,
-  type SPFxTemplateCollection,
-  SPFxTemplateRepositoryManager
-} from '@microsoft/spfx-template-api';
+import { type SPFxTemplateCollection, SPFxTemplateRepositoryManager } from '@microsoft/spfx-template-api';
 
 import { SPFxActionBase } from './SPFxActionBase';
 
 export class ListTemplatesAction extends SPFxActionBase {
-  private readonly _localSourcesParameter: CommandLineStringListParameter;
-
   public constructor(terminal: Terminal) {
     super(
       {
@@ -21,16 +14,10 @@ export class ListTemplatesAction extends SPFxActionBase {
         summary: 'Lists available SPFx templates from configured sources',
         documentation:
           'This command lists all available templates from the default GitHub source ' +
-          'and any additional sources specified with --local-source or --remote-source.'
+          'and any additional sources specified with --local-template or --remote-source.'
       },
       terminal
     );
-
-    this._localSourcesParameter = this.defineStringListParameter({
-      parameterLongName: '--local-source',
-      argumentName: 'PATH',
-      description: 'Path to a local template folder to include (repeatable)'
-    });
   }
 
   protected override async onExecuteAsync(): Promise<void> {
@@ -42,34 +29,13 @@ export class ListTemplatesAction extends SPFxActionBase {
       // Additive model: default GitHub source is always added first
       this._addGitHubTemplateSource(manager);
 
-      // Additive: also include any --local-source paths
-      for (const localPath of this._localSourcesParameter.values) {
-        terminal.writeLine(`Adding local template source: ${localPath}`);
-        manager.addSource(new LocalFileSystemRepositorySource(localPath));
-      }
+      // Additive: also include any --local-template paths
+      this._addLocalTemplateSources(manager);
 
       // Additive: also include any --remote-source URLs
       this._addRemoteSources(manager);
 
-      let templates: SPFxTemplateCollection;
-      try {
-        templates = await manager.getTemplatesAsync();
-      } catch (fetchError: unknown) {
-        const fetchMessage: string = fetchError instanceof Error ? fetchError.message : String(fetchError);
-        if (this._localSourcesParameter.values.length > 0) {
-          throw new Error(
-            `Failed to fetch templates. Verify that the specified ${this._localSourcesParameter.longName} path(s) exist` +
-              ` and that your network connection to any remote sources is available. Details: ${fetchMessage}`,
-            { cause: fetchError }
-          );
-        } else {
-          throw new Error(
-            `Failed to fetch templates. If you are offline or behind a firewall, ` +
-              `use ${this._localSourcesParameter.longName} to specify a local template source. Details: ${fetchMessage}`,
-            { cause: fetchError }
-          );
-        }
-      }
+      const templates: SPFxTemplateCollection = await this._fetchTemplatesAsync(manager);
 
       terminal.writeLine(templates.toString());
     } catch (error: unknown) {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListTemplatesAction --local-source (additive) adds LocalFileSystemRepositorySource AND still includes the default GitHub source 1`] = `
+exports[`ListTemplatesAction --local-template (additive) adds LocalFileSystemRepositorySource AND still includes the default GitHub source 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] Adding local template source: /path/to/templates[n]",
@@ -15,7 +15,7 @@ Array [
 ]
 `;
 
-exports[`ListTemplatesAction --local-source (additive) adds multiple local sources for multiple --local-source flags 1`] = `
+exports[`ListTemplatesAction --local-template (additive) adds multiple local sources for multiple --local-template flags 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] Adding local template source: /a[n]",
@@ -120,7 +120,7 @@ Array [
 ]
 `;
 
-exports[`ListTemplatesAction combined --local-source and --remote-source adds default GitHub, local, and remote sources all together 1`] = `
+exports[`ListTemplatesAction combined --local-template and --remote-source adds default GitHub, local, and remote sources all together 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] Adding local template source: /local/path[n]",

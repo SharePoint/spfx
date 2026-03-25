@@ -61,7 +61,7 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 
 ## `spfx list-templates`
 
-Lists all available templates from configured sources. The default GitHub source is always included; use `--local-source` and `--remote-source` to add more.
+Lists all available templates from configured sources. The default GitHub source is always included; use `--local-template` and `--remote-source` to add more.
 
 ```bash
 spfx list-templates
@@ -73,7 +73,7 @@ spfx list-templates
 |------|---------|-------------|
 | `--spfx-version VERSION` | repo default branch | Branch/tag in the default template repo to use (e.g. `1.22`, `1.23-rc.0`) |
 | `--template-url URL` | `https://github.com/SharePoint/spfx` | Custom GitHub template repository (default source) |
-| `--local-source PATH` | — | Path to a local template folder to include (repeatable) |
+| `--local-template PATH` | — | Path to a local template folder to include (repeatable) |
 | `--remote-source URL` | — | Additional public GitHub repo to include as a template source (repeatable) |
 
 ### Environment variables
@@ -87,7 +87,7 @@ spfx list-templates
 Include a local template folder alongside the default source:
 
 ```bash
-spfx list-templates --local-source ./my-templates
+spfx list-templates --local-template ./my-templates
 ```
 
 Include an additional GitHub repository:

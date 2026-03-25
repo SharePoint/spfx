@@ -565,10 +565,10 @@ describe('CreateAction', () => {
         );
       });
 
-      it('mentions the local template path context', async () => {
+      it('mentions verifying the local template paths', async () => {
         MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOENT: no such file'));
         await expect(runCreateAsync(['--local-template', '/bad/path'])).rejects.toThrow(
-          /Failed to load templates from the specified --local-template path\(s\)/
+          /Verify that the specified --local-template path\(s\) exist/
         );
       });
 

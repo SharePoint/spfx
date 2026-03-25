@@ -133,9 +133,9 @@ describe('ListTemplatesAction', () => {
     });
   });
 
-  describe('--local-source (additive)', () => {
+  describe('--local-template (additive)', () => {
     it('adds LocalFileSystemRepositorySource AND still includes the default GitHub source', async () => {
-      await runListAsync(['--local-source', '/path/to/templates']);
+      await runListAsync(['--local-template', '/path/to/templates']);
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
@@ -144,8 +144,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedLocal).toHaveBeenCalledWith('/path/to/templates');
     });
 
-    it('adds multiple local sources for multiple --local-source flags', async () => {
-      await runListAsync(['--local-source', '/a', '--local-source', '/b']);
+    it('adds multiple local sources for multiple --local-template flags', async () => {
+      await runListAsync(['--local-template', '/a', '--local-template', '/b']);
       expect(MockedLocal).toHaveBeenCalledTimes(2);
       expect(MockedLocal).toHaveBeenNthCalledWith(1, '/a');
       expect(MockedLocal).toHaveBeenNthCalledWith(2, '/b');
@@ -189,10 +189,10 @@ describe('ListTemplatesAction', () => {
     });
   });
 
-  describe('combined --local-source and --remote-source', () => {
+  describe('combined --local-template and --remote-source', () => {
     it('adds default GitHub, local, and remote sources all together', async () => {
       await runListAsync([
-        '--local-source',
+        '--local-template',
         '/local/path',
         '--remote-source',
         'https://github.com/my-org/extra-templates'
@@ -203,10 +203,10 @@ describe('ListTemplatesAction', () => {
   });
 
   describe('error handling', () => {
-    describe('when using only the default GitHub source (no --local-source)', () => {
-      it('suggests --local-source when fetch fails', async () => {
+    describe('when using only the default GitHub source (no --local-template)', () => {
+      it('suggests --local-template when fetch fails', async () => {
         MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOTFOUND'));
-        await expect(runListAsync()).rejects.toThrow(/use --local-source/);
+        await expect(runListAsync()).rejects.toThrow(/use --local-template/);
       });
 
       it('throws with a message mentioning "Failed to fetch templates"', async () => {
@@ -237,16 +237,18 @@ describe('ListTemplatesAction', () => {
       });
     });
 
-    describe('when using --local-source', () => {
-      it('does not suggest --local-source when fetch fails', async () => {
+    describe('when using --local-template', () => {
+      it('does not suggest --local-template when fetch fails', async () => {
         MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOENT: no such file'));
-        await expect(runListAsync(['--local-source', '/bad/path'])).rejects.not.toThrow(/use --local-source/);
+        await expect(runListAsync(['--local-template', '/bad/path'])).rejects.not.toThrow(
+          /use --local-template/
+        );
       });
 
       it('mentions verifying the local source paths', async () => {
         MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOENT: no such file'));
-        await expect(runListAsync(['--local-source', '/bad/path'])).rejects.toThrow(
-          /Verify that the specified --local-source path\(s\) exist/
+        await expect(runListAsync(['--local-template', '/bad/path'])).rejects.toThrow(
+          /Verify that the specified --local-template path\(s\) exist/
         );
       });
 
@@ -255,7 +257,7 @@ describe('ListTemplatesAction', () => {
         MockedManager.prototype.getTemplatesAsync.mockRejectedValue(originalError);
         let caughtError: unknown;
         try {
-          await runListAsync(['--local-source', '/bad/path']);
+          await runListAsync(['--local-template', '/bad/path']);
         } catch (e) {
           caughtError = e;
         }
@@ -264,7 +266,7 @@ describe('ListTemplatesAction', () => {
 
       it('includes the original error message in the wrapper', async () => {
         MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOENT: no such file'));
-        await expect(runListAsync(['--local-source', '/bad/path'])).rejects.toThrow(/ENOENT: no such file/);
+        await expect(runListAsync(['--local-template', '/bad/path'])).rejects.toThrow(/ENOENT: no such file/);
       });
     });
   });
