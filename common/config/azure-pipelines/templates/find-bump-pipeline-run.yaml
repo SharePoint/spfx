@@ -32,5 +32,5 @@ steps:
         node tools/repo-toolbox/lib/start.js find-bump-pipeline-run
         --pipeline-id ${{ parameters.PipelineId }}
         --commit-sha ${{ parameters.CommitSha }}
-        --team-project ${{ parameters.TeamProject }}
+        --team-project "${{ parameters.TeamProject }}"
       workingDirectory: ${{ parameters.WorkingDirectory }}
