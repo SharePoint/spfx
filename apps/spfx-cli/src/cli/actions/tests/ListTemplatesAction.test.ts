@@ -37,16 +37,9 @@ describe('ListTemplatesAction', () => {
 
     const mockCollection = new Map([['webpart-minimal', {}]]);
     mockCollection.toString = (): string =>
-      [
-        '# of templates: 1',
-        '',
-        'Template Name: webpart-minimal',
-        'Description: A minimal web part template (no framework) for SPFx',
-        'Version: 0.0.1',
-        'SPFx Version: 1.22.2',
-        'Number of Files: 23',
-        ''
-      ].join('\n');
+      'Found 1 template:\n\n' +
+      '| Name            | Category | Description                                        | Version | SPFx Version | Files |\n' +
+      '| webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |';
 
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(
       mockCollection as unknown as SPFxTemplateCollection

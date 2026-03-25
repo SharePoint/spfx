@@ -173,14 +173,14 @@ describe(SPFxTemplateCollection.name, () => {
   });
 
   describe('toString', () => {
-    it('should show count for empty collection', () => {
+    it('should show message for empty collection', () => {
       const collection = new SPFxTemplateCollection([]);
       const result = collection.toString();
 
-      expect(result).toContain('# of templates: 0');
+      expect(result).toBe('No templates found.');
     });
 
-    it('should show count and template details', () => {
+    it('should render a table with headers and data rows', () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'WebPart',
@@ -205,12 +205,18 @@ describe(SPFxTemplateCollection.name, () => {
       const collection = new SPFxTemplateCollection([template1, template2]);
       const result = collection.toString();
 
-      expect(result).toContain('# of templates: 2');
-      expect(result).toContain('Template Name: WebPart');
-      expect(result).toContain('Template Name: Extension');
+      expect(result).toContain('Found 2 templates:');
+      expect(result).toContain('Name');
+      expect(result).toContain('Category');
+      expect(result).toContain('Description');
+      expect(result).toContain('Version');
+      expect(result).toContain('SPFx Version');
+      expect(result).toContain('Files');
+      expect(result).toContain('WebPart');
+      expect(result).toContain('Extension');
     });
 
-    it('should include template details for each template', () => {
+    it('should include all template details in table rows', () => {
       const template = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'DetailedTemplate',
@@ -228,17 +234,18 @@ describe(SPFxTemplateCollection.name, () => {
       const collection = new SPFxTemplateCollection([template]);
       const result = collection.toString();
 
-      expect(result).toContain('Template Name: DetailedTemplate');
-      expect(result).toContain('Description: A detailed template');
-      expect(result).toContain('Version: 3.2.1');
-      expect(result).toContain('SPFx Version: 1.19.0');
-      expect(result).toContain('Number of Files: 2');
+      expect(result).toContain('Found 1 template:');
+      expect(result).toContain('DetailedTemplate');
+      expect(result).toContain('A detailed template');
+      expect(result).toContain('3.2.1');
+      expect(result).toContain('1.19.0');
+      expect(result).toContain('2');
     });
 
-    it('should separate template details with newlines', () => {
-      const template1 = new SPFxTemplate(
+    it('should show N/A for missing description', () => {
+      const template = new SPFxTemplate(
         new SPFxTemplateJsonFile({
-          name: 'First',
+          name: 'NoDesc',
           category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
@@ -246,21 +253,10 @@ describe(SPFxTemplateCollection.name, () => {
         new Map()
       );
 
-      const template2 = new SPFxTemplate(
-        new SPFxTemplateJsonFile({
-          name: 'Second',
-          category: 'extension',
-          version: '1.0.0',
-          spfxVersion: '1.18.0'
-        }),
-        new Map()
-      );
-
-      const collection = new SPFxTemplateCollection([template1, template2]);
+      const collection = new SPFxTemplateCollection([template]);
       const result = collection.toString();
 
-      const lines = result.split('\n');
-      expect(lines.length).toBeGreaterThan(5); // Count + 2 templates with multiple lines each
+      expect(result).toContain('N/A');
     });
   });
 });

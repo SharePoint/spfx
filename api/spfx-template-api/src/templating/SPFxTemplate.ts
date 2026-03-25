@@ -78,6 +78,13 @@ export class SPFxTemplate {
   }
 
   /**
+   * Gets the number of files in the template.
+   */
+  public get fileCount(): number {
+    return this._files.size;
+  }
+
+  /**
    * Creates a new SPFxTemplate instance from a folder on disk.
    * @param folderPath - The path to the folder containing the template files
    * @returns A Promise that resolves to a new SPFxTemplate instance
@@ -235,14 +242,13 @@ export class SPFxTemplate {
    * @returns A formatted string with template details
    */
   public toString(): string {
-    // print the name, description, version, spfxVersion, and number of files as a table
     return [
       `Template Name: ${this.name}`,
       `Category: ${this.category}`,
       `Description: ${this.description || 'N/A'}`,
       `Version: ${this.version}`,
       `SPFx Version: ${this.spfxVersion}`,
-      `Number of Files: ${this._files.size}`
+      `Number of Files: ${this.fileCount}`
     ].join('\n');
   }
 }
