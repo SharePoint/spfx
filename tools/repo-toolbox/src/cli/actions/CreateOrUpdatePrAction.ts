@@ -2,31 +2,26 @@
 // See LICENSE in the project root for license information.
 
 import type { ITerminal } from '@rushstack/terminal';
-import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
+import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
 
 import { GitHubClient, type IGitHubPr } from '../../utilities/GitHubClient';
 import { execGitAsync } from '../../utilities/GitUtilities';
+import { AzDoPipelineAction } from './AzDoPipelineAction';
 
-export class CreateOrUpdatePrAction extends CommandLineAction {
-  private readonly _terminal: ITerminal;
-
+export class CreateOrUpdatePrAction extends AzDoPipelineAction {
   private readonly _branchNameParameter: IRequiredCommandLineStringParameter;
   private readonly _baseBranchParameter: IRequiredCommandLineStringParameter;
   private readonly _titleParameter: IRequiredCommandLineStringParameter;
   private readonly _bodyParameter: IRequiredCommandLineStringParameter;
   private readonly _statusContextParameter: IRequiredCommandLineStringParameter;
-  private readonly _collectionUriParameter: IRequiredCommandLineStringParameter;
-  private readonly _teamProjectParameter: IRequiredCommandLineStringParameter;
   private readonly _buildIdParameter: IRequiredCommandLineStringParameter;
 
   public constructor(terminal: ITerminal) {
-    super({
+    super(terminal, {
       actionName: 'create-or-update-pr',
       summary: 'Creates or updates a pull request for the repository. To be used only on AzDO pipelines.',
       documentation: ''
     });
-
-    this._terminal = terminal;
 
     this._branchNameParameter = this.defineStringParameter({
       parameterLongName: '--branch-name',
@@ -65,22 +60,6 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
         'Posts a pending GitHub commit status with this context string and emits it ' +
         'as the StatusContext AzDO output variable for use by downstream stages.',
       required: true
-    });
-
-    this._collectionUriParameter = this.defineStringParameter({
-      parameterLongName: '--collection-uri',
-      argumentName: 'URI',
-      description: 'The AzDO collection URI, used to build the pipeline run target URL.',
-      required: true,
-      environmentVariable: 'SYSTEM_COLLECTIONURI'
-    });
-
-    this._teamProjectParameter = this.defineStringParameter({
-      parameterLongName: '--team-project',
-      argumentName: 'PROJECT',
-      description: 'The AzDO team project name, used to build the pipeline run target URL.',
-      required: true,
-      environmentVariable: 'SYSTEM_TEAMPROJECT'
     });
 
     this._buildIdParameter = this.defineStringParameter({
