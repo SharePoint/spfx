@@ -26,10 +26,6 @@ resources:
       type: git
       name: 1ESPipelineTemplates/1ESPipelineTemplates
       ref: refs/tags/release
-    - repository: RushstackRepo
-      type: github
-      name: Microsoft/rushstack
-      endpoint: 'GitHub (Rushbot)'
 
 extends:
   template: v1/1ES.Official.PipelineTemplate.yml@1esPipelines
@@ -37,10 +33,6 @@ extends:
     pool:
       name: Azure-Pipelines-1ESPT-ExDShared
       os: windows
-    sdl:
-      sourceRepositoriesToScan:
-        exclude:
-          - repository: RushstackRepo
     stages:
       - stage: BumpVersions
         displayName: 'Bump Versions and Create PR'
@@ -62,22 +54,16 @@ extends:
                 - output: pipelineArtifact
                   targetPath: $(Build.ArtifactStagingDirectory)/package-versions
                   artifactName: package-versions
-            variables:
-              SelfRepoPath: $(Pipeline.Workspace)/s/self
             steps:
               - checkout: self
                 persistCredentials: true
-                path: s/self
 
               - template: /common/config/azure-pipelines/templates/configure-git-user.yaml@self
-                parameters:
-                  RepoPath: $(SelfRepoPath)
 
               - bash: |
                   git checkout -b $(FeatureBranch)
                   echo "Created feature branch: $(FeatureBranch)"
                 displayName: 'Create Feature Branch'
-                workingDirectory: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
@@ -85,12 +71,10 @@ extends:
                 parameters:
                   Arguments: 'install'
                   DisplayName: 'Rush Install'
-                  RepoPath: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/bump-versions.yaml@self
                 parameters:
                   VersionPolicyName: spfx
-                  RepoPath: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/install-run-rush.yaml@self
                 parameters:
@@ -100,11 +84,8 @@ extends:
                     --timeline
                     --verbose
                   DisplayName: 'Rush Rebuild'
-                  RepoPath: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/pack.yaml@self
-                parameters:
-                  RepoPath: $(SelfRepoPath)
 
               # Check for changes and commit
               - bash: |
@@ -123,7 +104,6 @@ extends:
                     echo "##vso[task.setvariable variable=HasChanges]false"
                   fi
                 displayName: 'Commit Version Bumps'
-                workingDirectory: $(SelfRepoPath)
 
               # Push to remote
               - bash: |
@@ -132,7 +112,6 @@ extends:
                   echo "Pushed to $(FeatureBranch)"
                 displayName: 'Push Feature Branch'
                 condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
-                workingDirectory: $(SelfRepoPath)
 
               # Ensure artifact directories exist unconditionally. The 1ES
               # templateContext.outputs always attempts to publish declared
@@ -146,8 +125,6 @@ extends:
               - template: /common/config/azure-pipelines/templates/prepare-publish-artifacts.yaml@self
 
               - template: /common/config/azure-pipelines/templates/record-versions.yaml@self
-                parameters:
-                  RepoPath: $(SelfRepoPath)
 
               - template: /common/config/azure-pipelines/templates/create-update-pr.yaml@self
                 parameters:
@@ -160,7 +137,6 @@ extends:
                     This PR contains version bumps for the "spfx" lockstep version policy.
 
                     **Pipeline Run:** $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
-                  RepoPath: $(SelfRepoPath)
 
               # Tag this pipeline run with the version bump commit SHA so the
               # publish pipeline can find this exact run via the AzDO Build API.
@@ -171,4 +147,3 @@ extends:
                   echo "##vso[build.addbuildtag]$BUMP_TAG"
                 displayName: 'Tag build with bump commit SHA'
                 condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
-                workingDirectory: $(SelfRepoPath)
