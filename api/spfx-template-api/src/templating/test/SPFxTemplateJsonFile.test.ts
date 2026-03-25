@@ -12,6 +12,7 @@ import { FileSystem } from '@rushstack/node-core-library';
 import {
   SPFxTemplateJsonFile,
   SPFxTemplateDefinitionSchema,
+  SPFX_TEMPLATE_CATEGORIES,
   type ISPFxTemplateJson
 } from '../SPFxTemplateJsonFile';
 
@@ -26,6 +27,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should create an instance with valid data', () => {
       const data: ISPFxTemplateJson = {
         name: 'Test Template',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -40,6 +42,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should create an instance with optional fields', () => {
       const data: ISPFxTemplateJson = {
         name: 'Test Template',
+        category: 'extension',
         description: 'A test template',
         version: '1.0.0',
         spfxVersion: '1.18.0',
@@ -67,6 +70,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should return the correct name', () => {
       const data: ISPFxTemplateJson = {
         name: 'My Template',
+        category: 'webpart',
         version: '2.0.0',
         spfxVersion: '1.18.0'
       };
@@ -75,9 +79,22 @@ describe(SPFxTemplateJsonFile.name, () => {
       expect(instance.name).toBe('My Template');
     });
 
+    it('should return the correct category', () => {
+      const data: ISPFxTemplateJson = {
+        name: 'My Template',
+        category: 'extension',
+        version: '2.0.0',
+        spfxVersion: '1.18.0'
+      };
+      const instance = new SPFxTemplateJsonFile(data);
+
+      expect(instance.category).toBe('extension');
+    });
+
     it('should return undefined for missing description', () => {
       const data: ISPFxTemplateJson = {
         name: 'My Template',
+        category: 'webpart',
         version: '2.0.0',
         spfxVersion: '1.18.0'
       };
@@ -89,6 +106,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should return the correct version', () => {
       const data: ISPFxTemplateJson = {
         name: 'My Template',
+        category: 'webpart',
         version: '1.2.3',
         spfxVersion: '1.18.0'
       };
@@ -100,6 +118,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should return the correct spfxVersion', () => {
       const data: ISPFxTemplateJson = {
         name: 'My Template',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.19.0'
       };
@@ -111,6 +130,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should return undefined for missing contextSchema', () => {
       const data: ISPFxTemplateJson = {
         name: 'My Template',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -124,6 +144,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should create an instance from a valid file', async () => {
       const validJson = {
         name: 'File Template',
+        category: 'webpart',
         description: 'Template from file',
         version: '1.0.0',
         spfxVersion: '1.18.0'
@@ -149,6 +170,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should throw an error when validation fails', async () => {
       const invalidData = {
         name: 'AB', // Too short (min 3 chars)
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -178,6 +200,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should create an instance from a folder containing template.json', async () => {
       const validJson = {
         name: 'Folder Template',
+        category: 'extension',
         version: '2.0.0',
         spfxVersion: '1.18.0'
       };
@@ -194,6 +217,7 @@ describe(SPFxTemplateJsonFile.name, () => {
     it('should handle folder paths with different separators', async () => {
       const validJson = {
         name: 'Test',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -219,6 +243,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     it('should validate minimal valid template', () => {
       const data = {
         name: 'Valid Template',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -231,6 +256,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
       const data = {
         $schema: 'https://example.com/schema.json',
         name: 'Complete Template',
+        category: 'ace',
         description: 'A complete template with all fields',
         version: '1.2.3',
         spfxVersion: '1.18.0',
@@ -253,6 +279,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     it('should reject name that is too short', () => {
       const data = {
         name: 'AB', // Less than 3 characters
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -264,6 +291,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     it('should reject name that is too long', () => {
       const data = {
         name: 'A'.repeat(101), // More than 100 characters
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -275,6 +303,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     it('should reject description that is too long', () => {
       const data = {
         name: 'Valid Name',
+        category: 'webpart',
         description: 'A'.repeat(501), // More than 500 characters
         version: '1.0.0',
         spfxVersion: '1.18.0'
@@ -287,6 +316,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     it('should reject invalid version format', () => {
       const data = {
         name: 'Valid Name',
+        category: 'webpart',
         version: 'not-a-version',
         spfxVersion: '1.18.0'
       };
@@ -298,6 +328,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     it('should reject invalid spfxVersion format', () => {
       const data = {
         name: 'Valid Name',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: 'invalid'
       };
@@ -312,6 +343,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
       versions.forEach((version) => {
         const data = {
           name: 'Test',
+          category: 'webpart' as const,
           version,
           spfxVersion: version
         };
@@ -325,6 +357,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
       const data = {
         $schema: 'not-a-url',
         name: 'Valid Name',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -335,9 +368,10 @@ describe('SPFxTemplateDefinitionSchema', () => {
 
     it('should reject missing required fields', () => {
       const testCases = [
-        { version: '1.0.0', spfxVersion: '1.18.0' }, // Missing name
-        { name: 'Test', spfxVersion: '1.18.0' }, // Missing version
-        { name: 'Test', version: '1.0.0' } // Missing spfxVersion
+        { category: 'webpart', version: '1.0.0', spfxVersion: '1.18.0' }, // Missing name
+        { name: 'Test', category: 'webpart', spfxVersion: '1.18.0' }, // Missing version
+        { name: 'Test', category: 'webpart', version: '1.0.0' }, // Missing spfxVersion
+        { name: 'Test', version: '1.0.0', spfxVersion: '1.18.0' } // Missing category
       ];
 
       testCases.forEach((data) => {
@@ -349,6 +383,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     it('should reject extra fields due to strict mode', () => {
       const data = {
         name: 'Valid Name',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
         extraField: 'not allowed'
@@ -358,9 +393,35 @@ describe('SPFxTemplateDefinitionSchema', () => {
       expect(result.success).toBe(false);
     });
 
+    it('should validate all valid category values', () => {
+      SPFX_TEMPLATE_CATEGORIES.forEach((category) => {
+        const data = {
+          name: 'Test',
+          category,
+          version: '1.0.0',
+          spfxVersion: '1.18.0'
+        };
+        const result = SPFxTemplateDefinitionSchema.safeParse(data);
+        expect(result.success).toBe(true);
+      });
+    });
+
+    it('should reject invalid category value', () => {
+      const data = {
+        name: 'Valid Name',
+        category: 'invalid-category',
+        version: '1.0.0',
+        spfxVersion: '1.18.0'
+      };
+
+      const result = SPFxTemplateDefinitionSchema.safeParse(data);
+      expect(result.success).toBe(false);
+    });
+
     it('should reject invalid contextSchema type', () => {
       const data = {
         name: 'Valid Name',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
         contextSchema: {
@@ -378,6 +439,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
     it('should reject contextSchema without description', () => {
       const data = {
         name: 'Valid Name',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
         contextSchema: {

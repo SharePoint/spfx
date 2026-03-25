@@ -6,5 +6,7 @@ export { isBinaryFile } from './binaryFiles';
 export {
   type ISPFxTemplateJson,
   SPFxTemplateDefinitionSchema,
-  SPFxTemplateJsonFile
+  SPFxTemplateJsonFile,
+  SPFX_TEMPLATE_CATEGORIES,
+  type SPFxTemplateCategory
 } from './SPFxTemplateJsonFile';

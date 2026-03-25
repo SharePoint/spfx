@@ -1,5 +1,6 @@
 {
   "name": "library",
+  "category": "library",
   "description": "A SharePoint Framework Library Component",
   "version": "1.0.0",
   "spfxVersion": "1.22.2",

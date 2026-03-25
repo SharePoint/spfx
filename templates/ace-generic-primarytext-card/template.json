@@ -1,5 +1,6 @@
 {
   "name": "ace-generic-primarytext-card",
+  "category": "ace",
   "description": "A SharePoint Framework Adaptive Card Extension with Primary Text Card Template",
   "version": "1.0.0",
   "spfxVersion": "1.22.2",

@@ -31,6 +31,7 @@ describe(SPFxTemplate.name, () => {
     it('should create an instance with definition and files', () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Test Template',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });
@@ -54,6 +55,7 @@ describe(SPFxTemplate.name, () => {
     beforeEach(() => {
       const definition = new SPFxTemplateJsonFile({
         name: 'My Template',
+        category: 'extension',
         description: 'A test template',
         version: '2.0.0',
         spfxVersion: '1.19.0'
@@ -64,6 +66,10 @@ describe(SPFxTemplate.name, () => {
 
     it('should return the correct name', () => {
       expect(template.name).toBe('My Template');
+    });
+
+    it('should return the correct category', () => {
+      expect(template.category).toBe('extension');
     });
 
     it('should return the correct description', () => {
@@ -81,6 +87,7 @@ describe(SPFxTemplate.name, () => {
     it('should return undefined for missing description', () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'No Desc',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });
@@ -94,6 +101,7 @@ describe(SPFxTemplate.name, () => {
     it('should create a template from a folder', async () => {
       const templateJson = {
         name: 'Folder Template',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -142,6 +150,7 @@ describe(SPFxTemplate.name, () => {
     it('should exclude template.json from files map', async () => {
       const templateJson = {
         name: 'Test',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -177,6 +186,7 @@ describe(SPFxTemplate.name, () => {
     it('should handle nested directories', async () => {
       const templateJson = {
         name: 'Nested Template',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -224,6 +234,7 @@ describe(SPFxTemplate.name, () => {
     it('should create a template from memory', async () => {
       const templateJsonData = {
         name: 'Memory Template',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -243,6 +254,7 @@ describe(SPFxTemplate.name, () => {
     it('should exclude template.json from files', async () => {
       const templateJsonData = {
         name: 'Test',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -261,6 +273,7 @@ describe(SPFxTemplate.name, () => {
     it('should throw error for invalid template.json data', async () => {
       const invalidData = {
         name: 'AB', // Too short
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -275,6 +288,7 @@ describe(SPFxTemplate.name, () => {
     it('should handle empty file map', async () => {
       const templateJsonData = {
         name: 'Empty',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       };
@@ -292,6 +306,7 @@ describe(SPFxTemplate.name, () => {
     it('should render template without context schema', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Simple',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });
@@ -313,6 +328,7 @@ describe(SPFxTemplate.name, () => {
     it('should render template with context schema validation', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'WithSchema',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
         contextSchema: {
@@ -338,6 +354,7 @@ describe(SPFxTemplate.name, () => {
     it('should throw error when context does not match schema', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'WithSchema',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
         contextSchema: {
@@ -359,6 +376,7 @@ describe(SPFxTemplate.name, () => {
     it('should replace placeholders in filenames', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Test',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });
@@ -378,6 +396,7 @@ describe(SPFxTemplate.name, () => {
     it('should process EJS templates in file contents', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Test',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });
@@ -399,6 +418,7 @@ describe(SPFxTemplate.name, () => {
     it('should return MemFsEditor instance', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Test',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });
@@ -417,6 +437,7 @@ describe(SPFxTemplate.name, () => {
     it('should return formatted template information', () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'My Template',
+        category: 'webpart',
         description: 'A test template',
         version: '1.2.3',
         spfxVersion: '1.18.0'
@@ -432,6 +453,7 @@ describe(SPFxTemplate.name, () => {
       const result = template.toString();
 
       expect(result).toContain('Template Name: My Template');
+      expect(result).toContain('Category: webpart');
       expect(result).toContain('Description: A test template');
       expect(result).toContain('Version: 1.2.3');
       expect(result).toContain('SPFx Version: 1.18.0');
@@ -441,6 +463,7 @@ describe(SPFxTemplate.name, () => {
     it('should show "N/A" for missing description', () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'No Description',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });
@@ -454,6 +477,7 @@ describe(SPFxTemplate.name, () => {
     it('should show correct file count', () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Test',
+        category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0'
       });

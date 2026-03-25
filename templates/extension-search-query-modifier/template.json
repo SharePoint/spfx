@@ -1,5 +1,6 @@
 {
   "name": "extension-search-query-modifier",
+  "category": "extension",
   "description": "A SharePoint Framework search query modifier extension",
   "version": "1.0.0",
   "spfxVersion": "1.22.2",

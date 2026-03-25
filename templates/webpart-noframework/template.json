@@ -1,5 +1,6 @@
 {
   "name": "webpart-noframework",
+  "category": "webpart",
   "description": "A web part template with no framework (plain TypeScript) for SPFx",
   "version": "0.0.1",
   "spfxVersion": "1.22.2",

@@ -89,6 +89,7 @@ describe(SPFxTemplateRepositoryManager.name, () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'Template1',
+          category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -98,6 +99,7 @@ describe(SPFxTemplateRepositoryManager.name, () => {
       const template2 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'Template2',
+          category: 'extension',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -119,6 +121,7 @@ describe(SPFxTemplateRepositoryManager.name, () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'LocalTemplate',
+          category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -128,6 +131,7 @@ describe(SPFxTemplateRepositoryManager.name, () => {
       const template2 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'GitHubTemplate',
+          category: 'extension',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -151,29 +155,49 @@ describe(SPFxTemplateRepositoryManager.name, () => {
     it('should flatten templates from all sources', async () => {
       const templates1 = [
         new SPFxTemplate(
-          new SPFxTemplateJsonFile({ name: 'T1', version: '1.0.0', spfxVersion: '1.18.0' }),
+          new SPFxTemplateJsonFile({
+            name: 'T1',
+            category: 'webpart',
+            version: '1.0.0',
+            spfxVersion: '1.18.0'
+          }),
           new Map()
         ),
         new SPFxTemplate(
-          new SPFxTemplateJsonFile({ name: 'T2', version: '1.0.0', spfxVersion: '1.18.0' }),
+          new SPFxTemplateJsonFile({
+            name: 'T2',
+            category: 'webpart',
+            version: '1.0.0',
+            spfxVersion: '1.18.0'
+          }),
           new Map()
         )
       ];
 
       const templates2 = [
         new SPFxTemplate(
-          new SPFxTemplateJsonFile({ name: 'T3', version: '1.0.0', spfxVersion: '1.18.0' }),
+          new SPFxTemplateJsonFile({
+            name: 'T3',
+            category: 'extension',
+            version: '1.0.0',
+            spfxVersion: '1.18.0'
+          }),
           new Map()
         )
       ];
 
       const templates3 = [
         new SPFxTemplate(
-          new SPFxTemplateJsonFile({ name: 'T4', version: '1.0.0', spfxVersion: '1.18.0' }),
+          new SPFxTemplateJsonFile({ name: 'T4', category: 'ace', version: '1.0.0', spfxVersion: '1.18.0' }),
           new Map()
         ),
         new SPFxTemplate(
-          new SPFxTemplateJsonFile({ name: 'T5', version: '1.0.0', spfxVersion: '1.18.0' }),
+          new SPFxTemplateJsonFile({
+            name: 'T5',
+            category: 'library',
+            version: '1.0.0',
+            spfxVersion: '1.18.0'
+          }),
           new Map()
         )
       ];
@@ -197,6 +221,7 @@ describe(SPFxTemplateRepositoryManager.name, () => {
       const template = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'Template1',
+          category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -263,6 +288,7 @@ describe(SPFxTemplateRepositoryManager.name, () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'DuplicateName',
+          category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -272,6 +298,7 @@ describe(SPFxTemplateRepositoryManager.name, () => {
       const template2 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'DuplicateName',
+          category: 'webpart',
           version: '2.0.0',
           spfxVersion: '1.18.0'
         }),

@@ -17,6 +17,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'Template1',
+          category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -26,6 +27,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template2 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'Template2',
+          category: 'extension',
           version: '2.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -43,6 +45,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'MyTemplate',
+          category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -59,6 +62,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'DuplicateName',
+          category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -68,6 +72,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template2 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'DuplicateName',
+          category: 'webpart',
           version: '2.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -91,6 +96,7 @@ describe(SPFxTemplateCollection.name, () => {
       template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'Template1',
+          category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -100,6 +106,7 @@ describe(SPFxTemplateCollection.name, () => {
       template2 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'Template2',
+          category: 'extension',
           version: '2.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -177,6 +184,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'WebPart',
+          category: 'webpart',
           description: 'A web part template',
           version: '1.0.0',
           spfxVersion: '1.18.0'
@@ -187,6 +195,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template2 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'Extension',
+          category: 'extension',
           version: '2.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -205,6 +214,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'DetailedTemplate',
+          category: 'ace',
           description: 'A detailed template',
           version: '3.2.1',
           spfxVersion: '1.19.0'
@@ -229,6 +239,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'First',
+          category: 'webpart',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),
@@ -238,6 +249,7 @@ describe(SPFxTemplateCollection.name, () => {
       const template2 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'Second',
+          category: 'extension',
           version: '1.0.0',
           spfxVersion: '1.18.0'
         }),

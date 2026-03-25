@@ -1,5 +1,6 @@
 {
   "name": "test",
+  "category": "webpart",
   "description": "A test template for SPFx",
   "version": "0.0.1",
   "spfxVersion": "1.22.0",

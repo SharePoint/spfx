@@ -1,5 +1,6 @@
 {
   "name": "extension-listviewcommandset",
+  "category": "extension",
   "description": "SharePoint Framework list view command set extension template",
   "version": "1.0.0",
   "spfxVersion": "1.22.2",

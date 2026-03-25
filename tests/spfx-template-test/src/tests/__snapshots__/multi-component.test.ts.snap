@@ -167,102 +167,119 @@ exports[`Multi-component scaffolding should scaffold webpart-minimal then extens
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
 # of templates: 17
 Template Name: ace-data-visualization
+Category: ace
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: ace-generic-card
+Category: ace
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: ace-generic-image-card
+Category: ace
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
+Category: ace
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: ace-search-card
+Category: ace
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: extension-application-customizer
+Category: extension
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
 SPFx Version: 1.22.2
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
+Category: extension
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
+Category: extension
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
+Category: extension
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
+Category: extension
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
+Category: extension
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
+Category: extension
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
+Category: extension
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 22
 
 Template Name: library
+Category: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 21
 
 Template Name: webpart-minimal
+Category: webpart
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
 SPFx Version: 1.22.2
 Number of Files: 23
 
 Template Name: webpart-noframework
+Category: webpart
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
 SPFx Version: 1.22.2
 Number of Files: 26
 
 Template Name: webpart-react
+Category: webpart
 Description: A React-based web part template for SPFx
 Version: 0.0.1
 SPFx Version: 1.22.2
@@ -302,102 +319,119 @@ exports[`Multi-component scaffolding should scaffold webpart-minimal then extens
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
 # of templates: 17
 Template Name: ace-data-visualization
+Category: ace
 Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: ace-generic-card
+Category: ace
 Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: ace-generic-image-card
+Category: ace
 Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: ace-generic-primarytext-card
+Category: ace
 Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: ace-search-card
+Category: ace
 Description: Adaptive Card Extension with Search Card template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 25
 
 Template Name: extension-application-customizer
+Category: extension
 Description: A SharePoint Framework Application Customizer extension template
 Version: 0.0.1
 SPFx Version: 1.22.2
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-minimal
+Category: extension
 Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-noframework
+Category: extension
 Description: A SharePoint Framework field customizer extension with no framework
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 22
 
 Template Name: extension-fieldcustomizer-react
+Category: extension
 Description: SharePoint Framework Field Customizer extension with React framework
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 23
 
 Template Name: extension-formcustomizer-noframework
+Category: extension
 Description: A SharePoint Framework Form Customizer extension with no framework
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 21
 
 Template Name: extension-formcustomizer-react
+Category: extension
 Description: A SharePoint Framework Form Customizer extension with React
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 20
 
 Template Name: extension-listviewcommandset
+Category: extension
 Description: SharePoint Framework list view command set extension template
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 24
 
 Template Name: extension-search-query-modifier
+Category: extension
 Description: A SharePoint Framework search query modifier extension
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 22
 
 Template Name: library
+Category: library
 Description: A SharePoint Framework Library Component
 Version: 1.0.0
 SPFx Version: 1.22.2
 Number of Files: 21
 
 Template Name: webpart-minimal
+Category: webpart
 Description: A minimal web part template (no framework) for SPFx
 Version: 0.0.1
 SPFx Version: 1.22.2
 Number of Files: 23
 
 Template Name: webpart-noframework
+Category: webpart
 Description: A web part template with no framework (plain TypeScript) for SPFx
 Version: 0.0.1
 SPFx Version: 1.22.2
 Number of Files: 26
 
 Template Name: webpart-react
+Category: webpart
 Description: A React-based web part template for SPFx
 Version: 0.0.1
 SPFx Version: 1.22.2

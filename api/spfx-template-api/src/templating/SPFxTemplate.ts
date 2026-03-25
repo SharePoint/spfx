@@ -10,7 +10,8 @@ import { Async, FileSystem, type IPackageJson, type FolderItem } from '@rushstac
 import {
   SPFxTemplateJsonFile,
   SPFxTemplateDefinitionSchema,
-  type ISPFxTemplateJson
+  type ISPFxTemplateJson,
+  type SPFxTemplateCategory
 } from './SPFxTemplateJsonFile';
 import { isBinaryFile } from './binaryFiles';
 
@@ -45,6 +46,13 @@ export class SPFxTemplate {
    */
   public get name(): string {
     return this._definition.name;
+  }
+
+  /**
+   * Gets the category of the template.
+   */
+  public get category(): SPFxTemplateCategory {
+    return this._definition.category;
   }
 
   /**
@@ -230,6 +238,7 @@ export class SPFxTemplate {
     // print the name, description, version, spfxVersion, and number of files as a table
     return [
       `Template Name: ${this.name}`,
+      `Category: ${this.category}`,
       `Description: ${this.description || 'N/A'}`,
       `Version: ${this.version}`,
       `SPFx Version: ${this.spfxVersion}`,

@@ -140,7 +140,7 @@ The writer uses these helpers internally. You can also import them directly for 
 |--------|-------------|
 | `SPFxTemplateRepositoryManager` | Aggregates sources and returns a `SPFxTemplateCollection` |
 | `SPFxTemplateCollection` | `Map<string, SPFxTemplate>` of all loaded templates |
-| `SPFxTemplate` | Single template — exposes `name`, `spfxVersion`, and `renderAsync()` |
+| `SPFxTemplate` | Single template — exposes `name`, `category`, `spfxVersion`, and `renderAsync()` |
 | `PublicGitHubRepositorySource` | Loads templates from a public GitHub repo |
 | `LocalFileSystemRepositorySource` | Loads templates from the local filesystem |
 | `BaseSPFxTemplateRepositorySource` | Base class for building custom template sources |
@@ -148,10 +148,12 @@ The writer uses these helpers internally. You can also import them directly for 
 | `SPFxTemplateWriter` | Writes a rendered `MemFsEditor` to disk with merge support |
 | `IMergeHelper` | Interface for implementing custom merge helpers |
 | `ServeJsonMergeHelper` | Merges `config/serve.json` (also available standalone) |
-| `ISPFxTemplateJson` | Shape of the `template.json` manifest |
+| `SPFxTemplateCategory` | Union type of template categories: `'webpart' | 'extension' | 'ace' | 'library'` |
+| `SPFX_TEMPLATE_CATEGORIES` | Array of all valid category values (useful for validation/iteration) |
+| `ISPFxTemplateJson` | Shape of the `template.json` manifest (includes `category`) |
 | `SPFxTemplateDefinitionSchema` | Zod schema for validating a `template.json` |
 | `SPFxTemplateJsonFile` | Typed wrapper around a parsed `template.json` file |
-| `SPFxTemplateRepositorySourceKind` | Union type of all built-in repository source kinds (`'local' \| 'github'`) |
+| `SPFxTemplateRepositorySourceKind` | Union type of all built-in repository source kinds (`'local' | 'github'`) |
 | `IPublicGitHubRepositorySourceOptions` | Options object for constructing a `PublicGitHubRepositorySource` |
 | `IRenderOptions` | Context object passed to `template.renderAsync()` |
 

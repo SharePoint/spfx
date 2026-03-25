@@ -1,5 +1,6 @@
 {
   "name": "ace-search-card",
+  "category": "ace",
   "description": "Adaptive Card Extension with Search Card template",
   "version": "1.0.0",
   "spfxVersion": "1.22.2",

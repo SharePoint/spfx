@@ -1,5 +1,6 @@
 {
   "name": "webpart-minimal",
+  "category": "webpart",
   "description": "A minimal web part template (no framework) for SPFx",
   "version": "0.0.1",
   "spfxVersion": "1.22.2",

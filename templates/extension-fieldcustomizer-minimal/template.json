@@ -1,5 +1,6 @@
 {
   "name": "extension-fieldcustomizer-minimal",
+  "category": "extension",
   "description": "A minimal Field Customizer extension for SharePoint Framework without any framework dependencies",
   "version": "1.0.0",
   "spfxVersion": "1.22.2",

@@ -12,6 +12,23 @@ const NAME_MIN_LENGTH: number = 3;
 const NAME_MAX_LENGTH: number = 100;
 const DESCRIPTION_MAX_LENGTH: number = 500;
 
+/**
+ * The allowed category values for SPFx templates.
+ * @public
+ */
+export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library'] = [
+  'webpart',
+  'extension',
+  'ace',
+  'library'
+] as const;
+
+/**
+ * The category of an SPFx template.
+ * @public
+ */
+export type SPFxTemplateCategory = (typeof SPFX_TEMPLATE_CATEGORIES)[number];
+
 function isValidSemver(version: string): boolean {
   return semverValid(version) !== null;
 }
@@ -25,6 +42,8 @@ export interface ISPFxTemplateJson {
   $schema?: string;
   /** The name of the template */
   name: string;
+  /** The category of the template */
+  category: SPFxTemplateCategory;
   /** Optional description of the template */
   description?: string;
   /** The version of the template (semantic version format) */
@@ -43,6 +62,7 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z
   .object({
     $schema: z.url().optional(),
     name: z.string().min(NAME_MIN_LENGTH).max(NAME_MAX_LENGTH),
+    category: z.enum(SPFX_TEMPLATE_CATEGORIES),
     description: z.string().max(DESCRIPTION_MAX_LENGTH).optional(),
     version: z.string().refine(isValidSemver, {
       message: 'Invalid semantic version for "version" (expected format like "1.0.0").'
@@ -80,6 +100,13 @@ export class SPFxTemplateJsonFile {
    */
   public get name(): string {
     return this._data.name;
+  }
+
+  /**
+   * Gets the category of the template.
+   */
+  public get category(): SPFxTemplateCategory {
+    return this._data.category;
   }
 
   /**

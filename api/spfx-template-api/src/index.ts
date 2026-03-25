@@ -13,7 +13,9 @@ export {
   type ISPFxTemplateJson,
   SPFxTemplateDefinitionSchema,
   SPFxTemplateJsonFile,
-  type IRenderOptions
+  type IRenderOptions,
+  SPFX_TEMPLATE_CATEGORIES,
+  type SPFxTemplateCategory
 } from './templating/index';
 export {
   SPFxTemplateRepositoryManager,

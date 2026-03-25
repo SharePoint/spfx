@@ -1,5 +1,6 @@
 {
   "name": "extension-fieldcustomizer-noframework",
+  "category": "extension",
   "description": "A SharePoint Framework field customizer extension with no framework",
   "version": "1.0.0",
   "spfxVersion": "1.22.2",

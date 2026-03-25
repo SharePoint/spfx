@@ -48,6 +48,7 @@ export function _isBinaryFile(filePath: string): boolean;
 // @public
 export interface ISPFxTemplateJson {
     $schema?: string;
+    category: SPFxTemplateCategory;
     contextSchema?: Record<string, {
         type: 'string';
         description: string;
@@ -106,11 +107,15 @@ export class ServeJsonMergeHelper extends JsonMergeHelper {
 }
 
 // @public
+export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library'];
+
+// @public
 export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;
 
 // @public
 export class SPFxTemplate {
     constructor(definition: SPFxTemplateJsonFile, files: Map<string, string | Buffer>);
+    get category(): SPFxTemplateCategory;
     get description(): string | undefined;
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
@@ -120,6 +125,9 @@ export class SPFxTemplate {
     toString(): string;
     get version(): string;
 }
+
+// @public
+export type SPFxTemplateCategory = (typeof SPFX_TEMPLATE_CATEGORIES)[number];
 
 // @public
 export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
@@ -133,6 +141,7 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson>;
 // @public
 export class SPFxTemplateJsonFile {
     constructor(data: ISPFxTemplateJson);
+    get category(): SPFxTemplateCategory;
     get contextSchema(): Record<string, {
         type: 'string';
         description: string;

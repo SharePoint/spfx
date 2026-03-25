@@ -1,5 +1,6 @@
 {
   "name": "extension-application-customizer",
+  "category": "extension",
   "description": "A SharePoint Framework Application Customizer extension template",
   "version": "0.0.1",
   "spfxVersion": "1.22.2",

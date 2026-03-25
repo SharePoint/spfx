@@ -1,5 +1,6 @@
 {
   "name": "extension-formcustomizer-react",
+  "category": "extension",
   "description": "A SharePoint Framework Form Customizer extension with React",
   "version": "1.0.0",
   "spfxVersion": "1.22.2",
