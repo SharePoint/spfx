@@ -248,7 +248,7 @@ export class SPFxTemplate {
       `Description: ${this.description || 'N/A'}`,
       `Version: ${this.version}`,
       `SPFx Version: ${this.spfxVersion}`,
-      `Number of Files: ${this.fileCount}`
+      `Files: ${this.fileCount}`
     ].join('\n');
   }
 }

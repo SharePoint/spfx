@@ -267,7 +267,7 @@ describe(SPFxTemplate.name, () => {
       const template = await SPFxTemplate.fromMemoryAsync('Test', templateJsonData, fileMap);
 
       // template.json should not be in the files map
-      expect(template.toString()).toContain('Number of Files: 1');
+      expect(template.toString()).toContain('Files: 1');
     });
 
     it('should throw error for invalid template.json data', async () => {
@@ -298,7 +298,7 @@ describe(SPFxTemplate.name, () => {
       const template = await SPFxTemplate.fromMemoryAsync('Empty', templateJsonData, fileMap);
 
       expect(template.name).toBe('Empty');
-      expect(template.toString()).toContain('Number of Files: 0');
+      expect(template.toString()).toContain('Files: 0');
     });
   });
 
@@ -457,7 +457,7 @@ describe(SPFxTemplate.name, () => {
       expect(result).toContain('Description: A test template');
       expect(result).toContain('Version: 1.2.3');
       expect(result).toContain('SPFx Version: 1.18.0');
-      expect(result).toContain('Number of Files: 3');
+      expect(result).toContain('Files: 3');
     });
 
     it('should show "N/A" for missing description', () => {
@@ -490,7 +490,7 @@ describe(SPFxTemplate.name, () => {
       const template = new SPFxTemplate(definition, files);
       const result = template.toString();
 
-      expect(result).toContain('Number of Files: 10');
+      expect(result).toContain('Files: 10');
     });
   });
 });

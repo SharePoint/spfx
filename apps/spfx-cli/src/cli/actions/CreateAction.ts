@@ -176,7 +176,7 @@ export class CreateAction extends SPFxActionBase {
         );
       }
 
-      terminal.writeLine(templates.toString());
+      terminal.writeLine(await templates.toFormattedStringAsync());
 
       const template: SPFxTemplate | undefined = templates.get(templateName);
 

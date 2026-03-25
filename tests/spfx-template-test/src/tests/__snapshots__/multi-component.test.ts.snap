@@ -165,126 +165,45 @@ Object {
 
 exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-# of templates: 17
-Template Name: ace-data-visualization
-Category: ace
-Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
+Found 17 templates:
 
-Template Name: ace-generic-card
-Category: ace
-Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
-
-Template Name: ace-generic-image-card
-Category: ace
-Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
-
-Template Name: ace-generic-primarytext-card
-Category: ace
-Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
-
-Template Name: ace-search-card
-Category: ace
-Description: Adaptive Card Extension with Search Card template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
-
-Template Name: extension-application-customizer
-Category: extension
-Description: A SharePoint Framework Application Customizer extension template
-Version: 0.0.1
-SPFx Version: 1.22.2
-Number of Files: 22
-
-Template Name: extension-fieldcustomizer-minimal
-Category: extension
-Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 22
-
-Template Name: extension-fieldcustomizer-noframework
-Category: extension
-Description: A SharePoint Framework field customizer extension with no framework
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 22
-
-Template Name: extension-fieldcustomizer-react
-Category: extension
-Description: SharePoint Framework Field Customizer extension with React framework
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 23
-
-Template Name: extension-formcustomizer-noframework
-Category: extension
-Description: A SharePoint Framework Form Customizer extension with no framework
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 21
-
-Template Name: extension-formcustomizer-react
-Category: extension
-Description: A SharePoint Framework Form Customizer extension with React
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 20
-
-Template Name: extension-listviewcommandset
-Category: extension
-Description: SharePoint Framework list view command set extension template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 24
-
-Template Name: extension-search-query-modifier
-Category: extension
-Description: A SharePoint Framework search query modifier extension
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 22
-
-Template Name: library
-Category: library
-Description: A SharePoint Framework Library Component
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 21
-
-Template Name: webpart-minimal
-Category: webpart
-Description: A minimal web part template (no framework) for SPFx
-Version: 0.0.1
-SPFx Version: 1.22.2
-Number of Files: 23
-
-Template Name: webpart-noframework
-Category: webpart
-Description: A web part template with no framework (plain TypeScript) for SPFx
-Version: 0.0.1
-SPFx Version: 1.22.2
-Number of Files: 26
-
-Template Name: webpart-react
-Category: webpart
-Description: A React-based web part template for SPFx
-Version: 0.0.1
-SPFx Version: 1.22.2
-Number of Files: 27
-
+[gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬──────────────[default][gray]┬───────┐[default]
+[gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version [default][gray]│[default][red] Files [default][gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-data-visualization                [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Data Visualization                           [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-generic-card                      [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Generic Card Template                        [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-generic-image-card                [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Image Card Template                          [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-generic-primarytext-card          [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Primary Text Card Template                   [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.22.2       [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-fieldcustomizer-minimal     [gray]│[default] extension [gray]│[default] A minimal Field Customizer extension for SharePoint Framework without any framework dependencies [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-fieldcustomizer-noframework [gray]│[default] extension [gray]│[default] A SharePoint Framework field customizer extension with no framework                              [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-fieldcustomizer-react       [gray]│[default] extension [gray]│[default] SharePoint Framework Field Customizer extension with React framework                             [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 23    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-formcustomizer-noframework  [gray]│[default] extension [gray]│[default] A SharePoint Framework Form Customizer extension with no framework                               [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 21    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-formcustomizer-react        [gray]│[default] extension [gray]│[default] A SharePoint Framework Form Customizer extension with React                                      [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-listviewcommandset          [gray]│[default] extension [gray]│[default] SharePoint Framework list view command set extension template                                    [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 24    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-search-query-modifier       [gray]│[default] extension [gray]│[default] A SharePoint Framework search query modifier extension                                           [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] library                               [gray]│[default] library   [gray]│[default] A SharePoint Framework Library Component                                                         [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 21    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] webpart-minimal                       [gray]│[default] webpart   [gray]│[default] A minimal web part template (no framework) for SPFx                                              [gray]│[default] 0.0.1   [gray]│[default] 1.22.2       [gray]│[default] 23    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] webpart-noframework                   [gray]│[default] webpart   [gray]│[default] A web part template with no framework (plain TypeScript) for SPFx                                [gray]│[default] 0.0.1   [gray]│[default] 1.22.2       [gray]│[default] 26    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] webpart-react                         [gray]│[default] webpart   [gray]│[default] A React-based web part template for SPFx                                                         [gray]│[default] 0.0.1   [gray]│[default] 1.22.2       [gray]│[default] 27    [gray]│[default]
+[gray]└───────────────────────────────────────[default][gray]┴───────────[default][gray]┴──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┴─────────[default][gray]┴──────────────[default][gray]┴───────┘[default]
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]
@@ -317,126 +236,45 @@ targetDir: <TARGET_DIR>
 
 exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 2`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-# of templates: 17
-Template Name: ace-data-visualization
-Category: ace
-Description: A SharePoint Framework Adaptive Card Extension with Data Visualization
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
+Found 17 templates:
 
-Template Name: ace-generic-card
-Category: ace
-Description: A SharePoint Framework Adaptive Card Extension with Generic Card Template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
-
-Template Name: ace-generic-image-card
-Category: ace
-Description: A SharePoint Framework Adaptive Card Extension with Image Card Template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
-
-Template Name: ace-generic-primarytext-card
-Category: ace
-Description: A SharePoint Framework Adaptive Card Extension with Primary Text Card Template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
-
-Template Name: ace-search-card
-Category: ace
-Description: Adaptive Card Extension with Search Card template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 25
-
-Template Name: extension-application-customizer
-Category: extension
-Description: A SharePoint Framework Application Customizer extension template
-Version: 0.0.1
-SPFx Version: 1.22.2
-Number of Files: 22
-
-Template Name: extension-fieldcustomizer-minimal
-Category: extension
-Description: A minimal Field Customizer extension for SharePoint Framework without any framework dependencies
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 22
-
-Template Name: extension-fieldcustomizer-noframework
-Category: extension
-Description: A SharePoint Framework field customizer extension with no framework
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 22
-
-Template Name: extension-fieldcustomizer-react
-Category: extension
-Description: SharePoint Framework Field Customizer extension with React framework
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 23
-
-Template Name: extension-formcustomizer-noframework
-Category: extension
-Description: A SharePoint Framework Form Customizer extension with no framework
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 21
-
-Template Name: extension-formcustomizer-react
-Category: extension
-Description: A SharePoint Framework Form Customizer extension with React
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 20
-
-Template Name: extension-listviewcommandset
-Category: extension
-Description: SharePoint Framework list view command set extension template
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 24
-
-Template Name: extension-search-query-modifier
-Category: extension
-Description: A SharePoint Framework search query modifier extension
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 22
-
-Template Name: library
-Category: library
-Description: A SharePoint Framework Library Component
-Version: 1.0.0
-SPFx Version: 1.22.2
-Number of Files: 21
-
-Template Name: webpart-minimal
-Category: webpart
-Description: A minimal web part template (no framework) for SPFx
-Version: 0.0.1
-SPFx Version: 1.22.2
-Number of Files: 23
-
-Template Name: webpart-noframework
-Category: webpart
-Description: A web part template with no framework (plain TypeScript) for SPFx
-Version: 0.0.1
-SPFx Version: 1.22.2
-Number of Files: 26
-
-Template Name: webpart-react
-Category: webpart
-Description: A React-based web part template for SPFx
-Version: 0.0.1
-SPFx Version: 1.22.2
-Number of Files: 27
-
+[gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬──────────────[default][gray]┬───────┐[default]
+[gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version [default][gray]│[default][red] Files [default][gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-data-visualization                [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Data Visualization                           [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-generic-card                      [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Generic Card Template                        [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-generic-image-card                [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Image Card Template                          [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-generic-primarytext-card          [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Primary Text Card Template                   [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.22.2       [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-fieldcustomizer-minimal     [gray]│[default] extension [gray]│[default] A minimal Field Customizer extension for SharePoint Framework without any framework dependencies [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-fieldcustomizer-noframework [gray]│[default] extension [gray]│[default] A SharePoint Framework field customizer extension with no framework                              [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-fieldcustomizer-react       [gray]│[default] extension [gray]│[default] SharePoint Framework Field Customizer extension with React framework                             [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 23    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-formcustomizer-noframework  [gray]│[default] extension [gray]│[default] A SharePoint Framework Form Customizer extension with no framework                               [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 21    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-formcustomizer-react        [gray]│[default] extension [gray]│[default] A SharePoint Framework Form Customizer extension with React                                      [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-listviewcommandset          [gray]│[default] extension [gray]│[default] SharePoint Framework list view command set extension template                                    [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 24    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-search-query-modifier       [gray]│[default] extension [gray]│[default] A SharePoint Framework search query modifier extension                                           [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] library                               [gray]│[default] library   [gray]│[default] A SharePoint Framework Library Component                                                         [gray]│[default] 1.0.0   [gray]│[default] 1.22.2       [gray]│[default] 21    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] webpart-minimal                       [gray]│[default] webpart   [gray]│[default] A minimal web part template (no framework) for SPFx                                              [gray]│[default] 0.0.1   [gray]│[default] 1.22.2       [gray]│[default] 23    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] webpart-noframework                   [gray]│[default] webpart   [gray]│[default] A web part template with no framework (plain TypeScript) for SPFx                                [gray]│[default] 0.0.1   [gray]│[default] 1.22.2       [gray]│[default] 26    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼──────────────[default][gray]┼───────┤[default]
+[gray]│[default] webpart-react                         [gray]│[default] webpart   [gray]│[default] A React-based web part template for SPFx                                                         [gray]│[default] 0.0.1   [gray]│[default] 1.22.2       [gray]│[default] 27    [gray]│[default]
+[gray]└───────────────────────────────────────[default][gray]┴───────────[default][gray]┴──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┴─────────[default][gray]┴──────────────[default][gray]┴───────┘[default]
 targetDir: <TARGET_DIR>
 
 [cyan]The following files will be modified:[default]

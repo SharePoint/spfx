@@ -109,12 +109,11 @@ describe('CreateAction', () => {
       renderAsync: jest.fn().mockResolvedValue(mockMemFs),
       spfxVersion: '1.22.1'
     };
-    const mockCollection = new Map([['webpart-minimal', mockTemplate]]);
-    mockCollection.toString = () => '[Mocked SPFxTemplateCollection]';
+    const mockCollection = new Map([['webpart-minimal', mockTemplate]]) as unknown as SPFxTemplateCollection;
+    (mockCollection as unknown as { toFormattedStringAsync: () => Promise<string> }).toFormattedStringAsync =
+      jest.fn().mockResolvedValue('[Mocked SPFxTemplateCollection]');
 
-    MockedManager.prototype.getTemplatesAsync.mockResolvedValue(
-      mockCollection as unknown as SPFxTemplateCollection
-    );
+    MockedManager.prototype.getTemplatesAsync.mockResolvedValue(mockCollection);
     jest.spyOn(process, 'cwd').mockReturnValue('/tmp/test');
   });
 

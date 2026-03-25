@@ -133,7 +133,7 @@ export type SPFxTemplateCategory = (typeof SPFX_TEMPLATE_CATEGORIES)[number];
 // @public
 export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
     constructor(templates: SPFxTemplate[]);
-    toString(): string;
+    toFormattedStringAsync(): Promise<string>;
 }
 
 // @public

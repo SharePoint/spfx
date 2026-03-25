@@ -6,8 +6,11 @@ Array [
   "[    log] Adding local template source: /path/to/templates[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -18,8 +21,11 @@ Array [
   "[    log] Adding local template source: /b[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -29,8 +35,11 @@ Array [
   "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -41,8 +50,11 @@ Array [
   "[    log] Adding remote template source: https://github.com/org2/repo2[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -52,8 +64,11 @@ Array [
   "[    log] Adding remote template source: https://github.com/my-org/my-templates (branch: my-branch)[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -62,8 +77,11 @@ Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: pending-fixes)[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -72,8 +90,11 @@ Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -83,8 +104,11 @@ Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -95,8 +119,11 @@ Array [
   "[    log] Adding remote template source: https://github.com/my-org/extra-templates[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -105,8 +132,11 @@ Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -115,8 +145,11 @@ Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;
 
@@ -125,7 +158,10 @@ Array [
   "[    log] Using GitHub template source: https://github.com/my-org/my-templates[n]",
   "[    log] Found 1 template:[n]",
   "[    log] [n]",
-  "[    log] | Name            | Category | Description                                        | Version | SPFx Version | Files |[n]",
-  "[    log] | webpart-minimal | webpart  | A minimal web part template (no framework) for SPFx | 0.0.1   | 1.22.2       | 23    |[n]",
+  "[    log] ┌─────────────────┬──────────┬─────────────────────────────────────────────────────┬─────────┬──────────────┬───────┐[n]",
+  "[    log] │ Name            │ Category │ Description                                         │ Version │ SPFx Version │ Files │[n]",
+  "[    log] ├─────────────────┼──────────┼─────────────────────────────────────────────────────┼─────────┼──────────────┼───────┤[n]",
+  "[    log] │ webpart-minimal │ webpart  │ A minimal web part template (no framework) for SPFx │ 0.0.1   │ 1.22.2       │ 23    │[n]",
+  "[    log] └─────────────────┴──────────┴─────────────────────────────────────────────────────┴─────────┴──────────────┴───────┘[n]",
 ]
 `;

@@ -172,15 +172,15 @@ describe(SPFxTemplateCollection.name, () => {
     });
   });
 
-  describe('toString', () => {
-    it('should show message for empty collection', () => {
+  describe('toFormattedStringAsync', () => {
+    it('should show message for empty collection', async () => {
       const collection = new SPFxTemplateCollection([]);
-      const result = collection.toString();
+      const result = await collection.toFormattedStringAsync();
 
       expect(result).toBe('No templates found.');
     });
 
-    it('should render a table with headers and data rows', () => {
+    it('should render a table with headers and data rows', async () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'WebPart',
@@ -203,7 +203,7 @@ describe(SPFxTemplateCollection.name, () => {
       );
 
       const collection = new SPFxTemplateCollection([template1, template2]);
-      const result = collection.toString();
+      const result = await collection.toFormattedStringAsync();
 
       expect(result).toContain('Found 2 templates:');
       expect(result).toContain('Name');
@@ -216,7 +216,7 @@ describe(SPFxTemplateCollection.name, () => {
       expect(result).toContain('Extension');
     });
 
-    it('should include all template details in table rows', () => {
+    it('should include all template details in table rows', async () => {
       const template = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'DetailedTemplate',
@@ -232,7 +232,7 @@ describe(SPFxTemplateCollection.name, () => {
       );
 
       const collection = new SPFxTemplateCollection([template]);
-      const result = collection.toString();
+      const result = await collection.toFormattedStringAsync();
 
       expect(result).toContain('Found 1 template:');
       expect(result).toContain('DetailedTemplate');
@@ -242,7 +242,7 @@ describe(SPFxTemplateCollection.name, () => {
       expect(result).toContain('2');
     });
 
-    it('should show N/A for missing description', () => {
+    it('should show N/A for missing description', async () => {
       const template = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'NoDesc',
@@ -254,7 +254,7 @@ describe(SPFxTemplateCollection.name, () => {
       );
 
       const collection = new SPFxTemplateCollection([template]);
-      const result = collection.toString();
+      const result = await collection.toFormattedStringAsync();
 
       expect(result).toContain('N/A');
     });

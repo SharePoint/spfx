@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import Table from 'cli-table3';
+import type Table from 'cli-table3';
 
 import type { SPFxTemplate } from '../templating';
 
@@ -20,15 +20,18 @@ export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
   }
 
   /**
-   * Returns a string representation of the collection as a formatted table.
-   * @returns A formatted table string with collection details
+   * Returns a formatted table string representation of the collection.
+   * Uses cli-table3, which is loaded asynchronously to reduce startup cost.
+   * @returns A Promise that resolves to a formatted table string with collection details
    */
-  public override toString(): string {
+  public async toFormattedStringAsync(): Promise<string> {
     if (this.size === 0) {
       return 'No templates found.';
     }
 
-    const table: Table.Table = new Table({
+    const { default: TableConstructor } = await import('cli-table3');
+
+    const table: Table.Table = new TableConstructor({
       head: ['Name', 'Category', 'Description', 'Version', 'SPFx Version', 'Files']
     });
 
@@ -39,7 +42,7 @@ export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
         template.description || 'N/A',
         template.version,
         template.spfxVersion,
-        String(template.fileCount)
+        template.fileCount
       ]);
     }
 
