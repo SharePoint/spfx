@@ -63,7 +63,8 @@ export class ListTemplatesAction extends SPFxActionBase {
         );
       }
 
-      terminal.writeLine(await templates.toFormattedStringAsync());
+      const formattedTable: string = await templates.toFormattedStringAsync();
+      terminal.writeLine(formattedTable);
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
       terminal.writeErrorLine(`Error listing templates: ${message}`);

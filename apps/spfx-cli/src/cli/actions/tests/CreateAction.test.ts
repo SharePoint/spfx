@@ -111,7 +111,7 @@ describe('CreateAction', () => {
     };
     const mockCollection = new Map([['webpart-minimal', mockTemplate]]) as unknown as SPFxTemplateCollection;
     (mockCollection as unknown as { toFormattedStringAsync: () => Promise<string> }).toFormattedStringAsync =
-      jest.fn().mockResolvedValue(Promise.resolve('[Mocked SPFxTemplateCollection]'));
+      jest.fn().mockResolvedValue('[Mocked SPFxTemplateCollection]');
 
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(mockCollection);
     jest.spyOn(process, 'cwd').mockReturnValue('/tmp/test');

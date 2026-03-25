@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type Table from 'cli-table3';
-
 import type { SPFxTemplate } from '../templating';
 
 /**
@@ -31,7 +29,7 @@ export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
 
     const { default: TableConstructor } = await import('cli-table3');
 
-    const table: Table.Table = new TableConstructor({
+    const table: InstanceType<typeof TableConstructor> = new TableConstructor({
       head: ['Name', 'Category', 'Description', 'Version', 'SPFx Version', 'Files']
     });
 
