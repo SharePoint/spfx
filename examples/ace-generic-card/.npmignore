@@ -11,10 +11,12 @@
 
 # Ignore certain files in the above folders
 /dist/*.stats.*
-/dist/**/*.js.map
-/lib/**/*.js.map
+/dist/**/*.map
+/lib/**/*.map
+/lib/**/*.test.*
 /lib/**/test/**
-/lib-*/**/*.js.map
+/lib-*/**/*.map
+/lib-*/**/*.test.*
 /lib-*/**/test/**
 
 # NOTE: These don't need to be specified, because NPM includes them automatically.
