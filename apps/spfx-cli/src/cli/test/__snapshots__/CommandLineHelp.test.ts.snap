@@ -2,9 +2,9 @@
 
 exports[`CommandLineHelp prints the help: create 1`] = `
 "usage: spfx create [-h] [--template-url URL] [--spfx-version VERSION]
-                   [--target-dir TARGET_DIR] [--local-template TEMPLATE_PATH]
-                   --template TEMPLATE_NAME --library-name LIBRARY_NAME
-                   --component-name COMPONENT_NAME
+                   [--remote-source URL] [--target-dir TARGET_DIR]
+                   [--local-template TEMPLATE_PATH] --template TEMPLATE_NAME
+                   --library-name LIBRARY_NAME --component-name COMPONENT_NAME
                    [--component-alias COMPONENT_ALIAS]
                    [--component-description COMPONENT_DESCRIPTION]
                    [--solution-name SOLUTION_NAME]
@@ -24,6 +24,8 @@ Optional arguments:
                         Resolves to the \\"version/<VERSION>\\" branch in the
                         template repository. Defaults to the repository's
                         default branch (main).
+  --remote-source URL   Public GitHub repository URL to use as an additional
+                        template source (repeatable)
   --target-dir TARGET_DIR
                         The directory to create the solution (or where the
                         solution already exists) The default value is \\"<cwd>\\".
@@ -71,7 +73,7 @@ Optional arguments:
 
 exports[`CommandLineHelp prints the help: list-templates 1`] = `
 "usage: spfx list-templates [-h] [--template-url URL] [--spfx-version VERSION]
-                           [--local-source PATH] [--remote-source URL]
+                           [--remote-source URL] [--local-source PATH]
 
 
 This command lists all available templates from the default GitHub source and
@@ -88,9 +90,9 @@ Optional arguments:
                         Resolves to the \\"version/<VERSION>\\" branch in the
                         template repository. Defaults to the repository's
                         default branch (main).
+  --remote-source URL   Public GitHub repository URL to use as an additional
+                        template source (repeatable)
   --local-source PATH   Path to a local template folder to include
                         (repeatable)
-  --remote-source URL   Public GitHub repository URL to include as an
-                        additional template source (repeatable)
 "
 `;

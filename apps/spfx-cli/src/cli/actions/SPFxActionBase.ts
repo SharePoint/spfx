@@ -4,6 +4,7 @@
 import type { Terminal } from '@rushstack/terminal';
 import {
   CommandLineAction,
+  type CommandLineStringListParameter,
   type CommandLineStringParameter,
   type ICommandLineActionOptions
 } from '@rushstack/ts-command-line';
@@ -20,13 +21,14 @@ import {
 
 /**
  * Base class for SPFx CLI actions that work with template sources.
- * Defines the shared `--template-url` and `--spfx-version` parameters and provides
- * a helper to register a GitHub template source on a repository manager.
+ * Defines the shared `--template-url`, `--spfx-version`, and `--remote-source` parameters
+ * and provides helpers to register template sources on a repository manager.
  */
 export abstract class SPFxActionBase extends CommandLineAction {
   protected readonly _terminal: Terminal;
   protected readonly _templateUrlParameter: CommandLineStringParameter;
   protected readonly _spfxVersionParameter: CommandLineStringParameter;
+  protected readonly _remoteSourcesParameter: CommandLineStringListParameter;
 
   protected constructor(options: ICommandLineActionOptions, terminal: Terminal) {
     super(options);
@@ -46,6 +48,12 @@ export abstract class SPFxActionBase extends CommandLineAction {
       description:
         'The SPFx version to use (e.g., "1.22", "1.23-rc.0"). Resolves to the "version/<VERSION>" branch ' +
         "in the template repository. Defaults to the repository's default branch (main)."
+    });
+
+    this._remoteSourcesParameter = this.defineStringListParameter({
+      parameterLongName: '--remote-source',
+      argumentName: 'URL',
+      description: 'Public GitHub repository URL to use as an additional template source (repeatable)'
     });
   }
 
@@ -79,5 +87,20 @@ export abstract class SPFxActionBase extends CommandLineAction {
 
     terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
     manager.addSource(new PublicGitHubRepositorySource({ repoUrl, branch: ref, terminal }));
+  }
+
+  /**
+   * Processes all `--remote-source` URLs and registers a {@link PublicGitHubRepositorySource}
+   * for each on the given manager. Additive with any other sources already registered.
+   */
+  protected _addRemoteSources(manager: SPFxTemplateRepositoryManager): void {
+    const terminal: Terminal = this._terminal;
+    for (const remoteUrl of this._remoteSourcesParameter.values) {
+      const { repoUrl, urlBranch } = parseGitHubUrlAndRef(remoteUrl);
+      terminal.writeLine(
+        `Adding remote template source: ${repoUrl}${urlBranch ? ` (branch: ${urlBranch})` : ''}`
+      );
+      manager.addSource(new PublicGitHubRepositorySource({ repoUrl, branch: urlBranch, terminal }));
+    }
   }
 }
