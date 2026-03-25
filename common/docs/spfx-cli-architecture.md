@@ -69,7 +69,7 @@ Yeoman compatibility shim) can be built without duplicating core logic.
 |-----------|----------|-------------|
 | `--template TEMPLATE_NAME` | Yes | Choose the template to scaffold. |
 | `--target-dir TARGET` | No | The directory where output should be written. Defaults to current working directory. |
-| `--local-template PATH` | No | Path to a local template folder. Can be specified multiple times. |
+| `--local-source PATH` | No | Path to a local template folder. Can be specified multiple times. |
 | `--library-name NAME` | Yes | The library name for the component. |
 | `--component-name NAME` | Yes | The display name for the component (e.g. "Hello World"). |
 | `--component-alias ALIAS` | No | The component alias. Defaults to the component name. |
@@ -100,7 +100,7 @@ requirements before proceeding.
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `--local-template PATH` | No | Shows templates found on local disk. Can be specified multiple times. |
+| `--local-source PATH` | No | Shows templates found on local disk. Can be specified multiple times. |
 | `--github-source URL` | No | Shows templates found in additional public GitHub template sources. Only public GitHub repos are supported. |
 
 Lists all templates available from the registered sources.
