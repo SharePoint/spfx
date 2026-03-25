@@ -162,6 +162,8 @@ export class CreateAction extends SPFxActionBase {
         this._addGitHubTemplateSource(manager);
       }
 
+      this._addRemoteSources(manager);
+
       let templates: SPFxTemplateCollection;
       try {
         templates = await manager.getTemplatesAsync();
