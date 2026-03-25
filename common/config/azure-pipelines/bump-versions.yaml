@@ -20,6 +20,8 @@ variables:
     value: 1
   - name: FeatureBranch
     value: 'user/spfx-cli-bot/bump-versions'
+  - name: BaseBranch
+    value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
 
 resources:
   repositories:
@@ -132,7 +134,7 @@ extends:
                   Arguments: >
                     create-or-update-pr
                     --branch-name "$(FeatureBranch)"
-                    --base-branch "$(Build.SourceBranchName)"
+                    --base-branch "$(BaseBranch)"
                     --status-context "bump-versions"
                   DisplayName: 'Create or update GitHub PR'
                   Name: CreateOrUpdatePr
