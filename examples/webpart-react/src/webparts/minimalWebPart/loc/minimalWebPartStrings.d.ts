@@ -11,6 +11,18 @@ declare interface IMinimalWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   UnknownEnvironment: string;
+  GreetingMessage: string;
+  PropertyValueLabel: string;
+  WelcomeTitle: string;
+  WelcomeDescription: string;
+  LearnMoreHeading: string;
+  LinkOverview: string;
+  LinkMicrosoftGraph: string;
+  LinkMicrosoftTeams: string;
+  LinkVivaConnections: string;
+  LinkMarketplace: string;
+  LinkApiReference: string;
+  LinkDeveloperCommunity: string;
 }
 
 declare module 'MinimalWebPartStrings' {

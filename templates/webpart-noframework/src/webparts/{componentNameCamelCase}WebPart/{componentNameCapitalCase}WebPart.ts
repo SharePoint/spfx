@@ -26,24 +26,24 @@ export default class <%= componentNameCapitalCase %>WebPart extends BaseClientSi
     <section class="${styles.<%= componentNameCamelCase %>WebPart} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
       <div class="${styles.welcome}">
         <img alt="" src="${this._isDarkTheme ? welcomeDark : welcomeLight}" class="${styles.welcomeImage}" />
-        <h2>Well done, ${escape(this.context.pageContext.user.displayName)}!</h2>
+        <h2>${strings.GreetingMessage.replace(/\{0\}/g, escape(this.context.pageContext.user.displayName))}</h2>
         <div>${this._environmentMessage}</div>
-        <div>Web part property value: <strong>${escape(this.properties.description)}</strong></div>
+        <div>${strings.PropertyValueLabel} <strong>${escape(this.properties.description)}</strong></div>
       </div>
       <div>
-        <h3>Welcome to SharePoint Framework!</h3>
+        <h3>${strings.WelcomeTitle}</h3>
         <p>
-        The SharePoint Framework (SPFx) is an extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
+        ${strings.WelcomeDescription}
         </p>
-        <h4>Learn more about SPFx development:</h4>
+        <h4>${strings.LearnMoreHeading}</h4>
           <ul class="${styles.links}">
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noopener noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noopener noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noopener noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noopener noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noopener noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noopener noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noopener noreferrer">Microsoft 365 Developer Community</a></li>
+            <li><a href="https://aka.ms/spfx" target="_blank" rel="noopener noreferrer">${strings.LinkOverview}</a></li>
+            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noopener noreferrer">${strings.LinkMicrosoftGraph}</a></li>
+            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noopener noreferrer">${strings.LinkMicrosoftTeams}</a></li>
+            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noopener noreferrer">${strings.LinkVivaConnections}</a></li>
+            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noopener noreferrer">${strings.LinkMarketplace}</a></li>
+            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noopener noreferrer">${strings.LinkApiReference}</a></li>
+            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noopener noreferrer">${strings.LinkDeveloperCommunity}</a></li>
           </ul>
       </div>
     </section>`;
