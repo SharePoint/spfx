@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/SharePoint/spfx/actions/workflows/ci.yml"><img src="https://github.com/SharePoint/spfx/workflows/CI/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/SharePoint/spfx/actions/workflows/ci.yml"><img src="https://github.com/SharePoint/spfx/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI" /></a>
   <a href="https://www.npmjs.com/package/@microsoft/spfx-cli"><img src="https://img.shields.io/npm/v/@microsoft/spfx-cli" alt="npm version" /></a>
   <a href="https://github.com/SharePoint/spfx/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License" /></a>
-  <img src="https://img.shields.io/badge/node-%3E%3D22.14.0-brightgreen" alt="Node.js >= 22.14.0" />
-  <img src="https://img.shields.io/badge/SPFx-1.22-blue" alt="SPFx 1.22" />
+  <img src="https://img.shields.io/badge/node-22.x_%7C_24.x-brightgreen" alt="Node.js 22.x | 24.x" />
+  <img src="https://img.shields.io/badge/SPFx-1.22.2-blue" alt="SPFx 1.22.2" />
 </p>
 
 ---
