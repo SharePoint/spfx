@@ -277,11 +277,12 @@ function _buildRenderContext(context: object): {
     if (typeof value === 'string') {
       const cased: ICasedString = createCasedString(value);
       ejsContext[key] = cased;
+      const { camel, pascal, hyphen, allCaps } = cased;
       flatEntries.set(key, value);
-      flatEntries.set(`${key}.camel`, cased.camel);
-      flatEntries.set(`${key}.pascal`, cased.pascal);
-      flatEntries.set(`${key}.hyphen`, cased.hyphen);
-      flatEntries.set(`${key}.allCaps`, cased.allCaps);
+      flatEntries.set(`${key}.camel`, camel);
+      flatEntries.set(`${key}.pascal`, pascal);
+      flatEntries.set(`${key}.hyphen`, hyphen);
+      flatEntries.set(`${key}.allCaps`, allCaps);
     } else {
       ejsContext[key] = value;
       flatEntries.set(key, String(value));
