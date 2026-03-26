@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { CasedString } from '../CasedString';
+import { createCasedString, type ICasedString } from '../CasedString';
 
-describe(CasedString.name, () => {
+describe('createCasedString', () => {
   describe('multi-word input "Hello World"', () => {
-    const cs = new CasedString('Hello World');
+    const cs: ICasedString = createCasedString('Hello World');
 
     it('should return the raw value via toString()', () => {
       expect(cs.toString()).toBe('Hello World');
@@ -33,7 +33,7 @@ describe(CasedString.name, () => {
   });
 
   describe('single-word input "Minimal"', () => {
-    const cs = new CasedString('Minimal');
+    const cs: ICasedString = createCasedString('Minimal');
 
     it('should return the raw value via toString()', () => {
       expect(cs.toString()).toBe('Minimal');
@@ -57,7 +57,7 @@ describe(CasedString.name, () => {
   });
 
   describe('hyphen-case input "my-web-part"', () => {
-    const cs = new CasedString('my-web-part');
+    const cs: ICasedString = createCasedString('my-web-part');
 
     it('should return the raw value via toString()', () => {
       expect(cs.toString()).toBe('my-web-part');
@@ -81,7 +81,7 @@ describe(CasedString.name, () => {
   });
 
   describe('PascalCase input "DataVisualization"', () => {
-    const cs = new CasedString('DataVisualization');
+    const cs: ICasedString = createCasedString('DataVisualization');
 
     it('should return the raw value via toString()', () => {
       expect(cs.toString()).toBe('DataVisualization');
@@ -106,7 +106,7 @@ describe(CasedString.name, () => {
 
   describe('EJS template interpolation', () => {
     it('should render raw value when used in template literal', () => {
-      const cs = new CasedString('Hello World');
+      const cs: ICasedString = createCasedString('Hello World');
       expect(`Name: ${cs}`).toBe('Name: Hello World');
     });
   });

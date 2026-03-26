@@ -17,21 +17,23 @@ export abstract class BaseSPFxTemplateRepositorySource {
 }
 
 // @public
-export class CasedString {
-    constructor(raw: string);
-    readonly allCaps: string;
-    readonly camel: string;
-    readonly hyphen: string;
-    readonly pascal: string;
-    toString(): string;
-}
-
-// @public
 export class ConfigJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
     readonly fileRelativePath: string;
     // (undocumented)
     merge(existingContent: string, newContent: string): string;
+}
+
+// @public
+export function createCasedString(raw: string): ICasedString;
+
+// @public
+export interface ICasedString {
+    readonly allCaps: string;
+    readonly camel: string;
+    readonly hyphen: string;
+    readonly pascal: string;
+    toString(): string;
 }
 
 // @public

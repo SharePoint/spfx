@@ -8,38 +8,40 @@ import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
  *
  * @remarks
  * During template rendering, every plain-string value in the context is
- * automatically wrapped in a `CasedString`. This lets templates access any
+ * automatically wrapped via {@link createCasedString}. This lets templates access any
  * casing on the fly — e.g. `\<%= componentName.pascal %\>` — without the
  * caller having to pre-compute each variant.
  *
  * When used where a primitive string is expected (EJS interpolation,
  * `String()` coercion, template literals), the wrapper returns the original
- * raw value via {@link CasedString.toString}.
+ * raw value via `toString()`.
  *
  * @public
  */
-export class CasedString {
+export interface ICasedString {
   /** camelCase variant (e.g. "helloWorld") */
-  public readonly camel: string;
+  readonly camel: string;
   /** PascalCase variant (e.g. "HelloWorld") */
-  public readonly pascal: string;
+  readonly pascal: string;
   /** hyphen-case variant (e.g. "hello-world") */
-  public readonly hyphen: string;
+  readonly hyphen: string;
   /** UPPER_SNAKE_CASE variant (e.g. "HELLO_WORLD") */
-  public readonly allCaps: string;
-
-  private readonly _raw: string;
-
-  public constructor(raw: string) {
-    this._raw = raw;
-    this.camel = camelCase(raw);
-    this.pascal = upperFirst(camelCase(raw));
-    this.hyphen = kebabCase(raw);
-    this.allCaps = snakeCase(raw).toUpperCase();
-  }
-
+  readonly allCaps: string;
   /** Returns the original raw string so EJS `\<%= varName %\>` renders the unmodified value. */
-  public toString(): string {
-    return this._raw;
-  }
+  toString(): string;
+}
+
+/**
+ * Creates an {@link ICasedString} from a raw string, pre-computing all casing variants.
+ *
+ * @public
+ */
+export function createCasedString(raw: string): ICasedString {
+  return {
+    camel: camelCase(raw),
+    pascal: upperFirst(camelCase(raw)),
+    hyphen: kebabCase(raw),
+    allCaps: snakeCase(raw).toUpperCase(),
+    toString: () => raw
+  };
 }
