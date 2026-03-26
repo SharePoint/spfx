@@ -62,7 +62,7 @@ If you're adding a brand-new template (not editing an existing one):
 | `componentName` | original | Display name |
 | `componentNameCamelCase` | camelCase | File/folder names |
 | `componentNameCapitalCase` | PascalCase | Class names |
-| `componentNameHyphenCase` | kebab-case | CSS classes, IDs, localization keys |
+| `componentNameHyphenCase` | hyphen-case | CSS classes, IDs, localization keys |
 | `componentNameAllCaps` | UPPER_CASE | String literal IDs |
 | `description` | — | User-provided description |
 | `spfxVersion` | — | SPFx framework version |

@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "<%= componentName.kebab %>-web-part": {
+    "<%= componentName.hyphen %>-web-part": {
       "components": [
         {
           "entrypoint": "./lib/webparts/<%= componentName.camel %>WebPart/<%= componentName.pascal %>WebPart.js",

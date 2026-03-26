@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "<%= componentName.kebab %>-search-query-modifier": {
+    "<%= componentName.hyphen %>-search-query-modifier": {
       "components": [
         {
           "entrypoint": "./lib/extensions/<%= componentName.camel %>SearchQueryModifier/<%= componentName.pascal %>SearchQueryModifier.js",

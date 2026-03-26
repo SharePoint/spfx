@@ -33,7 +33,7 @@ export default class <%= componentName.pascal %>AdaptiveCardExtension extends Ba
 
   protected loadPropertyPaneResources(): Promise<void> {
     return import(
-      /* webpackChunkName: '<%= componentName.kebab %>-property-pane'*/
+      /* webpackChunkName: '<%= componentName.hyphen %>-property-pane'*/
       './<%= componentName.pascal %>PropertyPane'
     )
       .then(

@@ -135,7 +135,7 @@ The writer uses these helpers internally. You can also import them directly for 
 
 | Export | Description |
 |--------|-------------|
-| `CasedString` | String wrapper exposing `.camel`, `.pascal`, `.kebab`, `.allCaps`; auto-applied to all string context values during rendering |
+| `CasedString` | String wrapper exposing `.camel`, `.pascal`, `.hyphen`, `.allCaps`; auto-applied to all string context values during rendering |
 | `SPFxTemplateRepositoryManager` | Aggregates sources and returns a `SPFxTemplateCollection` |
 | `SPFxTemplateCollection` | `Map<string, SPFxTemplate>` of all loaded templates |
 | `SPFxTemplate` | Single template — exposes `name`, `category`, `spfxVersion`, and `renderAsync()` |

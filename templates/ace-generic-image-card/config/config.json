@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "<%= componentName.kebab %>-adaptive-card-extension": {
+    "<%= componentName.hyphen %>-adaptive-card-extension": {
       "components": [
         {
           "entrypoint": "./lib/adaptiveCardExtensions/<%= componentName.camel %>/<%= componentName.pascal %>AdaptiveCardExtension.js",

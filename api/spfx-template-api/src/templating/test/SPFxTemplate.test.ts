@@ -425,7 +425,7 @@ describe(SPFxTemplate.name, () => {
 
       const files = new Map<string, string | Buffer>([
         ['src/index.ts', 'export class <%= componentName.pascal %> {}'],
-        ['style.css', '.<%= componentName.kebab %>-container { }']
+        ['style.css', '.<%= componentName.hyphen %>-container { }']
       ]);
 
       const template = new SPFxTemplate(definition, files);
@@ -491,7 +491,7 @@ describe(SPFxTemplate.name, () => {
       });
 
       const files = new Map<string, string | Buffer>([
-        ['file.txt', '<%= libraryName.pascal %> / <%= componentAlias.kebab %>']
+        ['file.txt', '<%= libraryName.pascal %> / <%= componentAlias.hyphen %>']
       ]);
 
       const template = new SPFxTemplate(definition, files);

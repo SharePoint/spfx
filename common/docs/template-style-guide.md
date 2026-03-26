@@ -21,13 +21,13 @@ Every string value in the render context is automatically wrapped with casing he
 | `componentName` | original | Display name (via `toString()`) | "Generic Card" |
 | `componentName.camel` | camelCase | File/folder names | "genericCard" |
 | `componentName.pascal` | PascalCase | Class names | "GenericCard" |
-| `componentName.kebab` | kebab-case | CSS classes, IDs, localization keys | "generic-card" |
+| `componentName.hyphen` | hyphen-case | CSS classes, IDs, localization keys | "generic-card" |
 | `componentName.allCaps` | UPPER_SNAKE_CASE | String literal IDs | "GENERIC_CARD" |
 | `libraryName` | original | Package name (via `toString()`) | "@spfx-template/generic-card" |
 | `description` | — | User-provided description | User's text |
 | `spfxVersion` | — | SPFx framework version | "1.22.2" |
 
-The same casing helpers are available on **any** string context variable — e.g. `componentAlias.pascal`, `libraryName.kebab`, etc.
+The same casing helpers are available on **any** string context variable — e.g. `componentAlias.pascal`, `libraryName.hyphen`, etc.
 
 If you need a custom transformation, use inline EJS: `<%= componentName.toString().replace(/[^A-Z0-9]/gi, '') %>`
 
@@ -45,7 +45,7 @@ public static readonly GENERICCARD_CARD_VIEW = 'GENERICCARD_CARD_VIEW';
 public static readonly GenericCard_CARD_VIEW = 'GenericCard_CARD_VIEW';
 ```
 
-### Localization keys — kebab-case
+### Localization keys — hyphen-case
 
 ```typescript
 // Correct
@@ -132,7 +132,7 @@ Example READMEs should have real content: a component name header, an actual sum
 ## Pre-Submit Checklist
 
 - [ ] String literal IDs use ALL_CAPS
-- [ ] Localization keys use kebab-case
+- [ ] Localization keys use hyphen-case
 - [ ] README uses `<%= description %>` placeholder
 - [ ] Localization files use description placeholders
 - [ ] All version references use `<%= spfxVersion %>`

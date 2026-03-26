@@ -299,7 +299,7 @@ function _flattenContext(context: Record<string, unknown>): Array<[string, strin
       entries.push([key, String(value)]);
       entries.push([`${key}.camel`, value.camel]);
       entries.push([`${key}.pascal`, value.pascal]);
-      entries.push([`${key}.kebab`, value.kebab]);
+      entries.push([`${key}.hyphen`, value.hyphen]);
       entries.push([`${key}.allCaps`, value.allCaps]);
     } else {
       entries.push([key, String(value)]);

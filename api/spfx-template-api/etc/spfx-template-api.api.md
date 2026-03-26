@@ -21,7 +21,7 @@ export class CasedString {
     constructor(raw: string);
     readonly allCaps: string;
     readonly camel: string;
-    readonly kebab: string;
+    readonly hyphen: string;
     readonly pascal: string;
     toString(): string;
 }

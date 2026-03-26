@@ -74,7 +74,7 @@ Yeoman compatibility shim) can be built without duplicating core logic.
 | `--component-name NAME` | Yes | The display name for the component (e.g. "Hello World"). |
 | `--component-alias ALIAS` | No | The component alias. Defaults to the component name. |
 | `--component-description DESC` | No | The component description. Auto-generated from component name if omitted. |
-| `--solution-name NAME` | No | The solution name. Defaults to the kebab-case component name. |
+| `--solution-name NAME` | No | The solution name. Defaults to the hyphen-case component name. |
 | `--template-url URL` | No | Custom GitHub template repository URL. Defaults to `https://github.com/SharePoint/spfx`. Also accepts the `SPFX_TEMPLATE_REPO_URL` environment variable. |
 | `--spfx-version VERSION` | No | Branch/tag in the template repo to use (e.g. `1.22`, `1.23-rc.0`). Defaults to the repo's default branch. |
 | `--remote-source URL` | No | Public GitHub repo to include as an additional template source. Can be specified multiple times. |

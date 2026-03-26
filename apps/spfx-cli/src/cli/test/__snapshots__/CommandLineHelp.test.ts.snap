@@ -45,7 +45,7 @@ Optional arguments:
                         generate from component name.
   --solution-name SOLUTION_NAME
                         The solution name. If not provided, defaults to the
-                        kebab-case component name.
+                        hyphen-case component name.
   --package-manager {npm,pnpm,yarn,none}
                         Package manager to use for dependency installation
                         after scaffolding. Use \\"none\\" to skip installation.

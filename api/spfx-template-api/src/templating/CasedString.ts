@@ -23,8 +23,8 @@ export class CasedString {
   public readonly camel: string;
   /** PascalCase variant (e.g. "HelloWorld") */
   public readonly pascal: string;
-  /** kebab-case variant (e.g. "hello-world") */
-  public readonly kebab: string;
+  /** hyphen-case variant (e.g. "hello-world") */
+  public readonly hyphen: string;
   /** UPPER_SNAKE_CASE variant (e.g. "HELLO_WORLD") */
   public readonly allCaps: string;
 
@@ -34,7 +34,7 @@ export class CasedString {
     this._raw = raw;
     this.camel = camelCase(raw);
     this.pascal = upperFirst(camelCase(raw));
-    this.kebab = kebabCase(raw);
+    this.hyphen = kebabCase(raw);
     this.allCaps = snakeCase(raw).toUpperCase();
   }
 

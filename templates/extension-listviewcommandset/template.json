@@ -11,7 +11,7 @@
     },
     "libraryName": {
       "type": "string",
-      "description": "The library name (kebab-case)"
+      "description": "The library name (hyphen-case)"
     },
     "componentId": {
       "type": "string",

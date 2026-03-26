@@ -23,8 +23,8 @@ describe(CasedString.name, () => {
       expect(cs.pascal).toBe('HelloWorld');
     });
 
-    it('should return kebab-case', () => {
-      expect(cs.kebab).toBe('hello-world');
+    it('should return hyphen-case', () => {
+      expect(cs.hyphen).toBe('hello-world');
     });
 
     it('should return UPPER_SNAKE_CASE', () => {
@@ -47,8 +47,8 @@ describe(CasedString.name, () => {
       expect(cs.pascal).toBe('Minimal');
     });
 
-    it('should return kebab-case', () => {
-      expect(cs.kebab).toBe('minimal');
+    it('should return hyphen-case', () => {
+      expect(cs.hyphen).toBe('minimal');
     });
 
     it('should return UPPER_SNAKE_CASE', () => {
@@ -56,7 +56,7 @@ describe(CasedString.name, () => {
     });
   });
 
-  describe('kebab-case input "my-web-part"', () => {
+  describe('hyphen-case input "my-web-part"', () => {
     const cs = new CasedString('my-web-part');
 
     it('should return the raw value via toString()', () => {
@@ -71,8 +71,8 @@ describe(CasedString.name, () => {
       expect(cs.pascal).toBe('MyWebPart');
     });
 
-    it('should return kebab-case', () => {
-      expect(cs.kebab).toBe('my-web-part');
+    it('should return hyphen-case', () => {
+      expect(cs.hyphen).toBe('my-web-part');
     });
 
     it('should return UPPER_SNAKE_CASE', () => {
@@ -95,8 +95,8 @@ describe(CasedString.name, () => {
       expect(cs.pascal).toBe('DataVisualization');
     });
 
-    it('should return kebab-case', () => {
-      expect(cs.kebab).toBe('data-visualization');
+    it('should return hyphen-case', () => {
+      expect(cs.hyphen).toBe('data-visualization');
     });
 
     it('should return UPPER_SNAKE_CASE', () => {

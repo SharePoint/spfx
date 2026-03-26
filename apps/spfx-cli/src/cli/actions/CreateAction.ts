@@ -107,7 +107,7 @@ export class CreateAction extends SPFxActionBase {
     this._solutionNameParameter = this.defineStringParameter({
       parameterLongName: '--solution-name',
       argumentName: 'SOLUTION_NAME',
-      description: 'The solution name. If not provided, defaults to the kebab-case component name.'
+      description: 'The solution name. If not provided, defaults to the hyphen-case component name.'
     });
 
     this._packageManagerParameter = this.defineChoiceParameter({
