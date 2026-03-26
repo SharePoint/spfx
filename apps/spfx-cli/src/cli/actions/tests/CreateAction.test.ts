@@ -123,7 +123,7 @@ describe('CreateAction', () => {
   });
 
   describe('source selection', () => {
-    describe('without --local-template', () => {
+    describe('without --local-source', () => {
       it('should add a PublicGitHubRepositorySource with the default URL', async () => {
         await runCreateAsync();
         expect(MockedGitHub).toHaveBeenCalledWith({
@@ -156,15 +156,15 @@ describe('CreateAction', () => {
       });
     });
 
-    describe('with --local-template', () => {
+    describe('with --local-source', () => {
       it('should add a LocalFileSystemRepositorySource for the provided path', async () => {
-        await runCreateAsync(['--local-template', '/path/to/templates']);
+        await runCreateAsync(['--local-source', '/path/to/templates']);
         expect(MockedLocal).toHaveBeenCalledWith('/path/to/templates');
         expect(MockedGitHub).not.toHaveBeenCalled();
       });
 
-      it('should add multiple sources for multiple --local-template flags', async () => {
-        await runCreateAsync(['--local-template', '/a', '--local-template', '/b']);
+      it('should add multiple sources for multiple --local-source flags', async () => {
+        await runCreateAsync(['--local-source', '/a', '--local-source', '/b']);
         expect(MockedLocal).toHaveBeenCalledTimes(2);
         expect(MockedLocal).toHaveBeenNthCalledWith(1, '/a');
         expect(MockedLocal).toHaveBeenNthCalledWith(2, '/b');
@@ -209,9 +209,9 @@ describe('CreateAction', () => {
         });
       });
 
-      it('works alongside --local-template without adding the default GitHub source', async () => {
+      it('works alongside --local-source without adding the default GitHub source', async () => {
         await runCreateAsync([
-          '--local-template',
+          '--local-source',
           '/path/to/templates',
           '--remote-source',
           'https://github.com/my-org/my-templates'
@@ -311,8 +311,8 @@ describe('CreateAction', () => {
       });
     });
 
-    it('is ignored (with no throw) when --local-template is also provided', async () => {
-      await runCreateAsync(['--local-template', '/a', '--spfx-version', '1.22']);
+    it('is ignored (with no throw) when --local-source is also provided', async () => {
+      await runCreateAsync(['--local-source', '/a', '--spfx-version', '1.22']);
       expect(MockedLocal).toHaveBeenCalledWith('/a');
       expect(MockedGitHub).not.toHaveBeenCalled();
     });
@@ -522,36 +522,71 @@ describe('CreateAction', () => {
   });
 
   describe('error handling', () => {
-    it('throws with a message mentioning --local-template when fetch fails', async () => {
-      MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOTFOUND'));
-      await expect(runCreateAsync()).rejects.toThrow(/use --local-template/);
+    describe('when using GitHub source (no --local-source)', () => {
+      it('suggests --local-source when fetch fails', async () => {
+        MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOTFOUND'));
+        await expect(runCreateAsync()).rejects.toThrow(/use --local-source/);
+      });
+
+      it('throws with a message mentioning "Failed to fetch templates"', async () => {
+        MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOTFOUND'));
+        await expect(runCreateAsync()).rejects.toThrow(/Failed to fetch templates/);
+      });
+
+      it('preserves the original error as the cause', async () => {
+        const originalError = new Error('ENOTFOUND');
+        MockedManager.prototype.getTemplatesAsync.mockRejectedValue(originalError);
+        let caughtError: unknown;
+        try {
+          await runCreateAsync();
+        } catch (e) {
+          caughtError = e;
+        }
+        expect((caughtError as { cause?: unknown }).cause).toBe(originalError);
+      });
+
+      it('includes the original error message in the wrapper', async () => {
+        MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOTFOUND'));
+        await expect(runCreateAsync()).rejects.toThrow(/ENOTFOUND/);
+      });
+
+      it('handles non-Error rejected values', async () => {
+        MockedManager.prototype.getTemplatesAsync.mockRejectedValue('plain string');
+        await expect(runCreateAsync()).rejects.toThrow(/plain string/);
+      });
     });
 
-    it('throws with a message mentioning "Failed to fetch templates"', async () => {
-      MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOTFOUND'));
-      await expect(runCreateAsync()).rejects.toThrow(/Failed to fetch templates/);
-    });
+    describe('when using --local-source', () => {
+      it('does not suggest --local-source when local source fails', async () => {
+        MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOENT: no such file'));
+        await expect(runCreateAsync(['--local-source', '/bad/path'])).rejects.not.toThrow(
+          /use --local-source/
+        );
+      });
 
-    it('preserves the original error as the cause', async () => {
-      const originalError = new Error('ENOTFOUND');
-      MockedManager.prototype.getTemplatesAsync.mockRejectedValue(originalError);
-      let caughtError: unknown;
-      try {
-        await runCreateAsync();
-      } catch (e) {
-        caughtError = e;
-      }
-      expect((caughtError as { cause?: unknown }).cause).toBe(originalError);
-    });
+      it('mentions verifying the local template paths', async () => {
+        MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOENT: no such file'));
+        await expect(runCreateAsync(['--local-source', '/bad/path'])).rejects.toThrow(
+          /Verify that the specified --local-source path\(s\) exist/
+        );
+      });
 
-    it('includes the original error message in the wrapper', async () => {
-      MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOTFOUND'));
-      await expect(runCreateAsync()).rejects.toThrow(/ENOTFOUND/);
-    });
+      it('preserves the original error as the cause', async () => {
+        const originalError = new Error('ENOENT: no such file');
+        MockedManager.prototype.getTemplatesAsync.mockRejectedValue(originalError);
+        let caughtError: unknown;
+        try {
+          await runCreateAsync(['--local-source', '/bad/path']);
+        } catch (e) {
+          caughtError = e;
+        }
+        expect((caughtError as { cause?: unknown }).cause).toBe(originalError);
+      });
 
-    it('handles non-Error rejected values', async () => {
-      MockedManager.prototype.getTemplatesAsync.mockRejectedValue('plain string');
-      await expect(runCreateAsync()).rejects.toThrow(/plain string/);
+      it('includes the original error message in the wrapper', async () => {
+        MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOENT: no such file'));
+        await expect(runCreateAsync(['--local-source', '/bad/path'])).rejects.toThrow(/ENOENT: no such file/);
+      });
     });
   });
 });

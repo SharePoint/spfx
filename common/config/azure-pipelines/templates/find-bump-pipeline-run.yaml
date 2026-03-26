@@ -1,0 +1,37 @@
+# Template: Run the find-bump-pipeline-run repo-toolbox action
+# Finds the bump pipeline run associated with the current commit, if any.
+#
+# Note: This template cannot use run-repo-toolbox.yaml because it is consumed cross-repo
+# (from the GitHubProjectsPublish pipeline via @spfx), where WorkingDirectory and other
+# context differ from the defaults in run-repo-toolbox.yaml.
+#
+# Output variables (via step name):
+#   IsVersionBumpMerge — 'true' if this commit is a version bump merge, 'false' otherwise
+#   BumpPipelineRunId  — AzDO build ID of the originating bump pipeline run
+
+parameters:
+  - name: PipelineId
+    # Object to allow numeric literals and runtime expressions without breaking callers
+    type: object
+  - name: CommitSha
+    type: string
+  - name: TeamProject
+    type: string
+  - name: Name
+    type: string
+  - name: WorkingDirectory
+    type: string
+
+steps:
+  - task: CmdLine@2
+    name: ${{ parameters.Name }}
+    displayName: 'Find Bump Pipeline Run'
+    env:
+      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+    inputs:
+      script: >-
+        node tools/repo-toolbox/lib/start.js find-bump-pipeline-run
+        --pipeline-id ${{ parameters.PipelineId }}
+        --commit-sha ${{ parameters.CommitSha }}
+        --team-project "${{ parameters.TeamProject }}"
+      workingDirectory: ${{ parameters.WorkingDirectory }}

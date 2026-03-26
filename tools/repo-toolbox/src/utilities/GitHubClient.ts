@@ -35,6 +35,14 @@ export interface IUpdatePrDescriptionOptions {
   body: string;
 }
 
+export interface IPostCommitStatusOptions {
+  sha: string;
+  state: 'pending' | 'success' | 'failure' | 'error';
+  context: string;
+  description?: string;
+  targetUrl?: string;
+}
+
 interface IOctokitCommonOptions {
   owner: string;
   repo: string;
@@ -104,6 +112,18 @@ export class GitHubClient {
       commit_sha: commitSha
     });
     return data.find((pr) => pr.merge_commit_sha === commitSha);
+  }
+
+  public async postCommitStatusAsync(options: IPostCommitStatusOptions): Promise<void> {
+    const { sha, state, context, description, targetUrl } = options;
+    await this._octokit.repos.createCommitStatus({
+      ...this._octokitCommonOptions,
+      sha,
+      state,
+      context,
+      description,
+      target_url: targetUrl
+    });
   }
 
   public async updatePrDescriptionAsync(options: IUpdatePrDescriptionOptions): Promise<void> {

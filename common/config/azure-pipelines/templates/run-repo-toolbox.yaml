@@ -1,0 +1,28 @@
+# Template: Run a repo-toolbox action
+# Invokes the compiled repo-toolbox CLI with the given arguments.
+
+parameters:
+  - name: Arguments
+    type: string
+  - name: DisplayName
+    type: string
+  - name: Condition
+    type: string
+    default: 'succeeded()'
+  - name: Name
+    type: string
+    default: ''
+  - name: Env
+    type: object
+    default: {}
+
+steps:
+  - task: CmdLine@2
+    ${{ if ne(parameters.Name, '') }}:
+      name: ${{ parameters.Name }}
+    displayName: ${{ parameters.DisplayName }}
+    condition: ${{ parameters.Condition }}
+    env: ${{ parameters.Env }}
+    inputs:
+      script: node tools/repo-toolbox/lib/start.js ${{ parameters.Arguments }}
+      workingDirectory: $(Build.SourcesDirectory)

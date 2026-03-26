@@ -4,28 +4,23 @@
 import type { Build } from 'azure-devops-node-api/interfaces/BuildInterfaces';
 
 import type { ITerminal } from '@rushstack/terminal';
-import {
-  type IRequiredCommandLineStringParameter,
-  type IRequiredCommandLineIntegerParameter,
-  CommandLineAction
+import type {
+  IRequiredCommandLineStringParameter,
+  IRequiredCommandLineIntegerParameter
 } from '@rushstack/ts-command-line';
 
 import { AzDoClient } from '../../utilities/AzDoClient';
 import { GitHubClient, type ICommitPr } from '../../utilities/GitHubClient';
+import { BUMP_BUILD_TAG_PREFIX } from '../../utilities/BumpVersionsConstants';
+import { AzDoPipelineAction } from './AzDoPipelineAction';
 
-const BUMP_BUILD_TAG_PREFIX: 'spfx-version-bump-sha-' = 'spfx-version-bump-sha-';
-
-export class FindBumpPipelineRunAction extends CommandLineAction {
-  private readonly _terminal: ITerminal;
-
+export class FindBumpPipelineRunAction extends AzDoPipelineAction {
   private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
   private readonly _pipelineIdParameter: IRequiredCommandLineIntegerParameter;
-  private readonly _orgUrlParameter: IRequiredCommandLineStringParameter;
-  private readonly _projectParameter: IRequiredCommandLineStringParameter;
   private readonly _accessTokenParameter: IRequiredCommandLineStringParameter;
 
   public constructor(terminal: ITerminal) {
-    super({
+    super(terminal, {
       actionName: 'find-bump-pipeline-run',
       summary: 'If the current commit is a version bump merge, finds the originating bump pipeline run.',
       documentation:
@@ -33,8 +28,6 @@ export class FindBumpPipelineRunAction extends CommandLineAction {
         "Azure DevOps Build API for a pipeline run tagged with the PR's head commit SHA. " +
         'Sets the AzDO output variables IsVersionBumpMerge (true/false) and BumpPipelineRunId (the build ID).'
     });
-
-    this._terminal = terminal;
 
     this._commitShaParameter = this.defineStringParameter({
       parameterLongName: '--commit-sha',
@@ -49,22 +42,6 @@ export class FindBumpPipelineRunAction extends CommandLineAction {
       argumentName: 'ID',
       description: 'The pipeline definition ID of the bump versions pipeline',
       required: true
-    });
-
-    this._orgUrlParameter = this.defineStringParameter({
-      parameterLongName: '--org-url',
-      argumentName: 'URL',
-      description: 'Azure DevOps organization URL',
-      required: true,
-      environmentVariable: 'SYSTEM_COLLECTIONURI'
-    });
-
-    this._projectParameter = this.defineStringParameter({
-      parameterLongName: '--project',
-      argumentName: 'PROJECT',
-      description: 'Azure DevOps project name',
-      required: true,
-      environmentVariable: 'SYSTEM_TEAMPROJECT'
     });
 
     this._accessTokenParameter = this.defineStringParameter({
@@ -108,8 +85,8 @@ export class FindBumpPipelineRunAction extends CommandLineAction {
     // Step 3: Query AzDO for a bump pipeline run tagged with the head SHA.
     const bumpBuildTag: string = `${BUMP_BUILD_TAG_PREFIX}${headSha}`;
     const spfxVersioningPipelineId: number = this._pipelineIdParameter.value;
-    const orgUrl: string = this._orgUrlParameter.value;
-    const project: string = this._projectParameter.value;
+    const orgUrl: string = this._collectionUriParameter.value;
+    const project: string = this._teamProjectParameter.value;
     const accessToken: string = this._accessTokenParameter.value;
 
     terminal.writeLine(`AzDO organization: ${orgUrl}`);

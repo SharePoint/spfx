@@ -1,19 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { CommandLineStringListParameter } from '@rushstack/ts-command-line';
 import type { Terminal } from '@rushstack/terminal';
-import {
-  LocalFileSystemRepositorySource,
-  type SPFxTemplateCollection,
-  SPFxTemplateRepositoryManager
-} from '@microsoft/spfx-template-api';
+import { type SPFxTemplateCollection, SPFxTemplateRepositoryManager } from '@microsoft/spfx-template-api';
 
 import { SPFxActionBase } from './SPFxActionBase';
 
 export class ListTemplatesAction extends SPFxActionBase {
-  private readonly _localSourcesParameter: CommandLineStringListParameter;
-
   public constructor(terminal: Terminal) {
     super(
       {
@@ -25,12 +18,6 @@ export class ListTemplatesAction extends SPFxActionBase {
       },
       terminal
     );
-
-    this._localSourcesParameter = this.defineStringListParameter({
-      parameterLongName: '--local-source',
-      argumentName: 'PATH',
-      description: 'Path to a local template folder to include (repeatable)'
-    });
   }
 
   protected override async onExecuteAsync(): Promise<void> {
@@ -43,25 +30,12 @@ export class ListTemplatesAction extends SPFxActionBase {
       this._addGitHubTemplateSource(manager);
 
       // Additive: also include any --local-source paths
-      for (const localPath of this._localSourcesParameter.values) {
-        terminal.writeLine(`Adding local template source: ${localPath}`);
-        manager.addSource(new LocalFileSystemRepositorySource(localPath));
-      }
+      this._addLocalTemplateSources(manager);
 
       // Additive: also include any --remote-source URLs
       this._addRemoteSources(manager);
 
-      let templates: SPFxTemplateCollection;
-      try {
-        templates = await manager.getTemplatesAsync();
-      } catch (fetchError: unknown) {
-        const fetchMessage: string = fetchError instanceof Error ? fetchError.message : String(fetchError);
-        throw new Error(
-          `Failed to fetch templates. If you are offline or behind a firewall, ` +
-            `use ${this._localSourcesParameter.longName} to specify a local template source. Details: ${fetchMessage}`,
-          { cause: fetchError }
-        );
-      }
+      const templates: SPFxTemplateCollection = await this._fetchTemplatesAsync(manager);
 
       const formattedTable: string = await templates.toFormattedStringAsync();
       terminal.writeLine(formattedTable);

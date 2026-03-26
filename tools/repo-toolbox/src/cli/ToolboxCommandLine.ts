@@ -5,6 +5,7 @@ import { CommandLineParser } from '@rushstack/ts-command-line';
 import { ConsoleTerminalProvider, type ITerminal, Terminal } from '@rushstack/terminal';
 
 import { CreateOrUpdatePrAction } from './actions/CreateOrUpdatePrAction';
+import { EmitGitHubVarsAndTagBuildAction } from './actions/EmitGitHubVarsAndTagBuildAction';
 import { FindBumpPipelineRunAction } from './actions/FindBumpPipelineRunAction';
 
 export class ToolboxCommandLine extends CommandLineParser {
@@ -20,6 +21,7 @@ export class ToolboxCommandLine extends CommandLineParser {
     this.terminal = terminal;
 
     this.addAction(new CreateOrUpdatePrAction(terminal));
+    this.addAction(new EmitGitHubVarsAndTagBuildAction(terminal));
     this.addAction(new FindBumpPipelineRunAction(terminal));
   }
 }

@@ -13,13 +13,11 @@ import * as z from 'zod';
 import { Executable } from '@rushstack/node-core-library';
 import { Colorize, type Terminal } from '@rushstack/terminal';
 import type {
-  CommandLineStringListParameter,
   CommandLineStringParameter,
   IRequiredCommandLineChoiceParameter,
   IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
 import {
-  LocalFileSystemRepositorySource,
   type SPFxTemplateCollection,
   SPFxTemplateRepositoryManager,
   type SPFxTemplate,
@@ -49,7 +47,6 @@ const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile> = z.object({
 export class CreateAction extends SPFxActionBase {
   private readonly _targetDirParameter: IRequiredCommandLineStringParameter;
   private readonly _templateParameter: IRequiredCommandLineStringParameter;
-  private readonly _localTemplateSourcesParameter: CommandLineStringListParameter;
   private readonly _libraryNameParameter: IRequiredCommandLineStringParameter;
   private readonly _componentNameParameter: IRequiredCommandLineStringParameter;
   private readonly _componentAliasParameter: CommandLineStringParameter;
@@ -72,12 +69,6 @@ export class CreateAction extends SPFxActionBase {
       argumentName: 'TARGET_DIR',
       description: 'The directory to create the solution (or where the solution already exists)',
       defaultValue: process.cwd()
-    });
-
-    this._localTemplateSourcesParameter = this.defineStringListParameter({
-      parameterLongName: '--local-template',
-      argumentName: 'TEMPLATE_PATH',
-      description: 'Path to a local template folder'
     });
 
     this._templateParameter = this.defineStringParameter({
@@ -134,7 +125,7 @@ export class CreateAction extends SPFxActionBase {
 
     try {
       const options: IScaffoldProfile = {
-        localTemplateSources: this._localTemplateSourcesParameter.values,
+        localTemplateSources: this._localSourceParameter.values,
         templateName: this._templateParameter.value,
         targetDir: this._targetDirParameter.value
       };
@@ -148,33 +139,20 @@ export class CreateAction extends SPFxActionBase {
 
       const manager: SPFxTemplateRepositoryManager = new SPFxTemplateRepositoryManager();
 
-      if (this._localTemplateSourcesParameter.values.length > 0) {
+      if (this._localSourceParameter.values.length > 0) {
         if (this._spfxVersionParameter.value !== undefined) {
           terminal.writeWarningLine(
-            `${this._spfxVersionParameter.longName} is ignored when ${this._localTemplateSourcesParameter.longName} is specified.`
+            `${this._spfxVersionParameter.longName} is ignored when ${this._localSourceParameter.longName} is specified.`
           );
         }
-        for (const localPath of this._localTemplateSourcesParameter.values) {
-          terminal.writeLine(`Adding local template source: ${localPath}`);
-          manager.addSource(new LocalFileSystemRepositorySource(localPath));
-        }
+        this._addLocalTemplateSources(manager);
       } else {
         this._addGitHubTemplateSource(manager);
       }
 
       this._addRemoteSources(manager);
 
-      let templates: SPFxTemplateCollection;
-      try {
-        templates = await manager.getTemplatesAsync();
-      } catch (fetchError: unknown) {
-        const fetchMessage: string = fetchError instanceof Error ? fetchError.message : String(fetchError);
-        throw new Error(
-          `Failed to fetch templates. If you are offline or behind a firewall, ` +
-            `use ${this._localTemplateSourcesParameter.longName} to specify a local template source. Details: ${fetchMessage}`,
-          { cause: fetchError }
-        );
-      }
+      const templates: SPFxTemplateCollection = await this._fetchTemplatesAsync(manager);
 
       const formattedTable: string = await templates.toFormattedStringAsync();
       terminal.writeLine(formattedTable);

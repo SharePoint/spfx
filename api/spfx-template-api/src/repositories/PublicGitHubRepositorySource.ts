@@ -114,7 +114,7 @@ export interface IPublicGitHubRepositorySourceOptions {
  * - Templates are scaffolding code (one-time generation), not runtime dependencies
  * - Users trust the source repository (Microsoft-controlled for defaults)
  * - HTTPS provides transport security and authenticity
- * - Users can override with --local-template for full control
+ * - Users can override with --local-source for full control
  *
  * This pattern is similar to other scaffolding tools (npm create, dotnet new, etc.)
  */

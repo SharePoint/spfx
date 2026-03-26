@@ -87,9 +87,9 @@ Array [
 ]
 `;
 
-exports[`CreateAction --spfx-version is ignored (with no throw) when --local-template is also provided 1`] = `
+exports[`CreateAction --spfx-version is ignored (with no throw) when --local-source is also provided 1`] = `
 Array [
-  "[warning] --spfx-version is ignored when --local-template is specified.[n]",
+  "[warning] --spfx-version is ignored when --local-source is specified.[n]",
   "[    log] Adding local template source: /a[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test[n]",
@@ -254,7 +254,7 @@ Array [
 ]
 `;
 
-exports[`CreateAction source selection with --local-template should add a LocalFileSystemRepositorySource for the provided path 1`] = `
+exports[`CreateAction source selection with --local-source should add a LocalFileSystemRepositorySource for the provided path 1`] = `
 Array [
   "[    log] Adding local template source: /path/to/templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
@@ -265,7 +265,7 @@ Array [
 ]
 `;
 
-exports[`CreateAction source selection with --local-template should add multiple sources for multiple --local-template flags 1`] = `
+exports[`CreateAction source selection with --local-source should add multiple sources for multiple --local-source flags 1`] = `
 Array [
   "[    log] Adding local template source: /a[n]",
   "[    log] Adding local template source: /b[n]",
@@ -314,7 +314,7 @@ Array [
 ]
 `;
 
-exports[`CreateAction source selection with --remote-source works alongside --local-template without adding the default GitHub source 1`] = `
+exports[`CreateAction source selection with --remote-source works alongside --local-source without adding the default GitHub source 1`] = `
 Array [
   "[    log] Adding local template source: /path/to/templates[n]",
   "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
@@ -326,7 +326,7 @@ Array [
 ]
 `;
 
-exports[`CreateAction source selection without --local-template should add a PublicGitHubRepositorySource with the default URL 1`] = `
+exports[`CreateAction source selection without --local-source should add a PublicGitHubRepositorySource with the default URL 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
@@ -337,7 +337,7 @@ Array [
 ]
 `;
 
-exports[`CreateAction source selection without --local-template should use SPFX_TEMPLATE_REPO_URL when set 1`] = `
+exports[`CreateAction source selection without --local-source should use SPFX_TEMPLATE_REPO_URL when set 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/my-org/my-templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",

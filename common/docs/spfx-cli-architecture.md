@@ -69,7 +69,7 @@ Yeoman compatibility shim) can be built without duplicating core logic.
 |-----------|----------|-------------|
 | `--template TEMPLATE_NAME` | Yes | Choose the template to scaffold. |
 | `--target-dir TARGET` | No | The directory where output should be written. Defaults to current working directory. |
-| `--local-template PATH` | No | Path to a local template folder. Can be specified multiple times. |
+| `--local-source PATH` | No | Path to a local template folder. Can be specified multiple times. |
 | `--library-name NAME` | Yes | The library name for the component. |
 | `--component-name NAME` | Yes | The display name for the component (e.g. "Hello World"). |
 | `--component-alias ALIAS` | No | The component alias. Defaults to the component name. |
@@ -77,33 +77,19 @@ Yeoman compatibility shim) can be built without duplicating core logic.
 | `--solution-name NAME` | No | The solution name. Defaults to the kebab-case component name. |
 | `--template-url URL` | No | Custom GitHub template repository URL. Defaults to `https://github.com/SharePoint/spfx`. Also accepts the `SPFX_TEMPLATE_REPO_URL` environment variable. |
 | `--spfx-version VERSION` | No | Branch/tag in the template repo to use (e.g. `1.22`, `1.23-rc.0`). Defaults to the repo's default branch. |
+| `--remote-source URL` | No | Public GitHub repo to include as an additional template source. Can be specified multiple times. |
 | `--package-manager {npm,pnpm,yarn,none}` | No | Package manager for dependency installation after scaffolding. `none` skips installation (default). See [#165](https://github.com/SharePoint/spfx/issues/165) for the planned restriction to new projects only. |
 
-**Planned parameters (not yet implemented):**
-
-| Parameter | Description |
-|-----------|-------------|
-| `--github-source URL` | Registers additional public GitHub template sources. |
-
-In the current implementation, the `create` command reads templates from local template
-sources and writes the generated project files directly to disk via `SPFxTemplate.write()`.
-
-**Planned future behavior:** the `create` command will download, unzip, and read
-templates from all registered sources, find the selected template, validate parameters,
-render the template in-memory, and write to disk — routing modified files through merge
-helpers when scaffolding onto an existing project. After writing, the CLI will run
-dependency installation (via the selected package manager) so the project is immediately
-buildable. The CLI will also validate that the current Node.js version meets SPFx
-requirements before proceeding.
-
-#### `spfx list-templates` (planned)
+#### `spfx list-templates`
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `--local-template PATH` | No | Shows templates found on local disk. Can be specified multiple times. |
-| `--github-source URL` | No | Shows templates found in additional public GitHub template sources. Only public GitHub repos are supported. |
+| `--local-source PATH` | No | Path to a local template folder. Can be specified multiple times. |
+| `--remote-source URL` | No | Public GitHub repo to include as an additional template source. Can be specified multiple times. |
+| `--template-url URL` | No | Custom GitHub template repository URL for the default source. |
+| `--spfx-version VERSION` | No | Branch/tag in the default template repo to use. |
 
-Lists all templates available from the registered sources.
+Lists all templates available from the registered sources. The default GitHub source is always included; `--local-source` and `--remote-source` add additional sources.
 
 ---
 

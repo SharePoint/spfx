@@ -2,26 +2,29 @@
 // See LICENSE in the project root for license information.
 
 import type { ITerminal } from '@rushstack/terminal';
-import { type IRequiredCommandLineStringParameter, CommandLineAction } from '@rushstack/ts-command-line';
+import type {
+  IRequiredCommandLineIntegerParameter,
+  IRequiredCommandLineStringParameter
+} from '@rushstack/ts-command-line';
 
 import { GitHubClient, type IGitHubPr } from '../../utilities/GitHubClient';
+import { execGitAsync } from '../../utilities/GitUtilities';
+import { AzDoPipelineAction } from './AzDoPipelineAction';
 
-export class CreateOrUpdatePrAction extends CommandLineAction {
-  private readonly _terminal: ITerminal;
-
+export class CreateOrUpdatePrAction extends AzDoPipelineAction {
   private readonly _branchNameParameter: IRequiredCommandLineStringParameter;
   private readonly _baseBranchParameter: IRequiredCommandLineStringParameter;
   private readonly _titleParameter: IRequiredCommandLineStringParameter;
   private readonly _bodyParameter: IRequiredCommandLineStringParameter;
+  private readonly _statusContextParameter: IRequiredCommandLineStringParameter;
+  private readonly _buildIdParameter: IRequiredCommandLineIntegerParameter;
 
   public constructor(terminal: ITerminal) {
-    super({
+    super(terminal, {
       actionName: 'create-or-update-pr',
       summary: 'Creates or updates a pull request for the repository. To be used only on AzDO pipelines.',
       documentation: ''
     });
-
-    this._terminal = terminal;
 
     this._branchNameParameter = this.defineStringParameter({
       parameterLongName: '--branch-name',
@@ -52,6 +55,23 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       defaultValue: '',
       environmentVariable: 'PR_BODY'
     });
+
+    this._statusContextParameter = this.defineStringParameter({
+      parameterLongName: '--status-context',
+      argumentName: 'CONTEXT',
+      description:
+        'Posts a pending GitHub commit status with this context string and emits it ' +
+        'as the StatusContext AzDO output variable for use by downstream stages.',
+      required: true
+    });
+
+    this._buildIdParameter = this.defineIntegerParameter({
+      parameterLongName: '--build-id',
+      argumentName: 'ID',
+      description: 'The AzDO build ID, used to build the pipeline run target URL.',
+      required: true,
+      environmentVariable: 'BUILD_BUILDID'
+    });
   }
 
   protected override async onExecuteAsync(): Promise<void> {
@@ -78,5 +98,23 @@ export class CreateOrUpdatePrAction extends CommandLineAction {
       ({ number: prNumber } = await gitHubClient.openPrAsync({ title, body, branchName, baseBranch }));
       terminal.writeLine(`Created PR #${prNumber}`);
     }
+
+    const statusContext: string = this._statusContextParameter.value;
+    const sha: string = await execGitAsync(['rev-parse', 'HEAD'], terminal);
+    const collectionUri: string = this._collectionUriParameter.value;
+    const teamProject: string = this._teamProjectParameter.value;
+    const buildId: number = this._buildIdParameter.value;
+    const targetUrl: string = `${collectionUri}${teamProject}/_build/results?buildId=${buildId}`;
+
+    await gitHubClient.postCommitStatusAsync({
+      sha,
+      state: 'pending',
+      context: statusContext,
+      description: 'Bump versions pipeline in progress',
+      targetUrl
+    });
+    terminal.writeLine(`Posted pending commit status (context: ${statusContext})`);
+
+    terminal.writeLine(`##vso[task.setvariable variable=StatusContext;isOutput=true]${statusContext}`);
   }
 }
