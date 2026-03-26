@@ -18,11 +18,11 @@ Every string value in the render context is automatically wrapped with casing he
 
 | Syntax | Case | Use for | Example |
 |--------|------|---------|---------|
-| `componentName` | original | Display name (via `toString()`) | "Generic Card" |
-| `componentName.camel` | camelCase | File/folder names | "genericCard" |
-| `componentName.pascal` | PascalCase | Class names | "GenericCard" |
-| `componentName.hyphen` | hyphen-case | CSS classes, IDs, localization keys | "generic-card" |
-| `componentName.allCaps` | UPPER_SNAKE_CASE | String literal IDs | "GENERIC_CARD" |
+| `componentName` | original | Display titles in manifests (via `toString()`) | "Generic Card" |
+| `componentName.camel` | camelCase | Folder names, CSS classes, file-path segments | "genericCard" |
+| `componentName.pascal` | PascalCase | Class names, localization module keys, file names | "GenericCard" |
+| `componentName.hyphen` | hyphen-case | Bundle IDs in config.json, deploy containers, webpack chunk names | "generic-card" |
+| `componentName.allCaps` | UPPER_SNAKE_CASE | ACE view/quick-view registry IDs, string constants | "GENERIC_CARD" |
 | `libraryName` | original | Package name (via `toString()`) | "@spfx-template/generic-card" |
 | `description` | — | User-provided description | User's text |
 | `spfxVersion` | — | SPFx framework version | "1.22.2" |
@@ -45,14 +45,25 @@ public static readonly GENERICCARD_CARD_VIEW = 'GENERICCARD_CARD_VIEW';
 public static readonly GenericCard_CARD_VIEW = 'GenericCard_CARD_VIEW';
 ```
 
-### Localization keys — hyphen-case
+### Bundle identifiers — hyphen-case
 
-```typescript
+Used in `config/config.json` bundle keys, `config/deploy-azure-storage.json` containers, and webpack chunk names.
+
+```json
+// Correct — config.json bundle key
+"<%= componentName.hyphen %>-web-part": { ... }
+
+// Wrong — camelCase in bundle key
+"<%= componentName.camel %>WebPart": { ... }
+```
+
+### Localization modules — PascalCase
+
+Localization module names in `config.json` `localizedResources` and `loc/*.d.ts` `declare module` statements use `.pascal`.
+
+```json
 // Correct
-PropertyPaneDescription: 'generic-card-property-pane'
-
-// Wrong — capital letters
-PropertyPaneDescription: 'GenericCard-property-pane'
+"<%= componentName.pascal %>WebPartStrings": "lib/webparts/<%= componentName.camel %>WebPart/loc/{locale}.js"
 ```
 
 ### TypeScript identifiers — camelCase / PascalCase
@@ -132,7 +143,7 @@ Example READMEs should have real content: a component name header, an actual sum
 ## Pre-Submit Checklist
 
 - [ ] String literal IDs use ALL_CAPS
-- [ ] Localization keys use hyphen-case
+- [ ] Bundle IDs use `.hyphen`, localization modules use `.pascal`
 - [ ] README uses `<%= description %>` placeholder
 - [ ] Localization files use description placeholders
 - [ ] All version references use `<%= spfxVersion %>`
