@@ -18,9 +18,9 @@ export default class <%= componentNameCapitalCase %> extends React.Component<I<%
       <section className={`${styles.<%= componentNameCamelCase %>} ${hasTeamsContext ? styles.teams : ''}`}>
         <div className={styles.welcome}>
           <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>{strings.GreetingMessage.replace('{0}', escape(userDisplayName))}</h2>
+          <h2>{strings.GreetingMessage.replace(/\{0\}/g, escape(userDisplayName))}</h2>
           <div>{environmentMessage}</div>
-          <div>{strings.PropertyValueLabel}<strong>{escape(description)}</strong></div>
+          <div>{strings.PropertyValueLabel}{' '}<strong>{escape(description)}</strong></div>
         </div>
         <div>
           <h3>{strings.WelcomeTitle}</h3>

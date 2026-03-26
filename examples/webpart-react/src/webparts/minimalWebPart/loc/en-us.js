@@ -13,7 +13,7 @@ define([], function () {
     AppOutlookEnvironment: 'The app is running in Outlook',
     UnknownEnvironment: 'The app is running in an unknown environment',
     GreetingMessage: 'Well done, {0}!',
-    PropertyValueLabel: 'Web part property value: ',
+    PropertyValueLabel: 'Web part property value:',
     WelcomeTitle: 'Welcome to SharePoint Framework!',
     WelcomeDescription:
       "The SharePoint Framework (SPFx) is an extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.",

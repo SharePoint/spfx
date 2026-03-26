@@ -26,9 +26,9 @@ export default class NoFrameworkWebPart extends BaseClientSideWebPart<INoFramewo
     <section class="${styles.noFrameworkWebPart} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
       <div class="${styles.welcome}">
         <img alt="" src="${this._isDarkTheme ? welcomeDark : welcomeLight}" class="${styles.welcomeImage}" />
-        <h2>${strings.GreetingMessage.replace('{0}', escape(this.context.pageContext.user.displayName))}</h2>
+        <h2>${strings.GreetingMessage.replace(/\{0\}/g, escape(this.context.pageContext.user.displayName))}</h2>
         <div>${this._environmentMessage}</div>
-        <div>${strings.PropertyValueLabel}<strong>${escape(this.properties.description)}</strong></div>
+        <div>${strings.PropertyValueLabel} <strong>${escape(this.properties.description)}</strong></div>
       </div>
       <div>
         <h3>${strings.WelcomeTitle}</h3>
