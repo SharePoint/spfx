@@ -1,21 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { readFile } from 'node:fs/promises';
+import * as path from 'node:path';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 
-import type { MemFsEditor } from 'mem-fs-editor';
-
+import type { ITemplateFileSystem } from './TemplateFileSystem';
 import type { IMergeHelper } from './IMergeHelper';
 import { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 import { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';
 import { PackageSolutionJsonMergeHelper } from './PackageSolutionJsonMergeHelper';
 import { ServeJsonMergeHelper } from './ServeJsonMergeHelper';
-
-interface IDumpEntry {
-  // eslint-disable-next-line @rushstack/no-new-null
-  contents: string | null;
-  state?: string;
-}
 
 /**
  * Orchestrates writing template output to disk, routing modified files
@@ -50,50 +44,67 @@ export class SPFxTemplateWriter {
    * routed through their corresponding merge helper (if one is registered).
    * New files are written directly.
    *
-   * @param editor - The MemFsEditor containing rendered template files
+   * @param templateFs - The in-memory file system containing rendered template files
    * @param targetDir - The absolute path to the destination directory
    */
-  public async writeAsync(editor: MemFsEditor, targetDir: string): Promise<void> {
-    // editor.dump(targetDir) returns keys as paths relative to targetDir
-    const dump: Record<string, IDumpEntry> = editor.dump(targetDir);
+  public async writeAsync(templateFs: ITemplateFileSystem, targetDir: string): Promise<void> {
+    const resolvedTargetDir: string = path.resolve(targetDir);
 
-    for (const [rawPath, entry] of Object.entries(dump)) {
-      // Normalize Windows backslash separators so merge-helper lookup works cross-platform
-      const relativePath: string = rawPath.replace(/\\/g, '/');
-      if (entry.state === 'deleted') {
+    for (const [rawRelativePath, entry] of templateFs.files) {
+      // Normalize: strip leading separators and convert backslashes to forward slashes
+      const relativePath: string = rawRelativePath.replace(/\\/g, '/').replace(/^\/+/, '');
+
+      // Guard against path traversal: resolve the full path and verify it stays under targetDir
+      const absolutePath: string = path.resolve(resolvedTargetDir, relativePath);
+      const relativeToTarget: string = path.relative(resolvedTargetDir, absolutePath);
+      if (
+        path.isAbsolute(relativeToTarget) ||
+        relativeToTarget === '..' ||
+        relativeToTarget.startsWith('..' + path.sep)
+      ) {
+        throw new Error(`Template path "${rawRelativePath}" escapes the target directory`);
+      }
+
+      const contents: string | Buffer = entry.contents;
+
+      if (typeof contents !== 'string') {
+        // Binary file — always write directly
+        const dirPath: string = path.dirname(absolutePath);
+        await mkdir(dirPath, { recursive: true });
+        await writeFile(absolutePath, contents);
         continue;
       }
 
-      if (entry.contents === null) {
-        continue;
-      }
-
-      const absolutePath: string = `${targetDir}/${relativePath}`;
-
+      // Text file — attempt merge with existing content on disk
       let existingContent: string;
       try {
         existingContent = await readFile(absolutePath, 'utf-8');
-      } catch {
-        // File does not exist — new file, let commit write it as-is
+      } catch (error: unknown) {
+        // Only treat ENOENT (file not found) as "new file" — rethrow anything else
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((error as any)?.code !== 'ENOENT') {
+          throw error;
+        }
+        // File does not exist on disk — write as new file
+        const dirPath: string = path.dirname(absolutePath);
+        await mkdir(dirPath, { recursive: true });
+        await writeFile(absolutePath, contents, 'utf-8');
         continue;
       }
 
-      // File already exists on disk — attempt merge if content differs
-      if (existingContent === entry.contents) {
+      // File exists on disk — check if content differs
+      if (existingContent === contents) {
         continue;
       }
 
       const helper: IMergeHelper | undefined = this._mergeHelpers.get(relativePath);
       if (helper) {
-        const mergedContent: string = helper.merge(existingContent, entry.contents);
-        editor.write(absolutePath, mergedContent);
-      } else {
-        // No merge helper and content differs — preserve the existing version
-        // by writing it into the editor so commit() does not overwrite it.
-        editor.write(absolutePath, existingContent);
+        const mergedContent: string = helper.merge(existingContent, contents);
+        const dirPath: string = path.dirname(absolutePath);
+        await mkdir(dirPath, { recursive: true });
+        await writeFile(absolutePath, mergedContent, 'utf-8');
       }
+      // No merge helper and content differs — preserve existing content (skip writing)
     }
-
-    await editor.commit();
   }
 }
