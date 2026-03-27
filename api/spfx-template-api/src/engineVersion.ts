@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { PackageJsonLookup, type IPackageJson } from '@rushstack/node-core-library';
-
-const ownPackageJson: IPackageJson = PackageJsonLookup.loadOwnPackageJson(__dirname);
+// eslint-disable-next-line @typescript-eslint/typedef
+const ownPackageJson = require('../package.json') as { version: string };
 
 /**
- * The engine version of the \@microsoft/spfx-template-api package.
+ * The engine version of the `@microsoft/spfx-template-api` package.
  * Templates can declare a `minimumEngineVersion` in template.json to require
  * at least this version of the engine.
  * @public

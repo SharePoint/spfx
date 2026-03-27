@@ -64,19 +64,45 @@ export interface ISPFxTemplateJson {
 }
 
 /**
+ * The Zod shape for the template.json schema.  Defined as a standalone object so
+ * that {@link KNOWN_TEMPLATE_JSON_FIELDS} can be derived from its keys, keeping the
+ * set of recognized fields automatically in sync with the schema definition.
+ */
+// eslint-disable-next-line @typescript-eslint/typedef -- inferred type preserves the specific Zod shape needed by z.object()
+const _templateJsonSchemaShape = {
+  $schema: z.url().optional(),
+  name: z.string().min(NAME_MIN_LENGTH).max(NAME_MAX_LENGTH),
+  category: z.enum(SPFX_TEMPLATE_CATEGORIES),
+  description: z.string().max(DESCRIPTION_MAX_LENGTH).optional(),
+  version: z.string().refine(isValidSemver, {
+    message: 'Invalid semantic version for "version" (expected format like "1.0.0").'
+  }),
+  spfxVersion: z.string().refine(isValidSemver, {
+    message: 'Invalid semantic version for "spfxVersion" (expected format like "1.0.0").'
+  }),
+  contextSchema: z
+    .record(
+      z.string(),
+      z.object({
+        type: z.enum(['string']),
+        description: z.string()
+      })
+    )
+    .optional(),
+  minimumEngineVersion: z
+    .string()
+    .refine(isValidSemver, {
+      message: 'Invalid semantic version for "minimumEngineVersion" (expected format like "1.0.0").'
+    })
+    .optional()
+};
+
+/**
  * The set of field names recognized by this version of the engine.
+ * Derived from the Zod schema shape so it stays in sync automatically.
  * Used to detect unknown fields for forward-compatibility warnings.
  */
-const KNOWN_TEMPLATE_JSON_FIELDS: ReadonlySet<string> = new Set([
-  '$schema',
-  'name',
-  'category',
-  'description',
-  'version',
-  'spfxVersion',
-  'contextSchema',
-  'minimumEngineVersion'
-]);
+const KNOWN_TEMPLATE_JSON_FIELDS: ReadonlySet<string> = new Set(Object.keys(_templateJsonSchemaShape));
 
 /**
  * @public
@@ -86,33 +112,7 @@ const KNOWN_TEMPLATE_JSON_FIELDS: ReadonlySet<string> = new Set([
  * in future engine versions are tolerated by older engines (forward compatibility).
  */
 export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z
-  .object({
-    $schema: z.url().optional(),
-    name: z.string().min(NAME_MIN_LENGTH).max(NAME_MAX_LENGTH),
-    category: z.enum(SPFX_TEMPLATE_CATEGORIES),
-    description: z.string().max(DESCRIPTION_MAX_LENGTH).optional(),
-    version: z.string().refine(isValidSemver, {
-      message: 'Invalid semantic version for "version" (expected format like "1.0.0").'
-    }),
-    spfxVersion: z.string().refine(isValidSemver, {
-      message: 'Invalid semantic version for "spfxVersion" (expected format like "1.0.0").'
-    }),
-    contextSchema: z
-      .record(
-        z.string(),
-        z.object({
-          type: z.enum(['string']),
-          description: z.string()
-        })
-      )
-      .optional(),
-    minimumEngineVersion: z
-      .string()
-      .refine(isValidSemver, {
-        message: 'Invalid semantic version for "minimumEngineVersion" (expected format like "1.0.0").'
-      })
-      .optional()
-  })
+  .object(_templateJsonSchemaShape)
   .passthrough();
 
 /**
