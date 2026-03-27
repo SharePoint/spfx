@@ -216,7 +216,10 @@ export class SPFxTemplate {
           cache: false
         });
 
-        if (!options?.retainPhaseScripts && renderedFilename.endsWith('/package.json')) {
+        if (
+          !options?.retainPhaseScripts &&
+          (renderedFilename === 'package.json' || renderedFilename.endsWith('/package.json'))
+        ) {
           rendered = _stripPhaseScripts(rendered);
         }
 

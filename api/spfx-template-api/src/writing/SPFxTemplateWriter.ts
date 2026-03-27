@@ -48,8 +48,18 @@ export class SPFxTemplateWriter {
    * @param targetDir - The absolute path to the destination directory
    */
   public async writeAsync(templateFs: ITemplateFileSystem, targetDir: string): Promise<void> {
-    for (const [relativePath, entry] of templateFs.files) {
-      const absolutePath: string = `${targetDir}/${relativePath}`;
+    const resolvedTargetDir: string = path.resolve(targetDir);
+
+    for (const [rawRelativePath, entry] of templateFs.files) {
+      // Normalize: strip leading separators and convert backslashes to forward slashes
+      const relativePath: string = rawRelativePath.replace(/\\/g, '/').replace(/^\/+/, '');
+
+      // Guard against path traversal: resolve the full path and verify it stays under targetDir
+      const absolutePath: string = path.resolve(resolvedTargetDir, relativePath);
+      if (!absolutePath.startsWith(resolvedTargetDir + path.sep) && absolutePath !== resolvedTargetDir) {
+        throw new Error(`Template path "${rawRelativePath}" escapes the target directory`);
+      }
+
       const contents: string | Buffer = entry.contents;
 
       if (typeof contents !== 'string') {
@@ -64,12 +74,15 @@ export class SPFxTemplateWriter {
       let existingContent: string;
       try {
         existingContent = await readFile(absolutePath, 'utf-8');
-      } catch {
-        // File does not exist on disk — write as new file
-        const dirPath: string = path.dirname(absolutePath);
-        await mkdir(dirPath, { recursive: true });
-        await writeFile(absolutePath, contents, 'utf-8');
-        continue;
+      } catch (error: unknown) {
+        if (_isNodeError(error) && error.code === 'ENOENT') {
+          // File does not exist on disk — write as new file
+          const dirPath: string = path.dirname(absolutePath);
+          await mkdir(dirPath, { recursive: true });
+          await writeFile(absolutePath, contents, 'utf-8');
+          continue;
+        }
+        throw error;
       }
 
       // File exists on disk — check if content differs
@@ -87,4 +100,8 @@ export class SPFxTemplateWriter {
       // No merge helper and content differs — preserve existing content (skip writing)
     }
   }
+}
+
+function _isNodeError(error: unknown): error is NodeJS.ErrnoException {
+  return error instanceof Error && 'code' in error;
 }

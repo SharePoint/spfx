@@ -20,7 +20,7 @@ describe(SPFxTemplateWriter.name, () => {
 
   it('should write new files to disk', async () => {
     templateFs.write('src/newFile.ts', 'new content');
-    (readFile as jest.Mock).mockRejectedValue(new Error('ENOENT'));
+    (readFile as jest.Mock).mockRejectedValue(Object.assign(new Error('ENOENT'), { code: 'ENOENT' }));
 
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, '/target');
@@ -97,7 +97,7 @@ describe(SPFxTemplateWriter.name, () => {
       if (filePath.includes('config.json')) {
         return Promise.resolve(existingConfig);
       }
-      return Promise.reject(new Error('ENOENT'));
+      return Promise.reject(Object.assign(new Error('ENOENT'), { code: 'ENOENT' }));
     });
 
     const writer = new SPFxTemplateWriter();
@@ -142,7 +142,7 @@ describe(SPFxTemplateWriter.name, () => {
   it('should write binary files directly without merge', async () => {
     const buffer = Buffer.from([0x89, 0x50, 0x4e, 0x47]);
     templateFs.write('assets/logo.png', buffer);
-    (readFile as jest.Mock).mockRejectedValue(new Error('ENOENT'));
+    (readFile as jest.Mock).mockRejectedValue(Object.assign(new Error('ENOENT'), { code: 'ENOENT' }));
 
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, '/target');
@@ -154,12 +154,22 @@ describe(SPFxTemplateWriter.name, () => {
   describe('error propagation', () => {
     it('should propagate error when writeFile rejects', async () => {
       templateFs.write('file.txt', 'content');
-      (readFile as jest.Mock).mockRejectedValue(new Error('ENOENT'));
+      (readFile as jest.Mock).mockRejectedValue(Object.assign(new Error('ENOENT'), { code: 'ENOENT' }));
       (writeFile as jest.Mock).mockRejectedValue(new Error('EACCES: permission denied'));
 
       const writer = new SPFxTemplateWriter();
 
       await expect(writer.writeAsync(templateFs, '/target')).rejects.toThrow('EACCES');
+    });
+
+    it('should propagate non-ENOENT readFile errors instead of treating as new file', async () => {
+      templateFs.write('file.txt', 'content');
+      (readFile as jest.Mock).mockRejectedValue(Object.assign(new Error('EACCES'), { code: 'EACCES' }));
+
+      const writer = new SPFxTemplateWriter();
+
+      await expect(writer.writeAsync(templateFs, '/target')).rejects.toThrow('EACCES');
+      expect(writeFile).not.toHaveBeenCalled();
     });
 
     it('should propagate error when a merge helper merge() throws', async () => {
@@ -169,6 +179,14 @@ describe(SPFxTemplateWriter.name, () => {
       const writer = new SPFxTemplateWriter();
 
       await expect(writer.writeAsync(templateFs, '/target')).rejects.toThrow(SyntaxError);
+    });
+
+    it('should throw on path traversal attempts', async () => {
+      templateFs.write('../escape.txt', 'malicious');
+
+      const writer = new SPFxTemplateWriter();
+
+      await expect(writer.writeAsync(templateFs, '/target')).rejects.toThrow(/escapes the target directory/);
     });
   });
 
@@ -190,6 +208,23 @@ describe(SPFxTemplateWriter.name, () => {
       expect(writeFile).toHaveBeenCalledTimes(1);
       const writtenContent = JSON.parse((writeFile as jest.Mock).mock.calls[0][1]);
       expect(writtenContent.custom).toBe('merged');
+    });
+
+    it('should match merge helpers after normalizing leading slashes', async () => {
+      const existingPkg = JSON.stringify({ name: 'existing', dependencies: {} });
+      const incomingPkg = JSON.stringify({ name: 'incoming', dependencies: { axios: '^1.0.0' } });
+
+      // Write with leading slash — should still match the 'package.json' merge helper
+      templateFs.write('/package.json', incomingPkg);
+      (readFile as jest.Mock).mockResolvedValue(existingPkg);
+
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(templateFs, '/target');
+
+      expect(writeFile).toHaveBeenCalledTimes(1);
+      const writtenContent = JSON.parse((writeFile as jest.Mock).mock.calls[0][1]);
+      expect(writtenContent.name).toBe('existing');
+      expect(writtenContent.dependencies.axios).toBe('^1.0.0');
     });
 
     it('should not throw for built-in helper paths', async () => {

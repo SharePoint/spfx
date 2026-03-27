@@ -273,12 +273,12 @@ function _printFileChanges(terminal: Terminal, templateFs: ITemplateFileSystem, 
   terminal.writeLine(`targetDir: ${targetDir}`);
 
   terminal.writeLine();
-  terminal.writeLine(Colorize.cyan('The following files will be modified:'));
+  terminal.writeLine(Colorize.cyan('The following files will be generated:'));
 
   const sortedFiles: string[] = Array.from(templateFs.files.keys()).sort();
 
   for (const file of sortedFiles) {
-    terminal.writeLine(Colorize.green(`Added: ${file}`));
+    terminal.writeLine(Colorize.green(`  ${file}`));
   }
 
   terminal.writeLine();
