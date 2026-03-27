@@ -34,5 +34,16 @@ export {
   ConfigJsonMergeHelper,
   PackageSolutionJsonMergeHelper,
   ServeJsonMergeHelper,
-  SPFxTemplateWriter
+  SPFxTemplateWriter,
+  type IWriteOptions
 } from './writing/index';
+export {
+  type ISPFxScaffoldEventBase,
+  type ITemplateRenderedEvent,
+  type IPackageManagerSelectedEvent,
+  type FileWriteOutcome,
+  type IFileWriteEvent,
+  type IPackageManagerInstallCompletedEvent,
+  type SPFxScaffoldEvent,
+  SPFxScaffoldLog
+} from './logging/index';

@@ -25,9 +25,43 @@ export class ConfigJsonMergeHelper extends JsonMergeHelper {
 }
 
 // @public
+export type FileWriteOutcome = 'new' | 'merged' | 'preserved' | 'unchanged';
+
+// @public
+export interface IFileWriteEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    kind: 'file-write';
+    mergeHelper?: string;
+    // (undocumented)
+    outcome: FileWriteOutcome;
+    // (undocumented)
+    relativePath: string;
+}
+
+// @public
 export interface IMergeHelper {
     readonly fileRelativePath: string;
     merge(existingContent: string, newContent: string): string;
+}
+
+// @public
+export interface IPackageManagerInstallCompletedEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    exitCode: number;
+    // (undocumented)
+    kind: 'package-manager-install-completed';
+    // (undocumented)
+    packageManager: string;
+}
+
+// @public
+export interface IPackageManagerSelectedEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    kind: 'package-manager-selected';
+    // (undocumented)
+    packageManager: string;
+    // (undocumented)
+    targetDir: string;
 }
 
 // @public
@@ -46,6 +80,12 @@ export interface IRenderOptions {
 export function _isBinaryFile(filePath: string): boolean;
 
 // @public
+export interface ISPFxScaffoldEventBase {
+    kind: string;
+    timestamp: string;
+}
+
+// @public
 export interface ISPFxTemplateJson {
     $schema?: string;
     category: SPFxTemplateCategory;
@@ -57,6 +97,27 @@ export interface ISPFxTemplateJson {
     name: string;
     spfxVersion: string;
     version: string;
+}
+
+// @public
+export interface ITemplateRenderedEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    cliVersion: string;
+    // (undocumented)
+    context: Record<string, string>;
+    // (undocumented)
+    kind: 'template-rendered';
+    // (undocumented)
+    spfxVersion: string;
+    // (undocumented)
+    templateName: string;
+    // (undocumented)
+    templateVersion: string;
+}
+
+// @public
+export interface IWriteOptions {
+    log?: SPFxScaffoldLog;
 }
 
 // @public
@@ -111,6 +172,20 @@ export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 
 
 // @public
 export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;
+
+// @public
+export type SPFxScaffoldEvent = ITemplateRenderedEvent | IPackageManagerSelectedEvent | IFileWriteEvent | IPackageManagerInstallCompletedEvent;
+
+// @public
+export class SPFxScaffoldLog {
+    append(event: SPFxScaffoldEvent): void;
+    get events(): readonly SPFxScaffoldEvent[];
+    static fromJsonl(content: string): SPFxScaffoldLog;
+    getEventsByKind<K extends SPFxScaffoldEvent['kind']>(kind: K): Extract<SPFxScaffoldEvent, {
+        kind: K;
+    }>[];
+    toJsonl(): string;
+}
 
 // @public
 export class SPFxTemplate {
@@ -171,7 +246,7 @@ export type SPFxTemplateRepositorySourceKind = 'local' | 'github';
 export class SPFxTemplateWriter {
     constructor();
     addMergeHelper(helper: IMergeHelper): void;
-    writeAsync(editor: MemFsEditor, targetDir: string): Promise<void>;
+    writeAsync(editor: MemFsEditor, targetDir: string, options?: IWriteOptions): Promise<void>;
 }
 
 ```

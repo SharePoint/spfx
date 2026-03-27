@@ -21,7 +21,8 @@ import {
   type SPFxTemplateCollection,
   SPFxTemplateRepositoryManager,
   type SPFxTemplate,
-  SPFxTemplateWriter
+  SPFxTemplateWriter,
+  SPFxScaffoldLog
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
@@ -31,6 +32,8 @@ import { SPFxActionBase } from './SPFxActionBase';
 // namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
 const CI_NAMESPACE: string = '035a23a9-8c9e-569b-ae00-7ff2e4c82fb0';
 const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
+
+const CLI_VERSION: string = (require('../../../package.json') as { version: string }).version;
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -122,6 +125,7 @@ export class CreateAction extends SPFxActionBase {
 
   protected override async onExecuteAsync(): Promise<void> {
     const terminal: Terminal = this._terminal;
+    const log: SPFxScaffoldLog = new SPFxScaffoldLog();
 
     try {
       const options: IScaffoldProfile = {
@@ -198,36 +202,60 @@ export class CreateAction extends SPFxActionBase {
       }
       const solutionName: string = rawSolutionName || componentNameHyphenCase;
 
-      const fs: MemFsEditor = await template.renderAsync(
-        {
-          solution_name: solutionName,
-          libraryName: this._libraryNameParameter.value,
-          spfxVersion: template.spfxVersion,
-          // The shields.io badge URL uses dashes as separators, so dashes in version numbers
-          // need to be escaped as double dashes to avoid ambiguity. For example, "1.23.0-beta.0" becomes "1.23.0--beta.0".
-          spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
-          componentId: componentId,
-          featureId: featureId,
-          solutionId: solutionId,
-          componentAlias: componentAlias,
-          componentNameUnescaped: componentName,
-          componentNameCamelCase: componentNameCamelCase,
-          componentNameHyphenCase: componentNameHyphenCase,
-          componentNameCapitalCase: componentNameCapitalCase,
-          componentNameAllCaps: componentNameAllCaps,
-          componentDescription: componentDescription
-        },
-        targetDir,
-        { retainPhaseScripts: ciMode }
-      );
+      const renderContext: Record<string, string> = {
+        solution_name: solutionName,
+        libraryName: this._libraryNameParameter.value,
+        spfxVersion: template.spfxVersion,
+        // The shields.io badge URL uses dashes as separators, so dashes in version numbers
+        // need to be escaped as double dashes to avoid ambiguity. For example, "1.23.0-beta.0" becomes "1.23.0--beta.0".
+        spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
+        componentId: componentId,
+        featureId: featureId,
+        solutionId: solutionId,
+        componentAlias: componentAlias,
+        componentNameUnescaped: componentName,
+        componentNameCamelCase: componentNameCamelCase,
+        componentNameHyphenCase: componentNameHyphenCase,
+        componentNameCapitalCase: componentNameCapitalCase,
+        componentNameAllCaps: componentNameAllCaps,
+        componentDescription: componentDescription
+      };
+
+      const fs: MemFsEditor = await template.renderAsync(renderContext, targetDir, {
+        retainPhaseScripts: ciMode
+      });
+
+      log.append({
+        kind: 'template-rendered',
+        timestamp: '',
+        templateName: template.name,
+        templateVersion: template.version,
+        spfxVersion: template.spfxVersion,
+        context: renderContext,
+        cliVersion: CLI_VERSION
+      });
 
       _printFileChanges(this._terminal, fs, targetDir);
       const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
-      await writer.writeAsync(fs, targetDir);
+      await writer.writeAsync(fs, targetDir, { log });
 
       const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
       if (packageManager !== 'none') {
-        await _runInstallAsync(packageManager, targetDir, terminal);
+        log.append({
+          kind: 'package-manager-selected',
+          timestamp: '',
+          packageManager,
+          targetDir
+        });
+
+        const exitCode: number = await _runInstallAsync(packageManager, targetDir, terminal);
+
+        log.append({
+          kind: 'package-manager-install-completed',
+          timestamp: '',
+          packageManager,
+          exitCode
+        });
       }
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
@@ -240,12 +268,14 @@ export class CreateAction extends SPFxActionBase {
 /**
  * Spawns the chosen package manager's install command in targetDir and waits for it to finish.
  * Files are already written before this is called, so a failure here does not undo scaffolding.
+ *
+ * @returns The process exit code (0 on success).
  */
 async function _runInstallAsync(
   packageManager: PackageManager,
   targetDir: string,
   terminal: Terminal
-): Promise<void> {
+): Promise<number> {
   terminal.writeLine(`Running ${packageManager} install in ${targetDir}...`);
 
   const child: ChildProcess = Executable.spawn(packageManager, ['install'], {
@@ -265,6 +295,7 @@ async function _runInstallAsync(
   }
 
   terminal.writeLine(`${packageManager} install completed successfully.`);
+  return exitCode;
 }
 
 /**
