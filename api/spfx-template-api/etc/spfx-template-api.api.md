@@ -25,10 +25,10 @@ export class ConfigJsonMergeHelper extends JsonMergeHelper {
 }
 
 // @public
-export const ENGINE_VERSION: string;
+export function createCasedString(raw: string): ICasedString;
 
 // @public
-export function createCasedString(raw: string): ICasedString;
+export const ENGINE_VERSION: string;
 
 // @public
 export interface ICasedString {
