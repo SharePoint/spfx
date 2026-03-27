@@ -75,14 +75,16 @@ export class SPFxTemplateWriter {
       try {
         existingContent = await readFile(absolutePath, 'utf-8');
       } catch (error: unknown) {
-        if (_isNodeError(error) && error.code === 'ENOENT') {
-          // File does not exist on disk — write as new file
-          const dirPath: string = path.dirname(absolutePath);
-          await mkdir(dirPath, { recursive: true });
-          await writeFile(absolutePath, contents, 'utf-8');
-          continue;
+        // Only treat ENOENT (file not found) as "new file" — rethrow anything else
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((error as any)?.code !== 'ENOENT') {
+          throw error;
         }
-        throw error;
+        // File does not exist on disk — write as new file
+        const dirPath: string = path.dirname(absolutePath);
+        await mkdir(dirPath, { recursive: true });
+        await writeFile(absolutePath, contents, 'utf-8');
+        continue;
       }
 
       // File exists on disk — check if content differs
@@ -100,8 +102,4 @@ export class SPFxTemplateWriter {
       // No merge helper and content differs — preserve existing content (skip writing)
     }
   }
-}
-
-function _isNodeError(error: unknown): error is NodeJS.ErrnoException {
-  return error instanceof Error && 'code' in error;
 }
