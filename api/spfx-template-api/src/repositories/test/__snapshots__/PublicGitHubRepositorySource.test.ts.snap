@@ -42,7 +42,7 @@ Array [
 
 exports[`PublicGitHubRepositorySource constructor should create an instance with repository URI 1`] = `Array []`;
 
-exports[`PublicGitHubRepositorySource constructor should use default branch "main" when not specified 1`] = `Array []`;
+exports[`PublicGitHubRepositorySource constructor should use default branch "version/latest" when not specified 1`] = `Array []`;
 
 exports[`PublicGitHubRepositorySource constructor should use provided terminal 1`] = `Array []`;
 

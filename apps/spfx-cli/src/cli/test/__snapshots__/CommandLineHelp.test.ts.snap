@@ -22,8 +22,8 @@ Optional arguments:
   --spfx-version VERSION
                         The SPFx version to use (e.g., \\"1.22\\", \\"1.23-rc.0\\").
                         Resolves to the \\"version/<VERSION>\\" branch in the
-                        template repository. Defaults to the repository's
-                        default branch (main).
+                        template repository. Defaults to the \\"version/latest\\"
+                        branch.
   --local-source TEMPLATE_PATH
                         Path to a local template folder (repeatable)
   --remote-source URL   Public GitHub repository URL to use as an additional
@@ -89,8 +89,8 @@ Optional arguments:
   --spfx-version VERSION
                         The SPFx version to use (e.g., \\"1.22\\", \\"1.23-rc.0\\").
                         Resolves to the \\"version/<VERSION>\\" branch in the
-                        template repository. Defaults to the repository's
-                        default branch (main).
+                        template repository. Defaults to the \\"version/latest\\"
+                        branch.
   --local-source TEMPLATE_PATH
                         Path to a local template folder (repeatable)
   --remote-source URL   Public GitHub repository URL to use as an additional

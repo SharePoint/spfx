@@ -78,6 +78,22 @@ export class SPFxTemplate {
   }
 
   /**
+   * Gets the minimum engine version required to process this template.
+   * Returns undefined if no minimum is specified.
+   */
+  public get minimumEngineVersion(): string | undefined {
+    return this._definition.minimumEngineVersion;
+  }
+
+  /**
+   * Gets the list of field names in template.json that are not recognized by this
+   * version of the engine.
+   */
+  public get unknownFields(): readonly string[] {
+    return this._definition.unknownFields;
+  }
+
+  /**
    * Gets the number of files in the template.
    */
   public get fileCount(): number {

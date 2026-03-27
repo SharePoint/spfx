@@ -166,7 +166,7 @@ authenticated repos, npm packages, Azure DevOps artifacts, etc.):
 - **`LocalFileSystemRepositorySource`** — Accepts a path, reads templates from local
   disk. Primarily used for local testing and debugging.
 - **`PublicGitHubRepositorySource`** — Accepts a GitHub repo URL and optional branch
-  (defaults to `main`). Constructs a GitHub Codeload URL, performs an in-memory
+  (defaults to `version/latest`). Constructs a GitHub Codeload URL, performs an in-memory
   download and unzip of the repository. Primary path for production CLI.
 
 **Download mechanism:** The GitHub source constructs a URL of the form:
@@ -175,7 +175,7 @@ authenticated repos, npm packages, Azure DevOps artifacts, etc.):
 https://codeload.github.com/{owner}/{repo}/zip/{ref}
 ```
 
-Where `{ref}` is a branch name (e.g. `main`, `1.22`, `1.23-rc.0`) or a git commit
+Where `{ref}` is a branch name (e.g. `version/latest`, `version/1.22`, `version/1.23-rc.0`) or a git commit
 hash. This enables version-locked downloads and reproducible scaffolding.
 
 #### `SPFxTemplateWriter` (planned — not yet implemented)
@@ -342,7 +342,7 @@ search query modifiers, and libraries.
 
 There is a branch for every SPFx release type (including beta, RC). The CLI tool
 constructs the download URL assuming the SPFx version is a branch name in the repo.
-`main` always tracks the latest stable release.
+The default branch is `version/latest`, which tracks the latest stable release.
 
 For changes that need to be applied to older template versions (e.g. a security
 vulnerability in an indirect dependency), the fix is cherry-picked to any affected

@@ -52,11 +52,39 @@ export interface ISPFxTemplateJson {
   spfxVersion: string;
   /** Optional schema defining the context variables required by this template */
   contextSchema?: Record<string, { type: 'string'; description: string }>;
+  /**
+   * Optional minimum engine version required to process this template.
+   * When set, the engine will compare this against ENGINE_VERSION and reject
+   * the template if the engine is too old. Must be a valid semver string.
+   */
+  minimumEngineVersion?: string;
 }
 
 /**
  * @public
  * The schema for validating SPFx template definition files (template.json).
+ */
+/**
+ * The set of field names recognized by this version of the engine.
+ * Used to detect unknown fields for forward-compatibility warnings.
+ */
+const KNOWN_TEMPLATE_JSON_FIELDS: ReadonlySet<string> = new Set([
+  '$schema',
+  'name',
+  'category',
+  'description',
+  'version',
+  'spfxVersion',
+  'contextSchema',
+  'minimumEngineVersion'
+]);
+
+/**
+ * @public
+ * The schema for validating SPFx template definition files (template.json).
+ *
+ * Uses `.passthrough()` instead of `.strict()` so that unknown fields added
+ * in future engine versions are tolerated by older engines (forward compatibility).
  */
 export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z
   .object({
@@ -78,9 +106,15 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson> = z
           description: z.string()
         })
       )
+      .optional(),
+    minimumEngineVersion: z
+      .string()
+      .refine(isValidSemver, {
+        message: 'Invalid semantic version for "minimumEngineVersion" (expected format like "1.0.0").'
+      })
       .optional()
   })
-  .strict();
+  .passthrough();
 
 /**
  * @public
@@ -90,9 +124,11 @@ export class SPFxTemplateJsonFile {
   public static readonly TEMPLATE_JSON: string = 'template.json';
 
   private _data: ISPFxTemplateJson;
+  private _unknownFields: readonly string[];
 
   public constructor(data: ISPFxTemplateJson) {
     this._data = data;
+    this._unknownFields = Object.keys(data).filter((k) => !KNOWN_TEMPLATE_JSON_FIELDS.has(k));
   }
 
   /**
@@ -135,6 +171,23 @@ export class SPFxTemplateJsonFile {
    */
   public get contextSchema(): Record<string, { type: 'string'; description: string }> | undefined {
     return this._data.contextSchema;
+  }
+
+  /**
+   * Gets the minimum engine version required to process this template.
+   * Returns undefined if no minimum is specified.
+   */
+  public get minimumEngineVersion(): string | undefined {
+    return this._data.minimumEngineVersion;
+  }
+
+  /**
+   * Gets the list of field names in template.json that are not recognized by this
+   * version of the engine. Non-empty when a newer engine version added fields that
+   * this version does not know about.
+   */
+  public get unknownFields(): readonly string[] {
+    return this._unknownFields;
   }
 
   /**

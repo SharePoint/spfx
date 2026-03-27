@@ -10,7 +10,7 @@ import type { MemFsEditor } from 'mem-fs-editor';
 import { Async, FileSystem, type FolderItem } from '@rushstack/node-core-library';
 
 import { SPFxTemplate } from '../SPFxTemplate';
-import { SPFxTemplateJsonFile } from '../SPFxTemplateJsonFile';
+import { SPFxTemplateJsonFile, type ISPFxTemplateJson } from '../SPFxTemplateJsonFile';
 
 describe(SPFxTemplate.name, () => {
   const mockReadFileAsync = jest.mocked(FileSystem.readFileAsync);
@@ -94,6 +94,37 @@ describe(SPFxTemplate.name, () => {
 
       const templateNoDesc = new SPFxTemplate(definition, new Map());
       expect(templateNoDesc.description).toBeUndefined();
+    });
+
+    it('should return the correct minimumEngineVersion', () => {
+      const definition = new SPFxTemplateJsonFile({
+        name: 'Versioned',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        minimumEngineVersion: '0.3.0'
+      });
+
+      const t = new SPFxTemplate(definition, new Map());
+      expect(t.minimumEngineVersion).toBe('0.3.0');
+    });
+
+    it('should return undefined for missing minimumEngineVersion', () => {
+      expect(template.minimumEngineVersion).toBeUndefined();
+    });
+
+    it('should delegate unknownFields to definition', () => {
+      const data = {
+        name: 'Unknown Fields',
+        category: 'webpart' as const,
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        futureStuff: true
+      } as ISPFxTemplateJson;
+      const definition = new SPFxTemplateJsonFile(data);
+      const t = new SPFxTemplate(definition, new Map());
+
+      expect(t.unknownFields).toEqual(['futureStuff']);
     });
   });
 

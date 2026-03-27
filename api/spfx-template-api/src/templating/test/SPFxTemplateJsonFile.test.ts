@@ -138,6 +138,59 @@ describe(SPFxTemplateJsonFile.name, () => {
 
       expect(instance.contextSchema).toBeUndefined();
     });
+
+    it('should return the correct minimumEngineVersion', () => {
+      const data: ISPFxTemplateJson = {
+        name: 'My Template',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        minimumEngineVersion: '0.2.0'
+      };
+      const instance = new SPFxTemplateJsonFile(data);
+
+      expect(instance.minimumEngineVersion).toBe('0.2.0');
+    });
+
+    it('should return undefined for missing minimumEngineVersion', () => {
+      const data: ISPFxTemplateJson = {
+        name: 'My Template',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0'
+      };
+      const instance = new SPFxTemplateJsonFile(data);
+
+      expect(instance.minimumEngineVersion).toBeUndefined();
+    });
+
+    it('should detect unknown fields from passthrough data', () => {
+      // Simulate what Zod .passthrough() produces: extra runtime keys
+      const data = {
+        name: 'My Template',
+        category: 'webpart' as const,
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        futureField: 'something',
+        anotherFutureField: 42
+      } as ISPFxTemplateJson;
+      const instance = new SPFxTemplateJsonFile(data);
+
+      expect(instance.unknownFields).toEqual(['futureField', 'anotherFutureField']);
+    });
+
+    it('should return empty unknownFields for known-only fields', () => {
+      const data: ISPFxTemplateJson = {
+        name: 'My Template',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        minimumEngineVersion: '0.1.0'
+      };
+      const instance = new SPFxTemplateJsonFile(data);
+
+      expect(instance.unknownFields).toEqual([]);
+    });
   });
 
   describe('fromFileAsync', () => {
@@ -380,13 +433,39 @@ describe('SPFxTemplateDefinitionSchema', () => {
       });
     });
 
-    it('should reject extra fields due to strict mode', () => {
+    it('should accept extra fields (passthrough mode for forward compatibility)', () => {
       const data = {
         name: 'Valid Name',
         category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        extraField: 'not allowed'
+        extraField: 'allowed now'
+      };
+
+      const result = SPFxTemplateDefinitionSchema.safeParse(data);
+      expect(result.success).toBe(true);
+    });
+
+    it('should validate template with minimumEngineVersion', () => {
+      const data = {
+        name: 'Valid Template',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        minimumEngineVersion: '0.2.0'
+      };
+
+      const result = SPFxTemplateDefinitionSchema.safeParse(data);
+      expect(result.success).toBe(true);
+    });
+
+    it('should reject invalid minimumEngineVersion format', () => {
+      const data = {
+        name: 'Valid Template',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        minimumEngineVersion: 'not-a-version'
       };
 
       const result = SPFxTemplateDefinitionSchema.safeParse(data);
