@@ -41,7 +41,7 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--target-dir PATH` | current directory | Directory to scaffold into |
+| `--target-dir PATH` | `./<solution-name>` | Directory to scaffold into (derived from solution name when omitted) |
 | `--solution-name NAME` | hyphen-cased component name | SharePoint solution name |
 | `--component-alias ALIAS` | same as `--component-name` | Short identifier for the component |
 | `--component-description TEXT` | `"<name> description"` | Component description string |

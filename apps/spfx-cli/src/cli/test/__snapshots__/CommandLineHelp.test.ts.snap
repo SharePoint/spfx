@@ -29,8 +29,9 @@ Optional arguments:
   --remote-source URL   Public GitHub repository URL to use as an additional
                         template source (repeatable)
   --target-dir TARGET_DIR
-                        The directory to create the solution (or where the
-                        solution already exists) The default value is \\"<cwd>\\".
+                        The directory to scaffold into. When omitted,
+                        defaults to a subfolder named after the solution in
+                        the current working directory.
   --template TEMPLATE_NAME
                         The template to use for scaffolding
   --library-name LIBRARY_NAME
