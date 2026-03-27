@@ -6,7 +6,6 @@ import type { ChildProcess } from 'node:child_process';
 type PackageManager = 'npm' | 'pnpm' | 'yarn';
 
 import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
-import type { MemFsEditor } from 'mem-fs-editor';
 import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
 import * as z from 'zod';
 
@@ -21,7 +20,8 @@ import {
   type SPFxTemplateCollection,
   SPFxTemplateRepositoryManager,
   type SPFxTemplate,
-  SPFxTemplateWriter
+  SPFxTemplateWriter,
+  type ITemplateFileSystem
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
@@ -198,7 +198,7 @@ export class CreateAction extends SPFxActionBase {
       }
       const solutionName: string = rawSolutionName || componentNameHyphenCase;
 
-      const fs: MemFsEditor = await template.renderAsync(
+      const templateFs: ITemplateFileSystem = await template.renderAsync(
         {
           solution_name: solutionName,
           libraryName: this._libraryNameParameter.value,
@@ -217,13 +217,12 @@ export class CreateAction extends SPFxActionBase {
           componentNameAllCaps: componentNameAllCaps,
           componentDescription: componentDescription
         },
-        targetDir,
         { retainPhaseScripts: ciMode }
       );
 
-      _printFileChanges(this._terminal, fs, targetDir);
+      _printFileChanges(this._terminal, templateFs, targetDir);
       const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
-      await writer.writeAsync(fs, targetDir);
+      await writer.writeAsync(templateFs, targetDir);
 
       const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
       if (packageManager !== 'none') {
@@ -270,39 +269,16 @@ async function _runInstallAsync(
 /**
  * Utility function to show the user which files in the in-memory file system are pending changes.
  */
-function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: string): void {
+function _printFileChanges(terminal: Terminal, templateFs: ITemplateFileSystem, targetDir: string): void {
   terminal.writeLine(`targetDir: ${targetDir}`);
-  interface IChangedFile {
-    state: 'modified' | 'deleted';
-    isNew: boolean;
-  }
-  const changed: { [key: string]: IChangedFile } = fs.dump(targetDir);
 
   terminal.writeLine();
   terminal.writeLine(Colorize.cyan('The following files will be modified:'));
 
-  const changedEntries: [string, IChangedFile][] = Object.entries(changed).sort(([a], [b]) =>
-    a < b ? -1 : a > b ? 1 : 0
-  );
+  const sortedFiles: string[] = Array.from(templateFs.files.keys()).sort();
 
-  for (const [file, data] of changedEntries) {
-    const { state, isNew } = data;
-    if (isNew) {
-      terminal.writeLine(Colorize.green(`Added: ${file}`));
-      continue;
-    }
-
-    switch (state) {
-      case 'modified':
-        terminal.writeLine(Colorize.yellow(`Modified: ${file}`));
-        break;
-      case 'deleted':
-        terminal.writeLine(Colorize.red(`Deleted: ${file}`));
-        break;
-      default:
-        terminal.writeLine(`Unchanged: ${file}`);
-        break;
-    }
+  for (const file of sortedFiles) {
+    terminal.writeLine(Colorize.green(`Added: ${file}`));
   }
 
   terminal.writeLine();

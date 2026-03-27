@@ -1,21 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { readFile } from 'node:fs/promises';
+import * as path from 'node:path';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 
-import type { MemFsEditor } from 'mem-fs-editor';
-
+import type { ITemplateFileSystem } from './TemplateFileSystem';
 import type { IMergeHelper } from './IMergeHelper';
 import { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 import { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';
 import { PackageSolutionJsonMergeHelper } from './PackageSolutionJsonMergeHelper';
 import { ServeJsonMergeHelper } from './ServeJsonMergeHelper';
-
-interface IDumpEntry {
-  // eslint-disable-next-line @rushstack/no-new-null
-  contents: string | null;
-  state?: string;
-}
 
 /**
  * Orchestrates writing template output to disk, routing modified files
@@ -50,50 +44,47 @@ export class SPFxTemplateWriter {
    * routed through their corresponding merge helper (if one is registered).
    * New files are written directly.
    *
-   * @param editor - The MemFsEditor containing rendered template files
+   * @param templateFs - The in-memory file system containing rendered template files
    * @param targetDir - The absolute path to the destination directory
    */
-  public async writeAsync(editor: MemFsEditor, targetDir: string): Promise<void> {
-    // editor.dump(targetDir) returns keys as paths relative to targetDir
-    const dump: Record<string, IDumpEntry> = editor.dump(targetDir);
-
-    for (const [rawPath, entry] of Object.entries(dump)) {
-      // Normalize Windows backslash separators so merge-helper lookup works cross-platform
-      const relativePath: string = rawPath.replace(/\\/g, '/');
-      if (entry.state === 'deleted') {
-        continue;
-      }
-
-      if (entry.contents === null) {
-        continue;
-      }
-
+  public async writeAsync(templateFs: ITemplateFileSystem, targetDir: string): Promise<void> {
+    for (const [relativePath, entry] of templateFs.files) {
       const absolutePath: string = `${targetDir}/${relativePath}`;
+      const contents: string | Buffer = entry.contents;
 
+      if (typeof contents !== 'string') {
+        // Binary file — always write directly
+        const dirPath: string = path.dirname(absolutePath);
+        await mkdir(dirPath, { recursive: true });
+        await writeFile(absolutePath, contents);
+        continue;
+      }
+
+      // Text file — attempt merge with existing content on disk
       let existingContent: string;
       try {
         existingContent = await readFile(absolutePath, 'utf-8');
       } catch {
-        // File does not exist — new file, let commit write it as-is
+        // File does not exist on disk — write as new file
+        const dirPath: string = path.dirname(absolutePath);
+        await mkdir(dirPath, { recursive: true });
+        await writeFile(absolutePath, contents, 'utf-8');
         continue;
       }
 
-      // File already exists on disk — attempt merge if content differs
-      if (existingContent === entry.contents) {
+      // File exists on disk — check if content differs
+      if (existingContent === contents) {
         continue;
       }
 
       const helper: IMergeHelper | undefined = this._mergeHelpers.get(relativePath);
       if (helper) {
-        const mergedContent: string = helper.merge(existingContent, entry.contents);
-        editor.write(absolutePath, mergedContent);
-      } else {
-        // No merge helper and content differs — preserve the existing version
-        // by writing it into the editor so commit() does not overwrite it.
-        editor.write(absolutePath, existingContent);
+        const mergedContent: string = helper.merge(existingContent, contents);
+        const dirPath: string = path.dirname(absolutePath);
+        await mkdir(dirPath, { recursive: true });
+        await writeFile(absolutePath, mergedContent, 'utf-8');
       }
+      // No merge helper and content differs — preserve existing content (skip writing)
     }
-
-    await editor.commit();
   }
 }

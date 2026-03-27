@@ -5,30 +5,23 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import type { MemFsEditor } from 'mem-fs-editor';
-
+import { TemplateFileSystem } from '../TemplateFileSystem';
 import { SPFxTemplateWriter } from '../SPFxTemplateWriter';
 
 /**
  * Integration tests for SPFxTemplateWriter using real file I/O.
  *
  * These tests create real temp directories and write real JSON files to disk,
- * then verify that the writer correctly reads existing files and merges them
- * with incoming content. The MemFsEditor is still mocked (dump/write/commit),
- * but the writer uses real async file reads via node:fs/promises.
+ * then verify that the writer correctly reads existing files, merges them
+ * with incoming content, and writes the result.
  */
 describe(`${SPFxTemplateWriter.name} integration`, () => {
   let tempDir: string;
-  let mockEditor: MemFsEditor;
+  let templateFs: TemplateFileSystem;
 
   beforeEach(() => {
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'spfx-writer-'));
-
-    mockEditor = {
-      write: jest.fn(),
-      commit: jest.fn().mockResolvedValue(undefined),
-      dump: jest.fn().mockReturnValue({})
-    } as unknown as MemFsEditor;
+    templateFs = new TemplateFileSystem();
   });
 
   afterEach(() => {
@@ -51,15 +44,12 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
       devDependencies: { jest: '^29.0.0' }
     });
 
-    (mockEditor.dump as jest.Mock).mockReturnValue({
-      'package.json': { contents: incomingPkg, state: 'modified' }
-    });
+    templateFs.write('package.json', incomingPkg);
 
     const writer = new SPFxTemplateWriter();
-    await writer.writeAsync(mockEditor, tempDir);
+    await writer.writeAsync(templateFs, tempDir);
 
-    expect(mockEditor.write).toHaveBeenCalledTimes(1);
-    const merged = JSON.parse((mockEditor.write as jest.Mock).mock.calls[0][1]);
+    const merged = JSON.parse(fs.readFileSync(path.join(tempDir, 'package.json'), 'utf-8'));
     expect(merged.name).toBe('my-solution');
     expect(merged.dependencies.lodash).toBe('^4.17.0');
     expect(merged.dependencies.react).toBe('^17.0.0');
@@ -88,15 +78,12 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
       externals: {}
     });
 
-    (mockEditor.dump as jest.Mock).mockReturnValue({
-      'config/config.json': { contents: incomingConfig, state: 'modified' }
-    });
+    templateFs.write('config/config.json', incomingConfig);
 
     const writer = new SPFxTemplateWriter();
-    await writer.writeAsync(mockEditor, tempDir);
+    await writer.writeAsync(templateFs, tempDir);
 
-    expect(mockEditor.write).toHaveBeenCalledTimes(1);
-    const merged = JSON.parse((mockEditor.write as jest.Mock).mock.calls[0][1]);
+    const merged = JSON.parse(fs.readFileSync(path.join(configDir, 'config.json'), 'utf-8'));
     expect(merged.bundles['webpart-bundle']).toBeDefined();
     expect(merged.bundles['extension-bundle']).toBeDefined();
     expect(merged.localizedResources.WebPartStrings).toBeDefined();
@@ -129,15 +116,12 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
       }
     });
 
-    (mockEditor.dump as jest.Mock).mockReturnValue({
-      'config/package-solution.json': { contents: incomingPkgSolution, state: 'modified' }
-    });
+    templateFs.write('config/package-solution.json', incomingPkgSolution);
 
     const writer = new SPFxTemplateWriter();
-    await writer.writeAsync(mockEditor, tempDir);
+    await writer.writeAsync(templateFs, tempDir);
 
-    expect(mockEditor.write).toHaveBeenCalledTimes(1);
-    const merged = JSON.parse((mockEditor.write as jest.Mock).mock.calls[0][1]);
+    const merged = JSON.parse(fs.readFileSync(path.join(configDir, 'package-solution.json'), 'utf-8'));
     expect(merged.solution.name).toBe('my-solution');
     expect(merged.solution.features).toHaveLength(2);
     expect(merged.solution.features[0].id).toBe('feat-1');
@@ -168,15 +152,12 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
       }
     });
 
-    (mockEditor.dump as jest.Mock).mockReturnValue({
-      'config/serve.json': { contents: incomingServe, state: 'modified' }
-    });
+    templateFs.write('config/serve.json', incomingServe);
 
     const writer = new SPFxTemplateWriter();
-    await writer.writeAsync(mockEditor, tempDir);
+    await writer.writeAsync(templateFs, tempDir);
 
-    expect(mockEditor.write).toHaveBeenCalledTimes(1);
-    const merged = JSON.parse((mockEditor.write as jest.Mock).mock.calls[0][1]);
+    const merged = JSON.parse(fs.readFileSync(path.join(configDir, 'serve.json'), 'utf-8'));
     // Incoming wins for scalar fields
     expect(merged.port).toBe(9999);
     expect(merged.https).toBe(true);
@@ -184,16 +165,14 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     expect(merged.serveConfigurations.extension).toBeDefined();
   });
 
-  it('should skip merge when file does not exist on disk', async () => {
-    (mockEditor.dump as jest.Mock).mockReturnValue({
-      'package.json': { contents: '{"name":"new"}', state: 'modified' }
-    });
+  it('should write new files when they do not exist on disk', async () => {
+    templateFs.write('package.json', '{"name":"new"}');
 
     const writer = new SPFxTemplateWriter();
-    await writer.writeAsync(mockEditor, tempDir);
+    await writer.writeAsync(templateFs, tempDir);
 
-    expect(mockEditor.write).not.toHaveBeenCalled();
-    expect(mockEditor.commit).toHaveBeenCalled();
+    const written = fs.readFileSync(path.join(tempDir, 'package.json'), 'utf-8');
+    expect(written).toBe('{"name":"new"}');
   });
 
   it('should merge multiple config files in single writeAsync call', async () => {
@@ -213,44 +192,25 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
       JSON.stringify({ port: 4321, serveConfigurations: { old: {} } })
     );
 
-    (mockEditor.dump as jest.Mock).mockReturnValue({
-      'package.json': {
-        contents: JSON.stringify({ dependencies: { axios: '^1.0.0' } }),
-        state: 'modified'
-      },
-      'config/config.json': {
-        contents: JSON.stringify({ bundles: { 'new-bundle': {} }, localizedResources: {}, externals: {} }),
-        state: 'modified'
-      },
-      'config/serve.json': {
-        contents: JSON.stringify({ serveConfigurations: { new: {} } }),
-        state: 'modified'
-      }
-    });
+    templateFs.write('package.json', JSON.stringify({ dependencies: { axios: '^1.0.0' } }));
+    templateFs.write(
+      'config/config.json',
+      JSON.stringify({ bundles: { 'new-bundle': {} }, localizedResources: {}, externals: {} })
+    );
+    templateFs.write('config/serve.json', JSON.stringify({ serveConfigurations: { new: {} } }));
 
     const writer = new SPFxTemplateWriter();
-    await writer.writeAsync(mockEditor, tempDir);
+    await writer.writeAsync(templateFs, tempDir);
 
-    expect(mockEditor.write).toHaveBeenCalledTimes(3);
-    expect(mockEditor.commit).toHaveBeenCalled();
-
-    // Verify each merge was correct — use type assertions since we already
-    // confirmed write was called 3 times above
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const calls: any[][] = (mockEditor.write as jest.Mock).mock.calls;
-
-    const pkgCall = calls.find((c) => String(c[0]).includes('package.json'));
-    const mergedPkg = JSON.parse(String(pkgCall?.[1]));
+    const mergedPkg = JSON.parse(fs.readFileSync(path.join(tempDir, 'package.json'), 'utf-8'));
     expect(mergedPkg.dependencies.react).toBe('^17.0.0');
     expect(mergedPkg.dependencies.axios).toBe('^1.0.0');
 
-    const configCall = calls.find((c) => String(c[0]).includes('config.json'));
-    const mergedConfig = JSON.parse(String(configCall?.[1]));
+    const mergedConfig = JSON.parse(fs.readFileSync(path.join(configDir, 'config.json'), 'utf-8'));
     expect(mergedConfig.bundles['old-bundle']).toBeDefined();
     expect(mergedConfig.bundles['new-bundle']).toBeDefined();
 
-    const serveCall = calls.find((c) => String(c[0]).includes('serve.json'));
-    const mergedServe = JSON.parse(String(serveCall?.[1]));
+    const mergedServe = JSON.parse(fs.readFileSync(path.join(configDir, 'serve.json'), 'utf-8'));
     expect(mergedServe.serveConfigurations.old).toBeDefined();
     expect(mergedServe.serveConfigurations.new).toBeDefined();
   });
@@ -259,30 +219,36 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     const existingContent = '{"existing": true}';
     fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), existingContent);
 
-    (mockEditor.dump as jest.Mock).mockReturnValue({
-      'tsconfig.json': { contents: '{"compilerOptions":{}}', state: 'modified' }
-    });
+    templateFs.write('tsconfig.json', '{"compilerOptions":{}}');
 
     const writer = new SPFxTemplateWriter();
-    await writer.writeAsync(mockEditor, tempDir);
+    await writer.writeAsync(templateFs, tempDir);
 
-    // Should write existing content into the editor to prevent overwrite
-    expect(mockEditor.write).toHaveBeenCalledWith(expect.stringContaining('tsconfig.json'), existingContent);
-    expect(mockEditor.commit).toHaveBeenCalled();
+    // Existing content should be preserved — writer skips unregistered files with different content
+    const actual = fs.readFileSync(path.join(tempDir, 'tsconfig.json'), 'utf-8');
+    expect(actual).toBe(existingContent);
   });
 
   it('should skip silently for unregistered file with same content on disk', async () => {
     const sameContent = '{"compilerOptions":{}}';
     fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), sameContent);
 
-    (mockEditor.dump as jest.Mock).mockReturnValue({
-      'tsconfig.json': { contents: sameContent, state: 'modified' }
-    });
+    templateFs.write('tsconfig.json', sameContent);
 
     const writer = new SPFxTemplateWriter();
-    await writer.writeAsync(mockEditor, tempDir);
+    await writer.writeAsync(templateFs, tempDir);
 
-    expect(mockEditor.write).not.toHaveBeenCalled();
-    expect(mockEditor.commit).toHaveBeenCalled();
+    const actual = fs.readFileSync(path.join(tempDir, 'tsconfig.json'), 'utf-8');
+    expect(actual).toBe(sameContent);
+  });
+
+  it('should create intermediate directories for new files', async () => {
+    templateFs.write('src/webparts/myWebPart/MyWebPart.ts', 'export class MyWebPart {}');
+
+    const writer = new SPFxTemplateWriter();
+    await writer.writeAsync(templateFs, tempDir);
+
+    const actual = fs.readFileSync(path.join(tempDir, 'src/webparts/myWebPart/MyWebPart.ts'), 'utf-8');
+    expect(actual).toBe('export class MyWebPart {}');
   });
 });

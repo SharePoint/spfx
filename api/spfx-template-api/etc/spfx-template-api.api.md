@@ -6,7 +6,6 @@
 
 import type { ITerminal } from '@rushstack/terminal';
 import { JsonObject } from '@rushstack/node-core-library';
-import type { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
 
 // @public
@@ -57,6 +56,18 @@ export interface ISPFxTemplateJson {
     name: string;
     spfxVersion: string;
     version: string;
+}
+
+// @public
+export interface ITemplateFileEntry {
+    readonly contents: string | Buffer;
+}
+
+// @public
+export interface ITemplateFileSystem {
+    readonly files: ReadonlyMap<string, ITemplateFileEntry>;
+    read(relativePath: string): string | Buffer | undefined;
+    write(relativePath: string, contents: string | Buffer): void;
 }
 
 // @public
@@ -121,7 +132,7 @@ export class SPFxTemplate {
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
     get name(): string;
-    renderAsync(context: object, destinationDir: string, options?: IRenderOptions): Promise<MemFsEditor>;
+    renderAsync(context: object, options?: IRenderOptions): Promise<ITemplateFileSystem>;
     get spfxVersion(): string;
     toString(): string;
     get version(): string;
@@ -171,7 +182,14 @@ export type SPFxTemplateRepositorySourceKind = 'local' | 'github';
 export class SPFxTemplateWriter {
     constructor();
     addMergeHelper(helper: IMergeHelper): void;
-    writeAsync(editor: MemFsEditor, targetDir: string): Promise<void>;
+    writeAsync(templateFs: ITemplateFileSystem, targetDir: string): Promise<void>;
+}
+
+// @public
+export class TemplateFileSystem implements ITemplateFileSystem {
+    get files(): ReadonlyMap<string, ITemplateFileEntry>;
+    read(relativePath: string): string | Buffer | undefined;
+    write(relativePath: string, contents: string | Buffer): void;
 }
 
 ```
