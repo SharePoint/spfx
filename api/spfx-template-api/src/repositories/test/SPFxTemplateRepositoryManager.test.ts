@@ -284,6 +284,119 @@ describe(SPFxTemplateRepositoryManager.name, () => {
       await expect(manager.getTemplatesAsync()).rejects.toThrow('Failed to fetch templates');
     });
 
+    it('should pass when templates have no minimumEngineVersion', async () => {
+      const template = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'NoMinVersion',
+          category: 'webpart',
+          version: '1.0.0',
+          spfxVersion: '1.18.0'
+        }),
+        new Map()
+      );
+
+      const manager = new SPFxTemplateRepositoryManager();
+      manager.addSource(new MockRepositorySource('local', [template]));
+
+      const collection = await manager.getTemplatesAsync();
+      expect(collection.size).toBe(1);
+    });
+
+    it('should pass when engine version satisfies minimumEngineVersion', async () => {
+      const template = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'Compatible',
+          category: 'webpart',
+          version: '1.0.0',
+          spfxVersion: '1.18.0',
+          minimumEngineVersion: '0.0.1'
+        }),
+        new Map()
+      );
+
+      const manager = new SPFxTemplateRepositoryManager();
+      manager.addSource(new MockRepositorySource('local', [template]));
+
+      const collection = await manager.getTemplatesAsync();
+      expect(collection.size).toBe(1);
+    });
+
+    it('should throw a single error when templates require a newer engine version', async () => {
+      const template1 = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'FutureTemplate1',
+          category: 'webpart',
+          version: '1.0.0',
+          spfxVersion: '1.18.0',
+          minimumEngineVersion: '99.0.0'
+        }),
+        new Map()
+      );
+      const template2 = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'FutureTemplate2',
+          category: 'extension',
+          version: '1.0.0',
+          spfxVersion: '1.18.0',
+          minimumEngineVersion: '99.0.0'
+        }),
+        new Map()
+      );
+
+      const manager = new SPFxTemplateRepositoryManager();
+      manager.addSource(new MockRepositorySource('local', [template1, template2]));
+
+      await expect(manager.getTemplatesAsync()).rejects.toThrow(
+        /2 template\(s\) require engine version 99\.0\.0 or later/
+      );
+    });
+
+    it('should report the highest required version across incompatible templates', async () => {
+      const t1 = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'T1',
+          category: 'webpart',
+          version: '1.0.0',
+          spfxVersion: '1.18.0',
+          minimumEngineVersion: '50.0.0'
+        }),
+        new Map()
+      );
+      const t2 = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'T2',
+          category: 'webpart',
+          version: '1.0.0',
+          spfxVersion: '1.18.0',
+          minimumEngineVersion: '99.0.0'
+        }),
+        new Map()
+      );
+
+      const manager = new SPFxTemplateRepositoryManager();
+      manager.addSource(new MockRepositorySource('local', [t1, t2]));
+
+      await expect(manager.getTemplatesAsync()).rejects.toThrow(/99\.0\.0 or later/);
+    });
+
+    it('should include upgrade instructions in the error message', async () => {
+      const template = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'FutureTemplate',
+          category: 'webpart',
+          version: '1.0.0',
+          spfxVersion: '1.18.0',
+          minimumEngineVersion: '99.0.0'
+        }),
+        new Map()
+      );
+
+      const manager = new SPFxTemplateRepositoryManager();
+      manager.addSource(new MockRepositorySource('local', [template]));
+
+      await expect(manager.getTemplatesAsync()).rejects.toThrow(/Please update your SPFx tooling/);
+    });
+
     it('should handle duplicate template names (last one wins)', async () => {
       const template1 = new SPFxTemplate(
         new SPFxTemplateJsonFile({

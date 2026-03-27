@@ -17,7 +17,8 @@ export {
   SPFxTemplateJsonFile,
   type IRenderOptions,
   SPFX_TEMPLATE_CATEGORIES,
-  type SPFxTemplateCategory
+  type SPFxTemplateCategory,
+  ENGINE_VERSION
 } from './templating/index';
 export {
   SPFxTemplateRepositoryManager,

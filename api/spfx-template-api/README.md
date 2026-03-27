@@ -69,7 +69,7 @@ import { PublicGitHubRepositorySource } from '@microsoft/spfx-template-api';
 
 const terminal = new Terminal(new ConsoleTerminalProvider());
 
-// Latest (repository's default branch)
+// Latest (defaults to the version/latest branch)
 new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal });
 
 // Specific version
@@ -149,8 +149,9 @@ The writer uses these helpers internally. You can also import them directly for 
 | `ServeJsonMergeHelper` | Merges `config/serve.json` (also available standalone) |
 | `SPFxTemplateCategory` | Union type of template categories: `'webpart' | 'extension' | 'ace' | 'library'` |
 | `SPFX_TEMPLATE_CATEGORIES` | Array of all valid category values (useful for validation/iteration) |
-| `ISPFxTemplateJson` | Shape of the `template.json` manifest (includes `category`) |
-| `SPFxTemplateDefinitionSchema` | Zod schema for validating a `template.json` |
+| `ENGINE_VERSION` | Semver string identifying the installed engine version (matches `package.json` version) |
+| `ISPFxTemplateJson` | Shape of the `template.json` manifest (includes `category`, optional `minimumEngineVersion`) |
+| `SPFxTemplateDefinitionSchema` | Zod schema for validating a `template.json` (uses passthrough mode for forward compatibility) |
 | `SPFxTemplateJsonFile` | Typed wrapper around a parsed `template.json` file |
 | `SPFxTemplateRepositorySourceKind` | Union type of all built-in repository source kinds (`'local' | 'github'`) |
 | `IPublicGitHubRepositorySourceOptions` | Options object for constructing a `PublicGitHubRepositorySource` |

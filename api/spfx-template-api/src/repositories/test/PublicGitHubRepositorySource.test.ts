@@ -46,13 +46,13 @@ describe(PublicGitHubRepositorySource.name, () => {
       expect(source.kind).toBe('github');
     });
 
-    it('should use default branch "main" when not specified', () => {
+    it('should use default branch "version/latest" when not specified', () => {
       const source = new PublicGitHubRepositorySource({
         repoUrl: 'https://github.com/owner/repo',
         terminal
       });
 
-      expect(source['_ref']).toBe('main');
+      expect(source['_ref']).toBe('version/latest');
     });
 
     it('should use specified branch', () => {
@@ -254,7 +254,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
   describe('_parseTemplatesFromFileMapAsync', () => {
     it('should find templates with template.json files', async () => {
-      const mockTemplate = { name: 'Template1' } as SPFxTemplate;
+      const mockTemplate = { name: 'Template1', unknownFields: [] } as unknown as SPFxTemplate;
 
       const fileMap = new Map<string, Buffer>([
         ['webpart/template.json', Buffer.from(JSON.stringify({ name: 'WebPart' }))],
@@ -270,8 +270,8 @@ describe(PublicGitHubRepositorySource.name, () => {
     });
 
     it('should handle multiple templates', async () => {
-      const mockTemplate1 = { name: 'Template1' } as SPFxTemplate;
-      const mockTemplate2 = { name: 'Template2' } as SPFxTemplate;
+      const mockTemplate1 = { name: 'Template1', unknownFields: [] } as unknown as SPFxTemplate;
+      const mockTemplate2 = { name: 'Template2', unknownFields: [] } as unknown as SPFxTemplate;
 
       const fileMap = new Map<string, Buffer>([
         ['webpart/template.json', Buffer.from(JSON.stringify({ name: 'WebPart' }))],
@@ -286,7 +286,7 @@ describe(PublicGitHubRepositorySource.name, () => {
     });
 
     it('should handle template.json in root', async () => {
-      const mockTemplate = { name: 'RootTemplate' } as SPFxTemplate;
+      const mockTemplate = { name: 'RootTemplate', unknownFields: [] } as unknown as SPFxTemplate;
 
       const fileMap = new Map<string, Buffer>([
         ['template.json', Buffer.from(JSON.stringify({ name: 'Root' }))]
@@ -300,7 +300,7 @@ describe(PublicGitHubRepositorySource.name, () => {
     });
 
     it('should log warning and continue when template parsing fails', async () => {
-      const mockTemplate = { name: 'ValidTemplate' } as SPFxTemplate;
+      const mockTemplate = { name: 'ValidTemplate', unknownFields: [] } as unknown as SPFxTemplate;
 
       const fileMap = new Map<string, Buffer>([
         ['valid/template.json', Buffer.from(JSON.stringify({ name: 'Valid' }))],
@@ -319,7 +319,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
   describe('_createTemplateFromFileMapAsync', () => {
     it('should create template from file map', async () => {
-      const mockTemplate = { name: 'Template' } as SPFxTemplate;
+      const mockTemplate = { name: 'Template', unknownFields: [] } as unknown as SPFxTemplate;
 
       const templateJson = {
         name: 'Test Template',
@@ -350,7 +350,7 @@ describe(PublicGitHubRepositorySource.name, () => {
     });
 
     it('should include only files from the template directory', async () => {
-      const mockTemplate = { name: 'Template' } as SPFxTemplate;
+      const mockTemplate = { name: 'Template', unknownFields: [] } as unknown as SPFxTemplate;
 
       const fileMap = new Map<string, Buffer>([
         ['webpart/template.json', Buffer.from(JSON.stringify({ name: 'WebPart' }))],
@@ -379,7 +379,7 @@ describe(PublicGitHubRepositorySource.name, () => {
 
   describe('getTemplates', () => {
     it('should fetch and extract templates from GitHub', async () => {
-      const mockTemplate = { name: 'Template' } as SPFxTemplate;
+      const mockTemplate = { name: 'Template', unknownFields: [] } as unknown as SPFxTemplate;
 
       const templateJson = {
         name: 'Test',
@@ -420,7 +420,7 @@ describe(PublicGitHubRepositorySource.name, () => {
       });
       const templates = await source.getTemplatesAsync();
 
-      expect(mockFetch).toHaveBeenCalledWith('https://codeload.github.com/owner/repo/zip/main');
+      expect(mockFetch).toHaveBeenCalledWith('https://codeload.github.com/owner/repo/zip/version/latest');
       expect(templates).toHaveLength(1);
     });
 
