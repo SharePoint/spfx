@@ -10,11 +10,40 @@ import { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 import { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';
 import { PackageSolutionJsonMergeHelper } from './PackageSolutionJsonMergeHelper';
 import { ServeJsonMergeHelper } from './ServeJsonMergeHelper';
+import type { SPFxScaffoldLog } from '../logging/SPFxScaffoldLog';
+import type { FileWriteOutcome } from '../logging/SPFxScaffoldEvent';
 
 interface IDumpEntry {
   // eslint-disable-next-line @rushstack/no-new-null
   contents: string | null;
   state?: string;
+}
+
+/**
+ * Options for {@link SPFxTemplateWriter.writeAsync}.
+ *
+ * @public
+ */
+export interface IWriteOptions {
+  /**
+   * When provided, a `file-write` event is appended for every file processed
+   * during the write phase.
+   */
+  log?: SPFxScaffoldLog;
+}
+
+function _logFileWrite(
+  log: SPFxScaffoldLog | undefined,
+  relativePath: string,
+  outcome: FileWriteOutcome,
+  mergeHelper?: string
+): void {
+  log?.append({
+    kind: 'file-write',
+    relativePath,
+    outcome,
+    mergeHelper
+  });
 }
 
 /**
@@ -52,8 +81,11 @@ export class SPFxTemplateWriter {
    *
    * @param editor - The MemFsEditor containing rendered template files
    * @param targetDir - The absolute path to the destination directory
+   * @param options - Optional settings including a scaffold log to record file outcomes
    */
-  public async writeAsync(editor: MemFsEditor, targetDir: string): Promise<void> {
+  public async writeAsync(editor: MemFsEditor, targetDir: string, options?: IWriteOptions): Promise<void> {
+    const log: SPFxScaffoldLog | undefined = options?.log;
+
     // editor.dump(targetDir) returns keys as paths relative to targetDir
     const dump: Record<string, IDumpEntry> = editor.dump(targetDir);
 
@@ -73,13 +105,18 @@ export class SPFxTemplateWriter {
       let existingContent: string;
       try {
         existingContent = await readFile(absolutePath, 'utf-8');
-      } catch {
-        // File does not exist — new file, let commit write it as-is
-        continue;
+      } catch (error: unknown) {
+        if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+          // File does not exist — new file, let commit write it as-is
+          _logFileWrite(log, relativePath, 'new');
+          continue;
+        }
+        throw error;
       }
 
       // File already exists on disk — attempt merge if content differs
       if (existingContent === entry.contents) {
+        _logFileWrite(log, relativePath, 'unchanged');
         continue;
       }
 
@@ -87,10 +124,12 @@ export class SPFxTemplateWriter {
       if (helper) {
         const mergedContent: string = helper.merge(existingContent, entry.contents);
         editor.write(absolutePath, mergedContent);
+        _logFileWrite(log, relativePath, 'merged', helper.fileRelativePath);
       } else {
         // No merge helper and content differs — preserve the existing version
         // by writing it into the editor so commit() does not overwrite it.
         editor.write(absolutePath, existingContent);
+        _logFileWrite(log, relativePath, 'preserved');
       }
     }
 

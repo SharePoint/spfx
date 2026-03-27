@@ -7,6 +7,24 @@ import { readFile } from 'node:fs/promises';
 import type { MemFsEditor } from 'mem-fs-editor';
 
 import { SPFxTemplateWriter } from '../SPFxTemplateWriter';
+import { SPFxScaffoldLog } from '../../logging/SPFxScaffoldLog';
+import type { IFileWriteEvent } from '../../logging/SPFxScaffoldEvent';
+
+function enoent(): Error {
+  const err: NodeJS.ErrnoException = new Error('ENOENT: no such file or directory');
+  err.code = 'ENOENT';
+  return err;
+}
+
+/** Strip auto-generated timestamps from log events so snapshots are deterministic. */
+function snapshotLog(log: SPFxScaffoldLog): object[] {
+  return log.events.map((e) => {
+    const copy: Record<string, unknown> = { ...e };
+    // eslint-disable-next-line dot-notation
+    delete copy['timestamp'];
+    return copy;
+  });
+}
 
 describe(SPFxTemplateWriter.name, () => {
   let mockEditor: MemFsEditor;
@@ -25,7 +43,7 @@ describe(SPFxTemplateWriter.name, () => {
     (mockEditor.dump as jest.Mock).mockReturnValue({
       'src/newFile.ts': { contents: 'new content', state: 'modified' }
     });
-    (readFile as jest.Mock).mockRejectedValue(new Error('ENOENT'));
+    (readFile as jest.Mock).mockRejectedValue(enoent());
 
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(mockEditor, '/target');
@@ -126,7 +144,7 @@ describe(SPFxTemplateWriter.name, () => {
       if (filePath.includes('config.json')) {
         return Promise.resolve(existingConfig);
       }
-      return Promise.reject(new Error('ENOENT'));
+      return Promise.reject(enoent());
     });
 
     const writer = new SPFxTemplateWriter();
@@ -172,6 +190,20 @@ describe(SPFxTemplateWriter.name, () => {
   });
 
   describe('error propagation', () => {
+    it('should rethrow non-ENOENT readFile errors instead of treating file as new', async () => {
+      const permError: NodeJS.ErrnoException = new Error('EACCES: permission denied');
+      permError.code = 'EACCES';
+
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'src/file.ts': { contents: 'content', state: 'modified' }
+      });
+      (readFile as jest.Mock).mockRejectedValue(permError);
+
+      const writer = new SPFxTemplateWriter();
+
+      await expect(writer.writeAsync(mockEditor, '/target')).rejects.toThrow('EACCES');
+    });
+
     it('should propagate error when editor.commit() rejects', async () => {
       (mockEditor.dump as jest.Mock).mockReturnValue({});
       (mockEditor.commit as jest.Mock).mockRejectedValue(new Error('commit failed'));
@@ -278,7 +310,7 @@ describe(SPFxTemplateWriter.name, () => {
       (mockEditor.dump as jest.Mock).mockReturnValue({
         'src/file.ts': { contents: 'content', state: undefined }
       });
-      (readFile as jest.Mock).mockRejectedValue(new Error('ENOENT'));
+      (readFile as jest.Mock).mockRejectedValue(enoent());
 
       const writer = new SPFxTemplateWriter();
       await writer.writeAsync(mockEditor, '/target');
@@ -286,6 +318,145 @@ describe(SPFxTemplateWriter.name, () => {
       // File doesn't exist on disk, so no merge attempted — just commit
       expect(mockEditor.write).not.toHaveBeenCalled();
       expect(mockEditor.commit).toHaveBeenCalled();
+    });
+  });
+
+  // ---------- SPFxScaffoldLog integration ---------------------------------
+
+  describe('scaffold log integration', () => {
+    it('should record a "new" file-write event for files that do not exist on disk', async () => {
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'src/newFile.ts': { contents: 'new content', state: 'modified' }
+      });
+      (readFile as jest.Mock).mockRejectedValue(enoent());
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(mockEditor, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(1);
+      expect(events[0]!.relativePath).toBe('src/newFile.ts');
+      expect(events[0]!.outcome).toBe('new');
+      expect(events[0]!.mergeHelper).toBeUndefined();
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should record an "unchanged" file-write event when content matches', async () => {
+      const sameContent = '{"key": "value"}';
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'some/file.json': { contents: sameContent, state: 'modified' }
+      });
+      (readFile as jest.Mock).mockResolvedValue(sameContent);
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(mockEditor, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(1);
+      expect(events[0]!.relativePath).toBe('some/file.json');
+      expect(events[0]!.outcome).toBe('unchanged');
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should record a "merged" file-write event with mergeHelper name', async () => {
+      const existingPkg = JSON.stringify({ name: 'existing', dependencies: { lodash: '^4' } });
+      const incomingPkg = JSON.stringify({ name: 'incoming', dependencies: { axios: '^1' } });
+
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'package.json': { contents: incomingPkg, state: 'modified' }
+      });
+      (readFile as jest.Mock).mockResolvedValue(existingPkg);
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(mockEditor, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(1);
+      expect(events[0]!.relativePath).toBe('package.json');
+      expect(events[0]!.outcome).toBe('merged');
+      expect(events[0]!.mergeHelper).toBe('package.json');
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should record a "preserved" file-write event when no merge helper exists', async () => {
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'some/unknown/file.json': { contents: '{"new": true}', state: 'modified' }
+      });
+      (readFile as jest.Mock).mockResolvedValue('{"old": true}');
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(mockEditor, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(1);
+      expect(events[0]!.relativePath).toBe('some/unknown/file.json');
+      expect(events[0]!.outcome).toBe('preserved');
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should record events for multiple files with correct outcomes', async () => {
+      const existingPkg = JSON.stringify({ name: 'existing', dependencies: {} });
+      const incomingPkg = JSON.stringify({ name: 'incoming', dependencies: {} });
+      const sameContent = 'unchanged content';
+
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'src/brand-new.ts': { contents: 'new code', state: 'modified' },
+        'package.json': { contents: incomingPkg, state: 'modified' },
+        'unchanged.txt': { contents: sameContent, state: 'modified' },
+        'no-helper.json': { contents: '{"x":1}', state: 'modified' }
+      });
+
+      (readFile as jest.Mock).mockImplementation((filePath: string) => {
+        if (filePath.includes('brand-new')) return Promise.reject(enoent());
+        if (filePath.includes('package.json')) return Promise.resolve(existingPkg);
+        if (filePath.includes('unchanged')) return Promise.resolve(sameContent);
+        if (filePath.includes('no-helper')) return Promise.resolve('{"y":2}');
+        return Promise.reject(enoent());
+      });
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(mockEditor, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(4);
+
+      const outcomes: Map<string, string> = new Map(events.map((e) => [e.relativePath, e.outcome]));
+      expect(outcomes.get('src/brand-new.ts')).toBe('new');
+      expect(outcomes.get('package.json')).toBe('merged');
+      expect(outcomes.get('unchanged.txt')).toBe('unchanged');
+      expect(outcomes.get('no-helper.json')).toBe('preserved');
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should not error when log is not provided (backward-compatible)', async () => {
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'src/file.ts': { contents: 'content', state: 'modified' }
+      });
+      (readFile as jest.Mock).mockRejectedValue(enoent());
+
+      const writer = new SPFxTemplateWriter();
+      // No log passed — should work exactly as before
+      await writer.writeAsync(mockEditor, '/target');
+
+      expect(mockEditor.commit).toHaveBeenCalled();
+    });
+
+    it('should not record events for deleted or null-content entries', async () => {
+      (mockEditor.dump as jest.Mock).mockReturnValue({
+        'deleted.ts': { contents: null, state: 'deleted' },
+        'null-content.ts': { contents: null, state: 'modified' }
+      });
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(mockEditor, '/target', { log });
+
+      expect(log.getEventsOfKind('file-write').length).toBe(0);
     });
   });
 });
