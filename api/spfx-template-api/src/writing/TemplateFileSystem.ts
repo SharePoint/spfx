@@ -15,46 +15,31 @@ export interface ITemplateFileEntry {
  * Created by {@link SPFxTemplate.renderAsync} and consumed by {@link SPFxTemplateWriter.writeAsync}.
  * @public
  */
-export interface ITemplateFileSystem {
+export class TemplateFileSystem {
+  private readonly _files: Map<string, ITemplateFileEntry> = new Map<string, ITemplateFileEntry>();
+
   /**
    * Writes a file to the in-memory file system.
    * @param relativePath - Path relative to the destination directory
    * @param contents - File contents (string for text, Buffer for binary)
    */
-  write(relativePath: string, contents: string | Buffer): void;
+  public write(relativePath: string, contents: string | Buffer): void {
+    this._files.set(relativePath, { contents });
+  }
 
   /**
    * Reads a file from the in-memory file system.
    * @param relativePath - Path relative to the destination directory
    * @returns The file contents, or undefined if the file does not exist
    */
-  read(relativePath: string): string | Buffer | undefined;
+  public read(relativePath: string): string | Buffer | undefined {
+    return this._files.get(relativePath)?.contents;
+  }
 
   /**
    * Returns a read-only view of all files in the file system.
    * Keys are paths relative to the destination directory.
    */
-  readonly files: ReadonlyMap<string, ITemplateFileEntry>;
-}
-
-/**
- * Default implementation of {@link ITemplateFileSystem} backed by a simple Map.
- * @public
- */
-export class TemplateFileSystem implements ITemplateFileSystem {
-  private readonly _files: Map<string, ITemplateFileEntry> = new Map<string, ITemplateFileEntry>();
-
-  /** {@inheritDoc ITemplateFileSystem.write} */
-  public write(relativePath: string, contents: string | Buffer): void {
-    this._files.set(relativePath, { contents });
-  }
-
-  /** {@inheritDoc ITemplateFileSystem.read} */
-  public read(relativePath: string): string | Buffer | undefined {
-    return this._files.get(relativePath)?.contents;
-  }
-
-  /** {@inheritDoc ITemplateFileSystem.files} */
   public get files(): ReadonlyMap<string, ITemplateFileEntry> {
     return this._files;
   }

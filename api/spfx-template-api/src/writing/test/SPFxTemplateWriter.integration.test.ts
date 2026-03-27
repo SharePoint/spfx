@@ -5,6 +5,8 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
+import { FileSystem } from '@rushstack/node-core-library';
+
 import { TemplateFileSystem } from '../TemplateFileSystem';
 import { SPFxTemplateWriter } from '../SPFxTemplateWriter';
 
@@ -36,7 +38,7 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
       devDependencies: { typescript: '^5.0.0' }
     };
 
-    fs.writeFileSync(path.join(tempDir, 'package.json'), JSON.stringify(existingPkg, null, 2));
+    await FileSystem.writeFileAsync(`${tempDir}/package.json`, JSON.stringify(existingPkg, null, 2));
 
     const incomingPkg = JSON.stringify({
       name: 'template',
@@ -49,7 +51,7 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, tempDir);
 
-    const merged = JSON.parse(fs.readFileSync(path.join(tempDir, 'package.json'), 'utf-8'));
+    const merged = JSON.parse(await FileSystem.readFileAsync(`${tempDir}/package.json`));
     expect(merged.name).toBe('my-solution');
     expect(merged.dependencies.lodash).toBe('^4.17.0');
     expect(merged.dependencies.react).toBe('^17.0.0');
@@ -59,8 +61,8 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
   });
 
   it('should merge real config/config.json on disk', async () => {
-    const configDir = path.join(tempDir, 'config');
-    fs.mkdirSync(configDir, { recursive: true });
+    const configDir = `${tempDir}/config`;
+    await FileSystem.ensureFolderAsync(configDir);
 
     const existingConfig = {
       $schema: 'https://schema.example.com',
@@ -70,7 +72,7 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
       externals: {}
     };
 
-    fs.writeFileSync(path.join(configDir, 'config.json'), JSON.stringify(existingConfig, null, 2));
+    await FileSystem.writeFileAsync(`${configDir}/config.json`, JSON.stringify(existingConfig, null, 2));
 
     const incomingConfig = JSON.stringify({
       bundles: { 'extension-bundle': { components: [{ entrypoint: './lib/extension.js' }] } },
@@ -83,7 +85,7 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, tempDir);
 
-    const merged = JSON.parse(fs.readFileSync(path.join(configDir, 'config.json'), 'utf-8'));
+    const merged = JSON.parse(await FileSystem.readFileAsync(`${configDir}/config.json`));
     expect(merged.bundles['webpart-bundle']).toBeDefined();
     expect(merged.bundles['extension-bundle']).toBeDefined();
     expect(merged.localizedResources.WebPartStrings).toBeDefined();
@@ -91,8 +93,8 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
   });
 
   it('should merge real config/package-solution.json on disk', async () => {
-    const configDir = path.join(tempDir, 'config');
-    fs.mkdirSync(configDir, { recursive: true });
+    const configDir = `${tempDir}/config`;
+    await FileSystem.ensureFolderAsync(configDir);
 
     const existingPkgSolution = {
       $schema: 'https://schema.example.com',
@@ -105,8 +107,8 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
       paths: { zippedPackage: 'solution/my-solution.sppkg' }
     };
 
-    fs.writeFileSync(
-      path.join(configDir, 'package-solution.json'),
+    await FileSystem.writeFileAsync(
+      `${configDir}/package-solution.json`,
       JSON.stringify(existingPkgSolution, null, 2)
     );
 
@@ -121,7 +123,7 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, tempDir);
 
-    const merged = JSON.parse(fs.readFileSync(path.join(configDir, 'package-solution.json'), 'utf-8'));
+    const merged = JSON.parse(await FileSystem.readFileAsync(`${configDir}/package-solution.json`));
     expect(merged.solution.name).toBe('my-solution');
     expect(merged.solution.features).toHaveLength(2);
     expect(merged.solution.features[0].id).toBe('feat-1');
@@ -130,8 +132,8 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
   });
 
   it('should merge real config/serve.json on disk', async () => {
-    const configDir = path.join(tempDir, 'config');
-    fs.mkdirSync(configDir, { recursive: true });
+    const configDir = `${tempDir}/config`;
+    await FileSystem.ensureFolderAsync(configDir);
 
     const existingServe = {
       $schema: 'https://schema.example.com',
@@ -143,7 +145,7 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
       }
     };
 
-    fs.writeFileSync(path.join(configDir, 'serve.json'), JSON.stringify(existingServe, null, 2));
+    await FileSystem.writeFileAsync(`${configDir}/serve.json`, JSON.stringify(existingServe, null, 2));
 
     const incomingServe = JSON.stringify({
       port: 9999,
@@ -157,7 +159,7 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, tempDir);
 
-    const merged = JSON.parse(fs.readFileSync(path.join(configDir, 'serve.json'), 'utf-8'));
+    const merged = JSON.parse(await FileSystem.readFileAsync(`${configDir}/serve.json`));
     // Incoming wins for scalar fields
     expect(merged.port).toBe(9999);
     expect(merged.https).toBe(true);
@@ -171,24 +173,24 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, tempDir);
 
-    const written = fs.readFileSync(path.join(tempDir, 'package.json'), 'utf-8');
+    const written = await FileSystem.readFileAsync(`${tempDir}/package.json`);
     expect(written).toBe('{"name":"new"}');
   });
 
   it('should merge multiple config files in single writeAsync call', async () => {
-    const configDir = path.join(tempDir, 'config');
-    fs.mkdirSync(configDir, { recursive: true });
+    const configDir = `${tempDir}/config`;
+    await FileSystem.ensureFolderAsync(configDir);
 
-    fs.writeFileSync(
-      path.join(tempDir, 'package.json'),
+    await FileSystem.writeFileAsync(
+      `${tempDir}/package.json`,
       JSON.stringify({ name: 'existing', dependencies: { react: '^17.0.0' } })
     );
-    fs.writeFileSync(
-      path.join(configDir, 'config.json'),
+    await FileSystem.writeFileAsync(
+      `${configDir}/config.json`,
       JSON.stringify({ bundles: { 'old-bundle': {} }, localizedResources: {}, externals: {} })
     );
-    fs.writeFileSync(
-      path.join(configDir, 'serve.json'),
+    await FileSystem.writeFileAsync(
+      `${configDir}/serve.json`,
       JSON.stringify({ port: 4321, serveConfigurations: { old: {} } })
     );
 
@@ -202,22 +204,22 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, tempDir);
 
-    const mergedPkg = JSON.parse(fs.readFileSync(path.join(tempDir, 'package.json'), 'utf-8'));
+    const mergedPkg = JSON.parse(await FileSystem.readFileAsync(`${tempDir}/package.json`));
     expect(mergedPkg.dependencies.react).toBe('^17.0.0');
     expect(mergedPkg.dependencies.axios).toBe('^1.0.0');
 
-    const mergedConfig = JSON.parse(fs.readFileSync(path.join(configDir, 'config.json'), 'utf-8'));
+    const mergedConfig = JSON.parse(await FileSystem.readFileAsync(`${configDir}/config.json`));
     expect(mergedConfig.bundles['old-bundle']).toBeDefined();
     expect(mergedConfig.bundles['new-bundle']).toBeDefined();
 
-    const mergedServe = JSON.parse(fs.readFileSync(path.join(configDir, 'serve.json'), 'utf-8'));
+    const mergedServe = JSON.parse(await FileSystem.readFileAsync(`${configDir}/serve.json`));
     expect(mergedServe.serveConfigurations.old).toBeDefined();
     expect(mergedServe.serveConfigurations.new).toBeDefined();
   });
 
   it('should preserve existing content for unregistered file with different content on disk', async () => {
     const existingContent = '{"existing": true}';
-    fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), existingContent);
+    await FileSystem.writeFileAsync(`${tempDir}/tsconfig.json`, existingContent);
 
     templateFs.write('tsconfig.json', '{"compilerOptions":{}}');
 
@@ -225,20 +227,20 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     await writer.writeAsync(templateFs, tempDir);
 
     // Existing content should be preserved — writer skips unregistered files with different content
-    const actual = fs.readFileSync(path.join(tempDir, 'tsconfig.json'), 'utf-8');
+    const actual = await FileSystem.readFileAsync(`${tempDir}/tsconfig.json`);
     expect(actual).toBe(existingContent);
   });
 
   it('should skip silently for unregistered file with same content on disk', async () => {
     const sameContent = '{"compilerOptions":{}}';
-    fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), sameContent);
+    await FileSystem.writeFileAsync(`${tempDir}/tsconfig.json`, sameContent);
 
     templateFs.write('tsconfig.json', sameContent);
 
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, tempDir);
 
-    const actual = fs.readFileSync(path.join(tempDir, 'tsconfig.json'), 'utf-8');
+    const actual = await FileSystem.readFileAsync(`${tempDir}/tsconfig.json`);
     expect(actual).toBe(sameContent);
   });
 
@@ -248,7 +250,7 @@ describe(`${SPFxTemplateWriter.name} integration`, () => {
     const writer = new SPFxTemplateWriter();
     await writer.writeAsync(templateFs, tempDir);
 
-    const actual = fs.readFileSync(path.join(tempDir, 'src/webparts/myWebPart/MyWebPart.ts'), 'utf-8');
+    const actual = await FileSystem.readFileAsync(`${tempDir}/src/webparts/myWebPart/MyWebPart.ts`);
     expect(actual).toBe('export class MyWebPart {}');
   });
 });

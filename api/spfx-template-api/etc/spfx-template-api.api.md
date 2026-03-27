@@ -64,13 +64,6 @@ export interface ITemplateFileEntry {
 }
 
 // @public
-export interface ITemplateFileSystem {
-    readonly files: ReadonlyMap<string, ITemplateFileEntry>;
-    read(relativePath: string): string | Buffer | undefined;
-    write(relativePath: string, contents: string | Buffer): void;
-}
-
-// @public
 export abstract class JsonMergeHelper implements IMergeHelper {
     // (undocumented)
     abstract readonly fileRelativePath: string;
@@ -132,7 +125,7 @@ export class SPFxTemplate {
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
     get name(): string;
-    renderAsync(context: object, options?: IRenderOptions): Promise<ITemplateFileSystem>;
+    renderAsync(context: object, options?: IRenderOptions): Promise<TemplateFileSystem>;
     get spfxVersion(): string;
     toString(): string;
     get version(): string;
@@ -182,11 +175,11 @@ export type SPFxTemplateRepositorySourceKind = 'local' | 'github';
 export class SPFxTemplateWriter {
     constructor();
     addMergeHelper(helper: IMergeHelper): void;
-    writeAsync(templateFs: ITemplateFileSystem, targetDir: string): Promise<void>;
+    writeAsync(templateFs: TemplateFileSystem, targetDir: string): Promise<void>;
 }
 
 // @public
-export class TemplateFileSystem implements ITemplateFileSystem {
+export class TemplateFileSystem {
     get files(): ReadonlyMap<string, ITemplateFileEntry>;
     read(relativePath: string): string | Buffer | undefined;
     write(relativePath: string, contents: string | Buffer): void;

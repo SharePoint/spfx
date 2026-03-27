@@ -3,7 +3,7 @@
 
 jest.mock('@rushstack/node-core-library');
 
-import type { ITemplateFileSystem } from '../../writing/TemplateFileSystem';
+import type { TemplateFileSystem } from '../../writing/TemplateFileSystem';
 
 import { Async, FileSystem, type FolderItem } from '@rushstack/node-core-library';
 
@@ -317,7 +317,7 @@ describe(SPFxTemplate.name, () => {
       const template = new SPFxTemplate(definition, files);
       const context = { name: 'MyApp', title: 'My Application' };
 
-      const result: ITemplateFileSystem = await template.renderAsync(context);
+      const result: TemplateFileSystem = await template.renderAsync(context);
 
       expect(result.read('src/index.ts')).toBe('const name = "MyApp";');
       expect(result.read('README.md')).toBe('# My Application');
@@ -344,7 +344,7 @@ describe(SPFxTemplate.name, () => {
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
 
-      const result: ITemplateFileSystem = await template.renderAsync(context);
+      const result: TemplateFileSystem = await template.renderAsync(context);
 
       expect(result.read('src/index.ts')).toBe('const name = "MyComponent";');
     });
@@ -386,7 +386,7 @@ describe(SPFxTemplate.name, () => {
       const template = new SPFxTemplate(definition, files);
       const context = { componentName: 'MyComponent' };
 
-      const result: ITemplateFileSystem = await template.renderAsync(context);
+      const result: TemplateFileSystem = await template.renderAsync(context);
 
       expect(result.read('src/MyComponent.ts')).toBe('export class MyComponent {}');
     });
@@ -407,13 +407,13 @@ describe(SPFxTemplate.name, () => {
       const template = new SPFxTemplate(definition, files);
       const context = { name: 'World', version: '1.0.0' };
 
-      const result: ITemplateFileSystem = await template.renderAsync(context);
+      const result: TemplateFileSystem = await template.renderAsync(context);
 
       expect(result.read('file.txt')).toBe('Hello World!');
       expect(result.read('config.json')).toBe('{"version": "1.0.0"}');
     });
 
-    it('should return ITemplateFileSystem instance', async () => {
+    it('should return TemplateFileSystem instance', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Test',
         category: 'webpart',
@@ -422,7 +422,7 @@ describe(SPFxTemplate.name, () => {
       });
 
       const template = new SPFxTemplate(definition, new Map());
-      const result: ITemplateFileSystem = await template.renderAsync({});
+      const result: TemplateFileSystem = await template.renderAsync({});
 
       expect(result).toBeDefined();
       expect(typeof result.read).toBe('function');

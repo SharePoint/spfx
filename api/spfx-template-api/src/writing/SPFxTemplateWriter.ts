@@ -2,9 +2,10 @@
 // See LICENSE in the project root for license information.
 
 import * as path from 'node:path';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
 
-import type { ITemplateFileSystem } from './TemplateFileSystem';
+import { FileSystem } from '@rushstack/node-core-library';
+
+import type { TemplateFileSystem } from './TemplateFileSystem';
 import type { IMergeHelper } from './IMergeHelper';
 import { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 import { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';
@@ -47,7 +48,7 @@ export class SPFxTemplateWriter {
    * @param templateFs - The in-memory file system containing rendered template files
    * @param targetDir - The absolute path to the destination directory
    */
-  public async writeAsync(templateFs: ITemplateFileSystem, targetDir: string): Promise<void> {
+  public async writeAsync(templateFs: TemplateFileSystem, targetDir: string): Promise<void> {
     const resolvedTargetDir: string = path.resolve(targetDir);
 
     for (const [rawRelativePath, entry] of templateFs.files) {
@@ -69,26 +70,22 @@ export class SPFxTemplateWriter {
 
       if (typeof contents !== 'string') {
         // Binary file — always write directly
-        const dirPath: string = path.dirname(absolutePath);
-        await mkdir(dirPath, { recursive: true });
-        await writeFile(absolutePath, contents);
+        await FileSystem.ensureFolderAsync(path.dirname(absolutePath));
+        await FileSystem.writeFileAsync(absolutePath, contents);
         continue;
       }
 
       // Text file — attempt merge with existing content on disk
       let existingContent: string;
       try {
-        existingContent = await readFile(absolutePath, 'utf-8');
+        existingContent = await FileSystem.readFileAsync(absolutePath);
       } catch (error: unknown) {
-        // Only treat ENOENT (file not found) as "new file" — rethrow anything else
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if ((error as any)?.code !== 'ENOENT') {
+        if (!FileSystem.isNotExistError(error as Error)) {
           throw error;
         }
         // File does not exist on disk — write as new file
-        const dirPath: string = path.dirname(absolutePath);
-        await mkdir(dirPath, { recursive: true });
-        await writeFile(absolutePath, contents, 'utf-8');
+        await FileSystem.ensureFolderAsync(path.dirname(absolutePath));
+        await FileSystem.writeFileAsync(absolutePath, contents);
         continue;
       }
 
@@ -100,9 +97,8 @@ export class SPFxTemplateWriter {
       const helper: IMergeHelper | undefined = this._mergeHelpers.get(relativePath);
       if (helper) {
         const mergedContent: string = helper.merge(existingContent, contents);
-        const dirPath: string = path.dirname(absolutePath);
-        await mkdir(dirPath, { recursive: true });
-        await writeFile(absolutePath, mergedContent, 'utf-8');
+        await FileSystem.ensureFolderAsync(path.dirname(absolutePath));
+        await FileSystem.writeFileAsync(absolutePath, mergedContent);
       }
       // No merge helper and content differs — preserve existing content (skip writing)
     }

@@ -36,6 +36,5 @@ export {
   ServeJsonMergeHelper,
   SPFxTemplateWriter,
   type ITemplateFileEntry,
-  type ITemplateFileSystem,
   TemplateFileSystem
 } from './writing/index';

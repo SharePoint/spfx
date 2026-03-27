@@ -13,7 +13,7 @@ import {
   type SPFxTemplateCategory
 } from './SPFxTemplateJsonFile';
 import { isBinaryFile } from './binaryFiles';
-import { TemplateFileSystem, type ITemplateFileSystem } from '../writing/TemplateFileSystem';
+import { TemplateFileSystem } from '../writing/TemplateFileSystem';
 
 /**
  * @public
@@ -179,9 +179,9 @@ export class SPFxTemplate {
    * Renders the template with the provided context object.
    * @param context - The context object containing variables to be used in template rendering
    * @param options - Optional render options
-   * @returns A Promise that resolves to an ITemplateFileSystem containing the rendered files
+   * @returns A Promise that resolves to a TemplateFileSystem containing the rendered files
    */
-  public async renderAsync(context: object, options?: IRenderOptions): Promise<ITemplateFileSystem> {
+  public async renderAsync(context: object, options?: IRenderOptions): Promise<TemplateFileSystem> {
     // use the template "schema" to validate the context object
     if (this._definition.contextSchema) {
       // Build a Zod schema from the contextSchema metadata
@@ -208,6 +208,8 @@ export class SPFxTemplate {
         const placeholder: string = `{${key}}`;
         renderedFilename = renderedFilename.split(placeholder).join(String(value));
       }
+      // Normalize to relative POSIX path: convert backslashes and strip leading slashes
+      renderedFilename = renderedFilename.replace(/\\/g, '/').replace(/^\/+/, '');
 
       if (typeof contents === 'string') {
         // Process text file contents as EJS template

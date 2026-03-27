@@ -9,7 +9,7 @@ import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
 import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
 import * as z from 'zod';
 
-import { Executable } from '@rushstack/node-core-library';
+import { Executable, Path } from '@rushstack/node-core-library';
 import { Colorize, type Terminal } from '@rushstack/terminal';
 import type {
   CommandLineStringParameter,
@@ -21,7 +21,7 @@ import {
   SPFxTemplateRepositoryManager,
   type SPFxTemplate,
   SPFxTemplateWriter,
-  type ITemplateFileSystem
+  type TemplateFileSystem
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
@@ -198,7 +198,7 @@ export class CreateAction extends SPFxActionBase {
       }
       const solutionName: string = rawSolutionName || componentNameHyphenCase;
 
-      const templateFs: ITemplateFileSystem = await template.renderAsync(
+      const templateFs: TemplateFileSystem = await template.renderAsync(
         {
           solution_name: solutionName,
           libraryName: this._libraryNameParameter.value,
@@ -269,7 +269,7 @@ async function _runInstallAsync(
 /**
  * Utility function to show the user which files in the in-memory file system are pending changes.
  */
-function _printFileChanges(terminal: Terminal, templateFs: ITemplateFileSystem, targetDir: string): void {
+function _printFileChanges(terminal: Terminal, templateFs: TemplateFileSystem, targetDir: string): void {
   terminal.writeLine(`targetDir: ${targetDir}`);
 
   terminal.writeLine();
@@ -278,7 +278,7 @@ function _printFileChanges(terminal: Terminal, templateFs: ITemplateFileSystem, 
   const sortedFiles: string[] = Array.from(templateFs.files.keys()).sort();
 
   for (const file of sortedFiles) {
-    terminal.writeLine(Colorize.green(`  ${file}`));
+    terminal.writeLine(Colorize.green(`  ${Path.convertToSlashes(file)}`));
   }
 
   terminal.writeLine();
