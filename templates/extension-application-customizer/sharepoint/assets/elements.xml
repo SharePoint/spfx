@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
     <CustomAction
-        Title="<%= componentNameCapitalCase %>ApplicationCustomizer"
+        Title="<%= componentName.pascal %>ApplicationCustomizer"
         Location="ClientSideExtension.ApplicationCustomizer"
         ClientSideComponentId="<%= componentId %>"
         ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">

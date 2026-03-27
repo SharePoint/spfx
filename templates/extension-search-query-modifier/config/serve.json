@@ -14,7 +14,7 @@
         }
       }
     },
-    "<%= componentNameCamelCase %>SearchQueryModifier": {
+    "<%= componentName.camel %>SearchQueryModifier": {
       "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
       "customActions": {
         "<%= componentId %>": {

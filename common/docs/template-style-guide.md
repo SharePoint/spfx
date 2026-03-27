@@ -14,20 +14,22 @@ Template variables are defined in each template's `template.json` under `context
 }
 ```
 
-| Variable | Case | Use for | Example |
-|----------|------|---------|---------|
-| `componentName` | original | Display name | "Generic Card" |
-| `componentNameCamelCase` | camelCase | File/folder names | "genericCard" |
-| `componentNameCapitalCase` | PascalCase | Class names | "GenericCard" |
-| `componentNameHyphenCase` | kebab-case | CSS classes, IDs, localization keys | "generic-card" |
-| `componentNameAllCaps` | UPPER_CASE | String literal IDs | "GENERICCARD" |
-| `libraryName` | scoped | Package name | "@spfx-template/generic-card" |
+Every string value in the render context is automatically wrapped with casing helpers. Access any casing via dot notation:
+
+| Syntax | Case | Use for | Example |
+|--------|------|---------|---------|
+| `componentName` | original | Display titles in manifests (via `toString()`) | "Generic Card" |
+| `componentName.camel` | camelCase | Folder names, CSS classes, file-path segments | "genericCard" |
+| `componentName.pascal` | PascalCase | Class names, localization module keys, file names | "GenericCard" |
+| `componentName.hyphen` | hyphen-case | Bundle IDs in config.json, deploy containers, webpack chunk names | "generic-card" |
+| `componentName.allCaps` | UPPER_SNAKE_CASE | ACE view/quick-view registry IDs, string constants | "GENERIC_CARD" |
+| `libraryName` | original | Package name (via `toString()`) | "@spfx-template/generic-card" |
 | `description` | — | User-provided description | User's text |
 | `spfxVersion` | — | SPFx framework version | "1.22.2" |
 
-If you need a case transformation that doesn't exist, either:
-1. Add it to the template.json `contextSchema`
-2. Or transform inline with EJS: `<%= componentName.toUpperCase().replace(/[^A-Z0-9]/g, '') %>`
+The same casing helpers are available on **any** string context variable — e.g. `componentAlias.pascal`, `libraryName.hyphen`, etc.
+
+If you need a custom transformation, use inline EJS: `<%= componentName.toString().replace(/[^A-Z0-9]/gi, '') %>`
 
 ## Naming Conventions
 
@@ -43,19 +45,30 @@ public static readonly GENERICCARD_CARD_VIEW = 'GENERICCARD_CARD_VIEW';
 public static readonly GenericCard_CARD_VIEW = 'GenericCard_CARD_VIEW';
 ```
 
-### Localization keys — kebab-case
+### Bundle identifiers — hyphen-case
 
-```typescript
+Used in `config/config.json` bundle keys, `config/deploy-azure-storage.json` containers, and webpack chunk names.
+
+```json
+// Correct — config.json bundle key
+"<%= componentName.hyphen %>-web-part": { ... }
+
+// Wrong — camelCase in bundle key
+"<%= componentName.camel %>WebPart": { ... }
+```
+
+### Localization modules — PascalCase
+
+Localization module names in `config.json` `localizedResources` and `loc/*.d.ts` `declare module` statements use `.pascal`.
+
+```json
 // Correct
-PropertyPaneDescription: 'generic-card-property-pane'
-
-// Wrong — capital letters
-PropertyPaneDescription: 'GenericCard-property-pane'
+"<%= componentName.pascal %>WebPartStrings": "lib/webparts/<%= componentName.camel %>WebPart/loc/{locale}.js"
 ```
 
 ### TypeScript identifiers — camelCase / PascalCase
 
-Use `componentNameCamelCase` for instances and `componentNameCapitalCase` for class names.
+Use `componentName.camel` for instances and `componentName.pascal` for class names.
 
 ## Description Placeholders
 
@@ -130,7 +143,7 @@ Example READMEs should have real content: a component name header, an actual sum
 ## Pre-Submit Checklist
 
 - [ ] String literal IDs use ALL_CAPS
-- [ ] Localization keys use kebab-case
+- [ ] Bundle IDs use `.hyphen`, localization modules use `.pascal`
 - [ ] README uses `<%= description %>` placeholder
 - [ ] Localization files use description placeholders
 - [ ] All version references use `<%= spfxVersion %>`

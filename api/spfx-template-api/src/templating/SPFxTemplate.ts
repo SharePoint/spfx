@@ -13,6 +13,7 @@ import {
   type ISPFxTemplateJson,
   type SPFxTemplateCategory
 } from './SPFxTemplateJsonFile';
+import { createCasedString, type ICasedString } from './CasedString';
 import { isBinaryFile } from './binaryFiles';
 
 /**
@@ -202,9 +203,9 @@ export class SPFxTemplate {
     destinationDir: string,
     options?: IRenderOptions
   ): Promise<MemFsEditor> {
-    // use the template "schema" to validate the context object
+    // Validate the context object against the template's contextSchema (if declared).
+    // Validation runs on the raw (pre-wrap) context so schema types remain simple strings.
     if (this._definition.contextSchema) {
-      // Build a Zod schema from the contextSchema metadata
       const schemaShape: Record<string, z.ZodString> = {};
       for (const [key, value] of Object.entries(this._definition.contextSchema)) {
         if (value.type === 'string') {
@@ -212,29 +213,35 @@ export class SPFxTemplate {
         }
       }
 
-      const contextSchema: z.ZodObject<Record<string, z.ZodString>> = z.object(schemaShape);
+      const contextSchema: z.ZodObject<Record<string, z.ZodString>> = z.object(schemaShape).passthrough();
       const validationResult: z.ZodSafeParseResult<Record<string, string>> = contextSchema.safeParse(context);
       if (!validationResult.success) {
         throw new Error(`Invalid context object: ${validationResult.error}`);
       }
     }
 
+    // Wrap every plain-string value in the context with ICasedString so templates
+    // can access casing variants (e.g. <%= componentName.pascal %>) for free.
+    // Also pre-compute a flat list of dotted-key → string entries for filename
+    // placeholder replacement (e.g. {componentName.pascal} → "HelloWorld").
+    const { ejsContext, flatEntries } = _buildRenderContext(context);
+
     const { create: createMemFs } = await import('mem-fs');
     const { create: createEditor } = await import('mem-fs-editor');
     const memFs: MemFsEditor = createEditor(createMemFs());
 
     for (const [filename, contents] of this._files) {
-      // Render the filename by replacing {variableName} placeholders
+      // Render the filename by replacing {key} and {key.property} placeholders
       let renderedFilename: string = filename;
-      for (const [key, value] of Object.entries(context)) {
-        const placeholder: string = `{${key}}`;
-        renderedFilename = renderedFilename.split(placeholder).join(String(value));
+      for (const [dottedKey, value] of flatEntries) {
+        const placeholder: string = `{${dottedKey}}`;
+        renderedFilename = renderedFilename.split(placeholder).join(value);
       }
 
       const destination: string = `${destinationDir}/${renderedFilename}`;
       if (typeof contents === 'string') {
         // Process text file contents as EJS template
-        let rendered: string = ejs.render(contents, context, {
+        let rendered: string = ejs.render(contents, ejsContext, {
           filename,
           cache: false
         });
@@ -267,6 +274,38 @@ export class SPFxTemplate {
       `Files: ${this.fileCount}`
     ].join('\n');
   }
+}
+
+/**
+ * Builds both the EJS render context and the flat filename-placeholder entries in a
+ * single pass. Every plain-string value is wrapped with {@link createCasedString};
+ * non-string values are passed through unchanged. Flat entries include dotted sub-keys
+ * for each casing variant so that `{componentName.pascal}` resolves in filenames.
+ */
+function _buildRenderContext(context: object): {
+  ejsContext: Record<string, unknown>;
+  flatEntries: Map<string, string>;
+} {
+  const ejsContext: Record<string, unknown> = {};
+  const flatEntries: Map<string, string> = new Map<string, string>();
+
+  for (const [key, value] of Object.entries(context)) {
+    if (typeof value === 'string') {
+      const cased: ICasedString = createCasedString(value);
+      ejsContext[key] = cased;
+      const { camel, pascal, hyphen, allCaps } = cased;
+      flatEntries.set(key, value);
+      flatEntries.set(`${key}.camel`, camel);
+      flatEntries.set(`${key}.pascal`, pascal);
+      flatEntries.set(`${key}.hyphen`, hyphen);
+      flatEntries.set(`${key}.allCaps`, allCaps);
+    } else {
+      ejsContext[key] = value;
+      flatEntries.set(key, String(value));
+    }
+  }
+
+  return { ejsContext, flatEntries };
 }
 
 function _stripPhaseScripts(packageJsonContents: string): string {

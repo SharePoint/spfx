@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "<%= componentNameHyphenCase %>-application-customizer": {
+    "<%= componentName.hyphen %>-application-customizer": {
       "components": [
         {
-          "entrypoint": "./lib/extensions/<%= componentNameCamelCase %>ApplicationCustomizer/<%= componentNameCapitalCase %>ApplicationCustomizer.js",
-          "manifest": "./src/extensions/<%= componentNameCamelCase %>ApplicationCustomizer/<%= componentNameCapitalCase %>ApplicationCustomizer.manifest.json"
+          "entrypoint": "./lib/extensions/<%= componentName.camel %>ApplicationCustomizer/<%= componentName.pascal %>ApplicationCustomizer.js",
+          "manifest": "./src/extensions/<%= componentName.camel %>ApplicationCustomizer/<%= componentName.pascal %>ApplicationCustomizer.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "<%= componentNameCapitalCase %>ApplicationCustomizerStrings": "lib/extensions/<%= componentNameCamelCase %>ApplicationCustomizer/loc/{locale}.js"
+    "<%= componentName.pascal %>ApplicationCustomizerStrings": "lib/extensions/<%= componentName.camel %>ApplicationCustomizer/loc/{locale}.js"
   }
 }

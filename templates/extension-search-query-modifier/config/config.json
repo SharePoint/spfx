@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "<%= componentNameHyphenCase %>-search-query-modifier": {
+    "<%= componentName.hyphen %>-search-query-modifier": {
       "components": [
         {
-          "entrypoint": "./lib/extensions/<%= componentNameCamelCase %>SearchQueryModifier/<%= componentNameCapitalCase %>SearchQueryModifier.js",
-          "manifest": "./src/extensions/<%= componentNameCamelCase %>SearchQueryModifier/<%= componentNameCapitalCase %>SearchQueryModifier.manifest.json"
+          "entrypoint": "./lib/extensions/<%= componentName.camel %>SearchQueryModifier/<%= componentName.pascal %>SearchQueryModifier.js",
+          "manifest": "./src/extensions/<%= componentName.camel %>SearchQueryModifier/<%= componentName.pascal %>SearchQueryModifier.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "<%= componentNameCapitalCase %>SearchQueryModifierStrings": "lib/extensions/<%= componentNameCamelCase %>SearchQueryModifier/loc/{locale}.js"
+    "<%= componentName.pascal %>SearchQueryModifierStrings": "lib/extensions/<%= componentName.camel %>SearchQueryModifier/loc/{locale}.js"
   }
 }

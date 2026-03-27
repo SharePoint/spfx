@@ -5,7 +5,7 @@ import type { ChildProcess } from 'node:child_process';
 
 type PackageManager = 'npm' | 'pnpm' | 'yarn';
 
-import { camelCase, kebabCase, snakeCase, upperFirst } from 'lodash';
+import { kebabCase } from 'lodash';
 import type { MemFsEditor } from 'mem-fs-editor';
 import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
 import * as z from 'zod';
@@ -107,7 +107,7 @@ export class CreateAction extends SPFxActionBase {
     this._solutionNameParameter = this.defineStringParameter({
       parameterLongName: '--solution-name',
       argumentName: 'SOLUTION_NAME',
-      description: 'The solution name. If not provided, defaults to the kebab-case component name.'
+      description: 'The solution name. If not provided, defaults to the hyphen-case component name.'
     });
 
     this._packageManagerParameter = this.defineChoiceParameter({
@@ -184,19 +184,13 @@ export class CreateAction extends SPFxActionBase {
       const componentDescription: string =
         this._componentDescriptionParameter.value || `${componentName} description`;
 
-      // Compute name variants using lodash
-      const componentNameCamelCase: string = camelCase(componentName);
-      const componentNameHyphenCase: string = kebabCase(componentName);
-      const componentNameCapitalCase: string = upperFirst(camelCase(componentName));
-      const componentNameAllCaps: string = snakeCase(componentName).toUpperCase();
-
       const rawSolutionName: string | undefined = this._solutionNameParameter.value?.trim();
       if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
         throw new Error(
           `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
         );
       }
-      const solutionName: string = rawSolutionName || componentNameHyphenCase;
+      const solutionName: string = rawSolutionName || kebabCase(componentName);
 
       const fs: MemFsEditor = await template.renderAsync(
         {
@@ -210,11 +204,7 @@ export class CreateAction extends SPFxActionBase {
           featureId: featureId,
           solutionId: solutionId,
           componentAlias: componentAlias,
-          componentNameUnescaped: componentName,
-          componentNameCamelCase: componentNameCamelCase,
-          componentNameHyphenCase: componentNameHyphenCase,
-          componentNameCapitalCase: componentNameCapitalCase,
-          componentNameAllCaps: componentNameAllCaps,
+          componentName: componentName,
           componentDescription: componentDescription
         },
         targetDir,

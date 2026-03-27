@@ -5,21 +5,13 @@
   "version": "1.0.0",
   "spfxVersion": "1.22.2",
   "contextSchema": {
+    "componentName": {
+      "type": "string",
+      "description": "The component name"
+    },
     "libraryName": {
       "type": "string",
-      "description": "The library name (kebab-case)"
-    },
-    "componentNameCamelCase": {
-      "type": "string",
-      "description": "The component name in camelCase"
-    },
-    "componentNameCapitalCase": {
-      "type": "string",
-      "description": "The component name in CapitalCase"
-    },
-    "componentNameHyphenCase": {
-      "type": "string",
-      "description": "The component name in hyphen-case"
+      "description": "The library name (hyphen-case)"
     },
     "componentId": {
       "type": "string",

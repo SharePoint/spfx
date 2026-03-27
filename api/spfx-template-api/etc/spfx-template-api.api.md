@@ -28,6 +28,18 @@ export class ConfigJsonMergeHelper extends JsonMergeHelper {
 export const ENGINE_VERSION: string;
 
 // @public
+export function createCasedString(raw: string): ICasedString;
+
+// @public
+export interface ICasedString {
+    readonly allCaps: string;
+    readonly camel: string;
+    readonly hyphen: string;
+    readonly pascal: string;
+    toString(): string;
+}
+
+// @public
 export interface IMergeHelper {
     readonly fileRelativePath: string;
     merge(existingContent: string, newContent: string): string;

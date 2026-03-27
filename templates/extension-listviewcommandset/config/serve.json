@@ -15,7 +15,7 @@
         }
       }
     },
-    "<%= componentNameCamelCase %>CommandSet": {
+    "<%= componentName.camel %>CommandSet": {
       "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
       "customActions": {
         "<%= componentId %>": {

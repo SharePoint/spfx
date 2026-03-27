@@ -57,13 +57,15 @@ If you're adding a brand-new template (not editing an existing one):
 
 ## Common Template Variables
 
-| Variable | Case | Use for |
-|----------|------|---------|
-| `componentName` | original | Display name |
-| `componentNameCamelCase` | camelCase | File/folder names |
-| `componentNameCapitalCase` | PascalCase | Class names |
-| `componentNameHyphenCase` | kebab-case | CSS classes, IDs, localization keys |
-| `componentNameAllCaps` | UPPER_CASE | String literal IDs |
+Every string value in the render context is automatically wrapped with casing helpers. Access any casing via dot notation:
+
+| Syntax | Case | Use for |
+|--------|------|---------|
+| `componentName` | original | Display titles in manifests (via `toString()`) |
+| `componentName.camel` | camelCase | Folder names, CSS classes, file-path segments |
+| `componentName.pascal` | PascalCase | Class names, localization module keys, file names |
+| `componentName.hyphen` | hyphen-case | Bundle IDs in config.json, deploy containers, webpack chunk names |
+| `componentName.allCaps` | UPPER_SNAKE_CASE | ACE view/quick-view registry IDs, string constants |
 | `description` | — | User-provided description |
 | `spfxVersion` | — | SPFx framework version |
 

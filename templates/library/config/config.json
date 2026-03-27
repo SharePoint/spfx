@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "<%= componentNameHyphenCase %>-library": {
+    "<%= componentName.hyphen %>-library": {
       "components": [
         {
-          "entrypoint": "./lib/libraries/<%= componentNameCamelCase %>/<%= componentNameCapitalCase %>Library.js",
-          "manifest": "./src/libraries/<%= componentNameCamelCase %>/<%= componentNameCapitalCase %>Library.manifest.json"
+          "entrypoint": "./lib/libraries/<%= componentName.camel %>/<%= componentName.pascal %>Library.js",
+          "manifest": "./src/libraries/<%= componentName.camel %>/<%= componentName.pascal %>Library.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "<%= componentNameCapitalCase %>LibraryStrings": "lib/libraries/<%= componentNameCamelCase %>/loc/{locale}.js"
+    "<%= componentName.pascal %>LibraryStrings": "lib/libraries/<%= componentName.camel %>/loc/{locale}.js"
   }
 }

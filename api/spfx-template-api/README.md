@@ -33,6 +33,7 @@ const template = templates.get('webpart-react');
 if (!template) throw new Error('Template not found');
 
 // 2. Render to an in-memory file system
+// String values are automatically wrapped with casing helpers (e.g. componentName.pascal)
 const fs = await template.renderAsync(
   {
     solution_name: 'my-solution',
@@ -43,11 +44,7 @@ const fs = await template.renderAsync(
     featureId: '<uuid>',
     solutionId: '<uuid>',
     componentAlias: 'MyWebPart',
-    componentNameUnescaped: 'My Web Part',
-    componentNameCamelCase: 'myWebPart',
-    componentNameHyphenCase: 'my-web-part',
-    componentNameCapitalCase: 'MyWebPart',
-    componentNameAllCaps: 'MY_WEB_PART',
+    componentName: 'My Web Part',
     componentDescription: 'My Web Part description'
   },
   '/path/to/output'
@@ -138,6 +135,8 @@ The writer uses these helpers internally. You can also import them directly for 
 
 | Export | Description |
 |--------|-------------|
+| `ICasedString` | Interface exposing `.camel`, `.pascal`, `.hyphen`, `.allCaps`; auto-applied to all string context values during rendering |
+| `createCasedString` | Factory function that creates an `ICasedString` from a raw string |
 | `SPFxTemplateRepositoryManager` | Aggregates sources and returns a `SPFxTemplateCollection` |
 | `SPFxTemplateCollection` | `Map<string, SPFxTemplate>` of all loaded templates |
 | `SPFxTemplate` | Single template — exposes `name`, `category`, `spfxVersion`, and `renderAsync()` |

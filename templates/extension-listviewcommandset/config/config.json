@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "<%= componentNameHyphenCase %>-command-set": {
+    "<%= componentName.hyphen %>-command-set": {
       "components": [
         {
-          "entrypoint": "./lib/extensions/<%= componentNameCamelCase %>CommandSet/<%= componentNameCapitalCase %>CommandSet.js",
-          "manifest": "./src/extensions/<%= componentNameCamelCase %>CommandSet/<%= componentNameCapitalCase %>CommandSet.manifest.json"
+          "entrypoint": "./lib/extensions/<%= componentName.camel %>CommandSet/<%= componentName.pascal %>CommandSet.js",
+          "manifest": "./src/extensions/<%= componentName.camel %>CommandSet/<%= componentName.pascal %>CommandSet.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "<%= componentNameCapitalCase %>CommandSetStrings": "lib/extensions/<%= componentNameCamelCase %>CommandSet/loc/{locale}.js"
+    "<%= componentName.pascal %>CommandSetStrings": "lib/extensions/<%= componentName.camel %>CommandSet/loc/{locale}.js"
   }
 }

@@ -446,6 +446,93 @@ describe(SPFxTemplate.name, () => {
       expect(editor.read('/output/config.json')).toBe('{"version": "1.0.0"}');
     });
 
+    it('should auto-wrap string context values so dotted casing accessors work in EJS', async () => {
+      const definition = new SPFxTemplateJsonFile({
+        name: 'AutoWrap',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0'
+      });
+
+      const files = new Map<string, string | Buffer>([
+        ['src/index.ts', 'export class <%= componentName.pascal %> {}'],
+        ['style.css', '.<%= componentName.hyphen %>-container { }']
+      ]);
+
+      const template = new SPFxTemplate(definition, files);
+      const context = { componentName: 'Hello World' };
+
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
+
+      expect(editor.read('/output/src/index.ts')).toBe('export class HelloWorld {}');
+      expect(editor.read('/output/style.css')).toBe('.hello-world-container { }');
+    });
+
+    it('should resolve dotted-path placeholders in filenames via auto-wrapped context', async () => {
+      const definition = new SPFxTemplateJsonFile({
+        name: 'DottedFilename',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0'
+      });
+
+      const files = new Map<string, string | Buffer>([
+        [
+          'src/{componentName.camel}WebPart/{componentName.pascal}WebPart.ts',
+          'export class <%= componentName.pascal %>WebPart {}'
+        ]
+      ]);
+
+      const template = new SPFxTemplate(definition, files);
+      const context = { componentName: 'Hello World' };
+
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
+
+      expect(editor.read('/output/src/helloWorldWebPart/HelloWorldWebPart.ts')).toBe(
+        'export class HelloWorldWebPart {}'
+      );
+    });
+
+    it('should render raw string value via toString when using bare variable name in EJS', async () => {
+      const definition = new SPFxTemplateJsonFile({
+        name: 'RawValue',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0'
+      });
+
+      const files = new Map<string, string | Buffer>([
+        ['manifest.json', '{"title": "<%= componentName %>"}']
+      ]);
+
+      const template = new SPFxTemplate(definition, files);
+      const context = { componentName: 'Hello World' };
+
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
+
+      expect(editor.read('/output/manifest.json')).toBe('{"title": "Hello World"}');
+    });
+
+    it('should auto-wrap all string values, not just componentName', async () => {
+      const definition = new SPFxTemplateJsonFile({
+        name: 'AllStrings',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0'
+      });
+
+      const files = new Map<string, string | Buffer>([
+        ['file.txt', '<%= libraryName.pascal %> / <%= componentAlias.hyphen %>']
+      ]);
+
+      const template = new SPFxTemplate(definition, files);
+      const context = { libraryName: 'my-library', componentAlias: 'HelloWorld' };
+
+      const editor: MemFsEditor = await template.renderAsync(context, '/output');
+
+      expect(editor.read('/output/file.txt')).toBe('MyLibrary / hello-world');
+    });
+
     it('should return MemFsEditor instance', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Test',

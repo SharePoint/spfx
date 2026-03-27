@@ -5,21 +5,9 @@
   "version": "1.0.0",
   "spfxVersion": "1.22.2",
   "contextSchema": {
-    "componentNameCapitalCase": {
+    "componentName": {
       "type": "string",
-      "description": "The component name in CapitalCase (e.g., 'Minimal')"
-    },
-    "componentNameCamelCase": {
-      "type": "string",
-      "description": "The component name in camelCase (e.g., 'minimal')"
-    },
-    "componentNameHyphenCase": {
-      "type": "string",
-      "description": "The component name in hyphen-case (e.g., 'minimal')"
-    },
-    "componentNameUnescaped": {
-      "type": "string",
-      "description": "The component display name (unescaped)"
+      "description": "The component name"
     },
     "componentAlias": {
       "type": "string",

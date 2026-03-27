@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
     <ClientSideComponentInstance
-        Title="<%= componentNameCapitalCase %>SearchQueryModifier"
+        Title="<%= componentName.pascal %>SearchQueryModifier"
         Location="ClientSideExtension.SearchQueryModifier"
         ComponentId="<%= componentId %>"
         Properties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
