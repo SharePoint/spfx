@@ -33,7 +33,7 @@ export async function readChangelogSectionFromTgzAsync(
     return undefined;
   }
 
-  const lines: string[] = stdout.split('\n');
+  const lines: string[] = stdout.split(/\r?\n/);
   const sectionStart: number = lines.findIndex((line) => line.startsWith(`## ${version}`));
   if (sectionStart === -1) {
     return undefined;

@@ -25,7 +25,7 @@ export class TagPublishedPackagesAction extends CommandLineAction {
   public constructor(terminal: ITerminal) {
     super({
       actionName: 'tag-published-packages',
-      summary: 'Creates GitHub releases and tags for each .tgz package in a directory.',
+      summary: 'Creates a GitHub release for each .tgz package in a directory.',
       documentation: ''
     });
 
@@ -83,14 +83,22 @@ export class TagPublishedPackagesAction extends CommandLineAction {
         const prerelease: boolean = packageVersion.includes('-');
 
         terminal.writeLine(`Creating release: ${tag} → ${commitSha} (prerelease: ${prerelease})`);
-        await gitHubClient.createReleaseAsync({
-          tag,
-          sha: commitSha,
-          name: tag,
-          body: changelogSection,
-          prerelease
-        });
-        terminal.writeLine(`Created release: ${tag}`);
+        try {
+          await gitHubClient.createReleaseAsync({
+            tag,
+            sha: commitSha,
+            name: tag,
+            body: changelogSection,
+            prerelease
+          });
+          terminal.writeLine(`Created release: ${tag}`);
+        } catch (e: unknown) {
+          if (typeof e === 'object' && e !== null && (e as { status?: unknown }).status === 422) {
+            terminal.writeLine(`Release already exists for ${tag}; skipping.`);
+            return;
+          }
+          throw e;
+        }
       },
       { concurrency: 5 }
     );

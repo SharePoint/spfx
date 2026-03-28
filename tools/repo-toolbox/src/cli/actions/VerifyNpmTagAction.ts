@@ -85,17 +85,24 @@ export class VerifyNpmTagAction extends CommandLineAction {
         terminal.writeLine(`Package name: ${packageName}`);
         terminal.writeLine(`Package version: ${packageVersion}`);
 
-        const npmProcess: ChildProcess = Executable.spawn('npm', [
-          'view',
-          `${packageName}@${npmTag}`,
-          'version'
-        ]);
-        const { stdout } = await Executable.waitForExitAsync(npmProcess, {
-          encoding: 'utf8',
-          throwOnNonZeroExitCode: true,
-          throwOnSignal: true
-        });
-        const taggedVersion: string | undefined = stdout.trim();
+        let taggedVersion: string | undefined;
+        try {
+          const npmProcess: ChildProcess = Executable.spawn('npm', [
+            'view',
+            `${packageName}@${npmTag}`,
+            'version'
+          ]);
+          const { stdout } = await Executable.waitForExitAsync(npmProcess, {
+            encoding: 'utf8',
+            throwOnNonZeroExitCode: true,
+            throwOnSignal: true
+          });
+          taggedVersion = stdout.trim();
+        } catch (e) {
+          terminal.writeErrorLine(`Failed to query npm for ${packageName}@${npmTag}: ${e}`);
+          hasFailure = true;
+          return;
+        }
 
         if (packageVersion !== taggedVersion) {
           terminal.writeErrorLine(

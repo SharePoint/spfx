@@ -26,7 +26,7 @@ export class FindBumpPipelineRunAction extends AzDoPipelineAction {
       documentation:
         'Finds the merged PR for the specified commit SHA via the GitHub API, then queries the ' +
         "Azure DevOps Build API for a pipeline run tagged with the PR's head commit SHA. " +
-        'Sets the AzDO output variables IsVersionBumpMerge (true/false) and BumpPipelineRunId (the build ID).'
+        'Sets the AzDO output variables IsVersionBumpMerge (true/false), BumpPipelineRunId (the build ID), and BumpCommitSha (the pre-merge head SHA of the version bump PR branch).'
     });
 
     this._commitShaParameter = this.defineStringParameter({

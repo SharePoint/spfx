@@ -30,6 +30,7 @@ resources:
     - repository: publishConfig
       type: git
       name: GitHubProjectsPublish/GitHubProjectsPublish
+      ref: refs/heads/main
 
 variables:
   - name: SpfxVersioningProject
@@ -93,9 +94,10 @@ extends:
                   RepoPath: '$(Pipeline.Workspace)/spfx'
 
               - bash: |
-                  cp -r "$(Pipeline.Workspace)/spfx/tools/repo-toolbox/dist" \
-                     "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle"
+                  mkdir -p "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle"
                   mkdir -p "$(Build.ArtifactStagingDirectory)/published-versions"
+                  cp -r "$(Pipeline.Workspace)/spfx/tools/repo-toolbox/dist/." \
+                     "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle"
                 displayName: 'Stage artifacts'
 
               - template: /common/config/azure-pipelines/templates/find-bump-pipeline-run.yaml@self
@@ -176,7 +178,7 @@ extends:
                     node "$(RepoToolboxBundlePath)" verify-npm-tag
                     --packages-path "$(PackagesPath)"
                     --npm-tag "${{ parameters.NpmTag }}"
-                condition: and(succeeded(), ne('${{ parameters.DryRun }}', 'true'))
+                condition: and(succeeded(), not(${{ parameters.DryRun }}))
                 displayName: 'Verify NPM tag versions'
 
       - stage: Tag
