@@ -10,6 +10,7 @@
     "_phase:test": "heft run --only test -- --clean"
   },
   "dependencies": {
+    "@microsoft/rush-lib": "5.172.0",
     "@octokit/rest": "^22.0.0",
     "@rushstack/node-core-library": "~5.20.3",
     "@rushstack/terminal": "~0.22.3",

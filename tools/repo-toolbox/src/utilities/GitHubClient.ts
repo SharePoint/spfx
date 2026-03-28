@@ -48,6 +48,14 @@ export interface ICreateTagOptions {
   sha: string;
 }
 
+export interface ICreateReleaseOptions {
+  tag: string;
+  sha: string;
+  name: string;
+  body: string;
+  prerelease: boolean;
+}
+
 interface IOctokitCommonOptions {
   owner: string;
   repo: string;
@@ -147,6 +155,19 @@ export class GitHubClient {
       ...this._octokitCommonOptions,
       ref: `refs/tags/${tag}`,
       sha
+    });
+  }
+
+  public async createReleaseAsync(options: ICreateReleaseOptions): Promise<void> {
+    const { tag, sha, name, body, prerelease } = options;
+    await this._octokit.repos.createRelease({
+      ...this._octokitCommonOptions,
+      tag_name: tag,
+      target_commitish: sha,
+      name,
+      body,
+      draft: false,
+      prerelease
     });
   }
 }
