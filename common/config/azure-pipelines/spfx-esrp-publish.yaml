@@ -64,6 +64,9 @@ extends:
                 - output: pipelineArtifact
                   targetPath: $(Build.ArtifactStagingDirectory)/published-versions
                   artifactName: published-versions
+                - output: pipelineArtifact
+                  targetPath: $(Build.ArtifactStagingDirectory)/repo-toolbox-bundle
+                  artifactName: repo-toolbox-bundle
             steps:
               - checkout: self
                 path: spfx
@@ -86,8 +89,11 @@ extends:
                   RepoPath: '$(Pipeline.Workspace)/spfx'
 
               - bash: |
+                  mkdir -p "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle"
+                  cp "$(Pipeline.Workspace)/spfx/tools/repo-toolbox/bundle/repo-toolbox.js" \
+                     "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle/"
                   mkdir -p "$(Build.ArtifactStagingDirectory)/published-versions"
-                displayName: 'Create published-versions staging directory'
+                displayName: 'Stage artifacts'
 
               - template: /common/config/azure-pipelines/templates/find-bump-pipeline-run.yaml@self
                 parameters:
@@ -130,11 +136,19 @@ extends:
                 value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
               - name: PackagesPath
                 value: $(Agent.TempDirectory)/packages
+              - name: RepoToolboxBundlePath
+                value: $(Agent.TempDirectory)/repo-toolbox-bundle/repo-toolbox.js
             templateContext:
               type: releaseJob
               isProduction: true
             steps:
               - checkout: none
+
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  artifactName: repo-toolbox-bundle
+                  targetPath: $(Agent.TempDirectory)/repo-toolbox-bundle
+                displayName: 'Download repo-toolbox bundle'
 
               - task: 1ES.DownloadPipelineArtifact@1
                 inputs:
@@ -157,53 +171,11 @@ extends:
                   npmTag: ${{ parameters.NpmTag }}
                   dryRun: ${{ parameters.DryRun }}
 
-              - bash: |
-                  shopt -s nullglob
-                  packages=( $(PackagesPath)/*.tgz )
-
-                  if [ ${#packages[@]} -eq 0 ]; then
-                    echo "##vso[task.logissue type=error]No .tgz packages were found under $(PackagesPath)"
-                    echo "##vso[task.complete result=Failed;]Verification failed"
-                    exit 0
-                  fi
-
-                  hasFailure=0
-
-                  for package in "${packages[@]}"; do
-                    echo "Verifying package: $package"
-
-                    packageInfo=$(tar -xOzf "$package" package/package.json | jq -r '[.name, .version] | @tsv' 2>/dev/null)
-                    if [ -z "$packageInfo" ]; then
-                      echo "##vso[task.logissue type=error]Unable to read package metadata from $package"
-                      hasFailure=1
-                      continue
-                    fi
-
-                    IFS=$'\t' read -r packageName packageVersion <<< "$packageInfo"
-
-                    if [ -z "$packageName" ] || [ -z "$packageVersion" ]; then
-                      echo "##vso[task.logissue type=error]Invalid package metadata in $package"
-                      hasFailure=1
-                      continue
-                    fi
-
-                    echo "Package name: $packageName"
-                    echo "Package version: $packageVersion"
-
-                    taggedVersion=$(npm view "$packageName@${{ parameters.NpmTag }}" version 2>/dev/null || true)
-
-                    if [ "$packageVersion" != "$taggedVersion" ]; then
-                      echo "##vso[task.logissue type=error]Version mismatch for $packageName. Expected $packageVersion for tag ${{ parameters.NpmTag }}, found '$taggedVersion'."
-                      hasFailure=1
-                      continue
-                    fi
-
-                    echo "Package $packageName version $packageVersion matches ${{ parameters.NpmTag }} tag"
-                  done
-
-                  if [ "$hasFailure" -ne 0 ]; then
-                    echo "##vso[task.complete result=Failed;]Verification failed"
-                    exit 0
-                  fi
+              - task: CmdLine@2
+                inputs:
+                  script: >-
+                    node "$(RepoToolboxBundlePath)" verify-npm-tag
+                    --packages-path "$(PackagesPath)"
+                    --npm-tag "${{ parameters.NpmTag }}"
                 condition: and(succeeded(), ne('${{ parameters.DryRun }}', 'true'))
                 displayName: 'Verify NPM tag versions'
