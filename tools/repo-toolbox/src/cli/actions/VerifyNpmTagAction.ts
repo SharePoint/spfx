@@ -14,6 +14,8 @@ import {
 } from '@rushstack/node-core-library';
 import { CommandLineAction } from '@rushstack/ts-command-line';
 
+import { readPackageInfoFromTgzAsync } from '../../utilities/PackageTgzUtilities';
+
 /**
  * Verifies that each .tgz package in a directory has been published to npm under the expected tag.
  */
@@ -72,7 +74,7 @@ export class VerifyNpmTagAction extends CommandLineAction {
 
         let packageInfo: IPackageJson;
         try {
-          packageInfo = await _readPackageInfoFromTgzAsync(tgzPath);
+          packageInfo = await readPackageInfoFromTgzAsync(tgzPath);
         } catch (e) {
           terminal.writeErrorLine(`Unable to read package metadata from ${tgzPath}: ${e}`);
           hasFailure = true;
@@ -111,15 +113,4 @@ export class VerifyNpmTagAction extends CommandLineAction {
       throw new Error('One or more packages failed npm tag verification.');
     }
   }
-}
-
-async function _readPackageInfoFromTgzAsync(tgzPath: string): Promise<IPackageJson> {
-  const tarProcess: ChildProcess = Executable.spawn('tar', ['-xOzf', tgzPath, 'package/package.json']);
-  const { stdout } = await Executable.waitForExitAsync(tarProcess, {
-    encoding: 'utf8',
-    throwOnNonZeroExitCode: true,
-    throwOnSignal: true
-  });
-  const packageJson: IPackageJson = JSON.parse(stdout);
-  return packageJson;
 }
