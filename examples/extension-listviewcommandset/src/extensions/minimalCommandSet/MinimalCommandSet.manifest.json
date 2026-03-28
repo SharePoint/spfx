@@ -18,12 +18,12 @@
   "items": {
     "COMMAND_1": {
       "title": { "default": "Command One" },
-      "iconImageUrl": "./icons/request.png",
+      "iconImageUrl": "./icons/request.svg",
       "type": "command"
     },
     "COMMAND_2": {
       "title": { "default": "Command Two" },
-      "iconImageUrl": "./icons/cancel.png",
+      "iconImageUrl": "./icons/cancel.svg",
       "type": "command"
     }
   }
