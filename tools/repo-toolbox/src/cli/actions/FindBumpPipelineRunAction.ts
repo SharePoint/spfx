@@ -113,5 +113,6 @@ export class FindBumpPipelineRunAction extends AzDoPipelineAction {
 
     terminal.writeLine('##vso[task.setvariable variable=IsVersionBumpMerge;isOutput=true]true');
     terminal.writeLine(`##vso[task.setvariable variable=BumpPipelineRunId;isOutput=true]${buildId}`);
+    terminal.writeLine(`##vso[task.setvariable variable=BumpCommitSha;isOutput=true]${headSha}`);
   }
 }

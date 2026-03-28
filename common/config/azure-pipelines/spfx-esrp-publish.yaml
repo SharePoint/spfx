@@ -194,6 +194,8 @@ extends:
             variables:
               - name: BumpPipelineRunId
                 value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
+              - name: BumpCommitSha
+                value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpCommitSha'] ]
             steps:
               - checkout: self
                 persistCredentials: true
@@ -220,5 +222,5 @@ extends:
                   script: >-
                     node "$(RepoToolboxBundlePath)" tag-published-packages
                     --packages-path "$(PackagesPath)"
-                    --git-remote origin
-                displayName: 'Create and push Git tags'
+                    --commit-sha "$(BumpCommitSha)"
+                displayName: 'Create GitHub tags'
