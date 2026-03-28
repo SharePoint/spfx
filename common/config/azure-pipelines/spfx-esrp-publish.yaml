@@ -200,12 +200,11 @@ extends:
               - checkout: self
                 persistCredentials: true
 
-              - template: /common/config/azure-pipelines/templates/install-node.yaml@self
-
-              - template: /common/config/azure-pipelines/templates/install-run-rush.yaml@self
-                parameters:
-                  Arguments: 'install --to repo-toolbox'
-                  DisplayName: 'Rush Install (repo-toolbox)'
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  artifactName: repo-toolbox-bundle
+                  targetPath: $(Agent.TempDirectory)/repo-toolbox-bundle
+                displayName: 'Download repo-toolbox bundle'
 
               - task: DownloadPipelineArtifact@2
                 inputs:
@@ -221,7 +220,7 @@ extends:
               - task: CmdLine@2
                 inputs:
                   script: >-
-                    node tools/repo-toolbox/lib/start.js tag-published-packages
+                    node "$(RepoToolboxBundlePath)" tag-published-packages
                     --packages-path "$(PackagesPath)"
                     --commit-sha "$(BumpCommitSha)"
                 displayName: 'Create GitHub releases'
