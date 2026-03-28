@@ -5,13 +5,14 @@ import type { ChildProcess } from 'node:child_process';
 
 import type { ITerminal } from '@rushstack/terminal';
 import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
-import { Async, Executable, FileSystem } from '@rushstack/node-core-library';
+import {
+  Async,
+  Executable,
+  FileSystem,
+  type FolderItem,
+  type IPackageJson
+} from '@rushstack/node-core-library';
 import { CommandLineAction } from '@rushstack/ts-command-line';
-
-interface IPackageInfo {
-  name: string;
-  version: string;
-}
 
 /**
  * Verifies that each .tgz package in a directory has been published to npm under the expected tag.
@@ -48,9 +49,15 @@ export class VerifyNpmTagAction extends CommandLineAction {
     const packagesPath: string = this._packagesPathParameter.value;
     const npmTag: string = this._npmTagParameter.value;
 
-    const tgzFiles: string[] = (await FileSystem.readFolderItemNamesAsync(packagesPath))
-      .filter((f) => f.endsWith('.tgz'))
-      .map((f) => `${packagesPath}/${f}`);
+    const folderItems: FolderItem[] = await FileSystem.readFolderItemsAsync(packagesPath);
+    const tgzFiles: string[] = [];
+    for (const folderItem of folderItems) {
+      const folderItemName: string = folderItem.name;
+      if (folderItem.isFile() && folderItemName.endsWith('.tgz')) {
+        const fullPath: string = `${packagesPath}/${folderItemName}`;
+        tgzFiles.push(fullPath);
+      }
+    }
 
     if (tgzFiles.length === 0) {
       throw new Error(`No .tgz packages found in ${packagesPath}`);
@@ -63,7 +70,7 @@ export class VerifyNpmTagAction extends CommandLineAction {
       async (tgzPath: string) => {
         terminal.writeLine(`Verifying package: ${tgzPath}`);
 
-        let packageInfo: IPackageInfo;
+        let packageInfo: IPackageJson;
         try {
           packageInfo = await _readPackageInfoFromTgzAsync(tgzPath);
         } catch (e) {
@@ -81,20 +88,21 @@ export class VerifyNpmTagAction extends CommandLineAction {
           `${packageName}@${npmTag}`,
           'version'
         ]);
-        const { exitCode, stdout } = await Executable.waitForExitAsync(npmProcess, {
-          encoding: 'utf8'
+        const { stdout } = await Executable.waitForExitAsync(npmProcess, {
+          encoding: 'utf8',
+          throwOnNonZeroExitCode: true,
+          throwOnSignal: true
         });
-        const taggedVersion: string | undefined = exitCode === 0 ? stdout.trim() || undefined : undefined;
+        const taggedVersion: string | undefined = stdout.trim();
 
         if (packageVersion !== taggedVersion) {
           terminal.writeErrorLine(
             `Version mismatch for ${packageName}: expected ${packageVersion} at tag "${npmTag}", found "${taggedVersion}".`
           );
           hasFailure = true;
-          return;
+        } else {
+          terminal.writeLine(`Package ${packageName}@${packageVersion} matches "${npmTag}" tag`);
         }
-
-        terminal.writeLine(`Package ${packageName}@${packageVersion} matches "${npmTag}" tag`);
       },
       { concurrency: 5 }
     );
@@ -105,14 +113,13 @@ export class VerifyNpmTagAction extends CommandLineAction {
   }
 }
 
-async function _readPackageInfoFromTgzAsync(tgzPath: string): Promise<IPackageInfo> {
+async function _readPackageInfoFromTgzAsync(tgzPath: string): Promise<IPackageJson> {
   const tarProcess: ChildProcess = Executable.spawn('tar', ['-xOzf', tgzPath, 'package/package.json']);
-  const { exitCode, stdout, stderr } = await Executable.waitForExitAsync(tarProcess, {
-    encoding: 'utf8'
+  const { stdout } = await Executable.waitForExitAsync(tarProcess, {
+    encoding: 'utf8',
+    throwOnNonZeroExitCode: true,
+    throwOnSignal: true
   });
-  if (exitCode !== 0) {
-    throw new Error(`tar exited with status ${exitCode}: ${stderr}`);
-  }
-  const { name, version }: { name: string; version: string } = JSON.parse(stdout);
-  return { name, version };
+  const packageJson: IPackageJson = JSON.parse(stdout);
+  return packageJson;
 }
