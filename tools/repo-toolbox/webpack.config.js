@@ -9,5 +9,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'repo-toolbox.js'
-  }
+  },
+  ignoreWarnings: [
+    {
+      module: /node_modules/,
+      message: /Critical dependency/
+    }
+  ]
 };
