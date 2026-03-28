@@ -89,9 +89,8 @@ extends:
                   RepoPath: '$(Pipeline.Workspace)/spfx'
 
               - bash: |
-                  mkdir -p "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle"
-                  cp "$(Pipeline.Workspace)/spfx/tools/repo-toolbox/dist/repo-toolbox.js" \
-                     "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle/"
+                  cp -r "$(Pipeline.Workspace)/spfx/tools/repo-toolbox/dist" \
+                     "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle"
                   mkdir -p "$(Build.ArtifactStagingDirectory)/published-versions"
                 displayName: 'Stage artifacts'
 
