@@ -3,11 +3,11 @@
 const path = require('path');
 
 module.exports = {
-  entry: './lib/start.js',
+  entry: './lib-esm/start.js',
   target: 'node',
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, 'bundle'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'repo-toolbox.js'
   }
 };
