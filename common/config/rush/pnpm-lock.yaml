@@ -147,7 +147,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -196,7 +196,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -245,7 +245,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -294,7 +294,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -343,7 +343,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -395,7 +395,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -444,7 +444,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -493,7 +493,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -551,7 +551,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -618,7 +618,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -682,7 +682,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -746,7 +746,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -795,7 +795,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -835,7 +835,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -893,7 +893,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -951,7 +951,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -1018,7 +1018,7 @@ importers:
         version: 1.22.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.22.2
-        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)
+        version: 1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -1108,9 +1108,15 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.7
         version: 1.2.7(@types/node@22.19.13)
+      '@rushstack/heft-webpack5-plugin':
+        specifier: ^1.2.2
+        version: 1.2.2(@rushstack/heft@1.2.7(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)
       eslint:
         specifier: 9.37.0
         version: 9.37.0
+      webpack:
+        specifier: ^5.99.0
+        version: 5.105.4
 
   ../../tools/spfx-cli-build-rig:
     dependencies:
@@ -3039,6 +3045,12 @@ packages:
   '@types/ejs@3.1.5':
     resolution: {integrity: sha512-nv+GSx77ZtXiJzwKdsASqi+YQ5Z7vwHsTP0JY2SiQgjGckkBRKZnk8nIM+7oUZ1VCtuTz0+By4qVR7fqzp/Dfg==}
 
+  '@types/eslint-scope@3.7.7':
+    resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
+
+  '@types/eslint@9.6.1':
+    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
+
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
@@ -3445,6 +3457,12 @@ packages:
     resolution: {integrity: sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ==}
     peerDependencies:
       acorn: ^8
+
+  acorn-import-phases@1.0.4:
+    resolution: {integrity: sha512-wKmbr/DDiIXzEOiWrTTUcDm24kQ2vGfZQvM2fwg2vXqR5uW6aapr7ObPtj1th32b9u90/Pf4AItvdTh42fBmVQ==}
+    engines: {node: '>=10.13.0'}
+    peerDependencies:
+      acorn: ^8.14.0
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -4210,6 +4228,9 @@ packages:
 
   es-module-lexer@1.7.0:
     resolution: {integrity: sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==}
+
+  es-module-lexer@2.0.0:
+    resolution: {integrity: sha512-5POEcUuZybH7IdmGsD8wlf0AI55wMecM9rVBTI/qEAy2c1kTOm3DjFYjrBdI2K3BaJjJYfYFeRtM0t9ssnRuxw==}
 
   es-object-atoms@1.1.1:
     resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
@@ -5375,8 +5396,6 @@ packages:
 
   memfs@4.56.11:
     resolution: {integrity: sha512-/GodtwVeKVIHZKLUSr2ZdOxKBC5hHki4JNCU22DoCGPEHr5o2PD5U721zvESKyWwCfTfavFl9WZYgA13OAYK0g==}
-    peerDependencies:
-      tslib: '2'
 
   merge-descriptors@1.0.3:
     resolution: {integrity: sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==}
@@ -6833,6 +6852,16 @@ packages:
   webpack-sources@3.3.4:
     resolution: {integrity: sha512-7tP1PdV4vF+lYPnkMR0jMY5/la2ub5Fc/8VQrrU+lXkiM6C4TjVfGw7iKfyhnTQOsD+6Q/iKw0eFciziRgD58Q==}
     engines: {node: '>=10.13.0'}
+
+  webpack@5.105.4:
+    resolution: {integrity: sha512-jTywjboN9aHxFlToqb0K0Zs9SbBoW4zRUlGzI2tYNxVYcEi/IPpn+Xi4ye5jTLvX2YeLuic/IvxNot+Q1jMoOw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
 
   webpack@5.95.0:
     resolution: {integrity: sha512-2t3XstrKULz41MNMBF+cJ97TyHdyQ8HCt//pqErqDvNjU9YQBnZxIHa11VXsi7F3mb5/aO2tuDxdeTPdU7xu9Q==}
@@ -9768,7 +9797,7 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@microsoft/spfx-web-build-rig@1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)(tslib@2.3.1)':
+  '@microsoft/spfx-web-build-rig@1.22.2(@types/node@22.19.13)(jest-environment-node@29.7.0)':
     dependencies:
       '@microsoft/api-extractor': 7.52.5(@types/node@22.19.13)
       '@microsoft/spfx-heft-plugins': 1.22.2(patch_hash=185ffebb2de7b1fb5f6ad4d92e9d8ad3b2d3207721e8db14e7ac1f3d716d0b1a)(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)
@@ -9778,7 +9807,7 @@ snapshots:
       '@rushstack/heft-lint-plugin': 1.1.2(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft-sass-plugin': 0.15.24(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft-typescript-plugin': 1.1.2(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)
-      '@rushstack/heft-webpack5-plugin': 1.2.2(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)(tslib@2.3.1)(webpack@5.95.0)
+      '@rushstack/heft-webpack5-plugin': 1.2.2(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.95.0)
       '@types/heft-jest': 1.0.2
       '@types/webpack-env': 1.15.3
       jest-environment-jsdom: 29.5.0
@@ -9801,7 +9830,6 @@ snapshots:
       - react-native-b4a
       - supports-color
       - ts-node
-      - tslib
       - uglify-js
       - utf-8-validate
       - webpack-cli
@@ -10316,7 +10344,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@rushstack/heft-webpack5-plugin@1.2.2(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)(tslib@2.3.1)(webpack@5.95.0)':
+  '@rushstack/heft-webpack5-plugin@1.2.2(@rushstack/heft@1.1.2(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.95.0)':
     dependencies:
       '@rushstack/debug-certificate-manager': 1.6.2(@types/node@22.19.13)
       '@rushstack/heft': 1.1.2(@types/node@22.19.13)
@@ -10325,13 +10353,30 @@ snapshots:
       tapable: 1.1.3
       watchpack: 2.4.0
       webpack: 5.95.0
-      webpack-dev-server: 5.2.3(tslib@2.3.1)(webpack@5.95.0)
+      webpack-dev-server: 5.2.3(webpack@5.95.0)
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
       - debug
       - supports-color
-      - tslib
+      - utf-8-validate
+      - webpack-cli
+
+  '@rushstack/heft-webpack5-plugin@1.2.2(@rushstack/heft@1.2.7(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)':
+    dependencies:
+      '@rushstack/debug-certificate-manager': 1.6.2(@types/node@22.19.13)
+      '@rushstack/heft': 1.2.7(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.17.1(@types/node@22.19.13)
+      '@types/tapable': 1.0.6
+      tapable: 1.1.3
+      watchpack: 2.4.0
+      webpack: 5.105.4
+      webpack-dev-server: 5.2.3(webpack@5.105.4)
+    transitivePeerDependencies:
+      - '@types/node'
+      - bufferutil
+      - debug
+      - supports-color
       - utf-8-validate
       - webpack-cli
 
@@ -10651,6 +10696,16 @@ snapshots:
       '@types/node': 22.19.13
 
   '@types/ejs@3.1.5': {}
+
+  '@types/eslint-scope@3.7.7':
+    dependencies:
+      '@types/eslint': 9.6.1
+      '@types/estree': 1.0.8
+
+  '@types/eslint@9.6.1':
+    dependencies:
+      '@types/estree': 1.0.8
+      '@types/json-schema': 7.0.15
 
   '@types/estree@1.0.6': {}
 
@@ -11264,6 +11319,10 @@ snapshots:
       acorn-walk: 8.3.5
 
   acorn-import-attributes@1.9.5(acorn@8.16.0):
+    dependencies:
+      acorn: 8.16.0
+
+  acorn-import-phases@1.0.4(acorn@8.16.0):
     dependencies:
       acorn: 8.16.0
 
@@ -12124,6 +12183,8 @@ snapshots:
       safe-array-concat: 1.1.3
 
   es-module-lexer@1.7.0: {}
+
+  es-module-lexer@2.0.0: {}
 
   es-object-atoms@1.1.1:
     dependencies:
@@ -13772,7 +13833,7 @@ snapshots:
       tree-dump: 1.1.0(tslib@2.3.1)
       tslib: 2.3.1
 
-  memfs@4.56.11(tslib@2.3.1):
+  memfs@4.56.11:
     dependencies:
       '@jsonjoy.com/fs-core': 4.56.11(tslib@2.3.1)
       '@jsonjoy.com/fs-fsa': 4.56.11(tslib@2.3.1)
@@ -14973,6 +15034,14 @@ snapshots:
       - bare-abort-controller
       - react-native-b4a
 
+  terser-webpack-plugin@5.3.17(webpack@5.105.4):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.31
+      jest-worker: 27.5.1
+      schema-utils: 4.3.3
+      terser: 5.46.0
+      webpack: 5.105.4
+
   terser-webpack-plugin@5.3.17(webpack@5.95.0):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
@@ -15235,20 +15304,29 @@ snapshots:
 
   webidl-conversions@7.0.0: {}
 
-  webpack-dev-middleware@7.4.5(tslib@2.3.1)(webpack@5.95.0):
+  webpack-dev-middleware@7.4.5(webpack@5.105.4):
     dependencies:
       colorette: 2.0.20
-      memfs: 4.56.11(tslib@2.3.1)
+      memfs: 4.56.11
+      mime-types: 3.0.2
+      on-finished: 2.4.1
+      range-parser: 1.2.1
+      schema-utils: 4.3.3
+    optionalDependencies:
+      webpack: 5.105.4
+
+  webpack-dev-middleware@7.4.5(webpack@5.95.0):
+    dependencies:
+      colorette: 2.0.20
+      memfs: 4.56.11
       mime-types: 3.0.2
       on-finished: 2.4.1
       range-parser: 1.2.1
       schema-utils: 4.3.3
     optionalDependencies:
       webpack: 5.95.0
-    transitivePeerDependencies:
-      - tslib
 
-  webpack-dev-server@5.2.3(tslib@2.3.1)(webpack@5.95.0):
+  webpack-dev-server@5.2.3(webpack@5.105.4):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4
@@ -15276,7 +15354,45 @@ snapshots:
       serve-index: 1.9.2
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack-dev-middleware: 7.4.5(tslib@2.3.1)(webpack@5.95.0)
+      webpack-dev-middleware: 7.4.5(webpack@5.105.4)
+      ws: 8.19.0
+    optionalDependencies:
+      webpack: 5.105.4
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+
+  webpack-dev-server@5.2.3(webpack@5.95.0):
+    dependencies:
+      '@types/bonjour': 3.5.13
+      '@types/connect-history-api-fallback': 1.5.4
+      '@types/express': 4.17.25
+      '@types/express-serve-static-core': 4.19.8
+      '@types/serve-index': 1.9.4
+      '@types/serve-static': 1.15.10
+      '@types/sockjs': 0.3.36
+      '@types/ws': 8.18.1
+      ansi-html-community: 0.0.8
+      bonjour-service: 1.3.0
+      chokidar: 3.6.0
+      colorette: 2.0.20
+      compression: 1.8.1
+      connect-history-api-fallback: 2.0.0
+      express: 4.22.1
+      graceful-fs: 4.2.11
+      http-proxy-middleware: 2.0.9(@types/express@4.17.25)
+      ipaddr.js: 2.3.0
+      launch-editor: 2.13.1
+      open: 10.2.0
+      p-retry: 6.2.1
+      schema-utils: 4.3.3
+      selfsigned: 5.5.0
+      serve-index: 1.9.2
+      sockjs: 0.3.24
+      spdy: 4.0.2
+      webpack-dev-middleware: 7.4.5(webpack@5.95.0)
       ws: 8.19.0
     optionalDependencies:
       webpack: 5.95.0
@@ -15284,7 +15400,6 @@ snapshots:
       - bufferutil
       - debug
       - supports-color
-      - tslib
       - utf-8-validate
 
   webpack-merge@5.8.0:
@@ -15293,6 +15408,38 @@ snapshots:
       wildcard: 2.0.1
 
   webpack-sources@3.3.4: {}
+
+  webpack@5.105.4:
+    dependencies:
+      '@types/eslint-scope': 3.7.7
+      '@types/estree': 1.0.8
+      '@types/json-schema': 7.0.15
+      '@webassemblyjs/ast': 1.14.1
+      '@webassemblyjs/wasm-edit': 1.14.1
+      '@webassemblyjs/wasm-parser': 1.14.1
+      acorn: 8.16.0
+      acorn-import-phases: 1.0.4(acorn@8.16.0)
+      browserslist: 4.28.1
+      chrome-trace-event: 1.0.4
+      enhanced-resolve: 5.20.0
+      es-module-lexer: 2.0.0
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.1
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 4.3.3
+      tapable: 2.3.0
+      terser-webpack-plugin: 5.3.17(webpack@5.105.4)
+      watchpack: 2.5.1
+      webpack-sources: 3.3.4
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
 
   webpack@5.95.0:
     dependencies:
