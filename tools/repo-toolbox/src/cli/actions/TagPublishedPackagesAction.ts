@@ -7,11 +7,15 @@ import { Async, FileSystem, type FolderItem, type IPackageJson } from '@rushstac
 import { CommandLineAction } from '@rushstack/ts-command-line';
 
 import { GitHubClient } from '../../utilities/GitHubClient';
-import { readPackageInfoFromTgzAsync } from '../../utilities/PackageTgzUtilities';
+import {
+  readChangelogSectionFromTgzAsync,
+  readPackageInfoFromTgzAsync
+} from '../../utilities/PackageTgzUtilities';
 
 /**
- * Creates GitHub tags for each .tgz package in a directory.
+ * Creates GitHub releases (and their associated tags) for each .tgz package in a directory.
  * Tags are formatted as `@scope/package_vX.Y.Z`, matching the rushstack convention.
+ * Release notes are populated from the corresponding CHANGELOG.md section in the package.
  */
 export class TagPublishedPackagesAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
@@ -21,7 +25,7 @@ export class TagPublishedPackagesAction extends CommandLineAction {
   public constructor(terminal: ITerminal) {
     super({
       actionName: 'tag-published-packages',
-      summary: 'Creates GitHub tags for each .tgz package in a directory.',
+      summary: 'Creates GitHub releases and tags for each .tgz package in a directory.',
       documentation: ''
     });
 
@@ -66,9 +70,27 @@ export class TagPublishedPackagesAction extends CommandLineAction {
         const packageJson: IPackageJson = await readPackageInfoFromTgzAsync(tgzPath);
         const { name: packageName, version: packageVersion } = packageJson;
         const tag: string = `${packageName}_v${packageVersion}`;
-        terminal.writeLine(`Creating tag: ${tag} → ${commitSha}`);
-        await gitHubClient.createTagAsync({ tag, sha: commitSha });
-        terminal.writeLine(`Created tag: ${tag}`);
+
+        const changelogSection: string | undefined = await readChangelogSectionFromTgzAsync(
+          tgzPath,
+          packageVersion
+        );
+        if (!changelogSection) {
+          throw new Error(`No changelog section found for ${packageName}@${packageVersion} in ${tgzPath}`);
+        }
+
+        // Semver prerelease versions contain a hyphen (e.g. 1.0.0-alpha.1)
+        const prerelease: boolean = packageVersion.includes('-');
+
+        terminal.writeLine(`Creating release: ${tag} → ${commitSha} (prerelease: ${prerelease})`);
+        await gitHubClient.createReleaseAsync({
+          tag,
+          sha: commitSha,
+          name: tag,
+          body: changelogSection,
+          prerelease
+        });
+        terminal.writeLine(`Created release: ${tag}`);
       },
       { concurrency: 5 }
     );
