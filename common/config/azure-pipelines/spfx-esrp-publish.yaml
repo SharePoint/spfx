@@ -37,6 +37,10 @@ variables:
   # Pipeline definition ID of the "SPFx Versioning" pipeline in the SpfxVersioningProject AzDO project.
   - name: SpfxVersioningPipelineId
     value: 39
+  - name: PackagesPath
+    value: $(Agent.TempDirectory)/packages
+  - name: RepoToolboxBundlePath
+    value: $(Agent.TempDirectory)/repo-toolbox-bundle/repo-toolbox.js
 
 extends:
   template: v1/1ES.Official.PipelineTemplate.yml@1esPipelines
@@ -133,10 +137,6 @@ extends:
             variables:
               - name: BumpPipelineRunId
                 value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
-              - name: PackagesPath
-                value: $(Agent.TempDirectory)/packages
-              - name: RepoToolboxBundlePath
-                value: $(Agent.TempDirectory)/repo-toolbox-bundle/repo-toolbox.js
             templateContext:
               type: releaseJob
               isProduction: true
@@ -194,18 +194,9 @@ extends:
             variables:
               - name: BumpPipelineRunId
                 value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
-              - name: PackagesPath
-                value: $(Agent.TempDirectory)/packages
-              - name: RepoToolboxBundlePath
-                value: $(Agent.TempDirectory)/repo-toolbox-bundle/repo-toolbox.js
             steps:
               - checkout: self
-                path: spfx
                 persistCredentials: true
-
-              - template: /common/config/azure-pipelines/templates/configure-git-user.yaml@self
-                parameters:
-                  RepoPath: $(Pipeline.Workspace)/spfx
 
               - task: DownloadPipelineArtifact@2
                 inputs:
@@ -230,5 +221,4 @@ extends:
                     node "$(RepoToolboxBundlePath)" tag-published-packages
                     --packages-path "$(PackagesPath)"
                     --git-remote origin
-                  workingDirectory: $(Pipeline.Workspace)/spfx
                 displayName: 'Create and push Git tags'
