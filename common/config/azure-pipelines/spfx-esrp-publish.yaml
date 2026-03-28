@@ -1,0 +1,226 @@
+name: spfx-esrp-publish_$(Date:yyyyMMdd)$(Rev:.rrr)
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '**/CHANGELOG.md'
+      - 'common/config/rush/version-policies.json'
+
+pr: none
+
+parameters:
+  - name: DryRun
+    displayName: 'Dry Run'
+    type: boolean
+    default: false
+  - name: NpmTag
+    displayName: 'NPM Tag'
+    type: string
+    default: 'latest'
+
+resources:
+  repositories:
+    - repository: 1esPipelines
+      type: git
+      name: 1ESPipelineTemplates/1ESPipelineTemplates
+      ref: refs/tags/release
+    - repository: publishConfig
+      type: git
+      name: GitHubProjectsPublish/GitHubProjectsPublish
+
+variables:
+  - name: SpfxVersioningProject
+    value: GitHubProjects
+  # Pipeline definition ID of the "SPFx Versioning" pipeline in the SpfxVersioningProject AzDO project.
+  - name: SpfxVersioningPipelineId
+    value: 39
+  - name: PackagesPath
+    value: $(Agent.TempDirectory)/packages
+  - name: RepoToolboxBundlePath
+    value: $(Agent.TempDirectory)/repo-toolbox-bundle/repo-toolbox.js
+
+extends:
+  template: v1/1ES.Official.PipelineTemplate.yml@1esPipelines
+  parameters:
+    pool:
+      name: Azure-Pipelines-1ESPT-ExDShared
+      os: windows
+    sdl:
+      sourceRepositoriesToScan:
+        include:
+          - repository: self
+    stages:
+      - stage: Prepare
+        dependsOn: []
+        displayName: 'Prepare SPFx Publish'
+        jobs:
+          - job: PrepareSpfxPublish
+            displayName: 'Prepare SPFx Publish'
+            pool:
+              name: 'publish-rushstack'
+              os: linux
+            templateContext:
+              outputParentDirectory: $(Build.ArtifactStagingDirectory)
+              outputs:
+                - output: pipelineArtifact
+                  targetPath: $(Build.ArtifactStagingDirectory)/published-versions
+                  artifactName: published-versions
+                - output: pipelineArtifact
+                  targetPath: $(Build.ArtifactStagingDirectory)/repo-toolbox-bundle
+                  artifactName: repo-toolbox-bundle
+            steps:
+              - checkout: self
+                path: spfx
+                persistCredentials: true
+
+              - template: /common/config/azure-pipelines/templates/configure-git-user.yaml@self
+
+              - template: /common/config/azure-pipelines/templates/install-node.yaml@self
+
+              - template: /common/config/azure-pipelines/templates/install-run-rush.yaml@self
+                parameters:
+                  Arguments: 'install --to repo-toolbox'
+                  DisplayName: 'Rush Install (repo-toolbox)'
+                  RepoPath: '$(Pipeline.Workspace)/spfx'
+
+              - template: /common/config/azure-pipelines/templates/install-run-rush.yaml@self
+                parameters:
+                  Arguments: 'build --to repo-toolbox'
+                  DisplayName: 'Rush Build (repo-toolbox)'
+                  RepoPath: '$(Pipeline.Workspace)/spfx'
+
+              - bash: |
+                  cp -r "$(Pipeline.Workspace)/spfx/tools/repo-toolbox/dist" \
+                     "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle"
+                  mkdir -p "$(Build.ArtifactStagingDirectory)/published-versions"
+                displayName: 'Stage artifacts'
+
+              - template: /common/config/azure-pipelines/templates/find-bump-pipeline-run.yaml@self
+                parameters:
+                  PipelineId: $(SpfxVersioningPipelineId)
+                  CommitSha: $(Build.SourceVersion)
+                  TeamProject: $(SpfxVersioningProject)
+                  Name: FindBumpRun
+                  WorkingDirectory: $(Pipeline.Workspace)/spfx
+
+              - task: DownloadPipelineArtifact@2
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                inputs:
+                  artifactName: 'package-versions'
+                  targetPath: '$(Agent.TempDirectory)/package-versions'
+                  project: '$(SpfxVersioningProject)'
+                  definition: $(SpfxVersioningPipelineId)
+                  pipelineId: $(FindBumpRun.BumpPipelineRunId)
+                  buildType: 'specific'
+                  buildVersionToDownload: 'specific'
+                displayName: 'Download SPFx package versions'
+
+              - bash: |
+                  cp "$(Agent.TempDirectory)/package-versions"/*.json "$(Build.ArtifactStagingDirectory)/published-versions/"
+                condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
+                displayName: 'Stage published versions artifact'
+
+      - stage: Publish
+        displayName: 'Publish SPFx NPM Packages'
+        dependsOn:
+          - Prepare
+        condition: and(succeeded('Prepare'), eq(dependencies.Prepare.outputs['PrepareSpfxPublish.FindBumpRun.IsVersionBumpMerge'], 'true'))
+        jobs:
+          - job: PublishSpfxNpmPackages
+            displayName: 'Publish SPFx NPM Packages'
+            pool:
+              name: 'publish-rushstack'
+              os: linux
+            variables:
+              - name: BumpPipelineRunId
+                value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
+            templateContext:
+              type: releaseJob
+              isProduction: true
+            steps:
+              - checkout: none
+
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  artifactName: repo-toolbox-bundle
+                  targetPath: $(Agent.TempDirectory)/repo-toolbox-bundle
+                displayName: 'Download repo-toolbox bundle'
+
+              - task: 1ES.DownloadPipelineArtifact@1
+                inputs:
+                  artifactName: packages
+                  targetPath: $(PackagesPath)
+                  project: $(SpfxVersioningProject)
+                  pipelineId: $(BumpPipelineRunId)
+                  definition: $(SpfxVersioningPipelineId)
+                  buildType: specific
+                  buildVersionToDownload: specific
+                displayName: 'Download packed npm packages'
+
+              - bash: |
+                  ls -la "$(PackagesPath)"
+                displayName: 'List downloaded packages'
+
+              - template: /common/config/azure-pipelines/templates/esrp-release.yaml@publishConfig
+                parameters:
+                  packagesPath: $(PackagesPath)
+                  npmTag: ${{ parameters.NpmTag }}
+                  dryRun: ${{ parameters.DryRun }}
+
+              - task: CmdLine@2
+                inputs:
+                  script: >-
+                    node "$(RepoToolboxBundlePath)" verify-npm-tag
+                    --packages-path "$(PackagesPath)"
+                    --npm-tag "${{ parameters.NpmTag }}"
+                condition: and(succeeded(), ne('${{ parameters.DryRun }}', 'true'))
+                displayName: 'Verify NPM tag versions'
+
+      - stage: Tag
+        displayName: 'Tag Published SPFx Packages'
+        dependsOn:
+          - Prepare
+          - Publish
+        condition: and(succeeded('Publish'), ne('${{ parameters.DryRun }}', 'true'))
+        jobs:
+          - job: TagPublishedPackages
+            displayName: 'Tag Published SPFx Packages'
+            pool:
+              name: 'publish-rushstack'
+              os: linux
+            variables:
+              - name: BumpPipelineRunId
+                value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
+              - name: BumpCommitSha
+                value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpCommitSha'] ]
+            steps:
+              - checkout: self
+                persistCredentials: true
+
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  artifactName: repo-toolbox-bundle
+                  targetPath: $(Agent.TempDirectory)/repo-toolbox-bundle
+                displayName: 'Download repo-toolbox bundle'
+
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  artifactName: packages
+                  targetPath: $(PackagesPath)
+                  project: $(SpfxVersioningProject)
+                  definition: $(SpfxVersioningPipelineId)
+                  pipelineId: $(BumpPipelineRunId)
+                  buildType: specific
+                  buildVersionToDownload: specific
+                displayName: 'Download packed npm packages'
+
+              - task: CmdLine@2
+                inputs:
+                  script: >-
+                    node "$(RepoToolboxBundlePath)" tag-published-packages
+                    --packages-path "$(PackagesPath)"
+                    --commit-sha "$(BumpCommitSha)"
+                displayName: 'Create GitHub releases'
