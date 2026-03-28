@@ -43,6 +43,11 @@ export interface IPostCommitStatusOptions {
   targetUrl?: string;
 }
 
+export interface ICreateTagOptions {
+  tag: string;
+  sha: string;
+}
+
 interface IOctokitCommonOptions {
   owner: string;
   repo: string;
@@ -133,6 +138,15 @@ export class GitHubClient {
       pull_number: prNumber,
       title,
       body
+    });
+  }
+
+  public async createTagAsync(options: ICreateTagOptions): Promise<void> {
+    const { tag, sha } = options;
+    await this._octokit.git.createRef({
+      ...this._octokitCommonOptions,
+      ref: `refs/tags/${tag}`,
+      sha
     });
   }
 }
