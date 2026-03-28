@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { SpawnSyncReturns } from 'node:child_process';
+import type { ChildProcess } from 'node:child_process';
 
 import type { ITerminal } from '@rushstack/terminal';
 import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
-import { Executable, FileSystem } from '@rushstack/node-core-library';
+import { Async, Executable, FileSystem } from '@rushstack/node-core-library';
 import { CommandLineAction } from '@rushstack/ts-command-line';
 
 interface IPackageInfo {
@@ -48,7 +48,7 @@ export class VerifyNpmTagAction extends CommandLineAction {
     const packagesPath: string = this._packagesPathParameter.value;
     const npmTag: string = this._npmTagParameter.value;
 
-    const tgzFiles: string[] = FileSystem.readFolderItemNames(packagesPath)
+    const tgzFiles: string[] = (await FileSystem.readFolderItemNamesAsync(packagesPath))
       .filter((f) => f.endsWith('.tgz'))
       .map((f) => `${packagesPath}/${f}`);
 
@@ -58,40 +58,46 @@ export class VerifyNpmTagAction extends CommandLineAction {
 
     let hasFailure: boolean = false;
 
-    for (const tgzPath of tgzFiles) {
-      terminal.writeLine(`Verifying package: ${tgzPath}`);
+    await Async.forEachAsync(
+      tgzFiles,
+      async (tgzPath: string) => {
+        terminal.writeLine(`Verifying package: ${tgzPath}`);
 
-      let packageInfo: IPackageInfo;
-      try {
-        packageInfo = _readPackageInfoFromTgz(tgzPath);
-      } catch (e) {
-        terminal.writeErrorLine(`Unable to read package metadata from ${tgzPath}: ${e}`);
-        hasFailure = true;
-        continue;
-      }
+        let packageInfo: IPackageInfo;
+        try {
+          packageInfo = await _readPackageInfoFromTgzAsync(tgzPath);
+        } catch (e) {
+          terminal.writeErrorLine(`Unable to read package metadata from ${tgzPath}: ${e}`);
+          hasFailure = true;
+          return;
+        }
 
-      const { name: packageName, version: packageVersion } = packageInfo;
-      terminal.writeLine(`Package name: ${packageName}`);
-      terminal.writeLine(`Package version: ${packageVersion}`);
+        const { name: packageName, version: packageVersion } = packageInfo;
+        terminal.writeLine(`Package name: ${packageName}`);
+        terminal.writeLine(`Package version: ${packageVersion}`);
 
-      const npmResult: SpawnSyncReturns<string> = Executable.spawnSync('npm', [
-        'view',
-        `${packageName}@${npmTag}`,
-        'version'
-      ]);
-      const taggedVersion: string | undefined =
-        npmResult.status === 0 ? npmResult.stdout.trim() || undefined : undefined;
+        const npmProcess: ChildProcess = Executable.spawn('npm', [
+          'view',
+          `${packageName}@${npmTag}`,
+          'version'
+        ]);
+        const { exitCode, stdout } = await Executable.waitForExitAsync(npmProcess, {
+          encoding: 'utf8'
+        });
+        const taggedVersion: string | undefined = exitCode === 0 ? stdout.trim() || undefined : undefined;
 
-      if (packageVersion !== taggedVersion) {
-        terminal.writeErrorLine(
-          `Version mismatch for ${packageName}: expected ${packageVersion} at tag "${npmTag}", found "${taggedVersion}".`
-        );
-        hasFailure = true;
-        continue;
-      }
+        if (packageVersion !== taggedVersion) {
+          terminal.writeErrorLine(
+            `Version mismatch for ${packageName}: expected ${packageVersion} at tag "${npmTag}", found "${taggedVersion}".`
+          );
+          hasFailure = true;
+          return;
+        }
 
-      terminal.writeLine(`Package ${packageName}@${packageVersion} matches "${npmTag}" tag`);
-    }
+        terminal.writeLine(`Package ${packageName}@${packageVersion} matches "${npmTag}" tag`);
+      },
+      { concurrency: 5 }
+    );
 
     if (hasFailure) {
       throw new Error('One or more packages failed npm tag verification.');
@@ -99,15 +105,14 @@ export class VerifyNpmTagAction extends CommandLineAction {
   }
 }
 
-function _readPackageInfoFromTgz(tgzPath: string): IPackageInfo {
-  const result: SpawnSyncReturns<string> = Executable.spawnSync('tar', [
-    '-xOzf',
-    tgzPath,
-    'package/package.json'
-  ]);
-  if (result.status !== 0) {
-    throw new Error(`tar exited with status ${result.status}: ${result.stderr}`);
+async function _readPackageInfoFromTgzAsync(tgzPath: string): Promise<IPackageInfo> {
+  const tarProcess: ChildProcess = Executable.spawn('tar', ['-xOzf', tgzPath, 'package/package.json']);
+  const { exitCode, stdout, stderr } = await Executable.waitForExitAsync(tarProcess, {
+    encoding: 'utf8'
+  });
+  if (exitCode !== 0) {
+    throw new Error(`tar exited with status ${exitCode}: ${stderr}`);
   }
-  const { name, version }: { name: string; version: string } = JSON.parse(result.stdout);
+  const { name, version }: { name: string; version: string } = JSON.parse(stdout);
   return { name, version };
 }
