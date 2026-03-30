@@ -51,7 +51,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
       argumentName: 'VERSION',
       description:
         'The SPFx version to use (e.g., "1.22", "1.23-rc.0"). Resolves to the "version/<VERSION>" branch ' +
-        "in the template repository. Defaults to the repository's default branch (main)."
+        'in the template repository. Defaults to the "version/latest" branch.'
     });
 
     this._localSourceParameter = this.defineStringListParameter({

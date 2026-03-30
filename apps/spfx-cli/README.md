@@ -45,7 +45,7 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 | `--solution-name NAME` | hyphen-cased component name | SharePoint solution name |
 | `--component-alias ALIAS` | same as `--component-name` | Short identifier for the component |
 | `--component-description TEXT` | `"<name> description"` | Component description string |
-| `--spfx-version VERSION` | repo default branch | SPFx version to use; resolves to the `version/<VERSION>` branch (e.g. `1.22`, `1.23-rc.0`) |
+| `--spfx-version VERSION` | `version/latest` branch | SPFx version to use; resolves to the `version/<VERSION>` branch (e.g. `1.22`, `1.23-rc.0`) |
 | `--template-url URL` | `https://github.com/SharePoint/spfx` | Custom GitHub template repository |
 | `--local-source PATH` | — | Path to a local template folder (repeatable) |
 | `--remote-source URL` | — | Public GitHub repo to include as an additional template source (repeatable) |
@@ -71,7 +71,7 @@ spfx list-templates
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--spfx-version VERSION` | repo default branch | Branch/tag in the default template repo to use (e.g. `1.22`, `1.23-rc.0`) |
+| `--spfx-version VERSION` | `version/latest` branch | Branch/tag in the default template repo to use (e.g. `1.22`, `1.23-rc.0`) |
 | `--template-url URL` | `https://github.com/SharePoint/spfx` | Custom GitHub template repository (default source) |
 | `--local-source PATH` | — | Path to a local template folder to include (repeatable) |
 | `--remote-source URL` | — | Additional public GitHub repo to include as a template source (repeatable) |
