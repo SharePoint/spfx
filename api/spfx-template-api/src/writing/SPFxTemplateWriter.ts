@@ -69,7 +69,17 @@ export class SPFxTemplateWriter {
       const contents: string | Buffer = entry.contents;
 
       if (typeof contents !== 'string') {
-        // Binary file — always write directly
+        // Binary file — skip if identical file already exists on disk
+        try {
+          const existingBuffer: Buffer = await FileSystem.readFileToBufferAsync(absolutePath);
+          if (existingBuffer.equals(contents)) {
+            continue;
+          }
+        } catch (error: unknown) {
+          if (!FileSystem.isNotExistError(error as Error)) {
+            throw error;
+          }
+        }
         await FileSystem.ensureFolderAsync(path.dirname(absolutePath));
         await FileSystem.writeFileAsync(absolutePath, contents);
         continue;
