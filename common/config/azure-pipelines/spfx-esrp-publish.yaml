@@ -53,10 +53,6 @@ extends:
     pool:
       name: Azure-Pipelines-1ESPT-ExDShared
       os: windows
-    sdl:
-      sourceRepositoriesToScan:
-        include:
-          - repository: self
     stages:
       - stage: Prepare
         dependsOn: []
