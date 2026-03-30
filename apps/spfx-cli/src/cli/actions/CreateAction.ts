@@ -140,7 +140,9 @@ export class CreateAction extends SPFxActionBase {
       }
       const solutionName: string = rawSolutionName || kebabCase(componentName);
 
-      const targetDir: string = this._targetDirParameter.value ?? path.join(process.cwd(), solutionName);
+      const rawTargetDir: string | undefined = this._targetDirParameter.value?.trim();
+      const targetDir: string =
+        rawTargetDir && rawTargetDir.length > 0 ? rawTargetDir : path.join(process.cwd(), solutionName);
 
       const options: IScaffoldProfile = {
         localTemplateSources: this._localSourceParameter.values,
