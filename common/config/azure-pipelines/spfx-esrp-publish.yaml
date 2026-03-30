@@ -23,7 +23,7 @@ parameters:
   - name: CreateGitHubTagsAndReleases
     displayName: 'Create GitHub Tags and Releases'
     type: boolean
-    default: false
+    default: true
   - name: CommitShaOverride
     displayName: 'Commit SHA Override (for testing)'
     type: string
@@ -159,6 +159,8 @@ extends:
             steps:
               - checkout: none
 
+              - template: /common/config/azure-pipelines/templates/install-node.yaml@self
+
               - task: 1ES.DownloadPipelineArtifact@1
                 inputs:
                   artifactName: repo-toolbox-bundle
@@ -219,6 +221,8 @@ extends:
                     value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['EmitGitHubVars.GitHubRepoSlug'] ]
                 steps:
                   - checkout: none
+
+                  - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
                   - task: DownloadPipelineArtifact@2
                     inputs:
