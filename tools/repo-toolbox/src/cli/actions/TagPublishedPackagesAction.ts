@@ -121,6 +121,7 @@ export class TagPublishedPackagesAction extends CommandLineAction {
             terminal.writeLine(`Release already exists for ${tag}; skipping.`);
             return;
           }
+
           throw e;
         }
       },
