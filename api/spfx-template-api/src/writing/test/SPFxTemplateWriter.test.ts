@@ -10,7 +10,7 @@ jest.mock('@rushstack/node-core-library', () => {
       readFileToBufferAsync: jest.fn(),
       writeFileAsync: jest.fn().mockResolvedValue(undefined),
       ensureFolderAsync: jest.fn().mockResolvedValue(undefined),
-      isNotExistError: actual.FileSystem.isNotExistError
+      isNotExistError: (error: { code?: string }) => error?.code === 'ENOENT'
     }
   };
 });
