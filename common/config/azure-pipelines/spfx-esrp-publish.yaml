@@ -244,7 +244,7 @@ extends:
                   - task: CmdLine@2
                     inputs:
                       script: >-
-                        node "$(RepoToolboxBundlePath)" tag-published-packages
+                        node "$(RepoToolboxBundlePath)" create-github-releases
                         --packages-path "$(PackagesPath)"
                         --commit-sha "$(BumpCommitSha)"
                         --repo-slug "$(GitHubRepoSlug)"

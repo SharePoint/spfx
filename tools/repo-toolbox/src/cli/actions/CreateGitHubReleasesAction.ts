@@ -19,7 +19,7 @@ import {
  * Tags are formatted as `@scope/package_vX.Y.Z`, matching the rushstack convention.
  * Release notes are populated from the corresponding CHANGELOG.md section in the package.
  */
-export class TagPublishedPackagesAction extends CommandLineAction {
+export class CreateGitHubReleasesAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
   private readonly _packagesPathParameter: IRequiredCommandLineStringParameter;
   private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
@@ -28,7 +28,7 @@ export class TagPublishedPackagesAction extends CommandLineAction {
 
   public constructor(terminal: ITerminal) {
     super({
-      actionName: 'tag-published-packages',
+      actionName: 'create-github-releases',
       summary: 'Creates a GitHub release for each .tgz package in a directory.',
       documentation: ''
     });
