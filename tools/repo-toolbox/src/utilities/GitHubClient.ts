@@ -65,8 +65,8 @@ export class GitHubClient {
 
   private constructor(options: IGitHubClientOptionsInternal) {
     const { authorizationHeader, repoSlug, Octokit } = options;
-    const [owner, repo] = repoSlug.split('/');
-    if (!owner || !repo) {
+    const [owner, repo, ...extraParts] = repoSlug.split('/');
+    if (!owner || !repo || extraParts.length > 0) {
       throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
     }
 
