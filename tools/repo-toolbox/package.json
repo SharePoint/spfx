@@ -19,10 +19,10 @@
   },
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",
-    "@rushstack/heft": "^1.2.7",
     "@rushstack/heft-webpack5-plugin": "^1.2.2",
+    "@rushstack/heft": "^1.2.7",
+    "@rushstack/webpack-preserve-dynamic-require-plugin": "^0.12.8",
     "eslint": "9.37.0",
-    "webpack": "^5.99.0",
-    "@rushstack/webpack-preserve-dynamic-require-plugin": "~0.12.8"
+    "webpack": "^5.99.0"
   }
 }
