@@ -14,7 +14,7 @@
         }
       }
     },
-    "<%= componentNameCamelCase %>_NewForm": {
+    "<%= componentName.camel %>_NewForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
         "componentId": "<%= componentId %>",
@@ -25,7 +25,7 @@
         }
       }
     },
-    "<%= componentNameCamelCase %>_EditForm": {
+    "<%= componentName.camel %>_EditForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
         "componentId": "<%= componentId %>",
@@ -37,7 +37,7 @@
         }
       }
     },
-    "<%= componentNameCamelCase %>_ViewForm": {
+    "<%= componentName.camel %>_ViewForm": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/SPListForm.aspx",
       "formCustomizer": {
         "componentId": "<%= componentId %>",

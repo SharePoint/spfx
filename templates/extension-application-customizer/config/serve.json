@@ -14,7 +14,7 @@
         }
       }
     },
-    "<%= componentNameCamelCase %>ApplicationCustomizer": {
+    "<%= componentName.camel %>ApplicationCustomizer": {
       "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
       "customActions": {
         "<%= componentId %>": {

@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "<%= componentNameHyphenCase %>-adaptive-card-extension": {
+    "<%= componentName.hyphen %>-adaptive-card-extension": {
       "components": [
         {
-          "entrypoint": "./lib/adaptiveCardExtensions/<%= componentNameCamelCase %>/<%= componentNameCapitalCase %>AdaptiveCardExtension.js",
-          "manifest": "./src/adaptiveCardExtensions/<%= componentNameCamelCase %>/<%= componentNameCapitalCase %>AdaptiveCardExtension.manifest.json"
+          "entrypoint": "./lib/adaptiveCardExtensions/<%= componentName.camel %>/<%= componentName.pascal %>AdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/<%= componentName.camel %>/<%= componentName.pascal %>AdaptiveCardExtension.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "<%= componentNameCapitalCase %>AdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/<%= componentNameCamelCase %>/loc/{locale}.js"
+    "<%= componentName.pascal %>AdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/<%= componentName.camel %>/loc/{locale}.js"
   }
 }

@@ -42,7 +42,7 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 | Flag | Default | Description |
 |------|---------|-------------|
 | `--target-dir PATH` | current directory | Directory to scaffold into |
-| `--solution-name NAME` | kebab-cased component name | SharePoint solution name |
+| `--solution-name NAME` | hyphen-cased component name | SharePoint solution name |
 | `--component-alias ALIAS` | same as `--component-name` | Short identifier for the component |
 | `--component-description TEXT` | `"<name> description"` | Component description string |
 | `--spfx-version VERSION` | repo default branch | SPFx version to use; resolves to the `version/<VERSION>` branch (e.g. `1.22`, `1.23-rc.0`) |

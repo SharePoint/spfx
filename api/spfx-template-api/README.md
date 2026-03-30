@@ -33,6 +33,7 @@ const template = templates.get('webpart-react');
 if (!template) throw new Error('Template not found');
 
 // 2. Render to an in-memory file system
+// String values are automatically wrapped with casing helpers (e.g. componentName.pascal)
 const templateFs = await template.renderAsync({
   solution_name: 'my-solution',
   libraryName: 'my-spfx-library',
@@ -42,11 +43,7 @@ const templateFs = await template.renderAsync({
   featureId: '<uuid>',
   solutionId: '<uuid>',
   componentAlias: 'MyWebPart',
-  componentNameUnescaped: 'My Web Part',
-  componentNameCamelCase: 'myWebPart',
-  componentNameHyphenCase: 'my-web-part',
-  componentNameCapitalCase: 'MyWebPart',
-  componentNameAllCaps: 'MY_WEB_PART',
+  componentName: 'My Web Part',
   componentDescription: 'My Web Part description'
 });
 
@@ -110,11 +107,11 @@ const templates = await manager.getTemplatesAsync();
 
 ## Writing to disk
 
-`SPFxTemplateWriter` writes the in-memory `ITemplateFileSystem` to the target directory. When scaffolding into an existing SPFx solution, it merges generated content into existing files rather than overwriting them.
+`SPFxTemplateWriter` writes the in-memory `TemplateFileSystem` to the target directory. When scaffolding into an existing SPFx solution, it merges generated content into existing files rather than overwriting them.
 
 ```typescript
 const writer = new SPFxTemplateWriter();
-await writer.writeAsync(fs, targetDir);
+await writer.writeAsync(templateFs, targetDir);
 ```
 
 ### Merge helpers
@@ -135,17 +132,18 @@ The writer uses these helpers internally. You can also import them directly for 
 
 | Export | Description |
 |--------|-------------|
+| `ICasedString` | Interface exposing `.camel`, `.pascal`, `.hyphen`, `.allCaps`; auto-applied to all string context values during rendering |
+| `createCasedString` | Factory function that creates an `ICasedString` from a raw string |
 | `SPFxTemplateRepositoryManager` | Aggregates sources and returns a `SPFxTemplateCollection` |
 | `SPFxTemplateCollection` | `Map<string, SPFxTemplate>` of all loaded templates |
 | `SPFxTemplate` | Single template — exposes `name`, `category`, `spfxVersion`, and `renderAsync()` |
-| `ITemplateFileSystem` | Interface for the in-memory file system returned by `renderAsync()` |
 | `ITemplateFileEntry` | A single file entry (text or binary contents) |
-| `TemplateFileSystem` | Default `ITemplateFileSystem` implementation backed by a `Map` |
+| `TemplateFileSystem` | In-memory file system implementation backed by a `Map`, returned by `renderAsync()` |
 | `PublicGitHubRepositorySource` | Loads templates from a public GitHub repo |
 | `LocalFileSystemRepositorySource` | Loads templates from the local filesystem |
 | `BaseSPFxTemplateRepositorySource` | Base class for building custom template sources |
 | `SPFxRepositorySource` | Interface implemented by all source types |
-| `SPFxTemplateWriter` | Writes an `ITemplateFileSystem` to disk with merge support |
+| `SPFxTemplateWriter` | Writes a `TemplateFileSystem` to disk with merge support |
 | `IMergeHelper` | Interface for implementing custom merge helpers |
 | `ServeJsonMergeHelper` | Merges `config/serve.json` (also available standalone) |
 | `SPFxTemplateCategory` | Union type of template categories: `'webpart' | 'extension' | 'ace' | 'library'` |

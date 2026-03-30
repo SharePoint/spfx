@@ -5,21 +5,9 @@
   "version": "1.0.0",
   "spfxVersion": "1.22.2",
   "contextSchema": {
-    "componentNameCapitalCase": {
+    "componentName": {
       "type": "string",
-      "description": "The component name in capital case (e.g., ReactFormCustomizer)"
-    },
-    "componentNameCamelCase": {
-      "type": "string",
-      "description": "The component name in camel case (e.g., reactFormCustomizer)"
-    },
-    "componentNameHyphenCase": {
-      "type": "string",
-      "description": "The component name in hyphen case (e.g., react-form-customizer)"
-    },
-    "componentNameUnescaped": {
-      "type": "string",
-      "description": "The component name unescaped"
+      "description": "The component name"
     },
     "componentAlias": {
       "type": "string",

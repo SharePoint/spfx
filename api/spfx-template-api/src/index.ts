@@ -8,6 +8,8 @@
  */
 
 export {
+  type ICasedString,
+  createCasedString,
   SPFxTemplate,
   isBinaryFile as _isBinaryFile,
   type ISPFxTemplateJson,

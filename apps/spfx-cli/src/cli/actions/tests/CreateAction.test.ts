@@ -16,6 +16,8 @@ jest.mock('@rushstack/node-core-library', () => {
   };
 });
 
+jest.spyOn(process, 'cwd').mockReturnValue('/tmp/test');
+
 import { Executable } from '@rushstack/node-core-library';
 import { Terminal, StringBufferTerminalProvider } from '@rushstack/terminal';
 import {
@@ -114,12 +116,10 @@ describe('CreateAction', () => {
       jest.fn().mockResolvedValue('[Mocked SPFxTemplateCollection]');
 
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(mockCollection);
-    jest.spyOn(process, 'cwd').mockReturnValue('/tmp/test');
   });
 
   afterEach(() => {
     process.env = originalEnv;
-    jest.restoreAllMocks();
   });
 
   describe('source selection', () => {

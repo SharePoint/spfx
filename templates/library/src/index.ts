@@ -1,1 +1,1 @@
-export { <%= componentNameCapitalCase %>Library } from './libraries/<%= componentNameCamelCase %>/<%= componentNameCapitalCase %>Library';
+export { <%= componentName.pascal %>Library } from './libraries/<%= componentName.camel %>/<%= componentName.pascal %>Library';
