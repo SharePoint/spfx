@@ -2,7 +2,6 @@
 // See LICENSE in the project root for license information.
 
 import type { ChildProcess } from 'node:child_process';
-import * as path from 'node:path';
 
 type PackageManager = 'npm' | 'pnpm' | 'yarn';
 
@@ -142,7 +141,7 @@ export class CreateAction extends SPFxActionBase {
 
       const rawTargetDir: string | undefined = this._targetDirParameter.value?.trim();
       const targetDir: string =
-        rawTargetDir && rawTargetDir.length > 0 ? rawTargetDir : path.join(process.cwd(), solutionName);
+        rawTargetDir && rawTargetDir.length > 0 ? rawTargetDir : `${process.cwd()}/${solutionName}`;
 
       const options: IScaffoldProfile = {
         localTemplateSources: this._localSourceParameter.values,
