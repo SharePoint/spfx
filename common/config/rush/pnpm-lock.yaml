@@ -1086,6 +1086,9 @@ importers:
 
   ../../tools/repo-toolbox:
     dependencies:
+      '@octokit/request-error':
+        specifier: ^7.1.0
+        version: 7.1.0
       '@octokit/rest':
         specifier: ^22.0.0
         version: 22.0.1

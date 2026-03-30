@@ -64,6 +64,7 @@ export class TagPublishedPackagesAction extends CommandLineAction {
   }
 
   protected override async onExecuteAsync(): Promise<void> {
+    const { RequestError } = await import('@octokit/request-error');
     const terminal: ITerminal = this._terminal;
     const packagesPath: string = this._packagesPathParameter.value;
     const commitSha: string = this._commitShaParameter.value;
@@ -117,7 +118,7 @@ export class TagPublishedPackagesAction extends CommandLineAction {
           });
           terminal.writeLine(`Created release: ${tag}`);
         } catch (e: unknown) {
-          if (typeof e === 'object' && e !== null && (e as { status?: unknown }).status === 422) {
+          if (e instanceof RequestError && e.status === 422) {
             terminal.writeLine(`Release already exists for ${tag}; skipping.`);
             return;
           }
