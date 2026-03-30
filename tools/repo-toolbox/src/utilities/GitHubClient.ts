@@ -96,8 +96,11 @@ export class GitHubClient {
   }
 
   /**
-   * Creates a {@link GitHubClient} from an explicit GitHub token and repository slug,
-   * without requiring a local git checkout.
+   * Creates a {@link GitHubClient} from an explicit GitHub Authorization header value
+   * and repository slug, without requiring a local git checkout.
+   *
+   * @param options.authorizationHeader - The full HTTP Authorization header value,
+   *   e.g. `basic <base64>` as emitted by {@link EmitGitHubVarsAndTagBuildAction}.
    */
   public static async createGitHubClientFromTokenAndRepoSlugAsync(
     options: IGitHubClientOptions

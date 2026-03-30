@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
+import type { OctokitResponse, RequestError } from '@octokit/types';
+
 import type { ITerminal } from '@rushstack/terminal';
 import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
 import { Async, FileSystem, type FolderItem, type IPackageJson } from '@rushstack/node-core-library';
@@ -51,7 +53,8 @@ export class TagPublishedPackagesAction extends CommandLineAction {
       parameterLongName: '--github-token',
       argumentName: 'TOKEN',
       environmentVariable: 'GITHUB_TOKEN',
-      description: 'GitHub personal access token for creating releases.',
+      description:
+        'GitHub Authorization header value for creating releases (format: `basic <base64>` as emitted by emit-github-vars-and-tag-build).',
       required: true
     });
 
@@ -121,11 +124,22 @@ export class TagPublishedPackagesAction extends CommandLineAction {
           terminal.writeLine(`Created release: ${tag}`);
         } catch (e: unknown) {
           if (e instanceof RequestError && e.status === 422) {
-            terminal.writeLine(`Release already exists for ${tag}; skipping.`);
-            return;
-          }
+            const response: OctokitResponse<RequestError> | undefined = e.response as
+              | OctokitResponse<RequestError>
+              | undefined;
+            const responseErrors: RequestError['errors'] = response?.data?.errors;
 
-          throw e;
+            const alreadyExists: boolean =
+              Array.isArray(responseErrors) &&
+              responseErrors.some((error) => error.code === 'already_exists');
+
+            if (alreadyExists) {
+              terminal.writeLine(`Release already exists for ${tag}; skipping.`);
+              return;
+            }
+
+            throw e;
+          }
         }
       },
       { concurrency: 5 }

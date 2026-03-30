@@ -1092,6 +1092,9 @@ importers:
       '@octokit/rest':
         specifier: ^22.0.0
         version: 22.0.1
+      '@octokit/types':
+        specifier: ^16.0.0
+        version: 16.0.0
       '@rushstack/node-core-library':
         specifier: ~5.20.3
         version: 5.20.3(@types/node@22.19.13)
@@ -1115,7 +1118,7 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2(@rushstack/heft@1.2.7(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)
       '@rushstack/webpack-preserve-dynamic-require-plugin':
-        specifier: ~0.12.8
+        specifier: ^0.12.8
         version: 0.12.8
       eslint:
         specifier: 9.37.0
