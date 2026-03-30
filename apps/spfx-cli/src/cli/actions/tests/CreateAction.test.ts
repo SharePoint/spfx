@@ -424,6 +424,35 @@ describe('CreateAction', () => {
     });
   });
 
+  describe('--target-dir derivation', () => {
+    it('defaults to cwd/solutionName when --target-dir is omitted', async () => {
+      await runCreateAsync();
+      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
+        expect.anything(),
+        '/tmp/test/test', // cwd + kebabCase('Test')
+        expect.anything()
+      );
+    });
+
+    it('uses cwd/solutionName when --solution-name is provided without --target-dir', async () => {
+      await runCreateAsync(['--solution-name', 'my-app']);
+      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
+        expect.anything(),
+        '/tmp/test/my-app',
+        expect.anything()
+      );
+    });
+
+    it('uses explicit --target-dir and ignores solution name derivation', async () => {
+      await runCreateAsync(['--target-dir', '/custom/dir']);
+      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
+        expect.anything(),
+        '/custom/dir',
+        expect.anything()
+      );
+    });
+  });
+
   describe('--package-manager', () => {
     beforeEach(() => {
       MockedExecutable.spawn.mockReturnValue({});
@@ -440,7 +469,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'npm',
         ['install'],
-        expect.objectContaining({ currentWorkingDirectory: '/tmp/test' })
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
       );
     });
 
@@ -449,7 +478,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'pnpm',
         ['install'],
-        expect.objectContaining({ currentWorkingDirectory: '/tmp/test' })
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
       );
     });
 
@@ -458,7 +487,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'yarn',
         ['install'],
-        expect.objectContaining({ currentWorkingDirectory: '/tmp/test' })
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
       );
     });
 
@@ -467,7 +496,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'npm',
         ['install'],
-        expect.objectContaining({ stdio: 'inherit' })
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test', stdio: 'inherit' })
       );
     });
 

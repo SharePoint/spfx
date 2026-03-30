@@ -45,7 +45,7 @@ const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile> = z.object({
 });
 
 export class CreateAction extends SPFxActionBase {
-  private readonly _targetDirParameter: IRequiredCommandLineStringParameter;
+  private readonly _targetDirParameter: CommandLineStringParameter;
   private readonly _templateParameter: IRequiredCommandLineStringParameter;
   private readonly _libraryNameParameter: IRequiredCommandLineStringParameter;
   private readonly _componentNameParameter: IRequiredCommandLineStringParameter;
@@ -58,7 +58,7 @@ export class CreateAction extends SPFxActionBase {
     super(
       {
         actionName: 'create',
-        summary: 'Scaffolds an SPFx component into the current folder',
+        summary: 'Scaffolds a new SPFx component',
         documentation: 'This command creates a new SPFx component.'
       },
       terminal
@@ -67,8 +67,9 @@ export class CreateAction extends SPFxActionBase {
     this._targetDirParameter = this.defineStringParameter({
       parameterLongName: '--target-dir',
       argumentName: 'TARGET_DIR',
-      description: 'The directory to create the solution (or where the solution already exists)',
-      defaultValue: process.cwd()
+      description:
+        'The directory to scaffold into. When omitted, defaults to ' +
+        'a subfolder named after the solution in the current working directory.'
     });
 
     this._templateParameter = this.defineStringParameter({
@@ -124,10 +125,29 @@ export class CreateAction extends SPFxActionBase {
     const terminal: Terminal = this._terminal;
 
     try {
+      // Get component name and validate
+      const componentName: string = this._componentNameParameter.value;
+      if (!componentName || componentName.trim().length === 0) {
+        throw new Error('Component name is required and cannot be empty or only whitespace.');
+      }
+
+      const rawSolutionName: string | undefined = this._solutionNameParameter.value?.trim();
+      if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
+        throw new Error(
+          `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
+        );
+      }
+      const solutionName: string = rawSolutionName || kebabCase(componentName);
+
+      const rawTargetDir: string | undefined = this._targetDirParameter.value?.trim();
+      const targetDir: string =
+        rawTargetDir && rawTargetDir.length > 0 ? rawTargetDir : `${process.cwd()}/${solutionName}`;
+
+      const templateName: string = this._templateParameter.value;
       const options: IScaffoldProfile = {
         localTemplateSources: this._localSourceParameter.values,
-        templateName: this._templateParameter.value,
-        targetDir: this._targetDirParameter.value
+        templateName,
+        targetDir
       };
 
       const validationResult: z.ZodSafeParseResult<IScaffoldProfile> =
@@ -135,7 +155,6 @@ export class CreateAction extends SPFxActionBase {
       if (!validationResult.success) {
         throw new Error(`Invalid scaffold profile: ${JSON.stringify(validationResult.error.issues)}`);
       }
-      const { templateName, targetDir } = options;
 
       const manager: SPFxTemplateRepositoryManager = new SPFxTemplateRepositoryManager();
 
@@ -165,12 +184,6 @@ export class CreateAction extends SPFxActionBase {
         );
       }
 
-      // Get component name and validate
-      const componentName: string = this._componentNameParameter.value;
-      if (!componentName || componentName.trim().length === 0) {
-        throw new Error('Component name is required and cannot be empty or only whitespace.');
-      }
-
       const componentAlias: string = this._componentAliasParameter.value || componentName;
 
       // CI mode is read from an environment variable instead of a ts-command-line
@@ -183,14 +196,6 @@ export class CreateAction extends SPFxActionBase {
       const featureId: string = ciMode ? uuidv5(`feature:${componentAlias}`, CI_NAMESPACE) : uuidv4();
       const componentDescription: string =
         this._componentDescriptionParameter.value || `${componentName} description`;
-
-      const rawSolutionName: string | undefined = this._solutionNameParameter.value?.trim();
-      if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
-        throw new Error(
-          `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
-        );
-      }
-      const solutionName: string = rawSolutionName || kebabCase(componentName);
 
       const fs: MemFsEditor = await template.renderAsync(
         {
