@@ -101,7 +101,9 @@ export class TagPublishedPackagesAction extends CommandLineAction {
           packageVersion
         );
         if (!changelogSection) {
-          throw new Error(`No changelog section found for ${packageName}@${packageVersion} in ${tgzPath}`);
+          terminal.writeWarningLine(
+            `No changelog section found for ${packageName}@${packageVersion}; creating release without body.`
+          );
         }
 
         // Semver prerelease versions contain a hyphen (e.g. 1.0.0-alpha.1)

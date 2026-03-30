@@ -51,7 +51,7 @@ export interface ICreateReleaseOptions {
   tag: string;
   sha: string;
   name: string;
-  body: string;
+  body?: string;
   prerelease: boolean;
 }
 
