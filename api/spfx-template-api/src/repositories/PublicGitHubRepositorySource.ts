@@ -38,6 +38,20 @@ export async function _parseTemplatesFromFileMapAsync(
     }
   }
 
+  // Collect unknown field names across all templates and warn once
+  const allUnknownFields: Set<string> = new Set<string>();
+  for (const template of templates) {
+    for (const field of template.unknownFields) {
+      allUnknownFields.add(field);
+    }
+  }
+  if (allUnknownFields.size > 0) {
+    terminal.writeWarningLine(
+      `Template(s) contain unrecognized fields: ${[...allUnknownFields].sort().join(', ')}. ` +
+        `You may need to update your CLI to the latest version.`
+    );
+  }
+
   return templates;
 }
 
@@ -88,7 +102,7 @@ export interface IPublicGitHubRepositorySourceOptions {
   repoUrl: string;
 
   /**
-   * The branch name to fetch from. Defaults to 'main' if not specified.
+   * The branch name to fetch from. Defaults to 'version/latest' if not specified.
    */
   branch?: string;
 
@@ -127,7 +141,7 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
     super('github');
     const { repoUrl, branch, terminal } = options;
     this._repoUrl = repoUrl;
-    this._ref = branch || 'main';
+    this._ref = branch || 'version/latest';
     this._terminal = terminal;
   }
 

@@ -65,7 +65,7 @@ export class SPFxTemplate {
 
   /**
    * Gets the version of the template as a string.
-   * This is a semver "X.Y.Z" string; pre-release and build metadata are not supported.
+   * Must be a valid semver string (e.g. "1.0.0"). Pre-release and build metadata are permitted.
    */
   public get version(): string {
     return this._definition.version;
@@ -76,6 +76,22 @@ export class SPFxTemplate {
    */
   public get spfxVersion(): string {
     return this._definition.spfxVersion;
+  }
+
+  /**
+   * Gets the minimum engine version required to process this template.
+   * Returns undefined if no minimum is specified.
+   */
+  public get minimumEngineVersion(): string | undefined {
+    return this._definition.minimumEngineVersion;
+  }
+
+  /**
+   * Gets the list of field names in template.json that are not recognized by this
+   * version of the engine.
+   */
+  public get unknownFields(): readonly string[] {
+    return this._definition.unknownFields;
   }
 
   /**

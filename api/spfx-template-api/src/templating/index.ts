@@ -11,3 +11,4 @@ export {
   SPFX_TEMPLATE_CATEGORIES,
   type SPFxTemplateCategory
 } from './SPFxTemplateJsonFile';
+export { ENGINE_VERSION } from '../engineVersion';
