@@ -18,6 +18,8 @@ jest.mock('@rushstack/node-core-library', () => {
 
 jest.spyOn(process, 'cwd').mockReturnValue('/tmp/test');
 
+import * as path from 'node:path';
+
 import { Executable } from '@rushstack/node-core-library';
 import { Terminal, StringBufferTerminalProvider } from '@rushstack/terminal';
 import {
@@ -54,7 +56,11 @@ async function runCreateAsync(extraArgs: string[] = []): Promise<void> {
   const terminalProvider: StringBufferTerminalProvider = new StringBufferTerminalProvider();
   const parser: SPFxCommandLineParser = new SPFxCommandLineParser(new Terminal(terminalProvider));
   await parser.executeWithoutErrorHandlingAsync(['create', ...REQUIRED_ARGS, ...extraArgs]);
-  expect(terminalProvider.getAllOutputAsChunks({ asLines: true })).toMatchSnapshot();
+  // Normalize backslashes to forward slashes so snapshots are stable across Windows and Linux.
+  const output: string[] = terminalProvider
+    .getAllOutputAsChunks({ asLines: true })
+    .map((line: string) => line.replace(/\\/g, '/'));
+  expect(output).toMatchSnapshot();
 }
 
 describe('SOLUTION_NAME_PATTERN', () => {
@@ -429,7 +435,7 @@ describe('CreateAction', () => {
       await runCreateAsync();
       expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
         expect.anything(),
-        '/tmp/test/test', // cwd + kebabCase('Test')
+        path.join('/tmp/test', 'test'), // cwd + kebabCase('Test')
         expect.anything()
       );
     });
@@ -438,7 +444,7 @@ describe('CreateAction', () => {
       await runCreateAsync(['--solution-name', 'my-app']);
       expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
         expect.anything(),
-        '/tmp/test/my-app',
+        path.join('/tmp/test', 'my-app'),
         expect.anything()
       );
     });
@@ -469,7 +475,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'npm',
         ['install'],
-        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        expect.objectContaining({ currentWorkingDirectory: path.join('/tmp/test', 'test') })
       );
     });
 
@@ -478,7 +484,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'pnpm',
         ['install'],
-        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        expect.objectContaining({ currentWorkingDirectory: path.join('/tmp/test', 'test') })
       );
     });
 
@@ -487,7 +493,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'yarn',
         ['install'],
-        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        expect.objectContaining({ currentWorkingDirectory: path.join('/tmp/test', 'test') })
       );
     });
 
