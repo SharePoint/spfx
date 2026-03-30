@@ -63,18 +63,26 @@ export class SPFxScaffoldLog {
       return log;
     }
     let start: number = 0;
-    for (let i: number = 0; i <= content.length; i++) {
-      if (i === content.length || content[i] === '\n') {
-        if (i > start) {
-          let line: string = content.substring(start, i);
-          if (line.endsWith('\r')) {
-            line = line.slice(0, -1);
-          }
-          if (line.length > 0) {
-            log.append(JSON.parse(line) as SPFxScaffoldEvent);
-          }
-        }
-        start = i + 1;
+    let newlineIndex: number = content.indexOf('\n', start);
+    while (newlineIndex !== -1) {
+      let line: string = content.substring(start, newlineIndex);
+      if (line.endsWith('\r')) {
+        line = line.slice(0, -1);
+      }
+      if (line.length > 0) {
+        log.append(JSON.parse(line) as SPFxScaffoldEvent);
+      }
+      start = newlineIndex + 1;
+      newlineIndex = content.indexOf('\n', start);
+    }
+    // Handle the last line (no trailing newline)
+    if (start < content.length) {
+      let line: string = content.substring(start);
+      if (line.endsWith('\r')) {
+        line = line.slice(0, -1);
+      }
+      if (line.length > 0) {
+        log.append(JSON.parse(line) as SPFxScaffoldEvent);
       }
     }
     return log;

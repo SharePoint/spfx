@@ -10,7 +10,7 @@ import type { MemFsEditor } from 'mem-fs-editor';
 import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
 import * as z from 'zod';
 
-import { Executable } from '@rushstack/node-core-library';
+import { Executable, type IWaitForExitResultWithoutOutput } from '@rushstack/node-core-library';
 import { Colorize, type Terminal } from '@rushstack/terminal';
 import type {
   CommandLineStringParameter,
@@ -225,10 +225,6 @@ export class CreateAction extends SPFxActionBase {
         cliVersion: CLI_VERSION
       });
 
-      _printFileChanges(this._terminal, fs, targetDir);
-      const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
-      await writer.writeAsync(fs, targetDir, { log });
-
       const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
       log.append({
         kind: 'package-manager-selected',
@@ -236,21 +232,12 @@ export class CreateAction extends SPFxActionBase {
         targetDir
       });
 
+      _printFileChanges(this._terminal, fs, targetDir);
+      const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
+      await writer.writeAsync(fs, targetDir, { log });
+
       if (packageManager !== 'none') {
-        const installResult: IInstallResult = await _runInstallAsync(packageManager, targetDir, terminal);
-
-        log.append({
-          kind: 'package-manager-install-completed',
-          packageManager,
-          exitCode: installResult.exitCode ?? -1,
-          signal: installResult.signal ?? undefined
-        });
-
-        if (installResult.signal != null) {
-          throw new Error(`${packageManager} install was terminated by signal ${installResult.signal}`);
-        } else if (installResult.exitCode !== 0) {
-          throw new Error(`${packageManager} install exited with code ${installResult.exitCode}`);
-        }
+        await _runInstallAsync(packageManager, targetDir, terminal, log);
       }
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
@@ -260,24 +247,18 @@ export class CreateAction extends SPFxActionBase {
   }
 }
 
-interface IInstallResult {
-  // eslint-disable-next-line @rushstack/no-new-null
-  exitCode: number | null;
-  // eslint-disable-next-line @rushstack/no-new-null
-  signal: string | null;
-}
-
 /**
  * Spawns the chosen package manager's install command in targetDir and waits for it to finish.
  * Files are already written before this is called, so a failure here does not undo scaffolding.
  *
- * @returns The exit code and signal so the caller can log the outcome before deciding to throw.
+ * Appends a `package-manager-install-completed` event to the log and throws on failure.
  */
 async function _runInstallAsync(
   packageManager: PackageManager,
   targetDir: string,
-  terminal: Terminal
-): Promise<IInstallResult> {
+  terminal: Terminal,
+  log: SPFxScaffoldLog
+): Promise<void> {
   terminal.writeLine(`Running ${packageManager} install in ${targetDir}...`);
 
   const child: ChildProcess = Executable.spawn(packageManager, ['install'], {
@@ -285,16 +266,25 @@ async function _runInstallAsync(
     stdio: 'inherit'
   });
 
-  const { exitCode, signal } = await Executable.waitForExitAsync(child, {
+  const result: IWaitForExitResultWithoutOutput = await Executable.waitForExitAsync(child, {
     throwOnNonZeroExitCode: false,
     throwOnSignal: false
   });
 
-  if (exitCode === 0) {
-    terminal.writeLine(`${packageManager} install completed successfully.`);
+  log.append({
+    kind: 'package-manager-install-completed',
+    packageManager,
+    exitCode: result.exitCode ?? -1,
+    signal: result.signal ?? undefined
+  });
+
+  if (result.signal != null) {
+    throw new Error(`${packageManager} install was terminated by signal ${result.signal}`);
+  } else if (result.exitCode !== 0) {
+    throw new Error(`${packageManager} install exited with code ${result.exitCode}`);
   }
 
-  return { exitCode, signal };
+  terminal.writeLine(`${packageManager} install completed successfully.`);
 }
 
 /**

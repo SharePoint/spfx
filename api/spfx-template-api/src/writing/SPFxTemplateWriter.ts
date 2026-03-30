@@ -5,6 +5,8 @@ import { readFile } from 'node:fs/promises';
 
 import type { MemFsEditor } from 'mem-fs-editor';
 
+import { FileSystem } from '@rushstack/node-core-library';
+
 import type { IMergeHelper } from './IMergeHelper';
 import { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 import { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';
@@ -26,8 +28,8 @@ interface IDumpEntry {
  */
 export interface IWriteOptions {
   /**
-   * When provided, a `file-write` event is appended for every file processed
-   * during the write phase.
+   * When provided, a `file-write` event is appended for each file that is actually written
+   * (that is, for non-deleted entries with non-null contents) during the write phase.
    */
   log?: SPFxScaffoldLog;
 }
@@ -38,23 +40,12 @@ function _logFileWrite(
   outcome: FileWriteOutcome,
   mergeHelper?: string
 ): void {
-  if (!log) {
-    return;
-  }
-  const event: {
-    kind: 'file-write';
-    relativePath: string;
-    outcome: FileWriteOutcome;
-    mergeHelper?: string;
-  } = {
+  log?.append({
     kind: 'file-write',
     relativePath,
-    outcome
-  };
-  if (mergeHelper !== undefined) {
-    event.mergeHelper = mergeHelper;
-  }
-  log.append(event);
+    outcome,
+    mergeHelper
+  });
 }
 
 /**
@@ -116,13 +107,14 @@ export class SPFxTemplateWriter {
       let existingContent: string;
       try {
         existingContent = await readFile(absolutePath, 'utf-8');
-      } catch (error: unknown) {
-        if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      } catch (error) {
+        if (FileSystem.isNotExistError(error as Error)) {
           // File does not exist — new file, let commit write it as-is
           _logFileWrite(log, relativePath, 'new');
           continue;
+        } else {
+          throw error;
         }
-        throw error;
       }
 
       // File already exists on disk — attempt merge if content differs
