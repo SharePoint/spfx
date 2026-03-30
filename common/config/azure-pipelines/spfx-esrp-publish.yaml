@@ -24,6 +24,10 @@ parameters:
     displayName: 'Create GitHub Tags and Releases'
     type: boolean
     default: false
+  - name: CommitShaOverride
+    displayName: 'Commit SHA Override (for testing)'
+    type: string
+    default: ''
 
 resources:
   repositories:
@@ -109,7 +113,7 @@ extends:
               - template: /common/config/azure-pipelines/templates/find-bump-pipeline-run.yaml@self
                 parameters:
                   PipelineId: $(SpfxVersioningPipelineId)
-                  CommitSha: $(Build.SourceVersion)
+                  CommitSha: ${{ coalesce(parameters.CommitShaOverride, '$(Build.SourceVersion)') }}
                   TeamProject: $(SpfxVersioningProject)
                   Name: FindBumpRun
                   WorkingDirectory: $(Pipeline.Workspace)/spfx
