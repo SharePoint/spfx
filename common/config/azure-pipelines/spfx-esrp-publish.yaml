@@ -187,13 +187,13 @@ extends:
                 condition: and(succeeded(), not(${{ parameters.DryRun }}))
                 displayName: 'Verify NPM tag versions'
 
-      - ${{ if parameters.CreateGitHubTagsAndReleases }}:
+      - ${{ if and(parameters.CreateGitHubTagsAndReleases, not(parameters.DryRun)) }}:
           - stage: Tag
             displayName: 'Tag Published SPFx Packages'
             dependsOn:
               - Prepare
               - Publish
-            condition: and(succeeded('Publish'), not(${{ parameters.DryRun }}))
+            condition: succeeded('Publish')
             jobs:
               - job: TagPublishedPackages
                 displayName: 'Tag Published SPFx Packages'
