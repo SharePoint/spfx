@@ -15,7 +15,6 @@ exports[`SPFxTemplateWriter scaffold log integration should record a "new" file-
 Array [
   Object {
     "kind": "file-write",
-    "mergeHelper": undefined,
     "outcome": "new",
     "relativePath": "src/newFile.ts",
   },
@@ -26,7 +25,6 @@ exports[`SPFxTemplateWriter scaffold log integration should record a "preserved"
 Array [
   Object {
     "kind": "file-write",
-    "mergeHelper": undefined,
     "outcome": "preserved",
     "relativePath": "some/unknown/file.json",
   },
@@ -37,7 +35,6 @@ exports[`SPFxTemplateWriter scaffold log integration should record an "unchanged
 Array [
   Object {
     "kind": "file-write",
-    "mergeHelper": undefined,
     "outcome": "unchanged",
     "relativePath": "some/file.json",
   },
@@ -48,7 +45,6 @@ exports[`SPFxTemplateWriter scaffold log integration should record events for mu
 Array [
   Object {
     "kind": "file-write",
-    "mergeHelper": undefined,
     "outcome": "new",
     "relativePath": "src/brand-new.ts",
   },
@@ -60,13 +56,11 @@ Array [
   },
   Object {
     "kind": "file-write",
-    "mergeHelper": undefined,
     "outcome": "unchanged",
     "relativePath": "unchanged.txt",
   },
   Object {
     "kind": "file-write",
-    "mergeHelper": undefined,
     "outcome": "preserved",
     "relativePath": "no-helper.json",
   },
