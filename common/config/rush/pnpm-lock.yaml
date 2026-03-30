@@ -1111,6 +1111,9 @@ importers:
       '@rushstack/heft-webpack5-plugin':
         specifier: ^1.2.2
         version: 1.2.2(@rushstack/heft@1.2.7(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)
+      '@rushstack/webpack-preserve-dynamic-require-plugin':
+        specifier: ~0.12.8
+        version: 0.12.8
       eslint:
         specifier: 9.37.0
         version: 9.37.0
@@ -2957,6 +2960,10 @@ packages:
         optional: true
       webpack:
         optional: true
+
+  '@rushstack/webpack-preserve-dynamic-require-plugin@0.12.8':
+    resolution: {integrity: sha512-u1HBLDepw1UrlEaUC4uiWuSK9RLI56bjB/i/4J/gMrSE+HZRLYHweZyNIy7Vyyu3enrh05r1o06M71wZKN6YVg==}
+    engines: {node: '>=10.17.1'}
 
   '@rushstack/webpack5-localization-plugin@0.15.2':
     resolution: {integrity: sha512-tY/ogsa3PndAF3qtFZk82vcmiB7SBykdlwf/8Tajwd3FLwzZXLBPKwccj8u4lWk93IbLV7zh4JG6QXLDMhPLIA==}
@@ -10601,6 +10608,8 @@ snapshots:
       webpack-merge: 5.8.0
     optionalDependencies:
       webpack: 5.95.0
+
+  '@rushstack/webpack-preserve-dynamic-require-plugin@0.12.8': {}
 
   '@rushstack/webpack5-localization-plugin@0.15.2(@types/node@22.19.13)(webpack@5.95.0)':
     dependencies:

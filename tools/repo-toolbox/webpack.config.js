@@ -1,19 +1,14 @@
 'use strict';
 
-const path = require('path');
+const { PreserveDynamicRequireWebpackPlugin } = require('@rushstack/webpack-preserve-dynamic-require-plugin');
 
 module.exports = {
   entry: './lib-esm/start.js',
   target: 'node',
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: `${__dirname}/dist`,
     filename: 'repo-toolbox.js'
   },
-  ignoreWarnings: [
-    {
-      module: /node_modules/,
-      message: /Critical dependency/
-    }
-  ]
+  plugins: [new PreserveDynamicRequireWebpackPlugin()]
 };
