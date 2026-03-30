@@ -2,7 +2,7 @@
 // See LICENSE in the project root for license information.
 
 import { CommandLineParser } from '@rushstack/ts-command-line';
-import { ConsoleTerminalProvider, type ITerminal, Terminal } from '@rushstack/terminal';
+import type { ITerminal } from '@rushstack/terminal';
 
 import { CreateOrUpdatePrAction } from './actions/CreateOrUpdatePrAction';
 import { EmitGitHubVarsAndTagBuildAction } from './actions/EmitGitHubVarsAndTagBuildAction';
@@ -13,13 +13,12 @@ import { VerifyNpmTagAction } from './actions/VerifyNpmTagAction';
 export class ToolboxCommandLine extends CommandLineParser {
   public readonly terminal: ITerminal;
 
-  public constructor() {
+  public constructor(terminal: ITerminal) {
     super({
       toolFilename: 'repo-toolbox',
       toolDescription: 'Used to execute various operations specific to this repo'
     });
 
-    const terminal: ITerminal = new Terminal(new ConsoleTerminalProvider());
     this.terminal = terminal;
 
     this.addAction(new CreateOrUpdatePrAction(terminal));

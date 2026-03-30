@@ -21,6 +21,8 @@ export class TagPublishedPackagesAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
   private readonly _packagesPathParameter: IRequiredCommandLineStringParameter;
   private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
+  private readonly _githubTokenParameter: IRequiredCommandLineStringParameter;
+  private readonly _repoSlugParameter: IRequiredCommandLineStringParameter;
 
   public constructor(terminal: ITerminal) {
     super({
@@ -30,16 +32,33 @@ export class TagPublishedPackagesAction extends CommandLineAction {
     });
 
     this._terminal = terminal;
+
     this._packagesPathParameter = this.defineStringParameter({
       parameterLongName: '--packages-path',
       argumentName: 'PATH',
       description: 'Path to directory containing .tgz package files.',
       required: true
     });
+
     this._commitShaParameter = this.defineStringParameter({
       parameterLongName: '--commit-sha',
       argumentName: 'SHA',
       description: 'The commit SHA to tag.',
+      required: true
+    });
+
+    this._githubTokenParameter = this.defineStringParameter({
+      parameterLongName: '--github-token',
+      argumentName: 'TOKEN',
+      environmentVariable: 'GITHUB_TOKEN',
+      description: 'GitHub personal access token for creating releases.',
+      required: true
+    });
+
+    this._repoSlugParameter = this.defineStringParameter({
+      parameterLongName: '--repo-slug',
+      argumentName: 'SLUG',
+      description: 'GitHub repository slug in the form owner/repo.',
       required: true
     });
   }
@@ -48,6 +67,8 @@ export class TagPublishedPackagesAction extends CommandLineAction {
     const terminal: ITerminal = this._terminal;
     const packagesPath: string = this._packagesPathParameter.value;
     const commitSha: string = this._commitShaParameter.value;
+    const authorizationHeader: string = this._githubTokenParameter.value;
+    const repoSlug: string = this._repoSlugParameter.value;
 
     const folderItems: FolderItem[] = await FileSystem.readFolderItemsAsync(packagesPath);
     const tgzFiles: string[] = [];
@@ -62,7 +83,10 @@ export class TagPublishedPackagesAction extends CommandLineAction {
       throw new Error(`No .tgz packages found in ${packagesPath}`);
     }
 
-    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientAsync(terminal);
+    const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientFromTokenAndRepoSlugAsync({
+      authorizationHeader,
+      repoSlug
+    });
 
     await Async.forEachAsync(
       tgzFiles,

@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { Octokit, type RestEndpointMethodTypes } from '@octokit/rest';
+import type { Octokit, RestEndpointMethodTypes } from '@octokit/rest';
 
 import type { ITerminal } from '@rushstack/terminal';
 
@@ -14,8 +14,7 @@ export type ICommitPr =
 
 export interface IGitHubClientOptions {
   authorizationHeader: string;
-  owner: string;
-  repo: string;
+  repoSlug: string;
 }
 
 export interface IGetPrForBranchOptions {
@@ -61,12 +60,21 @@ interface IOctokitCommonOptions {
   repo: string;
 }
 
+interface IGitHubClientOptionsInternal extends IGitHubClientOptions {
+  Octokit: typeof Octokit;
+}
+
 export class GitHubClient {
   private readonly _octokit: Octokit;
   private readonly _octokitCommonOptions: IOctokitCommonOptions;
 
-  public constructor(options: IGitHubClientOptions) {
-    const { authorizationHeader, owner, repo } = options;
+  private constructor(options: IGitHubClientOptionsInternal) {
+    const { authorizationHeader, repoSlug, Octokit } = options;
+    const [owner, repo] = repoSlug.split('/');
+    if (!owner || !repo) {
+      throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
+    }
+
     this._octokitCommonOptions = { owner, repo };
 
     this._octokit = new Octokit();
@@ -80,14 +88,22 @@ export class GitHubClient {
    * header from the local git configuration.
    */
   public static async createGitHubClientAsync(terminal: ITerminal): Promise<GitHubClient> {
-    const repoSlug: string = await getRepoSlugAsync(terminal);
-    const [owner, repo] = repoSlug.split('/');
-    if (!owner || !repo) {
-      throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
-    }
+    const [repoSlug, authorizationHeader] = await Promise.all([
+      getRepoSlugAsync(terminal),
+      getGitAuthorizationHeaderAsync(terminal)
+    ]);
+    return await GitHubClient.createGitHubClientFromTokenAndRepoSlugAsync({ authorizationHeader, repoSlug });
+  }
 
-    const authorizationHeader: string = await getGitAuthorizationHeaderAsync(terminal);
-    return new GitHubClient({ authorizationHeader, owner, repo });
+  /**
+   * Creates a {@link GitHubClient} from an explicit GitHub token and repository slug,
+   * without requiring a local git checkout.
+   */
+  public static async createGitHubClientFromTokenAndRepoSlugAsync(
+    options: IGitHubClientOptions
+  ): Promise<GitHubClient> {
+    const { Octokit } = await import('@octokit/rest');
+    return new GitHubClient({ ...options, Octokit });
   }
 
   public async getPrForBranchAsync(options: IGetPrForBranchOptions): Promise<IGitHubPr | undefined> {
