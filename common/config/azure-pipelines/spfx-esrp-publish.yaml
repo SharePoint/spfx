@@ -145,7 +145,7 @@ extends:
             steps:
               - checkout: none
 
-              - task: DownloadPipelineArtifact@2
+              - task: 1ES.DownloadPipelineArtifact@1
                 inputs:
                   artifactName: repo-toolbox-bundle
                   targetPath: $(Agent.TempDirectory)/repo-toolbox-bundle
