@@ -25,8 +25,8 @@
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
 
-    // Performance & Compatibility
-    "skipLibCheck": true,
+    // Allow importing JSON files as modules
+    "resolveJsonModule": true,
 
     // Type Definitions - Add Node types
     "types": ["heft-jest", "node"],
