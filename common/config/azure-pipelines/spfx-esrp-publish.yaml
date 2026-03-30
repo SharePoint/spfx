@@ -20,6 +20,10 @@ parameters:
     displayName: 'NPM Tag'
     type: string
     default: 'latest'
+  - name: CreateGitHubTagsAndReleases
+    displayName: 'Create GitHub Tags and Releases'
+    type: boolean
+    default: false
 
 resources:
   repositories:
@@ -181,48 +185,49 @@ extends:
                 condition: and(succeeded(), not(${{ parameters.DryRun }}))
                 displayName: 'Verify NPM tag versions'
 
-      - stage: Tag
-        displayName: 'Tag Published SPFx Packages'
-        dependsOn:
-          - Prepare
-          - Publish
-        condition: and(succeeded('Publish'), ne('${{ parameters.DryRun }}', 'true'))
-        jobs:
-          - job: TagPublishedPackages
+      - ${{ if parameters.CreateGitHubTagsAndReleases }}:
+          - stage: Tag
             displayName: 'Tag Published SPFx Packages'
-            pool:
-              name: 'publish-rushstack'
-              os: linux
-            variables:
-              - name: BumpPipelineRunId
-                value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
-              - name: BumpCommitSha
-                value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpCommitSha'] ]
-            steps:
-              - checkout: self
-                persistCredentials: true
+            dependsOn:
+              - Prepare
+              - Publish
+            condition: and(succeeded('Publish'), not(${{ parameters.DryRun }}))
+            jobs:
+              - job: TagPublishedPackages
+                displayName: 'Tag Published SPFx Packages'
+                pool:
+                  name: 'publish-rushstack'
+                  os: linux
+                variables:
+                  - name: BumpPipelineRunId
+                    value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
+                  - name: BumpCommitSha
+                    value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpCommitSha'] ]
+                steps:
+                  - checkout: self
+                    persistCredentials: true
 
-              - task: DownloadPipelineArtifact@2
-                inputs:
-                  artifactName: repo-toolbox-bundle
-                  targetPath: $(Agent.TempDirectory)/repo-toolbox-bundle
-                displayName: 'Download repo-toolbox bundle'
+                  - task: DownloadPipelineArtifact@2
+                    inputs:
+                      artifactName: repo-toolbox-bundle
+                      targetPath: $(Agent.TempDirectory)/repo-toolbox-bundle
+                    displayName: 'Download repo-toolbox bundle'
 
-              - task: DownloadPipelineArtifact@2
-                inputs:
-                  artifactName: packages
-                  targetPath: $(PackagesPath)
-                  project: $(SpfxVersioningProject)
-                  definition: $(SpfxVersioningPipelineId)
-                  pipelineId: $(BumpPipelineRunId)
-                  buildType: specific
-                  buildVersionToDownload: specific
-                displayName: 'Download packed npm packages'
+                  - task: DownloadPipelineArtifact@2
+                    inputs:
+                      artifactName: packages
+                      targetPath: $(PackagesPath)
+                      project: $(SpfxVersioningProject)
+                      definition: $(SpfxVersioningPipelineId)
+                      pipelineId: $(BumpPipelineRunId)
+                      buildType: specific
+                      buildVersionToDownload: specific
+                    displayName: 'Download packed npm packages'
 
-              - task: CmdLine@2
-                inputs:
-                  script: >-
-                    node "$(RepoToolboxBundlePath)" tag-published-packages
-                    --packages-path "$(PackagesPath)"
-                    --commit-sha "$(BumpCommitSha)"
-                displayName: 'Create GitHub releases'
+                  - task: CmdLine@2
+                    inputs:
+                      script: >-
+                        node "$(RepoToolboxBundlePath)" tag-published-packages
+                        --packages-path "$(PackagesPath)"
+                        --commit-sha "$(BumpCommitSha)"
+                    displayName: 'Create GitHub releases'
