@@ -276,17 +276,19 @@ async function _runInstallAsync(
     throwOnSignal: false
   });
 
+  const normalizedExitCode: number = result.exitCode ?? -1;
+
   log.append({
     kind: 'package-manager-install-completed',
     packageManager,
-    exitCode: result.exitCode ?? -1,
+    exitCode: normalizedExitCode,
     signal: result.signal ?? undefined
   });
 
   if (result.signal != null) {
     throw new Error(`${packageManager} install was terminated by signal ${result.signal}`);
-  } else if (result.exitCode !== 0) {
-    throw new Error(`${packageManager} install exited with code ${result.exitCode}`);
+  } else if (normalizedExitCode !== 0) {
+    throw new Error(`${packageManager} install exited with code ${normalizedExitCode}`);
   }
 
   terminal.writeLine(`${packageManager} install completed successfully.`);

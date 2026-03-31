@@ -41,6 +41,13 @@ export interface IPackageManagerSelectedEvent extends ISPFxScaffoldEventBase {
 /**
  * The outcome of a single file during the write phase.
  *
+ * - `'new'` -- The file was written as-is (either it did not previously exist, or it is a binary
+ *   file whose contents differ from the existing file on disk).
+ * - `'merged'` -- The file existed on disk and was merged using a registered merge helper.
+ * - `'preserved'` -- The file existed on disk with different content but no merge helper was
+ *   registered, so the existing file was kept.
+ * - `'unchanged'` -- The file existed on disk with identical content, so no write was needed.
+ *
  * @public
  */
 export type FileWriteOutcome = 'new' | 'merged' | 'preserved' | 'unchanged';
