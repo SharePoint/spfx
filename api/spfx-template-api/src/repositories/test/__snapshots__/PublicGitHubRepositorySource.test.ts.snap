@@ -10,6 +10,8 @@ exports[`PublicGitHubRepositorySource _buildDownloadUrl should build correct dow
 
 exports[`PublicGitHubRepositorySource _buildDownloadUrl should build correct download URL with different owner and repo 1`] = `Array []`;
 
+exports[`PublicGitHubRepositorySource _buildDownloadUrl should use codeload URL for mixed-case GitHub.com host 1`] = `Array []`;
+
 exports[`PublicGitHubRepositorySource _createTemplateFromFileMapAsync should create template from file map 1`] = `Array []`;
 
 exports[`PublicGitHubRepositorySource _createTemplateFromFileMapAsync should include only files from the template directory 1`] = `Array []`;
@@ -24,6 +26,8 @@ exports[`PublicGitHubRepositorySource _extractZipBuffer should remove root direc
 
 exports[`PublicGitHubRepositorySource _extractZipBuffer should skip directories 1`] = `Array []`;
 
+exports[`PublicGitHubRepositorySource _parseRepoUrl should normalize host to lowercase 1`] = `Array []`;
+
 exports[`PublicGitHubRepositorySource _parseRepoUrl should parse GitHub Enterprise URL 1`] = `Array []`;
 
 exports[`PublicGitHubRepositorySource _parseRepoUrl should parse GitHub Enterprise URL with .git extension 1`] = `Array []`;
@@ -31,6 +35,8 @@ exports[`PublicGitHubRepositorySource _parseRepoUrl should parse GitHub Enterpri
 exports[`PublicGitHubRepositorySource _parseRepoUrl should parse GitHub URL with .git extension 1`] = `Array []`;
 
 exports[`PublicGitHubRepositorySource _parseRepoUrl should parse valid GitHub HTTPS URL 1`] = `Array []`;
+
+exports[`PublicGitHubRepositorySource _parseRepoUrl should reject http:// URLs 1`] = `Array []`;
 
 exports[`PublicGitHubRepositorySource _parseRepoUrl should throw error for URL with no path 1`] = `Array []`;
 

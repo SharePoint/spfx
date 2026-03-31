@@ -146,6 +146,25 @@ describe(PublicGitHubRepositorySource.name, () => {
       expect(result).toEqual({ host: 'github.mycompany.com', owner: 'org', repo: 'repo' });
     });
 
+    it('should normalize host to lowercase', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://GitHub.COM/owner/repo',
+        terminal
+      });
+      const result = source['_parseRepoUrl']();
+
+      expect(result).toEqual({ host: 'github.com', owner: 'owner', repo: 'repo' });
+    });
+
+    it('should reject http:// URLs', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'http://github.com/owner/repo',
+        terminal
+      });
+
+      expect(() => source['_parseRepoUrl']()).toThrow(/Invalid GitHub repository URL/);
+    });
+
     it('should throw error for URL with only one path segment', () => {
       const source = new PublicGitHubRepositorySource({
         repoUrl: 'https://github.com/owner',
@@ -197,6 +216,17 @@ describe(PublicGitHubRepositorySource.name, () => {
       const url = source['_buildDownloadUrl']();
 
       expect(url).toBe('https://codeload.github.com/microsoft/spfx/zip/v1.18');
+    });
+
+    it('should use codeload URL for mixed-case GitHub.com host', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://GitHub.COM/owner/repo',
+        branch: 'main',
+        terminal
+      });
+      const url = source['_buildDownloadUrl']();
+
+      expect(url).toBe('https://codeload.github.com/owner/repo/zip/main');
     });
 
     it('should build GHE REST API URL for non-github.com hosts', () => {

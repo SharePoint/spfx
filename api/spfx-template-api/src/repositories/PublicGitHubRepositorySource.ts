@@ -149,6 +149,8 @@ export interface IPublicGitHubRepositorySourceOptions {
  * This pattern is similar to other scaffolding tools (npm create, dotnet new, etc.)
  */
 export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySource {
+  private static readonly _REPO_URL_REGEX: RegExp = /^https:\/\/([^/]+)\/([^/]+)\/([^/]+?)(\.git)?$/;
+
   private readonly _repoUrl: string;
   private readonly _ref: string;
   private readonly _terminal: ITerminal;
@@ -188,16 +190,14 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
 
   private _parseRepoUrl(): { host: string; owner: string; repo: string } {
     // Parse URLs like: https://github.com/owner/repo, https://github.mycompany.com/org/repo,
-    // or the same with a .git suffix.
-    const match: RegExpMatchArray | null = this._repoUrl.match(
-      /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+?)(\.git)?$/
-    );
+    // or the same with a .git suffix. Only HTTPS is accepted.
+    const match: RegExpMatchArray | null = this._repoUrl.match(PublicGitHubRepositorySource._REPO_URL_REGEX);
     if (!match) {
       throw new Error(`Invalid GitHub repository URL: ${this._repoUrl}`);
     }
 
     const [, host, owner, repo] = match as [string, string, string, string];
-    return { host, owner, repo };
+    return { host: host.toLowerCase(), owner, repo };
   }
 
   private async _downloadAndExtractRepositoryAsync(downloadUrl: string): Promise<Map<string, Buffer>> {
