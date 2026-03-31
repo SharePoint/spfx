@@ -6,24 +6,23 @@ import type { OctokitResponse, RequestError } from '@octokit/types';
 import type { ITerminal } from '@rushstack/terminal';
 import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
 import { Async, FileSystem, type FolderItem, type IPackageJson } from '@rushstack/node-core-library';
-import { CommandLineAction } from '@rushstack/ts-command-line';
 
 import { GitHubClient } from '../../utilities/GitHubClient';
 import {
   readChangelogSectionFromTgzAsync,
   readPackageInfoFromTgzAsync
 } from '../../utilities/PackageTgzUtilities';
+import { GitHubTokenActionBase } from './GitHubTokenActionBase';
 
 /**
  * Creates GitHub releases (and their associated tags) for each .tgz package in a directory.
  * Tags are formatted as `@scope/package_vX.Y.Z`, matching the rushstack convention.
  * Release notes are populated from the corresponding CHANGELOG.md section in the package.
  */
-export class CreateGitHubReleasesAction extends CommandLineAction {
+export class CreateGitHubReleasesAction extends GitHubTokenActionBase {
   private readonly _terminal: ITerminal;
   private readonly _packagesPathParameter: IRequiredCommandLineStringParameter;
   private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
-  private readonly _githubTokenParameter: IRequiredCommandLineStringParameter;
   private readonly _repoSlugParameter: IRequiredCommandLineStringParameter;
 
   public constructor(terminal: ITerminal) {
@@ -49,15 +48,6 @@ export class CreateGitHubReleasesAction extends CommandLineAction {
       required: true
     });
 
-    this._githubTokenParameter = this.defineStringParameter({
-      parameterLongName: '--github-token',
-      argumentName: 'TOKEN',
-      environmentVariable: 'GITHUB_TOKEN',
-      description:
-        'GitHub token for creating releases. Accepts a raw installation token (e.g. `ghs_xxx`) or a full Authorization header value (e.g. `basic <base64>`).',
-      required: true
-    });
-
     this._repoSlugParameter = this.defineStringParameter({
       parameterLongName: '--repo-slug',
       argumentName: 'SLUG',
@@ -71,8 +61,15 @@ export class CreateGitHubReleasesAction extends CommandLineAction {
     const terminal: ITerminal = this._terminal;
     const packagesPath: string = this._packagesPathParameter.value;
     const commitSha: string = this._commitShaParameter.value;
-    const authorizationHeader: string = this._githubTokenParameter.value;
+    const authorizationHeader: string | undefined = this._githubTokenParameter.value;
     const repoSlug: string = this._repoSlugParameter.value;
+
+    if (!authorizationHeader) {
+      const { environmentVariable, longName } = this._githubTokenParameter;
+      throw new Error(
+        `A GitHub token is required. Set the ${environmentVariable} environment variable or pass ${longName}.`
+      );
+    }
 
     const folderItems: FolderItem[] = await FileSystem.readFolderItemsAsync(packagesPath);
     const tgzFiles: string[] = [];

@@ -151,13 +151,20 @@ extends:
                     SYSTEM_TEAMPROJECT: $(System.TeamProject)
                     BUILD_BUILDID: $(Build.BuildId)
 
-              # Tag this AzDO build with the bump commit SHA and emit GitHub
-              # pipeline variables for the agentless PostGitHubStatus stage.
               - template: /common/config/azure-pipelines/templates/run-repo-toolbox.yaml@self
                 parameters:
-                  Arguments: emit-github-vars-and-tag-build
-                  DisplayName: 'Tag build and emit GitHub pipeline variables'
+                  Arguments: emit-github-vars
+                  DisplayName: 'Emit GitHub pipeline variables'
                   Name: EmitGitHubVars
+                  Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
+
+              # Tag this AzDO build with the bump commit SHA so it can be located
+              # by FindBumpPipelineRunAction in the publish pipeline.
+              - template: /common/config/azure-pipelines/templates/run-repo-toolbox.yaml@self
+                parameters:
+                  Arguments: tag-build
+                  DisplayName: 'Tag build with bump commit SHA'
+                  Name: TagBuild
                   Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
 
       # Posts a GitHub commit status to the bump branch HEAD once both the
@@ -174,7 +181,7 @@ extends:
           and(
             in(dependencies.BumpVersions.result, 'Succeeded', 'SucceededWithIssues'),
             in(dependencies.SDLSources.result, 'Succeeded', 'SucceededWithIssues'),
-            ne(dependencies.BumpVersions.outputs['BumpVersions.EmitGitHubVars.BumpSha'], '')
+            ne(dependencies.BumpVersions.outputs['BumpVersions.TagBuild.BumpSha'], '')
           )
         jobs:
           - job: PostStatus
@@ -182,7 +189,7 @@ extends:
             pool: server
             variables:
               - name: BumpSha
-                value: $[ stageDependencies.BumpVersions.BumpVersions.outputs['EmitGitHubVars.BumpSha'] ]
+                value: $[ stageDependencies.BumpVersions.BumpVersions.outputs['TagBuild.BumpSha'] ]
               - name: GitHubRepoSlug
                 value: $[ stageDependencies.BumpVersions.BumpVersions.outputs['EmitGitHubVars.GitHubRepoSlug'] ]
               - name: GitHubToken

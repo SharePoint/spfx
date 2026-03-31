@@ -114,8 +114,8 @@ extends:
 
               - template: /common/config/azure-pipelines/templates/run-repo-toolbox.yaml@self
                 parameters:
-                  Arguments: emit-github-vars-and-tag-build
-                  DisplayName: 'Tag build and emit GitHub pipeline variables'
+                  Arguments: emit-github-vars
+                  DisplayName: 'Emit GitHub pipeline variables'
                   Name: EmitGitHubVars
 
               - template: /common/config/azure-pipelines/templates/find-bump-pipeline-run.yaml@self
@@ -218,13 +218,12 @@ extends:
                     value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
                   - name: BumpCommitSha
                     value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpCommitSha'] ]
+                  - name: GitHubToken
+                    value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['EmitGitHubVars.GitHubToken'] ]
                   - name: GitHubRepoSlug
                     value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['EmitGitHubVars.GitHubRepoSlug'] ]
                 steps:
-                  # A checkout is required so the 1ES PT 'Get GitHub Token' step has repo
-                  # context and injects GITHUB_TOKEN into the job environment.
-                  - checkout: self
-                    fetchDepth: 1
+                  - checkout: none
 
                   - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
@@ -252,4 +251,6 @@ extends:
                         --packages-path "$(PackagesPath)"
                         --commit-sha "$(BumpCommitSha)"
                         --repo-slug "$(GitHubRepoSlug)"
+                    env:
+                      GITHUB_TOKEN: $(GitHubToken)
                     displayName: 'Create GitHub releases'
