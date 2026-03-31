@@ -221,6 +221,8 @@ extends:
                   - name: GitHubRepoSlug
                     value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['EmitGitHubVars.GitHubRepoSlug'] ]
                 steps:
+                  # A checkout is required so the 1ES PT 'Get GitHub Token' step has repo
+                  # context and injects GITHUB_TOKEN into the job environment.
                   - checkout: self
                     fetchDepth: 1
 
