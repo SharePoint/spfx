@@ -9,12 +9,14 @@ templates, and how hotfixes are managed across release branches.
 
 | SPFx version | Branch | Description |
 |--------------|--------|-------------|
-| Latest stable | `main` | Always tracks the most recent stable SPFx release. |
-| Named stable release | `release/X.Y.Z` (e.g. `release/1.22.0`) | Created at GA for each SPFx version. |
-| Beta pre-release | `release/X.Y.Z-beta.N` (e.g. `release/1.23.0-beta.1`) | Created when a beta ships. |
-| RC pre-release | `release/X.Y.Z-rc.N` (e.g. `release/1.23.0-rc.1`) | Created when an RC ships. |
+| Latest stable | `version/latest` | Tracks the most recent stable SPFx release. **This is the CLI default.** |
+| Latest beta | `version/latest-beta` | Tracks the most recent beta/pre-release. |
+| Named stable release | `version/X.Y.Z` (e.g. `version/1.22.2`) | Created at GA for each SPFx version. |
+| Beta pre-release | `version/X.Y.Z-beta.N` (e.g. `version/1.23.0-beta.0`) | Created when a beta ships. |
+| RC pre-release | `version/X.Y.Z-rc.N` (e.g. `version/1.23.0-rc.1`) | Created when an RC ships. |
+| Development | `main` | Active development branch. |
 
-The `release/` prefix keeps the branch list organized and avoids collisions with
+The `version/` prefix keeps release branches organized and avoids collisions with
 tags or other ref names.
 
 ---
@@ -31,29 +33,33 @@ https://codeload.github.com/{owner}/{repo}/zip/{ref}
 
 ### Default behavior
 
-When no `--spfx-version` flag is provided, the CLI fetches from the **`main`
-branch**. Because `main` always tracks the latest stable release, users get
-up-to-date templates without specifying a version.
+When no `--spfx-version` flag is provided, the CLI fetches from the
+**`version/latest`** branch. This branch always points to the most recent stable
+SPFx release, so users get up-to-date templates without specifying a version.
 
 ### Selecting a specific version
 
-The planned `--spfx-version` CLI flag maps directly to a release branch:
+The `--spfx-version` flag maps to a `version/` branch. The CLI prepends `version/`
+to the provided string (unless it already starts with `version/`) and passes it as
+the `branch` parameter to `PublicGitHubRepositorySource`:
 
 ```bash
-# Fetches templates from the release/1.22.0 branch
-spfx create --template webpart-minimal --spfx-version 1.22.0 ...
+# Fetches templates from the version/1.22.2 branch
+spfx create --template webpart-minimal --spfx-version 1.22.2 ...
 
-# Fetches templates from the release/1.23.0-beta.1 branch
-spfx create --template webpart-minimal --spfx-version 1.23.0-beta.1 ...
+# Fetches templates from the version/1.23.0-beta.0 branch
+spfx create --template webpart-minimal --spfx-version 1.23.0-beta.0 ...
+
+# Fetches templates from the version/latest-beta branch
+spfx create --template webpart-minimal --spfx-version latest-beta ...
 ```
-
-The CLI prepends `release/` to the provided version string and passes it as the
-`branch` parameter to `PublicGitHubRepositorySource`.
 
 ### Local override
 
 For full control (custom templates, offline work, or development), use
-`--local-template` to point to a directory on disk. This bypasses GitHub entirely.
+`--local-source` to point to a directory on disk. This bypasses GitHub entirely.
+When `--local-source` is provided on the `create` command, `--spfx-version` is
+ignored.
 
 ---
 
@@ -67,16 +73,25 @@ When a new SPFx version ships:
    ```bash
    git checkout main
    git pull
-   git checkout -b release/X.Y.Z
+   git checkout -b version/X.Y.Z
    ```
 2. Update `spfxVersion` in every `template.json` to match the new SPFx version.
 3. Regenerate all examples from templates.
 4. Verify examples build: `rush build`.
 5. Push the branch and configure branch protection (require PR reviews, CI must
    pass).
+6. Update the `version/latest` branch to point to the same commit (for stable
+   releases) or update `version/latest-beta` (for pre-releases).
 
-After the release branch is created, `main` continues forward — it is always the
-latest stable.
+### Rolling branches
+
+Two special branches track the latest of each release type:
+
+- **`version/latest`** — updated to match the newest GA release branch.
+- **`version/latest-beta`** — updated to match the newest beta or RC branch.
+
+These are the branches the CLI resolves by default (`version/latest`) or when
+a user passes `--spfx-version latest-beta`.
 
 ### Pre-release branches
 
@@ -84,14 +99,14 @@ Beta and RC branches follow the same process. They are created from `main` (or
 from the prior pre-release branch) when the pre-release ships:
 
 ```
-main ──────────────────────────────── (latest stable)
-  └── release/1.23.0-beta.1           (created at beta)
-        └── release/1.23.0-rc.1       (created at RC)
-              └── release/1.23.0       (created at GA)
+main ──────────────────────────────── (development)
+  └── version/1.23.0-beta.0           (created at beta)
+        └── version/1.23.0-rc.1       (created at RC)
+              └── version/1.23.0       (created at GA)
 ```
 
-Once the GA branch (`release/1.23.0`) is created, `main` is updated to reflect
-that version as the new latest stable.
+When the GA branch (`version/1.23.0`) is created, `version/latest` is updated to
+match it.
 
 ### Private development
 
@@ -110,18 +125,22 @@ vulnerability in a dependency, a broken template pattern):
    contain the issue.
 3. **Cherry-pick to each affected branch:**
    ```bash
-   git checkout release/1.22.0
+   git checkout version/1.22.2
    git cherry-pick <commit-sha>
    ```
 4. **Open a PR for each release branch.** Each cherry-pick goes through the same
    review and CI process as any other change.
 5. **Verify the fix.** Ensure templates build and tests pass on each branch.
+6. **Update rolling branches.** If the fix applies to `version/latest` or
+   `version/latest-beta`, ensure those branches are updated as well.
 
 ### Which branches are actively maintained?
 
 At any given time, the following branches receive hotfixes:
 
 - **`main`** — always maintained.
+- **`version/latest`** — always maintained (tracks latest GA).
+- **`version/latest-beta`** — maintained when a beta or RC is active.
 - **The latest GA release branch** — maintained until the next GA ships.
 - **Any active pre-release branch** (beta, RC) — maintained until GA ships.
 
@@ -144,8 +163,8 @@ Release branches should have the following protections enabled:
 
 | Question | Answer |
 |----------|--------|
-| What does the CLI fetch by default? | The `main` branch (latest stable). |
-| How does `--spfx-version` change the branch? | It maps to `release/{version}` (e.g. `release/1.22.0`). |
-| What branch is stable? | `main` is always the latest stable. Named stable releases live under `release/X.Y.Z`. |
-| What branch is beta? | `release/X.Y.Z-beta.N` (e.g. `release/1.23.0-beta.1`). |
-| How are hotfixes applied? | Fix on `main`, then cherry-pick to affected release branches via PRs. |
+| What does the CLI fetch by default? | The `version/latest` branch (latest stable). |
+| How does `--spfx-version` change the branch? | It maps to `version/{value}` (e.g. `version/1.22.2`). |
+| What branch is stable? | `version/latest` tracks the latest GA. Named releases live under `version/X.Y.Z`. |
+| What branch is beta? | `version/latest-beta` tracks the latest pre-release. Named betas live under `version/X.Y.Z-beta.N`. |
+| How are hotfixes applied? | Fix on `main`, then cherry-pick to affected version branches via PRs. |
