@@ -46,7 +46,7 @@ export interface IPackageManagerSelectedEvent extends ISPFxScaffoldEventBase {
 export type FileWriteOutcome = 'new' | 'merged' | 'preserved' | 'unchanged';
 
 /**
- * Recorded for every file processed by {@link SPFxTemplateWriter}.
+ * Recorded for each non-deleted file with non-null contents processed by {@link SPFxTemplateWriter}.
  *
  * @public
  */

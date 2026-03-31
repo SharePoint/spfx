@@ -13,16 +13,17 @@ import type { IFileWriteEvent } from '../../logging/SPFxScaffoldEvent';
 function enoent(): Error {
   const err: NodeJS.ErrnoException = new Error('ENOENT: no such file or directory');
   err.code = 'ENOENT';
+  err.errno = -2;
+  err.syscall = 'open';
   return err;
 }
 
 /** Strip auto-generated timestamps from log events so snapshots are deterministic. */
 function snapshotLog(log: SPFxScaffoldLog): object[] {
   return log.events.map((e) => {
-    const copy: Record<string, unknown> = { ...e };
-    // eslint-disable-next-line dot-notation
-    delete copy['timestamp'];
-    return copy;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { timestamp, ...rest } = e;
+    return rest;
   });
 }
 

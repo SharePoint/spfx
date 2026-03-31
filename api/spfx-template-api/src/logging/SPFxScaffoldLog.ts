@@ -33,8 +33,10 @@ export class SPFxScaffoldLog {
    * it will be replaced with the current ISO 8601 timestamp.
    */
   public append(event: SPFxScaffoldEventInput): void {
-    const timestamp: string = event.timestamp || new Date().toISOString();
-    this._events.push({ ...event, timestamp } as SPFxScaffoldEvent);
+    if (!event.timestamp) {
+      event.timestamp = new Date().toISOString();
+    }
+    this._events.push(event as SPFxScaffoldEvent);
   }
 
   /** All events in insertion order (returns a defensive shallow copy). */
