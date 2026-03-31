@@ -137,9 +137,9 @@ export class CreateGitHubReleasesAction extends CommandLineAction {
               terminal.writeLine(`Release already exists for ${tag}; skipping.`);
               return;
             }
-
-            throw e;
           }
+
+          throw e;
         }
       },
       { concurrency: 5 }
