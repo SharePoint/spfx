@@ -24,6 +24,10 @@ parameters:
     displayName: 'Create GitHub Tags and Releases'
     type: boolean
     default: true
+  - name: SkipNpmTagVerification
+    displayName: 'Skip NPM Tag Verification'
+    type: boolean
+    default: false
   - name: CommitShaOverride
     displayName: 'Commit SHA Override (for testing)'
     type: string
@@ -188,14 +192,14 @@ extends:
                   npmTag: ${{ parameters.NpmTag }}
                   dryRun: ${{ parameters.DryRun }}
 
-              - task: CmdLine@2
-                inputs:
-                  script: >-
-                    node "$(RepoToolboxBundlePath)" verify-npm-tag
-                    --packages-path "$(PackagesPath)"
-                    --npm-tag "${{ parameters.NpmTag }}"
-                condition: and(succeeded(), not(${{ parameters.DryRun }}))
-                displayName: 'Verify NPM tag versions'
+              - ${{ if and(not(parameters.DryRun), not(parameters.SkipNpmTagVerification)) }}:
+                  - task: CmdLine@2
+                    inputs:
+                      script: >-
+                        node "$(RepoToolboxBundlePath)" verify-npm-tag
+                        --packages-path "$(PackagesPath)"
+                        --npm-tag "${{ parameters.NpmTag }}"
+                    displayName: 'Verify NPM tag versions'
 
       - ${{ if and(parameters.CreateGitHubTagsAndReleases, not(parameters.DryRun)) }}:
           - stage: Tag
@@ -203,7 +207,6 @@ extends:
             dependsOn:
               - Prepare
               - Publish
-            condition: succeeded('Publish')
             jobs:
               - job: TagPublishedPackages
                 displayName: 'Tag Published SPFx Packages'
