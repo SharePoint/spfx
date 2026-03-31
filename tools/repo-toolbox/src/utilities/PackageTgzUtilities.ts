@@ -34,16 +34,20 @@ export async function readChangelogSectionFromTgzAsync(
   }
 
   const lines: string[] = stdout.split(/\r?\n/);
-  const sectionStart: number = lines.findIndex((line) => line.startsWith(`## ${version}`));
+  const sectionStart: number = lines.findIndex((line) => line.trim() === `## ${version}`);
   if (sectionStart === -1) {
     return undefined;
   }
 
-  const nextSectionStart: number = lines.findIndex(
-    (line, index) => index > sectionStart && line.startsWith('## ')
-  );
-  const sectionLines: string[] =
-    nextSectionStart === -1 ? lines.slice(sectionStart + 1) : lines.slice(sectionStart + 1, nextSectionStart);
+  const sectionLines: string[] = [];
+  for (let i: number = sectionStart + 1; i < lines.length; i++) {
+    const line: string | undefined = lines[i];
+    if (line === undefined || line.startsWith('## ')) {
+      break;
+    }
+
+    sectionLines.push(line);
+  }
 
   return sectionLines.join('\n').trim() || undefined;
 }
