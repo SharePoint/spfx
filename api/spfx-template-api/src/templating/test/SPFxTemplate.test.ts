@@ -1,7 +1,20 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-jest.mock('@rushstack/node-core-library');
+jest.mock('@rushstack/node-core-library', () => {
+  const actual = jest.requireActual('@rushstack/node-core-library');
+  return {
+    ...actual,
+    FileSystem: {
+      readFileAsync: jest.fn(),
+      readFileToBufferAsync: jest.fn(),
+      readFolderItemsAsync: jest.fn()
+    },
+    Async: {
+      forEachAsync: jest.fn()
+    }
+  };
+});
 
 import type { TemplateFileSystem } from '../../writing/TemplateFileSystem';
 
