@@ -28,7 +28,8 @@
     // Allow importing JSON files as modules
     "resolveJsonModule": true,
 
-    // TODO: Remove when mem-fs-editor is removed.
+    // Required because @microsoft/spfx-heft-plugins ships broken .d.ts files
+    // that reference internal modules (@msinternal/spfx-manifests-file, etc.)
     "skipLibCheck": true,
 
     // Type Definitions - Add Node types

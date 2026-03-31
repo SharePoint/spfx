@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 
-import type { MemFsEditor } from 'mem-fs-editor';
+import { Async, FileSystem, Path } from '@rushstack/node-core-library';
 
-import { FileSystem } from '@rushstack/node-core-library';
-
+import type { TemplateOutput } from './TemplateOutput';
 import type { IMergeHelper } from './IMergeHelper';
 import { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 import { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';
@@ -15,12 +14,6 @@ import { ServeJsonMergeHelper } from './ServeJsonMergeHelper';
 import type { SPFxScaffoldLog } from '../logging/SPFxScaffoldLog';
 import type { FileWriteOutcome } from '../logging/SPFxScaffoldEvent';
 
-interface IDumpEntry {
-  // eslint-disable-next-line @rushstack/no-new-null
-  contents: string | null;
-  state?: string;
-}
-
 /**
  * Options for {@link SPFxTemplateWriter.writeAsync}.
  *
@@ -28,8 +21,8 @@ interface IDumpEntry {
  */
 export interface IWriteOptions {
   /**
-   * When provided, a `file-write` event is appended for each file that is actually written
-   * (that is, for non-deleted entries with non-null contents) during the write phase.
+   * When provided, a `file-write` event is appended for each non-deleted file with
+   * non-null contents processed during the write phase.
    */
   log?: SPFxScaffoldLog;
 }
@@ -81,61 +74,92 @@ export class SPFxTemplateWriter {
    * routed through their corresponding merge helper (if one is registered).
    * New files are written directly.
    *
-   * @param editor - The MemFsEditor containing rendered template files
+   * @param templateOutput - The rendered template output containing files to write
    * @param targetDir - The absolute path to the destination directory
    * @param options - Optional settings including a scaffold log to record file outcomes
    */
-  public async writeAsync(editor: MemFsEditor, targetDir: string, options?: IWriteOptions): Promise<void> {
+  public async writeAsync(
+    templateOutput: TemplateOutput,
+    targetDir: string,
+    options?: IWriteOptions
+  ): Promise<void> {
+    const resolvedTargetDir: string = Path.convertToSlashes(path.resolve(targetDir));
     const log: SPFxScaffoldLog | undefined = options?.log;
 
-    // editor.dump(targetDir) returns keys as paths relative to targetDir
-    const dump: Record<string, IDumpEntry> = editor.dump(targetDir);
+    await Async.forEachAsync(
+      templateOutput.files,
+      async ([rawRelativePath, entry]) => {
+        const relativePath: string = Path.convertToSlashes(rawRelativePath).replace(/^\/+/, '');
 
-    for (const [rawPath, entry] of Object.entries(dump)) {
-      // Normalize Windows backslash separators so merge-helper lookup works cross-platform
-      const relativePath: string = rawPath.replace(/\\/g, '/');
-      if (entry.state === 'deleted') {
-        continue;
-      }
+        // Guard against path traversal
+        const absolutePath: string = Path.convertToSlashes(path.resolve(targetDir, relativePath));
+        if (!absolutePath.startsWith(resolvedTargetDir + '/')) {
+          throw new Error(`Template path "${rawRelativePath}" escapes the target directory`);
+        }
 
-      if (entry.contents === null) {
-        continue;
-      }
+        await this._writeFileAsync(relativePath, absolutePath, entry.contents, log);
+      },
+      { concurrency: 50 }
+    );
+  }
 
-      const absolutePath: string = `${targetDir}/${relativePath}`;
-
-      let existingContent: string;
+  private async _writeFileAsync(
+    relativePath: string,
+    absolutePath: string,
+    contents: string | Buffer,
+    log?: SPFxScaffoldLog
+  ): Promise<void> {
+    let contentToWrite: string | Buffer | undefined;
+    if (typeof contents !== 'string') {
+      // Binary file — skip if identical file already exists on disk
+      let existingBuffer: Buffer | undefined;
       try {
-        existingContent = await readFile(absolutePath, 'utf-8');
+        existingBuffer = await FileSystem.readFileToBufferAsync(absolutePath);
       } catch (error) {
-        if (FileSystem.isNotExistError(error as Error)) {
-          // File does not exist — new file, let commit write it as-is
-          _logFileWrite(log, relativePath, 'new');
-          continue;
-        } else {
+        if (!FileSystem.isNotExistError(error)) {
           throw error;
         }
       }
 
-      // File already exists on disk — attempt merge if content differs
-      if (existingContent === entry.contents) {
+      if (existingBuffer === undefined) {
+        contentToWrite = contents;
+        _logFileWrite(log, relativePath, 'new');
+      } else if (!existingBuffer.equals(contents)) {
+        contentToWrite = contents;
+        _logFileWrite(log, relativePath, 'new');
+      } else {
         _logFileWrite(log, relativePath, 'unchanged');
-        continue;
+      }
+    } else {
+      // Text file — attempt merge with existing content on disk
+      let existingContent: string | undefined;
+      try {
+        existingContent = await FileSystem.readFileAsync(absolutePath);
+      } catch (error) {
+        if (!FileSystem.isNotExistError(error)) {
+          throw error;
+        }
       }
 
-      const helper: IMergeHelper | undefined = this._mergeHelpers.get(relativePath);
-      if (helper) {
-        const mergedContent: string = helper.merge(existingContent, entry.contents);
-        editor.write(absolutePath, mergedContent);
-        _logFileWrite(log, relativePath, 'merged', helper.fileRelativePath);
+      if (existingContent === undefined) {
+        contentToWrite = contents;
+        _logFileWrite(log, relativePath, 'new');
+      } else if (existingContent !== contents) {
+        const helper: IMergeHelper | undefined = this._mergeHelpers.get(relativePath);
+        if (helper) {
+          contentToWrite = helper.merge(existingContent, contents);
+          _logFileWrite(log, relativePath, 'merged', helper.fileRelativePath);
+        } else {
+          // No merge helper and content differs — preserve existing content (skip writing)
+          _logFileWrite(log, relativePath, 'preserved');
+        }
       } else {
-        // No merge helper and content differs — preserve the existing version
-        // by writing it into the editor so commit() does not overwrite it.
-        editor.write(absolutePath, existingContent);
-        _logFileWrite(log, relativePath, 'preserved');
+        _logFileWrite(log, relativePath, 'unchanged');
       }
     }
 
-    await editor.commit();
+    if (contentToWrite !== undefined) {
+      await FileSystem.writeFileAsync(absolutePath, contentToWrite, { ensureFolderExists: true });
+    }
   }
 }

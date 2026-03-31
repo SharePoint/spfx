@@ -38,7 +38,9 @@ export {
   PackageSolutionJsonMergeHelper,
   ServeJsonMergeHelper,
   SPFxTemplateWriter,
-  type IWriteOptions
+  type IWriteOptions,
+  type ITemplateOutputEntry,
+  TemplateOutput
 } from './writing/index';
 export {
   type ISPFxScaffoldEventBase,

@@ -43,12 +43,6 @@ importers:
       lodash:
         specifier: ^4.17.23
         version: 4.17.23
-      mem-fs:
-        specifier: ^4.1.2
-        version: 4.1.4
-      mem-fs-editor:
-        specifier: ^11.1.4
-        version: 11.1.4(mem-fs@4.1.4)
       semver:
         specifier: ~7.7.4
         version: 7.7.4
@@ -95,9 +89,6 @@ importers:
       lodash:
         specifier: ^4.17.23
         version: 4.17.23
-      mem-fs-editor:
-        specifier: ^11.1.4
-        version: 11.1.4(mem-fs@4.1.4)
       uuid:
         specifier: ^11.0.5
         version: 11.1.0

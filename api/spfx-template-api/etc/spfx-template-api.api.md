@@ -6,7 +6,6 @@
 
 import type { ITerminal } from '@rushstack/terminal';
 import { JsonObject } from '@rushstack/node-core-library';
-import type { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
 
 // @public
@@ -119,6 +118,11 @@ export interface ISPFxTemplateJson {
 }
 
 // @public
+export interface ITemplateOutputEntry {
+    readonly contents: string | Buffer;
+}
+
+// @public
 export interface ITemplateRenderedEvent extends ISPFxScaffoldEventBase {
     // (undocumented)
     cliVersion: string;
@@ -221,7 +225,7 @@ export class SPFxTemplate {
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
     get minimumEngineVersion(): string | undefined;
     get name(): string;
-    renderAsync(context: object, destinationDir: string, options?: IRenderOptions): Promise<MemFsEditor>;
+    renderAsync(context: object, options?: IRenderOptions): Promise<TemplateOutput>;
     get spfxVersion(): string;
     toString(): string;
     get unknownFields(): readonly string[];
@@ -274,7 +278,14 @@ export type SPFxTemplateRepositorySourceKind = 'local' | 'github';
 export class SPFxTemplateWriter {
     constructor();
     addMergeHelper(helper: IMergeHelper): void;
-    writeAsync(editor: MemFsEditor, targetDir: string, options?: IWriteOptions): Promise<void>;
+    writeAsync(templateOutput: TemplateOutput, targetDir: string, options?: IWriteOptions): Promise<void>;
+}
+
+// @public
+export class TemplateOutput {
+    get files(): ReadonlyMap<string, ITemplateOutputEntry>;
+    read(relativePath: string): string | Buffer | undefined;
+    write(relativePath: string, contents: string | Buffer): void;
 }
 
 ```

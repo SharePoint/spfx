@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { MemFsEditor } from 'mem-fs-editor';
 import * as ejs from 'ejs';
 import * as z from 'zod';
 
-import { Async, FileSystem, type IPackageJson, type FolderItem } from '@rushstack/node-core-library';
+import { Async, FileSystem, Path, type IPackageJson, type FolderItem } from '@rushstack/node-core-library';
 
 import {
   SPFxTemplateJsonFile,
@@ -15,6 +14,7 @@ import {
 } from './SPFxTemplateJsonFile';
 import { createCasedString, type ICasedString } from './CasedString';
 import { isBinaryFile } from './binaryFiles';
+import { TemplateOutput } from '../writing/TemplateOutput';
 
 /**
  * @public
@@ -193,16 +193,12 @@ export class SPFxTemplate {
   }
 
   /**
-   * Renders the template with the provided context object and writes to a destination directory.
+   * Renders the template with the provided context object.
    * @param context - The context object containing variables to be used in template rendering
-   * @param destinationDir - The destination directory where rendered files will be written
-   * @returns A Promise that resolves to a MemFsEditor instance containing the rendered files
+   * @param options - Optional render options
+   * @returns A Promise that resolves to a TemplateOutput containing the rendered files
    */
-  public async renderAsync(
-    context: object,
-    destinationDir: string,
-    options?: IRenderOptions
-  ): Promise<MemFsEditor> {
+  public async renderAsync(context: object, options?: IRenderOptions): Promise<TemplateOutput> {
     // Validate the context object against the template's contextSchema (if declared).
     // Validation runs on the raw (pre-wrap) context so schema types remain simple strings.
     if (this._definition.contextSchema) {
@@ -222,13 +218,11 @@ export class SPFxTemplate {
 
     // Wrap every plain-string value in the context with ICasedString so templates
     // can access casing variants (e.g. <%= componentName.pascal %>) for free.
-    // Also pre-compute a flat list of dotted-key → string entries for filename
-    // placeholder replacement (e.g. {componentName.pascal} → "HelloWorld").
+    // Also pre-compute a flat list of dotted-key -> string entries for filename
+    // placeholder replacement (e.g. {componentName.pascal} -> "HelloWorld").
     const { ejsContext, flatEntries } = _buildRenderContext(context);
 
-    const { create: createMemFs } = await import('mem-fs');
-    const { create: createEditor } = await import('mem-fs-editor');
-    const memFs: MemFsEditor = createEditor(createMemFs());
+    const templateFs: TemplateOutput = new TemplateOutput();
 
     for (const [filename, contents] of this._files) {
       // Render the filename by replacing {key} and {key.property} placeholders
@@ -237,8 +231,9 @@ export class SPFxTemplate {
         const placeholder: string = `{${dottedKey}}`;
         renderedFilename = renderedFilename.split(placeholder).join(value);
       }
+      // Normalize to relative POSIX path: convert backslashes and strip leading slashes
+      renderedFilename = Path.convertToSlashes(renderedFilename).replace(/^\/+/, '');
 
-      const destination: string = `${destinationDir}/${renderedFilename}`;
       if (typeof contents === 'string') {
         // Process text file contents as EJS template
         let rendered: string = ejs.render(contents, ejsContext, {
@@ -246,18 +241,21 @@ export class SPFxTemplate {
           cache: false
         });
 
-        if (!options?.retainPhaseScripts && renderedFilename.endsWith('/package.json')) {
+        if (
+          !options?.retainPhaseScripts &&
+          (renderedFilename === 'package.json' || renderedFilename.endsWith('/package.json'))
+        ) {
           rendered = _stripPhaseScripts(rendered);
         }
 
-        memFs.write(destination, rendered);
+        templateFs.write(renderedFilename, rendered);
       } else {
         // Binary files are written as-is without EJS processing
-        memFs.write(destination, contents);
+        templateFs.write(renderedFilename, contents);
       }
     }
 
-    return memFs;
+    return templateFs;
   }
 
   /**
