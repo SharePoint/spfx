@@ -32,12 +32,14 @@ export class VerifyNpmTagAction extends CommandLineAction {
     });
 
     this._terminal = terminal;
+
     this._packagesPathParameter = this.defineStringParameter({
       parameterLongName: '--packages-path',
       argumentName: 'PATH',
       description: 'Path to directory containing .tgz package files.',
       required: true
     });
+
     this._npmTagParameter = this.defineStringParameter({
       parameterLongName: '--npm-tag',
       argumentName: 'TAG',
