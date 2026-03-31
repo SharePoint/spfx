@@ -35,3 +35,4 @@ Please keep PRs focused — one logical change per PR. Ensure your fork is up to
 - [Setting up your dev environment](common/docs/setting-up-your-dev-environment.md) — Node.js, Rush, first-time setup
 - [Building and testing](common/docs/building-and-testing.md) — build commands, snapshot testing, change logs
 - [Creating a new template](common/docs/creating-a-new-template.md) — template workflow, variables, registration
+- [Branching and release strategy](common/docs/branching-and-release-strategy.md) — branch naming, version mapping, hotfix workflow
