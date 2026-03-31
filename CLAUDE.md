@@ -188,6 +188,171 @@ The two published packages each have a README that is displayed on NPM:
 
 These READMEs are written for NPM viewers — keep them practical and example-driven. Do not add internal monorepo details or contributor instructions.
 
+## Coding Standards
+
+These coding standards reflect the project's established conventions and must be followed exactly.
+
+### Use `@rushstack/node-core-library` Instead of Raw Node.js APIs
+
+This is the single most important coding convention in this repo. **Never** use raw `fs`, `path.join`, `JSON.parse`, or `child_process` when a `node-core-library` utility exists. **Prefer async filesystem operations** (`readFileAsync`, `writeFileAsync`, `readFolderItemsAsync`) over their sync counterparts.
+
+| Instead of | Use |
+|---|---|
+| `fs.readFile(p)` / `fs.readFileSync(p)` | `FileSystem.readFileAsync(p)` |
+| `fs.readFile(p)` (binary) | `FileSystem.readFileToBufferAsync(p)` |
+| `fs.readdir(p)` / `fs.readdirSync(p)` | `FileSystem.readFolderItemsAsync(p)` |
+| `fs.writeFile(p, data)` / `fs.writeFileSync(p, data)` | `FileSystem.writeFileAsync(p, content, { ensureFolderExists: true })` |
+| `(error as any)?.code !== 'ENOENT'` | `FileSystem.isNotExistError(error)` |
+| `JSON.parse(text)` | `JsonFile.parseString(text)` (preserves comments via `jju`) |
+| `JSON.stringify(obj)` | `JsonFile.updateString(original, obj)` (preserves comments and formatting) |
+| `path.join(a, b, c)` | `` `${a}/${b}/${c}` `` (template strings — faster, works on Windows) |
+| `path.relative(a, b).replace(/\\/g, '/')` | `Path.convertToSlashes(path.relative(a, b))` |
+| `child_process.spawn(...)` | `Executable.spawn(...)` or `Executable.spawnSync(...)` |
+| `const pkg = require('../package.json')` | `import pkg from '../package.json'` (enable `resolveJsonModule` in the rig) |
+
+**Why**: `JsonFile.parseString` uses `jju` under the hood. If a developer puts a comment in their `config.json` (which SPFx has always allowed), raw `JSON.parse` will throw. `FileSystem` also handles edge cases (encodings, newlines, folder creation) that raw `fs` does not.
+
+### Use `import` Instead of `require()`
+
+Always use static `import` statements. Never use `require()` for JSON files — use `import pkg from '../package.json'` with `resolveJsonModule` enabled in the rig (not in individual project tsconfigs). For package version access:
+
+```ts
+// WRONG
+const CLI_VERSION: string = (require('../../../package.json') as { version: string }).version;
+
+// RIGHT
+import packageJson from '../../../package.json';
+const CLI_VERSION: string = packageJson.version;
+```
+
+### Import Types from Existing Packages — Never Duplicate
+
+**Type duplication is a bad practice**, especially for complex types. Import types from their source packages:
+
+| Type | Import from |
+|---|---|
+| `IConfigJson` | `@microsoft/spfx-heft-plugins` |
+| `IServeJson` (`_ISpfxServe`) | `@microsoft/spfx-heft-plugins` |
+| `IPackageJson` | `@rushstack/node-core-library` |
+| `IPackageSolutionJson` | `@microsoft/spfx-heft-plugins` |
+
+Similarly, import shared constants (like `BINARY_EXTENSIONS`) from their source module rather than maintaining "keep in sync" comments.
+
+### Template Strings Over `path.join`
+
+Use template literals for path construction. `path.join` is slow and provides no benefit when paths are known to use forward slashes:
+
+```ts
+// WRONG
+const filePath = path.join(tempDir, 'config', 'package-solution.json');
+
+// RIGHT
+const filePath = `${tempDir}/config/package-solution.json`;
+```
+
+### TypeScript Patterns
+
+- **Prefer `interface` + factory function over `class`** when there is no behavior (no methods that use `this`). For example, `CasedString` should be an `ICasedString` interface with a `createCasedString()` factory.
+- **Avoid ad-hoc `instanceof` checks for domain types** — they are expensive. Prefer discriminated unions or explicit `kind` fields, and track types through the data flow when you control construction. `instanceof Error` for error narrowing is fine.
+- **Use `Map` over object records** for dynamic key/value data. Maps are more performant.
+- **Use `IRequiredCommandLineChoiceParameter<T>`** for required choice parameters to avoid runtime casts.
+- **Prefer `T | undefined` with `?.`** over definite assignment assertions (`!:`). Use optional chaining:
+  ```ts
+  // WRONG
+  private _button!: HTMLButtonElement;
+  this._button.removeEventListener('click', handler);
+
+  // RIGHT
+  private _button: HTMLButtonElement | undefined;
+  this._button?.removeEventListener('click', handler);
+  ```
+- **Always use `override` keyword** on overridden methods:
+  ```ts
+  protected override async onExecuteAsync(): Promise<void> { ... }
+  ```
+- **Use `async`/`await`** instead of `.then()` chains.
+- **Don't use `!!` for boolean coercion** — just use `if (value)` directly.
+
+### Code Organization
+
+- **Extract shared parameters into base classes.** If two CLI actions share parameters (e.g., `--local-source`, `--remote-source`, `--spfx-version`), put them in a shared base class. Don't duplicate between `CreateAction` and `ListTemplatesAction`.
+- **Use standalone functions instead of private methods** when the function doesn't need `this`. Make it a module-level function.
+- **Reference parameter long names from definitions** — don't repeat string literals:
+  ```ts
+  // WRONG
+  terminal.writeWarningLine('--spfx-version is ignored when --local-template is specified.');
+
+  // RIGHT
+  terminal.writeWarningLine(
+    `${this._spfxVersionParameter.longName} is ignored when ${this._localSourceParameter.longName} is specified.`
+  );
+  ```
+- **Shared test constants** go in a shared constants file to be reused across test files.
+- **Config belongs in the rig**, not in individual projects. Don't add `resolveJsonModule`, `staticAssetsToCopy`, or similar settings to individual `tsconfig.json` files when the rig should own them.
+- **Consider async-loading heavy dependencies** (like `cli-table3`) in CLI actions.
+
+### Test Conventions
+
+- **Use `toMatchSnapshot()`** for complex output assertions. Prefer snapshots over inline assertions for JSON structures, terminal output, and merge results. Use inline snapshots (`toMatchInlineSnapshot()`) when you want the value in the test file.
+- **Use `ClassName.name` in describe blocks** for refactor safety:
+  ```ts
+  describe(SPFxTemplateWriter.name, () => {
+    describe(SPFxTemplateWriter.prototype.addMergeHelper.name, () => {
+  ```
+- **Use jest mocks that auto-reset** instead of manual cleanup like `delete process.env.X`. Use `jest.replaceProperty()` or mock the env object.
+- **Mock network calls** — never wait for real network timeouts in tests.
+- **Include snapshot tests for terminal output** when testing CLI actions.
+- **Configure template folders as inputs** in `rush-project.json` for test phases that depend on them.
+
+### Template and Example Standards
+
+- **Sort `dependencies` and `devDependencies` alphabetically** in `package.json`.
+- **Don't include direct dependencies that come from the rig** (e.g., `css-loader`, `@typescript-eslint/parser`, `@types/webpack-env`, `@types/heft-jest`, `@microsoft/spfx-heft-plugins`).
+- **Remove config files that are redundant with `rig.json`** (e.g., `config/sass.json`, `config/typescript.json` when their values are defaults).
+- **Localize hardcoded UI strings** using the `loc/` pattern.
+- **Use `import` for images**, not `require()`.
+- **`.scss.ts` and `images.d.ts` files** should be generated by Heft plugins, not checked into the repo.
+- **`.npmignore` should exclude `*.test.*` files** and be comprehensive.
+- **Use descriptive dummy GUIDs in CI mode** — all `1`s, `2`s, and `3`s (e.g., `11111111-1111-1111-1111-111111111111`) to make it obvious they're not real values.
+
+### JSDoc Style
+
+Use `@remarks` for additional context in JSDoc:
+
+```ts
+/**
+ * Present only when `outcome` is `'merged'`.
+ */
+// WRONG — use @remarks for supplementary info:
+
+/**
+ * @remarks
+ * Present only when `outcome` is `'merged'`.
+ */
+// RIGHT
+```
+
+### Error Handling
+
+- **Collect and report all errors at once** instead of throwing on the first one, when validating multiple fields (e.g., package.json dependency conflicts).
+- **Be context-aware in error messages** — reference the specific package name (`@microsoft/spfx-cli` vs `@microsoft/spfx-template-api`) based on how the API is being invoked.
+
+### Merge Logic
+
+- **Don't create empty objects** for properties that aren't defined in either source during JSON merges. Check for existence before including:
+  ```ts
+  // WRONG — creates empty objects for missing properties
+  const merged = { bundles: {}, localizedResources: {}, externals: {}, ...existing, ...incoming };
+
+  // RIGHT — only include properties that exist
+  const merged: Partial<IConfigJson> = { ...existing, ...incoming };
+  ```
+
+### Change Log Discipline
+
+- All change files go under `common/changes/@microsoft/spfx-cli/` — **never** create a separate change file for `@microsoft/spfx-template-api` (its version is driven by the CLI package).
+- Pre-1.0: always use `"type": "none"` with `"comment": ""`.
+
 ## Important Notes
 
 1. **Always use the correct Node version** - This is the #1 cause of build failures
