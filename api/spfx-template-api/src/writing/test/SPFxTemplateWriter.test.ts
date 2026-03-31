@@ -159,7 +159,7 @@ describe(SPFxTemplateWriter.name, () => {
     expect(mockFileSystem.writeFileAsync).not.toHaveBeenCalled();
   });
 
-  it('should write binary files directly without merge', async () => {
+  it('should write new binary files to disk', async () => {
     const buffer = Buffer.from([0x89, 0x50, 0x4e, 0x47]);
     templateFs.write('assets/logo.png', buffer);
     mockFileSystem.readFileToBufferAsync.mockRejectedValue(
@@ -171,6 +171,32 @@ describe(SPFxTemplateWriter.name, () => {
 
     expect(mockFileSystem.writeFileAsync).toHaveBeenCalledWith(expect.stringContaining('logo.png'), buffer);
     expect(mockFileSystem.ensureFolderAsync).toHaveBeenCalled();
+  });
+
+  it('should overwrite binary files when content differs', async () => {
+    const newBuffer = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d]);
+    const existingBuffer = Buffer.from([0x89, 0x50, 0x4e, 0x47]);
+    templateFs.write('assets/logo.png', newBuffer);
+    mockFileSystem.readFileToBufferAsync.mockResolvedValue(existingBuffer);
+
+    const writer = new SPFxTemplateWriter();
+    await writer.writeAsync(templateFs, '/target');
+
+    expect(mockFileSystem.writeFileAsync).toHaveBeenCalledWith(
+      expect.stringContaining('logo.png'),
+      newBuffer
+    );
+  });
+
+  it('should skip binary files when content is identical', async () => {
+    const buffer = Buffer.from([0x89, 0x50, 0x4e, 0x47]);
+    templateFs.write('assets/logo.png', buffer);
+    mockFileSystem.readFileToBufferAsync.mockResolvedValue(Buffer.from([0x89, 0x50, 0x4e, 0x47]));
+
+    const writer = new SPFxTemplateWriter();
+    await writer.writeAsync(templateFs, '/target');
+
+    expect(mockFileSystem.writeFileAsync).not.toHaveBeenCalled();
   });
 
   describe('error propagation', () => {

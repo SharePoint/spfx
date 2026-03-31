@@ -107,7 +107,7 @@ const templates = await manager.getTemplatesAsync();
 
 ## Writing to disk
 
-`SPFxTemplateWriter` writes the in-memory `TemplateFileSystem` to the target directory. When scaffolding into an existing SPFx solution, it merges generated content into existing files rather than overwriting them.
+`SPFxTemplateWriter` writes the in-memory `TemplateFileSystem` to the target directory. When scaffolding into an existing SPFx solution, it intelligently merges known config files (package.json, serve.json, etc.) via registered merge helpers. Unregistered text files that already exist on disk are preserved; binary files and new files are written directly.
 
 ```typescript
 const writer = new SPFxTemplateWriter();
