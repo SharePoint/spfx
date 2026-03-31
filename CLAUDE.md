@@ -194,15 +194,14 @@ These coding standards reflect the project's established conventions and must be
 
 ### Use `@rushstack/node-core-library` Instead of Raw Node.js APIs
 
-This is the single most important coding convention in this repo. **Never** use raw `fs`, `path.join`, `JSON.parse`, or `child_process` when a `node-core-library` utility exists.
+This is the single most important coding convention in this repo. **Never** use raw `fs`, `path.join`, `JSON.parse`, or `child_process` when a `node-core-library` utility exists. **Prefer async filesystem operations** (`readFileAsync`, `writeFileAsync`, `readFolderItemsAsync`) over their sync counterparts.
 
 | Instead of | Use |
 |---|---|
-| `fs.readFileSync(p)` / `readFile(p)` | `FileSystem.readFileAsync(p)` or `FileSystem.readFile(p)` |
-| `fs.readFileSync(p)` (binary) | `FileSystem.readFileToBufferAsync(p)` |
-| `fs.readdirSync(p)` | `FileSystem.readFolderItemsAsync(p)` |
-| `fs.writeFileSync(p, data)` | `FileSystem.writeFile(p, { content })` |
-| `fs.mkdirSync(p, { recursive: true })` | `FileSystem.ensureFolder(p)` |
+| `fs.readFile(p)` / `fs.readFileSync(p)` | `FileSystem.readFileAsync(p)` |
+| `fs.readFile(p)` (binary) | `FileSystem.readFileToBufferAsync(p)` |
+| `fs.readdir(p)` / `fs.readdirSync(p)` | `FileSystem.readFolderItemsAsync(p)` |
+| `fs.writeFile(p, data)` / `fs.writeFileSync(p, data)` | `FileSystem.writeFileAsync(p, { content, ensureFolderExists: true })` |
 | `(error as any)?.code !== 'ENOENT'` | `FileSystem.isNotExistError(error)` |
 | `JSON.parse(text)` | `JsonFile.parseString(text)` (preserves comments via `jju`) |
 | `JSON.stringify(obj)` | `JsonFile.updateString(original, obj)` (preserves comments and formatting) |
