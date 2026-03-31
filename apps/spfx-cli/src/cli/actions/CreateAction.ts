@@ -27,14 +27,13 @@ import {
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
 import { SPFxActionBase } from './SPFxActionBase';
-import packageJson from '../../../package.json';
 
 // Deterministic namespace for CI mode GUIDs, derived from the well-known URL
 // namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
 const CI_NAMESPACE: string = '035a23a9-8c9e-569b-ae00-7ff2e4c82fb0';
 const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
 
-const CLI_VERSION: string = packageJson.version;
+const CLI_VERSION: string = (require('../../../package.json') as { version: string }).version;
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];

@@ -27,7 +27,6 @@
 
     // Performance & Compatibility
     "skipLibCheck": true,
-    "resolveJsonModule": true,
 
     // Type Definitions - Add Node types
     "types": ["heft-jest", "node"],
