@@ -1,9 +1,4 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
-  "extends": "./node_modules/@microsoft/spfx-cli-build-rig/profiles/default/tsconfig-base.json",
-
-  "compilerOptions": {
-    // Some dependencies have issues. This should be removed in the future.
-    "skipLibCheck": true
-  }
+  "extends": "./node_modules/@microsoft/spfx-cli-build-rig/profiles/default/tsconfig-base.json"
 }
