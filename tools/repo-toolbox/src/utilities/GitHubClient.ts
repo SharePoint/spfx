@@ -5,7 +5,11 @@ import type { Octokit, RestEndpointMethodTypes } from '@octokit/rest';
 
 import type { ITerminal } from '@rushstack/terminal';
 
-import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from './GitUtilities';
+import {
+  getGitAuthorizationHeaderAsync,
+  getRepoSlugAsync,
+  normalizeGitHubAuthorizationHeader
+} from './GitUtilities';
 
 export type IGitHubPr = RestEndpointMethodTypes['pulls']['list']['response']['data'][number];
 export type IGitHubCreationResult = RestEndpointMethodTypes['pulls']['create']['response']['data'];
@@ -74,11 +78,7 @@ export class GitHubClient {
 
     this._octokit = new Octokit();
     this._octokit.hook.before('request', (requestOptions) => {
-      // If the value contains a space, it is already a full HTTP Authorization header value
-      // (e.g. "basic <base64>" or "token <value>"). Otherwise, treat it as a raw bearer token.
-      requestOptions.headers.authorization = authorizationHeader.includes(' ')
-        ? authorizationHeader
-        : `token ${authorizationHeader}`;
+      requestOptions.headers.authorization = normalizeGitHubAuthorizationHeader(authorizationHeader);
     });
   }
 

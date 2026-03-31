@@ -3,7 +3,11 @@
 
 import type { ITerminal } from '@rushstack/terminal';
 
-import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
+import {
+  getGitAuthorizationHeaderAsync,
+  getRepoSlugAsync,
+  normalizeGitHubAuthorizationHeader
+} from '../../utilities/GitUtilities';
 import { GitHubTokenActionBase } from './GitHubTokenActionBase';
 
 /**
@@ -42,11 +46,13 @@ export class EmitGitHubVarsAction extends GitHubTokenActionBase {
     const { value: rawToken, environmentVariable, longName } = this._githubTokenParameter;
     let authHeader: string;
     if (rawToken) {
-      // Normalize a raw bearer token to a full Authorization header value.
-      authHeader = rawToken.includes(' ') ? rawToken : `token ${rawToken}`;
+      authHeader = normalizeGitHubAuthorizationHeader(rawToken);
       terminal.writeLine(`Using ${environmentVariable} from environment or ${longName} as GitHub token`);
     } else {
-      authHeader = await getGitAuthorizationHeaderAsync(terminal);
+      // The git extraheader uses "basic base64(x-access-token:ghs_xxx)". Normalize it
+      // to "token ghs_xxx" so GitHub App installation tokens are accepted by the API.
+      const rawAuthHeader: string = await getGitAuthorizationHeaderAsync(terminal);
+      authHeader = normalizeGitHubAuthorizationHeader(rawAuthHeader);
       terminal.writeLine('Using git credential extraheader as fallback');
     }
 
