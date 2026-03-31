@@ -78,8 +78,6 @@ describe(readChangelogSectionFromTgzAsync.name, () => {
   });
 
   it('does not match a version that is a prefix of another version', async () => {
-    mockTarStdout(changelog);
-
     // '1.0.0' should not match '## 1.0.0-alpha.1' or similar
     const changelogWithPrerelease: string = [
       '# Changelog',
