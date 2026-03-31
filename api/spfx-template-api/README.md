@@ -34,25 +34,22 @@ if (!template) throw new Error('Template not found');
 
 // 2. Render to an in-memory file system
 // String values are automatically wrapped with casing helpers (e.g. componentName.pascal)
-const fs = await template.renderAsync(
-  {
-    solution_name: 'my-solution',
-    libraryName: 'my-spfx-library',
-    spfxVersion: template.spfxVersion,
-    spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
-    componentId: '<uuid>',
-    featureId: '<uuid>',
-    solutionId: '<uuid>',
-    componentAlias: 'MyWebPart',
-    componentName: 'My Web Part',
-    componentDescription: 'My Web Part description'
-  },
-  '/path/to/output'
-);
+const templateFs = await template.renderAsync({
+  solution_name: 'my-solution',
+  libraryName: 'my-spfx-library',
+  spfxVersion: template.spfxVersion,
+  spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
+  componentId: '<uuid>',
+  featureId: '<uuid>',
+  solutionId: '<uuid>',
+  componentAlias: 'MyWebPart',
+  componentName: 'My Web Part',
+  componentDescription: 'My Web Part description'
+});
 
 // 3. Write files to disk (merges into existing SPFx solutions automatically)
 const writer = new SPFxTemplateWriter();
-await writer.writeAsync(fs, '/path/to/output');
+await writer.writeAsync(templateFs, '/path/to/output');
 ```
 
 ---
@@ -110,11 +107,11 @@ const templates = await manager.getTemplatesAsync();
 
 ## Writing to disk
 
-`SPFxTemplateWriter` commits the in-memory `MemFsEditor` to the target directory. When scaffolding into an existing SPFx solution, it merges generated content into existing files rather than overwriting them.
+`SPFxTemplateWriter` writes the in-memory `TemplateOutput` to the target directory. When scaffolding into an existing SPFx solution, it intelligently merges known config files (package.json, serve.json, etc.) via registered merge helpers. Unregistered text files that already exist on disk are preserved; binary files and new files are written directly.
 
 ```typescript
 const writer = new SPFxTemplateWriter();
-await writer.writeAsync(fs, targetDir);
+await writer.writeAsync(templateFs, targetDir);
 ```
 
 ### Merge helpers
@@ -140,11 +137,13 @@ The writer uses these helpers internally. You can also import them directly for 
 | `SPFxTemplateRepositoryManager` | Aggregates sources and returns a `SPFxTemplateCollection` |
 | `SPFxTemplateCollection` | `Map<string, SPFxTemplate>` of all loaded templates |
 | `SPFxTemplate` | Single template — exposes `name`, `category`, `spfxVersion`, and `renderAsync()` |
+| `ITemplateOutputEntry` | A single file entry (text or binary contents) |
+| `TemplateOutput` | In-memory file system implementation backed by a `Map`, returned by `renderAsync()` |
 | `PublicGitHubRepositorySource` | Loads templates from a public GitHub repo |
 | `LocalFileSystemRepositorySource` | Loads templates from the local filesystem |
 | `BaseSPFxTemplateRepositorySource` | Base class for building custom template sources |
 | `SPFxRepositorySource` | Interface implemented by all source types |
-| `SPFxTemplateWriter` | Writes a rendered `MemFsEditor` to disk with merge support |
+| `SPFxTemplateWriter` | Writes a `TemplateOutput` to disk with merge support |
 | `IMergeHelper` | Interface for implementing custom merge helpers |
 | `ServeJsonMergeHelper` | Merges `config/serve.json` (also available standalone) |
 | `SPFxTemplateCategory` | Union type of template categories: `'webpart' | 'extension' | 'ace' | 'library'` |

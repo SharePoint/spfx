@@ -1,21 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 
-import type { MemFsEditor } from 'mem-fs-editor';
+import { Async, FileSystem, Path } from '@rushstack/node-core-library';
 
+import type { TemplateOutput } from './TemplateOutput';
 import type { IMergeHelper } from './IMergeHelper';
 import { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 import { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';
 import { PackageSolutionJsonMergeHelper } from './PackageSolutionJsonMergeHelper';
 import { ServeJsonMergeHelper } from './ServeJsonMergeHelper';
-
-interface IDumpEntry {
-  // eslint-disable-next-line @rushstack/no-new-null
-  contents: string | null;
-  state?: string;
-}
 
 /**
  * Orchestrates writing template output to disk, routing modified files
@@ -50,50 +45,74 @@ export class SPFxTemplateWriter {
    * routed through their corresponding merge helper (if one is registered).
    * New files are written directly.
    *
-   * @param editor - The MemFsEditor containing rendered template files
+   * @param templateOutput - The rendered template output containing files to write
    * @param targetDir - The absolute path to the destination directory
    */
-  public async writeAsync(editor: MemFsEditor, targetDir: string): Promise<void> {
-    // editor.dump(targetDir) returns keys as paths relative to targetDir
-    const dump: Record<string, IDumpEntry> = editor.dump(targetDir);
+  public async writeAsync(templateOutput: TemplateOutput, targetDir: string): Promise<void> {
+    const resolvedTargetDir: string = Path.convertToSlashes(path.resolve(targetDir));
 
-    for (const [rawPath, entry] of Object.entries(dump)) {
-      // Normalize Windows backslash separators so merge-helper lookup works cross-platform
-      const relativePath: string = rawPath.replace(/\\/g, '/');
-      if (entry.state === 'deleted') {
-        continue;
-      }
+    await Async.forEachAsync(
+      templateOutput.files,
+      async ([rawRelativePath, entry]) => {
+        const relativePath: string = Path.convertToSlashes(rawRelativePath).replace(/^\/+/, '');
 
-      if (entry.contents === null) {
-        continue;
-      }
+        // Guard against path traversal
+        const absolutePath: string = Path.convertToSlashes(path.resolve(targetDir, relativePath));
+        if (!absolutePath.startsWith(resolvedTargetDir + '/')) {
+          throw new Error(`Template path "${rawRelativePath}" escapes the target directory`);
+        }
 
-      const absolutePath: string = `${targetDir}/${relativePath}`;
+        await this._writeFileAsync(relativePath, absolutePath, entry.contents);
+      },
+      { concurrency: 50 }
+    );
+  }
 
-      let existingContent: string;
+  private async _writeFileAsync(
+    relativePath: string,
+    absolutePath: string,
+    contents: string | Buffer
+  ): Promise<void> {
+    let contentToWrite: string | Buffer | undefined;
+    if (typeof contents !== 'string') {
+      // Binary file — skip if identical file already exists on disk
+      let existingBuffer: Buffer | undefined;
       try {
-        existingContent = await readFile(absolutePath, 'utf-8');
-      } catch {
-        // File does not exist — new file, let commit write it as-is
-        continue;
+        existingBuffer = await FileSystem.readFileToBufferAsync(absolutePath);
+      } catch (error) {
+        if (!FileSystem.isNotExistError(error)) {
+          throw error;
+        }
       }
 
-      // File already exists on disk — attempt merge if content differs
-      if (existingContent === entry.contents) {
-        continue;
+      if (!existingBuffer?.equals(contents)) {
+        contentToWrite = contents;
+      }
+    } else {
+      // Text file — attempt merge with existing content on disk
+      let existingContent: string | undefined;
+      try {
+        existingContent = await FileSystem.readFileAsync(absolutePath);
+      } catch (error) {
+        if (!FileSystem.isNotExistError(error)) {
+          throw error;
+        }
       }
 
-      const helper: IMergeHelper | undefined = this._mergeHelpers.get(relativePath);
-      if (helper) {
-        const mergedContent: string = helper.merge(existingContent, entry.contents);
-        editor.write(absolutePath, mergedContent);
-      } else {
-        // No merge helper and content differs — preserve the existing version
-        // by writing it into the editor so commit() does not overwrite it.
-        editor.write(absolutePath, existingContent);
+      if (existingContent === undefined) {
+        contentToWrite = contents;
+      } else if (existingContent !== contents) {
+        const helper: IMergeHelper | undefined = this._mergeHelpers.get(relativePath);
+        if (helper) {
+          contentToWrite = helper.merge(existingContent, contents);
+        }
+
+        // Else, no merge helper and content differs — preserve existing content (skip writing)
       }
     }
 
-    await editor.commit();
+    if (contentToWrite !== undefined) {
+      await FileSystem.writeFileAsync(absolutePath, contentToWrite, { ensureFolderExists: true });
+    }
   }
 }

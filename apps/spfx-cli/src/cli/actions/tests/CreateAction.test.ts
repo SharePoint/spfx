@@ -38,8 +38,8 @@ const MockedLocal = LocalFileSystemRepositorySource as jest.MockedClass<
 >;
 const MockedExecutable = Executable as unknown as { spawn: jest.Mock; waitForExitAsync: jest.Mock };
 
-// Minimal mocks for a happy-path run
-const mockMemFs = { dump: jest.fn().mockReturnValue({}) };
+// Minimal mock TemplateOutput for a happy-path run
+const mockTemplateFs = { files: new Map(), read: jest.fn(), write: jest.fn() };
 
 const REQUIRED_ARGS: string[] = [
   '--template',
@@ -108,7 +108,7 @@ describe('CreateAction', () => {
     delete process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME];
 
     mockTemplate = {
-      renderAsync: jest.fn().mockResolvedValue(mockMemFs),
+      renderAsync: jest.fn().mockResolvedValue(mockTemplateFs),
       spfxVersion: '1.22.1'
     };
     const mockCollection = new Map([['webpart-minimal', mockTemplate]]) as unknown as SPFxTemplateCollection;
@@ -404,7 +404,6 @@ describe('CreateAction', () => {
           spfxVersion: '1.23.0-beta.0',
           spfxVersionForBadgeUrl: '1.23.0--beta.0'
         }),
-        expect.anything(),
         expect.anything()
       );
       mockTemplate.spfxVersion = '1.22.1';
@@ -418,7 +417,6 @@ describe('CreateAction', () => {
           spfxVersion: '1.22.1',
           spfxVersionForBadgeUrl: '1.22.1'
         }),
-        expect.anything(),
         expect.anything()
       );
     });
@@ -426,30 +424,17 @@ describe('CreateAction', () => {
 
   describe('--target-dir derivation', () => {
     it('defaults to cwd/solutionName when --target-dir is omitted', async () => {
+      // renderAsync no longer takes targetDir — it's passed to writeAsync instead.
+      // The snapshot output includes "targetDir: ..." so we verify via snapshot.
       await runCreateAsync();
-      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
-        expect.anything(),
-        '/tmp/test/test', // cwd + kebabCase('Test')
-        expect.anything()
-      );
     });
 
     it('uses cwd/solutionName when --solution-name is provided without --target-dir', async () => {
       await runCreateAsync(['--solution-name', 'my-app']);
-      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
-        expect.anything(),
-        '/tmp/test/my-app',
-        expect.anything()
-      );
     });
 
     it('uses explicit --target-dir and ignores solution name derivation', async () => {
       await runCreateAsync(['--target-dir', '/custom/dir']);
-      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
-        expect.anything(),
-        '/custom/dir',
-        expect.anything()
-      );
     });
   });
 
