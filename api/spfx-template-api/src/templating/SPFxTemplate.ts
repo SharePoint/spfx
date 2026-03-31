@@ -4,7 +4,7 @@
 import * as ejs from 'ejs';
 import * as z from 'zod';
 
-import { Async, FileSystem, type IPackageJson, type FolderItem } from '@rushstack/node-core-library';
+import { Async, FileSystem, Path, type IPackageJson, type FolderItem } from '@rushstack/node-core-library';
 
 import {
   SPFxTemplateJsonFile,
