@@ -54,7 +54,7 @@ export class CreateGitHubReleasesAction extends CommandLineAction {
       argumentName: 'TOKEN',
       environmentVariable: 'GITHUB_TOKEN',
       description:
-        'GitHub Authorization header value for creating releases (format: `basic <base64>` as emitted by emit-github-vars-and-tag-build).',
+        'GitHub token for creating releases. Accepts a raw installation token (e.g. `ghs_xxx`) or a full Authorization header value (e.g. `basic <base64>`).',
       required: true
     });
 

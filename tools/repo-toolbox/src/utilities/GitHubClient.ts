@@ -74,7 +74,11 @@ export class GitHubClient {
 
     this._octokit = new Octokit();
     this._octokit.hook.before('request', (requestOptions) => {
-      requestOptions.headers.authorization = authorizationHeader;
+      // If the value contains a space, it is already a full HTTP Authorization header value
+      // (e.g. "basic <base64>" or "token <value>"). Otherwise, treat it as a raw bearer token.
+      requestOptions.headers.authorization = authorizationHeader.includes(' ')
+        ? authorizationHeader
+        : `token ${authorizationHeader}`;
     });
   }
 

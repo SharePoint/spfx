@@ -10,11 +10,11 @@ Optional arguments:
   -h, --help            Show this help message and exit.
   --packages-path PATH  Path to directory containing .tgz package files.
   --commit-sha SHA      The commit SHA to tag.
-  --github-token TOKEN  GitHub Authorization header value for creating
-                        releases (format: \`basic <base64>\` as emitted by
-                        emit-github-vars-and-tag-build). This parameter may
-                        alternatively be specified via the GITHUB_TOKEN
-                        environment variable.
+  --github-token TOKEN  GitHub token for creating releases. Accepts a raw
+                        installation token (e.g. \`ghs_xxx\`) or a full
+                        Authorization header value (e.g. \`basic <base64>\`).
+                        This parameter may alternatively be specified via the
+                        GITHUB_TOKEN environment variable.
   --repo-slug SLUG      GitHub repository slug in the form owner/repo.
 "
 `;

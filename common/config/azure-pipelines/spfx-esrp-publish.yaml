@@ -218,8 +218,6 @@ extends:
                     value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
                   - name: BumpCommitSha
                     value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpCommitSha'] ]
-                  - name: GitHubToken
-                    value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['EmitGitHubVars.GitHubToken'] ]
                   - name: GitHubRepoSlug
                     value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['EmitGitHubVars.GitHubRepoSlug'] ]
                 steps:
@@ -251,6 +249,4 @@ extends:
                         --packages-path "$(PackagesPath)"
                         --commit-sha "$(BumpCommitSha)"
                         --repo-slug "$(GitHubRepoSlug)"
-                    env:
-                      GITHUB_TOKEN: $(GitHubToken)
                     displayName: 'Create GitHub releases'
