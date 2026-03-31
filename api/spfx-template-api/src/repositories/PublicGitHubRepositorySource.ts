@@ -97,7 +97,8 @@ export async function _createTemplateFromFileMapAsync(
  */
 export interface IPublicGitHubRepositorySourceOptions {
   /**
-   * The GitHub repository URL (e.g., https://github.com/owner/repo).
+   * The GitHub repository URL (e.g., https://github.com/owner/repo or
+   * https://github.mycompany.com/org/repo for GitHub Enterprise).
    */
   repoUrl: string;
 
@@ -110,11 +111,29 @@ export interface IPublicGitHubRepositorySourceOptions {
    * The Terminal instance for logging.
    */
   terminal: ITerminal;
+
+  /**
+   * An optional GitHub personal access token for authenticating requests.
+   * Required for most GitHub Enterprise instances and for private repositories
+   * on github.com. When provided, it is sent as an `Authorization: token <value>` header.
+   */
+  token?: string;
 }
+
+// Matches https://<host>/<owner>/<repo>[.git] — HTTPS only, host-agnostic for GHE support.
+const REPO_URL_REGEX: RegExp = /^https:\/\/([^/]+)\/([^/]+)\/([^/]+?)(\.git)?$/;
 
 /**
  * @public
- * A repository that is hosted on a public GitHub repository.
+ * A template source backed by a GitHub repository (github.com or GitHub Enterprise).
+ *
+ * For `github.com` hosts the archive is fetched from `codeload.github.com`.
+ * For GitHub Enterprise (GHE) hosts the archive is fetched via the GHE REST API
+ * (`https://<host>/api/v3/repos/<owner>/<repo>/zipball/<ref>`).
+ *
+ * An optional personal access token can be supplied via
+ * {@link IPublicGitHubRepositorySourceOptions.token} for GHE instances or
+ * private repositories on github.com.
  *
  * SECURITY NOTE: This class intentionally fetches from mutable branch references
  * (not pinned commit SHAs) to enable template updates independent of CLI releases.
@@ -136,13 +155,15 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
   private readonly _repoUrl: string;
   private readonly _ref: string;
   private readonly _terminal: ITerminal;
+  private readonly _token: string | undefined;
 
   public constructor(options: IPublicGitHubRepositorySourceOptions) {
     super('github');
-    const { repoUrl, branch, terminal } = options;
+    const { repoUrl, branch, terminal, token } = options;
     this._repoUrl = repoUrl;
     this._ref = branch || 'version/latest';
     this._terminal = terminal;
+    this._token = token;
   }
 
   /**
@@ -160,23 +181,32 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
   }
 
   private _buildDownloadUrl(): string {
-    const { owner, repo } = this._parseGitHubUrl();
-    return `https://codeload.github.com/${owner}/${repo}/zip/${this._ref}`;
+    const { host, owner, repo } = this._parseRepoUrl();
+    if (host === 'github.com') {
+      return `https://codeload.github.com/${owner}/${repo}/zip/${this._ref}`;
+    }
+    // GitHub Enterprise: use the REST API archive endpoint
+    return `https://${host}/api/v3/repos/${owner}/${repo}/zipball/${this._ref}`;
   }
 
-  private _parseGitHubUrl(): { owner: string; repo: string } {
-    // Parse URLs like: https://github.com/sharepoint/spfx or https://github.com/sharepoint/spfx.git
-    const match: RegExpMatchArray | null = this._repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+?)(\.git)?$/);
+  private _parseRepoUrl(): { host: string; owner: string; repo: string } {
+    // Parse URLs like: https://github.com/owner/repo, https://github.mycompany.com/org/repo,
+    // or the same with a .git suffix. Only HTTPS is accepted.
+    const match: RegExpMatchArray | null = this._repoUrl.match(REPO_URL_REGEX);
     if (!match) {
       throw new Error(`Invalid GitHub repository URL: ${this._repoUrl}`);
     }
 
-    const [, owner, repo] = match as [string, string, string];
-    return { owner, repo };
+    const [, host, owner, repo] = match as [string, string, string, string, string?];
+    return { host: host.toLowerCase(), owner, repo };
   }
 
   private async _downloadAndExtractRepositoryAsync(downloadUrl: string): Promise<Map<string, Buffer>> {
-    const response: Response = await fetch(downloadUrl);
+    const fetchInit: RequestInit = {};
+    if (this._token) {
+      fetchInit.headers = { Authorization: `token ${this._token}` };
+    }
+    const response: Response = await fetch(downloadUrl, fetchInit);
     if (!response.ok) {
       throw new Error(`Failed to download repository: ${response.status} ${response.statusText}`);
     }

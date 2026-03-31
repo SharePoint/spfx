@@ -49,6 +49,7 @@ export interface IPublicGitHubRepositorySourceOptions {
     branch?: string;
     repoUrl: string;
     terminal: ITerminal;
+    token?: string;
 }
 
 // @public (undocumented)

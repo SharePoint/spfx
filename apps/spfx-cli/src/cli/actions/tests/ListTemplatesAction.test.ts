@@ -17,7 +17,7 @@ const {
 } = jest.requireActual<typeof import('@microsoft/spfx-template-api')>('@microsoft/spfx-template-api');
 
 import { SPFxCommandLineParser } from '../../SPFxCommandLineParser';
-import { SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME } from '../../../utilities/github';
+import { GITHUB_TOKEN_ENV_VAR_NAME, SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME } from '../../../utilities/github';
 
 const MockedManager = SPFxTemplateRepositoryManager as jest.MockedClass<typeof SPFxTemplateRepositoryManager>;
 const MockedGitHub = PublicGitHubRepositorySource as jest.MockedClass<typeof PublicGitHubRepositorySource>;
@@ -39,6 +39,7 @@ describe('ListTemplatesAction', () => {
     jest.clearAllMocks();
     process.env = { ...originalEnv };
     delete process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME];
+    delete process.env[GITHUB_TOKEN_ENV_VAR_NAME];
 
     const template = new RealSPFxTemplate(
       new RealSPFxTemplateJsonFile({
@@ -66,7 +67,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -76,7 +78,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/my-org/my-templates',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -86,7 +89,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -97,7 +101,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal
+        terminal,
+        token: undefined
       });
     });
   });
@@ -108,7 +113,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -119,7 +125,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -130,7 +137,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'pending-fixes',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
   });
@@ -141,7 +149,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
       expect(MockedLocal).toHaveBeenCalledWith('/path/to/templates');
     });
@@ -162,12 +171,14 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenNthCalledWith(1, {
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
       expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
         repoUrl: 'https://github.com/my-org/my-templates',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -176,7 +187,8 @@ describe('ListTemplatesAction', () => {
       expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
         repoUrl: 'https://github.com/my-org/my-templates',
         branch: 'my-branch',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 

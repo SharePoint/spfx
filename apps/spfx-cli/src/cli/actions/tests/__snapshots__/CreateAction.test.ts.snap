@@ -166,6 +166,62 @@ Array [
 ]
 `;
 
+exports[`CreateAction GITHUB_TOKEN passthrough passes token to --remote-source sources 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction GITHUB_TOKEN passthrough passes token to PublicGitHubRepositorySource when GITHUB_TOKEN is set 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction GITHUB_TOKEN passthrough passes undefined token when GITHUB_TOKEN is not set 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction GITHUB_TOKEN passthrough treats whitespace-only GITHUB_TOKEN as undefined 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction GITHUB_TOKEN passthrough trims whitespace from GITHUB_TOKEN 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
 exports[`CreateAction URL /tree/ branch extraction extracts branch from /tree/ in SPFX_TEMPLATE_REPO_URL 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: pending-fixes)[n]",

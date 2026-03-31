@@ -55,6 +55,7 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 | Variable | Description |
 |----------|-------------|
 | `SPFX_TEMPLATE_REPO_URL` | Equivalent to `--template-url` |
+| `GITHUB_TOKEN` | GitHub personal access token — required for GitHub Enterprise hosts, also works for private repos on github.com |
 | `SPFX_CI_MODE=1` | Internal/testing-only: produces deterministic UUIDs for CI; not shown in `--help`; subject to change |
 
 ---
@@ -81,6 +82,7 @@ spfx list-templates
 | Variable | Description |
 |----------|-------------|
 | `SPFX_TEMPLATE_REPO_URL` | Equivalent to `--template-url` |
+| `GITHUB_TOKEN` | GitHub personal access token — required for GitHub Enterprise hosts, also works for private repos on github.com |
 
 ### Examples
 
@@ -187,6 +189,16 @@ spfx create \
   --library-name my-spfx-library \
   --component-name "My Web Part" \
   --remote-source https://github.com/my-org/my-templates
+```
+
+Use templates from a GitHub Enterprise instance:
+
+```bash
+GITHUB_TOKEN=ghp_... spfx create \
+  --template webpart-react \
+  --library-name my-spfx-library \
+  --component-name "My Web Part" \
+  --template-url https://github.mycompany.com/org/spfx-templates
 ```
 
 ---

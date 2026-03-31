@@ -3,6 +3,7 @@
 
 export const DEFAULT_GITHUB_REPO: string = 'https://github.com/SharePoint/spfx';
 export const SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME: string = 'SPFX_TEMPLATE_REPO_URL';
+export const GITHUB_TOKEN_ENV_VAR_NAME: string = 'GITHUB_TOKEN';
 
 export interface IParsedGitHubUrl {
   repoUrl: string;
@@ -15,7 +16,7 @@ export interface IParsedGitHubUrl {
  */
 export function parseGitHubUrlAndRef(rawUrl: string): IParsedGitHubUrl {
   const normalized: string = rawUrl.trim().replace(/\/+$/, '');
-  // Match https://<host>/owner/repo[.git]/tree/<ref> — host-agnostic to support GHE.
+  // Match https://<host>/owner/repo[.git]/tree/<ref> — host-agnostic so GHE URLs work.
   // Only the first path segment after /tree/ is captured as the ref. This means branch
   // names containing slashes (e.g. `feature/foo`) cannot be expressed via a /tree/ URL;
   // use the --spfx-version flag to specify such refs directly.

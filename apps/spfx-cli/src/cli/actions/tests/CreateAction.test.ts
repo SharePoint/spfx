@@ -29,7 +29,7 @@ import type { SPFxTemplateCollection } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../../utilities/validation';
 import { SPFxCommandLineParser } from '../../SPFxCommandLineParser';
-import { SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME } from '../../../utilities/github';
+import { GITHUB_TOKEN_ENV_VAR_NAME, SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME } from '../../../utilities/github';
 
 const MockedManager = SPFxTemplateRepositoryManager as jest.MockedClass<typeof SPFxTemplateRepositoryManager>;
 const MockedGitHub = PublicGitHubRepositorySource as jest.MockedClass<typeof PublicGitHubRepositorySource>;
@@ -106,6 +106,7 @@ describe('CreateAction', () => {
     jest.clearAllMocks();
     process.env = { ...originalEnv };
     delete process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME];
+    delete process.env[GITHUB_TOKEN_ENV_VAR_NAME];
 
     mockTemplate = {
       renderAsync: jest.fn().mockResolvedValue(mockTemplateFs),
@@ -129,7 +130,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenCalledWith({
           repoUrl: 'https://github.com/SharePoint/spfx',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
         expect(MockedLocal).not.toHaveBeenCalled();
       });
@@ -140,7 +142,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenCalledWith({
           repoUrl: 'https://github.com/my-org/my-templates',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
       });
 
@@ -151,7 +154,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenCalledWith({
           repoUrl: 'https://github.com/SharePoint/spfx',
           branch: undefined,
-          terminal
+          terminal,
+          token: undefined
         });
       });
     });
@@ -179,13 +183,15 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenNthCalledWith(1, {
           repoUrl: 'https://github.com/SharePoint/spfx',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
         // Second call: remote source
         expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
           repoUrl: 'https://github.com/my-org/my-templates',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
       });
 
@@ -205,7 +211,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
           repoUrl: 'https://github.com/my-org/my-templates',
           branch: 'my-branch',
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
       });
 
@@ -222,7 +229,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenCalledWith({
           repoUrl: 'https://github.com/my-org/my-templates',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
       });
     });
@@ -235,7 +243,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -245,7 +254,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -255,7 +265,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -265,7 +276,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -275,7 +287,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
   });
@@ -286,7 +299,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -296,7 +310,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/my-org/my-templates',
         branch: 'version/1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -307,7 +322,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -326,7 +342,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'pending-fixes',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -336,7 +353,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: '1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -346,7 +364,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: '1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -356,7 +375,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -367,7 +387,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.mycompany.com/org/repo',
         branch: 'my-branch',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -378,7 +399,65 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'main',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
+      });
+    });
+  });
+
+  describe('GITHUB_TOKEN passthrough', () => {
+    it('passes token to PublicGitHubRepositorySource when GITHUB_TOKEN is set', async () => {
+      process.env[GITHUB_TOKEN_ENV_VAR_NAME] = 'ghp_test_token';
+      await runCreateAsync();
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: 'ghp_test_token'
+      });
+    });
+
+    it('passes undefined token when GITHUB_TOKEN is not set', async () => {
+      await runCreateAsync();
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: undefined
+      });
+    });
+
+    it('trims whitespace from GITHUB_TOKEN', async () => {
+      process.env[GITHUB_TOKEN_ENV_VAR_NAME] = '  ghp_test_token  ';
+      await runCreateAsync();
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: 'ghp_test_token'
+      });
+    });
+
+    it('treats whitespace-only GITHUB_TOKEN as undefined', async () => {
+      process.env[GITHUB_TOKEN_ENV_VAR_NAME] = '   ';
+      await runCreateAsync();
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: undefined
+      });
+    });
+
+    it('passes token to --remote-source sources', async () => {
+      process.env[GITHUB_TOKEN_ENV_VAR_NAME] = 'ghp_test_token';
+      await runCreateAsync(['--remote-source', 'https://github.com/my-org/my-templates']);
+      // Second call is the remote source
+      expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
+        repoUrl: 'https://github.com/my-org/my-templates',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: 'ghp_test_token'
       });
     });
   });
@@ -390,7 +469,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
   });

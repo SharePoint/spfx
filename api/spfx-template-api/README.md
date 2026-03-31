@@ -58,7 +58,7 @@ await writer.writeAsync(templateFs, '/path/to/output');
 
 ### `PublicGitHubRepositorySource`
 
-Fetches templates from a public GitHub repository. Pin a specific SPFx version with an optional branch/tag ref.
+Fetches templates from a GitHub repository (github.com or GitHub Enterprise). Pin a specific SPFx version with an optional branch/tag ref. An optional `token` enables access to GitHub Enterprise instances or private repositories on github.com.
 
 ```typescript
 import { Terminal, ConsoleTerminalProvider } from '@rushstack/terminal';
@@ -71,6 +71,13 @@ new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx'
 
 // Specific version
 new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', branch: 'version/1.22', terminal });
+
+// GitHub Enterprise with authentication
+new PublicGitHubRepositorySource({
+  repoUrl: 'https://github.mycompany.com/org/spfx-templates',
+  terminal,
+  token: process.env.GITHUB_TOKEN
+});
 ```
 
 ### `LocalFileSystemRepositorySource`
@@ -139,7 +146,7 @@ The writer uses these helpers internally. You can also import them directly for 
 | `SPFxTemplate` | Single template — exposes `name`, `category`, `spfxVersion`, and `renderAsync()` |
 | `ITemplateOutputEntry` | A single file entry (text or binary contents) |
 | `TemplateOutput` | In-memory file system implementation backed by a `Map`, returned by `renderAsync()` |
-| `PublicGitHubRepositorySource` | Loads templates from a public GitHub repo |
+| `PublicGitHubRepositorySource` | Loads templates from a GitHub repo (github.com or GHE, with optional auth token) |
 | `LocalFileSystemRepositorySource` | Loads templates from the local filesystem |
 | `BaseSPFxTemplateRepositorySource` | Base class for building custom template sources |
 | `SPFxRepositorySource` | Interface implemented by all source types |
