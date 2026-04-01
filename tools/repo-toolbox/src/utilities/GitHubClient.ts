@@ -76,9 +76,10 @@ export class GitHubClient {
 
     this._octokitCommonOptions = { owner, repo };
 
+    const normalizedAuthorizationHeader: string = normalizeGitHubAuthorizationHeader(authorizationHeader);
     this._octokit = new Octokit();
     this._octokit.hook.before('request', (requestOptions) => {
-      requestOptions.headers.authorization = normalizeGitHubAuthorizationHeader(authorizationHeader);
+      requestOptions.headers.authorization = normalizedAuthorizationHeader;
     });
   }
 

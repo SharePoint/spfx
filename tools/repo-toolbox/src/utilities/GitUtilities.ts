@@ -18,6 +18,38 @@ export async function getRepoSlugAsync(terminal: ITerminal): Promise<string> {
   return match[1]!;
 }
 
+/**
+ * Normalizes various token formats to a proper GitHub API Authorization header value.
+ *
+ * Git checkout extraheaders use `basic base64(x-access-token:ghs_xxx)`, which GitHub
+ * App installation tokens don't support — they require `token ghs_xxx`.
+ */
+export function normalizeGitHubAuthorizationHeader(value: string): string {
+  value = value.trim();
+  const spaceIndex: number = value.indexOf(' ');
+
+  if (spaceIndex === -1) {
+    // Raw token with no scheme prefix
+    return `token ${value}`;
+  }
+
+  const scheme: string = value.substring(0, spaceIndex);
+  const encoded: string = value.substring(spaceIndex + 1);
+  if (scheme.toLowerCase() === 'basic') {
+    const decoded: string = Buffer.from(encoded, 'base64').toString('utf8');
+    const colonIndex: number = decoded.indexOf(':');
+    if (colonIndex !== -1) {
+      const token: string = decoded.substring(colonIndex + 1);
+      if (token) {
+        return `token ${token}`;
+      }
+    }
+  }
+
+  // Already "token xxx", "bearer xxx", etc.
+  return value;
+}
+
 export async function getGitAuthorizationHeaderAsync(terminal: ITerminal): Promise<string> {
   // The checkout with persistCredentials sets an extraheader in git config
   // Format: "http.<url>.extraheader AUTHORIZATION: basic <token>"
@@ -31,43 +63,13 @@ export async function getGitAuthorizationHeaderAsync(terminal: ITerminal): Promi
   }
 
   // headerLine is "AUTHORIZATION: basic <token>" — strip the header name prefix
-  // to get just the value ("basic <token>") for use with fetch.
+  // to get just the value ("basic <token>") and normalize to a proper token format.
   const colonIndex: number = headerLine.indexOf(':');
   if (colonIndex === -1) {
     throw new Error(`Unexpected authorization header format: ${headerLine}`);
   }
 
-  return headerLine.substring(colonIndex + 1).trim();
-}
-
-/**
- * Normalizes various token formats to a proper GitHub API Authorization header value.
- *
- * Git checkout extraheaders use `basic base64(x-access-token:ghs_xxx)`, which GitHub
- * App installation tokens don't support — they require `token ghs_xxx`.
- */
-export function normalizeGitHubAuthorizationHeader(value: string): string {
-  if (!value.includes(' ')) {
-    // Raw token with no scheme prefix
-    return `token ${value}`;
-  }
-
-  const spaceIndex: number = value.indexOf(' ');
-  const scheme: string = value.substring(0, spaceIndex);
-  const encoded: string = value.substring(spaceIndex + 1);
-  if (scheme.toLowerCase() === 'basic' && encoded) {
-    const decoded: string = Buffer.from(encoded, 'base64').toString('utf8');
-    const colonIndex: number = decoded.indexOf(':');
-    if (colonIndex !== -1) {
-      const token: string = decoded.substring(colonIndex + 1);
-      if (token) {
-        return `token ${token}`;
-      }
-    }
-  }
-
-  // Already "token xxx", "bearer xxx", etc.
-  return value;
+  return normalizeGitHubAuthorizationHeader(headerLine.substring(colonIndex + 1).trim());
 }
 
 export async function execGitAsync(args: string[], terminal: ITerminal): Promise<string> {

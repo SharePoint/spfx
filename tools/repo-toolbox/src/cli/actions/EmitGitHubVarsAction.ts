@@ -49,10 +49,7 @@ export class EmitGitHubVarsAction extends GitHubTokenActionBase {
       authHeader = normalizeGitHubAuthorizationHeader(rawToken);
       terminal.writeLine(`Using ${environmentVariable} from environment or ${longName} as GitHub token`);
     } else {
-      // The git extraheader uses "basic base64(x-access-token:ghs_xxx)". Normalize it
-      // to "token ghs_xxx" so GitHub App installation tokens are accepted by the API.
-      const rawAuthHeader: string = await getGitAuthorizationHeaderAsync(terminal);
-      authHeader = normalizeGitHubAuthorizationHeader(rawAuthHeader);
+      authHeader = await getGitAuthorizationHeaderAsync(terminal);
       terminal.writeLine('Using git credential extraheader as fallback');
     }
 
