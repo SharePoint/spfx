@@ -42,6 +42,11 @@ export interface IPostCommitStatusOptions {
   targetUrl?: string;
 }
 
+export interface ICreateTagOptions {
+  tag: string;
+  sha: string;
+}
+
 export interface ICreateReleaseOptions {
   tag: string;
   sha: string;
@@ -65,8 +70,8 @@ export class GitHubClient {
 
   private constructor(options: IGitHubClientOptionsInternal) {
     const { authorizationHeader, repoSlug, Octokit } = options;
-    const [owner, repo, ...extraParts] = repoSlug.split('/');
-    if (!owner || !repo || extraParts.length > 0) {
+    const [owner, repo] = repoSlug.split('/');
+    if (!owner || !repo) {
       throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
     }
 
@@ -91,11 +96,8 @@ export class GitHubClient {
   }
 
   /**
-   * Creates a {@link GitHubClient} from an explicit GitHub Authorization header value
-   * and repository slug, without requiring a local git checkout.
-   *
-   * @param options.authorizationHeader - The full HTTP Authorization header value,
-   *   e.g. `basic <base64>` as emitted by {@link EmitGitHubVarsAndTagBuildAction}.
+   * Creates a {@link GitHubClient} from an explicit GitHub token and repository slug,
+   * without requiring a local git checkout.
    */
   public static async createGitHubClientFromTokenAndRepoSlugAsync(
     options: IGitHubClientOptions
@@ -160,6 +162,15 @@ export class GitHubClient {
       pull_number: prNumber,
       title,
       body
+    });
+  }
+
+  public async createTagAsync(options: ICreateTagOptions): Promise<void> {
+    const { tag, sha } = options;
+    await this._octokit.git.createRef({
+      ...this._octokitCommonOptions,
+      ref: `refs/tags/${tag}`,
+      sha
     });
   }
 

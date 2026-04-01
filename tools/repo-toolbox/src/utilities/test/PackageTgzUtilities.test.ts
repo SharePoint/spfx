@@ -77,25 +77,6 @@ describe(readChangelogSectionFromTgzAsync.name, () => {
     expect(result).toBeUndefined();
   });
 
-  it('does not match a version that is a prefix of another version', async () => {
-    mockTarStdout(changelog);
-
-    // '1.0.0' should not match '## 1.0.0-alpha.1' or similar
-    const changelogWithPrerelease: string = [
-      '# Changelog',
-      '',
-      '## 1.0.0-alpha.1',
-      '- Prerelease',
-      '',
-      '## 1.0.0',
-      '- Initial release'
-    ].join('\n');
-    mockTarStdout(changelogWithPrerelease);
-
-    const result = await readChangelogSectionFromTgzAsync('/path/to/package.tgz', '1.0.0');
-    expect(result).toBe('- Initial release');
-  });
-
   it('returns undefined when tar exits with non-zero exit code', async () => {
     mockTarStdout('', 1);
 

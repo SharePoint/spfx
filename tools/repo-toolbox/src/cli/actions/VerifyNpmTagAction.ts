@@ -32,14 +32,12 @@ export class VerifyNpmTagAction extends CommandLineAction {
     });
 
     this._terminal = terminal;
-
     this._packagesPathParameter = this.defineStringParameter({
       parameterLongName: '--packages-path',
       argumentName: 'PATH',
       description: 'Path to directory containing .tgz package files.',
       required: true
     });
-
     this._npmTagParameter = this.defineStringParameter({
       parameterLongName: '--npm-tag',
       argumentName: 'TAG',
@@ -89,24 +87,17 @@ export class VerifyNpmTagAction extends CommandLineAction {
 
         let taggedVersion: string | undefined;
         try {
-          const queryNpmTagVersionAsync = async (): Promise<string> => {
-            const npmProcess: ChildProcess = Executable.spawn('npm', [
-              'view',
-              `${packageName}@${npmTag}`,
-              'version'
-            ]);
-            const { stdout } = await Executable.waitForExitAsync(npmProcess, {
-              encoding: 'utf8',
-              throwOnNonZeroExitCode: true,
-              throwOnSignal: true
-            });
-            return stdout.trim();
-          };
-          taggedVersion = await Async.runWithRetriesAsync({
-            action: queryNpmTagVersionAsync,
-            maxRetries: 3,
-            retryDelayMs: 5000
+          const npmProcess: ChildProcess = Executable.spawn('npm', [
+            'view',
+            `${packageName}@${npmTag}`,
+            'version'
+          ]);
+          const { stdout } = await Executable.waitForExitAsync(npmProcess, {
+            encoding: 'utf8',
+            throwOnNonZeroExitCode: true,
+            throwOnSignal: true
           });
+          taggedVersion = stdout.trim();
         } catch (e) {
           terminal.writeErrorLine(`Failed to query npm for ${packageName}@${npmTag}: ${e}`);
           hasFailure = true;

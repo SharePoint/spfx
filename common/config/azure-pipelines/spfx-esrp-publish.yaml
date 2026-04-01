@@ -104,10 +104,6 @@ extends:
               - bash: |
                   mkdir -p "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle"
                   mkdir -p "$(Build.ArtifactStagingDirectory)/published-versions"
-                condition: always()
-                displayName: 'Initialize artifact staging directories'
-
-              - bash: |
                   cp -r "$(Pipeline.Workspace)/spfx/tools/repo-toolbox/dist/." \
                      "$(Build.ArtifactStagingDirectory)/repo-toolbox-bundle"
                 displayName: 'Stage artifacts'
@@ -143,70 +139,68 @@ extends:
                 condition: eq(variables['FindBumpRun.IsVersionBumpMerge'], 'true')
                 displayName: 'Stage published versions artifact'
 
-      - stage: Publish
-        displayName: 'Publish SPFx NPM Packages'
-        dependsOn:
-          - Prepare
-        condition: and(succeeded('Prepare'), eq(dependencies.Prepare.outputs['PrepareSpfxPublish.FindBumpRun.IsVersionBumpMerge'], 'true'))
-        jobs:
-          - job: PublishSpfxNpmPackages
-            displayName: 'Publish SPFx NPM Packages'
-            pool:
-              name: 'publish-rushstack'
-              os: linux
-            variables:
-              - name: BumpPipelineRunId
-                value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
-            templateContext:
-              type: releaseJob
-              isProduction: true
-            steps:
-              - checkout: none
+      # - stage: Publish
+      #   displayName: 'Publish SPFx NPM Packages'
+      #   dependsOn:
+      #     - Prepare
+      #   condition: and(succeeded('Prepare'), eq(dependencies.Prepare.outputs['PrepareSpfxPublish.FindBumpRun.IsVersionBumpMerge'], 'true'))
+      #   jobs:
+      #     - job: PublishSpfxNpmPackages
+      #       displayName: 'Publish SPFx NPM Packages'
+      #       pool:
+      #         name: 'publish-rushstack'
+      #         os: linux
+      #       variables:
+      #         - name: BumpPipelineRunId
+      #           value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['FindBumpRun.BumpPipelineRunId'] ]
+      #       templateContext:
+      #         type: releaseJob
+      #         isProduction: true
+      #       steps:
+      #         - checkout: none
 
-              - template: /common/config/azure-pipelines/templates/install-node.yaml@self
+      #         - task: 1ES.DownloadPipelineArtifact@1
+      #           inputs:
+      #             artifactName: repo-toolbox-bundle
+      #             targetPath: $(Agent.TempDirectory)/repo-toolbox-bundle
+      #           displayName: 'Download repo-toolbox bundle'
 
-              - task: 1ES.DownloadPipelineArtifact@1
-                inputs:
-                  artifactName: repo-toolbox-bundle
-                  targetPath: $(Agent.TempDirectory)/repo-toolbox-bundle
-                displayName: 'Download repo-toolbox bundle'
+      #         - task: 1ES.DownloadPipelineArtifact@1
+      #           inputs:
+      #             artifactName: packages
+      #             targetPath: $(PackagesPath)
+      #             project: $(SpfxVersioningProject)
+      #             pipelineId: $(BumpPipelineRunId)
+      #             definition: $(SpfxVersioningPipelineId)
+      #             buildType: specific
+      #             buildVersionToDownload: specific
+      #           displayName: 'Download packed npm packages'
 
-              - task: 1ES.DownloadPipelineArtifact@1
-                inputs:
-                  artifactName: packages
-                  targetPath: $(PackagesPath)
-                  project: $(SpfxVersioningProject)
-                  pipelineId: $(BumpPipelineRunId)
-                  definition: $(SpfxVersioningPipelineId)
-                  buildType: specific
-                  buildVersionToDownload: specific
-                displayName: 'Download packed npm packages'
+      #         - bash: |
+      #             ls -la "$(PackagesPath)"
+      #           displayName: 'List downloaded packages'
 
-              - bash: |
-                  ls -la "$(PackagesPath)"
-                displayName: 'List downloaded packages'
+      #         - template: /common/config/azure-pipelines/templates/esrp-release.yaml@publishConfig
+      #           parameters:
+      #             packagesPath: $(PackagesPath)
+      #             npmTag: ${{ parameters.NpmTag }}
+      #             dryRun: ${{ parameters.DryRun }}
 
-              - template: /common/config/azure-pipelines/templates/esrp-release.yaml@publishConfig
-                parameters:
-                  packagesPath: $(PackagesPath)
-                  npmTag: ${{ parameters.NpmTag }}
-                  dryRun: ${{ parameters.DryRun }}
-
-              - ${{ if and(not(parameters.DryRun), not(parameters.SkipNpmTagVerification)) }}:
-                  - task: CmdLine@2
-                    inputs:
-                      script: >-
-                        node "$(RepoToolboxBundlePath)" verify-npm-tag
-                        --packages-path "$(PackagesPath)"
-                        --npm-tag "${{ parameters.NpmTag }}"
-                    displayName: 'Verify NPM tag versions'
+      #         - ${{ if and(not(parameters.DryRun), not(parameters.SkipNpmTagVerification)) }}:
+      #             - task: CmdLine@2
+      #               inputs:
+      #                 script: >-
+      #                   node "$(RepoToolboxBundlePath)" verify-npm-tag
+      #                   --packages-path "$(PackagesPath)"
+      #                   --npm-tag "${{ parameters.NpmTag }}"
+      #               displayName: 'Verify NPM tag versions'
 
       - ${{ if and(parameters.CreateGitHubTagsAndReleases, not(parameters.DryRun)) }}:
           - stage: Tag
             displayName: 'Tag Published SPFx Packages'
             dependsOn:
               - Prepare
-              - Publish
+              # - Publish
             jobs:
               - job: TagPublishedPackages
                 displayName: 'Tag Published SPFx Packages'
@@ -224,8 +218,6 @@ extends:
                     value: $[ stageDependencies.Prepare.PrepareSpfxPublish.outputs['EmitGitHubVars.GitHubRepoSlug'] ]
                 steps:
                   - checkout: none
-
-                  - template: /common/config/azure-pipelines/templates/install-node.yaml@self
 
                   - task: DownloadPipelineArtifact@2
                     inputs:
@@ -247,7 +239,7 @@ extends:
                   - task: CmdLine@2
                     inputs:
                       script: >-
-                        node "$(RepoToolboxBundlePath)" create-github-releases
+                        node "$(RepoToolboxBundlePath)" tag-published-packages
                         --packages-path "$(PackagesPath)"
                         --commit-sha "$(BumpCommitSha)"
                         --repo-slug "$(GitHubRepoSlug)"

@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { OctokitResponse, RequestError } from '@octokit/types';
-
 import type { ITerminal } from '@rushstack/terminal';
 import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
 import { Async, FileSystem, type FolderItem, type IPackageJson } from '@rushstack/node-core-library';
@@ -19,7 +17,7 @@ import {
  * Tags are formatted as `@scope/package_vX.Y.Z`, matching the rushstack convention.
  * Release notes are populated from the corresponding CHANGELOG.md section in the package.
  */
-export class CreateGitHubReleasesAction extends CommandLineAction {
+export class TagPublishedPackagesAction extends CommandLineAction {
   private readonly _terminal: ITerminal;
   private readonly _packagesPathParameter: IRequiredCommandLineStringParameter;
   private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
@@ -28,7 +26,7 @@ export class CreateGitHubReleasesAction extends CommandLineAction {
 
   public constructor(terminal: ITerminal) {
     super({
-      actionName: 'create-github-releases',
+      actionName: 'tag-published-packages',
       summary: 'Creates a GitHub release for each .tgz package in a directory.',
       documentation: ''
     });
@@ -53,8 +51,7 @@ export class CreateGitHubReleasesAction extends CommandLineAction {
       parameterLongName: '--github-token',
       argumentName: 'TOKEN',
       environmentVariable: 'GITHUB_TOKEN',
-      description:
-        'GitHub Authorization header value for creating releases (format: `basic <base64>` as emitted by emit-github-vars-and-tag-build).',
+      description: 'GitHub personal access token for creating releases.',
       required: true
     });
 
@@ -124,19 +121,8 @@ export class CreateGitHubReleasesAction extends CommandLineAction {
           terminal.writeLine(`Created release: ${tag}`);
         } catch (e: unknown) {
           if (e instanceof RequestError && e.status === 422) {
-            const response: OctokitResponse<RequestError> | undefined = e.response as
-              | OctokitResponse<RequestError>
-              | undefined;
-            const responseErrors: RequestError['errors'] = response?.data?.errors;
-
-            const alreadyExists: boolean =
-              Array.isArray(responseErrors) &&
-              responseErrors.some((error) => error.code === 'already_exists');
-
-            if (alreadyExists) {
-              terminal.writeLine(`Release already exists for ${tag}; skipping.`);
-              return;
-            }
+            terminal.writeLine(`Release already exists for ${tag}; skipping.`);
+            return;
           }
 
           throw e;
