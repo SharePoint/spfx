@@ -8,6 +8,8 @@ import { valid as semverValid } from 'semver';
 
 import { FileSystem } from '@rushstack/node-core-library';
 
+import { BUILT_IN_PARAMETER_NAMES } from './SPFxBuiltInContext';
+
 const NAME_MIN_LENGTH: number = 3;
 const NAME_MAX_LENGTH: number = 100;
 const DESCRIPTION_MAX_LENGTH: number = 500;
@@ -34,6 +36,31 @@ function isValidSemver(version: string): boolean {
 }
 
 /**
+ * Defines a custom template parameter declared in template.json.
+ * @public
+ */
+export interface ISPFxTemplateParameterDefinition {
+  /** The data type of the parameter (currently only 'string' is supported). */
+  type: 'string';
+  /** A human-readable description of the parameter. */
+  description: string;
+  /**
+   * Whether the parameter is required.
+   *
+   * @remarks
+   * Defaults to `true` when omitted.
+   */
+  required?: boolean;
+  /**
+   * Default value used when the parameter is not explicitly provided.
+   *
+   * @remarks
+   * Only meaningful when `required` is `false`.
+   */
+  default?: string;
+}
+
+/**
  * Interface representing the template.json file structure for SPFx templates.
  * @public
  */
@@ -50,8 +77,15 @@ export interface ISPFxTemplateJson {
   version: string;
   /** The SPFx version this template is compatible with */
   spfxVersion: string;
-  /** Optional schema defining the context variables required by this template */
-  contextSchema?: Record<string, { type: 'string'; description: string }>;
+  /**
+   * Custom parameters specific to this template.
+   *
+   * @remarks
+   * Built-in context variables (componentName, libraryName, etc.) are
+   * provided automatically by the engine and must not appear here.
+   * Use the `--param key=value` CLI flag to supply custom parameter values.
+   */
+  parameters?: Record<string, ISPFxTemplateParameterDefinition>;
   /**
    * Optional minimum engine version required to process this template.
    * When set, the template engine's orchestrator (for example,
@@ -80,15 +114,26 @@ const _templateJsonSchemaShape = {
   spfxVersion: z.string().refine(isValidSemver, {
     message: 'Invalid semantic version for "spfxVersion" (expected format like "1.0.0").'
   }),
-  contextSchema: z
+  parameters: z
     .record(
       z.string(),
       z.object({
         type: z.enum(['string']),
-        description: z.string()
+        description: z.string(),
+        required: z.boolean().optional(),
+        default: z.string().optional()
       })
     )
-    .optional(),
+    .optional()
+    .refine(
+      (params) => {
+        if (!params) return true;
+        return Object.keys(params).every((key) => !BUILT_IN_PARAMETER_NAMES.has(key));
+      },
+      {
+        message: `Custom parameter names must not collide with built-in names: ${Array.from(BUILT_IN_PARAMETER_NAMES).join(', ')}`
+      }
+    ),
   minimumEngineVersion: z
     .string()
     .refine(isValidSemver, {
@@ -166,10 +211,11 @@ export class SPFxTemplateJsonFile {
   }
 
   /**
-   * Gets the context schema defining the variables required for template rendering.
+   * Gets the custom parameter definitions for this template.
+   * Returns undefined if the template defines no custom parameters.
    */
-  public get contextSchema(): Record<string, { type: 'string'; description: string }> | undefined {
-    return this._data.contextSchema;
+  public get parameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined {
+    return this._data.parameters;
   }
 
   /**

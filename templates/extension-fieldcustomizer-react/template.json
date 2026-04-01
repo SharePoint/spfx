@@ -3,35 +3,5 @@
   "category": "extension",
   "description": "SharePoint Framework Field Customizer extension with React framework",
   "version": "1.0.0",
-  "spfxVersion": "1.22.2",
-  "contextSchema": {
-    "componentName": {
-      "type": "string",
-      "description": "The component name"
-    },
-    "componentAlias": {
-      "type": "string",
-      "description": "Short alias for the component"
-    },
-    "libraryName": {
-      "type": "string",
-      "description": "Package/library name"
-    },
-    "solutionId": {
-      "type": "string",
-      "description": "Solution GUID"
-    },
-    "componentId": {
-      "type": "string",
-      "description": "Component GUID"
-    },
-    "featureId": {
-      "type": "string",
-      "description": "Feature GUID"
-    },
-    "componentDescription": {
-      "type": "string",
-      "description": "The component description"
-    }
-  }
+  "spfxVersion": "1.22.2"
 }

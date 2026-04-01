@@ -3,35 +3,5 @@
   "category": "ace",
   "description": "Adaptive Card Extension with Search Card template",
   "version": "1.0.0",
-  "spfxVersion": "1.22.2",
-  "contextSchema": {
-    "componentName": {
-      "type": "string",
-      "description": "The component name"
-    },
-    "libraryName": {
-      "type": "string",
-      "description": "The library name for the component"
-    },
-    "componentId": {
-      "type": "string",
-      "description": "The unique ID for the component"
-    },
-    "solutionId": {
-      "type": "string",
-      "description": "The unique ID for the solution"
-    },
-    "featureId": {
-      "type": "string",
-      "description": "The unique ID for the feature"
-    },
-    "componentDescription": {
-      "type": "string",
-      "description": "Description of the component"
-    },
-    "componentAlias": {
-      "type": "string",
-      "description": "The component alias"
-    }
-  }
+  "spfxVersion": "1.22.2"
 }

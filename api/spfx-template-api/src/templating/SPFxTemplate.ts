@@ -2,7 +2,7 @@
 // See LICENSE in the project root for license information.
 
 import * as ejs from 'ejs';
-import * as z from 'zod';
+import type * as z from 'zod';
 
 import { Async, FileSystem, Path, type IPackageJson, type FolderItem } from '@rushstack/node-core-library';
 
@@ -10,6 +10,7 @@ import {
   SPFxTemplateJsonFile,
   SPFxTemplateDefinitionSchema,
   type ISPFxTemplateJson,
+  type ISPFxTemplateParameterDefinition,
   type SPFxTemplateCategory
 } from './SPFxTemplateJsonFile';
 import { createCasedString, type ICasedString } from './CasedString';
@@ -92,6 +93,14 @@ export class SPFxTemplate {
    */
   public get unknownFields(): readonly string[] {
     return this._definition.unknownFields;
+  }
+
+  /**
+   * Gets the custom parameter definitions for this template.
+   * Returns undefined if the template defines no custom parameters.
+   */
+  public getParameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined {
+    return this._definition.parameters;
   }
 
   /**
@@ -199,20 +208,20 @@ export class SPFxTemplate {
    * @returns A Promise that resolves to a TemplateOutput containing the rendered files
    */
   public async renderAsync(context: object, options?: IRenderOptions): Promise<TemplateOutput> {
-    // Validate the context object against the template's contextSchema (if declared).
-    // Validation runs on the raw (pre-wrap) context so schema types remain simple strings.
-    if (this._definition.contextSchema) {
-      const schemaShape: Record<string, z.ZodString> = {};
-      for (const [key, value] of Object.entries(this._definition.contextSchema)) {
-        if (value.type === 'string') {
-          schemaShape[key] = z.string();
+    // Validate that all required custom parameters are present in the context.
+    const templateParams: Record<string, ISPFxTemplateParameterDefinition> | undefined =
+      this._definition.parameters;
+    if (templateParams) {
+      const contextRecord: Record<string, unknown> = context as Record<string, unknown>;
+      const missing: string[] = [];
+      for (const [key, paramDef] of Object.entries(templateParams)) {
+        const isRequired: boolean = paramDef.required !== false;
+        if (isRequired && contextRecord[key] === undefined) {
+          missing.push(key);
         }
       }
-
-      const contextSchema: z.ZodObject<Record<string, z.ZodString>> = z.object(schemaShape).passthrough();
-      const validationResult: z.ZodSafeParseResult<Record<string, string>> = contextSchema.safeParse(context);
-      if (!validationResult.success) {
-        throw new Error(`Invalid context object: ${validationResult.error}`);
+      if (missing.length > 0) {
+        throw new Error(`Missing required template parameters: ${missing.join(', ')}`);
       }
     }
 

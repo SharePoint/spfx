@@ -6,9 +6,17 @@ export { SPFxTemplate, type IRenderOptions } from './SPFxTemplate';
 export { isBinaryFile } from './binaryFiles';
 export {
   type ISPFxTemplateJson,
+  type ISPFxTemplateParameterDefinition,
   SPFxTemplateDefinitionSchema,
   SPFxTemplateJsonFile,
   SPFX_TEMPLATE_CATEGORIES,
   type SPFxTemplateCategory
 } from './SPFxTemplateJsonFile';
+export {
+  type ISPFxBuiltInContextInputs,
+  type ISPFxBuiltInContext,
+  type IBuildBuiltInContextOptions,
+  BUILT_IN_PARAMETER_NAMES,
+  buildBuiltInContext
+} from './SPFxBuiltInContext';
 export { ENGINE_VERSION } from '../engineVersion';

@@ -13,11 +13,17 @@ export {
   SPFxTemplate,
   isBinaryFile as _isBinaryFile,
   type ISPFxTemplateJson,
+  type ISPFxTemplateParameterDefinition,
   SPFxTemplateDefinitionSchema,
   SPFxTemplateJsonFile,
   type IRenderOptions,
   SPFX_TEMPLATE_CATEGORIES,
   type SPFxTemplateCategory,
+  type ISPFxBuiltInContextInputs,
+  type ISPFxBuiltInContext,
+  type IBuildBuiltInContextOptions,
+  BUILT_IN_PARAMETER_NAMES,
+  buildBuiltInContext,
   ENGINE_VERSION
 } from './templating/index';
 export {

@@ -3,31 +3,5 @@
   "category": "extension",
   "description": "SharePoint Framework list view command set extension template",
   "version": "1.0.0",
-  "spfxVersion": "1.22.2",
-  "contextSchema": {
-    "componentName": {
-      "type": "string",
-      "description": "The component name"
-    },
-    "libraryName": {
-      "type": "string",
-      "description": "The library name (hyphen-case)"
-    },
-    "componentId": {
-      "type": "string",
-      "description": "The component ID (GUID)"
-    },
-    "solutionId": {
-      "type": "string",
-      "description": "The solution ID (GUID)"
-    },
-    "featureId": {
-      "type": "string",
-      "description": "The feature ID (GUID)"
-    },
-    "componentDescription": {
-      "type": "string",
-      "description": "The component description"
-    }
-  }
+  "spfxVersion": "1.22.2"
 }

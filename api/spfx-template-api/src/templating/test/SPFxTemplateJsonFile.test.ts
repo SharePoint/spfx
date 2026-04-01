@@ -46,10 +46,10 @@ describe(SPFxTemplateJsonFile.name, () => {
         description: 'A test template',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
-          componentName: {
+        parameters: {
+          customParam: {
             type: 'string',
-            description: 'The name of the component'
+            description: 'A custom parameter'
           }
         }
       };
@@ -57,10 +57,10 @@ describe(SPFxTemplateJsonFile.name, () => {
       const instance = new SPFxTemplateJsonFile(data);
 
       expect(instance.description).toBe('A test template');
-      expect(instance.contextSchema).toEqual({
-        componentName: {
+      expect(instance.parameters).toEqual({
+        customParam: {
           type: 'string',
-          description: 'The name of the component'
+          description: 'A custom parameter'
         }
       });
     });
@@ -127,7 +127,7 @@ describe(SPFxTemplateJsonFile.name, () => {
       expect(instance.spfxVersion).toBe('1.19.0');
     });
 
-    it('should return undefined for missing contextSchema', () => {
+    it('should return undefined for missing parameters', () => {
       const data: ISPFxTemplateJson = {
         name: 'My Template',
         category: 'webpart',
@@ -136,7 +136,7 @@ describe(SPFxTemplateJsonFile.name, () => {
       };
       const instance = new SPFxTemplateJsonFile(data);
 
-      expect(instance.contextSchema).toBeUndefined();
+      expect(instance.parameters).toBeUndefined();
     });
 
     it('should return the correct minimumEngineVersion', () => {
@@ -313,14 +313,14 @@ describe('SPFxTemplateDefinitionSchema', () => {
         description: 'A complete template with all fields',
         version: '1.2.3',
         spfxVersion: '1.18.0',
-        contextSchema: {
-          componentName: {
+        parameters: {
+          customParam1: {
             type: 'string',
-            description: 'Component name'
+            description: 'First custom parameter'
           },
-          componentDescription: {
+          customParam2: {
             type: 'string',
-            description: 'Component description'
+            description: 'Second custom parameter'
           }
         }
       };
@@ -497,13 +497,13 @@ describe('SPFxTemplateDefinitionSchema', () => {
       expect(result.success).toBe(false);
     });
 
-    it('should reject invalid contextSchema type', () => {
+    it('should reject invalid parameters type', () => {
       const data = {
         name: 'Valid Name',
         category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
+        parameters: {
           field: {
             type: 'number', // Only 'string' is allowed
             description: 'A field'
@@ -515,13 +515,13 @@ describe('SPFxTemplateDefinitionSchema', () => {
       expect(result.success).toBe(false);
     });
 
-    it('should reject contextSchema without description', () => {
+    it('should reject parameters without description', () => {
       const data = {
         name: 'Valid Name',
         category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
+        parameters: {
           field: {
             type: 'string'
             // Missing description
@@ -531,6 +531,42 @@ describe('SPFxTemplateDefinitionSchema', () => {
 
       const result = SPFxTemplateDefinitionSchema.safeParse(data);
       expect(result.success).toBe(false);
+    });
+
+    it('should reject parameters that collide with built-in parameter names', () => {
+      const data = {
+        name: 'Valid Name',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        parameters: {
+          componentName: {
+            type: 'string',
+            description: 'This collides with a built-in name'
+          }
+        }
+      };
+
+      const result = SPFxTemplateDefinitionSchema.safeParse(data);
+      expect(result.success).toBe(false);
+    });
+
+    it('should accept parameters that do not collide with built-in names', () => {
+      const data = {
+        name: 'Valid Name',
+        category: 'webpart',
+        version: '1.0.0',
+        spfxVersion: '1.18.0',
+        parameters: {
+          myCustomParam: {
+            type: 'string',
+            description: 'A custom parameter that does not collide'
+          }
+        }
+      };
+
+      const result = SPFxTemplateDefinitionSchema.safeParse(data);
+      expect(result.success).toBe(true);
     });
   });
 });

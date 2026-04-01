@@ -5,14 +5,13 @@ import type { ChildProcess } from 'node:child_process';
 
 type PackageManager = 'npm' | 'pnpm' | 'yarn';
 
-import { kebabCase } from 'lodash';
-import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
 import * as z from 'zod';
 
 import { Executable, Path, type IWaitForExitResultWithoutOutput } from '@rushstack/node-core-library';
 import { Colorize, type Terminal } from '@rushstack/terminal';
 import type {
   CommandLineStringParameter,
+  CommandLineStringListParameter,
   IRequiredCommandLineChoiceParameter,
   IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
@@ -22,17 +21,15 @@ import {
   type SPFxTemplate,
   SPFxTemplateWriter,
   SPFxScaffoldLog,
-  type TemplateOutput
+  type TemplateOutput,
+  buildBuiltInContext,
+  type ISPFxBuiltInContext,
+  type ISPFxTemplateParameterDefinition
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
 import { SPFxActionBase } from './SPFxActionBase';
 import packageJson from '../../../package.json';
-
-// Deterministic namespace for CI mode GUIDs, derived from the well-known URL
-// namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
-const CI_NAMESPACE: string = '035a23a9-8c9e-569b-ae00-7ff2e4c82fb0';
-const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
 
 const CLI_VERSION: string = packageJson.version;
 
@@ -57,6 +54,7 @@ export class CreateAction extends SPFxActionBase {
   private readonly _componentDescriptionParameter: CommandLineStringParameter;
   private readonly _solutionNameParameter: CommandLineStringParameter;
   private readonly _packageManagerParameter: IRequiredCommandLineChoiceParameter<PackageManager | 'none'>;
+  private readonly _paramsParameter: CommandLineStringListParameter;
 
   public constructor(terminal: Terminal) {
     super(
@@ -123,6 +121,12 @@ export class CreateAction extends SPFxActionBase {
       alternatives: ['npm', 'pnpm', 'yarn', 'none'],
       defaultValue: 'none'
     });
+
+    this._paramsParameter = this.defineStringListParameter({
+      parameterLongName: '--param',
+      argumentName: 'KEY_VALUE',
+      description: 'Custom template parameter in key=value format (repeatable)'
+    });
   }
 
   protected override async onExecuteAsync(): Promise<void> {
@@ -142,7 +146,9 @@ export class CreateAction extends SPFxActionBase {
           `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
         );
       }
-      const solutionName: string = rawSolutionName || kebabCase(componentName);
+      // Compute a preliminary kebab-case solution name for targetDir before the
+      // template is loaded. buildBuiltInContext will produce the same value.
+      const solutionName: string = rawSolutionName || _toKebabCase(componentName);
 
       const rawTargetDir: string | undefined = this._targetDirParameter.value?.trim();
       const targetDir: string =
@@ -189,33 +195,57 @@ export class CreateAction extends SPFxActionBase {
         );
       }
 
-      const componentAlias: string = this._componentAliasParameter.value || componentName;
-
       // CI mode is read from an environment variable instead of a ts-command-line
       // parameter so it stays out of --help output. It is an internal/undocumented
       // flag used only by CI pipelines and tests to produce deterministic output.
       // eslint-disable-next-line dot-notation
       const ciMode: boolean = process.env['SPFX_CI_MODE'] === '1';
-      const componentId: string = ciMode ? uuidv5(`component:${componentAlias}`, CI_NAMESPACE) : uuidv4();
-      const solutionId: string = ciMode ? CI_SOLUTION_ID : uuidv4();
-      const featureId: string = ciMode ? uuidv5(`feature:${componentAlias}`, CI_NAMESPACE) : uuidv4();
-      const componentDescription: string =
-        this._componentDescriptionParameter.value || `${componentName} description`;
 
-      const renderContext: Record<string, string> = {
-        solution_name: solutionName,
-        libraryName: this._libraryNameParameter.value,
-        spfxVersion: template.spfxVersion,
-        // The shields.io badge URL uses dashes as separators, so dashes in version numbers
-        // need to be escaped as double dashes to avoid ambiguity. For example, "1.23.0-beta.0" becomes "1.23.0--beta.0".
-        spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
-        componentId: componentId,
-        featureId: featureId,
-        solutionId: solutionId,
-        componentAlias: componentAlias,
-        componentName: componentName,
-        componentDescription: componentDescription
-      };
+      const builtInContext: ISPFxBuiltInContext = buildBuiltInContext(
+        {
+          componentName,
+          libraryName: this._libraryNameParameter.value,
+          spfxVersion: template.spfxVersion,
+          solutionName: rawSolutionName || undefined,
+          componentAlias: this._componentAliasParameter.value || undefined,
+          componentDescription: this._componentDescriptionParameter.value || undefined
+        },
+        { ciMode }
+      );
+
+      // Parse custom --param values and validate against template parameter definitions
+      const customParams: Record<string, string> = {};
+      for (const paramValue of this._paramsParameter.values) {
+        const eqIndex: number = paramValue.indexOf('=');
+        if (eqIndex <= 0) {
+          throw new Error(
+            `Invalid ${this._paramsParameter.longName} format: "${paramValue}". Expected key=value format.`
+          );
+        }
+        customParams[paramValue.substring(0, eqIndex)] = paramValue.substring(eqIndex + 1);
+      }
+
+      const templateParams: Record<string, ISPFxTemplateParameterDefinition> | undefined =
+        template.getParameters();
+      if (templateParams) {
+        const missing: string[] = [];
+        for (const [key, paramDef] of Object.entries(templateParams)) {
+          const isRequired: boolean = paramDef.required !== false;
+          if (isRequired && customParams[key] === undefined) {
+            missing.push(key);
+          } else if (customParams[key] === undefined && paramDef.default !== undefined) {
+            customParams[key] = paramDef.default;
+          }
+        }
+        if (missing.length > 0) {
+          throw new Error(
+            `Missing required template parameters: ${missing.join(', ')}. ` +
+              `Use ${this._paramsParameter.longName} key=value to provide them.`
+          );
+        }
+      }
+
+      const renderContext: Record<string, string> = { ...builtInContext, ...customParams };
 
       const templateFs: TemplateOutput = await template.renderAsync(renderContext, {
         retainPhaseScripts: ciMode
@@ -292,6 +322,20 @@ async function _runInstallAsync(
   }
 
   terminal.writeLine(`${packageManager} install completed successfully.`);
+}
+
+/**
+ * Simple kebab-case conversion used only for the default targetDir before the
+ * template is loaded.  Duplicated intentionally to avoid importing from the API
+ * package (the canonical implementation lives in SPFxBuiltInContext).
+ */
+function _toKebabCase(input: string): string {
+  return input
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .split(/[^a-zA-Z0-9]+/)
+    .filter((w) => w.length > 0)
+    .map((w) => w.toLowerCase())
+    .join('-');
 }
 
 /**

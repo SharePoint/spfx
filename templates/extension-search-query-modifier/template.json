@@ -3,31 +3,5 @@
   "category": "extension",
   "description": "A SharePoint Framework search query modifier extension",
   "version": "1.0.0",
-  "spfxVersion": "1.22.2",
-  "contextSchema": {
-    "componentName": {
-      "type": "string",
-      "description": "The component name"
-    },
-    "libraryName": {
-      "type": "string",
-      "description": "Name of the library/solution"
-    },
-    "componentId": {
-      "type": "string",
-      "description": "Unique ID for the component"
-    },
-    "solutionId": {
-      "type": "string",
-      "description": "Solution ID"
-    },
-    "featureId": {
-      "type": "string",
-      "description": "Feature ID"
-    },
-    "componentDescription": {
-      "type": "string",
-      "description": "The component description"
-    }
-  }
+  "spfxVersion": "1.22.2"
 }

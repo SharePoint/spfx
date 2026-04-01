@@ -367,39 +367,39 @@ describe(SPFxTemplate.name, () => {
       expect(result.read('README.md')).toBe('# My Application');
     });
 
-    it('should render template with context schema validation', async () => {
+    it('should render template with parameters validation', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'WithSchema',
         category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
-          componentName: {
+        parameters: {
+          customParam: {
             type: 'string',
-            description: 'Component name'
+            description: 'A custom parameter'
           }
         }
       });
 
       const files = new Map<string, string | Buffer>([
-        ['src/index.ts', 'const name = "<%= componentName %>";']
+        ['src/index.ts', 'const name = "<%= customParam %>";']
       ]);
 
       const template = new SPFxTemplate(definition, files);
-      const context = { componentName: 'MyComponent' };
+      const context = { customParam: 'MyComponent' };
 
       const result: TemplateOutput = await template.renderAsync(context);
 
       expect(result.read('src/index.ts')).toBe('const name = "MyComponent";');
     });
 
-    it('should throw error when context does not match schema', async () => {
+    it('should throw error when required parameters are missing from context', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'WithSchema',
         category: 'webpart',
         version: '1.0.0',
         spfxVersion: '1.18.0',
-        contextSchema: {
+        parameters: {
           requiredField: {
             type: 'string',
             description: 'A required field'
@@ -412,7 +412,9 @@ describe(SPFxTemplate.name, () => {
       const template = new SPFxTemplate(definition, files);
       const invalidContext = { wrongField: 'value' };
 
-      await expect(template.renderAsync(invalidContext)).rejects.toThrow(/Invalid context object/);
+      await expect(template.renderAsync(invalidContext)).rejects.toThrow(
+        /Missing required template parameters/
+      );
     });
 
     it('should replace placeholders in filenames', async () => {

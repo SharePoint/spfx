@@ -1,7 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-jest.mock('@microsoft/spfx-template-api');
+jest.mock('@microsoft/spfx-template-api', () => {
+  const actual = jest.requireActual('@microsoft/spfx-template-api');
+  return {
+    ...jest.createMockFromModule<typeof actual>('@microsoft/spfx-template-api'),
+    // buildBuiltInContext must use the real implementation so the render context
+    // is populated correctly in tests.
+    buildBuiltInContext: actual.buildBuiltInContext,
+    SPFxScaffoldLog: actual.SPFxScaffoldLog
+  };
+});
 jest.mock('@rushstack/node-core-library', () => {
   const actual = jest.requireActual('@rushstack/node-core-library');
   return {
@@ -100,7 +109,7 @@ describe('SOLUTION_NAME_PATTERN', () => {
 
 describe('CreateAction', () => {
   const originalEnv = process.env;
-  let mockTemplate: { renderAsync: jest.Mock; spfxVersion: string };
+  let mockTemplate: { renderAsync: jest.Mock; getParameters: jest.Mock; spfxVersion: string };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -110,6 +119,7 @@ describe('CreateAction', () => {
 
     mockTemplate = {
       renderAsync: jest.fn().mockResolvedValue(mockTemplateFs),
+      getParameters: jest.fn().mockReturnValue(undefined),
       spfxVersion: '1.22.1'
     };
     const mockCollection = new Map([['webpart-minimal', mockTemplate]]) as unknown as SPFxTemplateCollection;

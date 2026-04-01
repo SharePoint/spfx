@@ -3,35 +3,5 @@
   "category": "webpart",
   "description": "A minimal web part template (no framework) for SPFx",
   "version": "0.0.1",
-  "spfxVersion": "1.22.2",
-  "contextSchema": {
-    "componentName": {
-      "type": "string",
-      "description": "The component name"
-    },
-    "libraryName": {
-      "type": "string",
-      "description": "The name of the library (also used as the package name)"
-    },
-    "featureId": {
-      "type": "string",
-      "description": "The feature ID (GUID) for the solution feature"
-    },
-    "solutionId": {
-      "type": "string",
-      "description": "The solution ID (GUID) for the SharePoint solution"
-    },
-    "componentId": {
-      "type": "string",
-      "description": "The component ID (GUID) for the web part"
-    },
-    "componentAlias": {
-      "type": "string",
-      "description": "The component alias (in manifest) for the web part"
-    },
-    "componentDescription": {
-      "type": "string",
-      "description": "The description of the component"
-    }
-  }
+  "spfxVersion": "1.22.2"
 }

@@ -9,6 +9,7 @@ exports[`CommandLineHelp prints the help: create 1`] = `
                    [--component-description COMPONENT_DESCRIPTION]
                    [--solution-name SOLUTION_NAME]
                    [--package-manager {npm,pnpm,yarn,none}]
+                   [--param KEY_VALUE]
 
 
 This command creates a new SPFx component.
@@ -56,6 +57,8 @@ Optional arguments:
                         Package manager to use for dependency installation
                         after scaffolding. Use \\"none\\" to skip installation.
                         The default value is \\"none\\".
+  --param KEY_VALUE     Custom template parameter in key=value format
+                        (repeatable)
 "
 `;
 
