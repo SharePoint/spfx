@@ -1,17 +1,17 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { SPFxScaffoldEvent } from './SPFxScaffoldEvent';
+import type { ISPFxScaffoldEvent } from './SPFxScaffoldEvent';
 
 /**
  * An event with `timestamp` made optional so callers don't need to provide it.
  *
- * Distributes `Omit` over each member of the `SPFxScaffoldEvent` union instead of collapsing it.
+ * Distributes `Omit` over each member of the `ISPFxScaffoldEvent` union instead of collapsing it.
  *
  * @public
  */
-export type SPFxScaffoldEventInput = SPFxScaffoldEvent extends infer E
-  ? E extends SPFxScaffoldEvent
+export type ISPFxScaffoldEventInput = ISPFxScaffoldEvent extends infer E
+  ? E extends ISPFxScaffoldEvent
     ? Omit<E, 'timestamp'> & { timestamp?: string }
     : never
   : never;
@@ -26,32 +26,32 @@ export type SPFxScaffoldEventInput = SPFxScaffoldEvent extends infer E
  * @public
  */
 export class SPFxScaffoldLog {
-  private readonly _events: SPFxScaffoldEvent[] = [];
+  private readonly _events: ISPFxScaffoldEvent[] = [];
 
   /**
    * Appends an event to the log.  If `timestamp` is omitted or empty
    * it will be replaced with the current ISO 8601 timestamp.
    */
-  public append(event: SPFxScaffoldEventInput): void {
-    const normalizedEvent: SPFxScaffoldEvent = {
+  public append(event: ISPFxScaffoldEventInput): void {
+    const normalizedEvent: ISPFxScaffoldEvent = {
       ...event,
       timestamp: event.timestamp || new Date().toISOString()
-    } as SPFxScaffoldEvent;
+    } as ISPFxScaffoldEvent;
     this._events.push(normalizedEvent);
   }
 
   /** All events in insertion order (returns a defensive shallow copy). */
-  public get events(): readonly SPFxScaffoldEvent[] {
+  public get events(): readonly ISPFxScaffoldEvent[] {
     return this._events.slice();
   }
 
   /**
    * Returns only events whose `kind` matches the given value.
    */
-  public getEventsOfKind<K extends SPFxScaffoldEvent['kind']>(
+  public getEventsOfKind<K extends ISPFxScaffoldEvent['kind']>(
     kind: K
-  ): Extract<SPFxScaffoldEvent, { kind: K }>[] {
-    return this._events.filter((e): e is Extract<SPFxScaffoldEvent, { kind: K }> => e.kind === kind);
+  ): Extract<ISPFxScaffoldEvent, { kind: K }>[] {
+    return this._events.filter((e): e is Extract<ISPFxScaffoldEvent, { kind: K }> => e.kind === kind);
   }
 
   /** Serializes the log to JSONL (one JSON object per line, no trailing newline). */
@@ -73,7 +73,7 @@ export class SPFxScaffoldLog {
         line = line.slice(0, -1);
       }
       if (line.length > 0) {
-        log.append(JSON.parse(line) as SPFxScaffoldEvent);
+        log.append(JSON.parse(line) as ISPFxScaffoldEvent);
       }
       start = newlineIndex + 1;
       newlineIndex = content.indexOf('\n', start);
@@ -85,7 +85,7 @@ export class SPFxScaffoldLog {
         line = line.slice(0, -1);
       }
       if (line.length > 0) {
-        log.append(JSON.parse(line) as SPFxScaffoldEvent);
+        log.append(JSON.parse(line) as ISPFxScaffoldEvent);
       }
     }
     return log;

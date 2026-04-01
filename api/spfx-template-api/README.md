@@ -155,8 +155,8 @@ The writer uses these helpers internally. You can also import them directly for 
 | `IMergeHelper` | Interface for implementing custom merge helpers |
 | `ServeJsonMergeHelper` | Merges `config/serve.json` (also available standalone) |
 | `SPFxScaffoldLog` | Append-only event log for recording scaffolding operations; serializes to JSONL |
-| `SPFxScaffoldEventInput` | Input type for `SPFxScaffoldLog.append()` (timestamp is optional) |
-| `SPFxScaffoldEvent` | Discriminated union of all scaffold event types |
+| `ISPFxScaffoldEventInput` | Input type for `SPFxScaffoldLog.append()` (timestamp is optional) |
+| `ISPFxScaffoldEvent` | Discriminated union of all scaffold event types |
 | `ISPFxScaffoldEventBase` | Base interface shared by every scaffold event (`kind` + `timestamp`) |
 | `ITemplateRenderedEvent` | Event recorded after a template is rendered |
 | `IPackageManagerSelectedEvent` | Event recorded when a package manager is chosen |

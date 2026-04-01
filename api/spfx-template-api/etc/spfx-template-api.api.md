@@ -98,10 +98,18 @@ export interface IRenderOptions {
 export function _isBinaryFile(filePath: string): boolean;
 
 // @public
+export type ISPFxScaffoldEvent = ITemplateRenderedEvent | IPackageManagerSelectedEvent | IFileWriteEvent | IPackageManagerInstallCompletedEvent;
+
+// @public
 export interface ISPFxScaffoldEventBase {
     kind: string;
     timestamp: string;
 }
+
+// @public
+export type ISPFxScaffoldEventInput = ISPFxScaffoldEvent extends infer E ? E extends ISPFxScaffoldEvent ? Omit<E, 'timestamp'> & {
+    timestamp?: string;
+} : never : never;
 
 // @public
 export interface ISPFxTemplateJson {
@@ -198,19 +206,11 @@ export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 
 export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;
 
 // @public
-export type SPFxScaffoldEvent = ITemplateRenderedEvent | IPackageManagerSelectedEvent | IFileWriteEvent | IPackageManagerInstallCompletedEvent;
-
-// @public
-export type SPFxScaffoldEventInput = SPFxScaffoldEvent extends infer E ? E extends SPFxScaffoldEvent ? Omit<E, 'timestamp'> & {
-    timestamp?: string;
-} : never : never;
-
-// @public
 export class SPFxScaffoldLog {
-    append(event: SPFxScaffoldEventInput): void;
-    get events(): readonly SPFxScaffoldEvent[];
+    append(event: ISPFxScaffoldEventInput): void;
+    get events(): readonly ISPFxScaffoldEvent[];
     static fromJsonl(content: string): SPFxScaffoldLog;
-    getEventsOfKind<K extends SPFxScaffoldEvent['kind']>(kind: K): Extract<SPFxScaffoldEvent, {
+    getEventsOfKind<K extends ISPFxScaffoldEvent['kind']>(kind: K): Extract<ISPFxScaffoldEvent, {
         kind: K;
     }>[];
     toJsonl(): string;

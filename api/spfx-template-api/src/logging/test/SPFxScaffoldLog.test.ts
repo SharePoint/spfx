@@ -7,7 +7,7 @@ import type {
   IPackageManagerSelectedEvent,
   IFileWriteEvent,
   IPackageManagerInstallCompletedEvent,
-  SPFxScaffoldEvent
+  ISPFxScaffoldEvent
 } from '../SPFxScaffoldEvent';
 
 // ---------------------------------------------------------------------------
@@ -92,7 +92,7 @@ describe(SPFxScaffoldLog.name, () => {
       log.append(makeFileWriteEvent());
 
       // The readonly type prevents compile-time mutation, but verify runtime too
-      const events: readonly SPFxScaffoldEvent[] = log.events;
+      const events: readonly ISPFxScaffoldEvent[] = log.events;
       expect(events.length).toBe(1);
 
       // Appending another event should not change the previously returned reference
@@ -111,7 +111,7 @@ describe(SPFxScaffoldLog.name, () => {
 
       log.append(event);
 
-      const recorded: SPFxScaffoldEvent | undefined = log.events[0];
+      const recorded: ISPFxScaffoldEvent | undefined = log.events[0];
       expect(recorded).toBeDefined();
       expect(recorded!.timestamp).not.toBe('');
       // Verify it parses as a valid date
@@ -130,7 +130,7 @@ describe(SPFxScaffoldLog.name, () => {
 
   // ---- getEventsOfKind ---------------------------------------------------
 
-  describe('getEventsOfKind', () => {
+  describe(SPFxScaffoldLog.prototype.getEventsOfKind.name, () => {
     it('returns only events of the requested kind', () => {
       const log: SPFxScaffoldLog = new SPFxScaffoldLog();
       const rendered: ITemplateRenderedEvent = makeTemplateRenderedEvent();
@@ -157,7 +157,7 @@ describe(SPFxScaffoldLog.name, () => {
 
   // ---- JSONL serialization -----------------------------------------------
 
-  describe('toJsonl', () => {
+  describe(SPFxScaffoldLog.prototype.toJsonl.name, () => {
     it('serializes each event as a single JSON line', () => {
       const log: SPFxScaffoldLog = new SPFxScaffoldLog();
       const e1: IFileWriteEvent = makeFileWriteEvent({ relativePath: 'a.ts' });
@@ -179,7 +179,7 @@ describe(SPFxScaffoldLog.name, () => {
     });
   });
 
-  describe('fromJsonl', () => {
+  describe(SPFxScaffoldLog.fromJsonl.name, () => {
     it('round-trips through toJsonl and fromJsonl', () => {
       const original: SPFxScaffoldLog = new SPFxScaffoldLog();
       original.append(makeTemplateRenderedEvent());

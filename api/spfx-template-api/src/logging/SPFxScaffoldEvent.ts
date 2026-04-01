@@ -85,7 +85,7 @@ export interface IPackageManagerInstallCompletedEvent extends ISPFxScaffoldEvent
  *
  * @public
  */
-export type SPFxScaffoldEvent =
+export type ISPFxScaffoldEvent =
   | ITemplateRenderedEvent
   | IPackageManagerSelectedEvent
   | IFileWriteEvent
