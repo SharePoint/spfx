@@ -16,6 +16,12 @@ export abstract class BaseSPFxTemplateRepositorySource {
 }
 
 // @public
+export function buildBuiltInContext(inputs: ISPFxBuiltInContextInputs, options?: IBuildBuiltInContextOptions): ISPFxBuiltInContext;
+
+// @public
+export const BUILT_IN_PARAMETER_NAMES: ReadonlySet<string>;
+
+// @public
 export class ConfigJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
     readonly fileRelativePath: string;
@@ -31,6 +37,11 @@ export const ENGINE_VERSION: string;
 
 // @public
 export type FileWriteOutcome = 'new' | 'merged' | 'preserved' | 'unchanged';
+
+// @public
+export interface IBuildBuiltInContextOptions {
+    ciMode?: boolean;
+}
 
 // @public
 export interface ICasedString {
@@ -98,6 +109,39 @@ export interface IRenderOptions {
 export function _isBinaryFile(filePath: string): boolean;
 
 // @public
+export interface ISPFxBuiltInContext {
+    // (undocumented)
+    componentAlias: string;
+    // (undocumented)
+    componentDescription: string;
+    // (undocumented)
+    componentId: string;
+    // (undocumented)
+    componentName: string;
+    // (undocumented)
+    featureId: string;
+    // (undocumented)
+    libraryName: string;
+    // (undocumented)
+    solution_name: string;
+    // (undocumented)
+    solutionId: string;
+    // (undocumented)
+    spfxVersion: string;
+    spfxVersionForBadgeUrl: string;
+}
+
+// @public
+export interface ISPFxBuiltInContextInputs {
+    componentAlias?: string;
+    componentDescription?: string;
+    componentName: string;
+    libraryName: string;
+    solutionName?: string;
+    spfxVersion: string;
+}
+
+// @public
 export type ISPFxScaffoldEvent = ITemplateRenderedEvent | IPackageManagerSelectedEvent | IFileWriteEvent | IPackageManagerInstallCompletedEvent;
 
 // @public
@@ -115,15 +159,20 @@ export type ISPFxScaffoldEventInput = ISPFxScaffoldEvent extends infer E ? E ext
 export interface ISPFxTemplateJson {
     $schema?: string;
     category: SPFxTemplateCategory;
-    contextSchema?: Record<string, {
-        type: 'string';
-        description: string;
-    }>;
     description?: string;
     minimumEngineVersion?: string;
     name: string;
+    parameters?: Record<string, ISPFxTemplateParameterDefinition>;
     spfxVersion: string;
     version: string;
+}
+
+// @public
+export interface ISPFxTemplateParameterDefinition {
+    default?: string;
+    description: string;
+    required?: boolean;
+    type: 'string';
 }
 
 // @public
@@ -224,6 +273,7 @@ export class SPFxTemplate {
     get fileCount(): number;
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
+    getParameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined;
     get minimumEngineVersion(): string | undefined;
     get name(): string;
     renderAsync(context: object, options?: IRenderOptions): Promise<TemplateOutput>;
@@ -249,15 +299,12 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson>;
 export class SPFxTemplateJsonFile {
     constructor(data: ISPFxTemplateJson);
     get category(): SPFxTemplateCategory;
-    get contextSchema(): Record<string, {
-        type: 'string';
-        description: string;
-    }> | undefined;
     get description(): string | undefined;
     static fromFileAsync(filePath: string): Promise<SPFxTemplateJsonFile>;
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplateJsonFile>;
     get minimumEngineVersion(): string | undefined;
     get name(): string;
+    get parameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined;
     get spfxVersion(): string;
     // (undocumented)
     static readonly TEMPLATE_JSON: string;
@@ -288,5 +335,8 @@ export class TemplateOutput {
     read(relativePath: string): string | Buffer | undefined;
     write(relativePath: string, contents: string | Buffer): void;
 }
+
+// @public
+export function toKebabCase(input: string): string;
 
 ```
