@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GitUtilities getGitAuthorizationHeaderAsync extracts authorization header value from git config entry 1`] = `
+exports[`GitUtilities getGitAuthorizationHeaderAsync normalizes basic-auth extraheader with a GitHub App token 1`] = `
 Array [
   "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
 ]
@@ -35,3 +35,15 @@ Array [
   "[    log] > git remote get-url origin[n]",
 ]
 `;
+
+exports[`GitUtilities normalizeGitHubAuthorizationHeader decodes basic-auth with x-access-token prefix to "token" scheme 1`] = `Array []`;
+
+exports[`GitUtilities normalizeGitHubAuthorizationHeader is idempotent — applying it twice produces the same result as once 1`] = `Array []`;
+
+exports[`GitUtilities normalizeGitHubAuthorizationHeader passes through a "bearer" header unchanged 1`] = `Array []`;
+
+exports[`GitUtilities normalizeGitHubAuthorizationHeader passes through an already-normalized "token" header unchanged 1`] = `Array []`;
+
+exports[`GitUtilities normalizeGitHubAuthorizationHeader trims leading and trailing whitespace 1`] = `Array []`;
+
+exports[`GitUtilities normalizeGitHubAuthorizationHeader wraps a raw token with "token" scheme 1`] = `Array []`;
