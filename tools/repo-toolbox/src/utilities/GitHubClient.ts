@@ -8,7 +8,7 @@ import type { ITerminal } from '@rushstack/terminal';
 import {
   getGitAuthorizationHeaderAsync,
   getRepoSlugAsync,
-  normalizeGitHubAuthorizationHeader
+  type IGitHubAuthorizationHeader
 } from './GitUtilities';
 
 export type IGitHubPr = RestEndpointMethodTypes['pulls']['list']['response']['data'][number];
@@ -17,7 +17,7 @@ export type ICommitPr =
   RestEndpointMethodTypes['repos']['listPullRequestsAssociatedWithCommit']['response']['data'][number];
 
 export interface IGitHubClientOptions {
-  authorizationHeader: string;
+  authorizationHeader: IGitHubAuthorizationHeader;
   repoSlug: string;
 }
 
@@ -68,7 +68,11 @@ export class GitHubClient {
   private readonly _octokitCommonOptions: IOctokitCommonOptions;
 
   private constructor(options: IGitHubClientOptionsInternal) {
-    const { authorizationHeader, repoSlug, Octokit } = options;
+    const {
+      authorizationHeader: { header },
+      repoSlug,
+      Octokit
+    } = options;
     const [owner, repo, ...extraParts] = repoSlug.split('/');
     if (!owner || !repo || extraParts.length > 0) {
       throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
@@ -76,10 +80,9 @@ export class GitHubClient {
 
     this._octokitCommonOptions = { owner, repo };
 
-    const normalizedAuthorizationHeader: string = normalizeGitHubAuthorizationHeader(authorizationHeader);
     this._octokit = new Octokit();
     this._octokit.hook.before('request', (requestOptions) => {
-      requestOptions.headers.authorization = normalizedAuthorizationHeader;
+      requestOptions.headers.authorization = header;
     });
   }
 

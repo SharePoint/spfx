@@ -8,6 +8,10 @@ import type { ITerminal } from '@rushstack/terminal';
 
 const GIT_BIN_NAME: 'git' = 'git';
 
+export interface IGitHubAuthorizationHeader {
+  header: string;
+}
+
 export async function getRepoSlugAsync(terminal: ITerminal): Promise<string> {
   const result: string = await execGitAsync(['remote', 'get-url', 'origin'], terminal);
   const match: RegExpMatchArray | null = result.match(/github\.com[:/]([^/]+\/[^/]+?)(?:\.git)?$/);
@@ -24,33 +28,38 @@ export async function getRepoSlugAsync(terminal: ITerminal): Promise<string> {
  * Git checkout extraheaders use `basic base64(x-access-token:ghs_xxx)`, which GitHub
  * App installation tokens don't support — they require `token ghs_xxx`.
  */
-export function normalizeGitHubAuthorizationHeader(value: string): string {
+export function parseGitHubAuthorizationHeader(value: string): IGitHubAuthorizationHeader {
   value = value.trim();
   const spaceIndex: number = value.indexOf(' ');
 
+  let header: string;
   if (spaceIndex === -1) {
     // Raw token with no scheme prefix
-    return `token ${value}`;
-  }
-
-  const scheme: string = value.substring(0, spaceIndex);
-  const encoded: string = value.substring(spaceIndex + 1);
-  if (scheme.toLowerCase() === 'basic') {
-    const decoded: string = Buffer.from(encoded, 'base64').toString('utf8');
-    const colonIndex: number = decoded.indexOf(':');
-    if (colonIndex !== -1) {
-      const token: string = decoded.substring(colonIndex + 1);
-      if (token) {
-        return `token ${token}`;
+    header = `token ${value}`;
+  } else {
+    const scheme: string = value.substring(0, spaceIndex);
+    const encoded: string = value.substring(spaceIndex + 1);
+    if (scheme.toLowerCase() === 'basic') {
+      const decoded: string = Buffer.from(encoded, 'base64').toString('utf8');
+      const colonIndex: number = decoded.indexOf(':');
+      if (colonIndex !== -1) {
+        const token: string = decoded.substring(colonIndex + 1);
+        if (token) {
+          header = `token ${token}`;
+        }
       }
     }
   }
 
   // Already "token xxx", "bearer xxx", etc.
-  return value;
+  header ??= value;
+
+  return { header };
 }
 
-export async function getGitAuthorizationHeaderAsync(terminal: ITerminal): Promise<string> {
+export async function getGitAuthorizationHeaderAsync(
+  terminal: ITerminal
+): Promise<IGitHubAuthorizationHeader> {
   // The checkout with persistCredentials sets an extraheader in git config
   // Format: "http.<url>.extraheader AUTHORIZATION: basic <token>"
   const result: string = await execGitAsync(['config', '--get-regexp', 'http\\..*\\.extraheader'], terminal);
@@ -69,7 +78,7 @@ export async function getGitAuthorizationHeaderAsync(terminal: ITerminal): Promi
     throw new Error(`Unexpected authorization header format: ${headerLine}`);
   }
 
-  return normalizeGitHubAuthorizationHeader(headerLine.substring(colonIndex + 1).trim());
+  return parseGitHubAuthorizationHeader(headerLine.substring(colonIndex + 1).trim());
 }
 
 export async function execGitAsync(args: string[], terminal: ITerminal): Promise<string> {

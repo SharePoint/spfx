@@ -9,7 +9,7 @@ import { StringBufferTerminalProvider, Terminal } from '@rushstack/terminal';
 import {
   getGitAuthorizationHeaderAsync,
   getRepoSlugAsync,
-  normalizeGitHubAuthorizationHeader
+  parseGitHubAuthorizationHeader
 } from '../GitUtilities';
 
 describe('GitUtilities', () => {
@@ -57,7 +57,8 @@ describe('GitUtilities', () => {
       const encoded: string = Buffer.from('x-access-token:ghs_abc123').toString('base64');
       mockGitStdout(`http.https://github.com/.extraheader AUTHORIZATION: basic ${encoded}`);
 
-      await expect(getGitAuthorizationHeaderAsync(terminal)).resolves.toBe('token ghs_abc123');
+      const { header } = await getGitAuthorizationHeaderAsync(terminal);
+      expect(header).toBe('token ghs_abc123');
     });
 
     it('throws when git config output has no header value', async () => {
@@ -77,40 +78,52 @@ describe('GitUtilities', () => {
     });
   });
 
-  describe(normalizeGitHubAuthorizationHeader.name, () => {
+  describe(parseGitHubAuthorizationHeader.name, () => {
     it('wraps a raw token with "token" scheme', () => {
-      expect(normalizeGitHubAuthorizationHeader('ghs_abc123')).toBe('token ghs_abc123');
+      const { header } = parseGitHubAuthorizationHeader('ghs_abc123');
+      expect(header).toBe('token ghs_abc123');
     });
 
     it('decodes basic-auth with x-access-token prefix to "token" scheme', () => {
       const encoded: string = Buffer.from('x-access-token:ghs_abc123').toString('base64');
-      expect(normalizeGitHubAuthorizationHeader(`basic ${encoded}`)).toBe('token ghs_abc123');
+      const { header } = parseGitHubAuthorizationHeader(`basic ${encoded}`);
+      expect(header).toBe('token ghs_abc123');
     });
 
     it('passes through an already-normalized "token" header unchanged', () => {
-      expect(normalizeGitHubAuthorizationHeader('token ghs_abc123')).toBe('token ghs_abc123');
+      const { header } = parseGitHubAuthorizationHeader('token ghs_abc123');
+      expect(header).toBe('token ghs_abc123');
     });
 
     it('passes through a "bearer" header unchanged', () => {
-      expect(normalizeGitHubAuthorizationHeader('bearer ghs_abc123')).toBe('bearer ghs_abc123');
+      const { header } = parseGitHubAuthorizationHeader('bearer ghs_abc123');
+      expect(header).toBe('bearer ghs_abc123');
     });
 
     it('trims leading and trailing whitespace', () => {
-      expect(normalizeGitHubAuthorizationHeader('  token ghs_abc123  ')).toBe('token ghs_abc123');
+      const { header } = parseGitHubAuthorizationHeader('  token ghs_abc123  ');
+      expect(header).toBe('token ghs_abc123');
     });
 
-    it('is idempotent — applying it twice produces the same result as once', () => {
-      const inputs: string[] = [
-        'ghs_abc123',
-        `basic ${Buffer.from('x-access-token:ghs_abc123').toString('base64')}`,
-        'token ghs_abc123',
-        'bearer ghs_abc123'
-      ];
-      for (const input of inputs) {
-        const once: string = normalizeGitHubAuthorizationHeader(input);
-        const twice: string = normalizeGitHubAuthorizationHeader(once);
+    it.each([
+      ['raw token (no scheme)', 'ghs_abc123'],
+      [
+        'basic auth (base64 x-access-token)',
+        `basic ${Buffer.from('x-access-token:ghs_abc123').toString('base64')}`
+      ],
+      ['"token" scheme', 'token ghs_abc123'],
+      ['"bearer" scheme', 'bearer ghs_abc123']
+    ])(
+      'is idempotent for %s',
+      (
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        _label,
+        input
+      ) => {
+        const { header: once } = parseGitHubAuthorizationHeader(input);
+        const { header: twice } = parseGitHubAuthorizationHeader(once);
         expect(twice).toBe(once);
       }
-    });
+    );
   });
 });

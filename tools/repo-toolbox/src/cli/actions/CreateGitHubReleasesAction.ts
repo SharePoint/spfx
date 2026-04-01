@@ -7,12 +7,16 @@ import type { ITerminal } from '@rushstack/terminal';
 import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
 import { Async, FileSystem, type FolderItem, type IPackageJson } from '@rushstack/node-core-library';
 
+import { GitHubTokenActionBase } from './GitHubTokenActionBase';
 import { GitHubClient } from '../../utilities/GitHubClient';
 import {
   readChangelogSectionFromTgzAsync,
   readPackageInfoFromTgzAsync
 } from '../../utilities/PackageTgzUtilities';
-import { GitHubTokenActionBase } from './GitHubTokenActionBase';
+import {
+  type IGitHubAuthorizationHeader,
+  parseGitHubAuthorizationHeader
+} from '../../utilities/GitUtilities';
 
 /**
  * Creates GitHub releases (and their associated tags) for each .tgz package in a directory.
@@ -84,6 +88,8 @@ export class CreateGitHubReleasesAction extends GitHubTokenActionBase {
       throw new Error(`No .tgz packages found in ${packagesPath}`);
     }
 
+    const authorizationHeader: IGitHubAuthorizationHeader =
+      parseGitHubAuthorizationHeader(rawAuthorizationHeader);
     const gitHubClient: GitHubClient = await GitHubClient.createGitHubClientFromTokenAndRepoSlugAsync({
       authorizationHeader,
       repoSlug

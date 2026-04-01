@@ -6,7 +6,8 @@ import type { ITerminal } from '@rushstack/terminal';
 import {
   getGitAuthorizationHeaderAsync,
   getRepoSlugAsync,
-  normalizeGitHubAuthorizationHeader
+  type IGitHubAuthorizationHeader,
+  parseGitHubAuthorizationHeader
 } from '../../utilities/GitUtilities';
 import { GitHubTokenActionBase } from './GitHubTokenActionBase';
 
@@ -44,9 +45,9 @@ export class EmitGitHubVarsAction extends GitHubTokenActionBase {
     terminal.writeLine(`Emitted GitHubRepoSlug: ${repoSlug}`);
 
     const { value: rawToken, environmentVariable, longName } = this._githubTokenParameter;
-    let authHeader: string;
+    let authHeader: IGitHubAuthorizationHeader;
     if (rawToken) {
-      authHeader = normalizeGitHubAuthorizationHeader(rawToken);
+      authHeader = parseGitHubAuthorizationHeader(rawToken);
       terminal.writeLine(`Using ${environmentVariable} from environment or ${longName} as GitHub token`);
     } else {
       authHeader = await getGitAuthorizationHeaderAsync(terminal);
