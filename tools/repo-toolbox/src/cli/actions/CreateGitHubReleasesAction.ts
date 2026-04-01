@@ -23,7 +23,7 @@ import {
  * Tags are formatted as `@scope/package_vX.Y.Z`, matching the rushstack convention.
  * Release notes are populated from the corresponding CHANGELOG.md section in the package.
  */
-export class CreateGitHubReleasesAction extends GitHubTokenActionBase {
+export class CreateGitHubReleasesAction extends GitHubTokenActionBase<true> {
   private readonly _terminal: ITerminal;
   private readonly _packagesPathParameter: IRequiredCommandLineStringParameter;
   private readonly _commitShaParameter: IRequiredCommandLineStringParameter;
@@ -33,7 +33,8 @@ export class CreateGitHubReleasesAction extends GitHubTokenActionBase {
     super({
       actionName: 'create-github-releases',
       summary: 'Creates a GitHub release for each .tgz package in a directory.',
-      documentation: ''
+      documentation: '',
+      githubTokenRequired: true
     });
 
     this._terminal = terminal;
@@ -65,15 +66,8 @@ export class CreateGitHubReleasesAction extends GitHubTokenActionBase {
     const terminal: ITerminal = this._terminal;
     const packagesPath: string = this._packagesPathParameter.value;
     const commitSha: string = this._commitShaParameter.value;
-    const authorizationHeader: string | undefined = this._githubTokenParameter.value;
+    const rawAuthorizationHeader: string = this._githubTokenParameter.value;
     const repoSlug: string = this._repoSlugParameter.value;
-
-    if (!authorizationHeader) {
-      const { environmentVariable, longName } = this._githubTokenParameter;
-      throw new Error(
-        `A GitHub token is required. Set the ${environmentVariable} environment variable or pass ${longName}.`
-      );
-    }
 
     const folderItems: FolderItem[] = await FileSystem.readFolderItemsAsync(packagesPath);
     const tgzFiles: string[] = [];

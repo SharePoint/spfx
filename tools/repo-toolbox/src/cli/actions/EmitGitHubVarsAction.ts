@@ -24,14 +24,15 @@ import { GitHubTokenActionBase } from './GitHubTokenActionBase';
  * credential stored in the checkout extraheader for environments without
  * the 1ES template.
  */
-export class EmitGitHubVarsAction extends GitHubTokenActionBase {
+export class EmitGitHubVarsAction extends GitHubTokenActionBase<false> {
   private readonly _terminal: ITerminal;
 
   public constructor(terminal: ITerminal) {
     super({
       actionName: 'emit-github-vars',
       summary: 'Emits GitHub repo slug and auth token as AzDO output variables.',
-      documentation: ''
+      documentation: '',
+      githubTokenRequired: false
     });
 
     this._terminal = terminal;
