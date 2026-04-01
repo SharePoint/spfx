@@ -29,16 +29,25 @@ export interface ISPFxBuiltInContextInputs {
  * @public
  */
 export interface ISPFxBuiltInContext {
+  /** Kebab-cased solution folder name (e.g. "hello-world"). */
   solution_name: string;
+  /** npm package / library name (e.g. "\@contoso/hello-world"). */
   libraryName: string;
+  /** SPFx version from the template manifest (e.g. "1.22.2"). */
   spfxVersion: string;
-  /** SPFx version with hyphens escaped for shields.io badge URLs (e.g. "1.23.0--beta.0") */
+  /** SPFx version with hyphens escaped for shields.io badge URLs (e.g. "1.23.0--beta.0"). */
   spfxVersionForBadgeUrl: string;
+  /** Random (or deterministic in CI mode) GUID identifying the component. */
   componentId: string;
+  /** Random (or deterministic in CI mode) GUID identifying the solution feature. */
   featureId: string;
+  /** Random (or deterministic in CI mode) GUID identifying the solution package. */
   solutionId: string;
+  /** Short identifier used in the component manifest; defaults to componentName. */
   componentAlias: string;
+  /** Human-readable component name as provided by the caller (e.g. "Hello World"). */
   componentName: string;
+  /** Description of the component; defaults to "\{componentName\} description". */
   componentDescription: string;
 }
 

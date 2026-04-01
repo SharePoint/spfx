@@ -110,23 +110,14 @@ export function _isBinaryFile(filePath: string): boolean;
 
 // @public
 export interface ISPFxBuiltInContext {
-    // (undocumented)
     componentAlias: string;
-    // (undocumented)
     componentDescription: string;
-    // (undocumented)
     componentId: string;
-    // (undocumented)
     componentName: string;
-    // (undocumented)
     featureId: string;
-    // (undocumented)
     libraryName: string;
-    // (undocumented)
     solution_name: string;
-    // (undocumented)
     solutionId: string;
-    // (undocumented)
     spfxVersion: string;
     spfxVersionForBadgeUrl: string;
 }
