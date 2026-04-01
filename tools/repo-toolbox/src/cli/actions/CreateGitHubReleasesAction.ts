@@ -121,23 +121,25 @@ export class CreateGitHubReleasesAction extends GitHubTokenActionBase {
           terminal.writeLine(`Created release: ${tag}`);
         } catch (e: unknown) {
           if (e instanceof RequestError) {
-            const response: OctokitResponse<RequestError> | undefined = e.response as
-              | OctokitResponse<RequestError>
-              | undefined;
-            const responseErrors: RequestError['errors'] = response?.data?.errors;
-
-            terminal.writeErrorLine(
-              `GitHub API error creating release ${tag}: HTTP ${e.status} — ${e.message}` +
-                (responseErrors ? `\n  errors: ${JSON.stringify(responseErrors)}` : '')
-            );
+            const { status, message, response } = e;
+            const responseData: RequestError | undefined = (
+              response as OctokitResponse<RequestError> | undefined
+            )?.data;
+            const responseErrors: RequestError['errors'] = responseData?.errors;
 
             if (
-              e.status === 422 &&
+              status === 422 &&
               Array.isArray(responseErrors) &&
               responseErrors.some((error) => error.code === 'already_exists')
             ) {
               terminal.writeLine(`Release already exists for ${tag}; skipping.`);
               return;
+            } else {
+              terminal.writeLine(
+                `##vso[task.logissue type=error]GitHub API error creating release ${tag}: ` +
+                  `HTTP ${status} — ${message}. ` +
+                  (responseData ? `response data: ${JSON.stringify(responseData)}` : '')
+              );
             }
           }
 
