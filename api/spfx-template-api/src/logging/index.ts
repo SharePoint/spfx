@@ -8,6 +8,6 @@ export {
   type FileWriteOutcome,
   type IFileWriteEvent,
   type IPackageManagerInstallCompletedEvent,
-  type SPFxScaffoldEvent
+  type ISPFxScaffoldEvent
 } from './SPFxScaffoldEvent';
-export { SPFxScaffoldLog, type SPFxScaffoldEventInput } from './SPFxScaffoldLog';
+export { SPFxScaffoldLog, type ISPFxScaffoldEventInput } from './SPFxScaffoldLog';

@@ -21,8 +21,8 @@ import type { FileWriteOutcome } from '../logging/SPFxScaffoldEvent';
  */
 export interface IWriteOptions {
   /**
-   * When provided, a `file-write` event is appended for each non-deleted file with
-   * non-null contents processed during the write phase.
+   * When provided, a `file-write` event is appended for each file in the template
+   * output that is evaluated for writing or merging during the write phase.
    */
   log?: SPFxScaffoldLog;
 }

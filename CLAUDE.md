@@ -272,6 +272,14 @@ const filePath = `${tempDir}/config/package-solution.json`;
   ```
 - **Use `async`/`await`** instead of `.then()` chains.
 - **Don't use `!!` for boolean coercion** — just use `if (value)` directly.
+- **Prefix type aliases with `I`** when they represent a union of interfaces or an interface-like shape. This matches the `I` prefix convention already used for interfaces:
+  ```ts
+  // WRONG
+  export type SPFxScaffoldEvent = ITemplateRenderedEvent | IFileWriteEvent;
+
+  // RIGHT
+  export type ISPFxScaffoldEvent = ITemplateRenderedEvent | IFileWriteEvent;
+  ```
 
 ### Code Organization
 
@@ -294,10 +302,11 @@ const filePath = `${tempDir}/config/package-solution.json`;
 ### Test Conventions
 
 - **Use `toMatchSnapshot()`** for complex output assertions. Prefer snapshots over inline assertions for JSON structures, terminal output, and merge results. Use inline snapshots (`toMatchInlineSnapshot()`) when you want the value in the test file.
-- **Use `ClassName.name` in describe blocks** for refactor safety:
+- **Use `ClassName.name` in describe blocks** for refactor safety. For method-level nested describes, use `ClassName.prototype.methodName.name`. For static methods, use `ClassName.staticMethod.name`:
   ```ts
   describe(SPFxTemplateWriter.name, () => {
     describe(SPFxTemplateWriter.prototype.addMergeHelper.name, () => {
+    describe(SPFxScaffoldLog.fromJsonl.name, () => {
   ```
 - **Use jest mocks that auto-reset** instead of manual cleanup like `delete process.env.X`. Use `jest.replaceProperty()` or mock the env object.
 - **Mock network calls** — never wait for real network timeouts in tests.
