@@ -4,11 +4,10 @@
 import type { ITerminal } from '@rushstack/terminal';
 
 import {
-  getGitAuthorizationHeaderAsync,
-  getRepoSlugAsync,
   type IGitHubAuthorizationHeader,
   parseGitHubAuthorizationHeader
-} from '../../utilities/GitUtilities';
+} from '../../utilities/GitHubClient';
+import { getGitHubAuthorizationHeaderAsync, getRepoSlugAsync } from '../../utilities/GitUtilities';
 import { GitHubTokenActionBase } from './GitHubTokenActionBase';
 
 /**
@@ -54,7 +53,7 @@ export class EmitGitHubVarsAction extends GitHubTokenActionBase<false> {
       authHeader = parseGitHubAuthorizationHeader(rawToken);
       terminal.writeLine(`Using ${environmentVariable} from environment or ${longName} as GitHub token`);
     } else {
-      authHeader = await getGitAuthorizationHeaderAsync(terminal);
+      authHeader = await getGitHubAuthorizationHeaderAsync(terminal);
       terminal.writeLine('Using git credential extraheader as fallback');
     }
 

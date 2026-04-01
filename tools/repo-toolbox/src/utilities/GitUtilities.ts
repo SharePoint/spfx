@@ -6,11 +6,9 @@ import type { ChildProcess } from 'node:child_process';
 import { Executable } from '@rushstack/node-core-library';
 import type { ITerminal } from '@rushstack/terminal';
 
-const GIT_BIN_NAME: 'git' = 'git';
+import { parseGitHubAuthorizationHeader, type IGitHubAuthorizationHeader } from './GitHubClient';
 
-export interface IGitHubAuthorizationHeader {
-  header: string;
-}
+const GIT_BIN_NAME: 'git' = 'git';
 
 export async function getRepoSlugAsync(terminal: ITerminal): Promise<string> {
   const result: string = await execGitAsync(['remote', 'get-url', 'origin'], terminal);
@@ -22,42 +20,7 @@ export async function getRepoSlugAsync(terminal: ITerminal): Promise<string> {
   return match[1]!;
 }
 
-/**
- * Normalizes various token formats to a proper GitHub API Authorization header value.
- *
- * Git checkout extraheaders use `basic base64(x-access-token:ghs_xxx)`, which GitHub
- * App installation tokens don't support — they require `token ghs_xxx`.
- */
-export function parseGitHubAuthorizationHeader(value: string): IGitHubAuthorizationHeader {
-  value = value.trim();
-  const spaceIndex: number = value.indexOf(' ');
-
-  let header: string;
-  if (spaceIndex === -1) {
-    // Raw token with no scheme prefix
-    header = `token ${value}`;
-  } else {
-    const scheme: string = value.substring(0, spaceIndex);
-    const encoded: string = value.substring(spaceIndex + 1);
-    if (scheme.toLowerCase() === 'basic') {
-      const decoded: string = Buffer.from(encoded, 'base64').toString('utf8');
-      const colonIndex: number = decoded.indexOf(':');
-      if (colonIndex !== -1) {
-        const token: string = decoded.substring(colonIndex + 1);
-        if (token) {
-          header = `token ${token}`;
-        }
-      }
-    }
-  }
-
-  // Already "token xxx", "bearer xxx", etc.
-  header ??= value;
-
-  return { header };
-}
-
-export async function getGitAuthorizationHeaderAsync(
+export async function getGitHubAuthorizationHeaderAsync(
   terminal: ITerminal
 ): Promise<IGitHubAuthorizationHeader> {
   // The checkout with persistCredentials sets an extraheader in git config

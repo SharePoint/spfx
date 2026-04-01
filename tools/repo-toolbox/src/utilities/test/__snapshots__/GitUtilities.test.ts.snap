@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GitUtilities getGitAuthorizationHeaderAsync normalizes basic-auth extraheader with a GitHub App token 1`] = `
+exports[`GitUtilities getGitHubAuthorizationHeaderAsync normalizes basic-auth extraheader with a GitHub App token 1`] = `
 Array [
   "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
 ]
 `;
 
-exports[`GitUtilities getGitAuthorizationHeaderAsync throws when git config output has no header value 1`] = `
+exports[`GitUtilities getGitHubAuthorizationHeaderAsync throws when git config output has no header value 1`] = `
 Array [
   "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
 ]
 `;
 
-exports[`GitUtilities getGitAuthorizationHeaderAsync throws when header line is missing colon 1`] = `
+exports[`GitUtilities getGitHubAuthorizationHeaderAsync throws when header line is missing colon 1`] = `
 Array [
   "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
 ]
@@ -35,21 +35,3 @@ Array [
   "[    log] > git remote get-url origin[n]",
 ]
 `;
-
-exports[`GitUtilities parseGitHubAuthorizationHeader decodes basic-auth with x-access-token prefix to "token" scheme 1`] = `Array []`;
-
-exports[`GitUtilities parseGitHubAuthorizationHeader is idempotent for "bearer" scheme 1`] = `Array []`;
-
-exports[`GitUtilities parseGitHubAuthorizationHeader is idempotent for "token" scheme 1`] = `Array []`;
-
-exports[`GitUtilities parseGitHubAuthorizationHeader is idempotent for basic auth (base64 x-access-token) 1`] = `Array []`;
-
-exports[`GitUtilities parseGitHubAuthorizationHeader is idempotent for raw token (no scheme) 1`] = `Array []`;
-
-exports[`GitUtilities parseGitHubAuthorizationHeader passes through a "bearer" header unchanged 1`] = `Array []`;
-
-exports[`GitUtilities parseGitHubAuthorizationHeader passes through an already-normalized "token" header unchanged 1`] = `Array []`;
-
-exports[`GitUtilities parseGitHubAuthorizationHeader trims leading and trailing whitespace 1`] = `Array []`;
-
-exports[`GitUtilities parseGitHubAuthorizationHeader wraps a raw token with "token" scheme 1`] = `Array []`;

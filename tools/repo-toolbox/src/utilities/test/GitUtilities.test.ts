@@ -6,11 +6,7 @@ import type { ChildProcess } from 'node:child_process';
 import { Executable } from '@rushstack/node-core-library';
 import { StringBufferTerminalProvider, Terminal } from '@rushstack/terminal';
 
-import {
-  getGitAuthorizationHeaderAsync,
-  getRepoSlugAsync,
-  parseGitHubAuthorizationHeader
-} from '../GitUtilities';
+import { getGitHubAuthorizationHeaderAsync, getRepoSlugAsync } from '../GitUtilities';
 
 describe('GitUtilities', () => {
   let terminalProvider: StringBufferTerminalProvider;
@@ -51,20 +47,20 @@ describe('GitUtilities', () => {
     });
   });
 
-  describe(getGitAuthorizationHeaderAsync.name, () => {
+  describe(getGitHubAuthorizationHeaderAsync.name, () => {
     it('normalizes basic-auth extraheader with a GitHub App token', async () => {
       // Simulate "basic base64(x-access-token:ghs_abc123)" as stored by git checkout
       const encoded: string = Buffer.from('x-access-token:ghs_abc123').toString('base64');
       mockGitStdout(`http.https://github.com/.extraheader AUTHORIZATION: basic ${encoded}`);
 
-      const { header } = await getGitAuthorizationHeaderAsync(terminal);
+      const { header } = await getGitHubAuthorizationHeaderAsync(terminal);
       expect(header).toBe('token ghs_abc123');
     });
 
     it('throws when git config output has no header value', async () => {
       mockGitStdout('');
 
-      await expect(getGitAuthorizationHeaderAsync(terminal)).rejects.toThrow(
+      await expect(getGitHubAuthorizationHeaderAsync(terminal)).rejects.toThrow(
         'Could not extract authorization header from git config'
       );
     });
@@ -72,58 +68,9 @@ describe('GitUtilities', () => {
     it('throws when header line is missing colon', async () => {
       mockGitStdout('http.https://github.com/.extraheader AUTHORIZATION basic abc123');
 
-      await expect(getGitAuthorizationHeaderAsync(terminal)).rejects.toThrow(
+      await expect(getGitHubAuthorizationHeaderAsync(terminal)).rejects.toThrow(
         'Unexpected authorization header format'
       );
     });
-  });
-
-  describe(parseGitHubAuthorizationHeader.name, () => {
-    it('wraps a raw token with "token" scheme', () => {
-      const { header } = parseGitHubAuthorizationHeader('ghs_abc123');
-      expect(header).toBe('token ghs_abc123');
-    });
-
-    it('decodes basic-auth with x-access-token prefix to "token" scheme', () => {
-      const encoded: string = Buffer.from('x-access-token:ghs_abc123').toString('base64');
-      const { header } = parseGitHubAuthorizationHeader(`basic ${encoded}`);
-      expect(header).toBe('token ghs_abc123');
-    });
-
-    it('passes through an already-normalized "token" header unchanged', () => {
-      const { header } = parseGitHubAuthorizationHeader('token ghs_abc123');
-      expect(header).toBe('token ghs_abc123');
-    });
-
-    it('passes through a "bearer" header unchanged', () => {
-      const { header } = parseGitHubAuthorizationHeader('bearer ghs_abc123');
-      expect(header).toBe('bearer ghs_abc123');
-    });
-
-    it('trims leading and trailing whitespace', () => {
-      const { header } = parseGitHubAuthorizationHeader('  token ghs_abc123  ');
-      expect(header).toBe('token ghs_abc123');
-    });
-
-    it.each([
-      ['raw token (no scheme)', 'ghs_abc123'],
-      [
-        'basic auth (base64 x-access-token)',
-        `basic ${Buffer.from('x-access-token:ghs_abc123').toString('base64')}`
-      ],
-      ['"token" scheme', 'token ghs_abc123'],
-      ['"bearer" scheme', 'bearer ghs_abc123']
-    ])(
-      'is idempotent for %s',
-      (
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        _label,
-        input
-      ) => {
-        const { header: once } = parseGitHubAuthorizationHeader(input);
-        const { header: twice } = parseGitHubAuthorizationHeader(once);
-        expect(twice).toBe(once);
-      }
-    );
   });
 });

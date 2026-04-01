@@ -7,11 +7,11 @@ import type { ITerminal } from '@rushstack/terminal';
 import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
 import { Async, FileSystem, type FolderItem, type IPackageJson } from '@rushstack/node-core-library';
 
-import { GitHubClient } from '../../utilities/GitHubClient';
 import {
+  GitHubClient,
   type IGitHubAuthorizationHeader,
   parseGitHubAuthorizationHeader
-} from '../../utilities/GitUtilities';
+} from '../../utilities/GitHubClient';
 import {
   readChangelogSectionFromTgzAsync,
   readPackageInfoFromTgzAsync

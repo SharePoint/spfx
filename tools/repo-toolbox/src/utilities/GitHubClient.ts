@@ -5,16 +5,16 @@ import type { Octokit, RestEndpointMethodTypes } from '@octokit/rest';
 
 import type { ITerminal } from '@rushstack/terminal';
 
-import {
-  getGitAuthorizationHeaderAsync,
-  getRepoSlugAsync,
-  type IGitHubAuthorizationHeader
-} from './GitUtilities';
+import { getGitHubAuthorizationHeaderAsync, getRepoSlugAsync } from './GitUtilities';
 
 export type IGitHubPr = RestEndpointMethodTypes['pulls']['list']['response']['data'][number];
 export type IGitHubCreationResult = RestEndpointMethodTypes['pulls']['create']['response']['data'];
 export type ICommitPr =
   RestEndpointMethodTypes['repos']['listPullRequestsAssociatedWithCommit']['response']['data'][number];
+
+export interface IGitHubAuthorizationHeader {
+  header: string;
+}
 
 export interface IGitHubClientOptions {
   authorizationHeader: IGitHubAuthorizationHeader;
@@ -63,6 +63,41 @@ interface IGitHubClientOptionsInternal extends IGitHubClientOptions {
   Octokit: typeof Octokit;
 }
 
+/**
+ * Normalizes various token formats to a proper GitHub API Authorization header value.
+ *
+ * Git checkout extraheaders use `basic base64(x-access-token:ghs_xxx)`, which GitHub
+ * App installation tokens don't support — they require `token ghs_xxx`.
+ */
+export function parseGitHubAuthorizationHeader(value: string): IGitHubAuthorizationHeader {
+  value = value.trim();
+  const spaceIndex: number = value.indexOf(' ');
+
+  let header: string;
+  if (spaceIndex === -1) {
+    // Raw token with no scheme prefix
+    header = `token ${value}`;
+  } else {
+    const scheme: string = value.substring(0, spaceIndex);
+    const encoded: string = value.substring(spaceIndex + 1);
+    if (scheme.toLowerCase() === 'basic') {
+      const decoded: string = Buffer.from(encoded, 'base64').toString('utf8');
+      const colonIndex: number = decoded.indexOf(':');
+      if (colonIndex !== -1) {
+        const token: string = decoded.substring(colonIndex + 1);
+        if (token) {
+          header = `token ${token}`;
+        }
+      }
+    }
+  }
+
+  // Already "token xxx", "bearer xxx", etc.
+  header ??= value;
+
+  return { header };
+}
+
 export class GitHubClient {
   private readonly _octokit: Octokit;
   private readonly _octokitCommonOptions: IOctokitCommonOptions;
@@ -93,7 +128,7 @@ export class GitHubClient {
   public static async createGitHubClientAsync(terminal: ITerminal): Promise<GitHubClient> {
     const [repoSlug, authorizationHeader] = await Promise.all([
       getRepoSlugAsync(terminal),
-      getGitAuthorizationHeaderAsync(terminal)
+      getGitHubAuthorizationHeaderAsync(terminal)
     ]);
     return await GitHubClient.createGitHubClientFromTokenAndRepoSlugAsync({ authorizationHeader, repoSlug });
   }
