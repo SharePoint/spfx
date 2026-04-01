@@ -201,10 +201,8 @@ await writer.writeAsync(templateFs, targetDir, { log });
 // Persist back to disk
 await log.saveAsync(targetDir);
 
-// After scaffolding, create an entry from the scaffold log
-const entry = SPFxCreationAuditLog.createEntryFromScaffoldLog(scaffoldLog, auditLog.hasEntries);
-auditLog.append(entry);
-await auditLog.saveAsync(targetDir);
+// Read the last package manager selection from the log
+const lastPM = log.lastPackageManager; // e.g. 'npm', or undefined if none recorded
 ```
 
 ---

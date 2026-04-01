@@ -248,7 +248,13 @@ export class CreateAction extends SPFxActionBase {
       if (packageManager !== 'none') {
         let resolvedPackageManager: PackageManager = packageManager;
 
-        if (isExistingProject && previousPackageManager && previousPackageManager !== packageManager) {
+        const validPackageManagers: ReadonlySet<string> = new Set<string>(['npm', 'pnpm', 'yarn']);
+        if (
+          isExistingProject &&
+          previousPackageManager &&
+          validPackageManagers.has(previousPackageManager) &&
+          previousPackageManager !== packageManager
+        ) {
           terminal.writeWarningLine(
             `${this._packageManagerParameter.longName} "${packageManager}" is overridden by ` +
               `"${previousPackageManager}" from the existing project's scaffold log.`

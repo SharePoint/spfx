@@ -78,7 +78,7 @@ Yeoman compatibility shim) can be built without duplicating core logic.
 | `--template-url URL` | No | Custom GitHub template repository URL. Defaults to `https://github.com/SharePoint/spfx`. Also accepts the `SPFX_TEMPLATE_REPO_URL` environment variable. |
 | `--spfx-version VERSION` | No | Branch/tag in the template repo to use (e.g. `1.22`, `1.23-rc.0`). Defaults to the repo's default branch. |
 | `--remote-source URL` | No | Public GitHub repo to include as an additional template source. Can be specified multiple times. |
-| `--package-manager {npm,pnpm,yarn,none}` | No | Package manager for dependency installation after scaffolding. `none` skips installation (default). Ignored with a warning for existing projects (detected via `.spfx-scaffold.jsonl`). |
+| `--package-manager {npm,pnpm,yarn,none}` | No | Package manager for dependency installation after scaffolding. `none` skips installation (default). For existing projects (detected via `.spfx-scaffold.jsonl`), the previously recorded package manager is used; a conflicting value is overridden with a warning. |
 
 #### `spfx list-templates`
 
@@ -229,9 +229,11 @@ each `spfx create` invocation. The file accumulates events (JSONL format) across
 runs, recording templates rendered, files written/merged, and package manager usage.
 
 This file also serves as the mechanism for detecting existing SPFx projects: when
-the CLI is run in a directory that already contains a scaffold log, it restricts
-certain flags (e.g. `--package-manager` is ignored with a warning, since the package
-manager is already committed to by the existing lockfile).
+the CLI is run in a directory that already contains a scaffold log, the
+`lastPackageManager` getter reads the most recent `package-manager-selected` event.
+If the user specifies a different `--package-manager` value, the CLI overrides it
+with the previously recorded manager and emits a warning. If no previous package
+manager is recorded (or the user passes `none`), the flag is honored as-is.
 
 ---
 
