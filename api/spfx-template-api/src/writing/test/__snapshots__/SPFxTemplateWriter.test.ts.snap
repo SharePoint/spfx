@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SPFxTemplateWriter scaffold log integration should record a "merged" file-write event with mergeHelper name 1`] = `
+Array [
+  Object {
+    "kind": "file-write",
+    "mergeHelper": "package.json",
+    "outcome": "merged",
+    "relativePath": "package.json",
+  },
+]
+`;
+
+exports[`SPFxTemplateWriter scaffold log integration should record a "new" file-write event for files that do not exist on disk 1`] = `
+Array [
+  Object {
+    "kind": "file-write",
+    "mergeHelper": undefined,
+    "outcome": "new",
+    "relativePath": "src/newFile.ts",
+  },
+]
+`;
+
+exports[`SPFxTemplateWriter scaffold log integration should record a "preserved" file-write event when no merge helper exists 1`] = `
+Array [
+  Object {
+    "kind": "file-write",
+    "mergeHelper": undefined,
+    "outcome": "preserved",
+    "relativePath": "some/unknown/file.json",
+  },
+]
+`;
+
+exports[`SPFxTemplateWriter scaffold log integration should record an "unchanged" file-write event when content matches 1`] = `
+Array [
+  Object {
+    "kind": "file-write",
+    "mergeHelper": undefined,
+    "outcome": "unchanged",
+    "relativePath": "some/file.json",
+  },
+]
+`;
+
+exports[`SPFxTemplateWriter scaffold log integration should record events for multiple files with correct outcomes 1`] = `
+Array [
+  Object {
+    "kind": "file-write",
+    "mergeHelper": undefined,
+    "outcome": "new",
+    "relativePath": "src/brand-new.ts",
+  },
+  Object {
+    "kind": "file-write",
+    "mergeHelper": "package.json",
+    "outcome": "merged",
+    "relativePath": "package.json",
+  },
+  Object {
+    "kind": "file-write",
+    "mergeHelper": undefined,
+    "outcome": "unchanged",
+    "relativePath": "unchanged.txt",
+  },
+  Object {
+    "kind": "file-write",
+    "mergeHelper": undefined,
+    "outcome": "preserved",
+    "relativePath": "no-helper.json",
+  },
+]
+`;

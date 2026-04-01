@@ -151,8 +151,18 @@ The writer uses these helpers internally. You can also import them directly for 
 | `BaseSPFxTemplateRepositorySource` | Base class for building custom template sources |
 | `SPFxRepositorySource` | Interface implemented by all source types |
 | `SPFxTemplateWriter` | Writes a `TemplateOutput` to disk with merge support |
+| `IWriteOptions` | Options for `SPFxTemplateWriter.writeAsync()` (includes optional `log`) |
 | `IMergeHelper` | Interface for implementing custom merge helpers |
 | `ServeJsonMergeHelper` | Merges `config/serve.json` (also available standalone) |
+| `SPFxScaffoldLog` | Append-only event log for recording scaffolding operations; serializes to JSONL |
+| `SPFxScaffoldEventInput` | Input type for `SPFxScaffoldLog.append()` (timestamp is optional) |
+| `SPFxScaffoldEvent` | Discriminated union of all scaffold event types |
+| `ISPFxScaffoldEventBase` | Base interface shared by every scaffold event (`kind` + `timestamp`) |
+| `ITemplateRenderedEvent` | Event recorded after a template is rendered |
+| `IPackageManagerSelectedEvent` | Event recorded when a package manager is chosen |
+| `IFileWriteEvent` | Event recorded for each file written during the write phase |
+| `FileWriteOutcome` | Union type: `'new' \| 'merged' \| 'preserved' \| 'unchanged'` |
+| `IPackageManagerInstallCompletedEvent` | Event recorded after the package-manager install exits |
 | `SPFxTemplateCategory` | Union type of template categories: `'webpart' | 'extension' | 'ace' | 'library'` |
 | `SPFX_TEMPLATE_CATEGORIES` | Array of all valid category values (useful for validation/iteration) |
 | `ENGINE_VERSION` | Semver string identifying the installed engine version (matches `package.json` version) |
@@ -162,6 +172,34 @@ The writer uses these helpers internally. You can also import them directly for 
 | `SPFxTemplateRepositorySourceKind` | Union type of all built-in repository source kinds (`'local' | 'github'`) |
 | `IPublicGitHubRepositorySourceOptions` | Options object for constructing a `PublicGitHubRepositorySource` |
 | `IRenderOptions` | Context object passed to `template.renderAsync()` |
+
+---
+
+## Scaffold event log
+
+`SPFxScaffoldLog` records structured events during scaffolding. Pass it to `writeAsync()` to capture file-write outcomes, then serialize for debugging or analytics.
+
+```typescript
+import { SPFxScaffoldLog, SPFxTemplateWriter, type IFileWriteEvent } from '@microsoft/spfx-template-api';
+
+const log = new SPFxScaffoldLog();
+
+// Record custom events
+log.append({ kind: 'template-rendered', templateName: 'webpart-react', templateVersion: '1.0.0', spfxVersion: '1.22.0', context: { componentName: 'MyWebPart' }, cliVersion: '0.1.0' });
+
+// Pass to writer to auto-record file-write events
+const writer = new SPFxTemplateWriter();
+await writer.writeAsync(templateFs, targetDir, { log });
+
+// Query events by kind
+const fileWrites: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+
+// Serialize to JSONL for persistence
+const jsonl: string = log.toJsonl();
+
+// Restore from JSONL
+const restored = SPFxScaffoldLog.fromJsonl(jsonl);
+```
 
 ---
 

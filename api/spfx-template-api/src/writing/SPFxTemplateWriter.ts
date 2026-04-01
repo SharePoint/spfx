@@ -11,6 +11,35 @@ import { PackageJsonMergeHelper } from './PackageJsonMergeHelper';
 import { ConfigJsonMergeHelper } from './ConfigJsonMergeHelper';
 import { PackageSolutionJsonMergeHelper } from './PackageSolutionJsonMergeHelper';
 import { ServeJsonMergeHelper } from './ServeJsonMergeHelper';
+import type { SPFxScaffoldLog } from '../logging/SPFxScaffoldLog';
+import type { FileWriteOutcome } from '../logging/SPFxScaffoldEvent';
+
+/**
+ * Options for {@link SPFxTemplateWriter.writeAsync}.
+ *
+ * @public
+ */
+export interface IWriteOptions {
+  /**
+   * When provided, a `file-write` event is appended for each non-deleted file with
+   * non-null contents processed during the write phase.
+   */
+  log?: SPFxScaffoldLog;
+}
+
+function _logFileWrite(
+  log: SPFxScaffoldLog | undefined,
+  relativePath: string,
+  outcome: FileWriteOutcome,
+  mergeHelper?: string
+): void {
+  log?.append({
+    kind: 'file-write',
+    relativePath,
+    outcome,
+    mergeHelper
+  });
+}
 
 /**
  * Orchestrates writing template output to disk, routing modified files
@@ -47,9 +76,15 @@ export class SPFxTemplateWriter {
    *
    * @param templateOutput - The rendered template output containing files to write
    * @param targetDir - The absolute path to the destination directory
+   * @param options - Optional settings including a scaffold log to record file outcomes
    */
-  public async writeAsync(templateOutput: TemplateOutput, targetDir: string): Promise<void> {
+  public async writeAsync(
+    templateOutput: TemplateOutput,
+    targetDir: string,
+    options?: IWriteOptions
+  ): Promise<void> {
     const resolvedTargetDir: string = Path.convertToSlashes(path.resolve(targetDir));
+    const log: SPFxScaffoldLog | undefined = options?.log;
 
     await Async.forEachAsync(
       templateOutput.files,
@@ -62,7 +97,7 @@ export class SPFxTemplateWriter {
           throw new Error(`Template path "${rawRelativePath}" escapes the target directory`);
         }
 
-        await this._writeFileAsync(relativePath, absolutePath, entry.contents);
+        await this._writeFileAsync(relativePath, absolutePath, entry.contents, log);
       },
       { concurrency: 50 }
     );
@@ -71,7 +106,8 @@ export class SPFxTemplateWriter {
   private async _writeFileAsync(
     relativePath: string,
     absolutePath: string,
-    contents: string | Buffer
+    contents: string | Buffer,
+    log?: SPFxScaffoldLog
   ): Promise<void> {
     let contentToWrite: string | Buffer | undefined;
     if (typeof contents !== 'string') {
@@ -85,8 +121,14 @@ export class SPFxTemplateWriter {
         }
       }
 
-      if (!existingBuffer?.equals(contents)) {
+      if (existingBuffer === undefined) {
         contentToWrite = contents;
+        _logFileWrite(log, relativePath, 'new');
+      } else if (!existingBuffer.equals(contents)) {
+        contentToWrite = contents;
+        _logFileWrite(log, relativePath, 'new');
+      } else {
+        _logFileWrite(log, relativePath, 'unchanged');
       }
     } else {
       // Text file — attempt merge with existing content on disk
@@ -101,13 +143,18 @@ export class SPFxTemplateWriter {
 
       if (existingContent === undefined) {
         contentToWrite = contents;
+        _logFileWrite(log, relativePath, 'new');
       } else if (existingContent !== contents) {
         const helper: IMergeHelper | undefined = this._mergeHelpers.get(relativePath);
         if (helper) {
           contentToWrite = helper.merge(existingContent, contents);
+          _logFileWrite(log, relativePath, 'merged', helper.fileRelativePath);
+        } else {
+          // No merge helper and content differs — preserve existing content (skip writing)
+          _logFileWrite(log, relativePath, 'preserved');
         }
-
-        // Else, no merge helper and content differs — preserve existing content (skip writing)
+      } else {
+        _logFileWrite(log, relativePath, 'unchanged');
       }
     }
 

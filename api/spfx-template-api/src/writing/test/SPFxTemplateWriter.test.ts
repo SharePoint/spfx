@@ -18,6 +18,17 @@ import { FileSystem } from '@rushstack/node-core-library';
 
 import { TemplateOutput } from '../TemplateOutput';
 import { SPFxTemplateWriter } from '../SPFxTemplateWriter';
+import { SPFxScaffoldLog } from '../../logging/SPFxScaffoldLog';
+import type { IFileWriteEvent } from '../../logging/SPFxScaffoldEvent';
+
+/** Strip auto-generated timestamps from log events so snapshots are deterministic. */
+function snapshotLog(log: SPFxScaffoldLog): object[] {
+  return log.events.map((e) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { timestamp, ...rest } = e;
+    return rest;
+  });
+}
 
 const mockFileSystem = FileSystem as jest.Mocked<typeof FileSystem>;
 
@@ -288,6 +299,120 @@ describe(SPFxTemplateWriter.name, () => {
       const writer = new SPFxTemplateWriter();
       // Should not throw — all files have registered merge helpers
       await writer.writeAsync(templateFs, '/target');
+    });
+  });
+
+  // ---------- SPFxScaffoldLog integration ---------------------------------
+
+  describe('scaffold log integration', () => {
+    it('should record a "new" file-write event for files that do not exist on disk', async () => {
+      templateFs.write('src/newFile.ts', 'new content');
+      mockFileSystem.readFileAsync.mockRejectedValue(Object.assign(new Error('ENOENT'), { code: 'ENOENT' }));
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(templateFs, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(1);
+      expect(events[0]!.relativePath).toBe('src/newFile.ts');
+      expect(events[0]!.outcome).toBe('new');
+      expect(events[0]!.mergeHelper).toBeUndefined();
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should record an "unchanged" file-write event when content matches', async () => {
+      const sameContent = '{"key": "value"}';
+      templateFs.write('some/file.json', sameContent);
+      mockFileSystem.readFileAsync.mockResolvedValue(sameContent);
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(templateFs, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(1);
+      expect(events[0]!.relativePath).toBe('some/file.json');
+      expect(events[0]!.outcome).toBe('unchanged');
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should record a "merged" file-write event with mergeHelper name', async () => {
+      const existingPkg = JSON.stringify({ name: 'existing', dependencies: { lodash: '^4' } });
+      const incomingPkg = JSON.stringify({ name: 'incoming', dependencies: { axios: '^1' } });
+
+      templateFs.write('package.json', incomingPkg);
+      mockFileSystem.readFileAsync.mockResolvedValue(existingPkg);
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(templateFs, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(1);
+      expect(events[0]!.relativePath).toBe('package.json');
+      expect(events[0]!.outcome).toBe('merged');
+      expect(events[0]!.mergeHelper).toBe('package.json');
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should record a "preserved" file-write event when no merge helper exists', async () => {
+      templateFs.write('some/unknown/file.json', '{"new": true}');
+      mockFileSystem.readFileAsync.mockResolvedValue('{"old": true}');
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(templateFs, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(1);
+      expect(events[0]!.relativePath).toBe('some/unknown/file.json');
+      expect(events[0]!.outcome).toBe('preserved');
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should record events for multiple files with correct outcomes', async () => {
+      const existingPkg = JSON.stringify({ name: 'existing', dependencies: {} });
+      const incomingPkg = JSON.stringify({ name: 'incoming', dependencies: {} });
+      const sameContent = 'unchanged content';
+
+      templateFs.write('src/brand-new.ts', 'new code');
+      templateFs.write('package.json', incomingPkg);
+      templateFs.write('unchanged.txt', sameContent);
+      templateFs.write('no-helper.json', '{"x":1}');
+
+      mockFileSystem.readFileAsync.mockImplementation(async (filePath: string) => {
+        if (filePath.includes('brand-new')) throw Object.assign(new Error('ENOENT'), { code: 'ENOENT' });
+        if (filePath.includes('package.json')) return existingPkg;
+        if (filePath.includes('unchanged')) return sameContent;
+        if (filePath.includes('no-helper')) return '{"y":2}';
+        throw Object.assign(new Error('ENOENT'), { code: 'ENOENT' });
+      });
+
+      const log = new SPFxScaffoldLog();
+      const writer = new SPFxTemplateWriter();
+      await writer.writeAsync(templateFs, '/target', { log });
+
+      const events: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+      expect(events.length).toBe(4);
+
+      const outcomes: Map<string, string> = new Map(events.map((e) => [e.relativePath, e.outcome]));
+      expect(outcomes.get('src/brand-new.ts')).toBe('new');
+      expect(outcomes.get('package.json')).toBe('merged');
+      expect(outcomes.get('unchanged.txt')).toBe('unchanged');
+      expect(outcomes.get('no-helper.json')).toBe('preserved');
+      expect(snapshotLog(log)).toMatchSnapshot();
+    });
+
+    it('should not error when log is not provided (backward-compatible)', async () => {
+      templateFs.write('src/file.ts', 'content');
+      mockFileSystem.readFileAsync.mockRejectedValue(Object.assign(new Error('ENOENT'), { code: 'ENOENT' }));
+
+      const writer = new SPFxTemplateWriter();
+      // No log passed — should work exactly as before
+      await writer.writeAsync(templateFs, '/target');
+
+      expect(mockFileSystem.writeFileAsync).toHaveBeenCalled();
     });
   });
 });

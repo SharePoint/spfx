@@ -9,7 +9,7 @@ import { kebabCase } from 'lodash';
 import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
 import * as z from 'zod';
 
-import { Executable, Path } from '@rushstack/node-core-library';
+import { Executable, Path, type IWaitForExitResultWithoutOutput } from '@rushstack/node-core-library';
 import { Colorize, type Terminal } from '@rushstack/terminal';
 import type {
   CommandLineStringParameter,
@@ -21,16 +21,20 @@ import {
   SPFxTemplateRepositoryManager,
   type SPFxTemplate,
   SPFxTemplateWriter,
+  SPFxScaffoldLog,
   type TemplateOutput
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
 import { SPFxActionBase } from './SPFxActionBase';
+import packageJson from '../../../package.json';
 
 // Deterministic namespace for CI mode GUIDs, derived from the well-known URL
 // namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
 const CI_NAMESPACE: string = '035a23a9-8c9e-569b-ae00-7ff2e4c82fb0';
 const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
+
+const CLI_VERSION: string = packageJson.version;
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -123,6 +127,7 @@ export class CreateAction extends SPFxActionBase {
 
   protected override async onExecuteAsync(): Promise<void> {
     const terminal: Terminal = this._terminal;
+    const log: SPFxScaffoldLog = new SPFxScaffoldLog();
 
     try {
       // Get component name and validate
@@ -197,31 +202,47 @@ export class CreateAction extends SPFxActionBase {
       const componentDescription: string =
         this._componentDescriptionParameter.value || `${componentName} description`;
 
-      const templateFs: TemplateOutput = await template.renderAsync(
-        {
-          solution_name: solutionName,
-          libraryName: this._libraryNameParameter.value,
-          spfxVersion: template.spfxVersion,
-          // The shields.io badge URL uses dashes as separators, so dashes in version numbers
-          // need to be escaped as double dashes to avoid ambiguity. For example, "1.23.0-beta.0" becomes "1.23.0--beta.0".
-          spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
-          componentId: componentId,
-          featureId: featureId,
-          solutionId: solutionId,
-          componentAlias: componentAlias,
-          componentName: componentName,
-          componentDescription: componentDescription
-        },
-        { retainPhaseScripts: ciMode }
-      );
+      const renderContext: Record<string, string> = {
+        solution_name: solutionName,
+        libraryName: this._libraryNameParameter.value,
+        spfxVersion: template.spfxVersion,
+        // The shields.io badge URL uses dashes as separators, so dashes in version numbers
+        // need to be escaped as double dashes to avoid ambiguity. For example, "1.23.0-beta.0" becomes "1.23.0--beta.0".
+        spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
+        componentId: componentId,
+        featureId: featureId,
+        solutionId: solutionId,
+        componentAlias: componentAlias,
+        componentName: componentName,
+        componentDescription: componentDescription
+      };
+
+      const templateFs: TemplateOutput = await template.renderAsync(renderContext, {
+        retainPhaseScripts: ciMode
+      });
+
+      log.append({
+        kind: 'template-rendered',
+        templateName: template.name,
+        templateVersion: template.version,
+        spfxVersion: template.spfxVersion,
+        context: renderContext,
+        cliVersion: CLI_VERSION
+      });
+
+      const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
+      log.append({
+        kind: 'package-manager-selected',
+        packageManager,
+        targetDir
+      });
 
       _printFileChanges(this._terminal, templateFs, targetDir);
       const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
-      await writer.writeAsync(templateFs, targetDir);
+      await writer.writeAsync(templateFs, targetDir, { log });
 
-      const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
       if (packageManager !== 'none') {
-        await _runInstallAsync(packageManager, targetDir, terminal);
+        await _runInstallAsync(packageManager, targetDir, terminal, log);
       }
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
@@ -234,11 +255,14 @@ export class CreateAction extends SPFxActionBase {
 /**
  * Spawns the chosen package manager's install command in targetDir and waits for it to finish.
  * Files are already written before this is called, so a failure here does not undo scaffolding.
+ *
+ * Appends a `package-manager-install-completed` event to the log and throws on failure.
  */
 async function _runInstallAsync(
   packageManager: PackageManager,
   targetDir: string,
-  terminal: Terminal
+  terminal: Terminal,
+  log: SPFxScaffoldLog
 ): Promise<void> {
   terminal.writeLine(`Running ${packageManager} install in ${targetDir}...`);
 
@@ -247,15 +271,24 @@ async function _runInstallAsync(
     stdio: 'inherit'
   });
 
-  const { exitCode, signal } = await Executable.waitForExitAsync(child, {
+  const result: IWaitForExitResultWithoutOutput = await Executable.waitForExitAsync(child, {
     throwOnNonZeroExitCode: false,
     throwOnSignal: false
   });
 
-  if (signal != null) {
-    throw new Error(`${packageManager} install was terminated by signal ${signal}`);
-  } else if (exitCode !== 0) {
-    throw new Error(`${packageManager} install exited with code ${exitCode}`);
+  const normalizedExitCode: number = result.exitCode ?? -1;
+
+  log.append({
+    kind: 'package-manager-install-completed',
+    packageManager,
+    exitCode: normalizedExitCode,
+    signal: result.signal ?? undefined
+  });
+
+  if (result.signal != null) {
+    throw new Error(`${packageManager} install was terminated by signal ${result.signal}`);
+  } else if (normalizedExitCode !== 0) {
+    throw new Error(`${packageManager} install exited with code ${normalizedExitCode}`);
   }
 
   terminal.writeLine(`${packageManager} install completed successfully.`);
