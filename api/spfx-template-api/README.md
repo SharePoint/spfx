@@ -19,7 +19,8 @@ import { Terminal, ConsoleTerminalProvider } from '@rushstack/terminal';
 import {
   SPFxTemplateRepositoryManager,
   PublicGitHubRepositorySource,
-  SPFxTemplateWriter
+  SPFxTemplateWriter,
+  buildBuiltInContext
 } from '@microsoft/spfx-template-api';
 
 const terminal = new Terminal(new ConsoleTerminalProvider());
@@ -33,7 +34,6 @@ const template = templates.get('webpart-react');
 if (!template) throw new Error('Template not found');
 
 // 2. Build the render context from CLI inputs
-import { buildBuiltInContext } from '@microsoft/spfx-template-api';
 
 const builtInContext = buildBuiltInContext({
   componentName: 'My Web Part',

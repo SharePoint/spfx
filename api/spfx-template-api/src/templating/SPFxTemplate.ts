@@ -208,20 +208,33 @@ export class SPFxTemplate {
    * @returns A Promise that resolves to a TemplateOutput containing the rendered files
    */
   public async renderAsync(context: object, options?: IRenderOptions): Promise<TemplateOutput> {
-    // Validate that all required custom parameters are present in the context.
+    // Validate custom parameters: check required presence and correct types.
     const templateParams: Record<string, ISPFxTemplateParameterDefinition> | undefined =
       this._definition.parameters;
     if (templateParams) {
       const contextRecord: Record<string, unknown> = context as Record<string, unknown>;
       const missing: string[] = [];
+      const wrongType: string[] = [];
       for (const [key, paramDef] of Object.entries(templateParams)) {
         const isRequired: boolean = paramDef.required !== false;
-        if (isRequired && contextRecord[key] === undefined) {
-          missing.push(key);
+        const value: unknown = contextRecord[key];
+        if (value === undefined) {
+          if (isRequired) {
+            missing.push(key);
+          }
+        } else if (typeof value !== 'string') {
+          wrongType.push(key);
         }
       }
+      const errors: string[] = [];
       if (missing.length > 0) {
-        throw new Error(`Missing required template parameters: ${missing.join(', ')}`);
+        errors.push(`Missing required template parameters: ${missing.join(', ')}`);
+      }
+      if (wrongType.length > 0) {
+        errors.push(`Template parameters must be strings: ${wrongType.join(', ')}`);
+      }
+      if (errors.length > 0) {
+        throw new Error(errors.join('. '));
       }
     }
 

@@ -117,12 +117,16 @@ const _templateJsonSchemaShape = {
   parameters: z
     .record(
       z.string(),
-      z.object({
-        type: z.enum(['string']),
-        description: z.string(),
-        required: z.boolean().optional(),
-        default: z.string().optional()
-      })
+      z
+        .object({
+          type: z.enum(['string']),
+          description: z.string(),
+          required: z.boolean().optional(),
+          default: z.string().optional()
+        })
+        .refine((p) => p.default === undefined || p.required === false, {
+          message: '"default" is only valid when "required" is false'
+        })
     )
     .optional()
     .refine(

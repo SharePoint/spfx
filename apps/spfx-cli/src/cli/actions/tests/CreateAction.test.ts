@@ -626,6 +626,43 @@ describe('CreateAction', () => {
     });
   });
 
+  describe('--param', () => {
+    it('passes custom params to renderAsync context', async () => {
+      mockTemplate.getParameters.mockReturnValue({
+        greeting: { type: 'string', description: 'A greeting' }
+      });
+      await runCreateAsync(['--param', 'greeting=hello']);
+      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
+        expect.objectContaining({ greeting: 'hello' }),
+        expect.anything()
+      );
+    });
+
+    it('rejects invalid key=value format', async () => {
+      await expect(runCreateAsync(['--param', 'noequals'])).rejects.toThrow(
+        /Invalid --param format.*Expected key=value/
+      );
+    });
+
+    it('throws when a required param is missing', async () => {
+      mockTemplate.getParameters.mockReturnValue({
+        greeting: { type: 'string', description: 'A greeting' }
+      });
+      await expect(runCreateAsync()).rejects.toThrow(/Missing required template parameters: greeting/);
+    });
+
+    it('applies default values for optional params', async () => {
+      mockTemplate.getParameters.mockReturnValue({
+        greeting: { type: 'string', description: 'A greeting', required: false, default: 'hi' }
+      });
+      await runCreateAsync();
+      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
+        expect.objectContaining({ greeting: 'hi' }),
+        expect.anything()
+      );
+    });
+  });
+
   describe('error handling', () => {
     describe('when using GitHub source (no --local-source)', () => {
       it('suggests --local-source when fetch fails', async () => {
