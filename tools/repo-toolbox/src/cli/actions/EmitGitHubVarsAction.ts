@@ -31,7 +31,10 @@ export class EmitGitHubVarsAction extends GitHubTokenActionBase<false> {
     super({
       actionName: 'emit-github-vars',
       summary: 'Emits GitHub repo slug and auth token as AzDO output variables.',
-      documentation: '',
+      documentation:
+        'Reads the GitHub repository slug from the local git remote and the authorization token ' +
+        'from --github-token / GITHUB_TOKEN (if set) or the git checkout credential, then emits ' +
+        'them as GitHubRepoSlug and GitHubToken AzDO output variables for use by downstream stages.',
       githubTokenRequired: false
     });
 
@@ -56,7 +59,7 @@ export class EmitGitHubVarsAction extends GitHubTokenActionBase<false> {
     }
 
     terminal.writeLine(
-      `##vso[task.setvariable variable=GitHubToken;isSecret=true;isOutput=true]${authHeader}`
+      `##vso[task.setvariable variable=GitHubToken;isSecret=true;isOutput=true]${authHeader.header}`
     );
     terminal.writeLine('Emitted GitHubToken (secret)');
   }

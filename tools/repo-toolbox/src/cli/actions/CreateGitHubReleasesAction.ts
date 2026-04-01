@@ -7,16 +7,16 @@ import type { ITerminal } from '@rushstack/terminal';
 import type { IRequiredCommandLineStringParameter } from '@rushstack/ts-command-line';
 import { Async, FileSystem, type FolderItem, type IPackageJson } from '@rushstack/node-core-library';
 
-import { GitHubTokenActionBase } from './GitHubTokenActionBase';
 import { GitHubClient } from '../../utilities/GitHubClient';
-import {
-  readChangelogSectionFromTgzAsync,
-  readPackageInfoFromTgzAsync
-} from '../../utilities/PackageTgzUtilities';
 import {
   type IGitHubAuthorizationHeader,
   parseGitHubAuthorizationHeader
 } from '../../utilities/GitUtilities';
+import {
+  readChangelogSectionFromTgzAsync,
+  readPackageInfoFromTgzAsync
+} from '../../utilities/PackageTgzUtilities';
+import { GitHubTokenActionBase } from './GitHubTokenActionBase';
 
 /**
  * Creates GitHub releases (and their associated tags) for each .tgz package in a directory.
@@ -33,7 +33,11 @@ export class CreateGitHubReleasesAction extends GitHubTokenActionBase<true> {
     super({
       actionName: 'create-github-releases',
       summary: 'Creates a GitHub release for each .tgz package in a directory.',
-      documentation: '',
+      documentation:
+        'Creates a GitHub release and tag for each .tgz file in the specified directory. Tags are ' +
+        'formatted as @scope/package_vX.Y.Z. Release notes are sourced from the package CHANGELOG.md. ' +
+        'Versions with a pre-release suffix (e.g. -alpha.1) are marked as GitHub pre-releases. ' +
+        'Packages whose release already exists are skipped.',
       githubTokenRequired: true
     });
 
@@ -135,9 +139,11 @@ export class CreateGitHubReleasesAction extends GitHubTokenActionBase<true> {
               terminal.writeLine(`Release already exists for ${tag}; skipping.`);
               return;
             } else {
+              // Newlines break the single-line ##vso logging command format.
+              const sanitizedMessage: string = message.replace(/[\r\n]+/g, ' ');
               terminal.writeLine(
                 `##vso[task.logissue type=error]GitHub API error creating release ${tag}: ` +
-                  `HTTP ${status} — ${message}. ` +
+                  `HTTP ${status} — ${sanitizedMessage}. ` +
                   (responseData ? `response data: ${JSON.stringify(responseData)}` : '')
               );
             }

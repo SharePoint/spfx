@@ -22,7 +22,9 @@ export class TagBuildAction extends CommandLineAction {
     super({
       actionName: 'tag-build',
       summary: 'Tags the AzDO build with the bump commit SHA and emits it as an output variable.',
-      documentation: ''
+      documentation:
+        'Reads the HEAD commit SHA, emits it as the BumpSha AzDO output variable, and tags the ' +
+        'current build with a structured tag so that find-bump-pipeline-run can locate this run later.'
     });
 
     this._terminal = terminal;

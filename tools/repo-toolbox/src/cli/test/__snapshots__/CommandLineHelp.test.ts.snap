@@ -6,6 +6,12 @@ exports[`CommandLineHelp prints the help: create-github-releases 1`] = `
                                            SHA --repo-slug SLUG
 
 
+Creates a GitHub release and tag for each .tgz file in the specified
+directory. Tags are formatted as @scope/package_vX.Y.Z. Release notes are
+sourced from the package CHANGELOG.md. Versions with a pre-release suffix (e.
+g. -alpha.1) are marked as GitHub pre-releases. Packages whose release
+already exists are skipped.
+
 Optional arguments:
   -h, --help            Show this help message and exit.
   --github-token TOKEN  GitHub token. Accepts a raw installation token (e.g.
@@ -57,6 +63,11 @@ Optional arguments:
 
 exports[`CommandLineHelp prints the help: emit-github-vars 1`] = `
 "usage: repo-toolbox emit-github-vars [-h] [--github-token TOKEN]
+
+Reads the GitHub repository slug from the local git remote and the
+authorization token from --github-token / GITHUB_TOKEN (if set) or the git
+checkout credential, then emits them as GitHubRepoSlug and GitHubToken AzDO
+output variables for use by downstream stages.
 
 Optional arguments:
   -h, --help            Show this help message and exit.
@@ -134,6 +145,10 @@ Optional arguments:
 
 exports[`CommandLineHelp prints the help: tag-build 1`] = `
 "usage: repo-toolbox tag-build [-h]
+
+Reads the HEAD commit SHA, emits it as the BumpSha AzDO output variable, and
+tags the current build with a structured tag so that find-bump-pipeline-run
+can locate this run later.
 
 Optional arguments:
   -h, --help  Show this help message and exit.
