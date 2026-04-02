@@ -1,7 +1,23 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { SPFxScaffoldLog } from '../SPFxScaffoldLog';
+jest.mock('@rushstack/node-core-library', () => {
+  const actual = jest.requireActual('@rushstack/node-core-library');
+  return {
+    ...actual,
+    FileSystem: {
+      readFileAsync: jest.fn(),
+      writeFileAsync: jest.fn().mockResolvedValue(undefined),
+      isNotExistError: (error: { code?: string }) => error?.code === 'ENOENT'
+    }
+  };
+});
+
+import { FileSystem } from '@rushstack/node-core-library';
+
+import { SPFxScaffoldLog, SCAFFOLD_LOG_FILENAME } from '../SPFxScaffoldLog';
+
+const mockFileSystem = FileSystem as jest.Mocked<typeof FileSystem>;
 import type {
   ITemplateRenderedEvent,
   IPackageManagerSelectedEvent,
@@ -66,6 +82,11 @@ function makeInstallCompletedEvent(
 // ---------------------------------------------------------------------------
 
 describe(SPFxScaffoldLog.name, () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockFileSystem.writeFileAsync.mockResolvedValue(undefined);
+  });
+
   // ---- append + read back ------------------------------------------------
 
   describe('append and events', () => {
@@ -248,6 +269,154 @@ describe(SPFxScaffoldLog.name, () => {
       const fileEvents: IFileWriteEvent[] = restored.getEventsOfKind('file-write');
 
       expect(fileEvents[0]!.mergeHelper).toBeUndefined();
+    });
+  });
+
+  // ---- hasEntries ---------------------------------------------------------
+
+  describe('hasEntries', () => {
+    it('returns false for a freshly constructed instance', () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      expect(log.hasEntries).toBe(false);
+    });
+
+    it('returns true after appending an event', () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      log.append(makeFileWriteEvent());
+      expect(log.hasEntries).toBe(true);
+    });
+  });
+
+  // ---- lastPackageManager ---------------------------------------------------
+
+  describe('lastPackageManager', () => {
+    it('returns undefined when no package-manager-selected events exist', () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      log.append(makeFileWriteEvent());
+      expect(log.lastPackageManager).toBeUndefined();
+    });
+
+    it('returns undefined for an empty log', () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      expect(log.lastPackageManager).toBeUndefined();
+    });
+
+    it('returns undefined when the only selection was "none"', () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      log.append(makePackageManagerSelectedEvent({ packageManager: 'none' }));
+      expect(log.lastPackageManager).toBeUndefined();
+    });
+
+    it('does not clear a previously recorded manager when "none" is appended', () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      log.append(makePackageManagerSelectedEvent({ packageManager: 'npm' }));
+      log.append(makePackageManagerSelectedEvent({ packageManager: 'none' }));
+      expect(log.lastPackageManager).toBe('npm');
+    });
+
+    it('returns the package manager from the most recent non-none event', () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      log.append(makePackageManagerSelectedEvent({ packageManager: 'npm' }));
+      log.append(makePackageManagerSelectedEvent({ packageManager: 'pnpm' }));
+      expect(log.lastPackageManager).toBe('pnpm');
+    });
+
+    it('returns the package manager when only one event exists', () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      log.append(makePackageManagerSelectedEvent({ packageManager: 'yarn' }));
+      expect(log.lastPackageManager).toBe('yarn');
+    });
+  });
+
+  // ---- loadAsync ----------------------------------------------------------
+
+  describe(SPFxScaffoldLog.loadFromFolderAsync.name, () => {
+    it('returns a log with events when file exists', async () => {
+      const original: SPFxScaffoldLog = new SPFxScaffoldLog();
+      original.append(makeTemplateRenderedEvent());
+      original.append(makeFileWriteEvent());
+      mockFileSystem.readFileAsync.mockResolvedValue(original.toJsonl());
+
+      const loaded: SPFxScaffoldLog = await SPFxScaffoldLog.loadFromFolderAsync('/project');
+
+      expect(loaded.events).toEqual(original.events);
+      expect(loaded.hasEntries).toBe(true);
+    });
+
+    it('returns an empty log when file does not exist (ENOENT)', async () => {
+      mockFileSystem.readFileAsync.mockRejectedValue(Object.assign(new Error('ENOENT'), { code: 'ENOENT' }));
+
+      const loaded: SPFxScaffoldLog = await SPFxScaffoldLog.loadFromFolderAsync('/project');
+
+      expect(loaded.hasEntries).toBe(false);
+      expect(loaded.events).toEqual([]);
+    });
+
+    it('propagates non-ENOENT read errors', async () => {
+      mockFileSystem.readFileAsync.mockRejectedValue(
+        Object.assign(new Error('EACCES: permission denied'), { code: 'EACCES' })
+      );
+
+      await expect(SPFxScaffoldLog.loadFromFolderAsync('/project')).rejects.toThrow('EACCES');
+    });
+
+    it('reads from the correct path using SCAFFOLD_LOG_FILENAME', async () => {
+      mockFileSystem.readFileAsync.mockRejectedValue(Object.assign(new Error('ENOENT'), { code: 'ENOENT' }));
+
+      await SPFxScaffoldLog.loadFromFolderAsync('/my/project');
+
+      expect(mockFileSystem.readFileAsync).toHaveBeenCalledWith(`/my/project/${SCAFFOLD_LOG_FILENAME}`);
+    });
+  });
+
+  // ---- saveAsync ----------------------------------------------------------
+
+  describe(SPFxScaffoldLog.prototype.saveToFolderAsync.name, () => {
+    it('writes JSONL via FileSystem.writeFileAsync', async () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      log.append(makeFileWriteEvent());
+
+      await log.saveToFolderAsync('/project');
+
+      expect(mockFileSystem.writeFileAsync).toHaveBeenCalledTimes(1);
+      const writtenContent: string = mockFileSystem.writeFileAsync.mock.calls[0]![1] as string;
+      expect(writtenContent).toContain('"kind":"file-write"');
+    });
+
+    it('calls FileSystem.writeFileAsync with ensureFolderExists: true', async () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      await log.saveToFolderAsync('/project');
+
+      expect(mockFileSystem.writeFileAsync).toHaveBeenCalledWith(expect.any(String), expect.any(String), {
+        ensureFolderExists: true
+      });
+    });
+
+    it('writes to the correct path using SCAFFOLD_LOG_FILENAME', async () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      await log.saveToFolderAsync('/my/project');
+
+      expect(mockFileSystem.writeFileAsync).toHaveBeenCalledWith(
+        `/my/project/${SCAFFOLD_LOG_FILENAME}`,
+        expect.any(String),
+        expect.any(Object)
+      );
+    });
+
+    it(`round-trips through ${SPFxScaffoldLog.prototype.saveToFolderAsync.name} and ${SPFxScaffoldLog.loadFromFolderAsync.name}`, async () => {
+      const original: SPFxScaffoldLog = new SPFxScaffoldLog();
+      original.append(makeTemplateRenderedEvent());
+      original.append(makeFileWriteEvent({ relativePath: 'src/index.ts' }));
+      original.append(makePackageManagerSelectedEvent());
+
+      await original.saveToFolderAsync('/project');
+
+      const writtenContent: string = mockFileSystem.writeFileAsync.mock.calls[0]![1] as string;
+      mockFileSystem.readFileAsync.mockResolvedValue(writtenContent);
+
+      const restored: SPFxScaffoldLog = await SPFxScaffoldLog.loadFromFolderAsync('/project');
+
+      expect(restored.events).toEqual(original.events);
     });
   });
 });

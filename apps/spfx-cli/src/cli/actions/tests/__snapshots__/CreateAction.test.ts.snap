@@ -35,6 +35,131 @@ Array [
 ]
 `;
 
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) does not warn about --package-manager 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) logs session-started and package-manager-selected with the specified PM 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) runs install with the specified --package-manager 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) saves the scaffold log after scaffolding 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn and skips install when --package-manager is "none" 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn and skips install when --package-manager is omitted 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn when --package-manager matches the logged value 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) overrides --package-manager with logged value and warns 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[warning] --package-manager \\"npm\\" is overridden by \\"pnpm\\" from the existing project's scaffold log. The --package-manager parameter will be ignored.[n]",
+  "[    log] Running pnpm install in /tmp/test/test...[n]",
+  "[    log] pnpm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) saves the scaffold log after scaffolding 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) uses the specified --package-manager when log has no package manager 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
 exports[`CreateAction --package-manager runs npm install when --package-manager npm is passed 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",

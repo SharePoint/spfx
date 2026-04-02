@@ -36,6 +36,8 @@ const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
 
 const CLI_VERSION: string = packageJson.version;
 
+const VALID_PACKAGE_MANAGERS: ReadonlySet<PackageManager> = new Set<PackageManager>(['npm', 'pnpm', 'yarn']);
+
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
   templateName: string;
@@ -127,7 +129,6 @@ export class CreateAction extends SPFxActionBase {
 
   protected override async onExecuteAsync(): Promise<void> {
     const terminal: Terminal = this._terminal;
-    const log: SPFxScaffoldLog = new SPFxScaffoldLog();
 
     try {
       // Get component name and validate
@@ -147,6 +148,14 @@ export class CreateAction extends SPFxActionBase {
       const rawTargetDir: string | undefined = this._targetDirParameter.value?.trim();
       const targetDir: string =
         rawTargetDir && rawTargetDir.length > 0 ? rawTargetDir : `${process.cwd()}/${solutionName}`;
+
+      const log: SPFxScaffoldLog = await SPFxScaffoldLog.loadFromFolderAsync(targetDir);
+      const isExistingProject: boolean = log.hasEntries;
+
+      log.append({
+        kind: 'session-started',
+        cliVersion: CLI_VERSION
+      });
 
       const templateName: string = this._templateParameter.value;
       const options: IScaffoldProfile = {
@@ -231,19 +240,40 @@ export class CreateAction extends SPFxActionBase {
       });
 
       const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
-      log.append({
-        kind: 'package-manager-selected',
-        packageManager,
-        targetDir
-      });
+      const previousPackageManager: string | undefined = log.lastPackageManager;
 
       _printFileChanges(this._terminal, templateFs, targetDir);
       const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
       await writer.writeAsync(templateFs, targetDir, { log });
 
       if (packageManager !== 'none') {
-        await _runInstallAsync(packageManager, targetDir, terminal, log);
+        let resolvedPackageManager: PackageManager = packageManager;
+
+        if (
+          isExistingProject &&
+          previousPackageManager &&
+          VALID_PACKAGE_MANAGERS.has(previousPackageManager as PackageManager) &&
+          previousPackageManager !== packageManager
+        ) {
+          const packageManagerParameterLongName: string = this._packageManagerParameter.longName;
+          terminal.writeWarningLine(
+            `${packageManagerParameterLongName} "${packageManager}" is overridden by ` +
+              `"${previousPackageManager}" from the existing project's scaffold log. ` +
+              `The ${packageManagerParameterLongName} parameter will be ignored.`
+          );
+          resolvedPackageManager = previousPackageManager as PackageManager;
+        }
+
+        log.append({
+          kind: 'package-manager-selected',
+          packageManager: resolvedPackageManager,
+          targetDir
+        });
+
+        await _runInstallAsync(resolvedPackageManager, targetDir, terminal, log);
       }
+
+      await log.saveToFolderAsync(targetDir);
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
       terminal.writeErrorLine(`Error creating SPFx component: ${message}`);

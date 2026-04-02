@@ -347,7 +347,13 @@ describe('SPFx Template Scaffolding', () => {
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
             // Skip build artifacts and generated files
-            const ignoredFiles = ['package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'webpack.config.js'];
+            const ignoredFiles = [
+              'package-lock.json',
+              'yarn.lock',
+              'pnpm-lock.yaml',
+              'webpack.config.js',
+              '.spfx-scaffold.jsonl'
+            ];
             const ignoredDirs = ['.rush', 'rush-logs', 'temp', 'node_modules', 'dist', 'teams'];
 
             // Ignore specific files regardless of their directory

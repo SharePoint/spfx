@@ -78,7 +78,7 @@ Yeoman compatibility shim) can be built without duplicating core logic.
 | `--template-url URL` | No | Custom GitHub template repository URL. Defaults to `https://github.com/SharePoint/spfx`. Also accepts the `SPFX_TEMPLATE_REPO_URL` environment variable. |
 | `--spfx-version VERSION` | No | Branch/tag in the template repo to use (e.g. `1.22`, `1.23-rc.0`). Defaults to the repo's default branch. |
 | `--remote-source URL` | No | Public GitHub repo to include as an additional template source. Can be specified multiple times. |
-| `--package-manager {npm,pnpm,yarn,none}` | No | Package manager for dependency installation after scaffolding. `none` skips installation (default). See [#165](https://github.com/SharePoint/spfx/issues/165) for the planned restriction to new projects only. |
+| `--package-manager {npm,pnpm,yarn,none}` | No | Package manager for dependency installation after scaffolding. `none` skips installation (default). For existing projects (detected via `.spfx-scaffold.jsonl`), the previously recorded package manager is used; a conflicting value is overridden with a warning. |
 
 #### `spfx list-templates`
 
@@ -222,14 +222,18 @@ For modified files with no registered merge helper, the writer emits a warning a
 falls back to overwriting. Custom merge helpers can be registered via
 `addMergeHelper()`.
 
-#### `SPFxCreationAuditLog` (future)
+#### `SPFxScaffoldLog` persistence
 
-A structured successor to the `.yo-rc.json` file — a well-defined audit log of what
-the CLI has done, what template was used, what decisions were made, etc. This file
-also serves as the mechanism for detecting existing SPFx projects: when the CLI is
-run in a directory that already contains an audit log, it can skip solution-level
-prompts and proceed directly to adding a new component. Not yet implemented but the
-design accommodates it.
+`SPFxScaffoldLog` is persisted to `.spfx-scaffold.jsonl` in the project root after
+each `spfx create` invocation. The file accumulates events (JSONL format) across
+runs, recording templates rendered, files written/merged, and package manager usage.
+
+This file also serves as the mechanism for detecting existing SPFx projects: when
+the CLI is run in a directory that already contains a scaffold log, the
+`lastPackageManager` getter reads the most recent `package-manager-selected` event.
+If the user specifies a different `--package-manager` value, the CLI overrides it
+with the previously recorded manager and emits a warning. If no previous package
+manager is recorded (or the user passes `none`), the flag is honored as-is.
 
 ---
 

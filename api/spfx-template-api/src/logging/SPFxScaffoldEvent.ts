@@ -14,6 +14,16 @@ export interface ISPFxScaffoldEventBase {
 }
 
 /**
+ * Recorded at the start of each `spfx create` invocation.
+ *
+ * @public
+ */
+export interface ISessionStartedEvent extends ISPFxScaffoldEventBase {
+  kind: 'session-started';
+  cliVersion: string;
+}
+
+/**
  * Recorded after a template has been rendered into the in-memory file system.
  *
  * @public
@@ -86,6 +96,7 @@ export interface IPackageManagerInstallCompletedEvent extends ISPFxScaffoldEvent
  * @public
  */
 export type ISPFxScaffoldEvent =
+  | ISessionStartedEvent
   | ITemplateRenderedEvent
   | IPackageManagerSelectedEvent
   | IFileWriteEvent

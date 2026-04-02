@@ -98,7 +98,15 @@ export interface IRenderOptions {
 export function _isBinaryFile(filePath: string): boolean;
 
 // @public
-export type ISPFxScaffoldEvent = ITemplateRenderedEvent | IPackageManagerSelectedEvent | IFileWriteEvent | IPackageManagerInstallCompletedEvent;
+export interface ISessionStartedEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    cliVersion: string;
+    // (undocumented)
+    kind: 'session-started';
+}
+
+// @public
+export type ISPFxScaffoldEvent = ISessionStartedEvent | ITemplateRenderedEvent | IPackageManagerSelectedEvent | IFileWriteEvent | IPackageManagerInstallCompletedEvent;
 
 // @public
 export interface ISPFxScaffoldEventBase {
@@ -192,6 +200,9 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
 }
 
 // @public
+export const SCAFFOLD_LOG_FILENAME: string;
+
+// @public
 export class ServeJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
     readonly fileRelativePath: string;
@@ -213,6 +224,10 @@ export class SPFxScaffoldLog {
     getEventsOfKind<K extends ISPFxScaffoldEvent['kind']>(kind: K): Extract<ISPFxScaffoldEvent, {
         kind: K;
     }>[];
+    get hasEntries(): boolean;
+    get lastPackageManager(): string | undefined;
+    static loadFromFolderAsync(targetDir: string): Promise<SPFxScaffoldLog>;
+    saveToFolderAsync(targetDir: string): Promise<void>;
     toJsonl(): string;
 }
 

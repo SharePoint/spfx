@@ -3,6 +3,7 @@
 
 export {
   type ISPFxScaffoldEventBase,
+  type ISessionStartedEvent,
   type ITemplateRenderedEvent,
   type IPackageManagerSelectedEvent,
   type FileWriteOutcome,
@@ -10,4 +11,4 @@ export {
   type IPackageManagerInstallCompletedEvent,
   type ISPFxScaffoldEvent
 } from './SPFxScaffoldEvent';
-export { SPFxScaffoldLog, type ISPFxScaffoldEventInput } from './SPFxScaffoldLog';
+export { SPFxScaffoldLog, type ISPFxScaffoldEventInput, SCAFFOLD_LOG_FILENAME } from './SPFxScaffoldLog';

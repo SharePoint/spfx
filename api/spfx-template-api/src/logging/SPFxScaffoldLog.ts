@@ -1,7 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { ISPFxScaffoldEvent } from './SPFxScaffoldEvent';
+import { FileSystem } from '@rushstack/node-core-library';
+
+import type { IPackageManagerSelectedEvent, ISPFxScaffoldEvent } from './SPFxScaffoldEvent';
+
+/**
+ * The well-known filename for the persisted scaffold log.
+ *
+ * @public
+ */
+export const SCAFFOLD_LOG_FILENAME: string = '.spfx-scaffold.jsonl';
 
 /**
  * An event with `timestamp` made optional so callers don't need to provide it.
@@ -27,6 +36,7 @@ export type ISPFxScaffoldEventInput = ISPFxScaffoldEvent extends infer E
  */
 export class SPFxScaffoldLog {
   private readonly _events: ISPFxScaffoldEvent[] = [];
+  private _lastPackageManager: string | undefined;
 
   /**
    * Appends an event to the log.  If `timestamp` is omitted or empty
@@ -38,6 +48,18 @@ export class SPFxScaffoldLog {
       timestamp: event.timestamp || new Date().toISOString()
     } as ISPFxScaffoldEvent;
     this._events.push(normalizedEvent);
+
+    if (normalizedEvent.kind === 'package-manager-selected') {
+      const pm: string = (normalizedEvent as IPackageManagerSelectedEvent).packageManager;
+      if (pm !== 'none') {
+        this._lastPackageManager = pm;
+      }
+    }
+  }
+
+  /** Whether the log contains any events. */
+  public get hasEntries(): boolean {
+    return this._events.length > 0;
   }
 
   /** All events in insertion order (returns a defensive shallow copy). */
@@ -52,6 +74,18 @@ export class SPFxScaffoldLog {
     kind: K
   ): Extract<ISPFxScaffoldEvent, { kind: K }>[] {
     return this._events.filter((e): e is Extract<ISPFxScaffoldEvent, { kind: K }> => e.kind === kind);
+  }
+
+  /**
+   * Returns the package manager from the most recent `package-manager-selected`
+   * event, or `undefined` if none has been recorded or the last selection was `'none'`.
+   *
+   * @remarks
+   * This value is cached and updated incrementally on each {@link SPFxScaffoldLog.append}
+   * call, so reading it is O(1).
+   */
+  public get lastPackageManager(): string | undefined {
+    return this._lastPackageManager;
   }
 
   /** Serializes the log to JSONL (one JSON object per line, no trailing newline). */
@@ -89,5 +123,31 @@ export class SPFxScaffoldLog {
       }
     }
     return log;
+  }
+
+  /**
+   * Loads a scaffold log from disk. Returns an empty log if the file does not exist.
+   */
+  public static async loadFromFolderAsync(targetDir: string): Promise<SPFxScaffoldLog> {
+    const filePath: string = `${targetDir}/${SCAFFOLD_LOG_FILENAME}`;
+    let content: string;
+    try {
+      content = await FileSystem.readFileAsync(filePath);
+    } catch (error) {
+      if (FileSystem.isNotExistError(error)) {
+        return new SPFxScaffoldLog();
+      }
+      throw error;
+    }
+    return SPFxScaffoldLog.fromJsonl(content);
+  }
+
+  /**
+   * Persists the scaffold log to disk as {@link SCAFFOLD_LOG_FILENAME}.
+   */
+  public async saveToFolderAsync(targetDir: string): Promise<void> {
+    const filePath: string = `${targetDir}/${SCAFFOLD_LOG_FILENAME}`;
+    const content: string = this._events.length > 0 ? this.toJsonl() + '\n' : '';
+    await FileSystem.writeFileAsync(filePath, content, { ensureFolderExists: true });
   }
 }

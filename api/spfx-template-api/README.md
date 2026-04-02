@@ -163,6 +163,7 @@ The writer uses these helpers internally. You can also import them directly for 
 | `IFileWriteEvent` | Event recorded for each file written during the write phase |
 | `FileWriteOutcome` | Union type: `'new' \| 'merged' \| 'preserved' \| 'unchanged'` |
 | `IPackageManagerInstallCompletedEvent` | Event recorded after the package-manager install exits |
+| `SCAFFOLD_LOG_FILENAME` | The well-known filename constant (`.spfx-scaffold.jsonl`) |
 | `SPFxTemplateCategory` | Union type of template categories: `'webpart' | 'extension' | 'ace' | 'library'` |
 | `SPFX_TEMPLATE_CATEGORIES` | Array of all valid category values (useful for validation/iteration) |
 | `ENGINE_VERSION` | Semver string identifying the installed engine version (matches `package.json` version) |
@@ -182,23 +183,26 @@ The writer uses these helpers internally. You can also import them directly for 
 ```typescript
 import { SPFxScaffoldLog, SPFxTemplateWriter, type IFileWriteEvent } from '@microsoft/spfx-template-api';
 
-const log = new SPFxScaffoldLog();
+// Load existing log from disk (returns empty if file doesn't exist)
+const log = await SPFxScaffoldLog.loadFromFolderAsync(targetDir);
 
-// Record custom events
+// Check if this is an existing project
+if (log.hasEntries) {
+  console.log('Existing project detected');
+}
+
+// Record events during scaffolding
 log.append({ kind: 'template-rendered', templateName: 'webpart-react', templateVersion: '1.0.0', spfxVersion: '1.22.0', context: { componentName: 'MyWebPart' }, cliVersion: '0.1.0' });
 
 // Pass to writer to auto-record file-write events
 const writer = new SPFxTemplateWriter();
 await writer.writeAsync(templateFs, targetDir, { log });
 
-// Query events by kind
-const fileWrites: IFileWriteEvent[] = log.getEventsOfKind('file-write');
+// Persist back to disk
+await log.saveToFolderAsync(targetDir);
 
-// Serialize to JSONL for persistence
-const jsonl: string = log.toJsonl();
-
-// Restore from JSONL
-const restored = SPFxScaffoldLog.fromJsonl(jsonl);
+// Read the last package manager selection from the log
+const lastPM = log.lastPackageManager; // e.g. 'npm', or undefined if none recorded
 ```
 
 ---

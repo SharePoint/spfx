@@ -23,7 +23,8 @@ import { Terminal, StringBufferTerminalProvider } from '@rushstack/terminal';
 import {
   LocalFileSystemRepositorySource,
   PublicGitHubRepositorySource,
-  SPFxTemplateRepositoryManager
+  SPFxTemplateRepositoryManager,
+  SPFxScaffoldLog
 } from '@microsoft/spfx-template-api';
 import type { SPFxTemplateCollection } from '@microsoft/spfx-template-api';
 
@@ -37,9 +38,35 @@ const MockedLocal = LocalFileSystemRepositorySource as jest.MockedClass<
   typeof LocalFileSystemRepositorySource
 >;
 const MockedExecutable = Executable as unknown as { spawn: jest.Mock; waitForExitAsync: jest.Mock };
+const MockedScaffoldLog = SPFxScaffoldLog as jest.MockedClass<typeof SPFxScaffoldLog> & {
+  loadFromFolderAsync: jest.Mock;
+};
 
 // Minimal mock TemplateOutput for a happy-path run
 const mockTemplateFs = { files: new Map(), read: jest.fn(), write: jest.fn() };
+
+function createMockScaffoldLogInstance(
+  hasEntries: boolean,
+  lastPackageManager?: string
+): {
+  hasEntries: boolean;
+  lastPackageManager: string | undefined;
+  events: unknown[];
+  append: jest.Mock;
+  saveToFolderAsync: jest.Mock;
+  getEventsOfKind: jest.Mock;
+  toJsonl: jest.Mock;
+} {
+  return {
+    hasEntries,
+    lastPackageManager,
+    events: [],
+    append: jest.fn(),
+    saveToFolderAsync: jest.fn().mockResolvedValue(undefined),
+    getEventsOfKind: jest.fn().mockReturnValue([]),
+    toJsonl: jest.fn().mockReturnValue('')
+  };
+}
 
 const REQUIRED_ARGS: string[] = [
   '--template',
@@ -117,6 +144,11 @@ describe('CreateAction', () => {
       jest.fn().mockResolvedValue('[Mocked SPFxTemplateCollection]');
 
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(mockCollection);
+
+    // Default: new project (no existing scaffold log on disk)
+    MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(
+      createMockScaffoldLogInstance(false) as unknown as SPFxScaffoldLog
+    );
   });
 
   afterEach(() => {
@@ -612,6 +644,140 @@ describe('CreateAction', () => {
       await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow(
         /npm install was terminated by signal SIGTERM/
       );
+    });
+  });
+
+  describe('--package-manager restriction for existing projects', () => {
+    beforeEach(() => {
+      MockedExecutable.spawn.mockReturnValue({});
+      MockedExecutable.waitForExitAsync.mockResolvedValue({
+        exitCode: 0,
+        stdout: '',
+        stderr: '',
+        signal: null
+      });
+    });
+
+    describe('when scaffold log exists (existing project)', () => {
+      it('overrides --package-manager with logged value and warns', async () => {
+        const mockInstance = createMockScaffoldLogInstance(true, 'pnpm');
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+          'pnpm',
+          ['install'],
+          expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        );
+
+        // Verify the *resolved* PM is logged, not the user-provided one
+        expect(mockInstance.append).toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'package-manager-selected', packageManager: 'pnpm' })
+        );
+      });
+
+      it('does not warn when --package-manager matches the logged value', async () => {
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(
+          createMockScaffoldLogInstance(true, 'npm') as unknown as SPFxScaffoldLog
+        );
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+          'npm',
+          ['install'],
+          expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        );
+      });
+
+      it('does not warn and skips install when --package-manager is "none"', async () => {
+        const mockInstance = createMockScaffoldLogInstance(true, 'npm');
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+
+        await runCreateAsync(['--package-manager', 'none']);
+        expect(MockedExecutable.spawn).not.toHaveBeenCalled();
+
+        // Verify no package-manager-selected event is logged (preserves existing PM in log)
+        expect(mockInstance.append).not.toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'package-manager-selected' })
+        );
+      });
+
+      it('does not warn and skips install when --package-manager is omitted', async () => {
+        const mockInstance = createMockScaffoldLogInstance(true, 'npm');
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+
+        await runCreateAsync();
+        expect(MockedExecutable.spawn).not.toHaveBeenCalled();
+
+        // Verify no package-manager-selected event is logged (preserves existing PM in log)
+        expect(mockInstance.append).not.toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'package-manager-selected' })
+        );
+      });
+
+      it('uses the specified --package-manager when log has no package manager', async () => {
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(
+          createMockScaffoldLogInstance(true) as unknown as SPFxScaffoldLog
+        );
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+          'npm',
+          ['install'],
+          expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        );
+      });
+
+      it('saves the scaffold log after scaffolding', async () => {
+        const mockInstance = createMockScaffoldLogInstance(true, 'npm');
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(mockInstance.saveToFolderAsync).toHaveBeenCalled();
+      });
+    });
+
+    describe('when scaffold log does not exist (new project)', () => {
+      it('runs install with the specified --package-manager', async () => {
+        await runCreateAsync(['--package-manager', 'npm']);
+        expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+          'npm',
+          ['install'],
+          expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        );
+      });
+
+      it('logs session-started and package-manager-selected with the specified PM', async () => {
+        const mockInstance = createMockScaffoldLogInstance(false);
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(mockInstance.append).toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'session-started' })
+        );
+        expect(mockInstance.append).toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'package-manager-selected', packageManager: 'npm' })
+        );
+      });
+
+      it('does not warn about --package-manager', async () => {
+        // Snapshot should NOT contain a warning about --package-manager
+        await runCreateAsync(['--package-manager', 'npm']);
+      });
+
+      it('saves the scaffold log after scaffolding', async () => {
+        const mockInstance = createMockScaffoldLogInstance(false);
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+
+        await runCreateAsync();
+
+        expect(mockInstance.saveToFolderAsync).toHaveBeenCalled();
+      });
     });
   });
 
