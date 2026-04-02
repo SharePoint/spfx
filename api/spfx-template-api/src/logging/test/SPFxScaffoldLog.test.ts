@@ -371,7 +371,7 @@ describe(SPFxScaffoldLog.name, () => {
 
   // ---- saveAsync ----------------------------------------------------------
 
-  describe('saveToFolderAsync', () => {
+  describe(SPFxScaffoldLog.prototype.saveToFolderAsync.name, () => {
     it('writes JSONL via FileSystem.writeFileAsync', async () => {
       const log: SPFxScaffoldLog = new SPFxScaffoldLog();
       log.append(makeFileWriteEvent());
@@ -403,7 +403,7 @@ describe(SPFxScaffoldLog.name, () => {
       );
     });
 
-    it('round-trips through saveAsync and loadAsync', async () => {
+    it(`round-trips through ${SPFxScaffoldLog.prototype.saveToFolderAsync.name} and ${SPFxScaffoldLog.loadFromFolderAsync.name}`, async () => {
       const original: SPFxScaffoldLog = new SPFxScaffoldLog();
       original.append(makeTemplateRenderedEvent());
       original.append(makeFileWriteEvent({ relativePath: 'src/index.ts' }));
