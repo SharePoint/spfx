@@ -8,8 +8,7 @@ jest.mock('@microsoft/spfx-template-api', () => {
     // buildBuiltInContext and toHyphenCase must use the real implementation so the
     // render context and solution name are populated correctly in tests.
     buildBuiltInContext: actual.buildBuiltInContext,
-    toHyphenCase: actual.toHyphenCase,
-    SPFxScaffoldLog: actual.SPFxScaffoldLog
+    toHyphenCase: actual.toHyphenCase
   };
 });
 jest.mock('@rushstack/node-core-library', () => {
