@@ -77,7 +77,7 @@ function _makeBuiltInParameterNames<const T extends ReadonlyArray<keyof ISPFxBui
 
 /**
  * The set of context variable names that are automatically provided by the engine.
- * Template authors must not declare custom parameters with any of these names.
+ * Used to identify which context variables are engine-provided.
  * @public
  */
 export const BUILT_IN_PARAMETER_NAMES: ReadonlySet<keyof ISPFxBuiltInContext> = _makeBuiltInParameterNames([
@@ -103,8 +103,7 @@ const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
  *
  * @remarks
  * This is the single source of truth for all variables that every template receives
- * automatically. Custom template parameters (declared in template.json's `parameters`
- * field) are merged separately by the CLI.
+ * automatically.
  *
  * @public
  */

@@ -4,7 +4,7 @@ This guide covers naming conventions, variable usage, and code quality standards
 
 ## Template Variable Reference
 
-Template variables are defined in each template's `template.json` under `contextSchema`:
+Built-in template variables are provided automatically by `buildBuiltInContext()` in the API package:
 
 ```json
 {
@@ -155,7 +155,7 @@ Example READMEs should have real content: a component name header, an actual sum
 
 ## Troubleshooting
 
-- **Which variable to use?** Check template.json `contextSchema`
+- **Which variable to use?** Check `ISPFxBuiltInContext` in `SPFxBuiltInContext.ts`
 - **How to format a specific identifier?** Look at existing working templates
 - **Incorrect casing in example IDs?** Fix the template, not the example
 - **Template syntax in rendered example?** Regenerate from the template

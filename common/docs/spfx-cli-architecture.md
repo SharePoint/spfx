@@ -119,8 +119,7 @@ Each template directory contains a `template.json` with the following fields:
 - **`description`** — Human-readable description
 - **`version`** — Template version (semver)
 - **`spfxVersion`** — Compatible SPFx version
-- **`contextSchema`** (optional) — Declares the context variables the template
-  expects, used for validation at render time
+- **`category`** — Template category (`webpart`, `extension`, `ace`, or `library`)
 
 The schema is validated with Zod at load time.
 
