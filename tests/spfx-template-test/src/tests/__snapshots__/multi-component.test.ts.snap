@@ -138,7 +138,7 @@ Object {
     "@microsoft/sp-module-interfaces": "1.22.2",
     "@microsoft/spfx-web-build-rig": "1.22.2",
     "@rushstack/eslint-config": "4.6.4",
-    "@rushstack/heft": "^1.2.7",
+    "@rushstack/heft": "^1.2.9",
     "@types/heft-jest": "^1.0.6",
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.48.1",

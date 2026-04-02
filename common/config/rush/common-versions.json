@@ -24,7 +24,7 @@
      * instead of the latest version.
      */
     // "some-library": "1.2.3"
-    "@rushstack/heft": "^1.2.7",
+    "@rushstack/heft": "^1.2.9",
     "fast-xml-parser": "^5.3.5"
   },
 
