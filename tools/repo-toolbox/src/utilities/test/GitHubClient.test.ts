@@ -26,6 +26,13 @@ describe(GitHubClient.name, () => {
       expect(header).toBe('bearer ghs_abc123');
     });
 
+    it('passes through basic-auth with a non-x-access-token username unchanged', () => {
+      const encoded: string = Buffer.from('someuser:somepassword').toString('base64');
+      const input: string = `basic ${encoded}`;
+      const { header } = parseGitHubAuthorizationHeader(input);
+      expect(header).toBe(input);
+    });
+
     it('trims leading and trailing whitespace', () => {
       const { header } = parseGitHubAuthorizationHeader('  token ghs_abc123  ');
       expect(header).toBe('token ghs_abc123');

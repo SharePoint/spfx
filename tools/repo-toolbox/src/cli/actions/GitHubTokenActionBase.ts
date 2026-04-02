@@ -21,12 +21,11 @@ export interface IGitHubTokenActionBaseOptions<
  * full Authorization header value (e.g. `basic <base64>`).
  */
 export abstract class GitHubTokenActionBase<
-  TTokenParameterRequired extends boolean,
-  TTokenParameter extends CommandLineStringParameter = TTokenParameterRequired extends true
-    ? IRequiredCommandLineStringParameter
-    : CommandLineStringParameter
+  TTokenParameterRequired extends boolean
 > extends CommandLineAction {
-  protected readonly _githubTokenParameter: TTokenParameter;
+  protected readonly _githubTokenParameter: TTokenParameterRequired extends true
+    ? IRequiredCommandLineStringParameter
+    : CommandLineStringParameter;
 
   protected constructor(options: IGitHubTokenActionBaseOptions<TTokenParameterRequired>) {
     const { githubTokenRequired, ...otherOptions } = options;
@@ -39,6 +38,8 @@ export abstract class GitHubTokenActionBase<
       description:
         'GitHub token. Accepts a raw installation token (e.g. `ghs_xxx`) or a full Authorization header value (e.g. `basic <base64>`).',
       required: githubTokenRequired
-    }) as TTokenParameter;
+    }) as TTokenParameterRequired extends true
+      ? IRequiredCommandLineStringParameter
+      : CommandLineStringParameter;
   }
 }

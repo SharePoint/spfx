@@ -73,7 +73,9 @@ export function parseGitHubAuthorizationHeader(value: string): IGitHubAuthorizat
   value = value.trim();
   const spaceIndex: number = value.indexOf(' ');
 
-  let header: string;
+  // Default: pass through unchanged (already "token xxx", "bearer xxx", etc.)
+  let header: string = value;
+
   if (spaceIndex === -1) {
     // Raw token with no scheme prefix
     header = `token ${value}`;
@@ -83,17 +85,13 @@ export function parseGitHubAuthorizationHeader(value: string): IGitHubAuthorizat
     if (scheme.toLowerCase() === 'basic') {
       const decoded: string = Buffer.from(encoded, 'base64').toString('utf8');
       const colonIndex: number = decoded.indexOf(':');
-      if (colonIndex !== -1) {
-        const token: string = decoded.substring(colonIndex + 1);
-        if (token) {
-          header = `token ${token}`;
-        }
+      const usernameOrHeaderName: string = decoded.substring(0, colonIndex);
+      const token: string = decoded.substring(colonIndex + 1);
+      if (colonIndex !== -1 && usernameOrHeaderName.toLowerCase() === 'x-access-token' && token) {
+        header = `token ${token}`;
       }
     }
   }
-
-  // Already "token xxx", "bearer xxx", etc.
-  header ??= value;
 
   return { header };
 }
