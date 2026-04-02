@@ -94,9 +94,13 @@ export const BUILT_IN_PARAMETER_NAMES: ReadonlySet<keyof ISPFxBuiltInContext> = 
   'componentDescription'
 ]);
 
-// Deterministic namespace for CI mode GUIDs, derived from the well-known URL
-// namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
+// Deterministic namespace for CI mode GUIDs.  This is a real UUID v5 value
+// derived from the well-known URL namespace so that each component alias
+// produces a unique but reproducible set of IDs:
+//   uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
 const CI_NAMESPACE: string = '035a23a9-8c9e-569b-ae00-7ff2e4c82fb0';
+// Dummy solution ID — obviously fake (all 2s) so it is never mistaken for a
+// real GUID in generated output.
 const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
 
 /**
@@ -139,6 +143,9 @@ export function buildBuiltInContext(
     solution_name: solutionName,
     libraryName,
     spfxVersion,
+    // The shields.io badge URL uses hyphens as separators, so hyphens in version
+    // numbers need to be escaped as double-hyphens to avoid ambiguity.
+    // For example, "1.23.0-beta.0" becomes "1.23.0--beta.0".
     spfxVersionForBadgeUrl: spfxVersion.replace(/-/g, '--'),
     componentId,
     featureId,

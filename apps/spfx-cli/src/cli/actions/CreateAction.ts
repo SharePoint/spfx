@@ -205,6 +205,9 @@ export class CreateAction extends SPFxActionBase {
         { ciMode }
       );
 
+      // Spread into Record<string, string> because ISPFxBuiltInContext uses named
+      // keys (for type-safe BUILT_IN_PARAMETER_NAMES) while renderAsync needs a
+      // general-purpose Record.
       const renderContext: Record<string, string> = { ...builtInContext };
 
       const templateFs: TemplateOutput = await template.renderAsync(renderContext, {
