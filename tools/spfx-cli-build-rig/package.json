@@ -18,7 +18,7 @@
     "_phase:build": ""
   },
   "peerDependencies": {
-    "@rushstack/heft": "^1.2.7",
+    "@rushstack/heft": "^1.2.9",
     "eslint": "9.37.0"
   },
   "dependencies": {
