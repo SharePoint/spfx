@@ -51,7 +51,9 @@ export class SPFxScaffoldLog {
 
     if (normalizedEvent.kind === 'package-manager-selected') {
       const pm: string = (normalizedEvent as IPackageManagerSelectedEvent).packageManager;
-      this._lastPackageManager = pm !== 'none' ? pm : undefined;
+      if (pm !== 'none') {
+        this._lastPackageManager = pm;
+      }
     }
   }
 

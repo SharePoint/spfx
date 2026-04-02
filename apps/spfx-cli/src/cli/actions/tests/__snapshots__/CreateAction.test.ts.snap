@@ -48,6 +48,19 @@ Array [
 ]
 `;
 
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) logs session-started and package-manager-selected with the specified PM 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) runs install with the specified --package-manager 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",

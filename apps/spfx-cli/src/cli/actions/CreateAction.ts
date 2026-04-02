@@ -242,12 +242,6 @@ export class CreateAction extends SPFxActionBase {
       const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
       const previousPackageManager: string | undefined = log.lastPackageManager;
 
-      log.append({
-        kind: 'package-manager-selected',
-        packageManager,
-        targetDir
-      });
-
       _printFileChanges(this._terminal, templateFs, targetDir);
       const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
       await writer.writeAsync(templateFs, targetDir, { log });
@@ -269,6 +263,12 @@ export class CreateAction extends SPFxActionBase {
           );
           resolvedPackageManager = previousPackageManager as PackageManager;
         }
+
+        log.append({
+          kind: 'package-manager-selected',
+          packageManager: resolvedPackageManager,
+          targetDir
+        });
 
         await _runInstallAsync(resolvedPackageManager, targetDir, terminal, log);
       }

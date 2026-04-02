@@ -301,13 +301,20 @@ describe(SPFxScaffoldLog.name, () => {
       expect(log.lastPackageManager).toBeUndefined();
     });
 
-    it('returns undefined when the last selection was "none"', () => {
+    it('returns undefined when the only selection was "none"', () => {
       const log: SPFxScaffoldLog = new SPFxScaffoldLog();
       log.append(makePackageManagerSelectedEvent({ packageManager: 'none' }));
       expect(log.lastPackageManager).toBeUndefined();
     });
 
-    it('returns the package manager from the most recent event', () => {
+    it('does not clear a previously recorded manager when "none" is appended', () => {
+      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
+      log.append(makePackageManagerSelectedEvent({ packageManager: 'npm' }));
+      log.append(makePackageManagerSelectedEvent({ packageManager: 'none' }));
+      expect(log.lastPackageManager).toBe('npm');
+    });
+
+    it('returns the package manager from the most recent non-none event', () => {
       const log: SPFxScaffoldLog = new SPFxScaffoldLog();
       log.append(makePackageManagerSelectedEvent({ packageManager: 'npm' }));
       log.append(makePackageManagerSelectedEvent({ packageManager: 'pnpm' }));
