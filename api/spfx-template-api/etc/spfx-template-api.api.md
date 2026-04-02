@@ -153,17 +153,8 @@ export interface ISPFxTemplateJson {
     description?: string;
     minimumEngineVersion?: string;
     name: string;
-    parameters?: Record<string, ISPFxTemplateParameterDefinition>;
     spfxVersion: string;
     version: string;
-}
-
-// @public
-export interface ISPFxTemplateParameterDefinition {
-    defaultValue?: string;
-    description: string;
-    required?: boolean;
-    type: 'string';
 }
 
 // @public
@@ -264,7 +255,6 @@ export class SPFxTemplate {
     get fileCount(): number;
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplate>;
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
-    getParameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined;
     get minimumEngineVersion(): string | undefined;
     get name(): string;
     renderAsync(context: Record<string, string>, options?: IRenderOptions): Promise<TemplateOutput>;
@@ -295,7 +285,6 @@ export class SPFxTemplateJsonFile {
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplateJsonFile>;
     get minimumEngineVersion(): string | undefined;
     get name(): string;
-    get parameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined;
     get spfxVersion(): string;
     // (undocumented)
     static readonly TEMPLATE_JSON: string;

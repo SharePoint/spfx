@@ -10,7 +10,6 @@ import {
   SPFxTemplateJsonFile,
   SPFxTemplateDefinitionSchema,
   type ISPFxTemplateJson,
-  type ISPFxTemplateParameterDefinition,
   type SPFxTemplateCategory
 } from './SPFxTemplateJsonFile';
 import { createCasedString, type ICasedString } from './CasedString';
@@ -93,14 +92,6 @@ export class SPFxTemplate {
    */
   public get unknownFields(): readonly string[] {
     return this._definition.unknownFields;
-  }
-
-  /**
-   * Gets the custom parameter definitions for this template.
-   * Returns undefined if the template defines no custom parameters.
-   */
-  public getParameters(): Record<string, ISPFxTemplateParameterDefinition> | undefined {
-    return this._definition.parameters;
   }
 
   /**
@@ -211,26 +202,6 @@ export class SPFxTemplate {
     context: Record<string, string>,
     options?: IRenderOptions
   ): Promise<TemplateOutput> {
-    // Validate custom parameters and apply declared defaults.
-    const templateParams: Record<string, ISPFxTemplateParameterDefinition> | undefined =
-      this._definition.parameters;
-    if (templateParams) {
-      const missing: string[] = [];
-      for (const [key, paramDef] of Object.entries(templateParams)) {
-        const isRequired: boolean = paramDef.required !== false;
-        if (context[key] === undefined) {
-          if (isRequired) {
-            missing.push(key);
-          } else if (paramDef.defaultValue !== undefined) {
-            context[key] = paramDef.defaultValue;
-          }
-        }
-      }
-      if (missing.length > 0) {
-        throw new Error(`Missing required template parameters: ${missing.join(', ')}`);
-      }
-    }
-
     // Wrap every plain-string value in the context with ICasedString so templates
     // can access casing variants (e.g. <%= componentName.pascal %>) for free.
     // Also pre-compute a flat list of dotted-key -> string entries for filename

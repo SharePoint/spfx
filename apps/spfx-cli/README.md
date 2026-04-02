@@ -45,7 +45,6 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 | `--solution-name NAME` | hyphen-cased component name | SharePoint solution name |
 | `--component-alias ALIAS` | same as `--component-name` | Short identifier for the component |
 | `--component-description TEXT` | `"<name> description"` | Component description string |
-| `--param KEY=VALUE` | — | Custom template parameter (repeatable); use for templates that declare custom parameters |
 | `--spfx-version VERSION` | `version/latest` branch | SPFx version to use; resolves to the `version/<VERSION>` branch (e.g. `1.22`, `1.23-rc.0`) |
 | `--template-url URL` | `https://github.com/SharePoint/spfx` | Custom GitHub template repository |
 | `--local-source PATH` | — | Path to a local template folder (repeatable) |

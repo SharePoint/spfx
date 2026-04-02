@@ -87,28 +87,6 @@ Array [
 ]
 `;
 
-exports[`CreateAction --param does not error for optional params without a value 1`] = `
-Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
-  "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test/test[n]",
-  "[    log] [n]",
-  "[    log] The following files will be generated:[n]",
-  "[    log] [n]",
-]
-`;
-
-exports[`CreateAction --param passes custom params to renderAsync context 1`] = `
-Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
-  "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test/test[n]",
-  "[    log] [n]",
-  "[    log] The following files will be generated:[n]",
-  "[    log] [n]",
-]
-`;
-
 exports[`CreateAction --spfx-version is ignored (with no throw) when --local-source is also provided 1`] = `
 Array [
   "[warning] --spfx-version is ignored when --local-source is specified.[n]",

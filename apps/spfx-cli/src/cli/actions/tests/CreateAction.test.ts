@@ -110,7 +110,7 @@ describe('SOLUTION_NAME_PATTERN', () => {
 
 describe('CreateAction', () => {
   const originalEnv = process.env;
-  let mockTemplate: { renderAsync: jest.Mock; getParameters: jest.Mock; spfxVersion: string };
+  let mockTemplate: { renderAsync: jest.Mock; spfxVersion: string };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -120,7 +120,6 @@ describe('CreateAction', () => {
 
     mockTemplate = {
       renderAsync: jest.fn().mockResolvedValue(mockTemplateFs),
-      getParameters: jest.fn().mockReturnValue(undefined),
       spfxVersion: '1.22.1'
     };
     const mockCollection = new Map([['webpart-minimal', mockTemplate]]) as unknown as SPFxTemplateCollection;
@@ -622,55 +621,6 @@ describe('CreateAction', () => {
       });
       await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow(
         /npm install was terminated by signal SIGTERM/
-      );
-    });
-  });
-
-  describe('--param', () => {
-    it('passes custom params to renderAsync context', async () => {
-      mockTemplate.getParameters.mockReturnValue({
-        greeting: { type: 'string', description: 'A greeting' }
-      });
-      await runCreateAsync(['--param', 'greeting=hello']);
-      expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
-        expect.objectContaining({ greeting: 'hello' }),
-        expect.anything()
-      );
-    });
-
-    it('rejects invalid key=value format', async () => {
-      await expect(runCreateAsync(['--param', 'noequals'])).rejects.toThrow(
-        /Invalid --param format.*Expected key=value/
-      );
-    });
-
-    it('throws when a required param is missing', async () => {
-      mockTemplate.getParameters.mockReturnValue({
-        greeting: { type: 'string', description: 'A greeting' }
-      });
-      await expect(runCreateAsync()).rejects.toThrow(/Missing required template parameter/);
-    });
-
-    it('does not error for optional params without a value', async () => {
-      mockTemplate.getParameters.mockReturnValue({
-        greeting: { type: 'string', description: 'A greeting', required: false, defaultValue: 'hi' }
-      });
-      await runCreateAsync();
-      // Defaults are applied by renderAsync, not the CLI — just verify no throw
-    });
-
-    it('rejects --param keys that collide with built-in context variables', async () => {
-      await expect(runCreateAsync(['--param', 'componentName=override'])).rejects.toThrow(
-        /conflicts with a built-in context variable/
-      );
-    });
-
-    it('rejects unknown --param keys not declared by the template', async () => {
-      mockTemplate.getParameters.mockReturnValue({
-        greeting: { type: 'string', description: 'A greeting' }
-      });
-      await expect(runCreateAsync(['--param', 'greeting=hi', '--param', 'typo=oops'])).rejects.toThrow(
-        /Unknown template parameter.*typo/
       );
     });
   });

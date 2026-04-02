@@ -11,7 +11,6 @@ import { Executable, Path, type IWaitForExitResultWithoutOutput } from '@rushsta
 import { Colorize, type Terminal } from '@rushstack/terminal';
 import type {
   CommandLineStringParameter,
-  CommandLineStringListParameter,
   IRequiredCommandLineChoiceParameter,
   IRequiredCommandLineStringParameter
 } from '@rushstack/ts-command-line';
@@ -23,9 +22,7 @@ import {
   SPFxScaffoldLog,
   type TemplateOutput,
   buildBuiltInContext,
-  BUILT_IN_PARAMETER_NAMES,
   type ISPFxBuiltInContext,
-  type ISPFxTemplateParameterDefinition,
   toKebabCase
 } from '@microsoft/spfx-template-api';
 
@@ -56,7 +53,6 @@ export class CreateAction extends SPFxActionBase {
   private readonly _componentDescriptionParameter: CommandLineStringParameter;
   private readonly _solutionNameParameter: CommandLineStringParameter;
   private readonly _packageManagerParameter: IRequiredCommandLineChoiceParameter<PackageManager | 'none'>;
-  private readonly _paramsParameter: CommandLineStringListParameter;
 
   public constructor(terminal: Terminal) {
     super(
@@ -122,12 +118,6 @@ export class CreateAction extends SPFxActionBase {
         'Use "none" to skip installation.',
       alternatives: ['npm', 'pnpm', 'yarn', 'none'],
       defaultValue: 'none'
-    });
-
-    this._paramsParameter = this.defineStringListParameter({
-      parameterLongName: '--param',
-      argumentName: 'KEY_VALUE',
-      description: 'Custom template parameter in key=value format (repeatable)'
     });
   }
 
@@ -215,55 +205,7 @@ export class CreateAction extends SPFxActionBase {
         { ciMode }
       );
 
-      // Parse custom --param values
-      const { values: paramValues, longName: paramLongName } = this._paramsParameter;
-      const customParams: Map<string, string> = new Map<string, string>();
-      for (const paramValue of paramValues) {
-        const eqIndex: number = paramValue.indexOf('=');
-        if (eqIndex <= 0) {
-          throw new Error(`Invalid ${paramLongName} format: "${paramValue}". Expected key=value format.`);
-        }
-        const key: string = paramValue.substring(0, eqIndex);
-        if (BUILT_IN_PARAMETER_NAMES.has(key as keyof ISPFxBuiltInContext)) {
-          throw new Error(
-            `${paramLongName} "${key}" conflicts with a built-in context variable and cannot be overridden.`
-          );
-        }
-        customParams.set(key, paramValue.substring(eqIndex + 1));
-      }
-
-      // Validate against the template's declared parameter definitions
-      const templateParams: Record<string, ISPFxTemplateParameterDefinition> | undefined =
-        template.getParameters();
-      if (templateParams) {
-        const errors: string[] = [];
-
-        // Reject unknown keys not declared by the template
-        for (const key of customParams.keys()) {
-          if (!(key in templateParams)) {
-            errors.push(`Unknown template parameter: "${key}"`);
-          }
-        }
-
-        // Check for missing required params
-        for (const [key, paramDef] of Object.entries(templateParams)) {
-          const isRequired: boolean = paramDef.required !== false;
-          if (isRequired && !customParams.has(key)) {
-            errors.push(`Missing required template parameter: "${key}"`);
-          }
-        }
-
-        if (errors.length > 0) {
-          throw new Error(
-            `${errors.join('. ')}. ` + `Use ${paramLongName} key=value to provide custom parameters.`
-          );
-        }
-      }
-
-      const renderContext: Record<string, string> = {
-        ...builtInContext,
-        ...Object.fromEntries(customParams)
-      };
+      const renderContext: Record<string, string> = { ...builtInContext };
 
       const templateFs: TemplateOutput = await template.renderAsync(renderContext, {
         retainPhaseScripts: ciMode

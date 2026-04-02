@@ -13,7 +13,6 @@ export {
   SPFxTemplate,
   isBinaryFile as _isBinaryFile,
   type ISPFxTemplateJson,
-  type ISPFxTemplateParameterDefinition,
   SPFxTemplateDefinitionSchema,
   SPFxTemplateJsonFile,
   type IRenderOptions,

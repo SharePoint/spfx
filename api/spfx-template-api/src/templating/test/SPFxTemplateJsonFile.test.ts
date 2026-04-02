@@ -45,24 +45,12 @@ describe(SPFxTemplateJsonFile.name, () => {
         category: 'extension',
         description: 'A test template',
         version: '1.0.0',
-        spfxVersion: '1.18.0',
-        parameters: {
-          customParam: {
-            type: 'string',
-            description: 'A custom parameter'
-          }
-        }
+        spfxVersion: '1.18.0'
       };
 
       const instance = new SPFxTemplateJsonFile(data);
 
       expect(instance.description).toBe('A test template');
-      expect(instance.parameters).toEqual({
-        customParam: {
-          type: 'string',
-          description: 'A custom parameter'
-        }
-      });
     });
   });
 
@@ -125,18 +113,6 @@ describe(SPFxTemplateJsonFile.name, () => {
       const instance = new SPFxTemplateJsonFile(data);
 
       expect(instance.spfxVersion).toBe('1.19.0');
-    });
-
-    it('should return undefined for missing parameters', () => {
-      const data: ISPFxTemplateJson = {
-        name: 'My Template',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0'
-      };
-      const instance = new SPFxTemplateJsonFile(data);
-
-      expect(instance.parameters).toBeUndefined();
     });
 
     it('should return the correct minimumEngineVersion', () => {
@@ -312,17 +288,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
         category: 'ace',
         description: 'A complete template with all fields',
         version: '1.2.3',
-        spfxVersion: '1.18.0',
-        parameters: {
-          customParam1: {
-            type: 'string',
-            description: 'First custom parameter'
-          },
-          customParam2: {
-            type: 'string',
-            description: 'Second custom parameter'
-          }
-        }
+        spfxVersion: '1.18.0'
       };
 
       const result = SPFxTemplateDefinitionSchema.safeParse(data);
@@ -495,78 +461,6 @@ describe('SPFxTemplateDefinitionSchema', () => {
 
       const result = SPFxTemplateDefinitionSchema.safeParse(data);
       expect(result.success).toBe(false);
-    });
-
-    it('should reject invalid parameters type', () => {
-      const data = {
-        name: 'Valid Name',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0',
-        parameters: {
-          field: {
-            type: 'number', // Only 'string' is allowed
-            description: 'A field'
-          }
-        }
-      };
-
-      const result = SPFxTemplateDefinitionSchema.safeParse(data);
-      expect(result.success).toBe(false);
-    });
-
-    it('should reject parameters without description', () => {
-      const data = {
-        name: 'Valid Name',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0',
-        parameters: {
-          field: {
-            type: 'string'
-            // Missing description
-          }
-        }
-      };
-
-      const result = SPFxTemplateDefinitionSchema.safeParse(data);
-      expect(result.success).toBe(false);
-    });
-
-    it('should reject parameters that collide with built-in parameter names', () => {
-      const data = {
-        name: 'Valid Name',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0',
-        parameters: {
-          componentName: {
-            type: 'string',
-            description: 'This collides with a built-in name'
-          }
-        }
-      };
-
-      const result = SPFxTemplateDefinitionSchema.safeParse(data);
-      expect(result.success).toBe(false);
-    });
-
-    it('should accept parameters that do not collide with built-in names', () => {
-      const data = {
-        name: 'Valid Name',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0',
-        parameters: {
-          myCustomParam: {
-            type: 'string',
-            description: 'A custom parameter that does not collide'
-          }
-        }
-      };
-
-      const result = SPFxTemplateDefinitionSchema.safeParse(data);
-      expect(result.success).toBe(true);
     });
   });
 });

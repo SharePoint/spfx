@@ -367,56 +367,6 @@ describe(SPFxTemplate.name, () => {
       expect(result.read('README.md')).toBe('# My Application');
     });
 
-    it('should render template with parameters validation', async () => {
-      const definition = new SPFxTemplateJsonFile({
-        name: 'WithSchema',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0',
-        parameters: {
-          customParam: {
-            type: 'string',
-            description: 'A custom parameter'
-          }
-        }
-      });
-
-      const files = new Map<string, string | Buffer>([
-        ['src/index.ts', 'const name = "<%= customParam %>";']
-      ]);
-
-      const template = new SPFxTemplate(definition, files);
-      const context = { customParam: 'MyComponent' };
-
-      const result: TemplateOutput = await template.renderAsync(context);
-
-      expect(result.read('src/index.ts')).toBe('const name = "MyComponent";');
-    });
-
-    it('should throw error when required parameters are missing from context', async () => {
-      const definition = new SPFxTemplateJsonFile({
-        name: 'WithSchema',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0',
-        parameters: {
-          requiredField: {
-            type: 'string',
-            description: 'A required field'
-          }
-        }
-      });
-
-      const files = new Map<string, string | Buffer>([['file.txt', 'content']]);
-
-      const template = new SPFxTemplate(definition, files);
-      const invalidContext = { wrongField: 'value' };
-
-      await expect(template.renderAsync(invalidContext)).rejects.toThrow(
-        /Missing required template parameters/
-      );
-    });
-
     it('should replace placeholders in filenames', async () => {
       const definition = new SPFxTemplateJsonFile({
         name: 'Test',

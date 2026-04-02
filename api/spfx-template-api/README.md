@@ -168,9 +168,8 @@ The writer uses these helpers internally. You can also import them directly for 
 | `ISPFxBuiltInContextInputs` | Input interface for `buildBuiltInContext` |
 | `ISPFxBuiltInContext` | Output interface — the 10 built-in variables every template receives |
 | `IBuildBuiltInContextOptions` | Options for `buildBuiltInContext` (e.g. `ciMode`) |
-| `BUILT_IN_PARAMETER_NAMES` | `ReadonlySet<string>` of all built-in variable names (used for collision detection) |
-| `ISPFxTemplateParameterDefinition` | Definition of a custom template parameter (`type`, `description`, `required?`, `default?`) |
-| `ISPFxTemplateJson` | Shape of the `template.json` manifest (includes `category`, optional `parameters` and `minimumEngineVersion`) |
+| `BUILT_IN_PARAMETER_NAMES` | `ReadonlySet` of all built-in context variable names |
+| `ISPFxTemplateJson` | Shape of the `template.json` manifest (includes `category`, optional `minimumEngineVersion`) |
 | `SPFxTemplateDefinitionSchema` | Zod schema for validating a `template.json` (uses passthrough mode for forward compatibility) |
 | `SPFxTemplateJsonFile` | Typed wrapper around a parsed `template.json` file |
 | `SPFxTemplateRepositorySourceKind` | Union type of all built-in repository source kinds (`'local' | 'github'`) |

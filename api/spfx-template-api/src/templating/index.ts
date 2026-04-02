@@ -6,7 +6,6 @@ export { SPFxTemplate, type IRenderOptions } from './SPFxTemplate';
 export { isBinaryFile } from './binaryFiles';
 export {
   type ISPFxTemplateJson,
-  type ISPFxTemplateParameterDefinition,
   SPFxTemplateDefinitionSchema,
   SPFxTemplateJsonFile,
   SPFX_TEMPLATE_CATEGORIES,
