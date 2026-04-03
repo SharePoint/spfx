@@ -78,6 +78,14 @@ export async function tryReadPackageManagerFromPackageJsonEnginesAsync(
  * Emits a warning and skips silently on version-detection or file-read failures so that a missing
  * or undetectable package manager never fails the overall scaffold.
  *
+ * @remarks
+ * Callers are expected to pass the package manager that is already recorded in `engines` (if any).
+ * The CLI enforces this via its existing-project guard, which reads the current value with
+ * {@link tryReadPackageManagerFromPackageJsonEnginesAsync} and overrides any conflicting
+ * `--package-manager` flag before reaching this function. As a result, this function will never
+ * write a different package manager than the one already present, so no cleanup of stale entries
+ * is needed.
+ *
  * @public
  */
 export async function writePackageManagerToPackageJsonEnginesAsync(
