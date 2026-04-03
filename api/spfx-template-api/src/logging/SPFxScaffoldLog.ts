@@ -3,7 +3,7 @@
 
 import { FileSystem } from '@rushstack/node-core-library';
 
-import type { IPackageManagerSelectedEvent, ISPFxScaffoldEvent } from './SPFxScaffoldEvent';
+import type { ISPFxScaffoldEvent } from './SPFxScaffoldEvent';
 
 /**
  * The well-known filename for the persisted scaffold log.
@@ -36,7 +36,6 @@ export type ISPFxScaffoldEventInput = ISPFxScaffoldEvent extends infer E
  */
 export class SPFxScaffoldLog {
   private readonly _events: ISPFxScaffoldEvent[] = [];
-  private _lastPackageManager: string | undefined;
 
   /**
    * Appends an event to the log.  If `timestamp` is omitted or empty
@@ -48,13 +47,6 @@ export class SPFxScaffoldLog {
       timestamp: event.timestamp || new Date().toISOString()
     } as ISPFxScaffoldEvent;
     this._events.push(normalizedEvent);
-
-    if (normalizedEvent.kind === 'package-manager-selected') {
-      const pm: string = (normalizedEvent as IPackageManagerSelectedEvent).packageManager;
-      if (pm !== 'none') {
-        this._lastPackageManager = pm;
-      }
-    }
   }
 
   /** Whether the log contains any events. */
@@ -74,18 +66,6 @@ export class SPFxScaffoldLog {
     kind: K
   ): Extract<ISPFxScaffoldEvent, { kind: K }>[] {
     return this._events.filter((e): e is Extract<ISPFxScaffoldEvent, { kind: K }> => e.kind === kind);
-  }
-
-  /**
-   * Returns the package manager from the most recent `package-manager-selected`
-   * event, or `undefined` if none has been recorded or the last selection was `'none'`.
-   *
-   * @remarks
-   * This value is cached and updated incrementally on each {@link SPFxScaffoldLog.append}
-   * call, so reading it is O(1).
-   */
-  public get lastPackageManager(): string | undefined {
-    return this._lastPackageManager;
   }
 
   /** Serializes the log to JSONL (one JSON object per line, no trailing newline). */
