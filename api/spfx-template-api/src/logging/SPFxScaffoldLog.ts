@@ -43,8 +43,8 @@ export class SPFxScaffoldLog {
    */
   public append(event: ISPFxScaffoldEventInput): void {
     const normalizedEvent: ISPFxScaffoldEvent = {
-      ...event,
-      timestamp: event.timestamp || new Date().toISOString()
+      timestamp: event.timestamp || new Date().toISOString(),
+      ...event
     } as ISPFxScaffoldEvent;
     this._events.push(normalizedEvent);
   }
