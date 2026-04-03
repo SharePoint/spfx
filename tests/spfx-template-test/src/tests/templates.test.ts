@@ -7,12 +7,12 @@ import ignore from 'ignore';
 import { _isBinaryFile as isBinaryFile } from '@microsoft/spfx-template-api';
 import { FileSystem, NewlineKind } from '@rushstack/node-core-library';
 
-import { REPO_ROOT, TEMPLATES_DIR } from './constants';
+import { PROJECT_ROOT, REPO_ROOT, TEMPLATES_DIR } from './constants';
 
 import { scaffoldAsync } from './testUtilities';
 
 const EXAMPLES_DIR: string = `${REPO_ROOT}/examples`;
-const OUTPUT_DIR: string = `${REPO_ROOT}/common/temp/examples`;
+const TEMP_OUTPUT_DIR: string = `${PROJECT_ROOT}/temp/examples`;
 
 // Predefined template configuration
 interface ITemplateConfig {
@@ -220,7 +220,7 @@ async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ig
 /**
  * Recursively get all files in a directory
  */
-async function getAllFiles(
+async function getAllFilesAsync(
   dir: string,
   baseDir: string = dir,
   ignoreMatcher?: ReturnType<typeof ignore>
@@ -237,7 +237,7 @@ async function getAllFiles(
       }
 
       if (entry.isDirectory()) {
-        return getAllFiles(fullPath, baseDir, ignoreMatcher);
+        return getAllFilesAsync(fullPath, baseDir, ignoreMatcher);
       } else {
         // Return relative path from baseDir
         return [path.relative(baseDir, fullPath)];
@@ -251,7 +251,7 @@ async function getAllFiles(
  * Read file content, return undefined if file doesn't exist or can't be read
  * Normalizes line endings to `\n` for consistent comparison
  */
-async function readFileContent(filePath: string): Promise<string | undefined> {
+async function readFileContentAsync(filePath: string): Promise<string | undefined> {
   try {
     return await FileSystem.readFileAsync(filePath, { convertLineEndings: NewlineKind.Lf });
   } catch (error) {
@@ -264,10 +264,10 @@ async function readFileContent(filePath: string): Promise<string | undefined> {
 }
 
 /**
- * Clean up the output directory before scaffolding
+ * Clean up the temp output directory before scaffolding
  */
-async function cleanOutputDirAsync(templateName: string): Promise<void> {
-  const outputPath = `${OUTPUT_DIR}/${templateName}`;
+async function cleanTempOutputDirAsync(templateName: string): Promise<void> {
+  const outputPath = `${TEMP_OUTPUT_DIR}/${templateName}`;
   await FileSystem.deleteFolderAsync(outputPath);
 }
 
@@ -276,7 +276,7 @@ describe('SPFx Template Scaffolding', () => {
   jest.setTimeout(120000);
 
   beforeAll(async () => {
-    await FileSystem.ensureFolderAsync(OUTPUT_DIR);
+    await FileSystem.ensureFolderAsync(TEMP_OUTPUT_DIR);
   });
 
   // Create a test for each template configuration
@@ -296,9 +296,8 @@ describe('SPFx Template Scaffolding', () => {
         } = config;
 
         const examplePath = `${EXAMPLES_DIR}/${templateName}`;
-        // In update mode, scaffold directly to examples directory
-        // In normal mode, scaffold to temp directory for comparison
-        const outputPath = UPDATE_MODE ? examplePath : `${OUTPUT_DIR}/${templateName}`;
+        // Always scaffold to temp directory
+        const outputPath: string = `${TEMP_OUTPUT_DIR}/${templateName}`;
 
         // Check if example exists (only in normal mode)
         const exampleExists = await FileSystem.existsAsync(examplePath);
@@ -306,8 +305,8 @@ describe('SPFx Template Scaffolding', () => {
           throw new Error(`No example found for template '${templateName}' at ${examplePath}`);
         }
 
-        // Clean up output directory
-        await cleanOutputDirAsync(templateName);
+        // Clean up temp output directory
+        await cleanTempOutputDirAsync(templateName);
 
         // Ensure output directory exists
         await FileSystem.ensureFolderAsync(outputPath);
@@ -332,17 +331,7 @@ describe('SPFx Template Scaffolding', () => {
         // Parse .gitignore from template
         const ignoreMatcher = await parseGitignore(templatePath);
 
-        // If update mode, skip comparison (we scaffolded directly to examples)
-        if (UPDATE_MODE) {
-          console.info(`[UPDATE MODE] Scaffolded ${templateName} to ${examplePath}`);
-          return;
-        }
-
-        // Get all files from both directories
-        const scaffoldedFiles = await getAllFiles(outputPath, outputPath, ignoreMatcher);
-        const exampleFiles = await getAllFiles(examplePath, examplePath, ignoreMatcher);
-
-        // Filter out files that should be ignored in comparison
+        // Filter out files that should be ignored in comparison/sync
         const filterFiles = (files: string[]): string[] =>
           files.filter((file) => {
             const normalized = file.replace(/\\/g, '/');
@@ -376,8 +365,40 @@ describe('SPFx Template Scaffolding', () => {
             return true;
           });
 
+        // Get all files from the scaffolded output
+        const [scaffoldedFiles, exampleFiles] = await Promise.all([
+          getAllFilesAsync(outputPath, outputPath, ignoreMatcher),
+          getAllFilesAsync(examplePath, examplePath, ignoreMatcher)
+        ]);
         const filteredScaffolded = filterFiles(scaffoldedFiles).sort();
-        const filteredExample = filterFiles(exampleFiles).sort();
+
+        // If update mode, sync scaffolded output to the example directory
+        if (UPDATE_MODE) {
+          await FileSystem.ensureFolderAsync(examplePath);
+
+          // Determine which files to delete from example (files that no longer exist in template)
+          const filteredExampleForSync: string[] = filterFiles(exampleFiles);
+          const scaffoldedSet: Set<string> = new Set(filteredScaffolded);
+          for (const file of filteredExampleForSync) {
+            if (!scaffoldedSet.has(file)) {
+              await FileSystem.deleteFileAsync(`${examplePath}/${file}`);
+            }
+          }
+
+          // Copy all scaffolded files to example directory
+          for (const file of filteredScaffolded) {
+            const content: Buffer = await FileSystem.readFileToBufferAsync(`${outputPath}/${file}`);
+            await FileSystem.writeFileAsync(`${examplePath}/${file}`, content, {
+              ensureFolderExists: true
+            });
+          }
+
+          console.info(`[UPDATE MODE] Synced ${templateName} to ${examplePath}`);
+          return;
+        }
+
+        // Get all files from both directories for comparison
+        const filteredExample: string[] = filterFiles(exampleFiles).sort();
 
         // Check that the same files exist in both directories
         expect(filteredScaffolded).toEqual(filteredExample);
