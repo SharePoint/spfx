@@ -30,6 +30,3 @@ coverage
 .vs
 bin
 obj
-
-# Resx Generated Code
-*.resx.ts

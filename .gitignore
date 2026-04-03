@@ -179,11 +179,5 @@ coverage
 bin
 obj
 
-# Resx Generated Code
-*.resx.ts
-
-# Styles Generated Code
-*.scss.ts
-
 # Claude
 .claude/*.local.json
