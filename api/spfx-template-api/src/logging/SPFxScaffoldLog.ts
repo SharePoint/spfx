@@ -3,7 +3,7 @@
 
 import { FileSystem } from '@rushstack/node-core-library';
 
-import type { IPackageManagerSelectedEvent, ISPFxScaffoldEvent } from './SPFxScaffoldEvent';
+import type { ISPFxScaffoldEvent } from './SPFxScaffoldEvent';
 
 /**
  * The well-known filename for the persisted scaffold log.
@@ -43,14 +43,15 @@ export class SPFxScaffoldLog {
    * it will be replaced with the current ISO 8601 timestamp.
    */
   public append(event: ISPFxScaffoldEventInput): void {
+    const { timestamp, ...rest } = event;
     const normalizedEvent: ISPFxScaffoldEvent = {
-      ...event,
-      timestamp: event.timestamp || new Date().toISOString()
-    } as ISPFxScaffoldEvent;
+      timestamp: timestamp || new Date().toISOString(),
+      ...rest
+    };
     this._events.push(normalizedEvent);
 
     if (normalizedEvent.kind === 'package-manager-selected') {
-      const pm: string = (normalizedEvent as IPackageManagerSelectedEvent).packageManager;
+      const pm: string = normalizedEvent.packageManager;
       if (pm !== 'none') {
         this._lastPackageManager = pm;
       }
