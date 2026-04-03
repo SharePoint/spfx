@@ -9,7 +9,7 @@ Built-in template variables are provided automatically by `buildBuiltInContext()
 ```json
 {
   "context": {
-    "spfxVersion": "1.23.0-beta.0"
+    "spfxVersion": "1.23.0-beta.2"
   }
 }
 ```
@@ -25,7 +25,7 @@ Every string value in the render context is automatically wrapped with casing he
 | `componentName.allCaps` | UPPER_SNAKE_CASE | ACE view/quick-view registry IDs, string constants | "GENERIC_CARD" |
 | `libraryName` | original | Package name (via `toString()`) | "@spfx-template/generic-card" |
 | `description` | — | User-provided description | User's text |
-| `spfxVersion` | — | SPFx framework version | "1.23.0-beta.0" |
+| `spfxVersion` | — | SPFx framework version | "1.23.0-beta.2" |
 
 The same casing helpers are available on **any** string context variable — e.g. `componentAlias.pascal`, `libraryName.hyphen`, etc.
 
@@ -102,7 +102,7 @@ PropertyPaneDescription: 'Description for property pane',
 
 Always use the `spfxVersion` variable — never hardcode version numbers. For shields.io badge
 URLs, use `spfxVersionForBadgeUrl` instead, which escapes hyphens so the badge renders correctly
-for prerelease versions like `1.23.0-beta.0`.
+for prerelease versions like `1.23.0-beta.2`.
 
 ```json
 "@microsoft/sp-core-library": "~<%= spfxVersion %>"

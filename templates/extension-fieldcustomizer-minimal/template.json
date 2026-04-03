@@ -3,5 +3,5 @@
   "category": "extension",
   "description": "A minimal Field Customizer extension for SharePoint Framework without any framework dependencies",
   "version": "1.0.0",
-  "spfxVersion": "1.23.0-beta.0"
+  "spfxVersion": "1.23.0-beta.2"
 }

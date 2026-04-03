@@ -518,12 +518,12 @@ describe('CreateAction', () => {
 
   describe('spfxVersionForBadgeUrl', () => {
     it('escapes hyphens in prerelease versions for shields.io badge URLs', async () => {
-      mockTemplate.spfxVersion = '1.23.0-beta.0';
+      mockTemplate.spfxVersion = '1.23.0-beta.2';
       await runCreateAsync();
       expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
         expect.objectContaining({
-          spfxVersion: '1.23.0-beta.0',
-          spfxVersionForBadgeUrl: '1.23.0--beta.0'
+          spfxVersion: '1.23.0-beta.2',
+          spfxVersionForBadgeUrl: '1.23.0--beta.2'
         }),
         expect.anything()
       );
