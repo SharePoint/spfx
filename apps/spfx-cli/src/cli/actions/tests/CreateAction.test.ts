@@ -53,7 +53,8 @@ const MockedLocal = LocalFileSystemRepositorySource as jest.MockedClass<
   typeof LocalFileSystemRepositorySource
 >;
 const MockedExecutable = Executable as unknown as { spawn: jest.Mock; waitForExitAsync: jest.Mock };
-const MockedTryRead = tryReadPackageManagerFromPackageJsonEnginesAsync as jest.Mock;
+const MockedTryReadPackageManagerFromPackageJsonEnginesAsync =
+  tryReadPackageManagerFromPackageJsonEnginesAsync as jest.Mock;
 const MockedScaffoldLog = SPFxScaffoldLog as jest.MockedClass<typeof SPFxScaffoldLog> & {
   loadFromFolderAsync: jest.Mock;
 };
@@ -160,7 +161,7 @@ describe('CreateAction', () => {
     MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(
       createMockScaffoldLogInstance(false) as unknown as SPFxScaffoldLog
     );
-    MockedTryRead.mockResolvedValue(undefined);
+    MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue(undefined);
   });
 
   afterEach(() => {
@@ -674,7 +675,7 @@ describe('CreateAction', () => {
       it('overrides --package-manager with engines value and warns', async () => {
         const mockInstance = createMockScaffoldLogInstance(true);
         MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
-        MockedTryRead.mockResolvedValue('pnpm');
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('pnpm');
 
         await runCreateAsync(['--package-manager', 'npm']);
 
@@ -694,7 +695,7 @@ describe('CreateAction', () => {
         MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(
           createMockScaffoldLogInstance(true) as unknown as SPFxScaffoldLog
         );
-        MockedTryRead.mockResolvedValue('npm');
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('npm');
 
         await runCreateAsync(['--package-manager', 'npm']);
 
@@ -708,7 +709,7 @@ describe('CreateAction', () => {
       it('does not warn and skips install when --package-manager is "none"', async () => {
         const mockInstance = createMockScaffoldLogInstance(true);
         MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
-        MockedTryRead.mockResolvedValue('npm');
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('npm');
 
         await runCreateAsync(['--package-manager', 'none']);
         expect(MockedExecutable.spawn).not.toHaveBeenCalled();
@@ -722,7 +723,7 @@ describe('CreateAction', () => {
       it('does not warn and skips install when --package-manager is omitted', async () => {
         const mockInstance = createMockScaffoldLogInstance(true);
         MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
-        MockedTryRead.mockResolvedValue('npm');
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('npm');
 
         await runCreateAsync();
         expect(MockedExecutable.spawn).not.toHaveBeenCalled();
@@ -751,7 +752,7 @@ describe('CreateAction', () => {
       it('saves the scaffold log after scaffolding', async () => {
         const mockInstance = createMockScaffoldLogInstance(true);
         MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
-        MockedTryRead.mockResolvedValue('npm');
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('npm');
 
         await runCreateAsync(['--package-manager', 'npm']);
 
