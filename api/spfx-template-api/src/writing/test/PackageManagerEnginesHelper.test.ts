@@ -214,6 +214,24 @@ describe(writePackageManagerToPackageJsonEnginesAsync.name, () => {
     expect(MockedJsonFile.saveAsync).not.toHaveBeenCalled();
   });
 
+  it('warns and skips when spawn throws (e.g. package manager not on PATH)', async () => {
+    MockedExecutable.spawn.mockImplementation(() => {
+      throw new Error('spawn pnpm ENOENT');
+    });
+    await writePackageManagerToPackageJsonEnginesAsync('pnpm', '/my/project', terminal);
+
+    expect(writeWarningLineSpy).toHaveBeenCalledWith(expect.stringContaining('pnpm'));
+    expect(MockedJsonFile.saveAsync).not.toHaveBeenCalled();
+  });
+
+  it('warns and skips when waitForExitAsync rejects', async () => {
+    MockedExecutable.waitForExitAsync.mockRejectedValue(new Error('process error'));
+    await writePackageManagerToPackageJsonEnginesAsync('pnpm', '/my/project', terminal);
+
+    expect(writeWarningLineSpy).toHaveBeenCalledWith(expect.stringContaining('pnpm'));
+    expect(MockedJsonFile.saveAsync).not.toHaveBeenCalled();
+  });
+
   it('warns and skips when package.json does not exist', async () => {
     MockedJsonFile.loadAsync.mockRejectedValue(makeEnoentError());
     await writePackageManagerToPackageJsonEnginesAsync('pnpm', '/my/project', terminal);

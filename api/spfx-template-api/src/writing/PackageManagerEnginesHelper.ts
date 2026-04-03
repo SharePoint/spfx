@@ -85,19 +85,25 @@ export async function writePackageManagerToPackageJsonEnginesAsync(
   targetDir: string,
   terminal: ITerminal
 ): Promise<void> {
-  const versionChild: ChildProcess = Executable.spawn(packageManager, ['--version'], {
-    currentWorkingDirectory: targetDir,
-    stdio: 'pipe'
-  });
+  let majorVersion: number | undefined;
+  try {
+    const versionChild: ChildProcess = Executable.spawn(packageManager, ['--version'], {
+      currentWorkingDirectory: targetDir,
+      stdio: 'pipe'
+    });
 
-  const { stdout } = await Executable.waitForExitAsync(versionChild, {
-    throwOnNonZeroExitCode: false,
-    throwOnSignal: false,
-    encoding: 'utf-8'
-  });
+    const { stdout } = await Executable.waitForExitAsync(versionChild, {
+      throwOnNonZeroExitCode: false,
+      throwOnSignal: false,
+      encoding: 'utf-8'
+    });
 
-  const majorVersion: number = parseInt(stdout.trim(), 10);
-  if (Number.isNaN(majorVersion)) {
+    majorVersion = parseInt(stdout.trim(), 10);
+  } catch {
+    // Ignore - fall through to warning below. This can fail if the package manager is not installed or not on the PATH,
+  }
+
+  if (majorVersion === undefined || Number.isNaN(majorVersion)) {
     terminal.writeWarningLine(
       `Could not detect ${packageManager} version; skipping engines field update in package.json.`
     );

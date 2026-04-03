@@ -24,7 +24,19 @@ Array [
 ]
 `;
 
+exports[`writePackageManagerToPackageJsonEnginesAsync warns and skips when spawn throws (e.g. package manager not on PATH): terminal output 1`] = `
+Array [
+  "[warning] Could not detect pnpm version; skipping engines field update in package.json.[n]",
+]
+`;
+
 exports[`writePackageManagerToPackageJsonEnginesAsync warns and skips when version output cannot be parsed: terminal output 1`] = `
+Array [
+  "[warning] Could not detect pnpm version; skipping engines field update in package.json.[n]",
+]
+`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync warns and skips when waitForExitAsync rejects: terminal output 1`] = `
 Array [
   "[warning] Could not detect pnpm version; skipping engines field update in package.json.[n]",
 ]
