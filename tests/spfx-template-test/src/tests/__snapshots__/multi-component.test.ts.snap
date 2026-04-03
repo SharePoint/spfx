@@ -136,7 +136,7 @@ Object {
     "@microsoft/eslint-config-spfx": "1.23.0-beta.2",
     "@microsoft/sp-module-interfaces": "1.23.0-beta.2",
     "@microsoft/spfx-web-build-rig": "1.23.0-beta.2",
-    "@rushstack/heft": "^1.2.7",
+    "@rushstack/heft": "^1.2.9",
     "@types/heft-jest": "^1.0.6",
     "@types/webpack-env": "~1.15.2",
     "eslint": "9.37.0",
