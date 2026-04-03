@@ -15,16 +15,16 @@
     "_phase:package-solution": "heft run --only package-solution -- --clean"
   },
   "dependencies": {
-    "@microsoft/decorators": "1.23.0-beta.0",
-    "@microsoft/sp-application-base": "1.23.0-beta.0",
-    "@microsoft/sp-core-library": "1.23.0-beta.0",
-    "@microsoft/sp-dialog": "1.23.0-beta.0",
+    "@microsoft/decorators": "1.23.0-beta.2",
+    "@microsoft/sp-application-base": "1.23.0-beta.2",
+    "@microsoft/sp-core-library": "1.23.0-beta.2",
+    "@microsoft/sp-dialog": "1.23.0-beta.2",
     "tslib": "2.3.1"
   },
   "devDependencies": {
-    "@microsoft/eslint-config-spfx": "1.23.0-beta.0",
-    "@microsoft/sp-module-interfaces": "1.23.0-beta.0",
-    "@microsoft/spfx-web-build-rig": "1.23.0-beta.0",
+    "@microsoft/eslint-config-spfx": "1.23.0-beta.2",
+    "@microsoft/sp-module-interfaces": "1.23.0-beta.2",
+    "@microsoft/spfx-web-build-rig": "1.23.0-beta.2",
     "@rushstack/heft": "^1.2.7",
     "@types/heft-jest": "^1.0.6",
     "@types/webpack-env": "~1.15.2",

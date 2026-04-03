@@ -36,7 +36,7 @@ export interface ISPFxBuiltInContext {
   libraryName: string;
   /** SPFx version from the template manifest (e.g. "1.22.2"). */
   spfxVersion: string;
-  /** SPFx version with hyphens escaped for shields.io badge URLs (e.g. "1.23.0--beta.0"). */
+  /** SPFx version with hyphens escaped for shields.io badge URLs (e.g. "1.23.0--beta.2"). */
   spfxVersionForBadgeUrl: string;
   /** Random (or deterministic in CI mode) GUID identifying the component. */
   componentId: string;
@@ -145,7 +145,7 @@ export function buildBuiltInContext(
     spfxVersion,
     // The shields.io badge URL uses hyphens as separators, so hyphens in version
     // numbers need to be escaped as double-hyphens to avoid ambiguity.
-    // For example, "1.23.0-beta.0" becomes "1.23.0--beta.0".
+    // For example, "1.23.0-beta.2" becomes "1.23.0--beta.2".
     spfxVersionForBadgeUrl: spfxVersion.replace(/-/g, '--'),
     componentId,
     featureId,
