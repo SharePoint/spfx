@@ -5,7 +5,7 @@ import * as path from 'node:path';
 import ignore from 'ignore';
 
 import { _isBinaryFile as isBinaryFile } from '@microsoft/spfx-template-api';
-import { FileSystem, NewlineKind, Path } from '@rushstack/node-core-library';
+import { Async, FileSystem, NewlineKind, Path } from '@rushstack/node-core-library';
 
 import { PROJECT_ROOT, REPO_ROOT, TEMPLATES_DIR } from './constants';
 
@@ -385,19 +385,28 @@ describe('SPFx Template Scaffolding', () => {
 
           // Determine which files to delete from example (files that no longer exist in template)
           const scaffoldedSet: Set<string> = new Set(filteredScaffolded);
-          for (const file of filteredExample) {
-            if (!scaffoldedSet.has(file)) {
-              await FileSystem.deleteFileAsync(`${examplePath}/${file}`);
-            }
-          }
-
-          // Copy all scaffolded files to example directory
-          for (const file of filteredScaffolded) {
-            const content: Buffer = await FileSystem.readFileToBufferAsync(`${outputPath}/${file}`);
-            await FileSystem.writeFileAsync(`${examplePath}/${file}`, content, {
-              ensureFolderExists: true
-            });
-          }
+          await Promise.all([
+            Async.forEachAsync(
+              filteredExample,
+              async (file) => {
+                if (!scaffoldedSet.has(file)) {
+                  await FileSystem.deleteFileAsync(`${examplePath}/${file}`);
+                }
+              },
+              { concurrency: 5 }
+            ),
+            // Copy all scaffolded files to example directory
+            Async.forEachAsync(
+              filteredScaffolded,
+              async (file) => {
+                const content: Buffer = await FileSystem.readFileToBufferAsync(`${outputPath}/${file}`);
+                await FileSystem.writeFileAsync(`${examplePath}/${file}`, content, {
+                  ensureFolderExists: true
+                });
+              },
+              { concurrency: 5 }
+            )
+          ]);
 
           console.info(`[UPDATE MODE] Synced ${templateName} to ${examplePath}`);
         } else {
@@ -405,37 +414,41 @@ describe('SPFx Template Scaffolding', () => {
           expect(filteredScaffolded).toEqual(filteredExample);
 
           // Compare content of each file with detailed diffs
-          for (const file of filteredScaffolded) {
-            const scaffoldedFile = `${outputPath}/${file}`;
-            const exampleFile = `${examplePath}/${file}`;
+          await Async.forEachAsync(
+            filteredScaffolded,
+            async (file) => {
+              const scaffoldedFile: string = `${outputPath}/${file}`;
+              const exampleFile: string = `${examplePath}/${file}`;
 
-            if (isBinaryFile(file)) {
-              // Compare binary files as raw buffers
-              try {
-                const [scaffoldedBuffer, exampleBuffer] = await Promise.all([
-                  FileSystem.readFileToBufferAsync(scaffoldedFile),
-                  FileSystem.readFileToBufferAsync(exampleFile)
+              if (isBinaryFile(file)) {
+                // Compare binary files as raw buffers
+                try {
+                  const [scaffoldedBuffer, exampleBuffer] = await Promise.all([
+                    FileSystem.readFileToBufferAsync(scaffoldedFile),
+                    FileSystem.readFileToBufferAsync(exampleFile)
+                  ]);
+                  expect(scaffoldedBuffer).toEqual(exampleBuffer);
+                } catch (error) {
+                  throw new Error(`Binary file mismatch in '${file}':\n${error}`);
+                }
+              } else {
+                // Compare text files as normalized strings
+                const [scaffoldedContent, exampleContent] = await Promise.all([
+                  readFileContentAsync(scaffoldedFile),
+                  readFileContentAsync(exampleFile)
                 ]);
-                expect(scaffoldedBuffer).toEqual(exampleBuffer);
-              } catch (error) {
-                throw new Error(`Binary file mismatch in '${file}':\n${error}`);
-              }
-            } else {
-              // Compare text files as normalized strings
-              const [scaffoldedContent, exampleContent] = await Promise.all([
-                readFileContentAsync(scaffoldedFile),
-                readFileContentAsync(exampleFile)
-              ]);
 
-              // Use Jest's expect to get nice diff output
-              // Add file context to the error message
-              try {
-                expect(scaffoldedContent).toEqual(exampleContent);
-              } catch (error) {
-                throw new Error(`File content mismatch in '${file}':\n${error}`);
+                // Use Jest's expect to get nice diff output
+                // Add file context to the error message
+                try {
+                  expect(scaffoldedContent).toEqual(exampleContent);
+                } catch (error) {
+                  throw new Error(`File content mismatch in '${file}':\n${error}`);
+                }
               }
-            }
-          }
+            },
+            { concurrency: 10 }
+          );
         }
       }
     );
