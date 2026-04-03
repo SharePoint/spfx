@@ -11,9 +11,10 @@ jest.mock('@microsoft/spfx-template-api', () => {
     // render context and solution name are populated correctly in tests.
     buildBuiltInContext: actual.buildBuiltInContext,
     toHyphenCase: actual.toHyphenCase,
-    // This is mocked so tests can control what package manager is found on disk
-    // and verify that the write step is called without hitting the real filesystem.
-    tryReadPackageManagerFromPackageJsonEnginesAsync: jest.fn().mockResolvedValue(undefined)
+    // These are mocked so tests can control what package manager is found on disk
+    // and assert that the write step is called, without hitting the real filesystem.
+    tryReadPackageManagerFromPackageJsonEnginesAsync: jest.fn().mockResolvedValue(undefined),
+    writePackageManagerToPackageJsonEnginesAsync: jest.fn().mockResolvedValue(undefined)
   };
 });
 jest.mock('@rushstack/node-core-library', () => {
@@ -39,7 +40,8 @@ import {
   PublicGitHubRepositorySource,
   SPFxTemplateRepositoryManager,
   SPFxScaffoldLog,
-  tryReadPackageManagerFromPackageJsonEnginesAsync
+  tryReadPackageManagerFromPackageJsonEnginesAsync,
+  writePackageManagerToPackageJsonEnginesAsync
 } from '@microsoft/spfx-template-api';
 import type { SPFxTemplateCollection } from '@microsoft/spfx-template-api';
 
@@ -55,6 +57,8 @@ const MockedLocal = LocalFileSystemRepositorySource as jest.MockedClass<
 const MockedExecutable = Executable as unknown as { spawn: jest.Mock; waitForExitAsync: jest.Mock };
 const MockedTryReadPackageManagerFromPackageJsonEnginesAsync =
   tryReadPackageManagerFromPackageJsonEnginesAsync as jest.Mock;
+const MockedWritePackageManagerToPackageJsonEnginesAsync =
+  writePackageManagerToPackageJsonEnginesAsync as jest.Mock;
 const MockedScaffoldLog = SPFxScaffoldLog as jest.MockedClass<typeof SPFxScaffoldLog> & {
   loadFromFolderAsync: jest.Mock;
 };
@@ -619,9 +623,23 @@ describe('CreateAction', () => {
       );
     });
 
+    it('calls writePackageManagerToPackageJsonEnginesAsync after a successful install', async () => {
+      await runCreateAsync(['--package-manager', 'pnpm']);
+      expect(MockedWritePackageManagerToPackageJsonEnginesAsync).toHaveBeenCalledWith(
+        'pnpm',
+        '/tmp/test/test',
+        expect.anything()
+      );
+    });
+
     it('does not run install when --package-manager none is passed', async () => {
       await runCreateAsync(['--package-manager', 'none']);
       expect(MockedExecutable.spawn).not.toHaveBeenCalled();
+    });
+
+    it('does not call writePackageManagerToPackageJsonEnginesAsync when install is skipped', async () => {
+      await runCreateAsync(['--package-manager', 'none']);
+      expect(MockedWritePackageManagerToPackageJsonEnginesAsync).not.toHaveBeenCalled();
     });
 
     it('does not run install when --package-manager is omitted', async () => {
@@ -645,6 +663,17 @@ describe('CreateAction', () => {
       await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow(
         /npm install exited with code 1/
       );
+    });
+
+    it('does not call writePackageManagerToPackageJsonEnginesAsync when install fails', async () => {
+      MockedExecutable.waitForExitAsync.mockResolvedValue({
+        exitCode: 1,
+        stdout: '',
+        stderr: '',
+        signal: null
+      });
+      await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow();
+      expect(MockedWritePackageManagerToPackageJsonEnginesAsync).not.toHaveBeenCalled();
     });
 
     it('surfaces signal termination with the signal name in the error message', async () => {

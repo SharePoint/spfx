@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CreateAction --package-manager calls writePackageManagerToPackageJsonEnginesAsync after a successful install 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running pnpm install in /tmp/test/test...[n]",
+  "[    log] pnpm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager does not call writePackageManagerToPackageJsonEnginesAsync when install is skipped 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
 exports[`CreateAction --package-manager does not run install when --package-manager is omitted 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
