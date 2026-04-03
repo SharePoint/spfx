@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CreateAction --package-manager calls writePackageManagerToPackageJsonEnginesAsync after a successful install 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running pnpm install in /tmp/test/test...[n]",
+  "[    log] pnpm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager does not call writePackageManagerToPackageJsonEnginesAsync when install is skipped 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
 exports[`CreateAction --package-manager does not run install when --package-manager is omitted 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
@@ -107,7 +131,7 @@ Array [
 ]
 `;
 
-exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn when --package-manager matches the logged value 1`] = `
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn when --package-manager matches the engines value 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
@@ -120,7 +144,7 @@ Array [
 ]
 `;
 
-exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) overrides --package-manager with logged value and warns 1`] = `
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) overrides --package-manager with engines value and warns 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
@@ -128,7 +152,7 @@ Array [
   "[    log] [n]",
   "[    log] The following files will be generated:[n]",
   "[    log] [n]",
-  "[warning] --package-manager \\"npm\\" is overridden by \\"pnpm\\" from the existing project's scaffold log. The --package-manager parameter will be ignored.[n]",
+  "[warning] --package-manager \\"npm\\" is overridden by \\"pnpm\\" from the existing project's \`package.json\` \`engines\` field. The --package-manager parameter will be ignored.[n]",
   "[    log] Running pnpm install in /tmp/test/test...[n]",
   "[    log] pnpm install completed successfully.[n]",
 ]
@@ -147,7 +171,7 @@ Array [
 ]
 `;
 
-exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) uses the specified --package-manager when log has no package manager 1`] = `
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) uses the specified --package-manager when package.json has no engines entry 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",

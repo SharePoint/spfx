@@ -203,9 +203,6 @@ await writer.writeAsync(templateFs, targetDir, { log });
 
 // Persist back to disk
 await log.saveToFolderAsync(targetDir);
-
-// Read the last package manager selection from the log
-const lastPM = log.lastPackageManager; // e.g. 'npm', or undefined if none recorded
 ```
 
 ---

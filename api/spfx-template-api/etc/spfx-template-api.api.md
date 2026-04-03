@@ -217,6 +217,9 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
 }
 
 // @public
+export type PackageManager = (typeof VALID_PACKAGE_MANAGERS)[number];
+
+// @public
 export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
     readonly fileRelativePath: string;
@@ -256,7 +259,6 @@ export class SPFxScaffoldLog {
         kind: K;
     }>[];
     get hasEntries(): boolean;
-    get lastPackageManager(): string | undefined;
     static loadFromFolderAsync(targetDir: string): Promise<SPFxScaffoldLog>;
     saveToFolderAsync(targetDir: string): Promise<void>;
     toJsonl(): string;
@@ -333,5 +335,14 @@ export class TemplateOutput {
 
 // @public
 export function toHyphenCase(input: string): string;
+
+// @public
+export function tryReadPackageManagerFromPackageJsonEnginesAsync(targetDir: string): Promise<PackageManager | undefined>;
+
+// @public (undocumented)
+export const VALID_PACKAGE_MANAGERS: readonly ["npm", "pnpm", "yarn"];
+
+// @public
+export function writePackageManagerToPackageJsonEnginesAsync(packageManager: PackageManager, targetDir: string, terminal: ITerminal): Promise<void>;
 
 ```
