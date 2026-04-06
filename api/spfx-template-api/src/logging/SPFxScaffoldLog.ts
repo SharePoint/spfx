@@ -42,10 +42,11 @@ export class SPFxScaffoldLog {
    * it will be replaced with the current ISO 8601 timestamp.
    */
   public append(event: ISPFxScaffoldEventInput): void {
+    const { timestamp, ...rest } = event;
     const normalizedEvent: ISPFxScaffoldEvent = {
-      ...event,
-      timestamp: event.timestamp || new Date().toISOString()
-    } as ISPFxScaffoldEvent;
+      timestamp: timestamp || new Date().toISOString(),
+      ...rest
+    };
     this._events.push(normalizedEvent);
   }
 
