@@ -287,47 +287,6 @@ describe(SPFxScaffoldLog.name, () => {
     });
   });
 
-  // ---- lastPackageManager ---------------------------------------------------
-
-  describe('lastPackageManager', () => {
-    it('returns undefined when no package-manager-selected events exist', () => {
-      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
-      log.append(makeFileWriteEvent());
-      expect(log.lastPackageManager).toBeUndefined();
-    });
-
-    it('returns undefined for an empty log', () => {
-      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
-      expect(log.lastPackageManager).toBeUndefined();
-    });
-
-    it('returns undefined when the only selection was "none"', () => {
-      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
-      log.append(makePackageManagerSelectedEvent({ packageManager: 'none' }));
-      expect(log.lastPackageManager).toBeUndefined();
-    });
-
-    it('does not clear a previously recorded manager when "none" is appended', () => {
-      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
-      log.append(makePackageManagerSelectedEvent({ packageManager: 'npm' }));
-      log.append(makePackageManagerSelectedEvent({ packageManager: 'none' }));
-      expect(log.lastPackageManager).toBe('npm');
-    });
-
-    it('returns the package manager from the most recent non-none event', () => {
-      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
-      log.append(makePackageManagerSelectedEvent({ packageManager: 'npm' }));
-      log.append(makePackageManagerSelectedEvent({ packageManager: 'pnpm' }));
-      expect(log.lastPackageManager).toBe('pnpm');
-    });
-
-    it('returns the package manager when only one event exists', () => {
-      const log: SPFxScaffoldLog = new SPFxScaffoldLog();
-      log.append(makePackageManagerSelectedEvent({ packageManager: 'yarn' }));
-      expect(log.lastPackageManager).toBe('yarn');
-    });
-  });
-
   // ---- loadAsync ----------------------------------------------------------
 
   describe(SPFxScaffoldLog.loadFromFolderAsync.name, () => {

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@microsoft/spfx-cli",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@microsoft/spfx-cli"
+}

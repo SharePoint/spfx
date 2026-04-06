@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`writePackageManagerToPackageJsonEnginesAsync detects version and writes for npm: terminal output 1`] = `Array []`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync detects version and writes for pnpm: terminal output 1`] = `Array []`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync detects version and writes for yarn: terminal output 1`] = `Array []`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync does not emit a warning on a successful write: terminal output 1`] = `Array []`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync overwrites an existing package manager constraint: terminal output 1`] = `Array []`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync preserves other engines entries when writing: terminal output 1`] = `Array []`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync propagates non-ENOENT errors from package.json read: terminal output 1`] = `Array []`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync saves to the correct path: terminal output 1`] = `Array []`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync spawns pm --version in the target directory: terminal output 1`] = `Array []`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync warns and skips when package.json does not exist: terminal output 1`] = `
+Array [
+  "[warning] Could not find package.json in /my/project; skipping engines field update.[n]",
+]
+`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync warns and skips when spawn throws (e.g. package manager not on PATH): terminal output 1`] = `
+Array [
+  "[warning] Could not detect pnpm version; skipping engines field update in package.json.[n]",
+]
+`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync warns and skips when version output cannot be parsed: terminal output 1`] = `
+Array [
+  "[warning] Could not detect pnpm version; skipping engines field update in package.json.[n]",
+]
+`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync warns and skips when waitForExitAsync rejects: terminal output 1`] = `
+Array [
+  "[warning] Could not detect pnpm version; skipping engines field update in package.json.[n]",
+]
+`;
+
+exports[`writePackageManagerToPackageJsonEnginesAsync writes a >=MAJOR constraint for the detected version: terminal output 1`] = `Array []`;

@@ -228,11 +228,11 @@ each `spfx create` invocation. The file accumulates events (JSONL format) across
 runs, recording templates rendered, files written/merged, and package manager usage.
 
 This file also serves as the mechanism for detecting existing SPFx projects: when
-the CLI is run in a directory that already contains a scaffold log, the
-`lastPackageManager` getter reads the most recent `package-manager-selected` event.
-If the user specifies a different `--package-manager` value, the CLI overrides it
-with the previously recorded manager and emits a warning. If no previous package
-manager is recorded (or the user passes `none`), the flag is honored as-is.
+the CLI is run in a directory that already contains a scaffold log, it checks the
+`"engines"` field of the project's `package.json` for a previously recorded package
+manager. If the user specifies a different `--package-manager` value, the CLI
+overrides it with the value from `engines` and emits a warning. If no previous
+package manager is recorded (or the user passes `none`), the flag is honored as-is.
 
 ---
 

@@ -5,14 +5,14 @@ import * as path from 'node:path';
 import ignore from 'ignore';
 
 import { _isBinaryFile as isBinaryFile } from '@microsoft/spfx-template-api';
-import { FileSystem, NewlineKind } from '@rushstack/node-core-library';
+import { Async, FileSystem, NewlineKind, Path } from '@rushstack/node-core-library';
 
-import { REPO_ROOT, TEMPLATES_DIR } from './constants';
+import { PROJECT_ROOT, REPO_ROOT, TEMPLATES_DIR } from './constants';
 
 import { scaffoldAsync } from './testUtilities';
 
 const EXAMPLES_DIR: string = `${REPO_ROOT}/examples`;
-const OUTPUT_DIR: string = `${REPO_ROOT}/common/temp/examples`;
+const TEMP_OUTPUT_DIR: string = `${PROJECT_ROOT}/temp/examples`;
 
 // Predefined template configuration
 interface ITemplateConfig {
@@ -217,41 +217,49 @@ async function parseGitignore(templateDir: string): Promise<ReturnType<typeof ig
   return ig;
 }
 
+interface IGetAllFilesOptions {
+  dir: string;
+  baseDir?: string;
+  ignoreMatcher: ReturnType<typeof ignore>;
+}
+
 /**
  * Recursively get all files in a directory
  */
-async function getAllFiles(
-  dir: string,
-  baseDir: string = dir,
-  ignoreMatcher?: ReturnType<typeof ignore>
-): Promise<string[]> {
-  const entries = await FileSystem.readFolderItemsAsync(dir);
-  const files = await Promise.all(
-    entries.map(async (entry) => {
+async function* getAllFilesAsync(options: IGetAllFilesOptions): AsyncIterable<string> {
+  const { dir, baseDir = dir, ignoreMatcher } = options;
+  let entries;
+  try {
+    entries = await FileSystem.readFolderItemsAsync(dir);
+  } catch (error) {
+    if (!FileSystem.isNotExistError(error)) {
+      throw error;
+    }
+  }
+
+  if (entries) {
+    for (const entry of entries) {
       const fullPath = `${dir}/${entry.name}`;
       const relativePath = path.relative(baseDir, fullPath).replace(/\\/g, '/');
 
       // Check if this path should be ignored
-      if (ignoreMatcher && ignoreMatcher.ignores(relativePath)) {
-        return [];
+      if (!ignoreMatcher.ignores(relativePath)) {
+        if (entry.isDirectory()) {
+          yield* getAllFilesAsync({ dir: fullPath, baseDir, ignoreMatcher });
+        } else {
+          // Return relative path from baseDir
+          yield path.relative(baseDir, fullPath);
+        }
       }
-
-      if (entry.isDirectory()) {
-        return getAllFiles(fullPath, baseDir, ignoreMatcher);
-      } else {
-        // Return relative path from baseDir
-        return [path.relative(baseDir, fullPath)];
-      }
-    })
-  );
-  return files.flat();
+    }
+  }
 }
 
 /**
  * Read file content, return undefined if file doesn't exist or can't be read
  * Normalizes line endings to `\n` for consistent comparison
  */
-async function readFileContent(filePath: string): Promise<string | undefined> {
+async function readFileContentAsync(filePath: string): Promise<string | undefined> {
   try {
     return await FileSystem.readFileAsync(filePath, { convertLineEndings: NewlineKind.Lf });
   } catch (error) {
@@ -264,11 +272,49 @@ async function readFileContent(filePath: string): Promise<string | undefined> {
 }
 
 /**
- * Clean up the output directory before scaffolding
+ * Clean up the temp output directory before scaffolding
  */
-async function cleanOutputDirAsync(templateName: string): Promise<void> {
-  const outputPath = `${OUTPUT_DIR}/${templateName}`;
+async function cleanTempOutputDirAsync(templateName: string): Promise<void> {
+  const outputPath = `${TEMP_OUTPUT_DIR}/${templateName}`;
   await FileSystem.deleteFolderAsync(outputPath);
+}
+
+// Skip build artifacts and generated files
+const IGNORED_FILES: Set<string> = new Set([
+  'package-lock.json',
+  'yarn.lock',
+  'pnpm-lock.yaml',
+  'webpack.config.js',
+  '.spfx-scaffold.jsonl'
+]);
+const IGNORED_DIRS: string[] = ['.rush', 'rush-logs', 'temp', 'node_modules', 'dist', 'teams'];
+
+// Filter out files that should be ignored in comparison/sync
+async function filterFilesIterableAsync(iterable: AsyncIterable<string>): Promise<string[]> {
+  const result: string[] = [];
+  for await (const file of iterable) {
+    const normalized: string = Path.convertToSlashes(file);
+
+    // Ignore specific files regardless of their directory
+    const filename: string = normalized.slice(normalized.lastIndexOf('/') + 1);
+    if (IGNORED_FILES.has(filename)) {
+      continue;
+    }
+
+    // Ignore any path that is or contains one of the ignored directories as a segment
+    if (
+      IGNORED_DIRS.some(
+        (dir) =>
+          normalized === dir || normalized.startsWith(dir + '/') || normalized.includes('/' + dir + '/')
+      )
+    ) {
+      continue;
+    }
+
+    result.push(normalized);
+  }
+
+  return result;
 }
 
 describe('SPFx Template Scaffolding', () => {
@@ -276,7 +322,7 @@ describe('SPFx Template Scaffolding', () => {
   jest.setTimeout(120000);
 
   beforeAll(async () => {
-    await FileSystem.ensureFolderAsync(OUTPUT_DIR);
+    await FileSystem.ensureFolderAsync(TEMP_OUTPUT_DIR);
   });
 
   // Create a test for each template configuration
@@ -296,9 +342,8 @@ describe('SPFx Template Scaffolding', () => {
         } = config;
 
         const examplePath = `${EXAMPLES_DIR}/${templateName}`;
-        // In update mode, scaffold directly to examples directory
-        // In normal mode, scaffold to temp directory for comparison
-        const outputPath = UPDATE_MODE ? examplePath : `${OUTPUT_DIR}/${templateName}`;
+        // Always scaffold to temp directory
+        const outputPath: string = `${TEMP_OUTPUT_DIR}/${templateName}`;
 
         // Check if example exists (only in normal mode)
         const exampleExists = await FileSystem.existsAsync(examplePath);
@@ -306,8 +351,8 @@ describe('SPFx Template Scaffolding', () => {
           throw new Error(`No example found for template '${templateName}' at ${examplePath}`);
         }
 
-        // Clean up output directory
-        await cleanOutputDirAsync(templateName);
+        // Clean up temp output directory
+        await cleanTempOutputDirAsync(templateName);
 
         // Ensure output directory exists
         await FileSystem.ensureFolderAsync(outputPath);
@@ -332,89 +377,88 @@ describe('SPFx Template Scaffolding', () => {
         // Parse .gitignore from template
         const ignoreMatcher = await parseGitignore(templatePath);
 
-        // If update mode, skip comparison (we scaffolded directly to examples)
+        // Get all files from both directories for comparison
+        const [scaffoldedFilesIterable, exampleFilesIterable] = await Promise.all([
+          getAllFilesAsync({ dir: outputPath, ignoreMatcher }),
+          getAllFilesAsync({ dir: examplePath, baseDir: examplePath, ignoreMatcher })
+        ]);
+        const [filteredScaffolded, filteredExample] = await Promise.all([
+          filterFilesIterableAsync(scaffoldedFilesIterable),
+          filterFilesIterableAsync(exampleFilesIterable)
+        ]);
+        filteredScaffolded.sort();
+        filteredExample.sort();
+
+        // If update mode, sync scaffolded output to the example directory
         if (UPDATE_MODE) {
-          console.info(`[UPDATE MODE] Scaffolded ${templateName} to ${examplePath}`);
-          return;
-        }
+          await FileSystem.ensureFolderAsync(examplePath);
 
-        // Get all files from both directories
-        const scaffoldedFiles = await getAllFiles(outputPath, outputPath, ignoreMatcher);
-        const exampleFiles = await getAllFiles(examplePath, examplePath, ignoreMatcher);
+          // Determine which files to delete from example (files that no longer exist in template)
+          const scaffoldedSet: Set<string> = new Set(filteredScaffolded);
+          await Promise.all([
+            Async.forEachAsync(
+              filteredExample,
+              async (file) => {
+                if (!scaffoldedSet.has(file)) {
+                  await FileSystem.deleteFileAsync(`${examplePath}/${file}`);
+                }
+              },
+              { concurrency: 5 }
+            ),
+            // Copy all scaffolded files to example directory
+            Async.forEachAsync(
+              filteredScaffolded,
+              async (file) => {
+                const content: Buffer = await FileSystem.readFileToBufferAsync(`${outputPath}/${file}`);
+                await FileSystem.writeFileAsync(`${examplePath}/${file}`, content, {
+                  ensureFolderExists: true
+                });
+              },
+              { concurrency: 5 }
+            )
+          ]);
 
-        // Filter out files that should be ignored in comparison
-        const filterFiles = (files: string[]): string[] =>
-          files.filter((file) => {
-            const normalized = file.replace(/\\/g, '/');
-            // Skip build artifacts and generated files
-            const ignoredFiles = [
-              'package-lock.json',
-              'yarn.lock',
-              'pnpm-lock.yaml',
-              'webpack.config.js',
-              '.spfx-scaffold.jsonl'
-            ];
-            const ignoredDirs = ['.rush', 'rush-logs', 'temp', 'node_modules', 'dist', 'teams'];
+          console.info(`[UPDATE MODE] Synced ${templateName} to ${examplePath}`);
+        } else {
+          // Check that the same files exist in both directories
+          expect(filteredScaffolded).toEqual(filteredExample);
 
-            // Ignore specific files regardless of their directory
-            if (ignoredFiles.some((name) => normalized === name || normalized.endsWith('/' + name))) {
-              return false;
-            }
+          // Compare content of each file with detailed diffs
+          await Async.forEachAsync(
+            filteredScaffolded,
+            async (file) => {
+              const scaffoldedFile: string = `${outputPath}/${file}`;
+              const exampleFile: string = `${examplePath}/${file}`;
 
-            // Ignore any path that is or contains one of the ignored directories as a segment
-            if (
-              ignoredDirs.some(
-                (dir) =>
-                  normalized === dir ||
-                  normalized.startsWith(dir + '/') ||
-                  normalized.includes('/' + dir + '/')
-              )
-            ) {
-              return false;
-            }
+              if (isBinaryFile(file)) {
+                // Compare binary files as raw buffers
+                try {
+                  const [scaffoldedBuffer, exampleBuffer] = await Promise.all([
+                    FileSystem.readFileToBufferAsync(scaffoldedFile),
+                    FileSystem.readFileToBufferAsync(exampleFile)
+                  ]);
+                  expect(scaffoldedBuffer).toEqual(exampleBuffer);
+                } catch (error) {
+                  throw new Error(`Binary file mismatch in '${file}':\n${error}`);
+                }
+              } else {
+                // Compare text files as normalized strings
+                const [scaffoldedContent, exampleContent] = await Promise.all([
+                  readFileContentAsync(scaffoldedFile),
+                  readFileContentAsync(exampleFile)
+                ]);
 
-            return true;
-          });
-
-        const filteredScaffolded = filterFiles(scaffoldedFiles).sort();
-        const filteredExample = filterFiles(exampleFiles).sort();
-
-        // Check that the same files exist in both directories
-        expect(filteredScaffolded).toEqual(filteredExample);
-
-        // Compare content of each file with detailed diffs
-        for (const file of filteredScaffolded) {
-          const scaffoldedFile = `${outputPath}/${file}`;
-          const exampleFile = `${examplePath}/${file}`;
-
-          if (isBinaryFile(file)) {
-            // Compare binary files as raw buffers
-            try {
-              const scaffoldedBuffer = await FileSystem.readFileAsync(scaffoldedFile);
-              const exampleBuffer = await FileSystem.readFileAsync(exampleFile);
-              expect(scaffoldedBuffer).toEqual(exampleBuffer);
-            } catch (error: unknown) {
-              if (error instanceof Error) {
-                throw new Error(`Binary file mismatch in '${file}':\n${error.message}`);
+                // Use Jest's expect to get nice diff output
+                // Add file context to the error message
+                try {
+                  expect(scaffoldedContent).toEqual(exampleContent);
+                } catch (error) {
+                  throw new Error(`File content mismatch in '${file}':\n${error}`);
+                }
               }
-              throw new Error(`Binary file mismatch in '${file}':\n${String(error)}`);
-            }
-          } else {
-            // Compare text files as normalized strings
-            const scaffoldedContent = await readFileContent(scaffoldedFile);
-            const exampleContent = await readFileContent(exampleFile);
-
-            // Use Jest's expect to get nice diff output
-            // Add file context to the error message
-            try {
-              expect(scaffoldedContent).toEqual(exampleContent);
-            } catch (error: unknown) {
-              if (error instanceof Error) {
-                throw new Error(`File content mismatch in '${file}':\n${error.message}`);
-              }
-              throw new Error(`File content mismatch in '${file}':\n${String(error)}`);
-            }
-          }
+            },
+            { concurrency: 10 }
+          );
         }
       }
     );

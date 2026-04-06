@@ -46,7 +46,11 @@ export {
   SPFxTemplateWriter,
   type IWriteOptions,
   type ITemplateOutputEntry,
-  TemplateOutput
+  TemplateOutput,
+  VALID_PACKAGE_MANAGERS,
+  type PackageManager,
+  tryReadPackageManagerFromPackageJsonEnginesAsync,
+  writePackageManagerToPackageJsonEnginesAsync
 } from './writing/index';
 export {
   type ISPFxScaffoldEventBase,
