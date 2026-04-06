@@ -3,8 +3,6 @@
 
 import type { ChildProcess } from 'node:child_process';
 
-type PackageManager = 'npm' | 'pnpm' | 'yarn';
-
 import * as z from 'zod';
 
 import { Executable, Path, type IWaitForExitResultWithoutOutput } from '@rushstack/node-core-library';
@@ -23,7 +21,10 @@ import {
   type TemplateOutput,
   buildBuiltInContext,
   type ISPFxBuiltInContext,
-  toHyphenCase
+  toHyphenCase,
+  type PackageManager,
+  tryReadPackageManagerFromPackageJsonEnginesAsync,
+  writePackageManagerToPackageJsonEnginesAsync
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
@@ -31,8 +32,6 @@ import { SPFxActionBase } from './SPFxActionBase';
 import packageJson from '../../../package.json';
 
 const CLI_VERSION: string = packageJson.version;
-
-const VALID_PACKAGE_MANAGERS: ReadonlySet<PackageManager> = new Set<PackageManager>(['npm', 'pnpm', 'yarn']);
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -233,7 +232,8 @@ export class CreateAction extends SPFxActionBase {
       });
 
       const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
-      const previousPackageManager: string | undefined = log.lastPackageManager;
+      const previousPackageManager: PackageManager | undefined =
+        await tryReadPackageManagerFromPackageJsonEnginesAsync(targetDir);
 
       _printFileChanges(this._terminal, templateFs, targetDir);
       const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
@@ -242,19 +242,14 @@ export class CreateAction extends SPFxActionBase {
       if (packageManager !== 'none') {
         let resolvedPackageManager: PackageManager = packageManager;
 
-        if (
-          isExistingProject &&
-          previousPackageManager &&
-          VALID_PACKAGE_MANAGERS.has(previousPackageManager as PackageManager) &&
-          previousPackageManager !== packageManager
-        ) {
+        if (isExistingProject && previousPackageManager && previousPackageManager !== packageManager) {
           const packageManagerParameterLongName: string = this._packageManagerParameter.longName;
           terminal.writeWarningLine(
             `${packageManagerParameterLongName} "${packageManager}" is overridden by ` +
-              `"${previousPackageManager}" from the existing project's scaffold log. ` +
+              `"${previousPackageManager}" from the existing project's \`package.json\` \`engines\` field. ` +
               `The ${packageManagerParameterLongName} parameter will be ignored.`
           );
-          resolvedPackageManager = previousPackageManager as PackageManager;
+          resolvedPackageManager = previousPackageManager;
         }
 
         log.append({
@@ -264,6 +259,7 @@ export class CreateAction extends SPFxActionBase {
         });
 
         await _runInstallAsync(resolvedPackageManager, targetDir, terminal, log);
+        await writePackageManagerToPackageJsonEnginesAsync(resolvedPackageManager, targetDir, terminal);
       }
 
       await log.saveToFolderAsync(targetDir);
