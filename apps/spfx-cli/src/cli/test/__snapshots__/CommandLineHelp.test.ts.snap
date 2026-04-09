@@ -60,7 +60,7 @@ Optional arguments:
 `;
 
 exports[`CommandLineHelp prints the help: global help 1`] = `
-"usage: spfx [-h] <command> ...
+"usage: spfx [-h] [-v] <command> ...
 
 CLI for managing SharePoint Framework (SPFx) projects
 
@@ -72,6 +72,7 @@ Positional arguments:
 
 Optional arguments:
   -h, --help      Show this help message and exit.
+  -v, --version   Show the CLI version and exit.
 
 [bold]For detailed help about a specific command, use: spfx <command> -h[normal]
 "
