@@ -33,7 +33,7 @@
     "skipLibCheck": true,
 
     // Type Definitions - Add Node types
-    "types": ["heft-jest", "node"],
+    "types": ["jest", "node"],
     "typeRoots": ["../../../../../node_modules/@types", "../../node_modules/@types"]
   },
   "include": ["../../../../../src/**/*.ts", "../../../../../src/**/*.tsx"]
