@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`PublicGitHubRepositorySource _buildDownloadUrl should build GHE REST API URL for non-github.com hosts 1`] = `Array []`;
 
