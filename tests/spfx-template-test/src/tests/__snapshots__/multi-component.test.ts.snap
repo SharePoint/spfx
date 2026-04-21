@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: merged config/config.json 1`] = `
 Object {
@@ -136,7 +136,7 @@ Object {
     "@microsoft/eslint-config-spfx": "1.23.0-beta.2",
     "@microsoft/sp-module-interfaces": "1.23.0-beta.2",
     "@microsoft/spfx-web-build-rig": "1.23.0-beta.2",
-    "@rushstack/heft": "^1.2.9",
+    "@rushstack/heft": "^1.2.15",
     "@types/jest": "30.0.0",
     "@types/webpack-env": "~1.15.2",
     "eslint": "9.37.0",
