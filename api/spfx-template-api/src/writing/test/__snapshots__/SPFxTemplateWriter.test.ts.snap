@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`SPFxTemplateWriter scaffold log integration should record a "merged" file-write event with mergeHelper name 1`] = `
 Array [
