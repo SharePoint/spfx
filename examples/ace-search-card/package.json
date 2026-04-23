@@ -15,15 +15,15 @@
     "_phase:package-solution": "heft run --only package-solution -- --clean"
   },
   "dependencies": {
-    "@microsoft/sp-adaptive-card-extension-base": "1.23.0-beta.2",
-    "@microsoft/sp-core-library": "1.23.0-beta.2",
-    "@microsoft/sp-property-pane": "1.23.0-beta.2",
+    "@microsoft/sp-adaptive-card-extension-base": "1.23.0-rc.1",
+    "@microsoft/sp-core-library": "1.23.0-rc.1",
+    "@microsoft/sp-property-pane": "1.23.0-rc.1",
     "tslib": "2.3.1"
   },
   "devDependencies": {
-    "@microsoft/eslint-config-spfx": "1.23.0-beta.2",
-    "@microsoft/sp-module-interfaces": "1.23.0-beta.2",
-    "@microsoft/spfx-web-build-rig": "1.23.0-beta.2",
+    "@microsoft/eslint-config-spfx": "1.23.0-rc.1",
+    "@microsoft/sp-module-interfaces": "1.23.0-rc.1",
+    "@microsoft/spfx-web-build-rig": "1.23.0-rc.1",
     "@rushstack/heft": "^1.2.15",
     "@types/jest": "30.0.0",
     "@types/webpack-env": "~1.15.2",

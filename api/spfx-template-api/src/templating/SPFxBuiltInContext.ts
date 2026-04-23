@@ -145,7 +145,7 @@ export function buildBuiltInContext(
     spfxVersion,
     // The shields.io badge URL uses hyphens as separators, so hyphens in version
     // numbers need to be escaped as double-hyphens to avoid ambiguity.
-    // For example, "1.23.0-beta.2" becomes "1.23.0--beta.2".
+    // For example, "1.23.0-rc.1" becomes "1.23.0--beta.2".
     spfxVersionForBadgeUrl: spfxVersion.replace(/-/g, '--'),
     componentId,
     featureId,

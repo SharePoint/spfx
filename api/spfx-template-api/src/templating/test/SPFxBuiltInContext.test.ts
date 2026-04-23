@@ -102,7 +102,7 @@ describe(buildBuiltInContext.name, () => {
     it('should escape hyphens for pre-release versions', () => {
       const ctx: ISPFxBuiltInContext = buildBuiltInContext({
         ...DEFAULT_INPUTS,
-        spfxVersion: '1.23.0-beta.2'
+        spfxVersion: '1.23.0-rc.1'
       });
       expect(ctx.spfxVersionForBadgeUrl).toBe('1.23.0--beta.2');
     });
