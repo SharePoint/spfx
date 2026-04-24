@@ -47,8 +47,8 @@ the `branch` parameter to `PublicGitHubRepositorySource`:
 # Fetches templates from the version/1.22 branch
 spfx create --template webpart-minimal --spfx-version 1.22 ...
 
-# Fetches templates from the version/1.23.0-beta.2 branch
-spfx create --template webpart-minimal --spfx-version 1.23.0-beta.2 ...
+# Fetches templates from the version/1.23.0-rc.1 branch
+spfx create --template webpart-minimal --spfx-version 1.23.0-rc.1 ...
 
 # Fetches templates from the version/next branch
 spfx create --template webpart-minimal --spfx-version next ...
@@ -101,7 +101,7 @@ from the prior pre-release branch) when the pre-release ships:
 ```
 main ──────────────────────────────── (development)
   └── version/1.23                     (created at first pre-release)
-        tag: version/1.23.0-beta.2    (tagged at beta)
+        tag: version/1.23.0-rc.1    (tagged at beta)
         tag: version/1.23.0-rc.1      (tagged at RC)
         tag: version/1.23.0           (tagged at GA)
 ```
@@ -173,5 +173,5 @@ branches via a repository ruleset. The following protections are enforced:
 | What does the CLI fetch by default? | The `version/latest` branch (latest stable). |
 | How does `--spfx-version` change the branch? | It maps to `version/{value}` (e.g. `version/1.22`). |
 | What branch is stable? | `version/latest` tracks the latest GA. Named releases live under `version/X.Y`. |
-| What branch is pre-release? | `version/next` tracks the latest pre-release. Individual pre-releases are tagged (e.g. `version/1.23.0-beta.2`). |
+| What branch is pre-release? | `version/next` tracks the latest pre-release. Individual pre-releases are tagged (e.g. `version/1.23.0-rc.1`). |
 | How are hotfixes applied? | Fix on `main`, then cherry-pick to affected version branches via PRs. |

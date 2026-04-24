@@ -3,5 +3,5 @@
   "category": "extension",
   "description": "SharePoint Framework list view command set extension template",
   "version": "1.0.0",
-  "spfxVersion": "1.23.0-beta.2"
+  "spfxVersion": "1.23.0-rc.1"
 }
