@@ -104,7 +104,7 @@ describe(buildBuiltInContext.name, () => {
         ...DEFAULT_INPUTS,
         spfxVersion: '1.23.0-rc.1'
       });
-      expect(ctx.spfxVersionForBadgeUrl).toBe('1.23.0--beta.2');
+      expect(ctx.spfxVersionForBadgeUrl).toBe('1.23.0--rc.1');
     });
   });
 

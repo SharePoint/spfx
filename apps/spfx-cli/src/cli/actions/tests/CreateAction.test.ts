@@ -531,7 +531,7 @@ describe('CreateAction', () => {
       expect(mockTemplate.renderAsync).toHaveBeenCalledWith(
         expect.objectContaining({
           spfxVersion: '1.23.0-rc.1',
-          spfxVersionForBadgeUrl: '1.23.0--beta.2'
+          spfxVersionForBadgeUrl: '1.23.0--rc.1'
         }),
         expect.anything()
       );
