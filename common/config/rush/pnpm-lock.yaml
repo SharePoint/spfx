@@ -126,9 +126,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -166,9 +166,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -206,9 +206,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -246,9 +246,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -286,9 +286,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -329,9 +329,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -369,9 +369,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -409,9 +409,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -458,9 +458,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/react':
         specifier: 17.0.45
         version: 17.0.45
@@ -510,9 +510,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -565,9 +565,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/react':
         specifier: 17.0.45
         version: 17.0.45
@@ -614,9 +614,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -654,9 +654,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -685,9 +685,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -734,9 +734,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -783,9 +783,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/webpack-env':
         specifier: ~1.15.2
         version: 1.15.3
@@ -841,9 +841,9 @@ importers:
       '@rushstack/heft':
         specifier: ^1.2.15
         version: 1.2.17(@types/node@22.19.17)
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
+      '@types/heft-jest':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/react':
         specifier: 17.0.45
         version: 17.0.45
@@ -2921,6 +2921,9 @@ packages:
 
   '@types/heft-jest@1.0.2':
     resolution: {integrity: sha512-HabX0JO8Pk+a3gTm2DQwTMrfZjqP6VxDnn8kIXAP6uZbmy4bkKuFRi9T9BV9K6LhwHrmcgq5kk2YikYHy4LJeg==}
+
+  '@types/heft-jest@1.0.6':
+    resolution: {integrity: sha512-oTVSfKEgvQEaukVq+y57m5UTo2sSh3MxmJWxpcnASPjSi3RUKbKXeNjvmrSnT4D6rF3Cs57u2jfn9JFFKf2hLg==}
 
   '@types/http-errors@2.0.5':
     resolution: {integrity: sha512-r8Tayk8HJnX0FztbZN7oVqGccWgw98T/0neJphO91KkmOzug1KkofZURD4UaD5uH8AqcFLfdPErnBod0u71/qg==}
@@ -10189,6 +10192,10 @@ snapshots:
       '@types/serve-static': 1.15.10
 
   '@types/heft-jest@1.0.2':
+    dependencies:
+      '@types/jest': 30.0.0
+
+  '@types/heft-jest@1.0.6':
     dependencies:
       '@types/jest': 30.0.0
 
