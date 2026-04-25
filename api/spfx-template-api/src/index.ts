@@ -32,6 +32,7 @@ export {
   BaseSPFxTemplateRepositorySource,
   type SPFxRepositorySource,
   SPFxTemplateCollection,
+  type ITemplateJsonOutputEntry,
   LocalFileSystemRepositorySource,
   PublicGitHubRepositorySource,
   type IPublicGitHubRepositorySourceOptions

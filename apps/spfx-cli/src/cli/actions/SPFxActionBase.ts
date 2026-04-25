@@ -76,6 +76,20 @@ export abstract class SPFxActionBase extends CommandLineAction {
         'Required for GitHub Enterprise hosts and private repositories on github.com.',
       environmentVariable: GITHUB_TOKEN_ENV_VAR_NAME
     });
+
+    this.defineFlagParameter({
+      parameterLongName: '--verbose',
+      description: 'Show verbose output.'
+    });
+  }
+
+  /**
+   * Writes an informational verbose-level message to the terminal. Subclasses can
+   * override this to redirect informational output away from stdout (for example,
+   * when an action emits machine-readable JSON to stdout).
+   */
+  protected _writeInfoLine(message: string): void {
+    this._terminal.writeVerboseLine(message);
   }
 
   /**
@@ -108,7 +122,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
 
     const token: string | undefined = this._githubTokenParameter.value?.trim() || undefined;
 
-    terminal.writeLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
+    this._writeInfoLine(`Using GitHub template source: ${repoUrl}${ref ? ` (branch: ${ref})` : ''}`);
     manager.addSource(new PublicGitHubRepositorySource({ repoUrl, branch: ref, terminal, token }));
   }
 
@@ -118,7 +132,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
    */
   protected _addLocalTemplateSources(manager: SPFxTemplateRepositoryManager): void {
     for (const localPath of this._localSourceParameter.values) {
-      this._terminal.writeLine(`Adding local template source: ${localPath}`);
+      this._writeInfoLine(`Adding local template source: ${localPath}`);
       manager.addSource(new LocalFileSystemRepositorySource(localPath));
     }
   }
@@ -132,7 +146,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
     const token: string | undefined = this._githubTokenParameter.value?.trim() || undefined;
     for (const remoteUrl of this._remoteSourcesParameter.values) {
       const { repoUrl, urlBranch } = parseGitHubUrlAndRef(remoteUrl);
-      terminal.writeLine(
+      this._writeInfoLine(
         `Adding remote template source: ${repoUrl}${urlBranch ? ` (branch: ${urlBranch})` : ''}`
       );
       manager.addSource(new PublicGitHubRepositorySource({ repoUrl, branch: urlBranch, terminal, token }));
