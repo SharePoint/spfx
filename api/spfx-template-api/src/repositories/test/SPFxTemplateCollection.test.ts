@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { SPFxTemplateCollection } from '../SPFxTemplateCollection';
+import { SPFxTemplateCollection, type ITemplateJsonOutputEntry } from '../SPFxTemplateCollection';
 import { SPFxTemplate } from '../../templating';
 import { SPFxTemplateJsonFile } from '../../templating';
 
@@ -169,6 +169,101 @@ describe(SPFxTemplateCollection.name, () => {
       expect(names).toContain('Template1');
       expect(names).toContain('Template2');
       expect(names.length).toBe(2);
+    });
+  });
+
+  describe(SPFxTemplateCollection.prototype.toJsonString.name, () => {
+    it('should return an empty array for empty collection', () => {
+      const collection = new SPFxTemplateCollection([]);
+      expect(collection.toJsonString()).toBe('[]');
+    });
+
+    it('should serialize a single template with all fields', () => {
+      const template = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'webpart-minimal',
+          category: 'webpart',
+          description: 'A minimal web part template',
+          version: '1.0.0',
+          spfxVersion: '1.22.0'
+        }),
+        new Map([
+          ['file1.txt', Buffer.from('content1')],
+          ['file2.txt', Buffer.from('content2')]
+        ])
+      );
+
+      const collection = new SPFxTemplateCollection([template]);
+      const parsed: ITemplateJsonOutputEntry[] = JSON.parse(collection.toJsonString());
+
+      expect(parsed).toEqual([
+        {
+          name: 'webpart-minimal',
+          category: 'webpart',
+          description: 'A minimal web part template',
+          version: '1.0.0',
+          spfxVersion: '1.22.0',
+          fileCount: 2
+        }
+      ]);
+    });
+
+    it('should use null for undefined description', () => {
+      const template = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'NoDesc',
+          category: 'webpart',
+          version: '1.0.0',
+          spfxVersion: '1.18.0'
+        }),
+        new Map()
+      );
+
+      const collection = new SPFxTemplateCollection([template]);
+      const parsed = JSON.parse(collection.toJsonString());
+
+      expect(parsed[0].description).toBeNull();
+    });
+
+    it('should serialize multiple templates', () => {
+      const template1 = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'WebPart',
+          category: 'webpart',
+          description: 'A web part template',
+          version: '1.0.0',
+          spfxVersion: '1.18.0'
+        }),
+        new Map([['file.txt', Buffer.from('content')]])
+      );
+
+      const template2 = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'Extension',
+          category: 'extension',
+          version: '2.0.0',
+          spfxVersion: '1.18.0'
+        }),
+        new Map()
+      );
+
+      const collection = new SPFxTemplateCollection([template1, template2]);
+      expect(collection.toJsonString()).toMatchSnapshot();
+    });
+
+    it('should return valid JSON', () => {
+      const template = new SPFxTemplate(
+        new SPFxTemplateJsonFile({
+          name: 'Test',
+          category: 'library',
+          version: '1.0.0',
+          spfxVersion: '1.18.0'
+        }),
+        new Map()
+      );
+
+      const collection = new SPFxTemplateCollection([template]);
+      expect(() => JSON.parse(collection.toJsonString())).not.toThrow();
     });
   });
 

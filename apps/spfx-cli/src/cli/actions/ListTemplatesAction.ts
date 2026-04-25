@@ -2,11 +2,16 @@
 // See LICENSE in the project root for license information.
 
 import type { Terminal } from '@rushstack/terminal';
+import type { IRequiredCommandLineChoiceParameter } from '@rushstack/ts-command-line';
 import { type SPFxTemplateCollection, SPFxTemplateRepositoryManager } from '@microsoft/spfx-template-api';
 
 import { SPFxActionBase } from './SPFxActionBase';
 
+export type OutputFormat = 'json' | 'text';
+
 export class ListTemplatesAction extends SPFxActionBase {
+  private readonly _outputParameter: IRequiredCommandLineChoiceParameter<OutputFormat>;
+
   public constructor(terminal: Terminal) {
     super(
       {
@@ -18,10 +23,21 @@ export class ListTemplatesAction extends SPFxActionBase {
       },
       terminal
     );
+
+    this._outputParameter = this.defineChoiceParameter({
+      parameterLongName: '--output',
+      parameterShortName: '-o',
+      description:
+        'Output format. "json" writes machine-readable JSON to stdout (informational ' +
+        'messages go to stderr). "text" writes a human-readable table.',
+      alternatives: ['json', 'text'],
+      defaultValue: 'json'
+    });
   }
 
   protected override async onExecuteAsync(): Promise<void> {
     const terminal: Terminal = this._terminal;
+    const isJson: boolean = this._outputParameter.value === 'json';
 
     try {
       const manager: SPFxTemplateRepositoryManager = new SPFxTemplateRepositoryManager();
@@ -37,8 +53,12 @@ export class ListTemplatesAction extends SPFxActionBase {
 
       const templates: SPFxTemplateCollection = await this._fetchTemplatesAsync(manager);
 
-      const formattedTable: string = await templates.toFormattedStringAsync();
-      terminal.writeLine(formattedTable);
+      if (isJson) {
+        terminal.write(templates.toJsonString() + '\n');
+      } else {
+        const formattedTable: string = await templates.toFormattedStringAsync();
+        terminal.writeLine(formattedTable);
+      }
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
       terminal.writeErrorLine(`Error listing templates: ${message}`);

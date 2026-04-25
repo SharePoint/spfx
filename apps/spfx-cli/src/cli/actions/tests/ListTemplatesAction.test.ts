@@ -7,7 +7,8 @@ import { Terminal, StringBufferTerminalProvider } from '@rushstack/terminal';
 import {
   LocalFileSystemRepositorySource,
   PublicGitHubRepositorySource,
-  SPFxTemplateRepositoryManager
+  SPFxTemplateRepositoryManager,
+  type ITemplateJsonOutputEntry
 } from '@microsoft/spfx-template-api';
 
 const {
@@ -28,8 +29,21 @@ const MockedLocal = LocalFileSystemRepositorySource as jest.MockedClass<
 async function runListAsync(extraArgs: string[] = []): Promise<void> {
   const terminalProvider: StringBufferTerminalProvider = new StringBufferTerminalProvider();
   const parser: SPFxCommandLineParser = new SPFxCommandLineParser(new Terminal(terminalProvider));
-  await parser.executeWithoutErrorHandlingAsync(['list-templates', ...extraArgs]);
+  await parser.executeWithoutErrorHandlingAsync(['list-templates', '--output', 'text', ...extraArgs]);
   expect(terminalProvider.getAllOutputAsChunks({ asLines: true })).toMatchSnapshot();
+}
+
+async function runListJsonAsync(
+  extraArgs: string[] = []
+): Promise<{ json: string; terminalChunks: string[] }> {
+  const terminalProvider: StringBufferTerminalProvider = new StringBufferTerminalProvider();
+  const parser: SPFxCommandLineParser = new SPFxCommandLineParser(new Terminal(terminalProvider));
+  await parser.executeWithoutErrorHandlingAsync(['list-templates', ...extraArgs]);
+  const json: string = terminalProvider.getOutput({ normalizeSpecialCharacters: false });
+  return {
+    json,
+    terminalChunks: terminalProvider.getAllOutputAsChunks({ asLines: true }) as string[]
+  };
 }
 
 describe('ListTemplatesAction', () => {
@@ -97,7 +111,7 @@ describe('ListTemplatesAction', () => {
     it('passes the terminal instance to PublicGitHubRepositorySource', async () => {
       const terminal: Terminal = new Terminal(new StringBufferTerminalProvider());
       const parser: SPFxCommandLineParser = new SPFxCommandLineParser(terminal);
-      await parser.executeWithoutErrorHandlingAsync(['list-templates']);
+      await parser.executeWithoutErrorHandlingAsync(['list-templates', '--output', 'text']);
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
@@ -280,6 +294,42 @@ describe('ListTemplatesAction', () => {
         MockedManager.prototype.getTemplatesAsync.mockRejectedValue(new Error('ENOENT: no such file'));
         await expect(runListAsync(['--local-source', '/bad/path'])).rejects.toThrow(/ENOENT: no such file/);
       });
+    });
+  });
+
+  describe('--output json (default)', () => {
+    it('writes valid JSON to stdout', async () => {
+      const { json } = await runListJsonAsync();
+      expect(() => JSON.parse(json)).not.toThrow();
+    });
+
+    it('includes expected template fields in JSON output', async () => {
+      const { json } = await runListJsonAsync();
+      const parsed: ITemplateJsonOutputEntry[] = JSON.parse(json);
+      expect(parsed).toEqual([
+        {
+          name: 'webpart-minimal',
+          category: 'webpart',
+          description: 'A minimal web part template (no framework) for SPFx',
+          version: '0.0.1',
+          spfxVersion: '1.22.2',
+          fileCount: 23
+        }
+      ]);
+    });
+
+    it('does not write table output to the terminal', async () => {
+      const { terminalChunks } = await runListJsonAsync();
+      const hasTableOutput: boolean = terminalChunks.some(
+        (chunk: string) => chunk.includes('┌') || chunk.includes('Found')
+      );
+      expect(hasTableOutput).toBe(false);
+    });
+
+    it('returns empty array for empty collection', async () => {
+      MockedManager.prototype.getTemplatesAsync.mockResolvedValue(new RealSPFxTemplateCollection([]));
+      const { json } = await runListJsonAsync();
+      expect(JSON.parse(json)).toEqual([]);
     });
   });
 });

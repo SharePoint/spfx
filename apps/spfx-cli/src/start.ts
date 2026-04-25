@@ -5,7 +5,8 @@ import { ConsoleTerminalProvider, Terminal } from '@rushstack/terminal';
 
 import { SPFxCommandLineParser } from './cli/SPFxCommandLineParser';
 
-const terminal: Terminal = new Terminal(new ConsoleTerminalProvider());
+const verboseEnabled: boolean = process.argv.includes('--verbose');
+const terminal: Terminal = new Terminal(new ConsoleTerminalProvider({ verboseEnabled }));
 
 async function main(): Promise<void> {
   const commandLine: SPFxCommandLineParser = new SPFxCommandLineParser(terminal);

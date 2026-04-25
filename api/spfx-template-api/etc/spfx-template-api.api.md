@@ -166,6 +166,22 @@ export interface ISPFxTemplateJson {
 }
 
 // @public
+export interface ITemplateJsonOutputEntry {
+    // (undocumented)
+    category: string;
+    // (undocumented)
+    description: string | null;
+    // (undocumented)
+    fileCount: number;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    spfxVersion: string;
+    // (undocumented)
+    version: string;
+}
+
+// @public
 export interface ITemplateOutputEntry {
     readonly contents: string | Buffer;
 }
@@ -288,6 +304,7 @@ export type SPFxTemplateCategory = (typeof SPFX_TEMPLATE_CATEGORIES)[number];
 export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
     constructor(templates: SPFxTemplate[]);
     toFormattedStringAsync(): Promise<string>;
+    toJsonString(): string;
 }
 
 // @public
