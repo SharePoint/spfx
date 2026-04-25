@@ -2,7 +2,7 @@
 
 exports[`CreateAction --package-manager calls writePackageManagerToPackageJsonEnginesAsync after a successful install 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -15,7 +15,7 @@ Array [
 
 exports[`CreateAction --package-manager does not call writePackageManagerToPackageJsonEnginesAsync when install is skipped 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -26,7 +26,7 @@ Array [
 
 exports[`CreateAction --package-manager does not run install when --package-manager is omitted 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -37,7 +37,7 @@ Array [
 
 exports[`CreateAction --package-manager does not run install when --package-manager none is passed 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -48,7 +48,7 @@ Array [
 
 exports[`CreateAction --package-manager installs into --target-dir when explicitly provided 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /custom/dir[n]",
   "[    log] [n]",
@@ -61,7 +61,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) does not warn about --package-manager 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -74,7 +74,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) logs session-started and package-manager-selected with the specified PM 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -87,7 +87,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) runs install with the specified --package-manager 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -100,7 +100,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) saves the scaffold log after scaffolding 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -111,7 +111,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn and skips install when --package-manager is "none" 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -122,7 +122,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn and skips install when --package-manager is omitted 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -133,7 +133,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn when --package-manager matches the engines value 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -146,7 +146,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) overrides --package-manager with engines value and warns 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -160,7 +160,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) saves the scaffold log after scaffolding 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -173,7 +173,7 @@ Array [
 
 exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) uses the specified --package-manager when package.json has no engines entry 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -186,7 +186,7 @@ Array [
 
 exports[`CreateAction --package-manager runs npm install when --package-manager npm is passed 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -199,7 +199,7 @@ Array [
 
 exports[`CreateAction --package-manager runs pnpm install when --package-manager pnpm is passed 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -212,7 +212,7 @@ Array [
 
 exports[`CreateAction --package-manager runs yarn install when --package-manager yarn is passed 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -225,7 +225,7 @@ Array [
 
 exports[`CreateAction --package-manager uses stdio: inherit so package manager output reaches the user 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -239,7 +239,7 @@ Array [
 exports[`CreateAction --spfx-version is ignored (with no throw) when --local-source is also provided 1`] = `
 Array [
   "[warning] --spfx-version is ignored when --local-source is specified.[n]",
-  "[    log] Adding local template source: /a[n]",
+  "[verbose] Adding local template source: /a[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -250,7 +250,7 @@ Array [
 
 exports[`CreateAction --spfx-version passes ref to PublicGitHubRepositorySource when --spfx-version is set 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -261,7 +261,7 @@ Array [
 
 exports[`CreateAction --spfx-version passes ref when SPFX_TEMPLATE_REPO_URL and --spfx-version are both set 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/my-org/my-templates (branch: version/1.22)[n]",
+  "[verbose] Using GitHub template source: https://github.com/my-org/my-templates (branch: version/1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -273,7 +273,7 @@ Array [
 exports[`CreateAction --spfx-version uses --spfx-version over branch encoded in SPFX_TEMPLATE_REPO_URL /tree/ path 1`] = `
 Array [
   "[warning] --template-url contains a branch ('/tree/pending-fixes'). --spfx-version \\"1.22\\" will take precedence.[n]",
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -284,7 +284,7 @@ Array [
 
 exports[`CreateAction --target-dir derivation defaults to cwd/solutionName when --target-dir is omitted 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -295,7 +295,7 @@ Array [
 
 exports[`CreateAction --target-dir derivation uses cwd/solutionName when --solution-name is provided without --target-dir 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/my-app[n]",
   "[    log] [n]",
@@ -306,7 +306,7 @@ Array [
 
 exports[`CreateAction --target-dir derivation uses explicit --target-dir and ignores solution name derivation 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /custom/dir[n]",
   "[    log] [n]",
@@ -317,8 +317,8 @@ Array [
 
 exports[`CreateAction GITHUB_TOKEN passthrough passes token to --remote-source sources 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
-  "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Adding remote template source: https://github.com/my-org/my-templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -329,7 +329,7 @@ Array [
 
 exports[`CreateAction GITHUB_TOKEN passthrough passes token to PublicGitHubRepositorySource when GITHUB_TOKEN is set 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -340,7 +340,7 @@ Array [
 
 exports[`CreateAction GITHUB_TOKEN passthrough passes undefined token when GITHUB_TOKEN is not set 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -351,7 +351,7 @@ Array [
 
 exports[`CreateAction GITHUB_TOKEN passthrough treats whitespace-only GITHUB_TOKEN as undefined 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -362,7 +362,7 @@ Array [
 
 exports[`CreateAction GITHUB_TOKEN passthrough trims whitespace from GITHUB_TOKEN 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -373,7 +373,7 @@ Array [
 
 exports[`CreateAction URL /tree/ branch extraction extracts branch from /tree/ in SPFX_TEMPLATE_REPO_URL 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: pending-fixes)[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx (branch: pending-fixes)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -384,7 +384,7 @@ Array [
 
 exports[`CreateAction URL /tree/ branch extraction extracts branch from /tree/ on a GHE host 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.mycompany.com/org/repo (branch: my-branch)[n]",
+  "[verbose] Using GitHub template source: https://github.mycompany.com/org/repo (branch: my-branch)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -395,7 +395,7 @@ Array [
 
 exports[`CreateAction URL /tree/ branch extraction handles .git before /tree/ 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -406,7 +406,7 @@ Array [
 
 exports[`CreateAction URL /tree/ branch extraction handles version-like branch name in /tree/ path 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -417,7 +417,7 @@ Array [
 
 exports[`CreateAction URL /tree/ branch extraction ignores subdirectory suffix after the branch name in /tree/ path 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: main)[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx (branch: main)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -428,7 +428,7 @@ Array [
 
 exports[`CreateAction URL /tree/ branch extraction passes undefined ref when URL has no /tree/ and no --spfx-version 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -439,7 +439,7 @@ Array [
 
 exports[`CreateAction URL normalization handles .git then slash together 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -450,7 +450,7 @@ Array [
 
 exports[`CreateAction URL normalization strips .git suffix 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -461,7 +461,7 @@ Array [
 
 exports[`CreateAction URL normalization strips multiple trailing slashes 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -472,7 +472,7 @@ Array [
 
 exports[`CreateAction URL normalization strips trailing slash 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -483,7 +483,7 @@ Array [
 
 exports[`CreateAction URL normalization trims whitespace 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -494,7 +494,7 @@ Array [
 
 exports[`CreateAction source selection with --local-source should add a LocalFileSystemRepositorySource for the provided path 1`] = `
 Array [
-  "[    log] Adding local template source: /path/to/templates[n]",
+  "[verbose] Adding local template source: /path/to/templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -505,8 +505,8 @@ Array [
 
 exports[`CreateAction source selection with --local-source should add multiple sources for multiple --local-source flags 1`] = `
 Array [
-  "[    log] Adding local template source: /a[n]",
-  "[    log] Adding local template source: /b[n]",
+  "[verbose] Adding local template source: /a[n]",
+  "[verbose] Adding local template source: /b[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -517,8 +517,8 @@ Array [
 
 exports[`CreateAction source selection with --remote-source adds an extra PublicGitHubRepositorySource alongside the default 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
-  "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Adding remote template source: https://github.com/my-org/my-templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -529,9 +529,9 @@ Array [
 
 exports[`CreateAction source selection with --remote-source adds multiple remote sources for multiple --remote-source flags 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
-  "[    log] Adding remote template source: https://github.com/org1/repo1[n]",
-  "[    log] Adding remote template source: https://github.com/org2/repo2[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Adding remote template source: https://github.com/org1/repo1[n]",
+  "[verbose] Adding remote template source: https://github.com/org2/repo2[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -542,8 +542,8 @@ Array [
 
 exports[`CreateAction source selection with --remote-source extracts branch from /tree/ in --remote-source URL 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
-  "[    log] Adding remote template source: https://github.com/my-org/my-templates (branch: my-branch)[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Adding remote template source: https://github.com/my-org/my-templates (branch: my-branch)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -554,8 +554,8 @@ Array [
 
 exports[`CreateAction source selection with --remote-source works alongside --local-source without adding the default GitHub source 1`] = `
 Array [
-  "[    log] Adding local template source: /path/to/templates[n]",
-  "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
+  "[verbose] Adding local template source: /path/to/templates[n]",
+  "[verbose] Adding remote template source: https://github.com/my-org/my-templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -566,7 +566,7 @@ Array [
 
 exports[`CreateAction source selection without --local-source should add a PublicGitHubRepositorySource with the default URL 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -577,7 +577,7 @@ Array [
 
 exports[`CreateAction source selection without --local-source should use SPFX_TEMPLATE_REPO_URL when set 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/my-org/my-templates[n]",
+  "[verbose] Using GitHub template source: https://github.com/my-org/my-templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -588,7 +588,7 @@ Array [
 
 exports[`CreateAction spfxVersionForBadgeUrl escapes hyphens in prerelease versions for shields.io badge URLs 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -599,7 +599,7 @@ Array [
 
 exports[`CreateAction spfxVersionForBadgeUrl leaves stable versions unchanged 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
@@ -610,7 +610,7 @@ Array [
 
 exports[`CreateAction whitespace env var fix falls back to default URL when SPFX_TEMPLATE_REPO_URL is whitespace-only 1`] = `
 Array [
-  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",

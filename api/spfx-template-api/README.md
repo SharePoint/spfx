@@ -140,7 +140,7 @@ The writer uses these helpers internally. You can also import them directly for 
 | `ICasedString` | Interface exposing `.camel`, `.pascal`, `.hyphen`, `.allCaps`; auto-applied to all string context values during rendering |
 | `createCasedString` | Factory function that creates an `ICasedString` from a raw string |
 | `SPFxTemplateRepositoryManager` | Aggregates sources and returns a `SPFxTemplateCollection` |
-| `SPFxTemplateCollection` | `Map<string, SPFxTemplate>` of all loaded templates |
+| `SPFxTemplateCollection` | `Map<string, SPFxTemplate>` of all loaded templates; call `toJsonString()` for structured JSON or `toFormattedStringAsync()` for a human-readable table |
 | `SPFxTemplate` | Single template — exposes `name`, `category`, `spfxVersion`, and `renderAsync()` |
 | `ITemplateOutputEntry` | A single file entry (text or binary contents) |
 | `TemplateOutput` | In-memory file system implementation backed by a `Map`, returned by `renderAsync()` |

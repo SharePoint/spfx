@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SPFxTemplateCollection toJsonString should serialize multiple templates 1`] = `
+"[
+  {
+    \\"name\\": \\"WebPart\\",
+    \\"category\\": \\"webpart\\",
+    \\"description\\": \\"A web part template\\",
+    \\"version\\": \\"1.0.0\\",
+    \\"spfxVersion\\": \\"1.18.0\\",
+    \\"fileCount\\": 1
+  },
+  {
+    \\"name\\": \\"Extension\\",
+    \\"category\\": \\"extension\\",
+    \\"description\\": null,
+    \\"version\\": \\"2.0.0\\",
+    \\"spfxVersion\\": \\"1.18.0\\",
+    \\"fileCount\\": 0
+  }
+]"
+`;

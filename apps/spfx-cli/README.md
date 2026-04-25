@@ -73,6 +73,7 @@ spfx list-templates
 
 | Flag | Default | Description |
 |------|---------|-------------|
+| `-o`, `--output {json,text}` | `json` | Output format. `json` writes machine-readable JSON to stdout (informational messages go to stderr). `text` writes a human-readable table |
 | `--spfx-version VERSION` | `version/latest` branch | Branch/tag in the default template repo to use (e.g. `1.22`, `1.23-rc.0`) |
 | `--template-url URL` | `https://github.com/SharePoint/spfx` | Custom GitHub template repository (default source) |
 | `--local-source PATH` | — | Path to a local template folder to include (repeatable) |
@@ -86,6 +87,18 @@ spfx list-templates
 | `GITHUB_TOKEN` | GitHub personal access token — required for GitHub Enterprise hosts, also works for private repos on github.com |
 
 ### Examples
+
+List templates as JSON (default, suitable for piping to `jq` or other tools):
+
+```bash
+spfx list-templates
+```
+
+List templates as a human-readable table:
+
+```bash
+spfx list-templates --output text
+```
 
 Include a local template folder alongside the default source:
 

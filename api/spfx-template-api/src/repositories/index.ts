@@ -7,7 +7,7 @@ export {
   BaseSPFxTemplateRepositorySource,
   type SPFxRepositorySource
 } from './SPFxTemplateRepositorySource';
-export { SPFxTemplateCollection } from './SPFxTemplateCollection';
+export { SPFxTemplateCollection, type ITemplateJsonOutputEntry } from './SPFxTemplateCollection';
 export { LocalFileSystemRepositorySource } from './LocalFileSystemRepositorySource';
 export {
   PublicGitHubRepositorySource,

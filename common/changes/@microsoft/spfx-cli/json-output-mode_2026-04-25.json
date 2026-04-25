@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@microsoft/spfx-cli",
+      "comment": "Adds JSON output mode for the `spfx list-templates` command (default `--output json`, with `--output text` for the human-readable table). Also adds a global `--verbose` flag to all actions and demotes source-registration messages (`Using GitHub template source`, `Adding local template source`, `Adding remote template source`) to verbose-level output.",
+      "type": "none"
+    }
+  ],
+  "packageName": "@microsoft/spfx-cli"
+}
