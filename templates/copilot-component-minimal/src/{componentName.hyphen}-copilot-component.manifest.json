@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-component-manifest.schema.json",
+
+  "id": "<%= componentId %>",
+  "alias": "<%= componentAlias %>CopilotComponent",
+  "componentType": "CopilotComponent",
+  "copilotType": "Ux",
+  "version": "*",
+  "manifestVersion": 2,
+
+  "capabilities": {
+    "availableDisplayModes": ["inline"]
+  },
+
+  "tools": [
+    {
+      "name": "<%= componentName.pascal %>",
+      "description": {
+        "default": "<%= componentDescription %>"
+      },
+      "propertiesSchema": {
+        "id": "$../lib/<%= componentName.pascal %>Properties.js:default;"
+      }
+    }
+  ]
+}

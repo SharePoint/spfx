@@ -1,0 +1,9 @@
+{
+  "$schema": "https://aka.ms/json-schemas/copilot-extensions/v2.1/plugin.schema.json",
+  "schema_version": "v2.4",
+  "namespace": "<%= componentName.camel %>agent",
+  "name_for_human": "<%= componentName %> Agent",
+  "description_for_human": "<%= componentDescription %>",
+  "description_for_model": "Calls the <%= componentName.pascal %>CopilotComponent tool to render a personalized greeting card for the user.",
+  "contact_email": "publisher@contoso.com"
+}

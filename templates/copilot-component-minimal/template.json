@@ -1,0 +1,7 @@
+{
+  "name": "copilot-component-minimal",
+  "category": "copilot",
+  "description": "A minimal Copilot Component template (no framework) for SPFx",
+  "version": "0.0.1",
+  "spfxVersion": "1.22.2"
+}
