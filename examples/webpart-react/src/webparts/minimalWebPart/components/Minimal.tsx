@@ -10,12 +10,11 @@ export default class Minimal extends React.Component<IMinimalProps> {
       description,
       isDarkTheme,
       environmentMessage,
-      hasTeamsContext,
       userDisplayName
     } = this.props;
 
     return (
-      <section className={`${styles.minimal} ${hasTeamsContext ? styles.teams : ''}`}>
+      <section className={`${styles.minimal}`}>
         <div className={styles.welcome}>
           <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
           <h2>{strings.GreetingMessage.replace(/\{0\}/g, escape(userDisplayName))}</h2>
