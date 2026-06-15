@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "minimal-copilot-component": {
+      "components": [
+        {
+          "entrypoint": "./lib/MinimalCopilotComponent.js",
+          "manifest": "./src/minimal-copilot-component.manifest.json"
+        }
+      ]
+    }
+  }
+}

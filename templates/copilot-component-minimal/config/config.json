@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "<%= componentName.hyphen %>-copilot-component": {
+      "components": [
+        {
+          "entrypoint": "./lib/<%= componentName.pascal %>CopilotComponent.js",
+          "manifest": "./src/<%= componentName.hyphen %>-copilot-component.manifest.json"
+        }
+      ]
+    }
+  }
+}

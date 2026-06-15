@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.5/schema.json",
+  "version": "v1.5",
+  "name": "<%= componentName %> Agent",
+  "description": "<%= componentDescription %>",
+  "instructions": "$[file('instruction.txt')]",
+  "conversation_starters": [
+    {
+      "title": "Greet me",
+      "text": "Greet me by name."
+    }
+  ],
+  "actions": [
+    {
+      "id": "<%= componentName.camel %>Action",
+      "file": "ai-plugin.json"
+    }
+  ]
+}

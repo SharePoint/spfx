@@ -189,6 +189,15 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Web Part Description'
+  },
+  {
+    libraryName: '@spfx-template/copilot-component-minimal',
+    templateName: 'copilot-component-minimal',
+    templatePath: `${REPO_ROOT}/templates/copilot-component-minimal`,
+    localTemplatePath: TEMPLATES_DIR,
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal CopilotComponent Description'
   }
 ];
 

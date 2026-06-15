@@ -16,11 +16,12 @@ const DESCRIPTION_MAX_LENGTH: number = 500;
  * The allowed category values for SPFx templates.
  * @public
  */
-export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library'] = [
+export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library', 'copilot'] = [
   'webpart',
   'extension',
   'ace',
-  'library'
+  'library',
+  'copilot'
 ] as const;
 
 /**

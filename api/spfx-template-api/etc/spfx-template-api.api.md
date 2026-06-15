@@ -245,7 +245,7 @@ export class ServeJsonMergeHelper extends JsonMergeHelper {
 }
 
 // @public
-export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library'];
+export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library', 'copilot'];
 
 // @public
 export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;
