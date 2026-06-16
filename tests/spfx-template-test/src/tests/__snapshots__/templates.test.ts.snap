@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold ace-data-visualization template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>

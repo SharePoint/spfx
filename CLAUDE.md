@@ -316,7 +316,7 @@ const filePath = `${tempDir}/config/package-solution.json`;
 ### Template and Example Standards
 
 - **Sort `dependencies` and `devDependencies` alphabetically** in `package.json`.
-- **Don't include direct dependencies that come from the rig** (e.g., `css-loader`, `@typescript-eslint/parser`, `@types/webpack-env`, `@types/heft-jest`, `@microsoft/spfx-heft-plugins`).
+- **Don't include direct dependencies that come from the rig** (e.g., `css-loader`, `@typescript-eslint/parser`, `@types/webpack-env`, `@types/jest`, `@microsoft/spfx-heft-plugins`).
 - **Remove config files that are redundant with `rig.json`** (e.g., `config/sass.json`, `config/typescript.json` when their values are defaults).
 - **Localize hardcoded UI strings** using the `loc/` pattern.
 - **Use `import` for images**, not `require()`.
