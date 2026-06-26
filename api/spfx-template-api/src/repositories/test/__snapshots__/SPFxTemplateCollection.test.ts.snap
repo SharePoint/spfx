@@ -13,7 +13,7 @@ exports[`SPFxTemplateCollection toJsonString should serialize multiple templates
   {
     \\"name\\": \\"Extension\\",
     \\"category\\": \\"extension\\",
-    \\"description\\": null,
+    \\"description\\": \\"\\",
     \\"version\\": \\"2.0.0\\",
     \\"spfxVersion\\": \\"1.18.0\\",
     \\"fileCount\\": 0

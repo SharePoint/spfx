@@ -29,6 +29,19 @@ Array [
 ]
 `;
 
+exports[`ListTemplatesAction --output json (default) includes expected template fields in JSON output 1`] = `
+Array [
+  Object {
+    "category": "webpart",
+    "description": "A minimal web part template (no framework) for SPFx",
+    "fileCount": 23,
+    "name": "webpart-minimal",
+    "spfxVersion": "1.22.2",
+    "version": "0.0.1",
+  },
+]
+`;
+
 exports[`ListTemplatesAction --remote-source (additive) adds an extra PublicGitHubRepositorySource alongside the default 1`] = `
 Array [
   "[verbose] Using GitHub template source: https://github.com/SharePoint/spfx[n]",

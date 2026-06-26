@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { SPFxTemplate } from '../templating';
+import type { SPFxTemplate, SPFxTemplateCategory } from '../templating';
 
 /**
  * @public
@@ -9,14 +9,20 @@ import type { SPFxTemplate } from '../templating';
  * {@link SPFxTemplateCollection.toJsonString}.
  */
 export interface ITemplateJsonOutputEntry {
+  /** The unique name of the template (matches the folder name in the template repository). */
   name: string;
-  category: string;
-  // `null` (not `undefined`) is intentional: JSON.stringify drops `undefined` fields
-  // but preserves `null`, ensuring the field is always present in the output.
-  // eslint-disable-next-line @rushstack/no-new-null
-  description: string | null;
+  /** The category of the template. */
+  category: SPFxTemplateCategory;
+  /**
+   * A human-readable description of what the template scaffolds.
+   * Empty string when the template does not declare a description.
+   */
+  description: string;
+  /** The semantic version of the template itself. */
   version: string;
+  /** The SPFx framework version that the template targets. */
   spfxVersion: string;
+  /** The number of files contained in the template. */
   fileCount: number;
 }
 
@@ -50,7 +56,7 @@ export class SPFxTemplateCollection extends Map<string, SPFxTemplate> {
       items.push({
         name: template.name,
         category: template.category,
-        description: template.description ?? null,
+        description: template.description ?? '',
         version: template.version,
         spfxVersion: template.spfxVersion,
         fileCount: template.fileCount

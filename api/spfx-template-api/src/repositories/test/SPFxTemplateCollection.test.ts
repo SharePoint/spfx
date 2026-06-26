@@ -208,7 +208,7 @@ describe(SPFxTemplateCollection.name, () => {
       ]);
     });
 
-    it('should use null for undefined description', () => {
+    it('should use empty string for undefined description', () => {
       const template = new SPFxTemplate(
         new SPFxTemplateJsonFile({
           name: 'NoDesc',
@@ -222,7 +222,7 @@ describe(SPFxTemplateCollection.name, () => {
       const collection = new SPFxTemplateCollection([template]);
       const parsed = JSON.parse(collection.toJsonString());
 
-      expect(parsed[0].description).toBeNull();
+      expect(parsed[0].description).toBe('');
     });
 
     it('should serialize multiple templates', () => {

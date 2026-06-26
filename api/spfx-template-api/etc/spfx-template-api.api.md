@@ -167,17 +167,11 @@ export interface ISPFxTemplateJson {
 
 // @public
 export interface ITemplateJsonOutputEntry {
-    // (undocumented)
-    category: string;
-    // (undocumented)
-    description: string | null;
-    // (undocumented)
+    category: SPFxTemplateCategory;
+    description: string;
     fileCount: number;
-    // (undocumented)
     name: string;
-    // (undocumented)
     spfxVersion: string;
-    // (undocumented)
     version: string;
 }
 

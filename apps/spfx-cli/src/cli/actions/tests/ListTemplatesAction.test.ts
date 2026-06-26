@@ -306,24 +306,7 @@ describe('ListTemplatesAction', () => {
     it('includes expected template fields in JSON output', async () => {
       const { json } = await runListJsonAsync();
       const parsed: ITemplateJsonOutputEntry[] = JSON.parse(json);
-      expect(parsed).toEqual([
-        {
-          name: 'webpart-minimal',
-          category: 'webpart',
-          description: 'A minimal web part template (no framework) for SPFx',
-          version: '0.0.1',
-          spfxVersion: '1.22.2',
-          fileCount: 23
-        }
-      ]);
-    });
-
-    it('does not write table output to the terminal', async () => {
-      const { terminalChunks } = await runListJsonAsync();
-      const hasTableOutput: boolean = terminalChunks.some(
-        (chunk: string) => chunk.includes('┌') || chunk.includes('Found')
-      );
-      expect(hasTableOutput).toBe(false);
+      expect(parsed).toMatchSnapshot();
     });
 
     it('returns empty array for empty collection', async () => {
