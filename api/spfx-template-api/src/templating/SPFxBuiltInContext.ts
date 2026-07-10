@@ -34,7 +34,7 @@ export interface ISPFxBuiltInContext {
   solution_name: string;
   /** npm package / library name (e.g. "\@contoso/hello-world"). */
   libraryName: string;
-  /** SPFx version from the template manifest (e.g. "1.22.2"). */
+  /** SPFx version from the template manifest (e.g. "1.23.2"). */
   spfxVersion: string;
   /** SPFx version with hyphens escaped for shields.io badge URLs (e.g. "1.23.0--beta.0"). */
   spfxVersionForBadgeUrl: string;

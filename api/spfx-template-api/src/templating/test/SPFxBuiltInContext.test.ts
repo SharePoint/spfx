@@ -13,7 +13,7 @@ const UUID_REGEX: RegExp = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-
 const DEFAULT_INPUTS: ISPFxBuiltInContextInputs = {
   componentName: 'Hello World',
   libraryName: '@contoso/hello-world',
-  spfxVersion: '1.22.2'
+  spfxVersion: '1.23.2'
 };
 
 describe(buildBuiltInContext.name, () => {
@@ -84,7 +84,7 @@ describe(buildBuiltInContext.name, () => {
 
     it('should pass through spfxVersion unchanged', () => {
       const ctx: ISPFxBuiltInContext = buildBuiltInContext(DEFAULT_INPUTS);
-      expect(ctx.spfxVersion).toBe('1.22.2');
+      expect(ctx.spfxVersion).toBe('1.23.2');
     });
 
     it('should pass through componentName unchanged', () => {
@@ -96,7 +96,7 @@ describe(buildBuiltInContext.name, () => {
   describe('spfxVersionForBadgeUrl', () => {
     it('should escape hyphens as double-hyphens for stable versions', () => {
       const ctx: ISPFxBuiltInContext = buildBuiltInContext(DEFAULT_INPUTS);
-      expect(ctx.spfxVersionForBadgeUrl).toBe('1.22.2');
+      expect(ctx.spfxVersionForBadgeUrl).toBe('1.23.2');
     });
 
     it('should escape hyphens for pre-release versions', () => {
