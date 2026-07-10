@@ -14,7 +14,8 @@ export class ListTemplatesAction extends SPFxActionBase {
         summary: 'Lists available SPFx templates from configured sources',
         documentation:
           'This command lists all available templates from the default GitHub source ' +
-          'and any additional sources specified with --local-source or --remote-source.'
+          'and any additional sources specified with --local-source or --remote-source. ' +
+          'Use --spfx-version to filter templates by version (e.g., "--spfx-version 1.22").'
       },
       terminal
     );
@@ -37,8 +38,26 @@ export class ListTemplatesAction extends SPFxActionBase {
 
       const templates: SPFxTemplateCollection = await this._fetchTemplatesAsync(manager);
 
-      const formattedTable: string = await templates.toFormattedStringAsync();
-      terminal.writeLine(formattedTable);
+      // Apply --spfx-version filter if provided (user expects filter, not just branch selection)
+      const spfxVersion: string | undefined = this._spfxVersionParameter.value?.trim();
+      if (spfxVersion) {
+        const filteredTemplates = [...templates.values()].filter(
+          (t) => t.spfxVersion && t.spfxVersion.startsWith(spfxVersion)
+        );
+        if (filteredTemplates.length === 0) {
+          terminal.writeLine(
+            `No templates found for SPFx version "${spfxVersion}". ` +
+              `Use "spfx list-templates" (without --spfx-version) to see all available versions.`
+          );
+          return;
+        }
+        const displayCollection: SPFxTemplateCollection = new SPFxTemplateCollection(filteredTemplates);
+        const formattedTable: string = await displayCollection.toFormattedStringAsync();
+        terminal.writeLine(formattedTable);
+      } else {
+        const formattedTable: string = await templates.toFormattedStringAsync();
+        terminal.writeLine(formattedTable);
+      }
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
       terminal.writeErrorLine(`Error listing templates: ${message}`);
