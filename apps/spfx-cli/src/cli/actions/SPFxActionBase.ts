@@ -188,7 +188,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
     }
 
     // Append examples after the last line of base help
-    const lines: string[] = base.split('\n');
+    const lines: string[] = base.replace(/\r$/, '').split('\n');
     lines.push('');
     lines.push('EXAMPLES');
     for (const example of examples) {
