@@ -180,7 +180,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
    * Overrides the base help text rendering to append a formatted EXAMPLES section
    * when examples are defined.
    */
-  public renderHelpText(): string {
+  public override renderHelpText(): string {
     const base: string = super.renderHelpText();
     const examples: string[] = this.getExamples();
     if (examples.length === 0) {
