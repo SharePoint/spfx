@@ -269,6 +269,15 @@ export class CreateAction extends SPFxActionBase {
       throw error;
     }
   }
+
+  protected getExamples(): string[] {
+    return [
+      'Scaffold a new React web part in the current directory:\n  spfx create --template webpart-react --component-name "HelloWorld" --library-name "helloworld-library" --solution-name "helloworld" --component-description "A Hello World web part"',
+      'Scaffold an extension with pnpm (skipping npm install):\n  spfx create --template extension-field --component-name "ColorField" --library-name "color-field-lib" --solution-name "color-field" --package-manager pnpm --skip-install',
+      'Scaffold a web part without npm install, specifying a local template source:\n  spfx create --template webpart-react --component-name "MyWebPart" --library-name "mywebpart" --solution-name "mywebpart" --skip-install --local-source ./my-templates',
+      'Scaffold a web part using a specific SPFx version:\n  spfx create --template webpart-react --component-name "MyWP" --component-description "Description" --spfx-version 1.22 --skip-install'
+    ];
+  }
 }
 
 /**
