@@ -10,6 +10,7 @@ import { TagBuildAction } from './actions/TagBuildAction';
 import { FindBumpPipelineRunAction } from './actions/FindBumpPipelineRunAction';
 import { CreateGitHubReleasesAction } from './actions/CreateGitHubReleasesAction';
 import { VerifyNpmTagAction } from './actions/VerifyNpmTagAction';
+import { SpfxUpgradeAction } from './actions/SpfxUpgradeAction';
 
 export class ToolboxCommandLine extends CommandLineParser {
   public readonly terminal: ITerminal;
@@ -28,5 +29,6 @@ export class ToolboxCommandLine extends CommandLineParser {
     this.addAction(new FindBumpPipelineRunAction(terminal));
     this.addAction(new CreateGitHubReleasesAction(terminal));
     this.addAction(new VerifyNpmTagAction(terminal));
+    this.addAction(new SpfxUpgradeAction(terminal));
   }
 }
