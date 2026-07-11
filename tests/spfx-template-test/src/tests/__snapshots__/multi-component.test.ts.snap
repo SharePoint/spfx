@@ -139,7 +139,7 @@ Object {
     "@microsoft/spfx-web-build-rig": "1.23.2",
     "@rushstack/eslint-config": "4.6.4",
     "@rushstack/heft": "^1.2.19",
-    "@types/heft-jest": "^1.0.6",
+    "@types/jest": "~30.0.0",
     "@types/webpack-env": "~1.15.2",
     "@typescript-eslint/parser": "8.48.1",
     "eslint": "8.57.1",
