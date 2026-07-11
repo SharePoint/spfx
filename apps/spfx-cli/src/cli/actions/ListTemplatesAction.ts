@@ -40,9 +40,15 @@ export class ListTemplatesAction extends SPFxActionBase {
 
       // Apply --spfx-version filter if provided (user expects filter, not just branch selection)
       const spfxVersion: string | undefined = this._spfxVersionParameter.value?.trim();
-      if (spfxVersion) {
+      // Normalize version prefix: "version/1.22" -> "1.22", "1.22-rc.0" -> "1.22"
+      const normalizedVersion: string | undefined = spfxVersion
+        ? spfxVersion.replace(/^version\//, '').replace(/-.*$/, '')
+        : undefined;
+      if (normalizedVersion) {
+        // Split into parts and compare major.minor so "1.2" doesn't match "1.20.0"
+        const versionParts: string[] = normalizedVersion.split('.');
         const filteredTemplates = [...templates.values()].filter(
-          (t) => t.spfxVersion && t.spfxVersion.startsWith(spfxVersion)
+          (t) => t.spfxVersion && t.spfxVersion.split('.').slice(0, versionParts.length).join('.') === normalizedVersion
         );
         if (filteredTemplates.length === 0) {
           terminal.writeLine(
