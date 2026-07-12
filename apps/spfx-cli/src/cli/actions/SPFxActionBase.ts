@@ -188,7 +188,8 @@ export abstract class SPFxActionBase extends CommandLineAction {
     }
 
     // Append examples after the last line of base help
-    const lines: string[] = base.replace(/\r$/, '').split('\n');
+    // Normalize Windows CRLF to LF before splitting so every line is clean
+    const lines: string[] = base.replace(/\r\n/g, '\n').split('\n');
     lines.push('');
     lines.push('EXAMPLES');
     for (const example of examples) {
