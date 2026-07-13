@@ -2,7 +2,7 @@
 // See LICENSE in the project root for license information.
 
 import type { Terminal } from '@rushstack/terminal';
-import { type SPFxTemplateCollection, SPFxTemplateRepositoryManager } from '@microsoft/spfx-template-api';
+import { SPFxTemplateCollection, SPFxTemplateRepositoryManager } from '@microsoft/spfx-template-api';
 
 import { SPFxActionBase } from './SPFxActionBase';
 
