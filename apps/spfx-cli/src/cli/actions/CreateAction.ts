@@ -48,7 +48,7 @@ const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile> = z.object({
 export class CreateAction extends SPFxActionBase {
   private readonly _targetDirParameter: CommandLineStringParameter;
   private readonly _templateParameter: IRequiredCommandLineStringParameter;
-  private readonly _libraryNameParameter: IRequiredCommandLineStringParameter;
+  private readonly _libraryNameParameter: CommandLineStringParameter;
   private readonly _componentNameParameter: IRequiredCommandLineStringParameter;
   private readonly _componentAliasParameter: CommandLineStringParameter;
   private readonly _componentDescriptionParameter: CommandLineStringParameter;
@@ -83,8 +83,8 @@ export class CreateAction extends SPFxActionBase {
     this._libraryNameParameter = this.defineStringParameter({
       parameterLongName: '--library-name',
       argumentName: 'LIBRARY_NAME',
-      description: 'The library name for the component',
-      required: true
+      description: 'The library name for the component. Defaults to the solution name if not specified.',
+      required: false
     });
 
     this._componentNameParameter = this.defineStringParameter({
@@ -204,7 +204,7 @@ export class CreateAction extends SPFxActionBase {
       const builtInContext: ISPFxBuiltInContext = buildBuiltInContext(
         {
           componentName,
-          libraryName: this._libraryNameParameter.value,
+          libraryName: this._libraryNameParameter.value || solutionName,
           spfxVersion: template.spfxVersion,
           solutionName: rawSolutionName || undefined,
           componentAlias: this._componentAliasParameter.value?.trim() || undefined,
