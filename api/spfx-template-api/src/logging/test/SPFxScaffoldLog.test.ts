@@ -36,7 +36,7 @@ function makeTemplateRenderedEvent(overrides?: Partial<ITemplateRenderedEvent>):
     timestamp: '2026-03-27T10:00:00.000Z',
     templateName: 'webpart-minimal',
     templateVersion: '1.0.0',
-    spfxVersion: '1.22.2',
+    spfxVersion: '1.23.2',
     context: { componentNameCamelCase: 'helloWorld' },
     cliVersion: '0.1.0',
     ...overrides
