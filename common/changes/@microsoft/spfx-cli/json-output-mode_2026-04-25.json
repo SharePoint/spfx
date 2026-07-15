@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@microsoft/spfx-cli",
+      "comment": "Adds JSON output mode for the `spfx list-templates` command (default `--output json`, with `--output text` for the human-readable table).",
+      "type": "none"
+    }
+  ],
+  "packageName": "@microsoft/spfx-cli"
+}
