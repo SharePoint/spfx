@@ -48,7 +48,7 @@ const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile> = z.object({
 export class CreateAction extends SPFxActionBase {
   private readonly _targetDirParameter: CommandLineStringParameter;
   private readonly _templateParameter: IRequiredCommandLineStringParameter;
-  private readonly _libraryNameParameter: IRequiredCommandLineStringParameter;
+  private readonly _libraryNameParameter: CommandLineStringParameter;
   private readonly _componentNameParameter: IRequiredCommandLineStringParameter;
   private readonly _componentAliasParameter: CommandLineStringParameter;
   private readonly _componentDescriptionParameter: CommandLineStringParameter;
@@ -83,8 +83,8 @@ export class CreateAction extends SPFxActionBase {
     this._libraryNameParameter = this.defineStringParameter({
       parameterLongName: '--library-name',
       argumentName: 'LIBRARY_NAME',
-      description: 'The library name for the component',
-      required: true
+      description: 'The library name for the component. Defaults to the solution name if not specified.',
+      required: false
     });
 
     this._componentNameParameter = this.defineStringParameter({
@@ -204,7 +204,7 @@ export class CreateAction extends SPFxActionBase {
       const builtInContext: ISPFxBuiltInContext = buildBuiltInContext(
         {
           componentName,
-          libraryName: this._libraryNameParameter.value,
+          libraryName: this._libraryNameParameter.value || solutionName,
           spfxVersion: template.spfxVersion,
           solutionName: rawSolutionName || undefined,
           componentAlias: this._componentAliasParameter.value?.trim() || undefined,
@@ -272,10 +272,10 @@ export class CreateAction extends SPFxActionBase {
 
   protected override getExamples(): string[] {
     return [
-      'Scaffold a new React web part in the current working directory:\n  spfx create --template webpart-react --component-name "HelloWorld" --library-name "helloworld-library" --solution-name "helloworld" --component-description "A Hello World web part"',
-      'Scaffold an extension with pnpm (skipping npm install):\n  spfx create --template extension-field --component-name "ColorField" --package-manager pnpm',
-      'Scaffold a web part without npm install, specifying a local template source:\n  spfx create --template webpart-react --component-name "MyWebPart" --library-name "mywebpart" --solution-name "mywebpart" --local-source ./my-templates',
-      'Scaffold a web part using a specific SPFx version:\n  spfx create --template webpart-react --component-name "MyWP" --component-description "Description" --spfx-version 1.22'
+      'Create a new React web part. Scaffolds into a subfolder named after the solution:\n  spfx create --template webpart-react --component-name "HelloWorld" --solution-name "helloworld" --component-description "A Hello World web part"',
+      'Create an extension. Skips package install with --package-manager none:\n  spfx create --template extension-field --component-name "ColorField" --package-manager none',
+      'Create a web part from a local template source:\n  spfx create --template webpart-react --component-name "MyWebPart" --library-name "mywebpart" --solution-name "mywebpart" --local-source ./my-templates',
+      'Create a web part with a specific SPFx version:\n  spfx create --template webpart-react --component-name "MyWP" --component-description "Description" --spfx-version 1.22 --library-name "mywp" --solution-name "mywp"'
     ];
   }
 }
