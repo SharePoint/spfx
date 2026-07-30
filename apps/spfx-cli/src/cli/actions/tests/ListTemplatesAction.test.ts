@@ -47,7 +47,7 @@ describe('ListTemplatesAction', () => {
         category: 'webpart',
         description: 'A minimal web part template (no framework) for SPFx',
         version: '0.0.1',
-        spfxVersion: '1.22.2'
+        spfxVersion: '1.23.2'
       }),
       new Map(Array.from({ length: 23 }, (value, i) => [`file${i}.txt`, `content${i}`]))
     );

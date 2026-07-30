@@ -1,11 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`CommandLineHelp prints the help: create 1`] = `
 "usage: spfx create [-h] [--template-url URL] [--spfx-version VERSION]
                    [--local-source TEMPLATE_PATH] [--remote-source URL]
                    [--github-token TOKEN] [--target-dir TARGET_DIR] --template
-                   TEMPLATE_NAME --library-name LIBRARY_NAME --component-name
-                   COMPONENT_NAME [--component-alias COMPONENT_ALIAS]
+                   TEMPLATE_NAME [--library-name LIBRARY_NAME]
+                   --component-name COMPONENT_NAME
+                   [--component-alias COMPONENT_ALIAS]
                    [--component-description COMPONENT_DESCRIPTION]
                    [--solution-name SOLUTION_NAME]
                    [--package-manager {npm,pnpm,yarn,none}]
@@ -40,7 +41,8 @@ Optional arguments:
   --template TEMPLATE_NAME
                         The template to use for scaffolding
   --library-name LIBRARY_NAME
-                        The library name for the component
+                        The library name for the component. Defaults to the
+                        solution name if not specified.
   --component-name COMPONENT_NAME
                         The component name (e.g., \\"Hello World\\")
   --component-alias COMPONENT_ALIAS

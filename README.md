@@ -13,7 +13,7 @@
   <a href="https://www.npmjs.com/package/@microsoft/spfx-cli"><img src="https://img.shields.io/npm/v/@microsoft/spfx-cli" alt="npm version" /></a>
   <a href="https://github.com/SharePoint/spfx/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/node-22.x_%7C_24.x-brightgreen" alt="Node.js 22.x | 24.x" />
-  <img src="https://img.shields.io/badge/SPFx-1.22.2-blue" alt="SPFx 1.22.2" />
+  <img src="https://img.shields.io/badge/SPFx-1.23.2-blue" alt="SPFx 1.23.2" />
 </p>
 
 ---
@@ -60,7 +60,7 @@ See the [CLI README](apps/spfx-cli/README.md) for the full command reference.
 
 ## Templates
 
-All templates target **SPFx 1.22.2**. Use `--spfx-version` to target a different release branch.
+All templates target **SPFx 1.23.2**. Use `--spfx-version` to target a different release branch.
 
 ### Web Parts
 

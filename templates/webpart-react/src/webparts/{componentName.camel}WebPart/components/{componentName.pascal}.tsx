@@ -10,12 +10,11 @@ export default class <%= componentName.pascal %> extends React.Component<I<%= co
       description,
       isDarkTheme,
       environmentMessage,
-      hasTeamsContext,
       userDisplayName
     } = this.props;
 
     return (
-      <section className={`${styles.<%= componentName.camel %>} ${hasTeamsContext ? styles.teams : ''}`}>
+      <section className={`${styles.<%= componentName.camel %>}`}>
         <div className={styles.welcome}>
           <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
           <h2>{strings.GreetingMessage.replace(/\{0\}/g, escape(userDisplayName))}</h2>
