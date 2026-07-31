@@ -165,7 +165,7 @@ Object {
 
 exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 19 templates:
+Found 20 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -183,6 +183,8 @@ Found 19 templates:
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-react               [gray]│[default] copilot   [gray]│[default] A React-based Copilot Component template for SPFx                                                [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -240,7 +242,7 @@ targetDir: <TARGET_DIR>
 
 exports[`Multi-component scaffolding should scaffold webpart-minimal then extension-application-customizer into same directory: stdout 2`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 19 templates:
+Found 20 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -258,6 +260,8 @@ Found 19 templates:
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-react               [gray]│[default] copilot   [gray]│[default] A React-based Copilot Component template for SPFx                                                [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-component-manifest.schema.json",
+
+  "id": "e3f611a9-871f-58d5-a7e2-9483f971c6a3",
+  "alias": "SampleCopilotComponent",
+  "componentType": "CopilotComponent",
+  "copilotType": "Ux",
+  "version": "*",
+  "manifestVersion": 2,
+
+  "capabilities": {
+    "availableDisplayModes": ["inline", "fullscreen"]
+  },
+
+  "tools": [
+    {
+      "name": "SampleTool",
+      "description": {
+        "default": "React CopilotComponent Description"
+      },
+      "propertiesSchema": {
+        "id": "$../lib/SampleProperties.js:default;"
+      }
+    }
+  ]
+}

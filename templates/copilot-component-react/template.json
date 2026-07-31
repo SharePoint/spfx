@@ -1,0 +1,7 @@
+{
+  "name": "copilot-component-react",
+  "category": "copilot",
+  "description": "A React-based Copilot Component template for SPFx",
+  "version": "0.0.1",
+  "spfxVersion": "1.24.0-beta.2"
+}

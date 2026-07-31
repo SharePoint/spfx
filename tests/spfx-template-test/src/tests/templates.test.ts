@@ -207,6 +207,15 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
     componentName: 'NoFramework',
     componentAlias: 'NoFramework',
     componentDescription: 'No Framework CopilotComponent Description'
+  },
+  {
+    libraryName: '@spfx-template/copilot-component-react',
+    templateName: 'copilot-component-react',
+    templatePath: `${REPO_ROOT}/templates/copilot-component-react`,
+    localTemplatePath: TEMPLATES_DIR,
+    componentName: 'Sample',
+    componentAlias: 'Sample',
+    componentDescription: 'React CopilotComponent Description'
   }
 ];
 

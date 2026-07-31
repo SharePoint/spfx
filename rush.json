@@ -517,6 +517,12 @@
       "tags": []
     },
     {
+      "packageName": "@spfx-template/copilot-component-react",
+      "projectFolder": "examples/copilot-component-react",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
       "packageName": "@spfx-template/extension-application-customizer",
       "projectFolder": "examples/extension-application-customizer",
       "reviewCategory": "templates",
