@@ -29,7 +29,7 @@ export default class <%= componentName.pascal %>CopilotComponent extends BaseCop
   private _siteTitle: string = '';
   private _siteUrl: string = '';
 
-  protected async onInit(): Promise<void> {
+  protected override async onInit(): Promise<void> {
     this._siteUrl = this.context.pageContext.web.absoluteUrl;
 
     // Fetch user info from Microsoft Graph (brokered SSO — no token code needed).
@@ -56,7 +56,7 @@ export default class <%= componentName.pascal %>CopilotComponent extends BaseCop
     }
   }
 
-  protected render(): void {
+  protected override render(): void {
     const props: I<%= componentName.pascal %>Props = {
       message: this.properties.message,
       userDisplayName: this._userDisplayName,
@@ -77,7 +77,7 @@ export default class <%= componentName.pascal %>CopilotComponent extends BaseCop
     ReactDOM.render(React.createElement(<%= componentName.pascal %>, props), this.context.domElement);
   }
 
-  protected async onTeardown(): Promise<void> {
+  protected override async onTeardown(): Promise<void> {
     ReactDOM.unmountComponentAtNode(this.context.domElement);
   }
 }

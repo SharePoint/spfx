@@ -12,7 +12,7 @@ import * as strings from 'NoFrameworkCopilotComponentStrings';
 const EXPAND_ICON: string = '\u26F6';
 
 export default class NoFrameworkCopilotComponent extends BaseCopilotComponent<INoFrameworkCopilotComponentProperties> {
-  protected render(): void {
+  protected override render(): void {
     const userName: string = this.context.pageContext.user.displayName || 'there';
     const theme: string = this.hostContext.theme || strings.UnknownTheme;
     const displayMode: string = this.hostContext.displayMode || strings.UnknownTheme;

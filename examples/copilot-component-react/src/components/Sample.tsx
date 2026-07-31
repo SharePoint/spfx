@@ -101,12 +101,13 @@ export default function Sample(props: ISampleProps): React.ReactElement {
 
   // Toggle between compact and expanded sizes by requesting a resize from the host.
   const handleResize = React.useCallback(async (): Promise<void> => {
-    if (isExpanded) {
-      await onRequestSizeChange(COMPACT_WIDTH, COMPACT_HEIGHT);
-    } else {
+    const nextExpanded: boolean = !isExpanded;
+    if (nextExpanded) {
       await onRequestSizeChange(EXPANDED_WIDTH, EXPANDED_HEIGHT);
+    } else {
+      await onRequestSizeChange(COMPACT_WIDTH, COMPACT_HEIGHT);
     }
-    setIsExpanded(!isExpanded);
+    setIsExpanded(nextExpanded);
   }, [onRequestSizeChange, isExpanded]);
 
   return (

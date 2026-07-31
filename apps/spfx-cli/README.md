@@ -147,6 +147,8 @@ Templates are fetched at runtime from the [SharePoint/spfx](https://github.com/S
 | Name | Description |
 |------|-------------|
 | `copilot-component-minimal` | Bare-bones Copilot Component, no UI framework |
+| `copilot-component-noframework` | No-framework Copilot Component (HTML/CSS) with theming and localization |
+| `copilot-component-react` | React-based Copilot Component using Fluent UI, Microsoft Graph, and SharePoint REST |
 
 ### Other
 
