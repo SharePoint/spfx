@@ -84,6 +84,7 @@
     // versions in addition to the repo's usual version.
     "@microsoft/eslint-config-spfx": ["1.24.0-beta.2"],
     "@microsoft/eslint-plugin-spfx": ["1.24.0-beta.2"],
+    "@microsoft/sp-lodash-subset": ["1.24.0-beta.2"],
     "@microsoft/sp-module-interfaces": ["1.24.0-beta.2"],
     "@microsoft/spfx-web-build-rig": ["1.24.0-beta.2"],
     // Copilot component templates use zod 3.x (required by zod-to-json-schema),

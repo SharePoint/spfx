@@ -2,7 +2,7 @@
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold ace-data-visualization template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -18,6 +18,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -77,7 +79,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold ace-generic-card template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -93,6 +95,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -152,7 +156,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold ace-generic-image-card template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -168,6 +172,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -227,7 +233,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold ace-generic-primarytext-card template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -243,6 +249,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -302,7 +310,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold ace-search-card template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -318,6 +326,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -377,7 +387,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold copilot-component-minimal template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -393,6 +403,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -445,9 +457,9 @@ targetDir: <TARGET_DIR>
 "
 `;
 
-exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold extension-application-customizer template and match example output: stdout 1`] = `
+exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold copilot-component-noframework template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -463,6 +475,88 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-fieldcustomizer-minimal     [gray]│[default] extension [gray]│[default] A minimal Field Customizer extension for SharePoint Framework without any framework dependencies [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-fieldcustomizer-noframework [gray]│[default] extension [gray]│[default] A SharePoint Framework field customizer extension with no framework                              [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-fieldcustomizer-react       [gray]│[default] extension [gray]│[default] SharePoint Framework Field Customizer extension with React framework                             [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 23    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-formcustomizer-noframework  [gray]│[default] extension [gray]│[default] A SharePoint Framework Form Customizer extension with no framework                               [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 21    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-formcustomizer-react        [gray]│[default] extension [gray]│[default] A SharePoint Framework Form Customizer extension with React                                      [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-listviewcommandset          [gray]│[default] extension [gray]│[default] SharePoint Framework list view command set extension template                                    [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 24    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] extension-search-query-modifier       [gray]│[default] extension [gray]│[default] A SharePoint Framework search query modifier extension                                           [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] library                               [gray]│[default] library   [gray]│[default] A SharePoint Framework Library Component                                                         [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 21    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] webpart-minimal                       [gray]│[default] webpart   [gray]│[default] A minimal web part template (no framework) for SPFx                                              [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 23    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] webpart-noframework                   [gray]│[default] webpart   [gray]│[default] A web part template with no framework (plain TypeScript) for SPFx                                [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 26    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] webpart-react                         [gray]│[default] webpart   [gray]│[default] A React-based web part template for SPFx                                                         [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 27    [gray]│[default]
+[gray]└───────────────────────────────────────[default][gray]┴───────────[default][gray]┴──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┴─────────[default][gray]┴───────────────[default][gray]┴───────┘[default]
+targetDir: <TARGET_DIR>
+
+[cyan]The following files will be generated:[default]
+[green]  .eslintrc.js[default]
+[green]  .gitignore[default]
+[green]  .npmignore[default]
+[green]  README.md[default]
+[green]  config/config.json[default]
+[green]  config/copilot-agent.json[default]
+[green]  config/package-solution.json[default]
+[green]  config/rig.json[default]
+[green]  config/sass.json[default]
+[green]  config/serve.json[default]
+[green]  config/typescript.json[default]
+[green]  copilot/ai-plugin.json[default]
+[green]  copilot/color.png[default]
+[green]  copilot/declarativeAgent.json[default]
+[green]  copilot/instruction.txt[default]
+[green]  copilot/manifest.json[default]
+[green]  copilot/outline.png[default]
+[green]  package.json[default]
+[green]  src/NoFrameworkCopilotComponent.module.scss[default]
+[green]  src/NoFrameworkCopilotComponent.ts[default]
+[green]  src/NoFrameworkProperties.ts[default]
+[green]  src/assets/welcome-dark.png[default]
+[green]  src/assets/welcome-light.png[default]
+[green]  src/images.d.ts[default]
+[green]  src/loc/en-us.js[default]
+[green]  src/loc/noFrameworkCopilotComponentStrings.d.ts[default]
+[green]  src/no-framework-copilot-component.manifest.json[default]
+[green]  tsconfig.json[default]
+
+"
+`;
+
+exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold extension-application-customizer template and match example output: stdout 1`] = `
+"Adding local template source: <LOCAL_TEMPLATE_PATH>
+Found 19 templates:
+
+[gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
+[gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-data-visualization                [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Data Visualization                           [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-generic-card                      [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Generic Card Template                        [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-generic-image-card                [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Image Card Template                          [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-generic-primarytext-card          [gray]│[default] ace       [gray]│[default] A SharePoint Framework Adaptive Card Extension with Primary Text Card Template                   [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -519,7 +613,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold extension-fieldcustomizer-minimal template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -535,6 +629,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -591,7 +687,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold extension-fieldcustomizer-noframework template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -607,6 +703,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -663,7 +761,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold extension-fieldcustomizer-react template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -679,6 +777,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -736,7 +836,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold extension-formcustomizer-noframework template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -752,6 +852,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -807,7 +909,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold extension-formcustomizer-react template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -823,6 +925,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -877,7 +981,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold extension-listviewcommandset template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -893,6 +997,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -951,7 +1057,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold extension-search-query-modifier template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -967,6 +1073,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -1023,7 +1131,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold library template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -1039,6 +1147,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -1112,7 +1222,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold webpart-minimal template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -1128,6 +1238,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -1185,7 +1297,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold webpart-noframework template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -1201,6 +1313,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
@@ -1261,7 +1375,7 @@ targetDir: <TARGET_DIR>
 
 exports[`SPFx Template Scaffolding Template scaffolding and comparison should scaffold webpart-react template and match example output: stdout 1`] = `
 "Adding local template source: <LOCAL_TEMPLATE_PATH>
-Found 18 templates:
+Found 19 templates:
 
 [gray]┌───────────────────────────────────────[default][gray]┬───────────[default][gray]┬──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┬─────────[default][gray]┬───────────────[default][gray]┬───────┐[default]
 [gray]│[default][red] Name                                  [default][gray]│[default][red] Category  [default][gray]│[default][red] Description                                                                                      [default][gray]│[default][red] Version [default][gray]│[default][red] SPFx Version  [default][gray]│[default][red] Files [default][gray]│[default]
@@ -1277,6 +1391,8 @@ Found 18 templates:
 [gray]│[default] ace-search-card                       [gray]│[default] ace       [gray]│[default] Adaptive Card Extension with Search Card template                                                [gray]│[default] 1.0.0   [gray]│[default] 1.23.2        [gray]│[default] 25    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] copilot-component-minimal             [gray]│[default] copilot   [gray]│[default] A minimal Copilot Component template (no framework) for SPFx                                     [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 20    [gray]│[default]
+[gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
+[gray]│[default] copilot-component-noframework         [gray]│[default] copilot   [gray]│[default] A no-framework Copilot Component template (HTML/CSS) for SPFx                                    [gray]│[default] 0.0.1   [gray]│[default] 1.24.0-beta.2 [gray]│[default] 28    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]
 [gray]│[default] extension-application-customizer      [gray]│[default] extension [gray]│[default] A SharePoint Framework Application Customizer extension template                                 [gray]│[default] 0.0.1   [gray]│[default] 1.23.2        [gray]│[default] 22    [gray]│[default]
 [gray]├───────────────────────────────────────[default][gray]┼───────────[default][gray]┼──────────────────────────────────────────────────────────────────────────────────────────────────[default][gray]┼─────────[default][gray]┼───────────────[default][gray]┼───────┤[default]

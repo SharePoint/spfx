@@ -395,6 +395,58 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
+  ../../examples/copilot-component-noframework:
+    dependencies:
+      '@microsoft/sp-copilot-component':
+        specifier: 1.24.0-beta.2
+        version: 1.24.0-beta.2(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-lodash-subset':
+        specifier: 1.24.0-beta.2
+        version: 1.24.0-beta.2
+      tslib:
+        specifier: 2.3.1
+        version: 2.3.1
+      zod:
+        specifier: 3.24.1
+        version: 3.24.1
+      zod-to-json-schema:
+        specifier: 3.24.1
+        version: 3.24.1(zod@3.24.1)
+    devDependencies:
+      '@microsoft/eslint-config-spfx':
+        specifier: 1.24.0-beta.2
+        version: 1.24.0-beta.2(eslint@8.57.1)(typescript@5.8.3)
+      '@microsoft/eslint-plugin-spfx':
+        specifier: 1.24.0-beta.2
+        version: 1.24.0-beta.2(eslint@8.57.1)(typescript@5.8.3)
+      '@microsoft/sp-module-interfaces':
+        specifier: 1.24.0-beta.2
+        version: 1.24.0-beta.2(@types/node@22.19.13)
+      '@microsoft/spfx-web-build-rig':
+        specifier: 1.24.0-beta.2
+        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.3.0)(zod@3.24.1)
+      '@rushstack/eslint-config':
+        specifier: 4.6.4
+        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+      '@rushstack/heft':
+        specifier: ^1.2.19
+        version: 1.2.19(@types/node@22.19.13)
+      '@types/jest':
+        specifier: ~30.0.0
+        version: 30.0.0
+      '@types/webpack-env':
+        specifier: ~1.15.2
+        version: 1.15.3
+      '@typescript-eslint/parser':
+        specifier: 8.48.1
+        version: 8.48.1(eslint@8.57.1)(typescript@5.8.3)
+      eslint:
+        specifier: 8.57.1
+        version: 8.57.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
   ../../examples/extension-application-customizer:
     dependencies:
       '@microsoft/decorators':

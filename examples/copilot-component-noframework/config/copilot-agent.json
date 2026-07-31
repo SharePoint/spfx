@@ -1,0 +1,11 @@
+{
+  "$schema": "../node_modules/@microsoft/spfx-heft-plugins/lib-commonjs/plugins/copilotAgentPlugin/copilot-agent.schema.json",
+
+  "agents": [
+    {
+      "name": { "default": "NoFramework Agent" },
+      "description": { "default": "No Framework CopilotComponent Description" },
+      "components": ["883e8d4f-7073-52ba-a991-5970ff009391"]
+    }
+  ]
+}

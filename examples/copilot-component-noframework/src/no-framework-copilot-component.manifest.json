@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-component-manifest.schema.json",
+
+  "id": "883e8d4f-7073-52ba-a991-5970ff009391",
+  "alias": "NoFrameworkCopilotComponent",
+  "componentType": "CopilotComponent",
+  "copilotType": "Ux",
+  "version": "*",
+  "manifestVersion": 2,
+
+  "capabilities": {
+    "availableDisplayModes": ["inline", "fullscreen"]
+  },
+
+  "tools": [
+    {
+      "name": "NoFrameworkTool",
+      "description": {
+        "default": "No Framework CopilotComponent Description"
+      },
+      "propertiesSchema": {
+        "id": "$../lib/NoFrameworkProperties.js:default;"
+      }
+    }
+  ]
+}
