@@ -15,6 +15,7 @@ lib-esm
 jest-output
 release
 solution
+teams
 temp
 *.sppkg
 .heft
