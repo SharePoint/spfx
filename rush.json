@@ -505,6 +505,12 @@
       "tags": []
     },
     {
+      "packageName": "@spfx-template/copilot-component-minimal",
+      "projectFolder": "examples/copilot-component-minimal",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
       "packageName": "@spfx-template/extension-application-customizer",
       "projectFolder": "examples/extension-application-customizer",
       "reviewCategory": "templates",

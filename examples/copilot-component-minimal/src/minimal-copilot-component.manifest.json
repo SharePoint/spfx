@@ -9,12 +9,12 @@
   "manifestVersion": 2,
 
   "capabilities": {
-    "availableDisplayModes": ["inline"]
+    "availableDisplayModes": ["inline", "fullscreen"]
   },
 
   "tools": [
     {
-      "name": "Minimal",
+      "name": "MinimalTool",
       "description": {
         "default": "Minimal CopilotComponent Description"
       },

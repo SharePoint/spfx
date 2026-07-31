@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { zodToJsonSchema } from 'zod-to-json-schema';
+import zodToJsonSchema from 'zod-to-json-schema';
 
-const minimalPropertiesSchema: z.ZodObject<{ name: z.ZodString }> = z.object({
-  name: z.string().describe('The name of the person to greet.')
+const propertiesSchema = z.object({
+  message: z.string().describe('A message to display.')
 });
 
-export type IMinimalCopilotComponentProperties = z.infer<typeof minimalPropertiesSchema>;
+export type IMinimalCopilotComponentProperties = z.infer<typeof propertiesSchema>;
 
-export default zodToJsonSchema(minimalPropertiesSchema);
+export default zodToJsonSchema(propertiesSchema);
