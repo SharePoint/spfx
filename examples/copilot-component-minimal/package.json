@@ -14,16 +14,16 @@
     "_phase:package-solution": "heft run --only package-solution -- --clean"
   },
   "dependencies": {
-    "@microsoft/sp-copilot-component": "1.22.2",
+    "@microsoft/sp-copilot-component": "1.24.0-beta.2",
     "tslib": "2.3.1",
     "zod": "3.25.75",
     "zod-to-json-schema": "3.25.1"
   },
   "devDependencies": {
-    "@microsoft/eslint-config-spfx": "1.22.2",
-    "@microsoft/eslint-plugin-spfx": "1.22.2",
-    "@microsoft/sp-module-interfaces": "1.22.2",
-    "@microsoft/spfx-web-build-rig": "1.22.2",
+    "@microsoft/eslint-config-spfx": "1.24.0-beta.2",
+    "@microsoft/eslint-plugin-spfx": "1.24.0-beta.2",
+    "@microsoft/sp-module-interfaces": "1.24.0-beta.2",
+    "@microsoft/spfx-web-build-rig": "1.24.0-beta.2",
     "@rushstack/eslint-config": "4.6.4",
     "@rushstack/heft": "^1.2.9",
     "@types/heft-jest": "^1.0.6",
