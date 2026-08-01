@@ -131,7 +131,7 @@ export default function <%= componentName.pascal %>(props: I<%= componentName.pa
               <Badge appearance="outline" color="informative">
                 {strings.ThemeBadgePrefix} {hostContext.theme || strings.UnknownTheme}
               </Badge>
-              <Badge appearance="outline" color="subtle">
+              <Badge appearance="outline" color="important">
                 {strings.ModeBadgePrefix} {hostContext.displayMode || strings.DefaultDisplayMode}
               </Badge>
             </div>
