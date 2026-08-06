@@ -1,0 +1,7 @@
+{
+  "name": "copilot-component-noframework",
+  "category": "copilot",
+  "description": "A no-framework Copilot Component template (HTML/CSS) for SPFx",
+  "version": "0.0.1",
+  "spfxVersion": "1.24.0-beta.2"
+}

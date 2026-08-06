@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.8/schema.json",
+  "version": "v1.8",
+  "name": "Minimal Agent",
+  "description": "Minimal CopilotComponent Description",
+  "instructions": "$[file('instruction.txt')]",
+  "conversation_starters": [
+    {
+      "title": "Get started",
+      "text": "What can you do?"
+    }
+  ],
+  "actions": [
+    {
+      "id": "minimalAction",
+      "file": "ai-plugin.json"
+    }
+  ]
+}

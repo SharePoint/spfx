@@ -505,6 +505,24 @@
       "tags": []
     },
     {
+      "packageName": "@spfx-template/copilot-component-minimal",
+      "projectFolder": "examples/copilot-component-minimal",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/copilot-component-noframework",
+      "projectFolder": "examples/copilot-component-noframework",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
+      "packageName": "@spfx-template/copilot-component-react",
+      "projectFolder": "examples/copilot-component-react",
+      "reviewCategory": "templates",
+      "tags": []
+    },
+    {
       "packageName": "@spfx-template/extension-application-customizer",
       "projectFolder": "examples/extension-application-customizer",
       "reviewCategory": "templates",

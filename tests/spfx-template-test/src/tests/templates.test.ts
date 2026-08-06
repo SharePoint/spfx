@@ -189,6 +189,33 @@ const TEMPLATE_CONFIGS: ITemplateConfig[] = [
     componentName: 'Minimal',
     componentAlias: 'Minimal',
     componentDescription: 'Minimal Web Part Description'
+  },
+  {
+    libraryName: '@spfx-template/copilot-component-minimal',
+    templateName: 'copilot-component-minimal',
+    templatePath: `${REPO_ROOT}/templates/copilot-component-minimal`,
+    localTemplatePath: TEMPLATES_DIR,
+    componentName: 'Minimal',
+    componentAlias: 'Minimal',
+    componentDescription: 'Minimal CopilotComponent Description'
+  },
+  {
+    libraryName: '@spfx-template/copilot-component-noframework',
+    templateName: 'copilot-component-noframework',
+    templatePath: `${REPO_ROOT}/templates/copilot-component-noframework`,
+    localTemplatePath: TEMPLATES_DIR,
+    componentName: 'NoFramework',
+    componentAlias: 'NoFramework',
+    componentDescription: 'No Framework CopilotComponent Description'
+  },
+  {
+    libraryName: '@spfx-template/copilot-component-react',
+    templateName: 'copilot-component-react',
+    templatePath: `${REPO_ROOT}/templates/copilot-component-react`,
+    localTemplatePath: TEMPLATES_DIR,
+    componentName: 'Sample',
+    componentAlias: 'Sample',
+    componentDescription: 'React CopilotComponent Description'
   }
 ];
 

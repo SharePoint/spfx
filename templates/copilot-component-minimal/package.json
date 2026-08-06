@@ -1,0 +1,35 @@
+{
+  "name": "<%= libraryName %>",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=22.14.0 < 23.0.0"
+  },
+  "scripts": {
+    "build": "heft test --clean --production && heft package-solution --production",
+    "start": "heft start --clean",
+    "clean": "heft clean",
+    "_phase:build": "heft run --only build -- --clean",
+    "_phase:test": "heft run --only test -- --clean",
+    "_phase:package-solution": "heft run --only package-solution -- --clean"
+  },
+  "dependencies": {
+    "@microsoft/sp-copilot-component": "<%= spfxVersion %>",
+    "tslib": "2.3.1",
+    "zod": "3.24.1",
+    "zod-to-json-schema": "3.24.1"
+  },
+  "devDependencies": {
+    "@microsoft/eslint-config-spfx": "<%= spfxVersion %>",
+    "@microsoft/eslint-plugin-spfx": "<%= spfxVersion %>",
+    "@microsoft/sp-module-interfaces": "<%= spfxVersion %>",
+    "@microsoft/spfx-web-build-rig": "<%= spfxVersion %>",
+    "@rushstack/eslint-config": "4.6.4",
+    "@rushstack/heft": "^1.2.19",
+    "@types/jest": "~30.0.0",
+    "@types/webpack-env": "~1.15.2",
+    "@typescript-eslint/parser": "8.48.1",
+    "eslint": "8.57.1",
+    "typescript": "~5.8.3"
+  }
+}

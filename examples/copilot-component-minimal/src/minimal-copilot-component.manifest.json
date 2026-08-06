@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-component-manifest.schema.json",
+
+  "id": "838638c8-36e9-53b5-a8c3-37a22b55fa22",
+  "alias": "MinimalCopilotComponent",
+  "componentType": "CopilotComponent",
+  "copilotType": "Ux",
+  "version": "*",
+  "manifestVersion": 2,
+
+  "capabilities": {
+    "availableDisplayModes": ["inline", "fullscreen"]
+  },
+
+  "tools": [
+    {
+      "name": "MinimalTool",
+      "description": {
+        "default": "Minimal CopilotComponent Description"
+      },
+      "propertiesSchema": {
+        "id": "$../lib/MinimalProperties.js:default;"
+      }
+    }
+  ]
+}

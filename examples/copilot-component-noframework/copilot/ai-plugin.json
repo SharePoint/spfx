@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.4/schema.json",
+  "schema_version": "v2.4",
+  "namespace": "noFramework",
+  "name_for_human": "NoFramework Agent",
+  "description_for_human": "No Framework CopilotComponent Description",
+  "description_for_model": "No Framework CopilotComponent Description",
+  "contact_email": "publisher@contoso.com"
+}
