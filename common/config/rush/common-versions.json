@@ -86,9 +86,6 @@
     "@microsoft/eslint-plugin-spfx": ["1.24.0-beta.2"],
     "@microsoft/sp-lodash-subset": ["1.24.0-beta.2"],
     "@microsoft/sp-module-interfaces": ["1.24.0-beta.2"],
-    "@microsoft/spfx-web-build-rig": ["1.24.0-beta.2"],
-    // Copilot component templates use zod 3.x (required by zod-to-json-schema),
-    // whereas the CLI tooling uses zod 4.x.
-    "zod": ["3.24.1"]
+    "@microsoft/spfx-web-build-rig": ["1.24.0-beta.2"]
   }
 }
