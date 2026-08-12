@@ -17,8 +17,7 @@
     "@microsoft/sp-copilot-component": "<%= spfxVersion %>",
     "@microsoft/sp-lodash-subset": "<%= spfxVersion %>",
     "tslib": "2.3.1",
-    "zod": "3.24.1",
-    "zod-to-json-schema": "3.24.1"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@microsoft/eslint-config-spfx": "<%= spfxVersion %>",

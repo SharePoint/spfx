@@ -20,7 +20,7 @@
     "@rushstack/node-core-library": "~5.23.1",
     "@rushstack/ts-command-line": "~5.3.10",
     "@rushstack/terminal": "~0.24.0",
-    "zod": "^4.1.5"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",

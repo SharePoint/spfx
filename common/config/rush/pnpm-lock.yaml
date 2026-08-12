@@ -45,8 +45,8 @@ importers:
         specifier: ^11.0.5
         version: 11.1.0
       zod:
-        specifier: ^4.1.5
-        version: 4.3.6
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@microsoft/spfx-cli-build-rig':
         specifier: workspace:*
@@ -88,8 +88,8 @@ importers:
         specifier: ~5.3.10
         version: 5.3.10(@types/node@22.19.13)
       zod:
-        specifier: ^4.1.5
-        version: 4.3.6
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@microsoft/spfx-cli-build-rig':
         specifier: workspace:*
@@ -355,11 +355,8 @@ importers:
         specifier: 2.3.1
         version: 2.3.1
       zod:
-        specifier: 3.24.1
-        version: 3.24.1
-      zod-to-json-schema:
-        specifier: 3.24.1
-        version: 3.24.1(zod@3.24.1)
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@microsoft/eslint-config-spfx':
         specifier: 1.24.0-beta.2
@@ -372,7 +369,7 @@ importers:
         version: 1.24.0-beta.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.24.0-beta.2
-        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.3.0)(zod@3.24.1)
+        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.3.0)(zod@4.4.3)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -407,11 +404,8 @@ importers:
         specifier: 2.3.1
         version: 2.3.1
       zod:
-        specifier: 3.24.1
-        version: 3.24.1
-      zod-to-json-schema:
-        specifier: 3.24.1
-        version: 3.24.1(zod@3.24.1)
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@microsoft/eslint-config-spfx':
         specifier: 1.24.0-beta.2
@@ -424,7 +418,7 @@ importers:
         version: 1.24.0-beta.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.24.0-beta.2
-        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.3.0)(zod@3.24.1)
+        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.3.0)(zod@4.4.3)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -471,11 +465,8 @@ importers:
         specifier: 2.3.1
         version: 2.3.1
       zod:
-        specifier: 3.24.1
-        version: 3.24.1
-      zod-to-json-schema:
-        specifier: 3.24.1
-        version: 3.24.1(zod@3.24.1)
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@microsoft/eslint-config-spfx':
         specifier: 1.24.0-beta.2
@@ -488,7 +479,7 @@ importers:
         version: 1.24.0-beta.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.24.0-beta.2
-        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.3.0)(zod@3.24.1)
+        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.3.0)(zod@4.4.3)
       '@rushstack/eslint-config':
         specifier: 4.6.4
         version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
@@ -7457,21 +7448,13 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zod-to-json-schema@3.24.1:
-    resolution: {integrity: sha512-3h08nf3Vw3Wl3PK+q3ow/lIil81IT2Oa7YpQyUUDsEWbXveMesdfK1xBd2RhCkynwZndAxixji/7SYJJowr62w==}
-    peerDependencies:
-      zod: ^3.24.1
-
   zod-to-json-schema@3.25.1:
     resolution: {integrity: sha512-pM/SU9d3YAggzi6MtR4h7ruuQlqKtad8e9S0fmxcMi+ueAK5Korys/aWcV9LIIHTVbj01NdzxcnXSN+O74ZIVA==}
     peerDependencies:
       zod: ^3.25 || ^4
 
-  zod@3.24.1:
-    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
-
-  zod@4.3.6:
-    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
 snapshots:
 
@@ -10598,13 +10581,13 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@microsoft/spfx-heft-plugins@1.24.0-beta.2(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(zod@3.24.1)':
+  '@microsoft/spfx-heft-plugins@1.24.0-beta.2(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(zod@4.4.3)':
     dependencies:
       '@azure/storage-blob': 12.26.0
       '@microsoft/app-manifest': 1.1.0
       '@microsoft/sp-css-loader': 1.24.0-beta.2(@types/node@22.19.13)(webpack@5.105.4)
       '@microsoft/sp-module-interfaces': 1.24.0-beta.2(@types/node@22.19.13)
-      '@modelcontextprotocol/sdk': 1.29.0(zod@3.24.1)
+      '@modelcontextprotocol/sdk': 1.29.0(zod@4.4.3)
       '@rushstack/heft': 1.2.17(@types/node@22.19.13)
       '@rushstack/heft-config-file': 0.20.10(@types/node@22.19.13)
       '@rushstack/localization-utilities': 0.15.17(@types/node@22.19.13)
@@ -10682,10 +10665,10 @@ snapshots:
       - utf-8-validate
       - webpack-cli
 
-  '@microsoft/spfx-web-build-rig@1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.3.0)(zod@3.24.1)':
+  '@microsoft/spfx-web-build-rig@1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.3.0)(zod@4.4.3)':
     dependencies:
       '@microsoft/api-extractor': 7.58.7(@types/node@22.19.13)
-      '@microsoft/spfx-heft-plugins': 1.24.0-beta.2(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(zod@3.24.1)
+      '@microsoft/spfx-heft-plugins': 1.24.0-beta.2(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(zod@4.4.3)
       '@rushstack/heft': 1.2.17(@types/node@22.19.13)
       '@rushstack/heft-dev-cert-plugin': 1.1.18(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft-jest-plugin': 2.0.6(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/jest@30.0.0)(@types/node@22.19.13)(jest-environment-jsdom@30.3.0)(jest-environment-node@30.3.0)
@@ -10746,7 +10729,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.16.0': {}
 
-  '@modelcontextprotocol/sdk@1.29.0(zod@3.24.1)':
+  '@modelcontextprotocol/sdk@1.29.0(zod@4.4.3)':
     dependencies:
       '@hono/node-server': 1.19.17(hono@4.12.32)
       ajv: 8.18.0
@@ -10763,8 +10746,8 @@ snapshots:
       json-schema-typed: 8.0.2
       pkce-challenge: 5.0.1
       raw-body: 3.0.2
-      zod: 3.24.1
-      zod-to-json-schema: 3.25.1(zod@3.24.1)
+      zod: 4.4.3
+      zod-to-json-schema: 3.25.1(zod@4.4.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -16669,14 +16652,8 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod-to-json-schema@3.24.1(zod@3.24.1):
+  zod-to-json-schema@3.25.1(zod@4.4.3):
     dependencies:
-      zod: 3.24.1
+      zod: 4.4.3
 
-  zod-to-json-schema@3.25.1(zod@3.24.1):
-    dependencies:
-      zod: 3.24.1
-
-  zod@3.24.1: {}
-
-  zod@4.3.6: {}
+  zod@4.4.3: {}
