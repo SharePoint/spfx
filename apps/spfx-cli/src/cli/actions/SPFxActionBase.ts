@@ -166,4 +166,37 @@ export abstract class SPFxActionBase extends CommandLineAction {
       }
     }
   }
+
+  /**
+   * Returns usage examples for this action. Each string is a self-contained example
+   * with the command invocation and a brief description of what it does.
+   * Override in subclasses to provide examples. The default returns an empty array.
+   */
+  protected getExamples(): string[] {
+    return [];
+  }
+
+  /**
+   * Overrides the base help text rendering to append a formatted EXAMPLES section
+   * when examples are defined.
+   */
+  public override renderHelpText(): string {
+    const base: string = super.renderHelpText();
+    const examples: string[] = this.getExamples();
+    if (examples.length === 0) {
+      return base;
+    }
+
+    // Append examples after the last line of base help
+    // Normalize Windows CRLF to LF before splitting so every line is clean
+    const lines: string[] = base.replace(/\r\n/g, '\n').split('\n');
+    lines.push('');
+    lines.push('EXAMPLES');
+    for (const example of examples) {
+      lines.push('');
+      lines.push(`  ${example}`);
+    }
+    lines.push('');
+    return lines.join('\n');
+  }
 }
