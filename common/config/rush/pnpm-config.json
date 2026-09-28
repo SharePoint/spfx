@@ -203,7 +203,9 @@
   "globalOverrides": {
     // "example1": "^1.0.0",
     // "example2": "npm:@company/example2@^1.0.0"
-    "baseline-browser-mapping": "^2.9.19"
+    "baseline-browser-mapping": "^2.9.19",
+    // Jest 30.4 fixes Node 26 localStorage warnings that cause Rush test phases to fail.
+    "jest-environment-node": "^30.4.0"
   },
 
   /**
