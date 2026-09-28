@@ -18,6 +18,9 @@ jobs:
           - os: ubuntu-latest
             nodeVersion: 24.14.x
             displayName: Ubuntu
+          - os: ubuntu-latest
+            nodeVersion: 26.x
+            displayName: Ubuntu (Node 26)
           - os: windows-latest
             nodeVersion: 24.14.x
             displayName: Windows
