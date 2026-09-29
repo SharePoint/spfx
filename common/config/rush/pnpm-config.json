@@ -277,7 +277,11 @@
    * PNPM documentation: https://pnpm.io/package_json#pnpmneverbuiltdependencies
    */
   "globalNeverBuiltDependencies": [
-    // "fsevents"
+    // Skip postinstall scripts that download native bindings from the public
+    // registry; these fail in the internal CI feed and the packages fall back
+    // to their bundled WASM build. See jest-resolve -> unrs-resolver.
+    "oxc-resolver",
+    "unrs-resolver"
   ],
 
   /**
