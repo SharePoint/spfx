@@ -6,7 +6,7 @@ This document contains important information for Claude (AI assistant) when work
 
 ### Node.js Version Management
 
-This repository requires **Node.js 22.14.0 or later** (but < 23.0.0) as specified in `rush.json`.
+This repository requires **Node.js `>=22.14.0 <23.0.0`, `>=24.12.0 <25.0.0`, or `>=26.0.0 <27.0.0`** as specified in `rush.json`.
 
 **IMPORTANT**: This system uses **nvs** (Node Version Switcher) to manage Node.js versions.
 

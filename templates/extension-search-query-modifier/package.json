@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": ">=22.14.0 < 23.0.0"
+    "node": ">=22.14.0 <23.0.0 || >=24.12.0 <25.0.0 || >=26.0.0 <27.0.0"
   },
   "scripts": {
     "build": "heft test --clean --production && heft package-solution --production",
