@@ -203,7 +203,9 @@
   "globalOverrides": {
     // "example1": "^1.0.0",
     // "example2": "npm:@company/example2@^1.0.0"
-    "baseline-browser-mapping": "^2.9.19"
+    "baseline-browser-mapping": "^2.9.19",
+    // Jest 30.4 fixes Node 26 localStorage warnings that cause Rush test phases to fail.
+    "jest-environment-node": "^30.4.0"
   },
 
   /**
@@ -275,7 +277,11 @@
    * PNPM documentation: https://pnpm.io/package_json#pnpmneverbuiltdependencies
    */
   "globalNeverBuiltDependencies": [
-    // "fsevents"
+    // Skip postinstall scripts that download native bindings from the public
+    // registry; these fail in the internal CI feed and the packages fall back
+    // to their bundled WASM build. See jest-resolve -> unrs-resolver.
+    "oxc-resolver",
+    "unrs-resolver"
   ],
 
   /**
