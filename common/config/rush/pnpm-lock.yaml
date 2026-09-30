@@ -10,7 +10,7 @@ overrides:
 
 packageExtensionsChecksum: sha256-6R0LZgepyPJVw81HMQ/3O4ZbifJ1cb0gItdR12MAr8w=
 
-pnpmfileChecksum: sha256-E1T7OJ3DLTjpDqf4RdJzK9VDtAxgm4gDEQCLYdHD8nI=
+pnpmfileChecksum: sha256-FceiOBivXBfnQ6+mNFF4or5E/6NvJXB3oz3cjl5O7OM=
 
 importers:
 
@@ -20,13 +20,13 @@ importers:
     dependencies:
       '@microsoft/spfx-heft-plugins':
         specifier: 1.23.2
-        version: 1.23.2(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)
+        version: 1.23.2(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/node-core-library':
-        specifier: ~5.23.1
-        version: 5.23.1(@types/node@22.19.13)
+        specifier: ~5.25.0
+        version: 5.25.0(@types/node@22.19.13)
       '@rushstack/terminal':
-        specifier: ~0.24.0
-        version: 0.24.0(@types/node@22.19.13)
+        specifier: ~0.24.6
+        version: 0.24.6(@types/node@22.19.13)
       adm-zip:
         specifier: ^0.5.16
         version: 0.5.16
@@ -53,8 +53,8 @@ importers:
         specifier: workspace:*
         version: link:../../tools/spfx-cli-build-rig
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/adm-zip':
         specifier: ^0.5.5
         version: 0.5.7
@@ -80,14 +80,14 @@ importers:
         specifier: workspace:*
         version: link:../../api/spfx-template-api
       '@rushstack/node-core-library':
-        specifier: ~5.23.1
-        version: 5.23.1(@types/node@22.19.13)
+        specifier: ~5.25.0
+        version: 5.25.0(@types/node@22.19.13)
       '@rushstack/terminal':
-        specifier: ~0.24.0
-        version: 0.24.0(@types/node@22.19.13)
+        specifier: ~0.24.6
+        version: 0.24.6(@types/node@22.19.13)
       '@rushstack/ts-command-line':
-        specifier: ~5.3.10
-        version: 5.3.10(@types/node@22.19.13)
+        specifier: ~5.3.16
+        version: 5.3.16(@types/node@22.19.13)
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -96,8 +96,8 @@ importers:
         specifier: workspace:*
         version: link:../../tools/spfx-cli-build-rig
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       eslint:
         specifier: 9.37.0
         version: 9.37.0
@@ -128,13 +128,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -177,13 +177,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -226,13 +226,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -275,13 +275,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -324,13 +324,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -370,13 +370,13 @@ importers:
         version: 1.24.0-beta.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.24.0-beta.2
-        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(zod@4.4.3)
+        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -419,13 +419,13 @@ importers:
         version: 1.24.0-beta.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.24.0-beta.2
-        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(zod@4.4.3)
+        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -480,13 +480,13 @@ importers:
         version: 1.24.0-beta.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.24.0-beta.2
-        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(zod@4.4.3)
+        version: 1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -544,13 +544,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -593,13 +593,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -642,13 +642,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -700,13 +700,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -767,13 +767,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -831,13 +831,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -895,13 +895,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -944,13 +944,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -984,13 +984,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -1042,13 +1042,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -1100,13 +1100,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -1167,13 +1167,13 @@ importers:
         version: 1.23.2(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
         specifier: 1.23.2
-        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)
+        version: 1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -1211,14 +1211,14 @@ importers:
         specifier: workspace:*
         version: link:../../api/spfx-template-api
       '@rushstack/node-core-library':
-        specifier: ~5.23.1
-        version: 5.23.1(@types/node@22.19.13)
+        specifier: ~5.25.0
+        version: 5.25.0(@types/node@22.19.13)
       '@rushstack/terminal':
-        specifier: ~0.24.0
-        version: 0.24.0(@types/node@22.19.13)
+        specifier: ~0.24.6
+        version: 0.24.6(@types/node@22.19.13)
       '@rushstack/ts-command-line':
-        specifier: ~5.3.10
-        version: 5.3.10(@types/node@22.19.13)
+        specifier: ~5.3.16
+        version: 5.3.16(@types/node@22.19.13)
       ignore:
         specifier: ^5.3.0
         version: 5.3.2
@@ -1227,8 +1227,8 @@ importers:
         specifier: workspace:*
         version: link:../../tools/spfx-cli-build-rig
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       eslint:
         specifier: 9.37.0
         version: 9.37.0
@@ -1245,14 +1245,14 @@ importers:
         specifier: ^16.0.0
         version: 16.0.0
       '@rushstack/node-core-library':
-        specifier: ~5.23.1
-        version: 5.23.1(@types/node@22.19.13)
+        specifier: ~5.25.0
+        version: 5.25.0(@types/node@22.19.13)
       '@rushstack/terminal':
-        specifier: ~0.24.0
-        version: 0.24.0(@types/node@22.19.13)
+        specifier: ~0.24.6
+        version: 0.24.6(@types/node@22.19.13)
       '@rushstack/ts-command-line':
-        specifier: ~5.3.10
-        version: 5.3.10(@types/node@22.19.13)
+        specifier: ~5.3.16
+        version: 5.3.16(@types/node@22.19.13)
       azure-devops-node-api:
         specifier: ^14.1.0
         version: 14.1.0
@@ -1261,17 +1261,20 @@ importers:
         specifier: workspace:*
         version: link:../spfx-cli-build-rig
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       '@rushstack/heft-webpack5-plugin':
-        specifier: ^1.3.20
-        version: 1.3.20(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)
+        specifier: ^1.3.30
+        version: 1.3.30(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)(tslib@2.3.1)(webpack@5.105.4)
       '@rushstack/webpack-preserve-dynamic-require-plugin':
-        specifier: ^0.12.20
-        version: 0.12.20
+        specifier: ^0.12.30
+        version: 0.12.30
       eslint:
         specifier: 9.37.0
         version: 9.37.0
+      tslib:
+        specifier: 2.3.1
+        version: 2.3.1
       webpack:
         specifier: ^5.99.0
         version: 5.105.4
@@ -1279,14 +1282,14 @@ importers:
   ../../tools/spfx-cli-build-rig:
     dependencies:
       '@microsoft/api-extractor':
-        specifier: ^7.58.9
-        version: 7.58.9(@types/node@22.19.13)
+        specifier: ^7.59.3
+        version: 7.59.3(@types/node@22.19.13)
       '@rushstack/eslint-config':
-        specifier: 4.6.4
-        version: 4.6.4(eslint@9.37.0)(typescript@5.8.3)
+        specifier: 4.8.0
+        version: 4.8.0(eslint@9.37.0)(typescript@5.8.3)
       '@rushstack/heft-node-rig':
-        specifier: ^2.11.42
-        version: 2.11.42(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)(jest-environment-jsdom@30.4.1)
+        specifier: ^2.11.52
+        version: 2.11.52(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)(jest-environment-jsdom@30.4.1)
       '@types/jest':
         specifier: ~30.0.0
         version: 30.0.0
@@ -1316,8 +1319,8 @@ importers:
         version: 5.8.3
     devDependencies:
       '@rushstack/heft':
-        specifier: ^1.2.19
-        version: 1.2.19(@types/node@22.19.13)
+        specifier: ^1.3.2
+        version: 1.3.2(@types/node@22.19.13)
       eslint:
         specifier: 9.37.0
         version: 9.37.0
@@ -1551,7 +1554,7 @@ packages:
     resolution: {integrity: sha512-BvAMfS6LrgZiryOAZ4pBYucu4wG/Ei/9o9DZ9akbREnMLbPJiom2i8b9C8IsKErQoiKqVhrerzt3kOT/RrzLHg==}
 
   '@colors/colors@1.5.0':
-    resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
+    resolution: {integrity: sha1-u1BFecHK6SPmV2pPXaQ9Jfl729k=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@colors/colors/-/colors-1.5.0.tgz}
     engines: {node: '>=0.1.90'}
 
   '@csstools/color-helpers@5.1.0':
@@ -1587,13 +1590,13 @@ packages:
     engines: {node: '>=10'}
 
   '@emnapi/core@1.10.0':
-    resolution: {integrity: sha512-yq6OkJ4p82CAfPl0u9mQebQHKPJkY7WrIuk205cTYnYe+k2Z8YBh11FrbRG/H6ihirqcacOgl2BIO8oyMQLeXw==}
+    resolution: {integrity: sha1-OAzMjyQS6iLR2XLff47iOjucdGc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@emnapi/core/-/core-1.10.0.tgz}
 
   '@emnapi/runtime@1.10.0':
-    resolution: {integrity: sha512-ewvYlk86xUoGI0zQRNq/mC+16R1QeDlKQy21Ki3oSYXNgLb45GV1P6A0M+/s6nyCuNDqe5VpaY84BzXGwVbwFA==}
+    resolution: {integrity: sha1-SyYMDTU0IE6YxhELjbGph9JuyHw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@emnapi/runtime/-/runtime-1.10.0.tgz}
 
   '@emnapi/wasi-threads@1.2.1':
-    resolution: {integrity: sha512-uTII7OYF+/Mes/MrcIOYp5yOtSMLBWSIoLPpcgwipoiKbli6k322tcoFsxoIIxPDqW01SQGAgko4EzZi2BNv2w==}
+    resolution: {integrity: sha1-KP7SGhuhznl8RKBwq8lNQvOuhUg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@emnapi/wasi-threads/-/wasi-threads-1.2.1.tgz}
 
   '@emotion/hash@0.9.2':
     resolution: {integrity: sha512-MyqliTZGuOm3+5ZRSaaBGP3USLw6+EGykkwZns2EPC5g8jJ4z9OrdZY9apkl3+UP9+sdz76YYkwCKP5gh8iY3g==}
@@ -2622,6 +2625,10 @@ packages:
   '@leichtgewicht/ip-codec@2.0.5':
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
 
+  '@microsoft/api-extractor-model@7.33.14':
+    resolution: {integrity: sha512-HdFzU14NGrm04SxA8CfEByX4R1S06o08qVCrGgIepb4miUgky771TwiDi2b3/ZJSQ1QKEJzq452MW09zenL19w==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/api-extractor-model/-/api-extractor-model-7.33.14.tgz}
+    engines: {node: '>=20.9.0'}
+
   '@microsoft/api-extractor-model@7.33.5':
     resolution: {integrity: sha512-Xh4dXuusndVQqVz4nEN9xOp0DyzsKxeD2FFJkSPg4arAjDSKPcy6cAc7CaeBPA7kF2wV1fuDlo2p/bNMpVr8yg==}
 
@@ -2636,8 +2643,9 @@ packages:
     resolution: {integrity: sha512-yK6OycD46gIzLRpj6ueVUWPk1ACSpkN1LBo05gY1qPTylbWyUCanXfH7+VgkI5LJrJoRSQR5F04XuCffCXLOBw==}
     hasBin: true
 
-  '@microsoft/api-extractor@7.58.9':
-    resolution: {integrity: sha512-S2UF4yza5GoxCmf7hJQNxJNZN9ltOVuOQv8Dy+Z21aol5ERoBNMdWcQHm4MJMPPItW4H/4rZD906iaf4mUojJA==}
+  '@microsoft/api-extractor@7.59.3':
+    resolution: {integrity: sha512-L1w0pe8/Af3PhjT7JDSsYZAtwFQ3l5pw7QjiNiNFpHA32nvvwYpvHWPedu8ulaJYiNWdKKq7We0FLSfZt0mbFA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/api-extractor/-/api-extractor-7.59.3.tgz}
+    engines: {node: '>=20.9.0'}
     hasBin: true
 
   '@microsoft/app-manifest@1.1.0':
@@ -2676,7 +2684,7 @@ packages:
     resolution: {integrity: sha512-W+IzEBw8a6LOOfRJM02dTT7BDZijxm+Z7lhtOAz1+y9vQm1Kdz9jlAO+qCEKsfxtUOmKilW8DIRqFw2aUgKeGg==}
 
   '@microsoft/microsoft-graph-client@1.7.2-spfx':
-    resolution: {integrity: sha512-BQN50r3tohWYOaQ0de7LJ5eCRjI6eg4RQqLhGDlgRmZIZhWzH0bhR6QBMmmxtYtwKWifhPhJSxYDW+cP67TJVw==}
+    resolution: {integrity: sha1-lHa1lMy7GC4Yg9LGPoDqn3/Duqw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/microsoft-graph-client/-/microsoft-graph-client-1.7.2-spfx.tgz}
 
   '@microsoft/microsoft-graph-client@3.0.2':
     resolution: {integrity: sha512-eYDiApYmiGsm1s1jfAa/rhB2xQCsX4pWt0vCTd1LZmiApMQfT/c0hXj2hvpuGz5GrcLdugbu05xB79rIV57Pjw==}
@@ -2892,16 +2900,22 @@ packages:
     resolution: {integrity: sha512-6uJQ/7sL7/h2tj6ZRgRPUocdY3lpHJhyjAMfvstq4GNMruwDpufKZJdU5c/ruiNJDkwlMqwrm55Erh7JsqR01A==}
 
   '@microsoft/teams-js@2.36.0':
-    resolution: {integrity: sha512-Ufib7QLYxyYS1BB9Za3Mh71+v34b9LOWGjaUlILwjEY9ux5Pez1zmgE1OMobnqUaMf53E8H4SoOnWQOVenOdHQ==}
+    resolution: {integrity: sha1-s2skaXtI8Hl9mTJSUNXcTvqyKy4=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/teams-js/-/teams-js-2.36.0.tgz}
 
   '@microsoft/teams-js@2.53.0':
-    resolution: {integrity: sha512-uGtWZM4HscQUEeYeujtFDE9/XkjSQ1fUvuh7rvOS/19KzXtd9IhS5Eri9rsKJ9Jvp6AbMlWi3l7u5hSgrUDDpQ==}
+    resolution: {integrity: sha1-6WQFDClnIk7sXvptRiiRz7gKOzs=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/teams-js/-/teams-js-2.53.0.tgz}
 
   '@microsoft/tsdoc-config@0.18.1':
     resolution: {integrity: sha512-9brPoVdfN9k9g0dcWkFeA7IH9bbcttzDJlXvkf8b2OBzd5MueR1V2wkKBL0abn0otvmkHJC6aapBOTJDDeMCZg==}
 
+  '@microsoft/tsdoc-config@0.18.3':
+    resolution: {integrity: sha512-0I0rGXo1eJziw3EEErkDS9p/0RzBcyOiV+zbSDqOZTeURmhtut+WIvpih0LM5g+ZpZ9SyFxDfkhAcl/r8e2zGw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/tsdoc-config/-/tsdoc-config-0.18.3.tgz}
+
   '@microsoft/tsdoc@0.16.0':
     resolution: {integrity: sha512-xgAyonlVVS+q7Vc7qLW0UrJU7rSFcETRWsqdXZtjzRU8dF+6CkozTK4V4y1LwOX7j8r/vHphjDeMeGI4tNGeGA==}
+
+  '@microsoft/tsdoc@0.17.1':
+    resolution: {integrity: sha512-VHyYyyoH63jFoO3shpw9Zfijk5v/9p/VrClW35z0/q6ooK7sSmxpzOkS4iZPxs3vO4XtBW4H38HRAKkAMIK7DA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/tsdoc/-/tsdoc-0.17.1.tgz}
 
   '@modelcontextprotocol/sdk@1.29.0':
     resolution: {integrity: sha512-zo37mZA9hJWpULgkRpowewez1y6ML5GsXJPY8FI0tBBCd77HEvza4jDqRKOXgHNn867PVGCyTdzqpz0izu5ZjQ==}
@@ -2914,7 +2928,7 @@ packages:
         optional: true
 
   '@napi-rs/wasm-runtime@1.1.6':
-    resolution: {integrity: sha512-ZLv/JdUfkvOy9eCnnBaGfiO+XimbjebAeO+MRQqD/B+FR1tnRN0tpKSJHRbE8sFfS6aqsXZ67TQjfwfsxULVbg==}
+    resolution: {integrity: sha1-7TOAbQ+b6Y3HbQw9T9hy/acBtdU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@napi-rs/wasm-runtime/-/wasm-runtime-1.1.6.tgz}
     peerDependencies:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
@@ -3022,7 +3036,7 @@ packages:
     engines: {node: '>=20.0.0'}
 
   '@pkgjs/parseargs@0.11.0':
-    resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
+    resolution: {integrity: sha1-p36nQvqyV3UUVDTrHSMoz1ATrDM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@pkgjs/parseargs/-/parseargs-0.11.0.tgz}
     engines: {node: '>=14'}
 
   '@pkgr/core@0.3.6':
@@ -3030,9 +3044,10 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
 
   '@rollup/rollup-linux-x64-gnu@4.53.3':
-    resolution: {integrity: sha512-3EhFi1FU6YL8HTUJZ51imGJWEX//ajQPfqWLI3BQq4TlvHy4X0MOr5q3D2Zof/ka0d5FNdPwZXm3Yyib/UEd+w==}
+    resolution: {integrity: sha1-/Q3qO7mqB+cINXnyXhwihaRsufo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.53.3.tgz}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
@@ -3046,20 +3061,34 @@ packages:
   '@rushstack/debug-certificate-manager@1.7.18':
     resolution: {integrity: sha512-Dp93F39EwLQTDKqNWACknNwymsGsU57DIwDLbFuUlt15V2hvmDcIFjfGFT9JHEoIQy9MDpNe+VEVc/suffumGg==}
 
-  '@rushstack/debug-certificate-manager@1.7.20':
-    resolution: {integrity: sha512-kNixLU15BzA3Bb0T6h3BFI+oJ5md1H+u68S5uYwUVIDudmYpOrYH9brUQ7sRdg70aR4vi47Snk8bkJCdWY6Vaw==}
+  '@rushstack/debug-certificate-manager@1.7.30':
+    resolution: {integrity: sha512-mng3zmpxn7pHZyXuPF9b3jvGZCEyouQRTvUamVdjRiIbEwDbYjezGsddxYXCofXUs1O/Q1eeE7qMHtU3+6DMZg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/debug-certificate-manager/-/debug-certificate-manager-1.7.30.tgz}
+    engines: {node: '>=20.9.0'}
 
   '@rushstack/eslint-config@4.6.4':
-    resolution: {integrity: sha512-nMd5JxzOqkICanNf2He3xebU4txXT5IiQ6ovMeJt5Ou72J+DZzor2kfVGKfQi6uBR2fyhZGYBOahwxnduH2bbA==}
+    resolution: {integrity: sha1-3SCC6zhpy4/nAhAUlUgfgZyT3bQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/eslint-config/-/eslint-config-4.6.4.tgz}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.25.1
+      typescript: '>=4.7.0'
+
+  '@rushstack/eslint-config@4.8.0':
+    resolution: {integrity: sha512-l8X/nqnadaUAFU0PShJ5KoCHSkpEoCvTpfdguVCXb25ksy7HcZwo+WRbeSdLqt/V+YRvTfSqcsfIMHTi0Vzu5g==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/eslint-config/-/eslint-config-4.8.0.tgz}
+    engines: {node: '>=20.9.0'}
     peerDependencies:
       eslint: ^8.57.0 || ^9.25.1
       typescript: '>=4.7.0'
 
   '@rushstack/eslint-patch@1.16.1':
-    resolution: {integrity: sha512-TvZbIpeKqGQQ7X0zSCvPH9riMSFQFSggnfBjFZ1mEoILW+UuXCKwOoPcgjMwiUtRqFZ8jWhPJc4um14vC6I4ag==}
+    resolution: {integrity: sha1-T5dYHhFPx58kbO43I6XE7dO2JBU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/eslint-patch/-/eslint-patch-1.16.1.tgz}
 
   '@rushstack/eslint-plugin-packlets@0.15.2':
     resolution: {integrity: sha512-mSW24B5Q1xGm/ANNlzZ+hPIqz8A1JCNeJwHOWOh7dcf43RxcRPqguhllE/7LhwIaly3IH43lUWFBwcamSvJzgw==}
+    peerDependencies:
+      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+
+  '@rushstack/eslint-plugin-packlets@0.15.3':
+    resolution: {integrity: sha1-redKXjYHPy0gMo+Y+2bJLD29KbA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/eslint-plugin-packlets/-/eslint-plugin-packlets-0.15.3.tgz}
+    engines: {node: '>=20.9.0'}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
 
@@ -3068,19 +3097,36 @@ packages:
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
 
+  '@rushstack/eslint-plugin-security@0.14.3':
+    resolution: {integrity: sha1-QqGUT73qz9QYe6TKIF3O7dkzBD0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/eslint-plugin-security/-/eslint-plugin-security-0.14.3.tgz}
+    engines: {node: '>=20.9.0'}
+    peerDependencies:
+      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+
   '@rushstack/eslint-plugin@0.23.2':
     resolution: {integrity: sha512-yMvd/jW/gUZ2IdXaOD5mr+DBU0UUjNgsZ/aDrFfzijIPvqdjtMich0gR68VBxvZjciUDQX0Zm4rfezvkxv/bRQ==}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
 
-  '@rushstack/heft-api-extractor-plugin@1.3.19':
-    resolution: {integrity: sha512-CNwJ94FH4Ne/tvZSAjqKGl1kv49zdooBLX1vRiMx3ZX9+455lFDzdJhplqMoxpcdI49pp33ZRe9RzjDsKctTfw==}
+  '@rushstack/eslint-plugin@0.23.5':
+    resolution: {integrity: sha1-rcORWdsbRN72VyQIAnVGwBEFplc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/eslint-plugin/-/eslint-plugin-0.23.5.tgz}
+    engines: {node: '>=20.9.0'}
     peerDependencies:
-      '@rushstack/heft': 1.2.19
+      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+
+  '@rushstack/heft-api-extractor-plugin@1.3.29':
+    resolution: {integrity: sha512-k3IvaLs9Ujo1bL1R5kZI0roioMid+2u5HSwxoq2vIYBAnCYAitlnzFbIQzMoCZtKvg7sdD9lCuwjZpw229yovQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/heft-api-extractor-plugin/-/heft-api-extractor-plugin-1.3.29.tgz}
+    engines: {node: '>=20.9.0'}
+    peerDependencies:
+      '@rushstack/heft': 1.3.2
 
   '@rushstack/heft-config-file@0.20.10':
     resolution: {integrity: sha512-6UKD7PlaaiLN8tebLMeV8ixm/8NFdmv9biNnPIpHCEEQe8J1TdDDs1HJQ5XGVmIjqljknShPPgDIsHVvVO8ZTw==}
     engines: {node: '>=10.13.0'}
+
+  '@rushstack/heft-config-file@0.20.16':
+    resolution: {integrity: sha512-9xfqlQDcdOIHq82QMdfogMUFq2ulYZlKUISXhESrR9fKS5GNGrAq3gOGgk2FXc5KCcjRjtzgVqlLYFue+mcsdg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/heft-config-file/-/heft-config-file-0.20.16.tgz}
+    engines: {node: '>=20.9.0'}
 
   '@rushstack/heft-config-file@0.20.3':
     resolution: {integrity: sha512-kVIBNxwtgV4wPQrqk4PCcaU3DKkmDmiULkELmb7RmhYKAYqR6XyA9dnyXdu/HgmF3zPn8EnuBT8/RhlKmbF8Zg==}
@@ -3095,6 +3141,22 @@ packages:
     resolution: {integrity: sha512-6XEOXd+q8ErrDp1efkbgdSNCLpIAWdxm+LwwiwfRm1Pz4OL8JX4W+k6zT52wolPyvuhT7nZx+EmMD+lbaHxB7Q==}
     peerDependencies:
       '@rushstack/heft': ^1.2.17
+
+  '@rushstack/heft-jest-plugin@2.0.19':
+    resolution: {integrity: sha512-4uR3JHXMx+Xg7iQv6rU+/kSiiljbbaH8AprKxF49U4GLCfPt3tryp8OsIPAfgay3GNSJuGBuWD3x6e/1zRqlsA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/heft-jest-plugin/-/heft-jest-plugin-2.0.19.tgz}
+    engines: {node: '>=20.9.0'}
+    peerDependencies:
+      '@rushstack/heft': ^1.3.2
+      '@types/jest': ^30.0.0
+      jest-environment-jsdom: ^30.3.0
+      jest-environment-node: ^30.4.0
+    peerDependenciesMeta:
+      '@types/jest':
+        optional: true
+      jest-environment-jsdom:
+        optional: true
+      jest-environment-node:
+        optional: true
 
   '@rushstack/heft-jest-plugin@2.0.6':
     resolution: {integrity: sha512-EVb1dDeTYDtU8yR2J482wW93ElgXbY/gFZfmEcAZMzizCrKWAsRE1tzBYlST1wmEge2QUzTvmXJ2+C2BE+oAGQ==}
@@ -3111,40 +3173,26 @@ packages:
       jest-environment-node:
         optional: true
 
-  '@rushstack/heft-jest-plugin@2.0.9':
-    resolution: {integrity: sha512-/uoCnPslFmuhf7t89+0698w2znQAHUfpG5pTFLiXAp7MnAJ21Msva0qVndsz8lnRe38CaNec6gQbulg6uvsOCw==}
-    peerDependencies:
-      '@rushstack/heft': ^1.2.19
-      '@types/jest': ^30.0.0
-      jest-environment-jsdom: ^30.3.0
-      jest-environment-node: ^30.4.0
-    peerDependenciesMeta:
-      '@types/jest':
-        optional: true
-      jest-environment-jsdom:
-        optional: true
-      jest-environment-node:
-        optional: true
-
   '@rushstack/heft-lint-plugin@1.2.17':
     resolution: {integrity: sha512-1b/UbXhT+PajTjUCM2gaHlc6M9H8BIfdpCKHz5KnXtgBTYBw3pHGVy2wDS9DmHDbYYM5eJ6Y5gaVE2oCFWQftw==}
     peerDependencies:
       '@rushstack/heft': 1.2.17
-
-  '@rushstack/heft-lint-plugin@1.2.19':
-    resolution: {integrity: sha512-aW/8d33ZI0uGQbNdbNJRo9/d5NinajpoqqnsNpkWtT3Wp8wC6WZIAvn73fEaN+0ocXp20kdjjKX3F7YBH0/hMQ==}
-    peerDependencies:
-      '@rushstack/heft': 1.2.19
 
   '@rushstack/heft-lint-plugin@1.2.7':
     resolution: {integrity: sha512-4Gb6SMB0CXRdiGr8H1ARfd3fB/zTDBh2n34DYzNH+k+PaQuDjKLDmw4TdM/7j3X+d/0okujmrE1VlI59XgC3yg==}
     peerDependencies:
       '@rushstack/heft': 1.2.7
 
-  '@rushstack/heft-node-rig@2.11.42':
-    resolution: {integrity: sha512-nf0kw7Loa0MurNgCPP1+pGk0gTZGQpPwg5P9gIRI362aB/b+ZVD6mbOEGdtPl1QhgWakEBXj2hrCWONsa5gESQ==}
+  '@rushstack/heft-lint-plugin@1.3.1':
+    resolution: {integrity: sha512-Cr3RTnvXe323/tYXeKUBbO5gp6zfClGzhZUD6PlIBtEfpgquqovSTwXpw0+o30unm3uDN/7y3ppW1NBD0RDppQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/heft-lint-plugin/-/heft-lint-plugin-1.3.1.tgz}
+    engines: {node: '>=20.9.0'}
     peerDependencies:
-      '@rushstack/heft': ^1.2.19
+      '@rushstack/heft': 1.3.2
+
+  '@rushstack/heft-node-rig@2.11.52':
+    resolution: {integrity: sha512-VRdjF4j89ALmTY6dvz+jXJ0ezbxxvwSPXhH3waF96ay8fzaoQGcfjnQs9Sl0ksE1xtwduDsgalkncrpnpVuzmw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/heft-node-rig/-/heft-node-rig-2.11.52.tgz}
+    peerDependencies:
+      '@rushstack/heft': ^1.3.2
 
   '@rushstack/heft-sass-plugin@1.4.1':
     resolution: {integrity: sha512-hs57aG7648CJ2rjnmALvzzlKo8UiS3eZFtOgBfaHga3D44rvIJUXQd8O0hSHQMxlgTBdQDClwEFPlVSy0+t5Fg==}
@@ -3166,15 +3214,16 @@ packages:
     peerDependencies:
       '@rushstack/heft': 1.2.17
 
-  '@rushstack/heft-typescript-plugin@1.3.14':
-    resolution: {integrity: sha512-iVK9sTLlItYEbzbsmzq67O3Pn2Gre4SaQlMxAKDNaMcsArvs51UwtF5sp+bG7XEh72LtW+GNV7fJGCUUUVa1tA==}
-    peerDependencies:
-      '@rushstack/heft': 1.2.19
-
   '@rushstack/heft-typescript-plugin@1.3.2':
     resolution: {integrity: sha512-oP8SLVW6zrlyaPUg7q01c0CLE/MuIA72E7BZDZX4OugbIBLhHTDOUAyXMnp0xFYX0bebD/vJbRLTWvRMpvuWyw==}
     peerDependencies:
       '@rushstack/heft': 1.2.7
+
+  '@rushstack/heft-typescript-plugin@1.3.24':
+    resolution: {integrity: sha512-cLZfx5xbxCypw5j2F/RKqzMnQPi200LxRv8JawCfkULZDze3THcq+K4KiR0kc5JmSwirgUxGHwhcOTdTt1x3Mw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/heft-typescript-plugin/-/heft-typescript-plugin-1.3.24.tgz}
+    engines: {node: '>=20.9.0'}
+    peerDependencies:
+      '@rushstack/heft': 1.3.2
 
   '@rushstack/heft-webpack5-plugin@1.3.10':
     resolution: {integrity: sha512-L7DdokBkf/5fq5LZrb/CAOIzT48YdUCb5CAsK34HzcDr4bUzzzZ9vqvQdtwjohD6W/CcrfCqvzTa44rvIXCGRg==}
@@ -3188,20 +3237,21 @@ packages:
       '@rushstack/heft': ^1.2.17
       webpack: ^5.82.1
 
-  '@rushstack/heft-webpack5-plugin@1.3.20':
-    resolution: {integrity: sha512-8ogMz9KQsuFCpYykx5k7dM94VOyZO1JnSiLAUyCzPQ0o/yqeSPMSe/O3/I0U64fg3MQPD/QvIVUKQZx2InmKZg==}
+  '@rushstack/heft-webpack5-plugin@1.3.30':
+    resolution: {integrity: sha512-DoP1d19R87V/UyWNSGnBfEnVBrl2+buYjuxgM+4n+72uevb3XyFCnIdZy8VF5AtljOI0VufZHHe+alUL+X/+5A==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/heft-webpack5-plugin/-/heft-webpack5-plugin-1.3.30.tgz}
+    engines: {node: '>=20.9.0'}
     peerDependencies:
-      '@rushstack/heft': ^1.2.19
+      '@rushstack/heft': ^1.3.2
       webpack: ^5.82.1
 
   '@rushstack/heft@1.2.17':
-    resolution: {integrity: sha512-ne4rl6TsZ71SrZ80b32xb2q71cscHD+bUf4nWS0zusLeaUP161B5SJE6xfUV19QYx/3hLQuAxo64qwh+B2id1A==}
+    resolution: {integrity: sha1-ExjD9hYhR+twAS5sjLHH7gDuTCA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/heft/-/heft-1.2.17.tgz}
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  '@rushstack/heft@1.2.19':
-    resolution: {integrity: sha512-2Q0VGzIbKq3Vcg00OGBrTXQ7vkRZxYT7YtjQBwo85McjyS7ATAlqDx+AHjGnkcJ59arnIj5lUKk0sbzUksj7hw==}
-    engines: {node: '>=10.13.0'}
+  '@rushstack/heft@1.3.2':
+    resolution: {integrity: sha512-CZKAGzSDVr+ZeTr211tBObLbNGE+sedVjXFSPzJekePwoDwLFeGo/E2Of8GgJBcRCl1CfS3ZCCgAZGK3SREDBQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/heft/-/heft-1.3.2.tgz}
+    engines: {node: '>=20.9.0'}
     hasBin: true
 
   '@rushstack/loader-raw-script@1.6.17':
@@ -3233,7 +3283,7 @@ packages:
         optional: true
 
   '@rushstack/node-core-library@5.20.3':
-    resolution: {integrity: sha512-95JgEPq2k7tHxhF9/OJnnyHDXfC9cLhhta0An/6MlkDsX2A6dTzDrTUG18vx4vjc280V0fi0xDH9iQczpSuWsw==}
+    resolution: {integrity: sha1-QgQ/5CI5+g35BqAzls/95WAhzh8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/node-core-library/-/node-core-library-5.20.3.tgz}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3241,7 +3291,7 @@ packages:
         optional: true
 
   '@rushstack/node-core-library@5.21.0':
-    resolution: {integrity: sha512-LFzN+1lyWROit/P8Md6yxAth7lLYKn37oCKJHirEE2TQB25NDUM7bALf0ar+JAtwFfRCH+D+DGOA7DAzIi2r+g==}
+    resolution: {integrity: sha1-QRHQliOXiMeI6Ne0QpXGN9qVsOw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/node-core-library/-/node-core-library-5.21.0.tgz}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3249,7 +3299,7 @@ packages:
         optional: true
 
   '@rushstack/node-core-library@5.22.0':
-    resolution: {integrity: sha512-S/Dm/N+8tkbasS6yM5cF6q4iDFt14mQQniiVIwk1fd0zpPwWESspO4qtPyIl8szEaN86XOYC1HRRzZrOowxjtw==}
+    resolution: {integrity: sha1-JDUZlEO2Qyna+xTc23jD05ZmMOg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/node-core-library/-/node-core-library-5.22.0.tgz}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3257,7 +3307,16 @@ packages:
         optional: true
 
   '@rushstack/node-core-library@5.23.1':
-    resolution: {integrity: sha512-wlKmIKIYCKuCASbITvOxLZXepPbwXvrv7S6ig6XNWFchSyhL/E2txmVXspHY49Wu2dzf7nI27a2k/yV5BA3EiA==}
+    resolution: {integrity: sha1-JBPxtSgRz1NxgSR0pwBqeoxMTrY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/node-core-library/-/node-core-library-5.23.1.tgz}
+    peerDependencies:
+      '@types/node': '*'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@rushstack/node-core-library@5.25.0':
+    resolution: {integrity: sha512-JWd5MVInIQqTlujjqV2gO4aJi/QZvBdGCD5jQ4tF0Swcz1Ba80fP0dvxIYTaHawUujyQaCixtzzz9LM8bM26hQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/node-core-library/-/node-core-library-5.25.0.tgz}
+    engines: {node: '>=20.9.0'}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3272,8 +3331,17 @@ packages:
       '@types/node':
         optional: true
 
+  '@rushstack/operation-graph@0.7.4':
+    resolution: {integrity: sha512-0CfS585sDZ4AU1rAbcQ8BGuUx8aywvlsPb6piu6z45qXjGh5OmpEqSfkH9VjYGckglW8IxRx6fYfU/kjgBsUGQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/operation-graph/-/operation-graph-0.7.4.tgz}
+    engines: {node: '>=20.9.0'}
+    peerDependencies:
+      '@types/node': '*'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
   '@rushstack/problem-matcher@0.2.1':
-    resolution: {integrity: sha512-gulfhBs6n+I5b7DvjKRfhMGyUejtSgOHTclF/eONr8hcgF1APEDjhxIsfdUYYMzC3rvLwGluqLjbwCFZ8nxrog==}
+    resolution: {integrity: sha1-6fbKwt1qiC1g52qNRGK30ktPF+U=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/problem-matcher/-/problem-matcher-0.2.1.tgz}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3284,7 +3352,7 @@ packages:
     resolution: {integrity: sha512-9XbFWuqMYcHUso4mnETfhGVUSaADBRj6HUAAEYk50nMPn8WRICmBuCphycQGNB3duIR6EEZX3Xj3SYc2XiP+9A==}
 
   '@rushstack/rig-package@0.7.3':
-    resolution: {integrity: sha512-aAA518n6wxxjCfnTAOjQnm7ngNE0FVHxHAw2pxKlIhxrMn0XQjGcXKF0oKWpjBgJOmsaJpVob/v+zr3zxgPWuA==}
+    resolution: {integrity: sha1-0opUQLHp9DBGcnunAJ0Y2ZMU8lE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/rig-package/-/rig-package-0.7.3.tgz}
 
   '@rushstack/set-webpack-public-path-plugin@5.3.18':
     resolution: {integrity: sha512-0fgaMNj0hzQJEwD/90kXUXJse9hzSaC+uwQ5euyrpCI7elbAcvn3Xpz3/2USrY5XOlo+0PwTjAuVFoVRCDA8xA==}
@@ -3305,7 +3373,7 @@ packages:
         optional: true
 
   '@rushstack/terminal@0.22.3':
-    resolution: {integrity: sha512-gHC9pIMrUPzAbBiI4VZMU7Q+rsCzb8hJl36lFIulIzoceKotyKL3Rd76AZ2CryCTKEg+0bnTj406HE5YY5OQvw==}
+    resolution: {integrity: sha1-lZt7DKJdaMc/dACmZwL2ajjO3gU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/terminal/-/terminal-0.22.3.tgz}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3313,7 +3381,7 @@ packages:
         optional: true
 
   '@rushstack/terminal@0.22.4':
-    resolution: {integrity: sha512-fhtLjnXCc/4WleVbVl6aoc7jcWnU6yqjS1S8WoaNREG3ycu/viZ9R/9QM7Y/b4CDvcXoiDyMNIay7JMwBptM3g==}
+    resolution: {integrity: sha1-wpexsvqiojJR9C9eGOtVgBG77Fk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/terminal/-/terminal-0.22.4.tgz}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3321,7 +3389,7 @@ packages:
         optional: true
 
   '@rushstack/terminal@0.22.5':
-    resolution: {integrity: sha512-umej8J6A+WRbfQV1G/uNfnz4bMa8CzFU9IJzQb/ZcH4j7Ybg3BQ8UBKOCF3o5U3/2yah1TDU/zE71ugg2JJv+Q==}
+    resolution: {integrity: sha1-mMvAJxtYPDi1nd7qHWi7zjEZUdE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/terminal/-/terminal-0.22.5.tgz}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3329,7 +3397,16 @@ packages:
         optional: true
 
   '@rushstack/terminal@0.24.0':
-    resolution: {integrity: sha512-8ZQS4MMaGsv27EXCBiH7WMPkRZrffeDoIevs6z9TM5dzqiY6+Hn4evfK/G+gvgBTjfvfkHIZPQQmalmI2sM4TQ==}
+    resolution: {integrity: sha1-ert2PqWP3uzpOjBUssWQJdVvcgM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/terminal/-/terminal-0.24.0.tgz}
+    peerDependencies:
+      '@types/node': '*'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@rushstack/terminal@0.24.6':
+    resolution: {integrity: sha512-MuSbKmMnP8CVEEBZ2kJpE22farLfxrScOrJ3pN3PoCOSaxemEhD/0H1lXZYj2PmKJxQMHb5pib5rVfIlOX/DlA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/terminal/-/terminal-0.24.6.tgz}
+    engines: {node: '>=20.9.0'}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -3339,14 +3416,15 @@ packages:
   '@rushstack/tree-pattern@0.4.1':
     resolution: {integrity: sha512-eFuLBUWUfWQ42u5i25qO1VpTOg6nW2PXaLVwpmjm5tHpPREht0k0L2jsYht8iVvQ732odEeVnkXVcf2nIwbGxA==}
 
-  '@rushstack/ts-command-line@5.3.10':
-    resolution: {integrity: sha512-fwI076HYknC0IrMXdY6UmjDv+PH7NHhNJX3/pY2UblSE5XrXgndXZPiOe/6ZtuFpn6DvVDVNhtkIzQ+Qu/MhVQ==}
+  '@rushstack/ts-command-line@5.3.16':
+    resolution: {integrity: sha512-k1L7MQQEuQ1v0rsQ8pRzoZ3NRsrvSifBguWlLnl2a5iWGTTW9E0/G/B39291eAf3zF45wheybuJ2onwB/PPsfA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/ts-command-line/-/ts-command-line-5.3.16.tgz}
+    engines: {node: '>=20.9.0'}
 
   '@rushstack/ts-command-line@5.3.4':
-    resolution: {integrity: sha512-MLkVKVEN6/2clKTrjN2B2KqKCuPxRwnNsWY7a+FCAq2EMdkj10cM8YgiBSMeGFfzM0mDMzargpHNnNzaBi9Whg==}
+    resolution: {integrity: sha1-H7KKuuqyWKIRJ+94ib44Q0bkB30=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/ts-command-line/-/ts-command-line-5.3.4.tgz}
 
   '@rushstack/ts-command-line@5.3.9':
-    resolution: {integrity: sha512-GIHqU+sRGQ3LGWAZu1O+9Yh++qwtyNIIGuNbcWHJjBTm2qRez0cwINUHZ+pQLR8UuzZDcMajrDaNbUYoaL/XtQ==}
+    resolution: {integrity: sha1-eB3fzpzmUrbH4N5Trwb/x2cb1QY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/ts-command-line/-/ts-command-line-5.3.9.tgz}
 
   '@rushstack/typings-generator@0.16.17':
     resolution: {integrity: sha512-MUjd+U3KcojLaI5OAscbWULmmTR9IiQJcdCrAIIwlKn/+5rgEEbKkXXSLfRbp9CoKbdNLkvRpjxSoryoSc3huQ==}
@@ -3386,9 +3464,9 @@ packages:
       webpack:
         optional: true
 
-  '@rushstack/webpack-preserve-dynamic-require-plugin@0.12.20':
-    resolution: {integrity: sha512-qRlB492Bwi1bqnu5oHCTjYi1H2BMb5CxEL70Tw4YGKxVTilEwhccGwptIvgqI2yEvparqeAZJKQLZJC7QM1qVg==}
-    engines: {node: '>=10.17.1'}
+  '@rushstack/webpack-preserve-dynamic-require-plugin@0.12.30':
+    resolution: {integrity: sha512-qwOIPA8d8ge+xFbWm8rYEhBmC5GFEbePs42WaoNeIwnjCe2AHCPVYM8Fgg/XtXa1ZIxzoec6VNcCNghTb8Vf+w==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@rushstack/webpack-preserve-dynamic-require-plugin/-/webpack-preserve-dynamic-require-plugin-0.12.30.tgz}
+    engines: {node: '>=20.9.0'}
 
   '@rushstack/webpack5-localization-plugin@0.16.17':
     resolution: {integrity: sha512-cGEcprJJ0AeXZGFujuE2SAzYQ0KItXbkwZlaQEc5D14lkT0n+sP5wkIpADB0AQX9ZI7GnDs3C2l2nm/3PUbxoA==}
@@ -3467,13 +3545,13 @@ packages:
     resolution: {integrity: sha512-QamiFeIK3txNjgUTNppE6MiG3p7TdninpZu0E0PbqVh1a9FNLT2FRhisaa4NcaX52XVhA5l7Pk58Ft7Sqi/2sA==}
 
   '@tybys/wasm-util@0.10.3':
-    resolution: {integrity: sha512-F3fo1MYrRJYL3zER0OUOmkutjr1Vp23m7OsSgp7nq4SP6OqX6C/56XFIPAl5bt3zaBRjmW7SGz3u/6LwFpYcOg==}
+    resolution: {integrity: sha1-AVy6np3UfOFNA9KoxdVHv7FpZl0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@tybys/wasm-util/-/wasm-util-0.10.3.tgz}
 
   '@types/adm-zip@0.5.7':
     resolution: {integrity: sha512-DNEs/QvmyRLurdQPChqq0Md4zGvPwHerAJYWk9l2jCbD1VPpnzRJorOdiq4zsw09NFbYnhfsoEhWtxIzXpn2yw==}
 
   '@types/argparse@1.0.38':
-    resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
+    resolution: {integrity: sha1-qB/YYG1IH4c6OADG665PHXaKVqk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@types/argparse/-/argparse-1.0.38.tgz}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -3742,112 +3820,122 @@ packages:
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
 
   '@unrs/resolver-binding-android-arm-eabi@1.12.2':
-    resolution: {integrity: sha512-g5T90pqg1bo/7mytQx6F4iBNC0Wsh9cu+z9veDbFjc7HjpesJFWD7QMS0NGStXM075+7dJPPVvBbpZlnrdpi/w==}
+    resolution: {integrity: sha1-mKn+5iwB8gl0ekq1hV8c7Tim0Do=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-android-arm-eabi/-/resolver-binding-android-arm-eabi-1.12.2.tgz}
     cpu: [arm]
     os: [android]
 
   '@unrs/resolver-binding-android-arm64@1.12.2':
-    resolution: {integrity: sha512-YGCRZv/9GLhwmz6mYDeTsm/92BAyR28l6c2ReweVW5pWgfsitWLY8upvfRlGdoyD8HjeTHSYJWyZGD4KJA/nFQ==}
+    resolution: {integrity: sha1-RrfooTk/kHRiMk8VduiINSms8GY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-android-arm64/-/resolver-binding-android-arm64-1.12.2.tgz}
     cpu: [arm64]
     os: [android]
 
   '@unrs/resolver-binding-darwin-arm64@1.12.2':
-    resolution: {integrity: sha512-u9DiNT1auQMO20A9SyTuG3wUgQWB9Z7KjAg0uFuCDR1FsAY8A0CG2S6JpHS1xwm/w1G08bjXZDcyOCjv1WAm2w==}
+    resolution: {integrity: sha1-DqB7AOJYOrAEuFPUwC7F8HRdSQw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-darwin-arm64/-/resolver-binding-darwin-arm64-1.12.2.tgz}
     cpu: [arm64]
     os: [darwin]
 
   '@unrs/resolver-binding-darwin-x64@1.12.2':
-    resolution: {integrity: sha512-f7rPLi/T1HVKZu/u6t87lroib16n8vrSzcyxI7lg4BGO9UF26KhQL44sd9eOUgrTYhvRXtWOIZT5PejdPyJfUA==}
+    resolution: {integrity: sha1-oqaQHtWESbkbRDjlgvaJDLqVYEk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-darwin-x64/-/resolver-binding-darwin-x64-1.12.2.tgz}
     cpu: [x64]
     os: [darwin]
 
   '@unrs/resolver-binding-freebsd-x64@1.12.2':
-    resolution: {integrity: sha512-BpcOjWCJub6nRZUS2zA20pmLvjtqAtGejETaIyRLiZiQf++cbrjltLA5NN/xaXfqeOBOSlMFbemIl5/S5tljmg==}
+    resolution: {integrity: sha1-6+b+f2cGtzeOpKSKAkYC6cL0j4k=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-freebsd-x64/-/resolver-binding-freebsd-x64-1.12.2.tgz}
     cpu: [x64]
     os: [freebsd]
 
   '@unrs/resolver-binding-linux-arm-gnueabihf@1.12.2':
-    resolution: {integrity: sha512-vZTDvdSISZjJx66OzJqtsOhzifbqRjbmI1Mnu49fQDwog5GtDI4QidRiEAYbZCRj9C8YZEW+3ZjqsyS9GR4k2A==}
+    resolution: {integrity: sha1-5gQP7aokASRBnTWyW2nF+hXdtJk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-arm-gnueabihf/-/resolver-binding-linux-arm-gnueabihf-1.12.2.tgz}
     cpu: [arm]
     os: [linux]
 
   '@unrs/resolver-binding-linux-arm-musleabihf@1.12.2':
-    resolution: {integrity: sha512-BiPI+IrIlwcW4nLLMM21+B1dFPzd55yAVgVGrdgDjNef+ch03GdxrcyaIz8X9SsQirh/kCQ7mviyWlMxdh2D7g==}
+    resolution: {integrity: sha1-0heo+1n2WcExU5MmwUDnti4+PGo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-arm-musleabihf/-/resolver-binding-linux-arm-musleabihf-1.12.2.tgz}
     cpu: [arm]
     os: [linux]
 
   '@unrs/resolver-binding-linux-arm64-gnu@1.12.2':
-    resolution: {integrity: sha512-zJc0H99FEPoFfSrNpa91HYfxzfAJCr502oxNK1cfdC9hlaFI43RT+JFCann9JUgZmLzzntChHyn13Sgn9ljHNg==}
+    resolution: {integrity: sha1-7asTxGpFeDp+ATUeETglwE81LiQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-arm64-gnu/-/resolver-binding-linux-arm64-gnu-1.12.2.tgz}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@unrs/resolver-binding-linux-arm64-musl@1.12.2':
-    resolution: {integrity: sha512-KQ3Lki6l+Pz1k/eBipN41ES+YUK30beLGb9YqcB1O542cyLCNE6GaxrfcY3T6EezmGGk84wb5XyO9loTM9tkcA==}
+    resolution: {integrity: sha1-5eGV2xEw99O2qi/Wezyf4epIWaA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-arm64-musl/-/resolver-binding-linux-arm64-musl-1.12.2.tgz}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@unrs/resolver-binding-linux-loong64-gnu@1.12.2':
-    resolution: {integrity: sha512-3SJGEh1DborhG6pyxvhPzCT4bbSIVihsvgJc13P1bHG7KLdNDaF9T3gsTwFc7Jw/5Y5/iWOjkEx7Zy0NvCGX3Q==}
+    resolution: {integrity: sha1-8B0i4JG64TAW9GNmmNncu9p3XD4=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-loong64-gnu/-/resolver-binding-linux-loong64-gnu-1.12.2.tgz}
     cpu: [loong64]
     os: [linux]
+    libc: [glibc]
 
   '@unrs/resolver-binding-linux-loong64-musl@1.12.2':
-    resolution: {integrity: sha512-jiuG/Obbel7uw1PwHNFfrkiKhLAF6mnyZ6aWlOAVN9WqKm8v0OFGnciJIHu8+CMvXLQ8AD51LPzAoUfT21D5Ew==}
+    resolution: {integrity: sha1-fSPvy5it8Ha/vOzCe0ISw2qmaX0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-loong64-musl/-/resolver-binding-linux-loong64-musl-1.12.2.tgz}
     cpu: [loong64]
     os: [linux]
+    libc: [musl]
 
   '@unrs/resolver-binding-linux-ppc64-gnu@1.12.2':
-    resolution: {integrity: sha512-q7xRvVpmcfeL+LlZg8Pbbo6QaTZwDU5BaGZbwfhkEsXJn3Was8xYfE0RBH266xZt0rM6B7i8xAYIvjthuUIWHg==}
+    resolution: {integrity: sha1-HzXx6qMi8zzy2W2sJ/BiapP/4vY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-ppc64-gnu/-/resolver-binding-linux-ppc64-gnu-1.12.2.tgz}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@unrs/resolver-binding-linux-riscv64-gnu@1.12.2':
-    resolution: {integrity: sha512-0CVdx6lcnT3Q9inOH8tsMIOJ6ImndllMjqJHg8RLVdB7Vq4SfkEXl9mCSsVNuNA4MCYycRicCUxPCabVHJRr6A==}
+    resolution: {integrity: sha1-Z0+qaW9c6W8hSHOUah4tbKlnI90=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-riscv64-gnu/-/resolver-binding-linux-riscv64-gnu-1.12.2.tgz}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
 
   '@unrs/resolver-binding-linux-riscv64-musl@1.12.2':
-    resolution: {integrity: sha512-iOwlRo9vnp6R6ohHQS11n0NnfdXx/omhkocmIfaPRpQhKZ+3BDMkkdRVh53qjkFkpPddf+FETA28NwGN7l5l+w==}
+    resolution: {integrity: sha1-N4Nf3QtHLs3P/M1CiPGQGEVLE4w=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-riscv64-musl/-/resolver-binding-linux-riscv64-musl-1.12.2.tgz}
     cpu: [riscv64]
     os: [linux]
+    libc: [musl]
 
   '@unrs/resolver-binding-linux-s390x-gnu@1.12.2':
-    resolution: {integrity: sha512-HYJtLfXq94q8iZNFT1lknx258wlkkWhZeUXJRqzKBBUJ00CvZ+N33zgbCqimLjsyw5Va6uUxhVa12mI+kaveEw==}
+    resolution: {integrity: sha1-tu3xPbS7Cszc0a1IKk7qAwHekiQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-s390x-gnu/-/resolver-binding-linux-s390x-gnu-1.12.2.tgz}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@unrs/resolver-binding-linux-x64-gnu@1.12.2':
-    resolution: {integrity: sha512-mPsUhunKKDih5O96Y6enDQyHc1SqBPlY1E/SfMWDM3EdJ95Z9CArPeCVwCCqbP45ljvivdEk8Fxn+SIb1rDAJQ==}
+    resolution: {integrity: sha1-2t2tAL9lpAUgIoTaHrHbjrg7IY8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-x64-gnu/-/resolver-binding-linux-x64-gnu-1.12.2.tgz}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@unrs/resolver-binding-linux-x64-musl@1.12.2':
-    resolution: {integrity: sha512-azrt6+5ydLd8Vt210AAFis/lZevSfPw93EJRIJG+xPu4WCJ8K0kppCTpMyLPcKT7H15M4Jnt2tMp5bOvCkRC6A==}
+    resolution: {integrity: sha1-39/x4MK60lQgtBx2p0YBHDmDubs=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-linux-x64-musl/-/resolver-binding-linux-x64-musl-1.12.2.tgz}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@unrs/resolver-binding-openharmony-arm64@1.12.2':
-    resolution: {integrity: sha512-YZ9hP4O0X9PQb8eO980qmLNGH4zT3I9+SZTdt0Pr0YyuGQhYKoOZkV02VzrzyOZJ5xIJ3UFIenKkUkGg8GjgWQ==}
+    resolution: {integrity: sha1-zgfE9ee0L3v85F52KbhlkGOu/v4=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-openharmony-arm64/-/resolver-binding-openharmony-arm64-1.12.2.tgz}
     cpu: [arm64]
     os: [openharmony]
 
   '@unrs/resolver-binding-wasm32-wasi@1.12.2':
-    resolution: {integrity: sha512-tYFDIkMxSflfEc/h92ZWNsZlHSwgimbNHSO3PL2JWQHfCuC2q316jMyYU9TIWZsFK2bQwyK5VAdYgn8ygPj69A==}
+    resolution: {integrity: sha1-glFPBQbPr2Xxf+FglfktRQ5IcYM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-wasm32-wasi/-/resolver-binding-wasm32-wasi-1.12.2.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [wasm32]
 
   '@unrs/resolver-binding-win32-arm64-msvc@1.12.2':
-    resolution: {integrity: sha512-qzNyg3xL0VPQmCaUh+N5jSitce6k+uCBfMDesWRnlULOZaqUkaJ0ybdT+UqlAWJoQjuqfIU/0Ptx9bteN4D82g==}
+    resolution: {integrity: sha1-UhQn3Vmo9HQN3R3Hw7xq8aodJg0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-win32-arm64-msvc/-/resolver-binding-win32-arm64-msvc-1.12.2.tgz}
     cpu: [arm64]
     os: [win32]
 
   '@unrs/resolver-binding-win32-ia32-msvc@1.12.2':
-    resolution: {integrity: sha512-WD9sY00OfpHVGfsnHZoA8jVT+esS/Bg8z8jzxp5BnDCjjwsuKsPQrzswwpFy4J1AUJbXPRfkpcX0mXrzeXW79g==}
+    resolution: {integrity: sha1-BbYyhv8to34M4wg7g5CIQ4Xv/2I=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-win32-ia32-msvc/-/resolver-binding-win32-ia32-msvc-1.12.2.tgz}
     cpu: [ia32]
     os: [win32]
 
   '@unrs/resolver-binding-win32-x64-msvc@1.12.2':
-    resolution: {integrity: sha512-nAB74NfSNKknqQ1RrYj6uz8FcXEomu/MATJZxh/x+BArzN2U3JbOYC0APYzUIGhVY3m5hRxA8VPNdPBoG8txlA==}
+    resolution: {integrity: sha1-ctoNpI1yseh4MbnAMIkx0/RmkCc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@unrs/resolver-binding-win32-x64-msvc/-/resolver-binding-win32-x64-msvc-1.12.2.tgz}
     cpu: [x64]
     os: [win32]
 
@@ -3945,7 +4033,7 @@ packages:
     engines: {node: '>= 14'}
 
   ajv-draft-04@1.0.0:
-    resolution: {integrity: sha512-mv00Te6nmYbRp5DCwclxtt7yV/joXJPGS7nM+97GdxvuttCOfgI3K4U25zboyeX0O+myI8ERluxQe5wljMmVIw==}
+    resolution: {integrity: sha1-O2R2GyaLoLnmaPC0G6U/zgrXf8g=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/ajv-draft-04/-/ajv-draft-04-1.0.0.tgz}
     peerDependencies:
       ajv: ^8.5.0
     peerDependenciesMeta:
@@ -3968,6 +4056,9 @@ packages:
 
   ajv@8.18.0:
     resolution: {integrity: sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==}
+
+  ajv@8.20.0:
+    resolution: {integrity: sha1-MEs2Nq3Yi6fZNnYN1Q7OAG3qlfk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/ajv/-/ajv-8.20.0.tgz}
 
   ansi-escapes@4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==}
@@ -4011,7 +4102,7 @@ packages:
     engines: {node: '>=14'}
 
   argparse@1.0.10:
-    resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
+    resolution: {integrity: sha1-vNZ5HqWuCXJeF+WtmIE0zUCz2RE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/argparse/-/argparse-1.0.10.tgz}
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
@@ -4110,7 +4201,7 @@ packages:
     engines: {node: 18 || 20 || >=22}
 
   base64-js@1.5.1:
-    resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    resolution: {integrity: sha1-GxtEAWClv3rUC2UPCVljSBkDkwo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/base64-js/-/base64-js-1.5.1.tgz}
 
   baseline-browser-mapping@2.10.0:
     resolution: {integrity: sha512-lIyg0szRfYbiy67j9KN8IyeD7q7hcmqnJ1ddWmNt19ItGpNN64mnllmxUNFIOdOm6by97jlL6wfpTTJrmnjWAA==}
@@ -4646,7 +4737,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   es6-promise@4.2.8:
-    resolution: {integrity: sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==}
+    resolution: {integrity: sha1-TrIVlMlyvEBVPSduUQU5FD21Pgo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/es6-promise/-/es6-promise-4.2.8.tgz}
 
   escalade@3.2.0:
     resolution: {integrity: sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==}
@@ -4719,6 +4810,14 @@ packages:
 
   eslint-plugin-tsdoc@0.5.2:
     resolution: {integrity: sha512-BlvqjWZdBJDIPO/YU3zcPCF23CvjYT3gyu63yo6b609NNV3D1b6zceAREy2xnweuBoDpZcLNuPyAUq9cvx6bbQ==}
+
+  eslint-plugin-tsdoc@0.5.4:
+    resolution: {integrity: sha512-TEtalhim3aByMLXWmPRYadb91Y2K2yQWYPOXmp8x/NYtrHsE0/mdlDe9idWBB2oF+eUa88P5pgLIZbXjjjibDg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/eslint-plugin-tsdoc/-/eslint-plugin-tsdoc-0.5.4.tgz}
+    peerDependencies:
+      eslint: '>=7'
+    peerDependenciesMeta:
+      eslint:
+        optional: true
 
   eslint-scope@5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
@@ -4849,7 +4948,7 @@ packages:
     engines: {node: '>=8.6.0'}
 
   fast-glob@3.3.3:
-    resolution: {integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==}
+    resolution: {integrity: sha1-0G1YXOjbqQoWsFBcVDw8z7OuuBg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/fast-glob/-/fast-glob-3.3.3.tgz}
     engines: {node: '>=8.6.0'}
 
   fast-json-stable-stringify@2.1.0:
@@ -4970,14 +5069,14 @@ packages:
     engines: {node: '>= 0.8'}
 
   fs-extra@11.3.4:
-    resolution: {integrity: sha512-CTXd6rk/M3/ULNQj8FBqBWHYBVYybQ3VPBw0xGKFe3tuH7ytT6ACnvzpIQ3UZtB8yvUKC2cXn1a+x+5EVQLovA==}
+    resolution: {integrity: sha1-q2k07Ki89vf2uCdC4zWR+GMB1vw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/fs-extra/-/fs-extra-11.3.4.tgz}
     engines: {node: '>=14.14'}
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
 
   fsevents@2.3.3:
-    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
+    resolution: {integrity: sha1-ysZAd4XQNnWipeGlMFxpezR9kNY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/fsevents/-/fsevents-2.3.3.tgz}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
@@ -5191,7 +5290,7 @@ packages:
       postcss: ^8.1.0
 
   ignore@5.1.9:
-    resolution: {integrity: sha512-2zeMQpbKz5dhZ9IwL0gbxSW5w0NK/MSAMtNuhgIHEPmaU3vPdKPL0UdvUCXs5SS4JAwsBxysK5sFMW8ocFiVjQ==}
+    resolution: {integrity: sha1-nsGly+jhRG7GDUQgBg1Dqm5zgvs=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/ignore/-/ignore-5.1.9.tgz}
     engines: {node: '>= 4'}
 
   ignore@5.3.2:
@@ -5213,7 +5312,7 @@ packages:
     engines: {node: '>=6'}
 
   import-lazy@4.0.0:
-    resolution: {integrity: sha512-rKtvo6a868b5Hu3heneU+L4yEQ4jYKLtjpnPeUdK7h0yzXGmyBTypknlkCvHFBqfX9YlorEiMM6Dnq/5atfHkw==}
+    resolution: {integrity: sha1-6OtidIOgpD2jwD8+NVSL5csMwVM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/import-lazy/-/import-lazy-4.0.0.tgz}
     engines: {node: '>=8'}
 
   imurmurhash@0.1.4:
@@ -5412,7 +5511,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   isomorphic-fetch@3.0.0:
-    resolution: {integrity: sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==}
+    resolution: {integrity: sha1-AmewBQSQRtJCEgchXUXWomK4uLQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/isomorphic-fetch/-/isomorphic-fetch-3.0.0.tgz}
 
   istanbul-lib-coverage@3.2.2:
     resolution: {integrity: sha512-O8dpsF+r0WV/8MNRKfnmrtCWhuKjxrq2w+jpzBL5UZKTi2LeVWnWOmWRxFlesJONmc+wLAGvKQZEOanko0LFTg==}
@@ -5617,7 +5716,7 @@ packages:
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
   jju@1.4.0:
-    resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
+    resolution: {integrity: sha1-o6vicYryQaKykE+EpiWXDzia4yo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/jju/-/jju-1.4.0.tgz}
 
   jose@6.2.5:
     resolution: {integrity: sha512-2E5L2yRp03FnwreJLJX8/r7mHiZICCf8kG7fAsTWkSQTDAcc46NIZoQLKy+EJ8sPoJlxyS4OQR5H70LjIZZlIQ==}
@@ -5689,7 +5788,7 @@ packages:
     hasBin: true
 
   jsonfile@6.2.0:
-    resolution: {integrity: sha512-FGuPw30AdOIUTRMC2OMRtQV+jkVj2cfPqSeWXv1NEAJ1qZ5zb1X6z1mFhbfOB/iy3ssJCD+3KuZ8r8C3uVFlAg==}
+    resolution: {integrity: sha1-fCZb0bZd5pd0eDAAh8mfHIQ4P2I=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/jsonfile/-/jsonfile-6.2.0.tgz}
 
   jsonpath-plus@10.3.0:
     resolution: {integrity: sha512-8TNmfeTCk2Le33A3vRRwtuworG/L5RrgMvdjhKZxvyShO+mBu2fP50OWUjRLNtvw344DdDarFh9buFAZs5ujeA==}
@@ -5821,6 +5920,8 @@ packages:
 
   memfs@4.56.11:
     resolution: {integrity: sha512-/GodtwVeKVIHZKLUSr2ZdOxKBC5hHki4JNCU22DoCGPEHr5o2PD5U721zvESKyWwCfTfavFl9WZYgA13OAYK0g==}
+    peerDependencies:
+      tslib: '2'
 
   merge-descriptors@1.0.3:
     resolution: {integrity: sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==}
@@ -5964,7 +6065,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   node-fetch@2.7.0:
-    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+    resolution: {integrity: sha1-0PD6bj4twdJ+/NitmdVQvalNGH0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/node-fetch/-/node-fetch-2.7.0.tgz}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
       encoding: ^0.1.0
@@ -6468,7 +6569,7 @@ packages:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
   react-is@19.2.7:
-    resolution: {integrity: sha512-kZFnouyVv7eP/Phmrlo9FK+zcAdriZJvzxXHF1Sl1P377WSGe2G/JxVolhTrB/jeV47lKImhNUsijjHAAbcl/A==}
+    resolution: {integrity: sha1-V2aO6Gp4V0pUKwpTlFUhKywIbfI=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/react-is/-/react-is-19.2.7.tgz}
 
   react@17.0.1:
     resolution: {integrity: sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w==}
@@ -6588,121 +6689,121 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
   sass-embedded-android-arm64@1.85.1:
-    resolution: {integrity: sha512-27oRheqNA3SJM2hAxpVbs7mCKUwKPWmEEhyiNFpBINb5ELVLg+Ck5RsGg+SJmo130ul5YX0vinmVB5uPWc8X5w==}
+    resolution: {integrity: sha1-HKnF4G6hqOz3T/f76mcXBs/lAyA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-android-arm64/-/sass-embedded-android-arm64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [android]
 
   sass-embedded-android-arm@1.85.1:
-    resolution: {integrity: sha512-GkcgUGMZtEF9gheuE1dxCU0ZSAifuaFXi/aX7ZXvjtdwmTl9Zc/OHR9oiUJkc8IW9UI7H8TuwlTAA8+SwgwIeQ==}
+    resolution: {integrity: sha1-87zVn7BcKTGuoSaUlqCYj4C5Nq8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-android-arm/-/sass-embedded-android-arm-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm]
     os: [android]
 
   sass-embedded-android-ia32@1.85.1:
-    resolution: {integrity: sha512-f3x16NyRgtXFksIaO/xXKrUhttUBv8V0XsAR2Dhdb/yz4yrDrhzw9Wh8fmw7PlQqECcQvFaoDr3XIIM6lKzasw==}
+    resolution: {integrity: sha1-C0jPGwoVfAZtjWyPTHz102trIps=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-android-ia32/-/sass-embedded-android-ia32-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [ia32]
     os: [android]
 
   sass-embedded-android-riscv64@1.85.1:
-    resolution: {integrity: sha512-IP6OijpJ8Mqo7XqCe0LsuZVbAxEFVboa0kXqqR5K55LebEplsTIA2GnmRyMay3Yr/2FVGsZbCb6Wlgkw23eCiA==}
+    resolution: {integrity: sha1-sgJKrrdUVAEb0qOujuTKwnO15xE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-android-riscv64/-/sass-embedded-android-riscv64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [riscv64]
     os: [android]
 
   sass-embedded-android-x64@1.85.1:
-    resolution: {integrity: sha512-Mh7CA53wR3ADvXAYipFc/R3vV4PVOzoKwWzPxmq+7i8UZrtsVjKONxGtqWe9JG1mna0C9CRZAx0sv/BzbOJxWg==}
+    resolution: {integrity: sha1-xTkYMMuzw3jlF3vA4D6Up4LNHME=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-android-x64/-/sass-embedded-android-x64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [android]
 
   sass-embedded-darwin-arm64@1.85.1:
-    resolution: {integrity: sha512-msWxzhvcP9hqGVegxVePVEfv9mVNTlUgGr6k7O7Ihji702mbtrH/lKwF4aRkkt4g1j7tv10+JtQXmTNi/pi9kA==}
+    resolution: {integrity: sha1-eay7aGfQFolvhDlxvfoKx24QHfg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-darwin-arm64/-/sass-embedded-darwin-arm64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [darwin]
 
   sass-embedded-darwin-x64@1.85.1:
-    resolution: {integrity: sha512-J4UFHUiyI9Z+mwYMwz11Ky9TYr3hY1fCxeQddjNGL/+ovldtb0yAIHvoVM0BGprQDm5JqhtUk8KyJ3RMJqpaAA==}
+    resolution: {integrity: sha1-FH7PSb8tGC295s7zN6WKBbepOrE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-darwin-x64/-/sass-embedded-darwin-x64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [darwin]
 
   sass-embedded-linux-arm64@1.85.1:
-    resolution: {integrity: sha512-jGadetB03BMFG2rq3OXub/uvC/lGpbQOiLGEz3NLb2nRZWyauRhzDtvZqkr6BEhxgIWtMtz2020yD8ZJSw/r2w==}
+    resolution: {integrity: sha1-XHtcJ0lTKZZjClUS0OG/bYRyrNM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-arm64/-/sass-embedded-linux-arm64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [linux]
 
   sass-embedded-linux-arm@1.85.1:
-    resolution: {integrity: sha512-X0fDh95nNSw1wfRlnkE4oscoEA5Au4nnk785s9jghPFkTBg+A+5uB6trCjf0fM22+Iw6kiP4YYmDdw3BqxAKLQ==}
+    resolution: {integrity: sha1-iZy6lLc+sRn2Q0aInkZt4xtvXTw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-arm/-/sass-embedded-linux-arm-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm]
     os: [linux]
 
   sass-embedded-linux-ia32@1.85.1:
-    resolution: {integrity: sha512-7HlYY90d9mitDtNi5s+S+5wYZrTVbkBH2/kf7ixrzh2BFfT0YM81UHLJRnGX93y9aOMBL6DSZAIfkt1RsV9bkQ==}
+    resolution: {integrity: sha1-8bpT8DQ4ljWv6cEFm8Nqd5NkIbg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-ia32/-/sass-embedded-linux-ia32-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [ia32]
     os: [linux]
 
   sass-embedded-linux-musl-arm64@1.85.1:
-    resolution: {integrity: sha512-FLkIT0p18XOkR6wryJ13LqGBDsrYev2dRk9dtiU18NCpNXruKsdBQ1ZnWHVKB3h1dA9lFyEEisC0sooKdNfeOQ==}
+    resolution: {integrity: sha512-FLkIT0p18XOkR6wryJ13LqGBDsrYev2dRk9dtiU18NCpNXruKsdBQ1ZnWHVKB3h1dA9lFyEEisC0sooKdNfeOQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-musl-arm64/-/sass-embedded-linux-musl-arm64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [linux]
 
   sass-embedded-linux-musl-arm@1.85.1:
-    resolution: {integrity: sha512-5vcdEqE8QZnu6i6shZo7x2N36V7YUoFotWj2rGekII5ty7Nkaj+VtZhUEOp9tAzEOlaFuDp5CyO1kUCvweT64A==}
+    resolution: {integrity: sha1-Qo5eKZqf9N/SC1eGHSRAQotfvfY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-musl-arm/-/sass-embedded-linux-musl-arm-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm]
     os: [linux]
 
   sass-embedded-linux-musl-ia32@1.85.1:
-    resolution: {integrity: sha512-N1093T84zQJor1yyIAdYScB5eAuQarGK1tKgZ4uTnxVlgA7Xi1lXV8Eh7ox9sDqKCaWkVQ3MjqU26vYRBeRWyw==}
+    resolution: {integrity: sha1-BwYJr9mc0Pnq5yGGyfSi0M32lE0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-musl-ia32/-/sass-embedded-linux-musl-ia32-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [ia32]
     os: [linux]
 
   sass-embedded-linux-musl-riscv64@1.85.1:
-    resolution: {integrity: sha512-WRsZS/7qlfYXsa93FBpSruieuURIu7ySfFhzYfF1IbKrNAGwmbduutkHZh2ddm5/vQMvQ0Rdosgv+CslaQHMcw==}
+    resolution: {integrity: sha1-D0JkvkAnfXzBgUnJ4PA68JVi5vc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-musl-riscv64/-/sass-embedded-linux-musl-riscv64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [riscv64]
     os: [linux]
 
   sass-embedded-linux-musl-x64@1.85.1:
-    resolution: {integrity: sha512-+OlLIilA5TnP0YEqTQ8yZtkW+bJIQYvzoGoNLUEskeyeGuOiIyn2CwL6G4JQB4xZQFaxPHb7JD3EueFkQbH0Pw==}
+    resolution: {integrity: sha1-tUteH2RtHwwJ2d9+Dm1JYNbtf6E=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-musl-x64/-/sass-embedded-linux-musl-x64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [linux]
 
   sass-embedded-linux-riscv64@1.85.1:
-    resolution: {integrity: sha512-mKKlOwMGLN7yP1p0gB5yG/HX4fYLnpWaqstNuOOXH+fOzTaNg0+1hALg0H0CDIqypPO74M5MS9T6FAJZGdT6dQ==}
+    resolution: {integrity: sha1-Jxh3Mwf5T+uBXk4vu1qnMiao03U=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-riscv64/-/sass-embedded-linux-riscv64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [riscv64]
     os: [linux]
 
   sass-embedded-linux-x64@1.85.1:
-    resolution: {integrity: sha512-uKRTv0z8NgtHV7xSren78+yoWB79sNi7TMqI7Bxd8fcRNIgHQSA8QBdF8led2ETC004hr8h71BrY60RPO+SSvA==}
+    resolution: {integrity: sha1-BmTMiGuHgYrJ0pv06fKZ/mxj9SQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-x64/-/sass-embedded-linux-x64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [linux]
 
   sass-embedded-win32-arm64@1.85.1:
-    resolution: {integrity: sha512-/GMiZXBOc6AEMBC3g25Rp+x8fq9Z6Ql7037l5rajBPhZ+DdFwtdHY0Ou3oIU6XuWUwD06U3ii4XufXVFhsP6PA==}
+    resolution: {integrity: sha1-0Ht1X4QI193huDCNOlf7/NqdkJw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-win32-arm64/-/sass-embedded-win32-arm64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [win32]
 
   sass-embedded-win32-ia32@1.85.1:
-    resolution: {integrity: sha512-L+4BWkKKBGFOKVQ2PQ5HwFfkM5FvTf1Xx2VSRvEWt9HxPXp6SPDho6zC8fqNQ3hSjoaoASEIJcSvgfdQYO0gdg==}
+    resolution: {integrity: sha1-Xl8W4aMPjfMRSKr2WncimNcDfXA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-win32-ia32/-/sass-embedded-win32-ia32-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [ia32]
     os: [win32]
 
   sass-embedded-win32-x64@1.85.1:
-    resolution: {integrity: sha512-/FO0AGKWxVfCk4GKsC0yXWBpUZdySe3YAAbQQL0lL6xUd1OiUY8Kow6g4Kc1TB/+z0iuQKKTqI/acJMEYl4iTQ==}
+    resolution: {integrity: sha1-dY+5bBbncmWkt/JHSkOWLXHvX/0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-win32-x64/-/sass-embedded-win32-x64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [win32]
@@ -6886,7 +6987,7 @@ packages:
     engines: {node: '>=6.0.0'}
 
   sprintf-js@1.0.3:
-    resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
+    resolution: {integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sprintf-js/-/sprintf-js-1.0.3.tgz}
 
   ssr-window@4.0.2:
     resolution: {integrity: sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==}
@@ -6912,7 +7013,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   string-argv@0.3.2:
-    resolution: {integrity: sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==}
+    resolution: {integrity: sha1-K20O8ktlYnTZV9VOCku/YVPcArY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/string-argv/-/string-argv-0.3.2.tgz}
     engines: {node: '>=0.6.19'}
 
   string-hash@1.1.3:
@@ -7114,7 +7215,7 @@ packages:
     engines: {node: '>=16'}
 
   tr46@0.0.3:
-    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+    resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/tr46/-/tr46-0.0.3.tgz}
 
   tr46@5.1.1:
     resolution: {integrity: sha512-hdF5ZgjTqgAntKkklYw0R03MG2x/bSzTtkxmIRw/sTNV8YXsCJ1tfLAX23lhxhHJlEf3CRCOCGGWw3vI3GaSPw==}
@@ -7136,13 +7237,13 @@ packages:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
   tslib@1.14.1:
-    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+    resolution: {integrity: sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/tslib/-/tslib-1.14.1.tgz}
 
   tslib@2.3.1:
-    resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
+    resolution: {integrity: sha1-6KM1rdXOrlGqJh0ypJAVjvBC7wE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/tslib/-/tslib-2.3.1.tgz}
 
   tslib@2.8.1:
-    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+    resolution: {integrity: sha1-YS7+TtI11Wfoq6Xypfq3AoCt6D8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/tslib/-/tslib-2.8.1.tgz}
 
   tsyringe@4.10.0:
     resolution: {integrity: sha512-axr3IdNuVIxnaK5XGEUFTu3YmAQ6lllgrvqfEoR16g/HGnYY/6We4oWENtAnzK6/LpJ2ur9PAb80RBt7/U4ugw==}
@@ -7225,7 +7326,7 @@ packages:
     resolution: {integrity: sha512-TmnEAEAsBJVZM/AADELsK76llnwcf9vMKuPz8JflO1frO8Lchitr0fNaN9d+Ap0BjKtqWqd/J17qeDnXh8CL2A==}
 
   universalify@2.0.1:
-    resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
+    resolution: {integrity: sha1-Fo78IYCWTmOG0GHglN9hr+I5sY0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/universalify/-/universalify-2.0.1.tgz}
     engines: {node: '>= 10.0.0'}
 
   unpipe@1.0.0:
@@ -7288,7 +7389,7 @@ packages:
     resolution: {integrity: sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==}
 
   watchpack@2.4.0:
-    resolution: {integrity: sha512-Lcvm7MGST/4fup+ifyKi2hjyIAwcdI4HRgtvTpIUxBRhB+RFtUh8XtDOxUfctVCnhVi+QQj49i91OyvzkJl6cg==}
+    resolution: {integrity: sha1-+jMDI3SWLHgRP5PH8vtMVMmGKl0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/watchpack/-/watchpack-2.4.0.tgz}
     engines: {node: '>=10.13.0'}
 
   watchpack@2.5.1:
@@ -7303,7 +7404,7 @@ packages:
     engines: {node: '>= 8'}
 
   webidl-conversions@3.0.1:
-    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+    resolution: {integrity: sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/webidl-conversions/-/webidl-conversions-3.0.1.tgz}
 
   webidl-conversions@7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
@@ -7363,7 +7464,7 @@ packages:
     deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-fetch@3.6.20:
-    resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
+    resolution: {integrity: sha1-WAzm15H6zskdN8cokJlaC0jTHHA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/whatwg-fetch/-/whatwg-fetch-3.6.20.tgz}
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
@@ -7374,7 +7475,7 @@ packages:
     engines: {node: '>=18'}
 
   whatwg-url@5.0.0:
-    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
+    resolution: {integrity: sha1-lmRU6HZUYuN2RNNib2dCzotwll0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/whatwg-url/-/whatwg-url-5.0.0.tgz}
 
   which-boxed-primitive@1.1.1:
     resolution: {integrity: sha512-TbX3mj8n0odCBFVlY8AxkqcHASw3L60jIuF8jFP78az3C2YhmGvqbHBpAjTRH2/xqYunrJ9g1jSyjCjpoWzIAA==}
@@ -7405,7 +7506,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   wrap-ansi@7.0.0:
-    resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
+    resolution: {integrity: sha1-Z+FFz/UQpqaYS98RUpEdadLrnkM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/wrap-ansi/-/wrap-ansi-7.0.0.tgz}
     engines: {node: '>=10'}
 
   wrap-ansi@8.1.0:
@@ -9711,6 +9812,14 @@ snapshots:
 
   '@leichtgewicht/ip-codec@2.0.5': {}
 
+  '@microsoft/api-extractor-model@7.33.14(@types/node@22.19.13)':
+    dependencies:
+      '@microsoft/tsdoc': 0.17.1
+      '@microsoft/tsdoc-config': 0.18.3
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
+    transitivePeerDependencies:
+      - '@types/node'
+
   '@microsoft/api-extractor-model@7.33.5(@types/node@22.19.13)':
     dependencies:
       '@microsoft/tsdoc': 0.16.0
@@ -9764,15 +9873,15 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/api-extractor@7.58.9(@types/node@22.19.13)':
+  '@microsoft/api-extractor@7.59.3(@types/node@22.19.13)':
     dependencies:
-      '@microsoft/api-extractor-model': 7.33.8(@types/node@22.19.13)
-      '@microsoft/tsdoc': 0.16.0
-      '@microsoft/tsdoc-config': 0.18.1
-      '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
+      '@microsoft/api-extractor-model': 7.33.14(@types/node@22.19.13)
+      '@microsoft/tsdoc': 0.17.1
+      '@microsoft/tsdoc-config': 0.18.3
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
       '@rushstack/rig-package': 0.7.3
-      '@rushstack/terminal': 0.24.0(@types/node@22.19.13)
-      '@rushstack/ts-command-line': 5.3.10(@types/node@22.19.13)
+      '@rushstack/terminal': 0.24.6(@types/node@22.19.13)
+      '@rushstack/ts-command-line': 5.3.16(@types/node@22.19.13)
       diff: 8.0.3
       minimatch: 10.2.3
       resolve: 1.22.11
@@ -10569,12 +10678,12 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@microsoft/spfx-heft-plugins@1.23.2(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)':
+  '@microsoft/spfx-heft-plugins@1.23.2(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)':
     dependencies:
       '@azure/storage-blob': 12.26.0
       '@microsoft/sp-css-loader': 1.23.2(@types/node@22.19.13)(webpack@5.105.4)
       '@microsoft/sp-module-interfaces': 1.23.2(@types/node@22.19.13)
-      '@rushstack/heft': 1.2.19(@types/node@22.19.13)
+      '@rushstack/heft': 1.3.2(@types/node@22.19.13)
       '@rushstack/heft-config-file': 0.20.3(@types/node@22.19.13)
       '@rushstack/localization-utilities': 0.15.7(@types/node@22.19.13)
       '@rushstack/module-minifier': 0.9.12(@types/node@22.19.13)
@@ -10655,7 +10764,7 @@ snapshots:
       - webpack-cli
       - zod
 
-  '@microsoft/spfx-web-build-rig@1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)':
+  '@microsoft/spfx-web-build-rig@1.23.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)':
     dependencies:
       '@microsoft/api-extractor': 7.58.1(@types/node@22.19.13)
       '@microsoft/spfx-heft-plugins': 1.23.2(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)
@@ -10666,7 +10775,7 @@ snapshots:
       '@rushstack/heft-sass-plugin': 1.4.1(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft-static-asset-typings-plugin': 0.1.3(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft-typescript-plugin': 1.3.2(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)
-      '@rushstack/heft-webpack5-plugin': 1.3.10(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)
+      '@rushstack/heft-webpack5-plugin': 1.3.10(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(tslib@2.3.1)(webpack@5.105.4)
       '@types/jest': 30.0.0
       '@types/webpack-env': 1.15.3
       eslint: 9.37.0
@@ -10690,11 +10799,12 @@ snapshots:
       - node-notifier
       - supports-color
       - ts-node
+      - tslib
       - uglify-js
       - utf-8-validate
       - webpack-cli
 
-  '@microsoft/spfx-web-build-rig@1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(zod@4.4.3)':
+  '@microsoft/spfx-web-build-rig@1.24.0-beta.2(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)':
     dependencies:
       '@microsoft/api-extractor': 7.58.7(@types/node@22.19.13)
       '@microsoft/spfx-heft-plugins': 1.24.0-beta.2(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(zod@4.4.3)
@@ -10705,7 +10815,7 @@ snapshots:
       '@rushstack/heft-sass-plugin': 1.4.1(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft-static-asset-typings-plugin': 0.1.13(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft-typescript-plugin': 1.3.12(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)
-      '@rushstack/heft-webpack5-plugin': 1.3.18(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)
+      '@rushstack/heft-webpack5-plugin': 1.3.18(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(tslib@2.3.1)(webpack@5.105.4)
       '@types/jest': 30.0.0
       '@types/webpack-env': 1.15.3
       eslint: 9.37.0
@@ -10730,6 +10840,7 @@ snapshots:
       - node-notifier
       - supports-color
       - ts-node
+      - tslib
       - uglify-js
       - utf-8-validate
       - webpack-cli
@@ -10756,7 +10867,16 @@ snapshots:
       jju: 1.4.0
       resolve: 1.22.11
 
+  '@microsoft/tsdoc-config@0.18.3':
+    dependencies:
+      '@microsoft/tsdoc': 0.17.1
+      ajv: 8.18.0
+      jju: 1.4.0
+      resolve: 1.22.11
+
   '@microsoft/tsdoc@0.16.0': {}
+
+  '@microsoft/tsdoc@0.17.1': {}
 
   '@modelcontextprotocol/sdk@1.29.0(zod@4.4.3)':
     dependencies:
@@ -10988,10 +11108,10 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@rushstack/debug-certificate-manager@1.7.20(@types/node@22.19.13)':
+  '@rushstack/debug-certificate-manager@1.7.30(@types/node@22.19.13)':
     dependencies:
-      '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
-      '@rushstack/terminal': 0.24.0(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
+      '@rushstack/terminal': 0.24.6(@types/node@22.19.13)
       node-forge: 1.4.0
     transitivePeerDependencies:
       - '@types/node'
@@ -11014,12 +11134,30 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@rushstack/eslint-config@4.6.4(eslint@9.37.0)(typescript@5.8.3)':
+  '@rushstack/eslint-config@4.8.0(eslint@8.57.1)(typescript@5.8.3)':
     dependencies:
       '@rushstack/eslint-patch': 1.16.1
-      '@rushstack/eslint-plugin': 0.23.2(eslint@9.37.0)(typescript@5.8.3)
-      '@rushstack/eslint-plugin-packlets': 0.15.2(eslint@9.37.0)(typescript@5.8.3)
-      '@rushstack/eslint-plugin-security': 0.14.2(eslint@9.37.0)(typescript@5.8.3)
+      '@rushstack/eslint-plugin': 0.23.5(eslint@8.57.1)(typescript@5.8.3)
+      '@rushstack/eslint-plugin-packlets': 0.15.3(eslint@8.57.1)(typescript@5.8.3)
+      '@rushstack/eslint-plugin-security': 0.14.3(eslint@8.57.1)(typescript@5.8.3)
+      '@typescript-eslint/eslint-plugin': 8.56.1(@typescript-eslint/parser@8.56.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
+      '@typescript-eslint/parser': 8.56.1(eslint@8.57.1)(typescript@5.8.3)
+      '@typescript-eslint/typescript-estree': 8.56.1(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.56.1(eslint@8.57.1)(typescript@5.8.3)
+      eslint: 8.57.1
+      eslint-plugin-promise: 7.2.1(eslint@8.57.1)
+      eslint-plugin-react: 7.37.5(eslint@8.57.1)
+      eslint-plugin-tsdoc: 0.5.4(eslint@8.57.1)(typescript@5.8.3)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@rushstack/eslint-config@4.8.0(eslint@9.37.0)(typescript@5.8.3)':
+    dependencies:
+      '@rushstack/eslint-patch': 1.16.1
+      '@rushstack/eslint-plugin': 0.23.5(eslint@9.37.0)(typescript@5.8.3)
+      '@rushstack/eslint-plugin-packlets': 0.15.3(eslint@9.37.0)(typescript@5.8.3)
+      '@rushstack/eslint-plugin-security': 0.14.3(eslint@9.37.0)(typescript@5.8.3)
       '@typescript-eslint/eslint-plugin': 8.56.1(@typescript-eslint/parser@8.56.1(eslint@9.37.0)(typescript@5.8.3))(eslint@9.37.0)(typescript@5.8.3)
       '@typescript-eslint/parser': 8.56.1(eslint@9.37.0)(typescript@5.8.3)
       '@typescript-eslint/typescript-estree': 8.56.1(typescript@5.8.3)
@@ -11027,7 +11165,7 @@ snapshots:
       eslint: 9.37.0
       eslint-plugin-promise: 7.2.1(eslint@9.37.0)
       eslint-plugin-react: 7.37.5(eslint@9.37.0)
-      eslint-plugin-tsdoc: 0.5.2(eslint@9.37.0)(typescript@5.8.3)
+      eslint-plugin-tsdoc: 0.5.4(eslint@9.37.0)(typescript@5.8.3)
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
@@ -11043,7 +11181,16 @@ snapshots:
       - supports-color
       - typescript
 
-  '@rushstack/eslint-plugin-packlets@0.15.2(eslint@9.37.0)(typescript@5.8.3)':
+  '@rushstack/eslint-plugin-packlets@0.15.3(eslint@8.57.1)(typescript@5.8.3)':
+    dependencies:
+      '@rushstack/tree-pattern': 0.4.1
+      '@typescript-eslint/utils': 8.56.1(eslint@8.57.1)(typescript@5.8.3)
+      eslint: 8.57.1
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+
+  '@rushstack/eslint-plugin-packlets@0.15.3(eslint@9.37.0)(typescript@5.8.3)':
     dependencies:
       '@rushstack/tree-pattern': 0.4.1
       '@typescript-eslint/utils': 8.56.1(eslint@9.37.0)(typescript@5.8.3)
@@ -11061,7 +11208,16 @@ snapshots:
       - supports-color
       - typescript
 
-  '@rushstack/eslint-plugin-security@0.14.2(eslint@9.37.0)(typescript@5.8.3)':
+  '@rushstack/eslint-plugin-security@0.14.3(eslint@8.57.1)(typescript@5.8.3)':
+    dependencies:
+      '@rushstack/tree-pattern': 0.4.1
+      '@typescript-eslint/utils': 8.56.1(eslint@8.57.1)(typescript@5.8.3)
+      eslint: 8.57.1
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+
+  '@rushstack/eslint-plugin-security@0.14.3(eslint@9.37.0)(typescript@5.8.3)':
     dependencies:
       '@rushstack/tree-pattern': 0.4.1
       '@typescript-eslint/utils': 8.56.1(eslint@9.37.0)(typescript@5.8.3)
@@ -11079,7 +11235,16 @@ snapshots:
       - supports-color
       - typescript
 
-  '@rushstack/eslint-plugin@0.23.2(eslint@9.37.0)(typescript@5.8.3)':
+  '@rushstack/eslint-plugin@0.23.5(eslint@8.57.1)(typescript@5.8.3)':
+    dependencies:
+      '@rushstack/tree-pattern': 0.4.1
+      '@typescript-eslint/utils': 8.56.1(eslint@8.57.1)(typescript@5.8.3)
+      eslint: 8.57.1
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+
+  '@rushstack/eslint-plugin@0.23.5(eslint@9.37.0)(typescript@5.8.3)':
     dependencies:
       '@rushstack/tree-pattern': 0.4.1
       '@typescript-eslint/utils': 8.56.1(eslint@9.37.0)(typescript@5.8.3)
@@ -11088,10 +11253,10 @@ snapshots:
       - supports-color
       - typescript
 
-  '@rushstack/heft-api-extractor-plugin@1.3.19(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)':
+  '@rushstack/heft-api-extractor-plugin@1.3.29(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)':
     dependencies:
-      '@rushstack/heft': 1.2.19(@types/node@22.19.13)
-      '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
+      '@rushstack/heft': 1.3.2(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
       semver: 7.7.4
     transitivePeerDependencies:
       - '@types/node'
@@ -11101,6 +11266,15 @@ snapshots:
       '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
       '@rushstack/rig-package': 0.7.3
       '@rushstack/terminal': 0.24.0(@types/node@22.19.13)
+      jsonpath-plus: 10.3.0
+    transitivePeerDependencies:
+      - '@types/node'
+
+  '@rushstack/heft-config-file@0.20.16(@types/node@22.19.13)':
+    dependencies:
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
+      '@rushstack/rig-package': 0.7.3
+      '@rushstack/terminal': 0.24.6(@types/node@22.19.13)
       jsonpath-plus: 10.3.0
     transitivePeerDependencies:
       - '@types/node'
@@ -11128,6 +11302,30 @@ snapshots:
       '@rushstack/heft': 1.2.17(@types/node@22.19.13)
     transitivePeerDependencies:
       - '@types/node'
+
+  '@rushstack/heft-jest-plugin@2.0.19(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/jest@30.0.0)(@types/node@22.19.13)(jest-environment-jsdom@30.4.1)(jest-environment-node@30.5.2)':
+    dependencies:
+      '@jest/core': 30.3.0
+      '@jest/reporters': 30.3.0
+      '@jest/transform': 30.3.0
+      '@rushstack/heft': 1.3.2(@types/node@22.19.13)
+      '@rushstack/heft-config-file': 0.20.16(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
+      '@rushstack/terminal': 0.24.6(@types/node@22.19.13)
+      jest-config: 30.3.0(@types/node@22.19.13)
+      jest-resolve: 30.3.0
+      jest-snapshot: 30.3.0
+    optionalDependencies:
+      '@types/jest': 30.0.0
+      jest-environment-jsdom: 30.4.1
+      jest-environment-node: 30.5.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - esbuild-register
+      - node-notifier
+      - supports-color
+      - ts-node
 
   '@rushstack/heft-jest-plugin@2.0.6(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/jest@30.0.0)(@types/node@22.19.13)(jest-environment-jsdom@30.3.0)(jest-environment-node@30.5.2)':
     dependencies:
@@ -11177,42 +11375,9 @@ snapshots:
       - supports-color
       - ts-node
 
-  '@rushstack/heft-jest-plugin@2.0.9(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/jest@30.0.0)(@types/node@22.19.13)(jest-environment-jsdom@30.4.1)(jest-environment-node@30.5.2)':
-    dependencies:
-      '@jest/core': 30.3.0
-      '@jest/reporters': 30.3.0
-      '@jest/transform': 30.3.0
-      '@rushstack/heft': 1.2.19(@types/node@22.19.13)
-      '@rushstack/heft-config-file': 0.20.10(@types/node@22.19.13)
-      '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
-      '@rushstack/terminal': 0.24.0(@types/node@22.19.13)
-      jest-config: 30.3.0(@types/node@22.19.13)
-      jest-resolve: 30.3.0
-      jest-snapshot: 30.3.0
-    optionalDependencies:
-      '@types/jest': 30.0.0
-      jest-environment-jsdom: 30.4.1
-      jest-environment-node: 30.5.2
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - esbuild-register
-      - node-notifier
-      - supports-color
-      - ts-node
-
   '@rushstack/heft-lint-plugin@1.2.17(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)':
     dependencies:
       '@rushstack/heft': 1.2.17(@types/node@22.19.13)
-      '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
-      json-stable-stringify-without-jsonify: 1.0.1
-      semver: 7.7.4
-    transitivePeerDependencies:
-      - '@types/node'
-
-  '@rushstack/heft-lint-plugin@1.2.19(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)':
-    dependencies:
-      '@rushstack/heft': 1.2.19(@types/node@22.19.13)
       '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
       json-stable-stringify-without-jsonify: 1.0.1
       semver: 7.7.4
@@ -11228,15 +11393,24 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@rushstack/heft-node-rig@2.11.42(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)(jest-environment-jsdom@30.4.1)':
+  '@rushstack/heft-lint-plugin@1.3.1(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)':
     dependencies:
-      '@microsoft/api-extractor': 7.58.9(@types/node@22.19.13)
-      '@rushstack/eslint-config': 4.6.4(eslint@9.37.0)(typescript@5.8.3)
-      '@rushstack/heft': 1.2.19(@types/node@22.19.13)
-      '@rushstack/heft-api-extractor-plugin': 1.3.19(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)
-      '@rushstack/heft-jest-plugin': 2.0.9(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/jest@30.0.0)(@types/node@22.19.13)(jest-environment-jsdom@30.4.1)(jest-environment-node@30.5.2)
-      '@rushstack/heft-lint-plugin': 1.2.19(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)
-      '@rushstack/heft-typescript-plugin': 1.3.14(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)
+      '@rushstack/heft': 1.3.2(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
+      json-stable-stringify-without-jsonify: 1.0.1
+      semver: 7.7.4
+    transitivePeerDependencies:
+      - '@types/node'
+
+  '@rushstack/heft-node-rig@2.11.52(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)(jest-environment-jsdom@30.4.1)':
+    dependencies:
+      '@microsoft/api-extractor': 7.59.3(@types/node@22.19.13)
+      '@rushstack/eslint-config': 4.8.0(eslint@9.37.0)(typescript@5.8.3)
+      '@rushstack/heft': 1.3.2(@types/node@22.19.13)
+      '@rushstack/heft-api-extractor-plugin': 1.3.29(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)
+      '@rushstack/heft-jest-plugin': 2.0.19(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/jest@30.0.0)(@types/node@22.19.13)(jest-environment-jsdom@30.4.1)(jest-environment-node@30.5.2)
+      '@rushstack/heft-lint-plugin': 1.3.1(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)
+      '@rushstack/heft-typescript-plugin': 1.3.24(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)
       '@types/jest': 30.0.0
       eslint: 9.37.0
       jest-environment-node: 30.5.2
@@ -11294,17 +11468,6 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@rushstack/heft-typescript-plugin@1.3.14(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)':
-    dependencies:
-      '@rushstack/heft': 1.2.19(@types/node@22.19.13)
-      '@rushstack/heft-config-file': 0.20.10(@types/node@22.19.13)
-      '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
-      '@types/tapable': 1.0.6
-      semver: 7.7.4
-      tapable: 1.1.3
-    transitivePeerDependencies:
-      - '@types/node'
-
   '@rushstack/heft-typescript-plugin@1.3.2(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)':
     dependencies:
       '@rushstack/heft': 1.2.17(@types/node@22.19.13)
@@ -11316,7 +11479,18 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@rushstack/heft-webpack5-plugin@1.3.10(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)':
+  '@rushstack/heft-typescript-plugin@1.3.24(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)':
+    dependencies:
+      '@rushstack/heft': 1.3.2(@types/node@22.19.13)
+      '@rushstack/heft-config-file': 0.20.16(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
+      '@types/tapable': 1.0.6
+      semver: 7.7.4
+      tapable: 1.1.3
+    transitivePeerDependencies:
+      - '@types/node'
+
+  '@rushstack/heft-webpack5-plugin@1.3.10(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(tslib@2.3.1)(webpack@5.105.4)':
     dependencies:
       '@rushstack/debug-certificate-manager': 1.7.10(@types/node@22.19.13)
       '@rushstack/heft': 1.2.17(@types/node@22.19.13)
@@ -11325,16 +11499,17 @@ snapshots:
       tapable: 1.1.3
       watchpack: 2.4.0
       webpack: 5.105.4
-      webpack-dev-server: 5.2.3(webpack@5.105.4)
+      webpack-dev-server: 5.2.3(tslib@2.3.1)(webpack@5.105.4)
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
       - debug
       - supports-color
+      - tslib
       - utf-8-validate
       - webpack-cli
 
-  '@rushstack/heft-webpack5-plugin@1.3.18(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)':
+  '@rushstack/heft-webpack5-plugin@1.3.18(@rushstack/heft@1.2.17(@types/node@22.19.13))(@types/node@22.19.13)(tslib@2.3.1)(webpack@5.105.4)':
     dependencies:
       '@rushstack/debug-certificate-manager': 1.7.18(@types/node@22.19.13)
       '@rushstack/heft': 1.2.17(@types/node@22.19.13)
@@ -11343,30 +11518,32 @@ snapshots:
       tapable: 1.1.3
       watchpack: 2.4.0
       webpack: 5.105.4
-      webpack-dev-server: 5.2.3(webpack@5.105.4)
+      webpack-dev-server: 5.2.3(tslib@2.3.1)(webpack@5.105.4)
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
       - debug
       - supports-color
+      - tslib
       - utf-8-validate
       - webpack-cli
 
-  '@rushstack/heft-webpack5-plugin@1.3.20(@rushstack/heft@1.2.19(@types/node@22.19.13))(@types/node@22.19.13)(webpack@5.105.4)':
+  '@rushstack/heft-webpack5-plugin@1.3.30(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)(tslib@2.3.1)(webpack@5.105.4)':
     dependencies:
-      '@rushstack/debug-certificate-manager': 1.7.20(@types/node@22.19.13)
-      '@rushstack/heft': 1.2.19(@types/node@22.19.13)
-      '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
+      '@rushstack/debug-certificate-manager': 1.7.30(@types/node@22.19.13)
+      '@rushstack/heft': 1.3.2(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
       '@types/tapable': 1.0.6
       tapable: 1.1.3
       watchpack: 2.4.0
       webpack: 5.105.4
-      webpack-dev-server: 5.2.3(webpack@5.105.4)
+      webpack-dev-server: 5.2.3(tslib@2.3.1)(webpack@5.105.4)
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
       - debug
       - supports-color
+      - tslib
       - utf-8-validate
       - webpack-cli
 
@@ -11387,14 +11564,14 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@rushstack/heft@1.2.19(@types/node@22.19.13)':
+  '@rushstack/heft@1.3.2(@types/node@22.19.13)':
     dependencies:
-      '@rushstack/heft-config-file': 0.20.10(@types/node@22.19.13)
-      '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
-      '@rushstack/operation-graph': 0.6.9(@types/node@22.19.13)
+      '@rushstack/heft-config-file': 0.20.16(@types/node@22.19.13)
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
+      '@rushstack/operation-graph': 0.7.4(@types/node@22.19.13)
       '@rushstack/rig-package': 0.7.3
-      '@rushstack/terminal': 0.24.0(@types/node@22.19.13)
-      '@rushstack/ts-command-line': 5.3.10(@types/node@22.19.13)
+      '@rushstack/terminal': 0.24.6(@types/node@22.19.13)
+      '@rushstack/ts-command-line': 5.3.16(@types/node@22.19.13)
       '@types/tapable': 1.0.6
       fast-glob: 3.3.3
       git-repo-info: 2.1.1
@@ -11502,10 +11679,30 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.13
 
+  '@rushstack/node-core-library@5.25.0(@types/node@22.19.13)':
+    dependencies:
+      ajv: 8.20.0
+      ajv-draft-04: 1.0.0(ajv@8.20.0)
+      ajv-formats: 3.0.1
+      fs-extra: 11.3.4
+      import-lazy: 4.0.0
+      jju: 1.4.0
+      resolve: 1.22.11
+      semver: 7.7.4
+    optionalDependencies:
+      '@types/node': 22.19.13
+
   '@rushstack/operation-graph@0.6.9(@types/node@22.19.13)':
     dependencies:
       '@rushstack/node-core-library': 5.23.1(@types/node@22.19.13)
       '@rushstack/terminal': 0.24.0(@types/node@22.19.13)
+    optionalDependencies:
+      '@types/node': 22.19.13
+
+  '@rushstack/operation-graph@0.7.4(@types/node@22.19.13)':
+    dependencies:
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
+      '@rushstack/terminal': 0.24.6(@types/node@22.19.13)
     optionalDependencies:
       '@types/node': 22.19.13
 
@@ -11575,11 +11772,19 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.13
 
+  '@rushstack/terminal@0.24.6(@types/node@22.19.13)':
+    dependencies:
+      '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
+      '@rushstack/problem-matcher': 0.2.1(@types/node@22.19.13)
+      supports-color: 8.1.1
+    optionalDependencies:
+      '@types/node': 22.19.13
+
   '@rushstack/tree-pattern@0.4.1': {}
 
-  '@rushstack/ts-command-line@5.3.10(@types/node@22.19.13)':
+  '@rushstack/ts-command-line@5.3.16(@types/node@22.19.13)':
     dependencies:
-      '@rushstack/terminal': 0.24.0(@types/node@22.19.13)
+      '@rushstack/terminal': 0.24.6(@types/node@22.19.13)
       '@types/argparse': 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
@@ -11636,7 +11841,7 @@ snapshots:
     optionalDependencies:
       webpack: 5.105.4
 
-  '@rushstack/webpack-preserve-dynamic-require-plugin@0.12.20': {}
+  '@rushstack/webpack-preserve-dynamic-require-plugin@0.12.30': {}
 
   '@rushstack/webpack5-localization-plugin@0.16.17(@types/node@22.19.13)(webpack@5.105.4)':
     dependencies:
@@ -12295,6 +12500,10 @@ snapshots:
     optionalDependencies:
       ajv: 8.18.0
 
+  ajv-draft-04@1.0.0(ajv@8.20.0):
+    optionalDependencies:
+      ajv: 8.20.0
+
   ajv-formats@2.1.1:
     dependencies:
       ajv: 8.18.0
@@ -12316,6 +12525,13 @@ snapshots:
       uri-js: 4.4.1
 
   ajv@8.18.0:
+    dependencies:
+      fast-deep-equal: 3.1.3
+      fast-uri: 3.1.0
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
+
+  ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
       fast-uri: 3.1.0
@@ -13309,13 +13525,25 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-tsdoc@0.5.2(eslint@9.37.0)(typescript@5.8.3):
+  eslint-plugin-tsdoc@0.5.4(eslint@8.57.1)(typescript@5.8.3):
     dependencies:
-      '@microsoft/tsdoc': 0.16.0
-      '@microsoft/tsdoc-config': 0.18.1
-      '@typescript-eslint/utils': 8.56.1(eslint@9.37.0)(typescript@5.8.3)
+      '@microsoft/tsdoc': 0.17.1
+      '@microsoft/tsdoc-config': 0.18.3
+      '@typescript-eslint/utils': 8.56.1(eslint@8.57.1)(typescript@5.8.3)
+    optionalDependencies:
+      eslint: 8.57.1
     transitivePeerDependencies:
-      - eslint
+      - supports-color
+      - typescript
+
+  eslint-plugin-tsdoc@0.5.4(eslint@9.37.0)(typescript@5.8.3):
+    dependencies:
+      '@microsoft/tsdoc': 0.17.1
+      '@microsoft/tsdoc-config': 0.18.3
+      '@typescript-eslint/utils': 8.56.1(eslint@9.37.0)(typescript@5.8.3)
+    optionalDependencies:
+      eslint: 9.37.0
+    transitivePeerDependencies:
       - supports-color
       - typescript
 
@@ -14769,7 +14997,7 @@ snapshots:
       tree-dump: 1.1.0(tslib@2.3.1)
       tslib: 2.3.1
 
-  memfs@4.56.11:
+  memfs@4.56.11(tslib@2.3.1):
     dependencies:
       '@jsonjoy.com/fs-core': 4.56.11(tslib@2.3.1)
       '@jsonjoy.com/fs-fsa': 4.56.11(tslib@2.3.1)
@@ -16466,18 +16694,20 @@ snapshots:
 
   webidl-conversions@7.0.0: {}
 
-  webpack-dev-middleware@7.4.5(webpack@5.105.4):
+  webpack-dev-middleware@7.4.5(tslib@2.3.1)(webpack@5.105.4):
     dependencies:
       colorette: 2.0.20
-      memfs: 4.56.11
+      memfs: 4.56.11(tslib@2.3.1)
       mime-types: 3.0.2
       on-finished: 2.4.1
       range-parser: 1.2.1
       schema-utils: 4.3.3
     optionalDependencies:
       webpack: 5.105.4
+    transitivePeerDependencies:
+      - tslib
 
-  webpack-dev-server@5.2.3(webpack@5.105.4):
+  webpack-dev-server@5.2.3(tslib@2.3.1)(webpack@5.105.4):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4
@@ -16505,7 +16735,7 @@ snapshots:
       serve-index: 1.9.2
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack-dev-middleware: 7.4.5(webpack@5.105.4)
+      webpack-dev-middleware: 7.4.5(tslib@2.3.1)(webpack@5.105.4)
       ws: 8.19.0
     optionalDependencies:
       webpack: 5.105.4
@@ -16513,6 +16743,7 @@ snapshots:
       - bufferutil
       - debug
       - supports-color
+      - tslib
       - utf-8-validate
 
   webpack-merge@5.8.0:
