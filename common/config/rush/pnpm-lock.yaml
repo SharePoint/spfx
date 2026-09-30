@@ -8,7 +8,7 @@ overrides:
   baseline-browser-mapping: ^2.9.19
   jest-environment-node: ^30.4.0
 
-packageExtensionsChecksum: sha256-6R0LZgepyPJVw81HMQ/3O4ZbifJ1cb0gItdR12MAr8w=
+packageExtensionsChecksum: sha256-ZPUcDJ3wZg5W+aLS1G0QW9fFXD6lhCTBDwmMllpLOzA=
 
 pnpmfileChecksum: sha256-E1T7OJ3DLTjpDqf4RdJzK9VDtAxgm4gDEQCLYdHD8nI=
 
@@ -9789,6 +9789,7 @@ snapshots:
       ajv: 8.18.0
       ajv-draft-04: 1.0.0(ajv@8.18.0)
       ajv-formats: 3.0.1
+      fs-extra: 11.3.4
       node-fetch: 3.3.2
       strip-bom: 5.0.0
 

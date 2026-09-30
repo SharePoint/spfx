@@ -262,6 +262,17 @@
         "@rushstack/eslint-plugin-security": "*",
         "eslint-plugin-promise": "*"
       }
+    },
+
+    // @microsoft/app-manifest's compiled build/*.js does `require("fs-extra")`, but the package
+    // only declares `@types/fs-extra` — not the runtime `fs-extra`. npm/codespace installs resolve
+    // it via hoisting, but under pnpm's strict isolation (and BuildXL CI) it can't, so the SPFx
+    // copilotAgentPlugin fails to load with "Cannot find module 'fs-extra'". Declare the missing
+    // runtime dependency here, version-matched to the package's own `@types/fs-extra` (^11).
+    "@microsoft/app-manifest": {
+      "dependencies": {
+        "fs-extra": "^11.3.1"
+      }
     }
   },
 
