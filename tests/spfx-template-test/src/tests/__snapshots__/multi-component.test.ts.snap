@@ -145,7 +145,7 @@ Object {
     "typescript": "~5.8.3",
   },
   "engines": Object {
-    "node": ">=22.14.0 < 23.0.0",
+    "node": ">=22.14.0 <23.0.0 || >=24.12.0 <25.0.0 || >=26.0.0 <27.0.0",
   },
   "name": "@spfx-template/multi-component-test",
   "private": true,
