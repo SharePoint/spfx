@@ -52,7 +52,7 @@ export abstract class SPFxActionBase extends CommandLineAction {
       parameterLongName: '--spfx-version',
       argumentName: 'VERSION',
       description:
-        'The SPFx version to use (e.g., "1.22", "1.23-rc.0"). Resolves to the "version/<VERSION>" branch ' +
+        'The SPFx version to filter by (e.g., "1.22"). Also selects a corresponding "version/<VERSION>" branch ' +
         'in the template repository. Defaults to the "version/latest" branch.'
     });
 
