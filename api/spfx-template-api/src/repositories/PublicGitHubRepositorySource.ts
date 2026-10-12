@@ -122,6 +122,10 @@ export interface IPublicGitHubRepositorySourceOptions {
 
 // Matches https://<host>/<owner>/<repo>[.git] — HTTPS only, host-agnostic for GHE support.
 const REPO_URL_REGEX: RegExp = /^https:\/\/([^/]+)\/([^/]+)\/([^/]+?)(\.git)?$/;
+const OFFICIAL_SPFX_REPO_HOST: string = 'github.com';
+const OFFICIAL_SPFX_REPO_OWNER: string = 'sharepoint';
+const OFFICIAL_SPFX_REPO_NAME: string = 'spfx';
+const OFFICIAL_SPFX_AVAILABLE_VERSIONS_MESSAGE: string = 'latest (1.22), next (1.23.0-beta)';
 
 /**
  * @public
@@ -208,11 +212,39 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
     }
     const response: Response = await fetch(downloadUrl, fetchInit);
     if (!response.ok) {
+      const invalidSpfxVersionErrorMessage: string | undefined = this._getInvalidSpfxVersionErrorMessage(
+        response.status
+      );
+      if (invalidSpfxVersionErrorMessage) {
+        throw new Error(invalidSpfxVersionErrorMessage);
+      }
+
       throw new Error(`Failed to download repository: ${response.status} ${response.statusText}`);
     }
 
     const zipBuffer: Buffer = Buffer.from(await response.arrayBuffer());
     return this._extractZipBuffer(zipBuffer);
+  }
+
+  private _getInvalidSpfxVersionErrorMessage(status: number): string | undefined {
+    if (status !== 404 || !this._ref.startsWith('version/')) {
+      return undefined;
+    }
+
+    const { host, owner, repo } = this._parseRepoUrl();
+    if (
+      host !== OFFICIAL_SPFX_REPO_HOST ||
+      owner.toLowerCase() !== OFFICIAL_SPFX_REPO_OWNER ||
+      repo.toLowerCase() !== OFFICIAL_SPFX_REPO_NAME
+    ) {
+      return undefined;
+    }
+
+    const requestedVersion: string = this._ref.slice('version/'.length);
+    return (
+      `Unsupported value for --spfx-version "${requestedVersion}". ` +
+      `Available versions: ${OFFICIAL_SPFX_AVAILABLE_VERSIONS_MESSAGE}.`
+    );
   }
 
   private _extractZipBuffer(zipBuffer: Buffer): Map<string, Buffer> {

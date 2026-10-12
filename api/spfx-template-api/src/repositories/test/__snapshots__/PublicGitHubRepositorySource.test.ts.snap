@@ -74,6 +74,8 @@ exports[`PublicGitHubRepositorySource getTemplates should send Authorization hea
 
 exports[`PublicGitHubRepositorySource getTemplates should throw error when download fails 1`] = `Array []`;
 
+exports[`PublicGitHubRepositorySource getTemplates should list available versions when --spfx-version does not exist in the official repo 1`] = `Array []`;
+
 exports[`PublicGitHubRepositorySource getTemplates should throw error when network request fails 1`] = `Array []`;
 
 exports[`PublicGitHubRepositorySource getTemplates should use GHE API URL for enterprise hosts 1`] = `Array []`;
