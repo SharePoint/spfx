@@ -1,0 +1,19 @@
+{
+  "name": "spfx-cli-prototype-recipe",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Source-only preservation of the fixed React SPFx CLI packaging prototype.",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=24.15.0 <25.0.0"
+  },
+  "scripts": {
+    "test": "node --test template-store.test.mjs template-profile.test.mjs wrapper.test.mjs recipe.test.mjs"
+  },
+  "dependencies": {
+    "@rushstack/node-core-library": "5.25.0",
+    "esbuild": "0.28.2",
+    "yaml": "2.8.1"
+  }
+}

@@ -1,0 +1,6 @@
+/node_modules/
+/temp/
+/*.tgz
+/*.log
+!/wrapper/bin/
+!/wrapper/bin/spfx.mjs
