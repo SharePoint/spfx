@@ -67,7 +67,7 @@ const terminal = new Terminal(new ConsoleTerminalProvider());
 // Latest (defaults to the version/latest branch)
 new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal });
 
-// SPFx 1.24
+// Specific version
 new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', branch: 'version/1.24', terminal });
 
 // GitHub Enterprise with authentication
