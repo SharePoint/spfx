@@ -67,8 +67,8 @@ const terminal = new Terminal(new ConsoleTerminalProvider());
 // Latest (defaults to the version/latest branch)
 new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal });
 
-// Specific version
-new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', branch: 'version/1.22', terminal });
+// SPFx 1.24
+new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', branch: 'version/1.24', terminal });
 
 // GitHub Enterprise with authentication
 new PublicGitHubRepositorySource({
@@ -195,7 +195,7 @@ if (log.hasEntries) {
 }
 
 // Record events during scaffolding
-log.append({ kind: 'template-rendered', templateName: 'webpart-react', templateVersion: '1.0.0', spfxVersion: '1.22.0', context: { componentName: 'MyWebPart' }, cliVersion: '0.1.0' });
+log.append({ kind: 'template-rendered', templateName: 'webpart-react', templateVersion: '1.0.0', spfxVersion: '1.24.0', context: { componentName: 'MyWebPart' }, cliVersion: '0.1.0' });
 
 // Pass to writer to auto-record file-write events
 const writer = new SPFxTemplateWriter();
