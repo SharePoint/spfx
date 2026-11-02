@@ -19,8 +19,8 @@ importers:
   ../../api/spfx-template-api:
     dependencies:
       '@microsoft/spfx-heft-plugins':
-        specifier: 1.24.0
-        version: 1.24.0(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/node-core-library':
         specifier: ~5.25.0
         version: 5.25.0(@types/node@22.19.13)
@@ -105,30 +105,30 @@ importers:
   ../../examples/ace-data-visualization:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-property-pane':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -157,30 +157,30 @@ importers:
   ../../examples/ace-generic-card:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-property-pane':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -209,30 +209,30 @@ importers:
   ../../examples/ace-generic-image-card:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-property-pane':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -261,30 +261,30 @@ importers:
   ../../examples/ace-generic-primarytext-card:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-property-pane':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -313,30 +313,30 @@ importers:
   ../../examples/ace-search-card:
     dependencies:
       '@microsoft/sp-adaptive-card-extension-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-property-pane':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -365,8 +365,8 @@ importers:
   ../../examples/copilot-component-minimal:
     dependencies:
       '@microsoft/sp-copilot-component':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -375,17 +375,17 @@ importers:
         version: 4.4.3
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -411,11 +411,11 @@ importers:
   ../../examples/copilot-component-noframework:
     dependencies:
       '@microsoft/sp-copilot-component':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-lodash-subset':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       tslib:
         specifier: 2.3.1
         version: 2.3.1
@@ -424,17 +424,17 @@ importers:
         version: 4.4.3
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -466,11 +466,11 @@ importers:
         specifier: 2.0.314
         version: 2.0.314(react@17.0.1)
       '@microsoft/sp-copilot-component':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-http':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       react:
         specifier: 17.0.1
         version: 17.0.1
@@ -485,17 +485,17 @@ importers:
         version: 4.4.3
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -533,33 +533,33 @@ importers:
   ../../examples/extension-application-customizer:
     dependencies:
       '@microsoft/decorators':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-application-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-dialog':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -588,30 +588,30 @@ importers:
   ../../examples/extension-fieldcustomizer-minimal:
     dependencies:
       '@microsoft/decorators':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -640,30 +640,30 @@ importers:
   ../../examples/extension-fieldcustomizer-noframework:
     dependencies:
       '@microsoft/decorators':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -695,14 +695,14 @@ importers:
         specifier: ^8.106.4
         version: 8.125.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/decorators':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       react:
         specifier: 17.0.1
         version: 17.0.1
@@ -714,17 +714,17 @@ importers:
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -765,36 +765,36 @@ importers:
   ../../examples/extension-formcustomizer-noframework:
     dependencies:
       '@microsoft/decorators':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-lodash-subset':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-office-ui-fabric-core':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -826,20 +826,20 @@ importers:
         specifier: ^8.106.4
         version: 8.125.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/decorators':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-listview-extensibility':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-lodash-subset':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-office-ui-fabric-core':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       react:
         specifier: 17.0.1
         version: 17.0.1
@@ -851,17 +851,17 @@ importers:
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -902,33 +902,33 @@ importers:
   ../../examples/extension-listviewcommandset:
     dependencies:
       '@microsoft/decorators':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-dialog':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       '@microsoft/sp-listview-extensibility':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -957,30 +957,30 @@ importers:
   ../../examples/extension-search-query-modifier:
     dependencies:
       '@microsoft/decorators':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-search-extensibility':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -1013,17 +1013,17 @@ importers:
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -1052,39 +1052,39 @@ importers:
   ../../examples/webpart-minimal:
     dependencies:
       '@microsoft/sp-component-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-lodash-subset':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-office-ui-fabric-core':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-property-pane':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       '@microsoft/sp-webpart-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -1113,39 +1113,39 @@ importers:
   ../../examples/webpart-noframework:
     dependencies:
       '@microsoft/sp-component-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-lodash-subset':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-office-ui-fabric-core':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-property-pane':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       '@microsoft/sp-webpart-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       tslib:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -1177,23 +1177,23 @@ importers:
         specifier: ^8.106.4
         version: 8.125.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-component-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-core-library':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/sp-lodash-subset':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-office-ui-fabric-core':
-        specifier: 1.24.0
-        version: 1.24.0
+        specifier: 1.24.1
+        version: 1.24.1
       '@microsoft/sp-property-pane':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       '@microsoft/sp-webpart-base':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       react:
         specifier: 17.0.1
         version: 17.0.1
@@ -1205,17 +1205,17 @@ importers:
         version: 2.3.1
     devDependencies:
       '@microsoft/eslint-config-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/eslint-plugin-spfx':
-        specifier: 1.24.0
-        version: 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+        specifier: 1.24.1
+        version: 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@microsoft/sp-module-interfaces':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)
       '@microsoft/spfx-web-build-rig':
-        specifier: 1.24.0
-        version: 1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)
+        specifier: 1.24.1
+        version: 1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)
       '@rushstack/eslint-config':
         specifier: 4.8.0
         version: 4.8.0(eslint@8.57.1)(typescript@5.8.3)
@@ -2971,12 +2971,6 @@ packages:
   '@griffel/style-types@1.3.0':
     resolution: {integrity: sha512-bHwD3sUE84Xwv4dH011gOKe1jul77M1S6ZFN9Tnq8pvZ48UMdY//vtES6fv7GRS5wXYT4iqxQPBluAiYAfkpmw==}
 
-  '@hono/node-server@1.19.17':
-    resolution: {integrity: sha1-mb2GJc266CZSoTXHE2PNYyL65IM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@hono/node-server/-/node-server-1.19.17.tgz}
-    engines: {node: '>=18.14.1'}
-    peerDependencies:
-      hono: ^4
-
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -3149,7 +3143,7 @@ packages:
     engines: {node: '>=6.0.0'}
 
   '@jridgewell/source-map@0.3.11':
-    resolution: {integrity: sha512-ZMp1V8ZFcPG5dIWnQLr3NSI1MiCU7UETdS/A0G8V/XWHvJv3ZsFqutJn1Y5RPmAPX6F3BiE397OqveU/9NCuIA==}
+    resolution: {integrity: sha1-shg1y9Nttla4V8KtAuvUE8wTqbo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jridgewell/source-map/-/source-map-0.3.11.tgz}
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
@@ -3158,49 +3152,49 @@ packages:
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
   '@jsep-plugin/assignment@1.3.0':
-    resolution: {integrity: sha512-VVgV+CXrhbMI3aSusQyclHkenWSAm95WaiKrMxRFam3JSUiIaQjoMIw2sEs/OX4XifnqeQUN4DYbJjlA8EfktQ==}
+    resolution: {integrity: sha1-/PxUF6BJM/fO7nhuirSYqjziskI=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsep-plugin/assignment/-/assignment-1.3.0.tgz}
     engines: {node: '>= 10.16.0'}
     peerDependencies:
       jsep: ^0.4.0||^1.0.0
 
   '@jsep-plugin/regex@1.0.4':
-    resolution: {integrity: sha512-q7qL4Mgjs1vByCaTnDFcBnV9HS7GVPJX5vyVoCgZHNSC9rjwIlmbXG5sUuorR5ndfHAIlJ8pVStxvjXHbNvtUg==}
+    resolution: {integrity: sha1-yy/EIyIPpxxgkyO5un99NEp1X8w=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsep-plugin/regex/-/regex-1.0.4.tgz}
     engines: {node: '>= 10.16.0'}
     peerDependencies:
       jsep: ^0.4.0||^1.0.0
 
   '@jsonjoy.com/base64@1.1.2':
-    resolution: {integrity: sha512-q6XAnWQDIMA3+FTiOYajoYqySkO+JSat0ytXGSuRdq9uXE7o92gzuQwQM14xaCRlBLGq3v5miDGC4vkVTn54xA==}
+    resolution: {integrity: sha1-z46p3LhJuByV8U/AqqFRxrVNJXg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/base64/-/base64-1.1.2.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/base64@17.67.0':
-    resolution: {integrity: sha512-5SEsJGsm15aP8TQGkDfJvz9axgPwAEm98S5DxOuYe8e1EbfajcDmgeXXzccEjh+mLnjqEKrkBdjHWS5vFNwDdw==}
+    resolution: {integrity: sha1-fu2jy0ETjXepBAj9LkKyq6EFdtc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/base64/-/base64-17.67.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/buffers@1.2.1':
-    resolution: {integrity: sha512-12cdlDwX4RUM3QxmUbVJWqZ/mrK6dFQH4Zxq6+r1YXKXYBNgZXndx2qbCJwh3+WWkCSn67IjnlG3XYTvmvYtgA==}
+    resolution: {integrity: sha1-jZnH9n6vck00KN/ZgmxkVSZqXIM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/buffers/-/buffers-1.2.1.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/buffers@17.67.0':
-    resolution: {integrity: sha512-tfExRpYxBvi32vPs9ZHaTjSP4fHAfzSmcahOfNxtvGHcyJel+aibkPlGeBB+7AoC6hL7lXIE++8okecBxx7lcw==}
+    resolution: {integrity: sha1-XFjbze6ogkzilr0c/OAGwusWez0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/buffers/-/buffers-17.67.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/codegen@1.0.0':
-    resolution: {integrity: sha512-E8Oy+08cmCf0EK/NMxpaJZmOxPqM+6iSe2S4nlSBrPZOORoDJILxtbSUEDKQyTamm/BVAhIGllOBNU79/dwf0g==}
+    resolution: {integrity: sha1-XCP3lsR2dfFm0juUjNuIkYS5Mgc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/codegen/-/codegen-1.0.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/codegen@17.67.0':
-    resolution: {integrity: sha512-idnkUplROpdBOV0HMcwhsCUS5TRUi9poagdGs70A6S4ux9+/aPuKbh8+UYRTLYQHtXvAdNfQWXDqZEx5k4Dj2Q==}
+    resolution: {integrity: sha1-NjX9h2nXfhm3XcVXS8l1YBmy5ZE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/codegen/-/codegen-17.67.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
@@ -3254,37 +3248,37 @@ packages:
       tslib: '2'
 
   '@jsonjoy.com/json-pack@1.21.0':
-    resolution: {integrity: sha512-+AKG+R2cfZMShzrF2uQw34v3zbeDYUqnQ+jg7ORic3BGtfw9p/+N6RJbq/kkV8JmYZaINknaEQ2m0/f693ZPpg==}
+    resolution: {integrity: sha1-k/jdV/46OpITKzPR6xgtzZ52Kfo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/json-pack/-/json-pack-1.21.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/json-pack@17.67.0':
-    resolution: {integrity: sha512-t0ejURcGaZsn1ClbJ/3kFqSOjlryd92eQY465IYrezsXmPcfHPE/av4twRSxf6WE+TkZgLY+71vCZbiIiFKA/w==}
+    resolution: {integrity: sha1-jdj/Zd2ZnF1NJt9GxjkVx73sCTo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/json-pack/-/json-pack-17.67.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/json-pointer@1.0.2':
-    resolution: {integrity: sha512-Fsn6wM2zlDzY1U+v4Nc8bo3bVqgfNTGcn6dMgs6FjrEnt4ZCe60o6ByKRjOGlI2gow0aE/Q41QOigdTqkyK5fg==}
+    resolution: {integrity: sha1-BJy1MKwk6Ey6CFkMXja0McSENAg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/json-pointer/-/json-pointer-1.0.2.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/json-pointer@17.67.0':
-    resolution: {integrity: sha512-+iqOFInH+QZGmSuaybBUNdh7yvNrXvqR+h3wjXm0N/3JK1EyyFAeGJvqnmQL61d1ARLlk/wJdFKSL+LHJ1eaUA==}
+    resolution: {integrity: sha1-dEOVc9wEbgyaOlUvuUs5G8dTE7g=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/json-pointer/-/json-pointer-17.67.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/util@1.9.0':
-    resolution: {integrity: sha512-pLuQo+VPRnN8hfPqUTLTHk126wuYdXVxE6aDmjSeV4NCAgyxWbiOIeNJVtID3h1Vzpoi9m4jXezf73I6LgabgQ==}
+    resolution: {integrity: sha1-fulVhq7Qp2a3Rs2Ng2PjNsPEfEY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/util/-/util-1.9.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
   '@jsonjoy.com/util@17.67.0':
-    resolution: {integrity: sha512-6+8xBaz1rLSohlGh68D1pdw3AwDi9xydm8QNlAFkvnavCJYSze+pxoW2VKP8p308jtlMRLs5NTHfPlZLd4w7ew==}
+    resolution: {integrity: sha1-fEKI/DgIIz5Vx2EBAee7RZDN3T8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@jsonjoy.com/util/-/util-17.67.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
@@ -3304,23 +3298,23 @@ packages:
   '@microsoft/app-manifest@1.1.4-beta.2026101507.0':
     resolution: {integrity: sha512-oGrCbUmdeTO+zVaO9VjR+BhWreTXxD8vXd/YzFw0FUbUTa3o5vkOG9Egt4BTWgUKCM0630ebt3ImdV3GUflmgA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/app-manifest/-/app-manifest-1.1.4-beta.2026101507.0.tgz}
 
-  '@microsoft/decorators@1.24.0':
-    resolution: {integrity: sha512-qVtvVd+cyF9zIamqjnpNPOLEajwCW0iIhKz6omnYJ7Tn0meOXfWp+qgy6hXwTi5C5lJ6Yo/hi08mlQQlbKHNRQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/decorators/-/decorators-1.24.0.tgz}
+  '@microsoft/decorators@1.24.1':
+    resolution: {integrity: sha512-YkwSAQCkrAtqjhrdYnlRlzeISkG2CnrErTDxbbwgKYdLe3/leHLegnu5CUHVDBagKsujbar/czZBCFVuWGN30w==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/decorators/-/decorators-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/eslint-config-spfx@1.24.0':
-    resolution: {integrity: sha512-e+5DidEyrYbBYYMXGjAbgs0cJis7AZjKF99eH0VMpoSLsoNWkrpMnQeDCTTzVJmKzV7uvOADVHk5J5CUFhlF2Q==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/eslint-config-spfx/-/eslint-config-spfx-1.24.0.tgz}
+  '@microsoft/eslint-config-spfx@1.24.1':
+    resolution: {integrity: sha512-HXurcmZj18r7hQ3of+XU+HAGsS5lk9gQKHi7kY/n19iS7vO21qDbkXrlM+WwpgGDvhMfVSqfap9miO3S/YfzcA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/eslint-config-spfx/-/eslint-config-spfx-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
 
-  '@microsoft/eslint-plugin-spfx@1.24.0':
-    resolution: {integrity: sha512-hqb/NGl6+1ruIj0SSKZnsKy1sGuZQIueAZqP4DXhMn3CB5qSMigCJz2bY9eq+3lWPmb7cgr75Uzj69tXNYYrQA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/eslint-plugin-spfx/-/eslint-plugin-spfx-1.24.0.tgz}
+  '@microsoft/eslint-plugin-spfx@1.24.1':
+    resolution: {integrity: sha512-xBU1gKAZFvx+/MtOrzvBuFvuDaIrW04riYHDYwn1SKnU2xzkp9stUdMO5o5UzPH1iT5qIoUK2ibXzOTmnPUy3g==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/eslint-plugin-spfx/-/eslint-plugin-spfx-1.24.1.tgz}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
 
   '@microsoft/load-themed-styles@1.10.292':
-    resolution: {integrity: sha512-LQWGImtpv2zHKIPySLalR1aFXumXfOq8UuJvR15mIZRKXIoM+KuN9wZq+ved2FyeuePjQSJGOxYynxtCLLwDBA==}
+    resolution: {integrity: sha1-VYdafoMQyd1J0mVH1lu9W6ohrGQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/load-themed-styles/-/load-themed-styles-1.10.292.tgz}
 
   '@microsoft/load-themed-styles@1.10.295':
     resolution: {integrity: sha512-W+IzEBw8a6LOOfRJM02dTT7BDZijxm+Z7lhtOAz1+y9vQm1Kdz9jlAO+qCEKsfxtUOmKilW8DIRqFw2aUgKeGg==}
@@ -3346,24 +3340,24 @@ packages:
       stream-browserify:
         optional: true
 
-  '@microsoft/sp-adaptive-card-extension-base@1.24.0':
-    resolution: {integrity: sha512-XnKoTksdwxs4gTPXwLy5UpHMNA8u/O3VP+D9zTmKrlLDxOBQJFh8MfO+oVQwL4Y55do/FWGzAEGsPSWLelsYiQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-adaptive-card-extension-base/-/sp-adaptive-card-extension-base-1.24.0.tgz}
+  '@microsoft/sp-adaptive-card-extension-base@1.24.1':
+    resolution: {integrity: sha512-ruUnsne7mP8/b2/J5GS+UcXl5HAOX7FnzsEc9FvQCQB+89/NtvZjT4E8zkaO9rgs7Y1CedzjA2+TleEKOXHyZw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-adaptive-card-extension-base/-/sp-adaptive-card-extension-base-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-application-base@1.24.0':
-    resolution: {integrity: sha512-PtMFVl5Hj8oV3qb4a+BMKIGG67twSpGRKiH+byfJjGfSFdCg9KdwP/XADgmCGM+8IAe/zDbpozIUE2lukmK3vw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-application-base/-/sp-application-base-1.24.0.tgz}
+  '@microsoft/sp-application-base@1.24.1':
+    resolution: {integrity: sha512-yg1v9DmL8hXMp0y/cn1HPzA8VEAcPUnmHIzYbCFYuuMLRfQIFwzEsF93tNwas1hsjrch7rfnOq2d28oNnZcA3g==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-application-base/-/sp-application-base-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-component-base@1.24.0':
-    resolution: {integrity: sha512-1N2rflx1SjwiFC3jv6lTHrhSilIt+U2ODJVr5r9eqDb4+tjn+89nYjAua7j1LpFSWnQfpjrOgqX8QxS1063Gyg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-component-base/-/sp-component-base-1.24.0.tgz}
+  '@microsoft/sp-component-base@1.24.1':
+    resolution: {integrity: sha512-cCygZ5rmbyL3DGTW9djtlj3CuoPEw3Yn3k2Lbbc1Qe6dPw5ioyKywwaT49LUlxFjzl2nYYicUdQz7QG0rdCR+Q==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-component-base/-/sp-component-base-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-copilot-component@1.24.0':
-    resolution: {integrity: sha512-0Igacrixy8KBkhmm988Mwq5q0pjnIF27otIGWO5aGo1bBwGpk+c6dJQpgNddaGm/LewB10vUIcw/3ICr5anRlQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-copilot-component/-/sp-copilot-component-1.24.0.tgz}
+  '@microsoft/sp-copilot-component@1.24.1':
+    resolution: {integrity: sha512-vDEPZm/FRo4WRJL6AcpJnMkUu+qXbw8iA3NMMPCpPtOfepMMbg36nrPQQNya5xkG9UZbBN93vE+iOC4EZEvsbQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-copilot-component/-/sp-copilot-component-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-core-library@1.24.0':
-    resolution: {integrity: sha512-ZGERyhyJedpZfi2JKWIQRSE3OEVv/4EKfC4IevyfrlsGgBr2xMPClITRaMkk/GkAEIDdbOpigYUep2rd1l/66Q==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-core-library/-/sp-core-library-1.24.0.tgz}
+  '@microsoft/sp-core-library@1.24.1':
+    resolution: {integrity: sha512-IhZqDYyy9tvddetHXwLVX5cEF2Y4tdyoSlU1adV6/dlsDvzPN1CVzLOzX5kJ5vDmUsqM04hAZnQoO9iYbVgMxg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-core-library/-/sp-core-library-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
     peerDependencies:
       '@types/react': '>=17.0.45 <19.0.0'
@@ -3371,42 +3365,42 @@ packages:
       react: '>=16.13.1 <19.0.0'
       react-dom: '>=16.13.1 <19.0.0'
 
-  '@microsoft/sp-css-loader@1.24.0':
-    resolution: {integrity: sha512-j0P/0J+nihKZhtcCDPZPj/cwlJ08qKM2RTqwiXzAVX5pv83kDDEJghVu0CDRZXcwWx49kr9gjIbjIkzOy8xGEA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-css-loader/-/sp-css-loader-1.24.0.tgz}
+  '@microsoft/sp-css-loader@1.24.1':
+    resolution: {integrity: sha512-z/4aMHTk/DlC9Mtjz9VMfGFDwAt5Gfb/hNbOm5riz6tFB3dDOXV4ouOgPi+vR4hyb5popXgJ+1LA9xuku+XH5g==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-css-loader/-/sp-css-loader-1.24.1.tgz}
     peerDependencies:
       webpack: ^5.88.1
 
-  '@microsoft/sp-diagnostics@1.24.0':
-    resolution: {integrity: sha512-O+obVVNGJr75A6GZiIW+nAp+2R2Jqszfr765Bc5/AIlq76MqlooNC51UjLFDktHLYuVFUGvLemdeia8flr1UUw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-diagnostics/-/sp-diagnostics-1.24.0.tgz}
+  '@microsoft/sp-diagnostics@1.24.1':
+    resolution: {integrity: sha512-Eqisb3g7YJTPtjjuRGJE5F7vssO6OUg32bqZrEJcTSl/k14MfQhncX6eUWpDPaFaHbmOQnh2L1w/3xUe9IAqHQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-diagnostics/-/sp-diagnostics-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-dialog@1.24.0':
-    resolution: {integrity: sha512-yPBH7Bk28eFQxjV0Faa/wgw+2mFQKWStvK0VdPoUPhGNkjyyGb3PpqF/vVcFgYam1BHUCq5OuCM9cnQv0RYsZw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-dialog/-/sp-dialog-1.24.0.tgz}
+  '@microsoft/sp-dialog@1.24.1':
+    resolution: {integrity: sha512-GBEiuhWqpx8lzgI/kiChSwtwydjaGRfYXAtV7rsVCuKKtOxWTQPvuR/xabMVfU9OFljau5q9QJYm2ugcFyEn9Q==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-dialog/-/sp-dialog-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
     peerDependencies:
       '@types/react': '>=17.0.45 <19.0.0'
       '@types/react-dom': '>=17.0.17 <19.0.0'
 
-  '@microsoft/sp-dynamic-data@1.24.0':
-    resolution: {integrity: sha512-KixKfY+6GYvH61BQV07D2NZ21qDAqCIA9QxMe0S0LYE6F44Q9W2fgqP3M6qoIt7+DZomfbCOjtAqhwMbqZ5OrQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-dynamic-data/-/sp-dynamic-data-1.24.0.tgz}
+  '@microsoft/sp-dynamic-data@1.24.1':
+    resolution: {integrity: sha512-hlzjVYy2e3e7w7l/Wl2iuBY9+U34GuUr1WCXi1Yp5qOmNFGB8VNLyAvRvJi6PPsLSGjTWb5w1X8CXGHGWPstVQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-dynamic-data/-/sp-dynamic-data-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-extension-base@1.24.0':
-    resolution: {integrity: sha512-rVukr+A2vtAjJbA88Jq8fPBCX7tvBmB0O+G0VYyJ01mywhTCUum2Pis0FpG9nK+SmdWSu7SyZ7kqyIjZe6SMMA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-extension-base/-/sp-extension-base-1.24.0.tgz}
+  '@microsoft/sp-extension-base@1.24.1':
+    resolution: {integrity: sha512-nTFQNonk7VKKdt9bOk3SSu8TId7rwl25g50H9onIBWDTLvljcDeQJZNec2XAJxrq2Y/NSTcucWdRrclJWrnYKw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-extension-base/-/sp-extension-base-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-http-base@1.24.0':
-    resolution: {integrity: sha512-B4DKKrsNE/8dYqIHs8OTI/aMPoQb3K+nQMmEn1s8Cer0NyZIZfKyhoQqbPCbXQo428basgsU/2TK4z1kpbgn3g==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-http-base/-/sp-http-base-1.24.0.tgz}
+  '@microsoft/sp-http-base@1.24.1':
+    resolution: {integrity: sha512-wjhjoKo9COQ0PR/psQEcrOSUmWRlT0pXIJflowhME7Xy7uhCvdbuGgAjsOYF2/R3ycNQAIZvZbLilbtwzk7w5g==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-http-base/-/sp-http-base-1.24.1.tgz}
 
-  '@microsoft/sp-http-msgraph@1.24.0':
-    resolution: {integrity: sha512-GURhfcKWjXWAqXhc8n+e0lOXTXOfEySJoYSR/UostcZwZgHKHSKuRHgoMBCxxIj/SMjKjxvCQJQ9B2alD0fi7g==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-http-msgraph/-/sp-http-msgraph-1.24.0.tgz}
+  '@microsoft/sp-http-msgraph@1.24.1':
+    resolution: {integrity: sha512-R5+SdztxKeIPtifds8ChE16+zzbo/nONdLcp/En3rWJ5lUa224MqABFmPhnu1soYERdRKk7myZWWXTFK5O6Xvg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-http-msgraph/-/sp-http-msgraph-1.24.1.tgz}
 
-  '@microsoft/sp-http@1.24.0':
-    resolution: {integrity: sha512-z1PE2LEqREGNyKVjF7lOphYa6Qu8J2QFe1xPGNrMiKVxf+x7xPOhiOeqK3zpNEpE8uEM+z3jZtWu6xahLmqmrw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-http/-/sp-http-1.24.0.tgz}
+  '@microsoft/sp-http@1.24.1':
+    resolution: {integrity: sha512-LSfPPoY73FcVJDpDojjz7lx078v2zD4hHh74DsJ6lDnhyAh0CTGP0bKhQQ5kxSJniTA/UBwfgr+xuCRXGUaOpw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-http/-/sp-http-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-image-helper@1.24.0':
-    resolution: {integrity: sha512-kfFslHF5z7n7oMTypn0irqUOTn33Srf2m9P9YraUpaM/vwJaOaA6mQtY0xiWnuSAAy4YTnt4oyeJfIzd7W9vUg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-image-helper/-/sp-image-helper-1.24.0.tgz}
+  '@microsoft/sp-image-helper@1.24.1':
+    resolution: {integrity: sha512-1iDyPfQmlWZR/XnzgkGiadBxABhI4wm24cvXJOvJoNtzSStwzFOELF4HduZSjbN4+WFpugUOiOyPGe0TgpBqBw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-image-helper/-/sp-image-helper-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
     peerDependencies:
       '@types/react': '>=17.0.45 <19.0.0'
@@ -3414,65 +3408,65 @@ packages:
       react: '>=16.13.1 <18.0.0'
       react-dom: '>=16.13.1 <18.0.0'
 
-  '@microsoft/sp-listview-extensibility@1.24.0':
-    resolution: {integrity: sha512-khNsAgNAHZk3xgz4WggcroA+dKspwXzMXgoVUYK/kxNfq9NXt/CBEl6+RdoBZLy+TR7wZlMNIB3SkUaAJzuo5Q==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-listview-extensibility/-/sp-listview-extensibility-1.24.0.tgz}
+  '@microsoft/sp-listview-extensibility@1.24.1':
+    resolution: {integrity: sha512-eus3XHsnAi+atVAMERc+xuhXNRsgY7gLe7pYhoxB97kqFaLBTAXMj5RV6DGsauRlMgJi/M2xVx6mibp/MvWreA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-listview-extensibility/-/sp-listview-extensibility-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-loader@1.24.0':
-    resolution: {integrity: sha512-eHxEyceEOnG2oOIGLWKz4bztkJYMaijveHLJfDzU2DbDDyFjXZ7lf13wrXruidxGbCnYk8Tuco8FU/+a4+1EcQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-loader/-/sp-loader-1.24.0.tgz}
-    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
-    peerDependencies:
-      '@types/react': '>=17.0.45 <19.0.0'
-      '@types/react-dom': '>=17.0.17 <19.0.0'
-
-  '@microsoft/sp-lodash-subset@1.24.0':
-    resolution: {integrity: sha512-YFxPRlw2nTzTAHXyl/w6AIlU56m9bUb0UQ4QvbyPPxvAe4UKbnuU3UH6Kh+MRMk2asRxeNLsNG4yYtsyR4bn+w==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-lodash-subset/-/sp-lodash-subset-1.24.0.tgz}
-    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
-
-  '@microsoft/sp-module-interfaces@1.24.0':
-    resolution: {integrity: sha512-5ht2xTUgh3w1LmE/V3zi/kQ72v0ijo0VSRzAkqm31zlASK0KnBJ3pqxveDqvKT0G+lAs3NexHuZCLwKkKowsLw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-module-interfaces/-/sp-module-interfaces-1.24.0.tgz}
-    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
-
-  '@microsoft/sp-odata-types@1.24.0':
-    resolution: {integrity: sha512-mUe9BAPddYdSmqtOt9oumxbJxiOASugqmsdp5+y1tLfNonP/bB8MwxMJoH/9Xp9KjnKjwukblX9u+vDwkmFkhg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-odata-types/-/sp-odata-types-1.24.0.tgz}
-    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
-
-  '@microsoft/sp-office-ui-fabric-core@1.24.0':
-    resolution: {integrity: sha512-NNRMWWkrkYk40JrHWF4Wz+KTS88MHKDG/NeHrwykhcH0c0pg5qDiTCD5G2yrCwnzIw6tZDxA46Fp4x7KrCiejg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-office-ui-fabric-core/-/sp-office-ui-fabric-core-1.24.0.tgz}
-    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
-
-  '@microsoft/sp-page-context@1.24.0':
-    resolution: {integrity: sha512-Es6ORYWvu4n89yNR9+Zo0kOumC2yywHiZvFexWSX38h0kwXRVQOEMMb2GntsDVYwEW26ARL556xEWGFSeN/xfA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-page-context/-/sp-page-context-1.24.0.tgz}
-    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
-
-  '@microsoft/sp-property-pane@1.24.0':
-    resolution: {integrity: sha512-jTKxSp9FtRiJueTh/wW4c4ly1ED1u94zI+COtK65w5yxEDkSOZuwijUDb1X4BTsPxyO2YoYG2lx/Miq0HBLRzQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-property-pane/-/sp-property-pane-1.24.0.tgz}
+  '@microsoft/sp-loader@1.24.1':
+    resolution: {integrity: sha512-vCEO+ai9DDgzOa0KOaeHQ49YFuplqdAguLSTRgPz5LAIkBazfoMs4U6iV7riI7q3eV+sy+l5/ehGYuGB6b8QKQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-loader/-/sp-loader-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
     peerDependencies:
       '@types/react': '>=17.0.45 <19.0.0'
       '@types/react-dom': '>=17.0.17 <19.0.0'
 
-  '@microsoft/sp-search-extensibility@1.24.0':
-    resolution: {integrity: sha512-Ujw9cwLgxeYbNpl6Lmv+YUjgOCKwKg9eljX4uLUqaB4A8FVKTLO7Pv5hlng1XyKHncQzj1IEssWUlUjg8y2KNw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-search-extensibility/-/sp-search-extensibility-1.24.0.tgz}
+  '@microsoft/sp-lodash-subset@1.24.1':
+    resolution: {integrity: sha512-oouDHl/Hd1ldJ8ZtWKVT59EVbWVw/QDpoNYH4jYN8AgOHVC6Sv1ntKo3OU2FbiZ7gC4Z4dcDnOrAtgh9L/RxnA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-lodash-subset/-/sp-lodash-subset-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-top-actions@1.24.0':
-    resolution: {integrity: sha512-8VFBTrcvPicMAMMibWhqbBJyYwsoEizuagSQBv0Tgi+TfJ5VpGQ+2wX4MJJsgKU3UF4nl7h1/7UeJ1JeYQYfzw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-top-actions/-/sp-top-actions-1.24.0.tgz}
+  '@microsoft/sp-module-interfaces@1.24.1':
+    resolution: {integrity: sha512-+HoQTyU4WvzApqAnKSkFRdhoG9E85b+rSTUg2Ct3bxkJcRQto4wQvzjcOgVIyvGh+NRBPtRbJRKMHbg+EYGubQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-module-interfaces/-/sp-module-interfaces-1.24.1.tgz}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
 
-  '@microsoft/sp-webpart-base@1.24.0':
-    resolution: {integrity: sha512-oZ2jfP4VuAHpU3cYmo1VNlThe1GXzxVrZyYukBoDzOqnXzfgMyCb2rb1DWI1NepAdQ+E1U9Hd3ceOz4uwQWnUA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-webpart-base/-/sp-webpart-base-1.24.0.tgz}
+  '@microsoft/sp-odata-types@1.24.1':
+    resolution: {integrity: sha512-133tGAGYOzRHqokqmUzCHJDur8YSNlCJsuKeTNOMJZ01xASDSzwScwj/uqrcN0KJEsCj6FdKC5OHrcswfZXXfQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-odata-types/-/sp-odata-types-1.24.1.tgz}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
+
+  '@microsoft/sp-office-ui-fabric-core@1.24.1':
+    resolution: {integrity: sha512-JRuzKKDGOgc+Hlvd0b5ZPfVKqpL+gXGFHHQ9+bHo6AGs2Wq0y4ZKPbrOr2TdLy7Gdh7IK+tlkSzjl5X6owqEuA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-office-ui-fabric-core/-/sp-office-ui-fabric-core-1.24.1.tgz}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
+
+  '@microsoft/sp-page-context@1.24.1':
+    resolution: {integrity: sha512-9AuFSUjLtnOt4v6psDu9tc1oaazTWe8ElJcaI1x6mmm96V+s/mmsCg+jNGQjpyStCDJyOOWFZQuQIz/VlzTU3g==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-page-context/-/sp-page-context-1.24.1.tgz}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
+
+  '@microsoft/sp-property-pane@1.24.1':
+    resolution: {integrity: sha512-wevLk8XXu/HBueQcKn3GG29rsCTdnIlyCbOXTjlj0VEUoAuo4oDY/wJx+rnFNa/H9gwgRNDfp/wbHHYXn/fUhg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-property-pane/-/sp-property-pane-1.24.1.tgz}
     engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
     peerDependencies:
       '@types/react': '>=17.0.45 <19.0.0'
       '@types/react-dom': '>=17.0.17 <19.0.0'
 
-  '@microsoft/spfx-heft-plugins@1.24.0':
-    resolution: {integrity: sha512-vkLMHWDrd+UZZKD1BX3o+4cS6Adjay6oCkFRq9XJlHXaCbHZFyg3CXYwY2ebY3ztT4mPwnKcd0sv5F1kakNaXQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/spfx-heft-plugins/-/spfx-heft-plugins-1.24.0.tgz}
+  '@microsoft/sp-search-extensibility@1.24.1':
+    resolution: {integrity: sha512-bcgIPdbKDhmIrBF3zjA1KYlcr+5YxWyL0Izddxyhl05MAX5epysBUnY/Hu0qFPYbmhv5yGgss14KBDCXSjtpAg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-search-extensibility/-/sp-search-extensibility-1.24.1.tgz}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
+
+  '@microsoft/sp-top-actions@1.24.1':
+    resolution: {integrity: sha512-o+6jNHGGi3QWbLFXTh1JZkc0bGy9ty9AIDUNwKDuUBkXhiR2tDLOkj6f4xT6VTY35OzGT+Xb3EcoZgv2WsQfpA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-top-actions/-/sp-top-actions-1.24.1.tgz}
+
+  '@microsoft/sp-webpart-base@1.24.1':
+    resolution: {integrity: sha512-0Ot5/Gqwmy1YmsIzzwoOJ1i4jcNday/KDVVrPpho9DMMfNAcJULyXUFPf2Rp4A+aaaAON0yeWdZc+s93/t0j+w==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/sp-webpart-base/-/sp-webpart-base-1.24.1.tgz}
+    engines: {node: '>=18.17.1 <19.0.0 || >=22.14.0 <23.0.0 || >=24.0.0 <25.0.0 || >=26.0.0 <27.0.0'}
+    peerDependencies:
+      '@types/react': '>=17.0.45 <19.0.0'
+      '@types/react-dom': '>=17.0.17 <19.0.0'
+
+  '@microsoft/spfx-heft-plugins@1.24.1':
+    resolution: {integrity: sha512-Qtk/Ra5GN7VOItvxV52mNXOkpBxQCG7Me92pTZRTqX5eppYaXJ+cfk5behKWFAtnxVjmpnDYiqGeTYms/9DYpw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/spfx-heft-plugins/-/spfx-heft-plugins-1.24.1.tgz}
     peerDependencies:
       '@rushstack/heft': ^1.1.5
 
-  '@microsoft/spfx-web-build-rig@1.24.0':
-    resolution: {integrity: sha512-mLL4kyp2Uc29Z/eoJNZ2XPAC1HNtBwmRELi748K1P3xmTTbv+amN56PCQeR/Z74RrWXy0lALBYMdKspuZaZ7iQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/spfx-web-build-rig/-/spfx-web-build-rig-1.24.0.tgz}
+  '@microsoft/spfx-web-build-rig@1.24.1':
+    resolution: {integrity: sha512-5zUxIiU3rQHyBK7N24280nKj7wPB5nxTzPUSibGDCbADtUk0ufF63raAIfy88kpp7tLYUC7hHDGmrcWNdWOcUw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/spfx-web-build-rig/-/spfx-web-build-rig-1.24.1.tgz}
 
   '@microsoft/teams-js@2.53.0':
     resolution: {integrity: sha1-6WQFDClnIk7sXvptRiiRz7gKOzs=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/teams-js/-/teams-js-2.53.0.tgz}
@@ -3482,16 +3476,6 @@ packages:
 
   '@microsoft/tsdoc@0.17.1':
     resolution: {integrity: sha512-VHyYyyoH63jFoO3shpw9Zfijk5v/9p/VrClW35z0/q6ooK7sSmxpzOkS4iZPxs3vO4XtBW4H38HRAKkAMIK7DA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@microsoft/tsdoc/-/tsdoc-0.17.1.tgz}
-
-  '@modelcontextprotocol/sdk@1.29.0':
-    resolution: {integrity: sha1-eXhti1JeJp3oUKyCsfH3V/ORX0Q=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@modelcontextprotocol/sdk/-/sdk-1.29.0.tgz}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@cfworker/json-schema': ^4.1.1
-      zod: ^3.25 || ^4.0
-    peerDependenciesMeta:
-      '@cfworker/json-schema':
-        optional: true
 
   '@napi-rs/wasm-runtime@1.1.6':
     resolution: {integrity: sha1-7TOAbQ+b6Y3HbQw9T9hy/acBtdU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@napi-rs/wasm-runtime/-/wasm-runtime-1.1.6.tgz}
@@ -3980,7 +3964,7 @@ packages:
     resolution: {integrity: sha512-YfhQ22Lah2e3CHPsb93tRwIGNiSwkuz1/blk4e6QrWS0jQzCSNbGLtOEYhPg02W0yGTTmpajp7dCTbBAMN3qsg==}
 
   '@types/requirejs@2.1.29':
-    resolution: {integrity: sha512-61MNgoBY6iEsHhFGiElSjEu8HbHOahJLGh9BdGSfzgAN+2qOuFJKuG3f7F+/ggKr+0yEM3Y4fCWAgxU6es0otg==}
+    resolution: {integrity: sha1-vEi8gzwHnCwkumr7ym06A7P04vM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@types/requirejs/-/requirejs-2.1.29.tgz}
 
   '@types/retry@0.12.2':
     resolution: {integrity: sha512-XISRgDJ2Tc5q4TRqvgJtzsRkFYNJzZrhTdtMoGVBttwzzQJkPnS3WWTFc7kuDRoPtPakl+T+OfdEUjYJj7Jbow==}
@@ -4014,7 +3998,7 @@ packages:
     deprecated: This is a stub types definition. strip-bom provides its own type definitions, so you do not need this installed.
 
   '@types/tapable@1.0.6':
-    resolution: {integrity: sha512-W+bw9ds02rAQaMvaLYxAbJ6cvguW/iJXNT6lTssS1ps6QdrMKttqEAMEG/b5CR8TZl3/L7/lH0ZV5nNR1LXikA==}
+    resolution: {integrity: sha1-qcpLcKGLJwzLK8Cqr+/R1Ia36nQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@types/tapable/-/tapable-1.0.6.tgz}
 
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha1-y24qaRtwyxd8bjrpwdLosuqM0wQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@types/tough-cookie/-/tough-cookie-4.0.5.tgz}
@@ -4309,11 +4293,7 @@ packages:
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
 
   accepts@1.3.8:
-    resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
-    engines: {node: '>= 0.6'}
-
-  accepts@2.0.0:
-    resolution: {integrity: sha1-u89LpQdUZ/PyEx6rPP/HPC9deJU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/accepts/-/accepts-2.0.0.tgz}
+    resolution: {integrity: sha1-C/C+EltnAUrcsLCSHmLbe//hay4=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/accepts/-/accepts-1.3.8.tgz}
     engines: {node: '>= 0.6'}
 
   acorn-import-phases@1.0.4:
@@ -4354,7 +4334,7 @@ packages:
         optional: true
 
   ajv-formats@2.1.1:
-    resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    resolution: {integrity: sha1-bmaUAGWet0lzu/LjMycYCgmWtSA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/ajv-formats/-/ajv-formats-2.1.1.tgz}
 
   ajv-formats@3.0.1:
     resolution: {integrity: sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==}
@@ -4425,7 +4405,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   array-flatten@1.1.1:
-    resolution: {integrity: sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==}
+    resolution: {integrity: sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/array-flatten/-/array-flatten-1.1.1.tgz}
 
   array-includes@3.1.9:
     resolution: {integrity: sha512-FmeCCAenzH0KH381SPT5FZmiA/TmpndpcaShhfgEN9eCVjnFBqq3l1xrI42y8+PPLI6hypzou4GXw00WHmPBLQ==}
@@ -4471,7 +4451,7 @@ packages:
     engines: {node: '>= 4.0.0'}
 
   autoprefixer@10.4.27:
-    resolution: {integrity: sha512-NP9APE+tO+LuJGn7/9+cohklunJsXWiaWEfV3si4Gi/XHDwVNgkwr1J3RQYFIvPy76GmJ9/bW8vyoU1LcxwKHA==}
+    resolution: {integrity: sha1-UeowGlw8X4ZC+OVkdZxPVzvkhvI=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/autoprefixer/-/autoprefixer-10.4.27.tgz}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
@@ -4539,12 +4519,8 @@ packages:
     engines: {node: '>=8'}
 
   body-parser@1.20.4:
-    resolution: {integrity: sha512-ZTgYYLMOXY9qKU/57FAo8F+HA2dGX7bqGc71txDRC1rS4frdFI5R7NhluHxH6M0YItAP0sHB4uqAOcYKxO6uGA==}
+    resolution: {integrity: sha1-+OIPTQbKilCnHtMpwV3MrRzcVH8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/body-parser/-/body-parser-1.20.4.tgz}
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
-
-  body-parser@2.3.0:
-    resolution: {integrity: sha1-bYZi9NjDNgKLismqJCUbDKZLpDc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/body-parser/-/body-parser-2.3.0.tgz}
-    engines: {node: '>=18'}
 
   bonjour-service@1.3.0:
     resolution: {integrity: sha512-3YuAUiSkWykd+2Azjgyxei8OWf8thdn8AITIog2M4UICzoqfjlqr64WIjEXZllf/W6vK1goqleSR6brGomxQqA==}
@@ -4578,14 +4554,14 @@ packages:
     resolution: {integrity: sha1-MyLNMH2Cltqx9gRhhZOyYaP63o8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/buffer-builder/-/buffer-builder-0.2.0.tgz}
 
   buffer-from@1.1.2:
-    resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
+    resolution: {integrity: sha1-KxRqb9cugLT1XSVfNe1Zo6mkG9U=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/buffer-from/-/buffer-from-1.1.2.tgz}
 
   bundle-name@4.1.0:
     resolution: {integrity: sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q==}
     engines: {node: '>=18'}
 
   bytes@3.1.2:
-    resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
+    resolution: {integrity: sha1-iwvuuYYFrfGxKPpDhkA8AJ4CIaU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/bytes/-/bytes-3.1.2.tgz}
     engines: {node: '>= 0.8'}
 
   bytestreamjs@2.0.1:
@@ -4623,7 +4599,7 @@ packages:
     resolution: {integrity: sha1-Xk2Q4idJYdRikZl99Znj7QCO5MA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/caniuse-api/-/caniuse-api-3.0.0.tgz}
 
   caniuse-lite@1.0.30001776:
-    resolution: {integrity: sha512-sg01JDPzZ9jGshqKSckOQthXnYwOEP50jeVFhaSFbZcOy05TiuuaffDOfcwtCisJ9kNQuLBFibYywv2Bgm9osw==}
+    resolution: {integrity: sha1-PGTQBjSKLpIDeqQwI0USmAakLSQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/caniuse-lite/-/caniuse-lite-1.0.30001776.tgz}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -4692,7 +4668,7 @@ packages:
     engines: {node: '>=20'}
 
   commander@2.20.3:
-    resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
+    resolution: {integrity: sha1-/UhehMA+tIgcIHIrpIA16FMa6zM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/commander/-/commander-2.20.3.tgz}
 
   commander@7.2.0:
     resolution: {integrity: sha1-o2y1fQtQHOEI5NIFWaFQo5HZerc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/commander/-/commander-7.2.0.tgz}
@@ -4718,37 +4694,25 @@ packages:
     engines: {node: '>=0.8'}
 
   content-disposition@0.5.4:
-    resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
+    resolution: {integrity: sha1-i4K076yCUSoCuwsdzsnSxejrW/4=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/content-disposition/-/content-disposition-0.5.4.tgz}
     engines: {node: '>= 0.6'}
-
-  content-disposition@1.1.0:
-    resolution: {integrity: sha1-89t4nHUtRVZMx+nh4LMXkNSjjhc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/content-disposition/-/content-disposition-1.1.0.tgz}
-    engines: {node: '>=18'}
 
   content-type@1.0.5:
-    resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
+    resolution: {integrity: sha1-i3cxYmVtHRCGeEyPI6VM5tc9eRg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/content-type/-/content-type-1.0.5.tgz}
     engines: {node: '>= 0.6'}
-
-  content-type@2.0.0:
-    resolution: {integrity: sha1-L7Pt5p3/oK94ynxM51iWgGOLVt8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/content-type/-/content-type-2.0.0.tgz}
-    engines: {node: '>=18'}
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha1-S1YPZJ/E6RjdCrdc9JYei8iC2Co=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/convert-source-map/-/convert-source-map-2.0.0.tgz}
 
   cookie-signature@1.0.7:
-    resolution: {integrity: sha512-NXdYc3dLr47pBkpUCHtKSwIOQXLVn8dZEuywboCOJY/osA0wFSLlSawr3KN8qXJEyX66FcONTH8EIlVuK0yyFA==}
-
-  cookie-signature@1.2.2:
-    resolution: {integrity: sha1-V8f8PMKTrKuf7FTXPhVpDr5KF5M=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/cookie-signature/-/cookie-signature-1.2.2.tgz}
-    engines: {node: '>=6.6.0'}
+    resolution: {integrity: sha1-q13Xq3V8VOYPN+9lUPSBxCbRBFQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/cookie-signature/-/cookie-signature-1.0.7.tgz}
 
   cookie@0.7.2:
-    resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
+    resolution: {integrity: sha1-VWNpxHKiupEPKXmJG1JrNDYjftc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/cookie/-/cookie-0.7.2.tgz}
     engines: {node: '>= 0.6'}
 
   core-util-is@1.0.3:
-    resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
+    resolution: {integrity: sha1-pgQtNjTCsn6TKPg3uWX6yDgI24U=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/core-util-is/-/core-util-is-1.0.3.tgz}
 
   cors@2.8.5:
     resolution: {integrity: sha1-6sEdpRWS3Ya58G9uesKTs9+HXSk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/cors/-/cors-2.8.5.tgz}
@@ -4788,7 +4752,7 @@ packages:
     engines: {node: '>= 6'}
 
   cssesc@3.0.0:
-    resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
+    resolution: {integrity: sha1-N3QZGZA7hoVl4cCep0dEXNGJg+4=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/cssesc/-/cssesc-3.0.0.tgz}
     engines: {node: '>=4'}
     hasBin: true
 
@@ -4842,7 +4806,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   debug@2.6.9:
-    resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    resolution: {integrity: sha1-XRKFFd8TT/Mn6QpMk/Tgd6U2NB8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/debug/-/debug-2.6.9.tgz}
 
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -4895,18 +4859,18 @@ packages:
     engines: {node: '>= 0.4'}
 
   depd@1.1.2:
-    resolution: {integrity: sha512-7emPTl6Dpo6JRXOXjLRxck+FlLRX5847cLKEn00PLAgc3g2hTZZgr+e4c2v6QpSmLeFP3n5yUo7ft6avBK/5jQ==}
+    resolution: {integrity: sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/depd/-/depd-1.1.2.tgz}
     engines: {node: '>= 0.6'}
 
   depd@2.0.0:
-    resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
+    resolution: {integrity: sha1-tpYWPMdXVg0JzyLMj60Vcbeedt8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/depd/-/depd-2.0.0.tgz}
     engines: {node: '>= 0.8'}
 
   des.js@1.1.0:
     resolution: {integrity: sha512-r17GxjhUCjSRy8aiJpr8/UadFIzMzJGexI3Nmz4ADi9LYSFx4gTBp80+NaX/YsXWWLhpZ7v/v/ubEc/bCNfKwg==}
 
   destroy@1.2.0:
-    resolution: {integrity: sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==}
+    resolution: {integrity: sha1-SANzVQmti+VSk0xn32FPlOZvoBU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/destroy/-/destroy-1.2.0.tgz}
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
 
   detect-newline@3.1.0:
@@ -4959,7 +4923,7 @@ packages:
     resolution: {integrity: sha1-aWzi7Aqg5uqTo5f/zySqeEDIJ8s=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/eastasianwidth/-/eastasianwidth-0.2.0.tgz}
 
   ee-first@1.1.1:
-    resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
+    resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/ee-first/-/ee-first-1.1.1.tgz}
 
   ejs@3.1.10:
     resolution: {integrity: sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==}
@@ -4997,7 +4961,7 @@ packages:
     engines: {node: '>= 4'}
 
   encodeurl@2.0.0:
-    resolution: {integrity: sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==}
+    resolution: {integrity: sha1-e46omAd9fkCdOsRUdOo46vCFelg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/encodeurl/-/encodeurl-2.0.0.tgz}
     engines: {node: '>= 0.8'}
 
   enhanced-resolve@5.20.0:
@@ -5012,7 +4976,7 @@ packages:
     engines: {node: '>=0.12'}
 
   entities@6.0.1:
-    resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
+    resolution: {integrity: sha1-wow0pDN5yn9h0HQTCy9fcCCjBpQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/entities/-/entities-6.0.1.tgz}
     engines: {node: '>=0.12'}
 
   error-ex@1.3.4:
@@ -5061,7 +5025,7 @@ packages:
     engines: {node: '>=6'}
 
   escape-html@1.0.3:
-    resolution: {integrity: sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==}
+    resolution: {integrity: sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/escape-html/-/escape-html-1.0.3.tgz}
 
   escape-string-regexp@2.0.0:
     resolution: {integrity: sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==}
@@ -5207,7 +5171,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   etag@1.8.1:
-    resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
+    resolution: {integrity: sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/etag/-/etag-1.8.1.tgz}
     engines: {node: '>= 0.6'}
 
   eventemitter3@4.0.7:
@@ -5216,14 +5180,6 @@ packages:
   events@3.3.0:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
-
-  eventsource-parser@3.1.0:
-    resolution: {integrity: sha1-ThmOuRzTM9Co3cwDZQKzYYol9Ek=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/eventsource-parser/-/eventsource-parser-3.1.0.tgz}
-    engines: {node: '>=18.0.0'}
-
-  eventsource@3.0.7:
-    resolution: {integrity: sha1-EVdiLi9Td7tq7yEUNycougwVaYk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/eventsource/-/eventsource-3.0.7.tgz}
-    engines: {node: '>=18.0.0'}
 
   execa@5.1.1:
     resolution: {integrity: sha1-+ArZy/Qpj3vR1MlVXCHpN0HEEd0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/execa/-/execa-5.1.1.tgz}
@@ -5237,19 +5193,9 @@ packages:
     resolution: {integrity: sha512-1zQrciTiQfRdo7qJM1uG4navm8DayFa2TgCSRlzUyNkhcJ6XUZF3hjnpkyr3VhAqPH7i/9GkG7Tv5abz6fqz0Q==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  express-rate-limit@8.6.1:
-    resolution: {integrity: sha1-4Jd+yAdTRuIH14g4M2Ktp8CDJK4=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/express-rate-limit/-/express-rate-limit-8.6.1.tgz}
-    engines: {node: '>= 16'}
-    peerDependencies:
-      express: '>= 4.11'
-
   express@4.22.1:
-    resolution: {integrity: sha512-F2X8g9P1X7uCPZMA3MVf9wcTqlyNp7IhH5qPCI0izhaOIYXaW9L535tGA3qmjRzpH+bZczqq7hVKxTR4NWnu+g==}
+    resolution: {integrity: sha1-HeI6CXRaT//bOSR7NEu16v84IGk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/express/-/express-4.22.1.tgz}
     engines: {node: '>= 0.10.0'}
-
-  express@5.2.1:
-    resolution: {integrity: sha1-jyHRW20yf5K0eU7PjLCKcvlWrAQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/express/-/express-5.2.1.tgz}
-    engines: {node: '>= 18'}
 
   fast-content-type-parse@3.0.0:
     resolution: {integrity: sha512-ZvLdcY8P+N8mGQJahJV5G4U88CSvT1rP8ApL6uETe88MBXrBHAkZlSEySdUlyztF7ccb+Znos3TFqaepHxdhBg==}
@@ -5320,12 +5266,8 @@ packages:
     engines: {node: '>=8'}
 
   finalhandler@1.3.2:
-    resolution: {integrity: sha512-aA4RyPcd3badbdABGDuTXCMTtOneUCAYH/gxoYRTZlIJdF0YPWuGqiAsIrhNnnqdXGswYk6dGujem4w80UJFhg==}
+    resolution: {integrity: sha1-HrwiKPx2c6rEpHLDEMwFt32FK4g=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/finalhandler/-/finalhandler-1.3.2.tgz}
     engines: {node: '>= 0.8'}
-
-  finalhandler@2.1.1:
-    resolution: {integrity: sha1-osUXplWYUrzbBtH4vX9Rto+tgJk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/finalhandler/-/finalhandler-2.1.1.tgz}
-    engines: {node: '>= 18.0.0'}
 
   find-up@4.1.0:
     resolution: {integrity: sha1-l6/n1s3AvFkoWEt8jXsW6KmqXRk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/find-up/-/find-up-4.1.0.tgz}
@@ -5368,19 +5310,15 @@ packages:
     engines: {node: '>=12.20.0'}
 
   forwarded@0.2.0:
-    resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
+    resolution: {integrity: sha1-ImmTZCiq1MFcfr6XeahL8LKoGBE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/forwarded/-/forwarded-0.2.0.tgz}
     engines: {node: '>= 0.6'}
 
   fraction.js@5.3.4:
-    resolution: {integrity: sha512-1X1NTtiJphryn/uLQz3whtY6jK3fTqoE3ohKs0tT+Ujr1W59oopxmoEh7Lu5p6vBaPbgoM0bzveAW4Qi5RyWDQ==}
+    resolution: {integrity: sha1-jA/MapkIJi307Rl0J73u9WPgaZo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/fraction.js/-/fraction.js-5.3.4.tgz}
 
   fresh@0.5.2:
-    resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
+    resolution: {integrity: sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/fresh/-/fresh-0.5.2.tgz}
     engines: {node: '>= 0.6'}
-
-  fresh@2.0.0:
-    resolution: {integrity: sha1-jdffahs6Gzpc8YbAWl3SZ2ImNaQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/fresh/-/fresh-2.0.0.tgz}
-    engines: {node: '>= 0.8'}
 
   fs-extra@11.3.4:
     resolution: {integrity: sha1-q2k07Ki89vf2uCdC4zWR+GMB1vw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/fs-extra/-/fs-extra-11.3.4.tgz}
@@ -5440,7 +5378,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   git-repo-info@2.1.1:
-    resolution: {integrity: sha512-8aCohiDo4jwjOwma4FmYFd3i97urZulL8XL24nIPxuE+GZnfsAyy/g2Shqx6OjUiFKUXZM+Yy+KHnOmmA3FVcg==}
+    resolution: {integrity: sha1-Ig/+2MuudO+KgOMFLyzLUXmu0Fg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/git-repo-info/-/git-repo-info-2.1.1.tgz}
     engines: {node: '>= 4.0'}
 
   glob-parent@5.1.2:
@@ -5521,10 +5459,6 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
-  hono@4.12.32:
-    resolution: {integrity: sha1-lInrVQfCuQVU7ngXo/l9m3VO4f8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/hono/-/hono-4.12.32.tgz}
-    engines: {node: '>=16.9.0'}
-
   hpack.js@2.1.6:
     resolution: {integrity: sha512-zJxVehUdMGIKsRaNt7apO2Gqp0BdqW5yaiGHXXmbpvxgBYVZnAql+BJb4RO5ad2MgpbZKn5G6nMnegrH1FcNYQ==}
 
@@ -5550,11 +5484,11 @@ packages:
     resolution: {integrity: sha512-LmpOGxTfbpgtGVxJrj5k7asXHCgNZp5nLfp+hWc8QQRqtb7fUy6kRY3BO1h9ddF6yIPYUARgxGOwB42DnxIaNw==}
 
   http-errors@1.8.1:
-    resolution: {integrity: sha512-Kpk9Sm7NmI+RHhnj6OIWDI1d6fIoFAtFt9RLaTMRlg/8w49juAStsrBgp0Dp4OdxdVbRIeKhtCUvoi/RuAhO4g==}
+    resolution: {integrity: sha1-fD8oV3y8iiBziEVdvWIpXtB71ow=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/http-errors/-/http-errors-1.8.1.tgz}
     engines: {node: '>= 0.6'}
 
   http-errors@2.0.1:
-    resolution: {integrity: sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==}
+    resolution: {integrity: sha1-NtL2W8kJyHkAGN02+02T2myq4Gs=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/http-errors/-/http-errors-2.0.1.tgz}
     engines: {node: '>= 0.8'}
 
   http-parser-js@0.5.10:
@@ -5586,19 +5520,15 @@ packages:
     engines: {node: '>=10.17.0'}
 
   hyperdyperid@1.2.0:
-    resolution: {integrity: sha512-Y93lCzHYgGWdrJ66yIktxiaGULYc6oGiABxhcO5AufBeOyoIdZF7bIfLaOrbM0iGIOXQQgxxRrFEnb+Y6w1n4A==}
+    resolution: {integrity: sha1-WWaNMjrakiKNKoadPkdNWjO2nms=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/hyperdyperid/-/hyperdyperid-1.2.0.tgz}
     engines: {node: '>=10.18'}
 
   iconv-lite@0.4.24:
-    resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
+    resolution: {integrity: sha1-ICK0sl+93CHS9SSXSkdKr+czkIs=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/iconv-lite/-/iconv-lite-0.4.24.tgz}
     engines: {node: '>=0.10.0'}
 
   iconv-lite@0.6.3:
-    resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
-    engines: {node: '>=0.10.0'}
-
-  iconv-lite@0.7.3:
-    resolution: {integrity: sha1-hO4S+WPn3lC8AaE+FgoHizsPQV8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/iconv-lite/-/iconv-lite-0.7.3.tgz}
+    resolution: {integrity: sha1-pS+AvzjaGVLrXGgXkHGYcaGnJQE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/iconv-lite/-/iconv-lite-0.6.3.tgz}
     engines: {node: '>=0.10.0'}
 
   icss-utils@5.1.0:
@@ -5648,16 +5578,12 @@ packages:
     resolution: {integrity: sha512-4gd7VpWNQNB4UKKCFFVcp1AVv+FMOgs9NKzjHKusc8jTMhd5eL1NqQqOpE0KzMds804/yHlglp3uxgluOqAPLw==}
     engines: {node: '>= 0.4'}
 
-  ip-address@10.3.1:
-    resolution: {integrity: sha1-kp+WKdFyT34bdIXOiXUvNnUzahA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/ip-address/-/ip-address-10.3.1.tgz}
-    engines: {node: '>= 12'}
-
   ipaddr.js@1.9.1:
-    resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
+    resolution: {integrity: sha1-v/OFQ+64mEglB5/zoqjmy9RngbM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/ipaddr.js/-/ipaddr.js-1.9.1.tgz}
     engines: {node: '>= 0.10'}
 
   ipaddr.js@2.3.0:
-    resolution: {integrity: sha512-Zv/pA+ciVFbCSBBjGfaKUya/CcGmUHzTydLMaTwrUUEM2DIEO3iZvueGxmacvmN50fGpGVKeTXpb2LcYQxeVdg==}
+    resolution: {integrity: sha1-cdznDhOYEiIImW0cIvK6RqJLGrw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/ipaddr.js/-/ipaddr.js-2.3.0.tgz}
     engines: {node: '>= 10'}
 
   is-array-buffer@3.0.5:
@@ -5768,9 +5694,6 @@ packages:
   is-potential-custom-element-name@1.0.1:
     resolution: {integrity: sha1-Fx7W8Z46xVQ5Tt94yqBXhKRb67U=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/is-potential-custom-element-name/-/is-potential-custom-element-name-1.0.1.tgz}
 
-  is-promise@4.0.0:
-    resolution: {integrity: sha1-Qv+fhCBsGZHSbev1IN1cAQQt0vM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/is-promise/-/is-promise-4.0.0.tgz}
-
   is-regex@1.2.1:
     resolution: {integrity: sha512-MjYsKHO5O7mCsmRGxWcLWheFqN9DJ/2TmngvjKXihe6efViPqc274+Fx/4fYj/r03+ESvBdTXK0V6tA3rgez1g==}
     engines: {node: '>= 0.4'}
@@ -5816,10 +5739,10 @@ packages:
     engines: {node: '>=16'}
 
   isarray@1.0.0:
-    resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
+    resolution: {integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/isarray/-/isarray-1.0.0.tgz}
 
   isarray@2.0.5:
-    resolution: {integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==}
+    resolution: {integrity: sha1-ivHkwSISRMxiRZ+vOJQNTmRKVyM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/isarray/-/isarray-2.0.5.tgz}
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
@@ -6011,9 +5934,6 @@ packages:
   jju@1.4.0:
     resolution: {integrity: sha1-o6vicYryQaKykE+EpiWXDzia4yo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/jju/-/jju-1.4.0.tgz}
 
-  jose@6.2.5:
-    resolution: {integrity: sha1-LbVu0qqJeGzYJYQ0FhNt4Q1q1CQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/jose/-/jose-6.2.5.tgz}
-
   js-md4@0.3.2:
     resolution: {integrity: sha512-/GDnfQYsltsjRswQhN9fhv3EMw2sCpUdrdxyWDOUK7eyD++r3gRhzgiQgc/x4MAv2i1iuQ4lxO5mvqM3vj4bwA==}
 
@@ -6042,7 +5962,7 @@ packages:
         optional: true
 
   jsep@1.4.0:
-    resolution: {integrity: sha512-B7qPcEVE3NVkmSJbaYxvv4cHkVW7DQsZz13pUMrfS8z8Q/BuShN+gcTXrUlPiGqM2/t/EEaI030bpxMqY8gMlw==}
+    resolution: {integrity: sha1-Gf7Mv6Udinn3JIC0uOQM4uFxUvA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/jsep/-/jsep-1.4.0.tgz}
     engines: {node: '>= 10.16.0'}
 
   jsesc@3.1.0:
@@ -6061,9 +5981,6 @@ packages:
 
   json-schema-traverse@1.0.0:
     resolution: {integrity: sha1-rnvLNlard6c7pcSb9lTzjmtoYOI=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz}
-
-  json-schema-typed@8.0.2:
-    resolution: {integrity: sha1-6Y7nsYmf9KGEU00fFnwojGa77/Q=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/json-schema-typed/-/json-schema-typed-8.0.2.tgz}
 
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
@@ -6084,7 +6001,7 @@ packages:
     resolution: {integrity: sha1-fCZb0bZd5pd0eDAAh8mfHIQ4P2I=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/jsonfile/-/jsonfile-6.2.0.tgz}
 
   jsonpath-plus@10.3.0:
-    resolution: {integrity: sha512-8TNmfeTCk2Le33A3vRRwtuworG/L5RrgMvdjhKZxvyShO+mBu2fP50OWUjRLNtvw344DdDarFh9buFAZs5ujeA==}
+    resolution: {integrity: sha1-WeIuT6IpjGjfzXBlm7R/DK1SUjg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/jsonpath-plus/-/jsonpath-plus-10.3.0.tgz}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -6199,28 +6116,20 @@ packages:
     resolution: {integrity: sha1-cRP8QoGRfWPOKbQ0RvcB5owlulA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/mdn-data/-/mdn-data-2.0.14.tgz}
 
   media-typer@0.3.0:
-    resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
+    resolution: {integrity: sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/media-typer/-/media-typer-0.3.0.tgz}
     engines: {node: '>= 0.6'}
-
-  media-typer@1.1.1:
-    resolution: {integrity: sha1-bwNUAN/jq51WB7x3VGzjDML5xrg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/media-typer/-/media-typer-1.1.1.tgz}
-    engines: {node: '>= 0.8'}
 
   memfs@4.12.0:
     resolution: {integrity: sha1-dlcEeK7kYWlfszNsozVqeoz8Jsw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/memfs/-/memfs-4.12.0.tgz}
     engines: {node: '>= 4.0.0'}
 
   memfs@4.56.11:
-    resolution: {integrity: sha512-/GodtwVeKVIHZKLUSr2ZdOxKBC5hHki4JNCU22DoCGPEHr5o2PD5U721zvESKyWwCfTfavFl9WZYgA13OAYK0g==}
+    resolution: {integrity: sha1-U6IbEaBqRGoRWYMDvNNTwWdiy00=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/memfs/-/memfs-4.56.11.tgz}
     peerDependencies:
       tslib: '2'
 
   merge-descriptors@1.0.3:
-    resolution: {integrity: sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==}
-
-  merge-descriptors@2.0.0:
-    resolution: {integrity: sha1-6pIvZgY1oiSe5WXgRJ+VHmtgOAg=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/merge-descriptors/-/merge-descriptors-2.0.0.tgz}
-    engines: {node: '>=18'}
+    resolution: {integrity: sha1-2AMZpl88eTU1Hlz9rI+TGFBNvtU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/merge-descriptors/-/merge-descriptors-1.0.3.tgz}
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -6230,7 +6139,7 @@ packages:
     engines: {node: '>= 8'}
 
   methods@1.1.2:
-    resolution: {integrity: sha512-iclAHeNqNm68zFtnZ0e+1L2yUIdvzNoauKU4WBA3VvH/vPFieF7qfRlwUZU+DA9P9bPXIS90ulxoUoCH23sV2w==}
+    resolution: {integrity: sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/methods/-/methods-1.1.2.tgz}
     engines: {node: '>= 0.6'}
 
   micromatch@4.0.8:
@@ -6250,11 +6159,11 @@ packages:
     engines: {node: '>= 0.6'}
 
   mime-types@3.0.2:
-    resolution: {integrity: sha512-Lbgzdk0h4juoQ9fCKXW4by0UJqj+nOOrI9MJ1sSj4nI8aI2eo1qmvQEie4VD1glsS250n15LsWsYtCugiStS5A==}
+    resolution: {integrity: sha1-OQAtQYJXXVrwNv+hGBAPJSSy4qs=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/mime-types/-/mime-types-3.0.2.tgz}
     engines: {node: '>=18'}
 
   mime@1.6.0:
-    resolution: {integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==}
+    resolution: {integrity: sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/mime/-/mime-1.6.0.tgz}
     engines: {node: '>=4'}
     hasBin: true
 
@@ -6302,7 +6211,7 @@ packages:
     hasBin: true
 
   ms@2.0.0:
-    resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
+    resolution: {integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/ms/-/ms-2.0.0.tgz}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -6325,15 +6234,11 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
   negotiator@0.6.3:
-    resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
+    resolution: {integrity: sha1-WOMjpy/twNb5zU0x/kn1FHlZDM0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/negotiator/-/negotiator-0.6.3.tgz}
     engines: {node: '>= 0.6'}
 
   negotiator@0.6.4:
-    resolution: {integrity: sha512-myRT3DiWPHqho5PrJaIRyaMv2kgYf0mUVgBNOYMuCH5Ki1yEiQaf/ZJuQ62nvpc44wL5WDbTX7yGJi1Neevw8w==}
-    engines: {node: '>= 0.6'}
-
-  negotiator@1.0.0:
-    resolution: {integrity: sha1-tskbtHFy1p+Tz9fDV7u1KQGbX2o=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/negotiator/-/negotiator-1.0.0.tgz}
+    resolution: {integrity: sha1-d3lI4kUmUcVwtxLdAcI+JicT//c=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/negotiator/-/negotiator-0.6.4.tgz}
     engines: {node: '>= 0.6'}
 
   neo-async@2.6.2:
@@ -6431,7 +6336,7 @@ packages:
     resolution: {integrity: sha1-9HaWgK+uSfBnq00XfJhfxHJ6VdQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/office-ui-fabric-core/-/office-ui-fabric-core-11.0.1.tgz}
 
   on-finished@2.4.1:
-    resolution: {integrity: sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==}
+    resolution: {integrity: sha1-WMjEQRblSEWtV/FKsQsDUzGErD8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/on-finished/-/on-finished-2.4.1.tgz}
     engines: {node: '>= 0.8'}
 
   on-headers@1.1.0:
@@ -6508,7 +6413,7 @@ packages:
     resolution: {integrity: sha512-IInvU7fabl34qmi9gY8XOVxhYyMyuH2xUNpb2q8/Y+7552KlejkRvqvD19nMoUW/uQGGbqNpA6Tufu5FL5BZgw==}
 
   parseurl@1.3.3:
-    resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}
+    resolution: {integrity: sha1-naGee+6NEt/wUT7Vt2lXeTvC6NQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/parseurl/-/parseurl-1.3.3.tgz}
     engines: {node: '>= 0.8'}
 
   pascal-case@3.1.2:
@@ -6534,10 +6439,7 @@ packages:
     engines: {node: '>=16 || 14 >=14.18'}
 
   path-to-regexp@0.1.12:
-    resolution: {integrity: sha512-RA1GjUVMnvYFxuqovrEqZoxxW5NUZqbwKtYz/Tt7nXerk0LbLblQmrsgdeOxV5SFHf0UDggjS/bSeOZwt1pmEQ==}
-
-  path-to-regexp@8.4.2:
-    resolution: {integrity: sha1-eVxCDE98pFxbiHNm9iLuDJhSzM0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/path-to-regexp/-/path-to-regexp-8.4.2.tgz}
+    resolution: {integrity: sha1-1eGhLkeKl21DLvPFjVNLmSMWS7c=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/path-to-regexp/-/path-to-regexp-0.1.12.tgz}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -6553,10 +6455,6 @@ packages:
   pirates@4.0.7:
     resolution: {integrity: sha1-ZDtKGMQlfIplEEtz8wSc6aChXiI=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/pirates/-/pirates-4.0.7.tgz}
     engines: {node: '>= 6'}
-
-  pkce-challenge@5.0.1:
-    resolution: {integrity: sha1-O0RGhlsXsXRems4gFqMfSN32Iw0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/pkce-challenge/-/pkce-challenge-5.0.1.tgz}
-    engines: {node: '>=16.20.0'}
 
   pkijs@3.3.3:
     resolution: {integrity: sha512-+KD8hJtqQMYoTuL1bbGOqxb4z+nZkTAwVdNtWwe8Tc2xNbEmdJYIYoc6Qt0uF55e6YW6KuTHw1DjQ18gMhzepw==}
@@ -6749,7 +6647,7 @@ packages:
     engines: {node: '>=4'}
 
   postcss-selector-parser@7.1.1:
-    resolution: {integrity: sha512-orRsuYpJVw8LdAwqqLykBj9ecS5/cRHlI5+nvTo8LcCKmzDmqVORXtOIYEEQuL9D4BxtA1lm5isAqzQZCoQ6Eg==}
+    resolution: {integrity: sha1-510uDYQ/Yg5d9pB2Fm9OFviRy58=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/postcss-selector-parser/-/postcss-selector-parser-7.1.1.tgz}
     engines: {node: '>=4'}
 
   postcss-svgo@5.1.0:
@@ -6765,7 +6663,7 @@ packages:
       postcss: ^8.2.15
 
   postcss-value-parser@4.2.0:
-    resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
+    resolution: {integrity: sha1-cjwJkgg2um0+WvAZ+SvAlxwC5RQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz}
 
   postcss@8.5.31:
     resolution: {integrity: sha512-YUbWYCgErwnMAVkjUnYa+KlMBzGpHwiIt/DE7f0G33AuX2LH9UcTk6KgWxd3zRU+pN3u/C+Xl3EnMLM4Hea7Sg==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/postcss/-/postcss-8.5.31.tgz}
@@ -6788,13 +6686,13 @@ packages:
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
   process-nextick-args@2.0.1:
-    resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
+    resolution: {integrity: sha1-eCDZsWEgzFXKmud5JoCufbptf+I=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/process-nextick-args/-/process-nextick-args-2.0.1.tgz}
 
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
 
   proxy-addr@2.0.7:
-    resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
+    resolution: {integrity: sha1-8Z/mnOqzEe65S0LnDowgcPm6ECU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/proxy-addr/-/proxy-addr-2.0.7.tgz}
     engines: {node: '>= 0.10'}
 
   pseudolocale@1.1.0:
@@ -6818,27 +6716,19 @@ packages:
     resolution: {integrity: sha512-V/yCWTTF7VJ9hIh18Ugr2zhJMP01MY7c5kh4J870L7imm6/DIzBsNLTXzMwUA3yZ5b/KBqLx8Kp3uRvd7xSe3Q==}
     engines: {node: '>=0.6'}
 
-  qs@6.15.3:
-    resolution: {integrity: sha1-doUhMqWO1cfA72fkRBubtdYGGzs=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/qs/-/qs-6.15.3.tgz}
-    engines: {node: '>=0.6'}
-
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
   range-parser@1.2.1:
-    resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
+    resolution: {integrity: sha1-PPNwI9GZ4cJNGlW4SADC8+ZGgDE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/range-parser/-/range-parser-1.2.1.tgz}
     engines: {node: '>= 0.6'}
 
   raw-body@2.5.3:
-    resolution: {integrity: sha512-s4VSOf6yN0rvbRZGxs8Om5CWj6seneMwK3oDb4lWDH0UPhWcxwOWw5+qk24bxq87szX1ydrwylIOp2uG1ojUpA==}
+    resolution: {integrity: sha1-EcZlDudwp94bSU8ZeSfeDJI4IuI=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/raw-body/-/raw-body-2.5.3.tgz}
     engines: {node: '>= 0.8'}
 
-  raw-body@3.0.2:
-    resolution: {integrity: sha1-PjraWuVWj5CV2EN2/TpJuPsAClE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/raw-body/-/raw-body-3.0.2.tgz}
-    engines: {node: '>= 0.10'}
-
   raw-loader@0.5.1:
-    resolution: {integrity: sha512-sf7oGoLuaYAScB4VGr0tzetsYlS8EJH6qnTCfQ/WVEa89hALQ4RQfCKt5xCyPQKPDUbVUAIP1QsxAwfAjlDp7Q==}
+    resolution: {integrity: sha1-DD0L6u2KAclm2Xh793goElKpeao=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/raw-loader/-/raw-loader-0.5.1.tgz}
 
   react-dom@17.0.1:
     resolution: {integrity: sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug==}
@@ -6849,7 +6739,7 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
   react-is@18.3.1:
-    resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
+    resolution: {integrity: sha1-6DVX3BLq5jqZ4AOkY4ix3LtE234=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/react-is/-/react-is-18.3.1.tgz}
 
   react-is@19.2.7:
     resolution: {integrity: sha1-V2aO6Gp4V0pUKwpTlFUhKywIbfI=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/react-is/-/react-is-19.2.7.tgz}
@@ -6859,10 +6749,10 @@ packages:
     engines: {node: '>=0.10.0'}
 
   readable-stream@2.3.8:
-    resolution: {integrity: sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==}
+    resolution: {integrity: sha1-kRJegEK7obmIf0k0X2J3Anzovps=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/readable-stream/-/readable-stream-2.3.8.tgz}
 
   readable-stream@3.6.2:
-    resolution: {integrity: sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==}
+    resolution: {integrity: sha1-VqmzbqllwAxak+8x6xEaDxEFaWc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/readable-stream/-/readable-stream-3.6.2.tgz}
     engines: {node: '>= 6'}
 
   readdirp@3.6.0:
@@ -6889,7 +6779,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   requirejs@2.3.7:
-    resolution: {integrity: sha512-DouTG8T1WanGok6Qjg2SXuCMzszOo0eHeH9hDZ5Y4x8Je+9JB38HdTLT4/VA8OaUhBa0JPVHJ0pyBkM1z+pDsw==}
+    resolution: {integrity: sha1-CyIDLlGpZ5AOCunzJ2LCOocDa9A=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/requirejs/-/requirejs-2.3.7.tgz}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -6930,10 +6820,6 @@ packages:
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
-  router@2.2.0:
-    resolution: {integrity: sha1-AZvmILcRyHZBFnzHm5kJDwCxRu8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/router/-/router-2.2.0.tgz}
-    engines: {node: '>= 18'}
-
   rrweb-cssom@0.8.0:
     resolution: {integrity: sha1-MCHRtDUvvzthSq7tC8DVc5q+C8I=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/rrweb-cssom/-/rrweb-cssom-0.8.0.tgz}
 
@@ -6955,10 +6841,10 @@ packages:
     engines: {node: '>=0.4'}
 
   safe-buffer@5.1.2:
-    resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
+    resolution: {integrity: sha1-mR7GnSluAxN0fVm9/St0XDX4go0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/safe-buffer/-/safe-buffer-5.1.2.tgz}
 
   safe-buffer@5.2.1:
-    resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
+    resolution: {integrity: sha1-Hq+fqb2x/dTsdfWPnNtOa3gn7sY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/safe-buffer/-/safe-buffer-5.2.1.tgz}
 
   safe-push-apply@1.0.0:
     resolution: {integrity: sha512-iKE9w/Z7xCzUMIZqdBsp6pEQvwuEebH4vdpjcDWnyzaI6yl6O9FHvVpmGelvEHNsoY6wGblkxR6Zty/h00WiSA==}
@@ -6969,10 +6855,10 @@ packages:
     engines: {node: '>= 0.4'}
 
   safer-buffer@2.1.2:
-    resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+    resolution: {integrity: sha1-RPoWGwGHuVSd2Eu5GAL5vYOFzWo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/safer-buffer/-/safer-buffer-2.1.2.tgz}
 
   sass-embedded-android-arm64@1.85.1:
-    resolution: {integrity: sha1-HKnF4G6hqOz3T/f76mcXBs/lAyA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-android-arm64/-/sass-embedded-android-arm64-1.85.1.tgz}
+    resolution: {integrity: sha512-27oRheqNA3SJM2hAxpVbs7mCKUwKPWmEEhyiNFpBINb5ELVLg+Ck5RsGg+SJmo130ul5YX0vinmVB5uPWc8X5w==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-android-arm64/-/sass-embedded-android-arm64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [android]
@@ -6990,7 +6876,7 @@ packages:
     os: [android]
 
   sass-embedded-android-riscv64@1.85.1:
-    resolution: {integrity: sha1-sgJKrrdUVAEb0qOujuTKwnO15xE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-android-riscv64/-/sass-embedded-android-riscv64-1.85.1.tgz}
+    resolution: {integrity: sha512-IP6OijpJ8Mqo7XqCe0LsuZVbAxEFVboa0kXqqR5K55LebEplsTIA2GnmRyMay3Yr/2FVGsZbCb6Wlgkw23eCiA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-android-riscv64/-/sass-embedded-android-riscv64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [riscv64]
     os: [android]
@@ -7008,7 +6894,7 @@ packages:
     os: [darwin]
 
   sass-embedded-darwin-x64@1.85.1:
-    resolution: {integrity: sha1-FH7PSb8tGC295s7zN6WKBbepOrE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-darwin-x64/-/sass-embedded-darwin-x64-1.85.1.tgz}
+    resolution: {integrity: sha512-J4UFHUiyI9Z+mwYMwz11Ky9TYr3hY1fCxeQddjNGL/+ovldtb0yAIHvoVM0BGprQDm5JqhtUk8KyJ3RMJqpaAA==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-darwin-x64/-/sass-embedded-darwin-x64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [darwin]
@@ -7020,7 +6906,7 @@ packages:
     os: [linux]
 
   sass-embedded-linux-arm@1.85.1:
-    resolution: {integrity: sha1-iZy6lLc+sRn2Q0aInkZt4xtvXTw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-arm/-/sass-embedded-linux-arm-1.85.1.tgz}
+    resolution: {integrity: sha512-X0fDh95nNSw1wfRlnkE4oscoEA5Au4nnk785s9jghPFkTBg+A+5uB6trCjf0fM22+Iw6kiP4YYmDdw3BqxAKLQ==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-arm/-/sass-embedded-linux-arm-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [arm]
     os: [linux]
@@ -7044,13 +6930,13 @@ packages:
     os: [linux]
 
   sass-embedded-linux-musl-ia32@1.85.1:
-    resolution: {integrity: sha1-BwYJr9mc0Pnq5yGGyfSi0M32lE0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-musl-ia32/-/sass-embedded-linux-musl-ia32-1.85.1.tgz}
+    resolution: {integrity: sha512-N1093T84zQJor1yyIAdYScB5eAuQarGK1tKgZ4uTnxVlgA7Xi1lXV8Eh7ox9sDqKCaWkVQ3MjqU26vYRBeRWyw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-musl-ia32/-/sass-embedded-linux-musl-ia32-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [ia32]
     os: [linux]
 
   sass-embedded-linux-musl-riscv64@1.85.1:
-    resolution: {integrity: sha1-D0JkvkAnfXzBgUnJ4PA68JVi5vc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-musl-riscv64/-/sass-embedded-linux-musl-riscv64-1.85.1.tgz}
+    resolution: {integrity: sha512-WRsZS/7qlfYXsa93FBpSruieuURIu7ySfFhzYfF1IbKrNAGwmbduutkHZh2ddm5/vQMvQ0Rdosgv+CslaQHMcw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/sass-embedded-linux-musl-riscv64/-/sass-embedded-linux-musl-riscv64-1.85.1.tgz}
     engines: {node: '>=14.0.0'}
     cpu: [riscv64]
     os: [linux]
@@ -7128,12 +7014,8 @@ packages:
     hasBin: true
 
   send@0.19.2:
-    resolution: {integrity: sha512-VMbMxbDeehAxpOtWJXlcUS5E8iXh6QmN+BkRX1GARS3wRaXEEgzCcB10gTQazO42tpNIya8xIyNx8fll1OFPrg==}
+    resolution: {integrity: sha1-WbwNobTqetQnNv1kKxxClOEU/yk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/send/-/send-0.19.2.tgz}
     engines: {node: '>= 0.8.0'}
-
-  send@1.2.1:
-    resolution: {integrity: sha1-nqt0O4dPNVD0CiaGe/KGrWDT8+0=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/send/-/send-1.2.1.tgz}
-    engines: {node: '>= 18'}
 
   serialize-javascript@7.0.5:
     resolution: {integrity: sha1-x5jMBVL/uwiYGRSkKodW4znQ1bE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/serialize-javascript/-/serialize-javascript-7.0.5.tgz}
@@ -7144,12 +7026,8 @@ packages:
     engines: {node: '>= 0.8.0'}
 
   serve-static@1.16.3:
-    resolution: {integrity: sha512-x0RTqQel6g5SY7Lg6ZreMmsOzncHFU7nhnRWkKgWuMTu5NN0DR5oruckMqRvacAN9d5w6ARnRBXl9xhDCgfMeA==}
+    resolution: {integrity: sha1-qXt02VV3hYPzhipPC4QetNXXjPk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/serve-static/-/serve-static-1.16.3.tgz}
     engines: {node: '>= 0.8.0'}
-
-  serve-static@2.2.1:
-    resolution: {integrity: sha1-fxhqSk5fW2Y616QpT/G/N88OmKk=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/serve-static/-/serve-static-2.2.1.tgz}
-    engines: {node: '>= 18'}
 
   set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
@@ -7168,7 +7046,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   setprototypeof@1.2.0:
-    resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
+    resolution: {integrity: sha1-ZsmiSnP5/CjL5msJ/tPTPcrxtCQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/setprototypeof/-/setprototypeof-1.2.0.tgz}
 
   shallow-clone@3.0.1:
     resolution: {integrity: sha1-jymBrZJTH1UDWwH7IwdppA4C76M=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/shallow-clone/-/shallow-clone-3.0.1.tgz}
@@ -7190,10 +7068,6 @@ packages:
     resolution: {integrity: sha512-FCLHtRD/gnpCiCHEiJLOwdmFP+wzCmDEkc9y7NsYxeF4u7Btsn1ZuwgwJGxImImHicJArLP4R0yX4c2KCrMrTA==}
     engines: {node: '>= 0.4'}
 
-  side-channel-list@1.0.1:
-    resolution: {integrity: sha1-wuC1oUpUCuvuO7xsP4ZmzJtQkSc=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/side-channel-list/-/side-channel-list-1.0.1.tgz}
-    engines: {node: '>= 0.4'}
-
   side-channel-map@1.0.1:
     resolution: {integrity: sha512-VCjCNfgMsby3tTdo02nbjtM/ewra6jPHmpThenkTYh8pG9ucZ/1P8So4u4FGBek/BjpOVsDCMoLA/iuBKIFXRA==}
     engines: {node: '>= 0.4'}
@@ -7204,10 +7078,6 @@ packages:
 
   side-channel@1.1.0:
     resolution: {integrity: sha512-ZX99e6tRweoUXqR+VBrslhda51Nh5MTQwou5tnUDgbtyM0dBgmhEDtWGP/xbKn6hqfPRHujUNwz5fy/wbbhnpw==}
-    engines: {node: '>= 0.4'}
-
-  side-channel@1.1.1:
-    resolution: {integrity: sha1-6gLGLgXcS+pn1EQvD7ce4ZL44Ks=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/side-channel/-/side-channel-1.1.1.tgz}
     engines: {node: '>= 0.4'}
 
   signal-exit@3.0.7:
@@ -7224,10 +7094,6 @@ packages:
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
 
-  source-map-js@1.2.1:
-    resolution: {integrity: sha1-HOVlD93YerwJnto33P8CTCZnrkY=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/source-map-js/-/source-map-js-1.2.1.tgz}
-    engines: {node: '>=0.10.0'}
-
   source-map-js@1.2.2:
     resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/source-map-js/-/source-map-js-1.2.2.tgz}
     engines: {node: '>=0.10.0'}
@@ -7242,7 +7108,7 @@ packages:
     resolution: {integrity: sha1-MbJKnC5zwt6FBmwP631Edn7VKTI=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/source-map-support/-/source-map-support-0.5.13.tgz}
 
   source-map-support@0.5.21:
-    resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
+    resolution: {integrity: sha1-BP58f54e0tZiIzwoyys1ufY/bk8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/source-map-support/-/source-map-support-0.5.21.tgz}
 
   source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
@@ -7283,11 +7149,11 @@ packages:
     engines: {node: '>=10'}
 
   statuses@1.5.0:
-    resolution: {integrity: sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==}
+    resolution: {integrity: sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/statuses/-/statuses-1.5.0.tgz}
     engines: {node: '>= 0.6'}
 
   statuses@2.0.2:
-    resolution: {integrity: sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==}
+    resolution: {integrity: sha1-j3XuzvdlteHPzcCA2llAntQk44I=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/statuses/-/statuses-2.0.2.tgz}
     engines: {node: '>= 0.8'}
 
   stop-iteration-iterator@1.1.0:
@@ -7333,10 +7199,10 @@ packages:
     engines: {node: '>= 0.4'}
 
   string_decoder@1.1.1:
-    resolution: {integrity: sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==}
+    resolution: {integrity: sha1-nPFhG6YmhdcDCunkujQUnDrwP8g=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/string_decoder/-/string_decoder-1.1.1.tgz}
 
   string_decoder@1.3.0:
-    resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
+    resolution: {integrity: sha1-QvEUWUpGzxqOMLCoT1bHjD7awh4=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/string_decoder/-/string_decoder-1.3.0.tgz}
 
   strip-ansi@5.2.0:
     resolution: {integrity: sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==}
@@ -7351,7 +7217,7 @@ packages:
     engines: {node: '>=12'}
 
   strip-bom@3.0.0:
-    resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
+    resolution: {integrity: sha1-IzTBjpx1n3vdVv3vfprj1YjmjtM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/strip-bom/-/strip-bom-3.0.0.tgz}
     engines: {node: '>=4'}
 
   strip-bom@4.0.0:
@@ -7453,7 +7319,7 @@ packages:
         optional: true
 
   terser@5.46.0:
-    resolution: {integrity: sha512-jTwoImyr/QbOWFFso3YoU3ik0jBBDJ6JTOQiy/J2YxVJdZCc+5u7skhNwiOR3FQIygFqVUPHl7qbbxtjW2K3Qg==}
+    resolution: {integrity: sha1-G4HlYNWEu910qO3oe02Ud7D/lpU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/terser/-/terser-5.46.0.tgz}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -7465,7 +7331,7 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
   thingies@2.5.0:
-    resolution: {integrity: sha512-s+2Bwztg6PhWUD7XMfeYm5qliDdSiZm7M7n8KjTkIsm3l/2lgVRc2/Gx/v+ZX8lT4FMA+i8aQvhcWylldc+ZNw==}
+    resolution: {integrity: sha1-X3uILJM7hZifhGa1KKYkemiB4E8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/thingies/-/thingies-2.5.0.tgz}
     engines: {node: '>=10.18'}
     peerDependencies:
       tslib: ^2
@@ -7492,7 +7358,7 @@ packages:
     engines: {node: '>=8.0'}
 
   toidentifier@1.0.1:
-    resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
+    resolution: {integrity: sha1-O+NDIaiKgg7RvYDfqjPkefu43TU=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/toidentifier/-/toidentifier-1.0.1.tgz}
     engines: {node: '>=0.6'}
 
   tough-cookie@5.1.2:
@@ -7507,7 +7373,7 @@ packages:
     engines: {node: '>=18'}
 
   tree-dump@1.1.0:
-    resolution: {integrity: sha512-rMuvhU4MCDbcbnleZTFezWsaZXRFemSqAM+7jPnzUl1fo9w3YEKOxAeui0fz3OI4EU4hf23iyA7uQRVko+UaBA==}
+    resolution: {integrity: sha1-qykSkWncRgBEFPWp1KPG6J8T6KQ=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/tree-dump/-/tree-dump-1.1.0.tgz}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
@@ -7555,12 +7421,8 @@ packages:
     engines: {node: '>=10'}
 
   type-is@1.6.18:
-    resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
+    resolution: {integrity: sha1-TlUs0F3wlGfcvE73Od6J8s83wTE=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/type-is/-/type-is-1.6.18.tgz}
     engines: {node: '>= 0.6'}
-
-  type-is@2.1.0:
-    resolution: {integrity: sha1-cdGnBTKTWC4WrJ8+uvGrmqSeVXA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/type-is/-/type-is-2.1.0.tgz}
-    engines: {node: '>= 18'}
 
   typed-array-buffer@1.0.3:
     resolution: {integrity: sha512-nAYYwfY3qnzX30IkA6AQZjVbtK6duGontcQm1WSG1MD94YLqK0515GNApXkoxKOWMusVssAHWLh9SeaoefYFGw==}
@@ -7615,7 +7477,7 @@ packages:
     engines: {node: '>= 10.0.0'}
 
   unpipe@1.0.0:
-    resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
+    resolution: {integrity: sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/unpipe/-/unpipe-1.0.0.tgz}
     engines: {node: '>= 0.8'}
 
   unrs-resolver@1.12.2:
@@ -7636,10 +7498,10 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   util-deprecate@1.0.2:
-    resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/util-deprecate/-/util-deprecate-1.0.2.tgz}
 
   utils-merge@1.0.1:
-    resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
+    resolution: {integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/utils-merge/-/utils-merge-1.0.1.tgz}
     engines: {node: '>= 0.4.0'}
 
   uuid@11.1.0:
@@ -7663,7 +7525,7 @@ packages:
     resolution: {integrity: sha1-mIHrDOj+rqZRJDnRnd+Ev1UWYdA=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/varint/-/varint-6.0.0.tgz}
 
   vary@1.1.2:
-    resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
+    resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/vary/-/vary-1.1.2.tgz}
     engines: {node: '>= 0.8'}
 
   w3c-xmlserializer@5.0.0:
@@ -7844,11 +7706,6 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-
-  zod-to-json-schema@3.25.1:
-    resolution: {integrity: sha1-fySWIQGkOd2t4r8a6rPDv+x9hLo=, tarball: https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/zod-to-json-schema/-/zod-to-json-schema-3.25.1.tgz}
-    peerDependencies:
-      zod: ^3.25 || ^4
 
   zod@4.4.3:
     resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
@@ -10829,10 +10686,6 @@ snapshots:
     dependencies:
       csstype: 3.2.3
 
-  '@hono/node-server@1.19.17(hono@4.12.32)':
-    dependencies:
-      hono: 4.12.32
-
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.7':
@@ -11304,14 +11157,14 @@ snapshots:
       node-fetch: 3.3.2
       strip-bom: 5.0.0
 
-  '@microsoft/decorators@1.24.0':
+  '@microsoft/decorators@1.24.1':
     dependencies:
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
 
-  '@microsoft/eslint-config-spfx@1.24.0(eslint@8.57.1)(typescript@5.8.3)':
+  '@microsoft/eslint-config-spfx@1.24.1(eslint@8.57.1)(typescript@5.8.3)':
     dependencies:
-      '@microsoft/eslint-plugin-spfx': 1.24.0(eslint@8.57.1)(typescript@5.8.3)
+      '@microsoft/eslint-plugin-spfx': 1.24.1(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/eslint-config': 4.8.0(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/eslint-plugin': 0.23.5(eslint@8.57.1)(typescript@5.8.3)
       '@rushstack/eslint-plugin-security': 0.14.3(eslint@8.57.1)(typescript@5.8.3)
@@ -11325,7 +11178,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@microsoft/eslint-plugin-spfx@1.24.0(eslint@8.57.1)(typescript@5.8.3)':
+  '@microsoft/eslint-plugin-spfx@1.24.1(eslint@8.57.1)(typescript@5.8.3)':
     dependencies:
       '@rushstack/eslint-plugin': 0.23.5(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/utils': 8.56.1(eslint@8.57.1)(typescript@5.8.3)
@@ -11351,17 +11204,17 @@ snapshots:
       '@babel/runtime': 7.28.6
       tslib: 2.3.1
 
-  '@microsoft/sp-adaptive-card-extension-base@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
+  '@microsoft/sp-adaptive-card-extension-base@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)':
     dependencies:
-      '@microsoft/sp-component-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-loader': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
-      '@microsoft/sp-lodash-subset': 1.24.0
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
-      '@microsoft/sp-property-pane': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+      '@microsoft/sp-component-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-loader': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
+      '@microsoft/sp-lodash-subset': 1.24.1
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
+      '@microsoft/sp-property-pane': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
       '@microsoft/teams-js-v2': '@microsoft/teams-js@2.53.0'
       '@swc/helpers': 0.5.19
       adaptivecards: 2.11.2(swiper@8.4.7)
@@ -11381,20 +11234,20 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-application-base@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-application-base@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-component-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-extension-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-loader': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
-      '@microsoft/sp-lodash-subset': 1.24.0
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
-      '@microsoft/sp-odata-types': 1.24.0
-      '@microsoft/sp-page-context': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-search-extensibility': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-component-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-extension-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-loader': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
+      '@microsoft/sp-lodash-subset': 1.24.1
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
+      '@microsoft/sp-odata-types': 1.24.1
+      '@microsoft/sp-page-context': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-search-extensibility': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -11410,17 +11263,17 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-component-base@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-component-base@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@fluentui/react': 8.125.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@fluentui/react': 8.125.10(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-components': 9.75.0(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-dynamic-data': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-lodash-subset': 1.24.0
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
-      '@microsoft/sp-page-context': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-dynamic-data': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-lodash-subset': 1.24.1
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
+      '@microsoft/sp-page-context': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.19
       scheduler: 0.20.2
       tslib: 2.3.1
@@ -11437,12 +11290,12 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-copilot-component@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-copilot-component@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-component-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
+      '@microsoft/sp-component-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -11458,9 +11311,9 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-core-library@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-core-library@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
       '@swc/helpers': 0.5.19
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.17
@@ -11470,7 +11323,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/sp-css-loader@1.24.0(@types/node@22.19.13)(webpack@5.105.4)':
+  '@microsoft/sp-css-loader@1.24.1(@types/node@22.19.13)(webpack@5.105.4)':
     dependencies:
       '@microsoft/load-themed-styles': 1.10.292
       '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
@@ -11488,10 +11341,10 @@ snapshots:
       - '@rspack/core'
       - '@types/node'
 
-  '@microsoft/sp-diagnostics@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-diagnostics@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-lodash-subset': 1.24.0
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-lodash-subset': 1.24.1
     transitivePeerDependencies:
       - '@types/node'
       - '@types/react'
@@ -11499,14 +11352,14 @@ snapshots:
       - react
       - react-dom
 
-  '@microsoft/sp-dialog@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)':
+  '@microsoft/sp-dialog@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)':
     dependencies:
-      '@fluentui/react': 8.125.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@fluentui/react': 8.125.10(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-components': 9.75.0(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
       '@fluentui/react-migration-v8-v9': 9.10.23(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
-      '@microsoft/sp-application-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-application-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.19
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.17
@@ -11523,12 +11376,12 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-dynamic-data@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-dynamic-data@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-lodash-subset': 1.24.0
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-lodash-subset': 1.24.1
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -11538,13 +11391,13 @@ snapshots:
       - react
       - react-dom
 
-  '@microsoft/sp-extension-base@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-extension-base@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-component-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-loader': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
+      '@microsoft/sp-component-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-loader': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -11560,11 +11413,11 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-http-base@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-http-base@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-page-context': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-page-context': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@microsoft/teams-js-v2': '@microsoft/teams-js@2.53.0'
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
@@ -11576,14 +11429,14 @@ snapshots:
       - react-dom
       - supports-color
 
-  '@microsoft/sp-http-msgraph@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-http-msgraph@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
       '@microsoft/microsoft-graph-client': 3.0.2
       '@microsoft/microsoft-graph-clientv1': '@microsoft/microsoft-graph-client@1.7.2-spfx'
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-loader': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-loader': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -11599,12 +11452,12 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-http@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-http@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http-msgraph': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-msgraph': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -11620,14 +11473,14 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-image-helper@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-image-helper@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-loader': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
-      '@microsoft/sp-lodash-subset': 1.24.0
-      '@microsoft/sp-page-context': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-loader': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
+      '@microsoft/sp-lodash-subset': 1.24.1
+      '@microsoft/sp-page-context': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.19
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.17
@@ -11638,12 +11491,12 @@ snapshots:
       - '@types/node'
       - supports-color
 
-  '@microsoft/sp-listview-extensibility@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-listview-extensibility@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-extension-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
-      '@microsoft/sp-page-context': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-extension-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
+      '@microsoft/sp-page-context': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -11659,17 +11512,17 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-loader@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)':
+  '@microsoft/sp-loader@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)':
     dependencies:
-      '@fluentui/react': 8.125.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-dynamic-data': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-lodash-subset': 1.24.0
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
-      '@microsoft/sp-odata-types': 1.24.0
-      '@microsoft/sp-page-context': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@fluentui/react': 8.125.10(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-dynamic-data': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-lodash-subset': 1.24.1
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
+      '@microsoft/sp-odata-types': 1.24.1
+      '@microsoft/sp-page-context': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@rushstack/loader-raw-script': 1.6.29
       '@swc/helpers': 0.5.19
       '@types/react': 17.0.45
@@ -11684,13 +11537,13 @@ snapshots:
       - '@types/node'
       - supports-color
 
-  '@microsoft/sp-lodash-subset@1.24.0':
+  '@microsoft/sp-lodash-subset@1.24.1':
     dependencies:
       '@swc/helpers': 0.5.19
       '@types/lodash': 4.14.117
       tslib: 2.3.1
 
-  '@microsoft/sp-module-interfaces@1.24.0(@types/node@22.19.13)':
+  '@microsoft/sp-module-interfaces@1.24.1(@types/node@22.19.13)':
     dependencies:
       '@rushstack/node-core-library': 5.25.0(@types/node@22.19.13)
       '@types/json-schema': 7.0.6
@@ -11698,24 +11551,24 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/sp-odata-types@1.24.0':
+  '@microsoft/sp-odata-types@1.24.1':
     dependencies:
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
 
-  '@microsoft/sp-office-ui-fabric-core@1.24.0':
+  '@microsoft/sp-office-ui-fabric-core@1.24.1':
     dependencies:
       '@swc/helpers': 0.5.19
       office-ui-fabric-core: 11.0.1
       tslib: 2.3.1
 
-  '@microsoft/sp-page-context@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-page-context@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-dynamic-data': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-lodash-subset': 1.24.0
-      '@microsoft/sp-odata-types': 1.24.0
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-dynamic-data': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-lodash-subset': 1.24.1
+      '@microsoft/sp-odata-types': 1.24.1
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -11725,20 +11578,20 @@ snapshots:
       - react
       - react-dom
 
-  '@microsoft/sp-property-pane@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)':
+  '@microsoft/sp-property-pane@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)':
     dependencies:
-      '@fluentui/react': 8.125.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@fluentui/react': 8.125.10(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@fluentui/react-components': 9.75.0(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)(scheduler@0.20.2)
       '@fluentui/react-icons': 2.0.314(react@17.0.1)
       '@fluentui/react-tabster': 9.26.19(@types/react@17.0.45)(react@17.0.1)
-      '@fluentui/utilities': 8.17.2(@types/react@17.0.45)(react@17.0.1)
-      '@microsoft/sp-component-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-dynamic-data': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-image-helper': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-lodash-subset': 1.24.0
-      '@microsoft/sp-page-context': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@fluentui/utilities': 8.17.4(@types/react@17.0.45)(react@17.0.1)
+      '@microsoft/sp-component-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-dynamic-data': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-image-helper': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-lodash-subset': 1.24.1
+      '@microsoft/sp-page-context': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
       '@swc/helpers': 0.5.19
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.17
@@ -11755,12 +11608,12 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-search-extensibility@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
+  '@microsoft/sp-search-extensibility@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)':
     dependencies:
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-extension-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-loader': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-extension-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-loader': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
       '@swc/helpers': 0.5.19
       tslib: 2.3.1
     transitivePeerDependencies:
@@ -11776,24 +11629,24 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/sp-top-actions@1.24.0':
+  '@microsoft/sp-top-actions@1.24.1':
     dependencies:
       '@swc/helpers': 0.5.19
 
-  '@microsoft/sp-webpart-base@1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)':
+  '@microsoft/sp-webpart-base@1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)':
     dependencies:
-      '@fluentui/react': 8.125.5(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-component-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-core-library': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-diagnostics': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-http-base': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-loader': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
-      '@microsoft/sp-lodash-subset': 1.24.0
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
-      '@microsoft/sp-page-context': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
-      '@microsoft/sp-property-pane': 1.24.0(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
-      '@microsoft/sp-top-actions': 1.24.0
+      '@fluentui/react': 8.125.10(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-component-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-core-library': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-diagnostics': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-http-base': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-loader': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)
+      '@microsoft/sp-lodash-subset': 1.24.1
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
+      '@microsoft/sp-page-context': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(react-dom@17.0.1(react@17.0.1))(react@17.0.1)
+      '@microsoft/sp-property-pane': 1.24.1(@types/node@22.19.13)(@types/react-dom@17.0.17)(@types/react@17.0.45)(scheduler@0.20.2)
+      '@microsoft/sp-top-actions': 1.24.1
       '@microsoft/teams-js-v2': '@microsoft/teams-js@2.53.0'
       '@swc/helpers': 0.5.19
       '@types/office-js': 1.0.36
@@ -11812,13 +11665,12 @@ snapshots:
       - stream-browserify
       - supports-color
 
-  '@microsoft/spfx-heft-plugins@1.24.0(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)(zod@4.4.3)':
+  '@microsoft/spfx-heft-plugins@1.24.1(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)':
     dependencies:
       '@azure/storage-blob': 12.26.0
       '@microsoft/app-manifest': 1.1.4-beta.2026101507.0
-      '@microsoft/sp-css-loader': 1.24.0(@types/node@22.19.13)(webpack@5.105.4)
-      '@microsoft/sp-module-interfaces': 1.24.0(@types/node@22.19.13)
-      '@modelcontextprotocol/sdk': 1.29.0(zod@4.4.3)
+      '@microsoft/sp-css-loader': 1.24.1(@types/node@22.19.13)(webpack@5.105.4)
+      '@microsoft/sp-module-interfaces': 1.24.1(@types/node@22.19.13)
       '@rushstack/heft': 1.3.2(@types/node@22.19.13)
       '@rushstack/heft-config-file': 0.20.16(@types/node@22.19.13)
       '@rushstack/localization-utilities': 0.16.7(@types/node@22.19.13)
@@ -11846,7 +11698,6 @@ snapshots:
       webpack: 5.105.4
       xml: 1.0.1
     transitivePeerDependencies:
-      - '@cfworker/json-schema'
       - '@rspack/core'
       - '@swc/core'
       - '@types/node'
@@ -11855,12 +11706,11 @@ snapshots:
       - supports-color
       - uglify-js
       - webpack-cli
-      - zod
 
-  '@microsoft/spfx-web-build-rig@1.24.0(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)(zod@4.4.3)':
+  '@microsoft/spfx-web-build-rig@1.24.1(@types/node@22.19.13)(jest-environment-node@30.5.2)(tslib@2.3.1)':
     dependencies:
       '@microsoft/api-extractor': 7.59.3(@types/node@22.19.13)
-      '@microsoft/spfx-heft-plugins': 1.24.0(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)(zod@4.4.3)
+      '@microsoft/spfx-heft-plugins': 1.24.1(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft': 1.3.2(@types/node@22.19.13)
       '@rushstack/heft-dev-cert-plugin': 1.1.30(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/node@22.19.13)
       '@rushstack/heft-jest-plugin': 2.0.19(@rushstack/heft@1.3.2(@types/node@22.19.13))(@types/jest@30.0.0)(@types/node@22.19.13)(jest-environment-jsdom@30.3.0)(jest-environment-node@30.5.2)
@@ -11877,7 +11727,6 @@ snapshots:
       typescript: 5.3.3
       webpack: 5.105.4
     transitivePeerDependencies:
-      - '@cfworker/json-schema'
       - '@rspack/core'
       - '@swc/core'
       - '@types/node'
@@ -11897,7 +11746,6 @@ snapshots:
       - uglify-js
       - utf-8-validate
       - webpack-cli
-      - zod
 
   '@microsoft/teams-js@2.53.0':
     dependencies:
@@ -11914,28 +11762,6 @@ snapshots:
       resolve: 1.22.11
 
   '@microsoft/tsdoc@0.17.1': {}
-
-  '@modelcontextprotocol/sdk@1.29.0(zod@4.4.3)':
-    dependencies:
-      '@hono/node-server': 1.19.17(hono@4.12.32)
-      ajv: 8.20.0
-      ajv-formats: 3.0.1
-      content-type: 1.0.5
-      cors: 2.8.5
-      cross-spawn: 7.0.6
-      eventsource: 3.0.7
-      eventsource-parser: 3.1.0
-      express: 5.2.1
-      express-rate-limit: 8.6.1(express@5.2.1)
-      hono: 4.12.32
-      jose: 6.2.5
-      json-schema-typed: 8.0.2
-      pkce-challenge: 5.0.1
-      raw-body: 3.0.2
-      zod: 4.4.3
-      zod-to-json-schema: 3.25.1(zod@4.4.3)
-    transitivePeerDependencies:
-      - supports-color
 
   '@napi-rs/wasm-runtime@1.1.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
@@ -13071,11 +12897,6 @@ snapshots:
       mime-types: 2.1.35
       negotiator: 0.6.3
 
-  accepts@2.0.0:
-    dependencies:
-      mime-types: 3.0.2
-      negotiator: 1.0.0
-
   acorn-import-phases@1.0.4(acorn@8.16.0):
     dependencies:
       acorn: 8.16.0
@@ -13347,20 +13168,6 @@ snapshots:
       type-is: 1.6.18
       unpipe: 1.0.0
 
-  body-parser@2.3.0:
-    dependencies:
-      bytes: 3.1.2
-      content-type: 2.0.0
-      debug: 4.4.3
-      http-errors: 2.0.1
-      iconv-lite: 0.7.3
-      on-finished: 2.4.1
-      qs: 6.15.3
-      raw-body: 3.0.2
-      type-is: 2.1.0
-    transitivePeerDependencies:
-      - supports-color
-
   bonjour-service@1.3.0:
     dependencies:
       fast-deep-equal: 3.1.3
@@ -13535,17 +13342,11 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  content-disposition@1.1.0: {}
-
   content-type@1.0.5: {}
-
-  content-type@2.0.0: {}
 
   convert-source-map@2.0.0: {}
 
   cookie-signature@1.0.7: {}
-
-  cookie-signature@1.2.2: {}
 
   cookie@0.7.2: {}
 
@@ -14214,12 +14015,6 @@ snapshots:
 
   events@3.3.0: {}
 
-  eventsource-parser@3.1.0: {}
-
-  eventsource@3.0.7:
-    dependencies:
-      eventsource-parser: 3.1.0
-
   execa@5.1.1:
     dependencies:
       cross-spawn: 7.0.6
@@ -14242,14 +14037,6 @@ snapshots:
       jest-message-util: 30.3.0
       jest-mock: 30.3.0
       jest-util: 30.3.0
-
-  express-rate-limit@8.6.1(express@5.2.1):
-    dependencies:
-      debug: 4.4.3
-      express: 5.2.1
-      ip-address: 10.3.1
-    transitivePeerDependencies:
-      - supports-color
 
   express@4.22.1:
     dependencies:
@@ -14284,39 +14071,6 @@ snapshots:
       type-is: 1.6.18
       utils-merge: 1.0.1
       vary: 1.1.2
-
-  express@5.2.1:
-    dependencies:
-      accepts: 2.0.0
-      body-parser: 2.3.0
-      content-disposition: 1.1.0
-      content-type: 1.0.5
-      cookie: 0.7.2
-      cookie-signature: 1.2.2
-      debug: 4.4.3
-      depd: 2.0.0
-      encodeurl: 2.0.0
-      escape-html: 1.0.3
-      etag: 1.8.1
-      finalhandler: 2.1.1
-      fresh: 2.0.0
-      http-errors: 2.0.1
-      merge-descriptors: 2.0.0
-      mime-types: 3.0.2
-      on-finished: 2.4.1
-      once: 1.4.0
-      parseurl: 1.3.3
-      proxy-addr: 2.0.7
-      qs: 6.15.3
-      range-parser: 1.2.1
-      router: 2.2.0
-      send: 1.2.1
-      serve-static: 2.2.1
-      statuses: 2.0.2
-      type-is: 2.1.0
-      vary: 1.1.2
-    transitivePeerDependencies:
-      - supports-color
 
   fast-content-type-parse@3.0.0: {}
 
@@ -14398,17 +14152,6 @@ snapshots:
       statuses: 2.0.2
       unpipe: 1.0.0
 
-  finalhandler@2.1.1:
-    dependencies:
-      debug: 4.4.3
-      encodeurl: 2.0.0
-      escape-html: 1.0.3
-      on-finished: 2.4.1
-      parseurl: 1.3.3
-      statuses: 2.0.2
-    transitivePeerDependencies:
-      - supports-color
-
   find-up@4.1.0:
     dependencies:
       locate-path: 5.0.0
@@ -14452,8 +14195,6 @@ snapshots:
   fraction.js@5.3.4: {}
 
   fresh@0.5.2: {}
-
-  fresh@2.0.0: {}
 
   fs-extra@11.3.4:
     dependencies:
@@ -14597,8 +14338,6 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  hono@4.12.32: {}
-
   hpack.js@2.1.6:
     dependencies:
       inherits: 2.0.4
@@ -14694,10 +14433,6 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
-  iconv-lite@0.7.3:
-    dependencies:
-      safer-buffer: 2.1.2
-
   icss-utils@5.1.0(postcss@8.5.31):
     dependencies:
       postcss: 8.5.31
@@ -14733,8 +14468,6 @@ snapshots:
       es-errors: 1.3.0
       hasown: 2.0.2
       side-channel: 1.1.0
-
-  ip-address@10.3.1: {}
 
   ipaddr.js@1.9.1: {}
 
@@ -14836,8 +14569,6 @@ snapshots:
       isobject: 3.0.1
 
   is-potential-custom-element-name@1.0.1: {}
-
-  is-promise@4.0.0: {}
 
   is-regex@1.2.1:
     dependencies:
@@ -15294,8 +15025,6 @@ snapshots:
 
   jju@1.4.0: {}
 
-  jose@6.2.5: {}
-
   js-md4@0.3.2: {}
 
   js-tokens@4.0.0: {}
@@ -15349,8 +15078,6 @@ snapshots:
   json-schema-traverse@0.4.1: {}
 
   json-schema-traverse@1.0.0: {}
-
-  json-schema-typed@8.0.2: {}
 
   json-stable-stringify-without-jsonify@1.0.1: {}
 
@@ -15478,8 +15205,6 @@ snapshots:
 
   media-typer@0.3.0: {}
 
-  media-typer@1.1.1: {}
-
   memfs@4.12.0:
     dependencies:
       '@jsonjoy.com/json-pack': 1.21.0(tslib@2.3.1)
@@ -15505,8 +15230,6 @@ snapshots:
       tslib: 2.3.1
 
   merge-descriptors@1.0.3: {}
-
-  merge-descriptors@2.0.0: {}
 
   merge-stream@2.0.0: {}
 
@@ -15583,8 +15306,6 @@ snapshots:
   negotiator@0.6.3: {}
 
   negotiator@0.6.4: {}
-
-  negotiator@1.0.0: {}
 
   neo-async@2.6.2: {}
 
@@ -15790,8 +15511,6 @@ snapshots:
 
   path-to-regexp@0.1.12: {}
 
-  path-to-regexp@8.4.2: {}
-
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
@@ -15799,8 +15518,6 @@ snapshots:
   picomatch@4.0.3: {}
 
   pirates@4.0.7: {}
-
-  pkce-challenge@5.0.1: {}
 
   pkijs@3.3.3:
     dependencies:
@@ -16065,11 +15782,6 @@ snapshots:
     dependencies:
       side-channel: 1.1.0
 
-  qs@6.15.3:
-    dependencies:
-      es-define-property: 1.0.1
-      side-channel: 1.1.1
-
   queue-microtask@1.2.3: {}
 
   range-parser@1.2.1: {}
@@ -16079,13 +15791,6 @@ snapshots:
       bytes: 3.1.2
       http-errors: 2.0.1
       iconv-lite: 0.4.24
-      unpipe: 1.0.0
-
-  raw-body@3.0.2:
-    dependencies:
-      bytes: 3.1.2
-      http-errors: 2.0.1
-      iconv-lite: 0.7.3
       unpipe: 1.0.0
 
   raw-loader@0.5.1: {}
@@ -16188,16 +15893,6 @@ snapshots:
   rimraf@3.0.2:
     dependencies:
       glob: 7.2.3
-
-  router@2.2.0:
-    dependencies:
-      debug: 4.4.3
-      depd: 2.0.0
-      is-promise: 4.0.0
-      parseurl: 1.3.3
-      path-to-regexp: 8.4.2
-    transitivePeerDependencies:
-      - supports-color
 
   rrweb-cssom@0.8.0: {}
 
@@ -16377,22 +16072,6 @@ snapshots:
       range-parser: 1.2.1
       statuses: 2.0.2
 
-  send@1.2.1:
-    dependencies:
-      debug: 4.4.3
-      encodeurl: 2.0.0
-      escape-html: 1.0.3
-      etag: 1.8.1
-      fresh: 2.0.0
-      http-errors: 2.0.1
-      mime-types: 3.0.2
-      ms: 2.1.3
-      on-finished: 2.4.1
-      range-parser: 1.2.1
-      statuses: 2.0.2
-    transitivePeerDependencies:
-      - supports-color
-
   serialize-javascript@7.0.5: {}
 
   serve-index@1.9.2:
@@ -16411,15 +16090,6 @@ snapshots:
       escape-html: 1.0.3
       parseurl: 1.3.3
       send: 0.19.2
-
-  serve-static@2.2.1:
-    dependencies:
-      encodeurl: 2.0.0
-      escape-html: 1.0.3
-      parseurl: 1.3.3
-      send: 1.2.1
-    transitivePeerDependencies:
-      - supports-color
 
   set-function-length@1.2.2:
     dependencies:
@@ -16464,11 +16134,6 @@ snapshots:
       es-errors: 1.3.0
       object-inspect: 1.13.4
 
-  side-channel-list@1.0.1:
-    dependencies:
-      es-errors: 1.3.0
-      object-inspect: 1.13.4
-
   side-channel-map@1.0.1:
     dependencies:
       call-bound: 1.0.4
@@ -16492,14 +16157,6 @@ snapshots:
       side-channel-map: 1.0.1
       side-channel-weakmap: 1.0.2
 
-  side-channel@1.1.1:
-    dependencies:
-      es-errors: 1.3.0
-      object-inspect: 1.13.4
-      side-channel-list: 1.0.1
-      side-channel-map: 1.0.1
-      side-channel-weakmap: 1.0.2
-
   signal-exit@3.0.7: {}
 
   signal-exit@4.1.0: {}
@@ -16512,14 +16169,12 @@ snapshots:
       uuid: 8.3.2
       websocket-driver: 0.7.4
 
-  source-map-js@1.2.1: {}
-
   source-map-js@1.2.2: {}
 
   source-map-loader@4.0.2(webpack@5.105.4):
     dependencies:
       iconv-lite: 0.6.3
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
       webpack: 5.105.4
 
   source-map-support@0.5.13:
@@ -16844,12 +16499,6 @@ snapshots:
     dependencies:
       media-typer: 0.3.0
       mime-types: 2.1.35
-
-  type-is@2.1.0:
-    dependencies:
-      content-type: 2.0.0
-      media-typer: 1.1.1
-      mime-types: 3.0.2
 
   typed-array-buffer@1.0.3:
     dependencies:
@@ -17210,9 +16859,5 @@ snapshots:
   yaml@1.10.2: {}
 
   yocto-queue@0.1.0: {}
-
-  zod-to-json-schema@3.25.1(zod@4.4.3):
-    dependencies:
-      zod: 4.4.3
 
   zod@4.4.3: {}

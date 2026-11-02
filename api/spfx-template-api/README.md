@@ -195,7 +195,7 @@ if (log.hasEntries) {
 }
 
 // Record events during scaffolding
-log.append({ kind: 'template-rendered', templateName: 'webpart-react', templateVersion: '1.0.0', spfxVersion: '1.24.0', context: { componentName: 'MyWebPart' }, cliVersion: '0.1.0' });
+log.append({ kind: 'template-rendered', templateName: 'webpart-react', templateVersion: '1.0.0', spfxVersion: '1.24.1', context: { componentName: 'MyWebPart' }, cliVersion: '0.1.0' });
 
 // Pass to writer to auto-record file-write events
 const writer = new SPFxTemplateWriter();
