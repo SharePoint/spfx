@@ -45,24 +45,12 @@ describe(SPFxTemplateJsonFile.name, () => {
         category: 'extension',
         description: 'A test template',
         version: '1.0.0',
-        spfxVersion: '1.18.0',
-        contextSchema: {
-          componentName: {
-            type: 'string',
-            description: 'The name of the component'
-          }
-        }
+        spfxVersion: '1.18.0'
       };
 
       const instance = new SPFxTemplateJsonFile(data);
 
       expect(instance.description).toBe('A test template');
-      expect(instance.contextSchema).toEqual({
-        componentName: {
-          type: 'string',
-          description: 'The name of the component'
-        }
-      });
     });
   });
 
@@ -125,18 +113,6 @@ describe(SPFxTemplateJsonFile.name, () => {
       const instance = new SPFxTemplateJsonFile(data);
 
       expect(instance.spfxVersion).toBe('1.19.0');
-    });
-
-    it('should return undefined for missing contextSchema', () => {
-      const data: ISPFxTemplateJson = {
-        name: 'My Template',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0'
-      };
-      const instance = new SPFxTemplateJsonFile(data);
-
-      expect(instance.contextSchema).toBeUndefined();
     });
 
     it('should return the correct minimumEngineVersion', () => {
@@ -312,17 +288,7 @@ describe('SPFxTemplateDefinitionSchema', () => {
         category: 'ace',
         description: 'A complete template with all fields',
         version: '1.2.3',
-        spfxVersion: '1.18.0',
-        contextSchema: {
-          componentName: {
-            type: 'string',
-            description: 'Component name'
-          },
-          componentDescription: {
-            type: 'string',
-            description: 'Component description'
-          }
-        }
+        spfxVersion: '1.18.0'
       };
 
       const result = SPFxTemplateDefinitionSchema.safeParse(data);
@@ -491,42 +457,6 @@ describe('SPFxTemplateDefinitionSchema', () => {
         category: 'invalid-category',
         version: '1.0.0',
         spfxVersion: '1.18.0'
-      };
-
-      const result = SPFxTemplateDefinitionSchema.safeParse(data);
-      expect(result.success).toBe(false);
-    });
-
-    it('should reject invalid contextSchema type', () => {
-      const data = {
-        name: 'Valid Name',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0',
-        contextSchema: {
-          field: {
-            type: 'number', // Only 'string' is allowed
-            description: 'A field'
-          }
-        }
-      };
-
-      const result = SPFxTemplateDefinitionSchema.safeParse(data);
-      expect(result.success).toBe(false);
-    });
-
-    it('should reject contextSchema without description', () => {
-      const data = {
-        name: 'Valid Name',
-        category: 'webpart',
-        version: '1.0.0',
-        spfxVersion: '1.18.0',
-        contextSchema: {
-          field: {
-            type: 'string'
-            // Missing description
-          }
-        }
       };
 
       const result = SPFxTemplateDefinitionSchema.safeParse(data);

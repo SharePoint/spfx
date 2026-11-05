@@ -1,7 +1,22 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-jest.mock('@microsoft/spfx-template-api');
+jest.mock('@microsoft/spfx-template-api', () => {
+  const actual: typeof import('@microsoft/spfx-template-api') = jest.requireActual(
+    '@microsoft/spfx-template-api'
+  );
+  return {
+    ...jest.createMockFromModule<typeof actual>('@microsoft/spfx-template-api'),
+    // buildBuiltInContext and toHyphenCase must use the real implementation so the
+    // render context and solution name are populated correctly in tests.
+    buildBuiltInContext: actual.buildBuiltInContext,
+    toHyphenCase: actual.toHyphenCase,
+    // These are mocked so tests can control what package manager is found on disk
+    // and assert that the write step is called, without hitting the real filesystem.
+    tryReadPackageManagerFromPackageJsonEnginesAsync: jest.fn().mockResolvedValue(undefined),
+    writePackageManagerToPackageJsonEnginesAsync: jest.fn().mockResolvedValue(undefined)
+  };
+});
 jest.mock('@rushstack/node-core-library', () => {
   const actual = jest.requireActual('@rushstack/node-core-library');
   return {
@@ -23,13 +38,16 @@ import { Terminal, StringBufferTerminalProvider } from '@rushstack/terminal';
 import {
   LocalFileSystemRepositorySource,
   PublicGitHubRepositorySource,
-  SPFxTemplateRepositoryManager
+  SPFxTemplateRepositoryManager,
+  SPFxScaffoldLog,
+  tryReadPackageManagerFromPackageJsonEnginesAsync,
+  writePackageManagerToPackageJsonEnginesAsync
 } from '@microsoft/spfx-template-api';
 import type { SPFxTemplateCollection } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../../utilities/validation';
 import { SPFxCommandLineParser } from '../../SPFxCommandLineParser';
-import { SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME } from '../../../utilities/github';
+import { GITHUB_TOKEN_ENV_VAR_NAME, SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME } from '../../../utilities/github';
 
 const MockedManager = SPFxTemplateRepositoryManager as jest.MockedClass<typeof SPFxTemplateRepositoryManager>;
 const MockedGitHub = PublicGitHubRepositorySource as jest.MockedClass<typeof PublicGitHubRepositorySource>;
@@ -37,9 +55,34 @@ const MockedLocal = LocalFileSystemRepositorySource as jest.MockedClass<
   typeof LocalFileSystemRepositorySource
 >;
 const MockedExecutable = Executable as unknown as { spawn: jest.Mock; waitForExitAsync: jest.Mock };
+const MockedTryReadPackageManagerFromPackageJsonEnginesAsync =
+  tryReadPackageManagerFromPackageJsonEnginesAsync as jest.Mock;
+const MockedWritePackageManagerToPackageJsonEnginesAsync =
+  writePackageManagerToPackageJsonEnginesAsync as jest.Mock;
+const MockedScaffoldLog = SPFxScaffoldLog as jest.MockedClass<typeof SPFxScaffoldLog> & {
+  loadFromFolderAsync: jest.Mock;
+};
 
-// Minimal mocks for a happy-path run
-const mockMemFs = { dump: jest.fn().mockReturnValue({}) };
+// Minimal mock TemplateOutput for a happy-path run
+const mockTemplateFs = { files: new Map(), read: jest.fn(), write: jest.fn() };
+
+function createMockScaffoldLogInstance(hasEntries: boolean): {
+  hasEntries: boolean;
+  events: unknown[];
+  append: jest.Mock;
+  saveToFolderAsync: jest.Mock;
+  getEventsOfKind: jest.Mock;
+  toJsonl: jest.Mock;
+} {
+  return {
+    hasEntries,
+    events: [],
+    append: jest.fn(),
+    saveToFolderAsync: jest.fn().mockResolvedValue(undefined),
+    getEventsOfKind: jest.fn().mockReturnValue([]),
+    toJsonl: jest.fn().mockReturnValue('')
+  };
+}
 
 const REQUIRED_ARGS: string[] = [
   '--template',
@@ -106,9 +149,10 @@ describe('CreateAction', () => {
     jest.clearAllMocks();
     process.env = { ...originalEnv };
     delete process.env[SPFX_TEMPLATE_REPO_URL_ENV_VAR_NAME];
+    delete process.env[GITHUB_TOKEN_ENV_VAR_NAME];
 
     mockTemplate = {
-      renderAsync: jest.fn().mockResolvedValue(mockMemFs),
+      renderAsync: jest.fn().mockResolvedValue(mockTemplateFs),
       spfxVersion: '1.22.1'
     };
     const mockCollection = new Map([['webpart-minimal', mockTemplate]]) as unknown as SPFxTemplateCollection;
@@ -116,6 +160,12 @@ describe('CreateAction', () => {
       jest.fn().mockResolvedValue('[Mocked SPFxTemplateCollection]');
 
     MockedManager.prototype.getTemplatesAsync.mockResolvedValue(mockCollection);
+
+    // Default: new project (no existing scaffold log on disk, no package manager in engines)
+    MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(
+      createMockScaffoldLogInstance(false) as unknown as SPFxScaffoldLog
+    );
+    MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue(undefined);
   });
 
   afterEach(() => {
@@ -129,7 +179,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenCalledWith({
           repoUrl: 'https://github.com/SharePoint/spfx',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
         expect(MockedLocal).not.toHaveBeenCalled();
       });
@@ -140,7 +191,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenCalledWith({
           repoUrl: 'https://github.com/my-org/my-templates',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
       });
 
@@ -151,7 +203,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenCalledWith({
           repoUrl: 'https://github.com/SharePoint/spfx',
           branch: undefined,
-          terminal
+          terminal,
+          token: undefined
         });
       });
     });
@@ -179,13 +232,15 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenNthCalledWith(1, {
           repoUrl: 'https://github.com/SharePoint/spfx',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
         // Second call: remote source
         expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
           repoUrl: 'https://github.com/my-org/my-templates',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
       });
 
@@ -205,7 +260,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
           repoUrl: 'https://github.com/my-org/my-templates',
           branch: 'my-branch',
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
       });
 
@@ -222,7 +278,8 @@ describe('CreateAction', () => {
         expect(MockedGitHub).toHaveBeenCalledWith({
           repoUrl: 'https://github.com/my-org/my-templates',
           branch: undefined,
-          terminal: expect.anything()
+          terminal: expect.anything(),
+          token: undefined
         });
       });
     });
@@ -235,7 +292,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -245,7 +303,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -255,7 +314,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -265,7 +325,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -275,7 +336,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
   });
@@ -286,7 +348,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -296,7 +359,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/my-org/my-templates',
         branch: 'version/1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -307,7 +371,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'version/1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -326,7 +391,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'pending-fixes',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -336,7 +402,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: '1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -346,7 +413,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: '1.22',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -356,7 +424,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -367,7 +436,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.mycompany.com/org/repo',
         branch: 'my-branch',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
 
@@ -378,7 +448,65 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: 'main',
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
+      });
+    });
+  });
+
+  describe('GITHUB_TOKEN passthrough', () => {
+    it('passes token to PublicGitHubRepositorySource when GITHUB_TOKEN is set', async () => {
+      process.env[GITHUB_TOKEN_ENV_VAR_NAME] = 'ghp_test_token';
+      await runCreateAsync();
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: 'ghp_test_token'
+      });
+    });
+
+    it('passes undefined token when GITHUB_TOKEN is not set', async () => {
+      await runCreateAsync();
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: undefined
+      });
+    });
+
+    it('trims whitespace from GITHUB_TOKEN', async () => {
+      process.env[GITHUB_TOKEN_ENV_VAR_NAME] = '  ghp_test_token  ';
+      await runCreateAsync();
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: 'ghp_test_token'
+      });
+    });
+
+    it('treats whitespace-only GITHUB_TOKEN as undefined', async () => {
+      process.env[GITHUB_TOKEN_ENV_VAR_NAME] = '   ';
+      await runCreateAsync();
+      expect(MockedGitHub).toHaveBeenCalledWith({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: undefined
+      });
+    });
+
+    it('passes token to --remote-source sources', async () => {
+      process.env[GITHUB_TOKEN_ENV_VAR_NAME] = 'ghp_test_token';
+      await runCreateAsync(['--remote-source', 'https://github.com/my-org/my-templates']);
+      // Second call is the remote source
+      expect(MockedGitHub).toHaveBeenNthCalledWith(2, {
+        repoUrl: 'https://github.com/my-org/my-templates',
+        branch: undefined,
+        terminal: expect.anything(),
+        token: 'ghp_test_token'
       });
     });
   });
@@ -390,7 +518,8 @@ describe('CreateAction', () => {
       expect(MockedGitHub).toHaveBeenCalledWith({
         repoUrl: 'https://github.com/SharePoint/spfx',
         branch: undefined,
-        terminal: expect.anything()
+        terminal: expect.anything(),
+        token: undefined
       });
     });
   });
@@ -404,7 +533,6 @@ describe('CreateAction', () => {
           spfxVersion: '1.23.0-beta.0',
           spfxVersionForBadgeUrl: '1.23.0--beta.0'
         }),
-        expect.anything(),
         expect.anything()
       );
       mockTemplate.spfxVersion = '1.22.1';
@@ -418,9 +546,24 @@ describe('CreateAction', () => {
           spfxVersion: '1.22.1',
           spfxVersionForBadgeUrl: '1.22.1'
         }),
-        expect.anything(),
         expect.anything()
       );
+    });
+  });
+
+  describe('--target-dir derivation', () => {
+    it('defaults to cwd/solutionName when --target-dir is omitted', async () => {
+      // renderAsync no longer takes targetDir — it's passed to writeAsync instead.
+      // The snapshot output includes "targetDir: ..." so we verify via snapshot.
+      await runCreateAsync();
+    });
+
+    it('uses cwd/solutionName when --solution-name is provided without --target-dir', async () => {
+      await runCreateAsync(['--solution-name', 'my-app']);
+    });
+
+    it('uses explicit --target-dir and ignores solution name derivation', async () => {
+      await runCreateAsync(['--target-dir', '/custom/dir']);
     });
   });
 
@@ -440,7 +583,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'npm',
         ['install'],
-        expect.objectContaining({ currentWorkingDirectory: '/tmp/test' })
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
       );
     });
 
@@ -449,7 +592,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'pnpm',
         ['install'],
-        expect.objectContaining({ currentWorkingDirectory: '/tmp/test' })
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
       );
     });
 
@@ -458,7 +601,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'yarn',
         ['install'],
-        expect.objectContaining({ currentWorkingDirectory: '/tmp/test' })
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
       );
     });
 
@@ -467,7 +610,7 @@ describe('CreateAction', () => {
       expect(MockedExecutable.spawn).toHaveBeenCalledWith(
         'npm',
         ['install'],
-        expect.objectContaining({ stdio: 'inherit' })
+        expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test', stdio: 'inherit' })
       );
     });
 
@@ -480,9 +623,23 @@ describe('CreateAction', () => {
       );
     });
 
+    it('calls writePackageManagerToPackageJsonEnginesAsync after a successful install', async () => {
+      await runCreateAsync(['--package-manager', 'pnpm']);
+      expect(MockedWritePackageManagerToPackageJsonEnginesAsync).toHaveBeenCalledWith(
+        'pnpm',
+        '/tmp/test/test',
+        expect.anything()
+      );
+    });
+
     it('does not run install when --package-manager none is passed', async () => {
       await runCreateAsync(['--package-manager', 'none']);
       expect(MockedExecutable.spawn).not.toHaveBeenCalled();
+    });
+
+    it('does not call writePackageManagerToPackageJsonEnginesAsync when install is skipped', async () => {
+      await runCreateAsync(['--package-manager', 'none']);
+      expect(MockedWritePackageManagerToPackageJsonEnginesAsync).not.toHaveBeenCalled();
     });
 
     it('does not run install when --package-manager is omitted', async () => {
@@ -508,6 +665,17 @@ describe('CreateAction', () => {
       );
     });
 
+    it('does not call writePackageManagerToPackageJsonEnginesAsync when install fails', async () => {
+      MockedExecutable.waitForExitAsync.mockResolvedValue({
+        exitCode: 1,
+        stdout: '',
+        stderr: '',
+        signal: null
+      });
+      await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow();
+      expect(MockedWritePackageManagerToPackageJsonEnginesAsync).not.toHaveBeenCalled();
+    });
+
     it('surfaces signal termination with the signal name in the error message', async () => {
       MockedExecutable.waitForExitAsync.mockResolvedValue({
         exitCode: null,
@@ -518,6 +686,146 @@ describe('CreateAction', () => {
       await expect(runCreateAsync(['--package-manager', 'npm'])).rejects.toThrow(
         /npm install was terminated by signal SIGTERM/
       );
+    });
+  });
+
+  describe('--package-manager restriction for existing projects', () => {
+    beforeEach(() => {
+      MockedExecutable.spawn.mockReturnValue({});
+      MockedExecutable.waitForExitAsync.mockResolvedValue({
+        exitCode: 0,
+        stdout: '',
+        stderr: '',
+        signal: null
+      });
+    });
+
+    describe('when scaffold log exists (existing project)', () => {
+      it('overrides --package-manager with engines value and warns', async () => {
+        const mockInstance = createMockScaffoldLogInstance(true);
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('pnpm');
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+          'pnpm',
+          ['install'],
+          expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        );
+
+        // Verify the *resolved* PM is logged, not the user-provided one
+        expect(mockInstance.append).toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'package-manager-selected', packageManager: 'pnpm' })
+        );
+      });
+
+      it('does not warn when --package-manager matches the engines value', async () => {
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(
+          createMockScaffoldLogInstance(true) as unknown as SPFxScaffoldLog
+        );
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('npm');
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+          'npm',
+          ['install'],
+          expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        );
+      });
+
+      it('does not warn and skips install when --package-manager is "none"', async () => {
+        const mockInstance = createMockScaffoldLogInstance(true);
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('npm');
+
+        await runCreateAsync(['--package-manager', 'none']);
+        expect(MockedExecutable.spawn).not.toHaveBeenCalled();
+
+        // Verify no package-manager-selected event is logged
+        expect(mockInstance.append).not.toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'package-manager-selected' })
+        );
+      });
+
+      it('does not warn and skips install when --package-manager is omitted', async () => {
+        const mockInstance = createMockScaffoldLogInstance(true);
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('npm');
+
+        await runCreateAsync();
+        expect(MockedExecutable.spawn).not.toHaveBeenCalled();
+
+        // Verify no package-manager-selected event is logged
+        expect(mockInstance.append).not.toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'package-manager-selected' })
+        );
+      });
+
+      it('uses the specified --package-manager when package.json has no engines entry', async () => {
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(
+          createMockScaffoldLogInstance(true) as unknown as SPFxScaffoldLog
+        );
+        // package.json exists but has no pm in engines — tryRead returns undefined
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+          'npm',
+          ['install'],
+          expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        );
+      });
+
+      it('saves the scaffold log after scaffolding', async () => {
+        const mockInstance = createMockScaffoldLogInstance(true);
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+        MockedTryReadPackageManagerFromPackageJsonEnginesAsync.mockResolvedValue('npm');
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(mockInstance.saveToFolderAsync).toHaveBeenCalled();
+      });
+    });
+
+    describe('when scaffold log does not exist (new project)', () => {
+      it('runs install with the specified --package-manager', async () => {
+        await runCreateAsync(['--package-manager', 'npm']);
+        expect(MockedExecutable.spawn).toHaveBeenCalledWith(
+          'npm',
+          ['install'],
+          expect.objectContaining({ currentWorkingDirectory: '/tmp/test/test' })
+        );
+      });
+
+      it('logs session-started and package-manager-selected with the specified PM', async () => {
+        const mockInstance = createMockScaffoldLogInstance(false);
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+
+        await runCreateAsync(['--package-manager', 'npm']);
+
+        expect(mockInstance.append).toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'session-started' })
+        );
+        expect(mockInstance.append).toHaveBeenCalledWith(
+          expect.objectContaining({ kind: 'package-manager-selected', packageManager: 'npm' })
+        );
+      });
+
+      it('does not warn about --package-manager', async () => {
+        // Snapshot should NOT contain a warning about --package-manager
+        await runCreateAsync(['--package-manager', 'npm']);
+      });
+
+      it('saves the scaffold log after scaffolding', async () => {
+        const mockInstance = createMockScaffoldLogInstance(false);
+        MockedScaffoldLog.loadFromFolderAsync.mockResolvedValue(mockInstance as unknown as SPFxScaffoldLog);
+
+        await runCreateAsync();
+
+        expect(mockInstance.saveToFolderAsync).toHaveBeenCalled();
+      });
     });
   });
 

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.4/schema.json",
+  "schema_version": "v2.4",
+  "namespace": "sample",
+  "name_for_human": "Sample Agent",
+  "description_for_human": "React CopilotComponent Description",
+  "description_for_model": "React CopilotComponent Description",
+  "contact_email": "publisher@contoso.com"
+}

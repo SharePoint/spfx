@@ -8,7 +8,7 @@ The official CLI for scaffolding [SharePoint Framework (SPFx)](https://aka.ms/sp
 npm install -g @microsoft/spfx-cli
 ```
 
-**Requires Node.js `>=22.14.0 <23.0.0` or `>=24.12.0 <25.0.0`**
+**Requires Node.js `>=22.14.0 <23.0.0`, `>=24.12.0 <25.0.0`, or `>=26.0.0 <27.0.0`**
 
 ---
 
@@ -21,7 +21,7 @@ spfx create \
   --component-name "Hello World"
 ```
 
-This downloads the `webpart-react` template from the [SharePoint/spfx](https://github.com/SharePoint/spfx) template repository and scaffolds a React-based web part into the current directory.
+This downloads the `webpart-react` template from the [SharePoint/spfx](https://github.com/SharePoint/spfx) template repository and scaffolds a React-based web part into a `hello-world` subfolder.
 
 ---
 
@@ -41,7 +41,7 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--target-dir PATH` | current directory | Directory to scaffold into |
+| `--target-dir PATH` | `./<solution-name>` | Directory to scaffold into (derived from solution name when omitted) |
 | `--solution-name NAME` | hyphen-cased component name | SharePoint solution name |
 | `--component-alias ALIAS` | same as `--component-name` | Short identifier for the component |
 | `--component-description TEXT` | `"<name> description"` | Component description string |
@@ -49,12 +49,14 @@ Scaffolds a new SPFx component. Templates are pulled from the [SharePoint/spfx](
 | `--template-url URL` | `https://github.com/SharePoint/spfx` | Custom GitHub template repository |
 | `--local-source PATH` | — | Path to a local template folder (repeatable) |
 | `--remote-source URL` | — | Public GitHub repo to include as an additional template source (repeatable) |
+| `--package-manager {npm,pnpm,yarn,none}` | `none` | Package manager to use for dependency installation after scaffolding. For existing projects (detected via `.spfx-scaffold.jsonl`), the previously recorded package manager is used; if a different value is specified it is overridden with a warning |
 
 ### Environment variables
 
 | Variable | Description |
 |----------|-------------|
 | `SPFX_TEMPLATE_REPO_URL` | Equivalent to `--template-url` |
+| `GITHUB_TOKEN` | GitHub personal access token — required for GitHub Enterprise hosts, also works for private repos on github.com |
 | `SPFX_CI_MODE=1` | Internal/testing-only: produces deterministic UUIDs for CI; not shown in `--help`; subject to change |
 
 ---
@@ -81,6 +83,7 @@ spfx list-templates
 | Variable | Description |
 |----------|-------------|
 | `SPFX_TEMPLATE_REPO_URL` | Equivalent to `--template-url` |
+| `GITHUB_TOKEN` | GitHub personal access token — required for GitHub Enterprise hosts, also works for private repos on github.com |
 
 ### Examples
 
@@ -139,6 +142,14 @@ Templates are fetched at runtime from the [SharePoint/spfx](https://github.com/S
 | `ace-generic-primarytext-card` | Generic primary text card |
 | `ace-search-card` | Search card |
 
+### Copilot Components
+
+| Name | Description |
+|------|-------------|
+| `copilot-component-minimal` | Bare-bones Copilot Component, no UI framework |
+| `copilot-component-noframework` | No-framework Copilot Component (HTML/CSS) with theming and localization |
+| `copilot-component-react` | React-based Copilot Component using Fluent UI, Microsoft Graph, and SharePoint REST |
+
 ### Other
 
 | Name | Description |
@@ -187,6 +198,16 @@ spfx create \
   --library-name my-spfx-library \
   --component-name "My Web Part" \
   --remote-source https://github.com/my-org/my-templates
+```
+
+Use templates from a GitHub Enterprise instance:
+
+```bash
+GITHUB_TOKEN=ghp_... spfx create \
+  --template webpart-react \
+  --library-name my-spfx-library \
+  --component-name "My Web Part" \
+  --template-url https://github.mycompany.com/org/spfx-templates
 ```
 
 ---

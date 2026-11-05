@@ -1,10 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`CommandLineHelp prints the help: create 1`] = `
 "usage: spfx create [-h] [--template-url URL] [--spfx-version VERSION]
                    [--local-source TEMPLATE_PATH] [--remote-source URL]
-                   [--target-dir TARGET_DIR] --template TEMPLATE_NAME
-                   --library-name LIBRARY_NAME --component-name COMPONENT_NAME
+                   [--github-token TOKEN] [--target-dir TARGET_DIR] --template
+                   TEMPLATE_NAME [--library-name LIBRARY_NAME]
+                   --component-name COMPONENT_NAME
                    [--component-alias COMPONENT_ALIAS]
                    [--component-description COMPONENT_DESCRIPTION]
                    [--solution-name SOLUTION_NAME]
@@ -28,13 +29,20 @@ Optional arguments:
                         Path to a local template folder (repeatable)
   --remote-source URL   Public GitHub repository URL to use as an additional
                         template source (repeatable)
+  --github-token TOKEN  GitHub personal access token for authenticating
+                        requests. Required for GitHub Enterprise hosts and
+                        private repositories on github.com. This parameter
+                        may alternatively be specified via the GITHUB_TOKEN
+                        environment variable.
   --target-dir TARGET_DIR
-                        The directory to create the solution (or where the
-                        solution already exists) The default value is \\"<cwd>\\".
+                        The directory to scaffold into. When omitted,
+                        defaults to a subfolder named after the solution in
+                        the current working directory.
   --template TEMPLATE_NAME
                         The template to use for scaffolding
   --library-name LIBRARY_NAME
-                        The library name for the component
+                        The library name for the component. Defaults to the
+                        solution name if not specified.
   --component-name COMPONENT_NAME
                         The component name (e.g., \\"Hello World\\")
   --component-alias COMPONENT_ALIAS
@@ -60,7 +68,7 @@ CLI for managing SharePoint Framework (SPFx) projects
 
 Positional arguments:
   <command>
-    create        Scaffolds an SPFx component into the current folder
+    create        Scaffolds a new SPFx component
     list-templates
                   Lists available SPFx templates from configured sources
 
@@ -74,7 +82,7 @@ Optional arguments:
 exports[`CommandLineHelp prints the help: list-templates 1`] = `
 "usage: spfx list-templates [-h] [--template-url URL] [--spfx-version VERSION]
                            [--local-source TEMPLATE_PATH]
-                           [--remote-source URL]
+                           [--remote-source URL] [--github-token TOKEN]
 
 
 This command lists all available templates from the default GitHub source and
@@ -95,5 +103,10 @@ Optional arguments:
                         Path to a local template folder (repeatable)
   --remote-source URL   Public GitHub repository URL to use as an additional
                         template source (repeatable)
+  --github-token TOKEN  GitHub personal access token for authenticating
+                        requests. Required for GitHub Enterprise hosts and
+                        private repositories on github.com. This parameter
+                        may alternatively be specified via the GITHUB_TOKEN
+                        environment variable.
 "
 `;

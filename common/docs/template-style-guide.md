@@ -4,12 +4,12 @@ This guide covers naming conventions, variable usage, and code quality standards
 
 ## Template Variable Reference
 
-Template variables are defined in each template's `template.json` under `contextSchema`:
+Built-in template variables are provided automatically by `buildBuiltInContext()` in the API package:
 
 ```json
 {
   "context": {
-    "spfxVersion": "1.22.2"
+    "spfxVersion": "1.23.2"
   }
 }
 ```
@@ -25,7 +25,7 @@ Every string value in the render context is automatically wrapped with casing he
 | `componentName.allCaps` | UPPER_SNAKE_CASE | ACE view/quick-view registry IDs, string constants | "GENERIC_CARD" |
 | `libraryName` | original | Package name (via `toString()`) | "@spfx-template/generic-card" |
 | `description` | — | User-provided description | User's text |
-| `spfxVersion` | — | SPFx framework version | "1.22.2" |
+| `spfxVersion` | — | SPFx framework version | "1.23.2" |
 
 The same casing helpers are available on **any** string context variable — e.g. `componentAlias.pascal`, `libraryName.hyphen`, etc.
 
@@ -155,7 +155,7 @@ Example READMEs should have real content: a component name header, an actual sum
 
 ## Troubleshooting
 
-- **Which variable to use?** Check template.json `contextSchema`
+- **Which variable to use?** Check `ISPFxBuiltInContext` in `SPFxBuiltInContext.ts`
 - **How to format a specific identifier?** Look at existing working templates
 - **Incorrect casing in example IDs?** Fix the template, not the example
 - **Template syntax in rendered example?** Regenerate from the template

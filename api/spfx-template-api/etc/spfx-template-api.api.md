@@ -6,7 +6,6 @@
 
 import type { ITerminal } from '@rushstack/terminal';
 import { JsonObject } from '@rushstack/node-core-library';
-import type { MemFsEditor } from 'mem-fs-editor';
 import * as z from 'zod';
 
 // @public
@@ -15,6 +14,12 @@ export abstract class BaseSPFxTemplateRepositorySource {
     abstract getTemplatesAsync(): Promise<Array<SPFxTemplate>>;
     readonly kind: SPFxTemplateRepositorySourceKind;
 }
+
+// @public
+export function buildBuiltInContext(inputs: ISPFxBuiltInContextInputs, options?: IBuildBuiltInContextOptions): ISPFxBuiltInContext;
+
+// @public
+export const BUILT_IN_PARAMETER_NAMES: ReadonlySet<keyof ISPFxBuiltInContext>;
 
 // @public
 export class ConfigJsonMergeHelper extends JsonMergeHelper {
@@ -31,6 +36,14 @@ export function createCasedString(raw: string): ICasedString;
 export const ENGINE_VERSION: string;
 
 // @public
+export type FileWriteOutcome = 'new' | 'merged' | 'preserved' | 'unchanged';
+
+// @public
+export interface IBuildBuiltInContextOptions {
+    ciMode?: boolean;
+}
+
+// @public
 export interface ICasedString {
     readonly allCaps: string;
     readonly camel: string;
@@ -40,9 +53,43 @@ export interface ICasedString {
 }
 
 // @public
+export interface IFileWriteEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    kind: 'file-write';
+    // (undocumented)
+    mergeHelper?: string;
+    // (undocumented)
+    outcome: FileWriteOutcome;
+    // (undocumented)
+    relativePath: string;
+}
+
+// @public
 export interface IMergeHelper {
     readonly fileRelativePath: string;
     merge(existingContent: string, newContent: string): string;
+}
+
+// @public
+export interface IPackageManagerInstallCompletedEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    exitCode: number;
+    // (undocumented)
+    kind: 'package-manager-install-completed';
+    // (undocumented)
+    packageManager: string;
+    // (undocumented)
+    signal?: string;
+}
+
+// @public
+export interface IPackageManagerSelectedEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    kind: 'package-manager-selected';
+    // (undocumented)
+    packageManager: string;
+    // (undocumented)
+    targetDir: string;
 }
 
 // @public
@@ -50,6 +97,7 @@ export interface IPublicGitHubRepositorySourceOptions {
     branch?: string;
     repoUrl: string;
     terminal: ITerminal;
+    token?: string;
 }
 
 // @public (undocumented)
@@ -61,18 +109,86 @@ export interface IRenderOptions {
 export function _isBinaryFile(filePath: string): boolean;
 
 // @public
+export interface ISessionStartedEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    cliVersion: string;
+    // (undocumented)
+    kind: 'session-started';
+}
+
+// @public
+export interface ISPFxBuiltInContext {
+    componentAlias: string;
+    componentDescription: string;
+    componentId: string;
+    componentName: string;
+    featureId: string;
+    libraryName: string;
+    solution_name: string;
+    solutionId: string;
+    spfxVersion: string;
+    spfxVersionForBadgeUrl: string;
+}
+
+// @public
+export interface ISPFxBuiltInContextInputs {
+    componentAlias?: string;
+    componentDescription?: string;
+    componentName: string;
+    libraryName: string;
+    solutionName?: string;
+    spfxVersion: string;
+}
+
+// @public
+export type ISPFxScaffoldEvent = ISessionStartedEvent | ITemplateRenderedEvent | IPackageManagerSelectedEvent | IFileWriteEvent | IPackageManagerInstallCompletedEvent;
+
+// @public
+export interface ISPFxScaffoldEventBase {
+    kind: string;
+    timestamp: string;
+}
+
+// @public
+export type ISPFxScaffoldEventInput = ISPFxScaffoldEvent extends infer E ? E extends ISPFxScaffoldEvent ? Omit<E, 'timestamp'> & {
+    timestamp?: string;
+} : never : never;
+
+// @public
 export interface ISPFxTemplateJson {
     $schema?: string;
     category: SPFxTemplateCategory;
-    contextSchema?: Record<string, {
-        type: 'string';
-        description: string;
-    }>;
     description?: string;
     minimumEngineVersion?: string;
     name: string;
     spfxVersion: string;
     version: string;
+}
+
+// @public
+export interface ITemplateOutputEntry {
+    readonly contents: string | Buffer;
+}
+
+// @public
+export interface ITemplateRenderedEvent extends ISPFxScaffoldEventBase {
+    // (undocumented)
+    cliVersion: string;
+    // (undocumented)
+    context: Record<string, string>;
+    // (undocumented)
+    kind: 'template-rendered';
+    // (undocumented)
+    spfxVersion: string;
+    // (undocumented)
+    templateName: string;
+    // (undocumented)
+    templateVersion: string;
+}
+
+// @public
+export interface IWriteOptions {
+    log?: SPFxScaffoldLog;
 }
 
 // @public
@@ -101,6 +217,9 @@ export class PackageJsonMergeHelper extends JsonMergeHelper {
 }
 
 // @public
+export type PackageManager = (typeof VALID_PACKAGE_MANAGERS)[number];
+
+// @public
 export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
     readonly fileRelativePath: string;
@@ -115,6 +234,9 @@ export class PublicGitHubRepositorySource extends BaseSPFxTemplateRepositorySour
 }
 
 // @public
+export const SCAFFOLD_LOG_FILENAME: string;
+
+// @public
 export class ServeJsonMergeHelper extends JsonMergeHelper {
     // (undocumented)
     readonly fileRelativePath: string;
@@ -123,10 +245,24 @@ export class ServeJsonMergeHelper extends JsonMergeHelper {
 }
 
 // @public
-export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library'];
+export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library', 'copilot'];
 
 // @public
 export type SPFxRepositorySource = LocalFileSystemRepositorySource | PublicGitHubRepositorySource;
+
+// @public
+export class SPFxScaffoldLog {
+    append(event: ISPFxScaffoldEventInput): void;
+    get events(): readonly ISPFxScaffoldEvent[];
+    static fromJsonl(content: string): SPFxScaffoldLog;
+    getEventsOfKind<K extends ISPFxScaffoldEvent['kind']>(kind: K): Extract<ISPFxScaffoldEvent, {
+        kind: K;
+    }>[];
+    get hasEntries(): boolean;
+    static loadFromFolderAsync(targetDir: string): Promise<SPFxScaffoldLog>;
+    saveToFolderAsync(targetDir: string): Promise<void>;
+    toJsonl(): string;
+}
 
 // @public
 export class SPFxTemplate {
@@ -138,7 +274,7 @@ export class SPFxTemplate {
     static fromMemoryAsync(templateName: string, templateJsonData: unknown, fileMap: Map<string, Buffer>): Promise<SPFxTemplate>;
     get minimumEngineVersion(): string | undefined;
     get name(): string;
-    renderAsync(context: object, destinationDir: string, options?: IRenderOptions): Promise<MemFsEditor>;
+    renderAsync(context: Record<string, string>, options?: IRenderOptions): Promise<TemplateOutput>;
     get spfxVersion(): string;
     toString(): string;
     get unknownFields(): readonly string[];
@@ -161,10 +297,6 @@ export const SPFxTemplateDefinitionSchema: z.ZodType<ISPFxTemplateJson>;
 export class SPFxTemplateJsonFile {
     constructor(data: ISPFxTemplateJson);
     get category(): SPFxTemplateCategory;
-    get contextSchema(): Record<string, {
-        type: 'string';
-        description: string;
-    }> | undefined;
     get description(): string | undefined;
     static fromFileAsync(filePath: string): Promise<SPFxTemplateJsonFile>;
     static fromFolderAsync(folderPath: string): Promise<SPFxTemplateJsonFile>;
@@ -191,7 +323,26 @@ export type SPFxTemplateRepositorySourceKind = 'local' | 'github';
 export class SPFxTemplateWriter {
     constructor();
     addMergeHelper(helper: IMergeHelper): void;
-    writeAsync(editor: MemFsEditor, targetDir: string): Promise<void>;
+    writeAsync(templateOutput: TemplateOutput, targetDir: string, options?: IWriteOptions): Promise<void>;
 }
+
+// @public
+export class TemplateOutput {
+    get files(): ReadonlyMap<string, ITemplateOutputEntry>;
+    read(relativePath: string): string | Buffer | undefined;
+    write(relativePath: string, contents: string | Buffer): void;
+}
+
+// @public
+export function toHyphenCase(input: string): string;
+
+// @public
+export function tryReadPackageManagerFromPackageJsonEnginesAsync(targetDir: string): Promise<PackageManager | undefined>;
+
+// @public (undocumented)
+export const VALID_PACKAGE_MANAGERS: readonly ["npm", "pnpm", "yarn"];
+
+// @public
+export function writePackageManagerToPackageJsonEnginesAsync(packageManager: PackageManager, targetDir: string, terminal: ITerminal): Promise<void>;
 
 ```

@@ -6,7 +6,7 @@ import type { ChildProcess } from 'node:child_process';
 import { Executable } from '@rushstack/node-core-library';
 import { StringBufferTerminalProvider, Terminal } from '@rushstack/terminal';
 
-import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from '../GitUtilities';
+import { getGitHubAuthorizationHeaderAsync, getRepoSlugAsync } from '../GitUtilities';
 
 describe('GitUtilities', () => {
   let terminalProvider: StringBufferTerminalProvider;
@@ -47,17 +47,20 @@ describe('GitUtilities', () => {
     });
   });
 
-  describe(getGitAuthorizationHeaderAsync.name, () => {
-    it('extracts authorization header value from git config entry', async () => {
-      mockGitStdout('http.https://github.com/.extraheader AUTHORIZATION: basic abc123');
+  describe(getGitHubAuthorizationHeaderAsync.name, () => {
+    it('normalizes basic-auth extraheader with a GitHub App token', async () => {
+      // Simulate "basic base64(x-access-token:ghs_abc123)" as stored by git checkout
+      const encoded: string = Buffer.from('x-access-token:ghs_abc123').toString('base64');
+      mockGitStdout(`http.https://github.com/.extraheader AUTHORIZATION: basic ${encoded}`);
 
-      await expect(getGitAuthorizationHeaderAsync(terminal)).resolves.toBe('basic abc123');
+      const { header } = await getGitHubAuthorizationHeaderAsync(terminal);
+      expect(header).toBe('token ghs_abc123');
     });
 
     it('throws when git config output has no header value', async () => {
       mockGitStdout('');
 
-      await expect(getGitAuthorizationHeaderAsync(terminal)).rejects.toThrow(
+      await expect(getGitHubAuthorizationHeaderAsync(terminal)).rejects.toThrow(
         'Could not extract authorization header from git config'
       );
     });
@@ -65,7 +68,7 @@ describe('GitUtilities', () => {
     it('throws when header line is missing colon', async () => {
       mockGitStdout('http.https://github.com/.extraheader AUTHORIZATION basic abc123');
 
-      await expect(getGitAuthorizationHeaderAsync(terminal)).rejects.toThrow(
+      await expect(getGitHubAuthorizationHeaderAsync(terminal)).rejects.toThrow(
         'Unexpected authorization header format'
       );
     });

@@ -1,18 +1,18 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`GitUtilities getGitAuthorizationHeaderAsync extracts authorization header value from git config entry 1`] = `
+exports[`GitUtilities getGitHubAuthorizationHeaderAsync normalizes basic-auth extraheader with a GitHub App token 1`] = `
 Array [
   "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
 ]
 `;
 
-exports[`GitUtilities getGitAuthorizationHeaderAsync throws when git config output has no header value 1`] = `
+exports[`GitUtilities getGitHubAuthorizationHeaderAsync throws when git config output has no header value 1`] = `
 Array [
   "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
 ]
 `;
 
-exports[`GitUtilities getGitAuthorizationHeaderAsync throws when header line is missing colon 1`] = `
+exports[`GitUtilities getGitHubAuthorizationHeaderAsync throws when header line is missing colon 1`] = `
 Array [
   "[    log] > git config --get-regexp http\\\\..*\\\\.extraheader[n]",
 ]

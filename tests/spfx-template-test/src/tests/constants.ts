@@ -5,3 +5,4 @@
 export const REPO_ROOT: string = `${__dirname}/../../../..`;
 export const CLI_PATH: string = require.resolve('@microsoft/spfx-cli/bin/spfx');
 export const TEMPLATES_DIR: string = `${REPO_ROOT}/templates`;
+export const PROJECT_ROOT: string = `${__dirname}/../..`;

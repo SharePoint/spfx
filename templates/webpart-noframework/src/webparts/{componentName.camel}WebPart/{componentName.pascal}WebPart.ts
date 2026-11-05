@@ -23,7 +23,7 @@ export default class <%= componentName.pascal %>WebPart extends BaseClientSideWe
 
   public render(): void {
     this.domElement.innerHTML = `
-    <section class="${styles.<%= componentName.camel %>WebPart} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
+    <section class="${styles.<%= componentName.camel %>WebPart}">
       <div class="${styles.welcome}">
         <img alt="" src="${this._isDarkTheme ? welcomeDark : welcomeLight}" class="${styles.welcomeImage}" />
         <h2>${strings.GreetingMessage.replace(/\{0\}/g, escape(this.context.pageContext.user.displayName))}</h2>

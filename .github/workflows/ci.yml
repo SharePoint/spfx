@@ -18,6 +18,9 @@ jobs:
           - os: ubuntu-latest
             nodeVersion: 24.14.x
             displayName: Ubuntu
+          - os: ubuntu-latest
+            nodeVersion: 26.x
+            displayName: Ubuntu (Node 26)
           - os: windows-latest
             nodeVersion: 24.14.x
             displayName: Windows
@@ -28,7 +31,7 @@ jobs:
     env:
       INSTALL_RUN_RUSH_LOCKFILE_PATH: ${{ github.workspace }}/common/config/validation/rush-package-lock.json
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 2
 
@@ -36,7 +39,7 @@ jobs:
 
       - run: git config --global user.name "SPFx CLI Bot"
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ matrix.nodeVersion }}
 

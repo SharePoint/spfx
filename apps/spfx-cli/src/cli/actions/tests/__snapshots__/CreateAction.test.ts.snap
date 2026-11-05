@@ -1,12 +1,36 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`CreateAction --package-manager calls writePackageManagerToPackageJsonEnginesAsync after a successful install 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running pnpm install in /tmp/test/test...[n]",
+  "[    log] pnpm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager does not call writePackageManagerToPackageJsonEnginesAsync when install is skipped 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
 
 exports[`CreateAction --package-manager does not run install when --package-manager is omitted 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -15,9 +39,9 @@ exports[`CreateAction --package-manager does not run install when --package-mana
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -28,9 +52,134 @@ Array [
   "[    log] [Mocked SPFxTemplateCollection][n]",
   "[    log] targetDir: /custom/dir[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
   "[    log] Running npm install in /custom/dir...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) does not warn about --package-manager 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) logs session-started and package-manager-selected with the specified PM 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) runs install with the specified --package-manager 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log does not exist (new project) saves the scaffold log after scaffolding 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn and skips install when --package-manager is "none" 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn and skips install when --package-manager is omitted 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) does not warn when --package-manager matches the engines value 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) overrides --package-manager with engines value and warns 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[warning] --package-manager \\"npm\\" is overridden by \\"pnpm\\" from the existing project's \`package.json\` \`engines\` field. The --package-manager parameter will be ignored.[n]",
+  "[    log] Running pnpm install in /tmp/test/test...[n]",
+  "[    log] pnpm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) saves the scaffold log after scaffolding 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
+  "[    log] npm install completed successfully.[n]",
+]
+`;
+
+exports[`CreateAction --package-manager restriction for existing projects when scaffold log exists (existing project) uses the specified --package-manager when package.json has no engines entry 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
   "[    log] npm install completed successfully.[n]",
 ]
 `;
@@ -39,11 +188,11 @@ exports[`CreateAction --package-manager runs npm install when --package-manager 
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
-  "[    log] Running npm install in /tmp/test...[n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
   "[    log] npm install completed successfully.[n]",
 ]
 `;
@@ -52,11 +201,11 @@ exports[`CreateAction --package-manager runs pnpm install when --package-manager
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
-  "[    log] Running pnpm install in /tmp/test...[n]",
+  "[    log] Running pnpm install in /tmp/test/test...[n]",
   "[    log] pnpm install completed successfully.[n]",
 ]
 `;
@@ -65,11 +214,11 @@ exports[`CreateAction --package-manager runs yarn install when --package-manager
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
-  "[    log] Running yarn install in /tmp/test...[n]",
+  "[    log] Running yarn install in /tmp/test/test...[n]",
   "[    log] yarn install completed successfully.[n]",
 ]
 `;
@@ -78,11 +227,11 @@ exports[`CreateAction --package-manager uses stdio: inherit so package manager o
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
-  "[    log] Running npm install in /tmp/test...[n]",
+  "[    log] Running npm install in /tmp/test/test...[n]",
   "[    log] npm install completed successfully.[n]",
 ]
 `;
@@ -92,9 +241,9 @@ Array [
   "[warning] --spfx-version is ignored when --local-source is specified.[n]",
   "[    log] Adding local template source: /a[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -103,9 +252,9 @@ exports[`CreateAction --spfx-version passes ref to PublicGitHubRepositorySource 
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -114,9 +263,9 @@ exports[`CreateAction --spfx-version passes ref when SPFX_TEMPLATE_REPO_URL and 
 Array [
   "[    log] Using GitHub template source: https://github.com/my-org/my-templates (branch: version/1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -126,9 +275,98 @@ Array [
   "[warning] --template-url contains a branch ('/tree/pending-fixes'). --spfx-version \\"1.22\\" will take precedence.[n]",
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: version/1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --target-dir derivation defaults to cwd/solutionName when --target-dir is omitted 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --target-dir derivation uses cwd/solutionName when --solution-name is provided without --target-dir 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/my-app[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction --target-dir derivation uses explicit --target-dir and ignores solution name derivation 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /custom/dir[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction GITHUB_TOKEN passthrough passes token to --remote-source sources 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction GITHUB_TOKEN passthrough passes token to PublicGitHubRepositorySource when GITHUB_TOKEN is set 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction GITHUB_TOKEN passthrough passes undefined token when GITHUB_TOKEN is not set 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction GITHUB_TOKEN passthrough treats whitespace-only GITHUB_TOKEN as undefined 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
+  "[    log] [n]",
+]
+`;
+
+exports[`CreateAction GITHUB_TOKEN passthrough trims whitespace from GITHUB_TOKEN 1`] = `
+Array [
+  "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
+  "[    log] [Mocked SPFxTemplateCollection][n]",
+  "[    log] targetDir: /tmp/test/test[n]",
+  "[    log] [n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -137,9 +375,9 @@ exports[`CreateAction URL /tree/ branch extraction extracts branch from /tree/ i
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: pending-fixes)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -148,9 +386,9 @@ exports[`CreateAction URL /tree/ branch extraction extracts branch from /tree/ o
 Array [
   "[    log] Using GitHub template source: https://github.mycompany.com/org/repo (branch: my-branch)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -159,9 +397,9 @@ exports[`CreateAction URL /tree/ branch extraction handles .git before /tree/ 1`
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -170,9 +408,9 @@ exports[`CreateAction URL /tree/ branch extraction handles version-like branch n
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: 1.22)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -181,9 +419,9 @@ exports[`CreateAction URL /tree/ branch extraction ignores subdirectory suffix a
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx (branch: main)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -192,9 +430,9 @@ exports[`CreateAction URL /tree/ branch extraction passes undefined ref when URL
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -203,9 +441,9 @@ exports[`CreateAction URL normalization handles .git then slash together 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -214,9 +452,9 @@ exports[`CreateAction URL normalization strips .git suffix 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -225,9 +463,9 @@ exports[`CreateAction URL normalization strips multiple trailing slashes 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -236,9 +474,9 @@ exports[`CreateAction URL normalization strips trailing slash 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -247,9 +485,9 @@ exports[`CreateAction URL normalization trims whitespace 1`] = `
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -258,9 +496,9 @@ exports[`CreateAction source selection with --local-source should add a LocalFil
 Array [
   "[    log] Adding local template source: /path/to/templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -270,9 +508,9 @@ Array [
   "[    log] Adding local template source: /a[n]",
   "[    log] Adding local template source: /b[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -282,9 +520,9 @@ Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -295,9 +533,9 @@ Array [
   "[    log] Adding remote template source: https://github.com/org1/repo1[n]",
   "[    log] Adding remote template source: https://github.com/org2/repo2[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -307,9 +545,9 @@ Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] Adding remote template source: https://github.com/my-org/my-templates (branch: my-branch)[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -319,9 +557,9 @@ Array [
   "[    log] Adding local template source: /path/to/templates[n]",
   "[    log] Adding remote template source: https://github.com/my-org/my-templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -330,9 +568,9 @@ exports[`CreateAction source selection without --local-source should add a Publi
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -341,9 +579,9 @@ exports[`CreateAction source selection without --local-source should use SPFX_TE
 Array [
   "[    log] Using GitHub template source: https://github.com/my-org/my-templates[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -352,9 +590,9 @@ exports[`CreateAction spfxVersionForBadgeUrl escapes hyphens in prerelease versi
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -363,9 +601,9 @@ exports[`CreateAction spfxVersionForBadgeUrl leaves stable versions unchanged 1`
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;
@@ -374,9 +612,9 @@ exports[`CreateAction whitespace env var fix falls back to default URL when SPFX
 Array [
   "[    log] Using GitHub template source: https://github.com/SharePoint/spfx[n]",
   "[    log] [Mocked SPFxTemplateCollection][n]",
-  "[    log] targetDir: /tmp/test[n]",
+  "[    log] targetDir: /tmp/test/test[n]",
   "[    log] [n]",
-  "[    log] The following files will be modified:[n]",
+  "[    log] The following files will be generated:[n]",
   "[    log] [n]",
 ]
 `;

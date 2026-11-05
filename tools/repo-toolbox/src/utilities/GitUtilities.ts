@@ -6,6 +6,8 @@ import type { ChildProcess } from 'node:child_process';
 import { Executable } from '@rushstack/node-core-library';
 import type { ITerminal } from '@rushstack/terminal';
 
+import { parseGitHubAuthorizationHeader, type IGitHubAuthorizationHeader } from './GitHubClient';
+
 const GIT_BIN_NAME: 'git' = 'git';
 
 export async function getRepoSlugAsync(terminal: ITerminal): Promise<string> {
@@ -18,7 +20,9 @@ export async function getRepoSlugAsync(terminal: ITerminal): Promise<string> {
   return match[1]!;
 }
 
-export async function getGitAuthorizationHeaderAsync(terminal: ITerminal): Promise<string> {
+export async function getGitHubAuthorizationHeaderAsync(
+  terminal: ITerminal
+): Promise<IGitHubAuthorizationHeader> {
   // The checkout with persistCredentials sets an extraheader in git config
   // Format: "http.<url>.extraheader AUTHORIZATION: basic <token>"
   const result: string = await execGitAsync(['config', '--get-regexp', 'http\\..*\\.extraheader'], terminal);
@@ -31,13 +35,13 @@ export async function getGitAuthorizationHeaderAsync(terminal: ITerminal): Promi
   }
 
   // headerLine is "AUTHORIZATION: basic <token>" — strip the header name prefix
-  // to get just the value ("basic <token>") for use with fetch.
+  // to get just the value ("basic <token>") and normalize to a proper token format.
   const colonIndex: number = headerLine.indexOf(':');
   if (colonIndex === -1) {
     throw new Error(`Unexpected authorization header format: ${headerLine}`);
   }
 
-  return headerLine.substring(colonIndex + 1).trim();
+  return parseGitHubAuthorizationHeader(headerLine.substring(colonIndex + 1).trim());
 }
 
 export async function execGitAsync(args: string[], terminal: ITerminal): Promise<string> {

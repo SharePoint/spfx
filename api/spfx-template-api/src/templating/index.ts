@@ -11,4 +11,12 @@ export {
   SPFX_TEMPLATE_CATEGORIES,
   type SPFxTemplateCategory
 } from './SPFxTemplateJsonFile';
+export {
+  type ISPFxBuiltInContextInputs,
+  type ISPFxBuiltInContext,
+  type IBuildBuiltInContextOptions,
+  BUILT_IN_PARAMETER_NAMES,
+  buildBuiltInContext,
+  toHyphenCase
+} from './SPFxBuiltInContext';
 export { ENGINE_VERSION } from '../engineVersion';

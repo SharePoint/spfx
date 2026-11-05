@@ -1,7 +1,7 @@
 {
   "name": "@microsoft/spfx-template-api",
   "description": "Library for generating SPFx solutions",
-  "version": "0.1.0-pre.2",
+  "version": "0.1.0-pre.4",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
@@ -10,25 +10,25 @@
     "_phase:test": "heft run --only test -- --clean"
   },
   "dependencies": {
-    "@microsoft/spfx-heft-plugins": "1.22.2",
-    "@rushstack/node-core-library": "~5.20.3",
-    "@rushstack/terminal": "~0.22.3",
+    "@microsoft/spfx-heft-plugins": "1.24.1",
+    "@rushstack/node-core-library": "~5.25.0",
+    "@rushstack/terminal": "~0.24.6",
     "adm-zip": "^0.5.16",
     "cli-table3": "^0.6.5",
     "ejs": "^3.1.10",
     "lodash": "^4.17.23",
-    "mem-fs": "^4.1.2",
-    "mem-fs-editor": "^11.1.4",
     "semver": "~7.7.4",
-    "zod": "^4.1.5"
+    "uuid": "^11.0.5",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@microsoft/spfx-cli-build-rig": "workspace:*",
-    "@rushstack/heft": "^1.2.7",
+    "@rushstack/heft": "^1.3.2",
     "@types/adm-zip": "^0.5.5",
     "@types/ejs": "^3.1.5",
     "@types/lodash": "^4.17.18",
     "@types/semver": "7.7.1",
+    "@types/uuid": "^10.0.0",
     "eslint": "9.37.0"
   }
 }

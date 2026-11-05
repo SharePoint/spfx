@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "no-framework-copilot-component": {
+      "components": [
+        {
+          "entrypoint": "./lib/NoFrameworkCopilotComponent.js",
+          "manifest": "./src/no-framework-copilot-component.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "NoFrameworkCopilotComponentStrings": "lib/loc/{locale}.js"
+  }
+}

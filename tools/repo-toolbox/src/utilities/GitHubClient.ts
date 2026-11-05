@@ -1,21 +1,24 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import { Octokit, type RestEndpointMethodTypes } from '@octokit/rest';
+import type { Octokit, RestEndpointMethodTypes } from '@octokit/rest';
 
 import type { ITerminal } from '@rushstack/terminal';
 
-import { getGitAuthorizationHeaderAsync, getRepoSlugAsync } from './GitUtilities';
+import { getGitHubAuthorizationHeaderAsync, getRepoSlugAsync } from './GitUtilities';
 
 export type IGitHubPr = RestEndpointMethodTypes['pulls']['list']['response']['data'][number];
 export type IGitHubCreationResult = RestEndpointMethodTypes['pulls']['create']['response']['data'];
 export type ICommitPr =
   RestEndpointMethodTypes['repos']['listPullRequestsAssociatedWithCommit']['response']['data'][number];
 
+export interface IGitHubAuthorizationHeader {
+  header: string;
+}
+
 export interface IGitHubClientOptions {
-  authorizationHeader: string;
-  owner: string;
-  repo: string;
+  authorizationHeader: IGitHubAuthorizationHeader;
+  repoSlug: string;
 }
 
 export interface IGetPrForBranchOptions {
@@ -43,22 +46,76 @@ export interface IPostCommitStatusOptions {
   targetUrl?: string;
 }
 
+export interface ICreateReleaseOptions {
+  tag: string;
+  sha: string;
+  name: string;
+  body?: string;
+  prerelease: boolean;
+}
+
 interface IOctokitCommonOptions {
   owner: string;
   repo: string;
+}
+
+interface IGitHubClientOptionsInternal extends IGitHubClientOptions {
+  Octokit: typeof Octokit;
+}
+
+/**
+ * Normalizes various token formats to a proper GitHub API Authorization header value.
+ *
+ * Git checkout extraheaders use `basic base64(x-access-token:ghs_xxx)`, which GitHub
+ * App installation tokens don't support — they require `token ghs_xxx`.
+ */
+export function parseGitHubAuthorizationHeader(value: string): IGitHubAuthorizationHeader {
+  value = value.trim();
+  const spaceIndex: number = value.indexOf(' ');
+
+  // Default: pass through unchanged (already "token xxx", "bearer xxx", etc.)
+  let header: string = value;
+
+  if (spaceIndex === -1) {
+    // Raw token with no scheme prefix
+    header = `token ${value}`;
+  } else {
+    const scheme: string = value.substring(0, spaceIndex);
+    const encoded: string = value.substring(spaceIndex + 1);
+    if (scheme.toLowerCase() === 'basic') {
+      const decoded: string = Buffer.from(encoded, 'base64').toString('utf8');
+      const colonIndex: number = decoded.indexOf(':');
+      const usernameOrHeaderName: string = decoded.substring(0, colonIndex);
+      const token: string = decoded.substring(colonIndex + 1);
+      if (colonIndex !== -1 && usernameOrHeaderName.toLowerCase() === 'x-access-token' && token) {
+        header = `token ${token}`;
+      }
+    }
+  }
+
+  return { header };
 }
 
 export class GitHubClient {
   private readonly _octokit: Octokit;
   private readonly _octokitCommonOptions: IOctokitCommonOptions;
 
-  public constructor(options: IGitHubClientOptions) {
-    const { authorizationHeader, owner, repo } = options;
+  private constructor(options: IGitHubClientOptionsInternal) {
+    const {
+      authorizationHeader: { header },
+      repoSlug,
+      Octokit
+    } = options;
+    const [owner, repo, ...extraParts] = repoSlug.split('/');
+    if (!owner || !repo || extraParts.length > 0) {
+      throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
+    }
+
     this._octokitCommonOptions = { owner, repo };
 
     this._octokit = new Octokit();
     this._octokit.hook.before('request', (requestOptions) => {
-      requestOptions.headers.authorization = authorizationHeader;
+      requestOptions.headers.authorization = header;
     });
   }
 
@@ -67,14 +124,25 @@ export class GitHubClient {
    * header from the local git configuration.
    */
   public static async createGitHubClientAsync(terminal: ITerminal): Promise<GitHubClient> {
-    const repoSlug: string = await getRepoSlugAsync(terminal);
-    const [owner, repo] = repoSlug.split('/');
-    if (!owner || !repo) {
-      throw new Error(`Unable to determine repository owner/name from slug: ${repoSlug}`);
-    }
+    const [repoSlug, authorizationHeader] = await Promise.all([
+      getRepoSlugAsync(terminal),
+      getGitHubAuthorizationHeaderAsync(terminal)
+    ]);
+    return await GitHubClient.createGitHubClientFromTokenAndRepoSlugAsync({ authorizationHeader, repoSlug });
+  }
 
-    const authorizationHeader: string = await getGitAuthorizationHeaderAsync(terminal);
-    return new GitHubClient({ authorizationHeader, owner, repo });
+  /**
+   * Creates a {@link GitHubClient} from an explicit GitHub Authorization header value
+   * and repository slug, without requiring a local git checkout.
+   *
+   * @param options.authorizationHeader - The full HTTP Authorization header value,
+   *   e.g. `basic <base64>` as emitted by {@link EmitGitHubVarsAndTagBuildAction}.
+   */
+  public static async createGitHubClientFromTokenAndRepoSlugAsync(
+    options: IGitHubClientOptions
+  ): Promise<GitHubClient> {
+    const { Octokit } = await import('@octokit/rest');
+    return new GitHubClient({ ...options, Octokit });
   }
 
   public async getPrForBranchAsync(options: IGetPrForBranchOptions): Promise<IGitHubPr | undefined> {
@@ -133,6 +201,19 @@ export class GitHubClient {
       pull_number: prNumber,
       title,
       body
+    });
+  }
+
+  public async createReleaseAsync(options: ICreateReleaseOptions): Promise<void> {
+    const { tag, sha, name, body, prerelease } = options;
+    await this._octokit.repos.createRelease({
+      ...this._octokitCommonOptions,
+      tag_name: tag,
+      target_commitish: sha,
+      name,
+      body,
+      draft: false,
+      prerelease
     });
   }
 }

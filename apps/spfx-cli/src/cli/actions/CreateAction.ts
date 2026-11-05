@@ -3,14 +3,9 @@
 
 import type { ChildProcess } from 'node:child_process';
 
-type PackageManager = 'npm' | 'pnpm' | 'yarn';
-
-import { kebabCase } from 'lodash';
-import type { MemFsEditor } from 'mem-fs-editor';
-import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
 import * as z from 'zod';
 
-import { Executable } from '@rushstack/node-core-library';
+import { Executable, Path, type IWaitForExitResultWithoutOutput } from '@rushstack/node-core-library';
 import { Colorize, type Terminal } from '@rushstack/terminal';
 import type {
   CommandLineStringParameter,
@@ -21,16 +16,22 @@ import {
   type SPFxTemplateCollection,
   SPFxTemplateRepositoryManager,
   type SPFxTemplate,
-  SPFxTemplateWriter
+  SPFxTemplateWriter,
+  SPFxScaffoldLog,
+  type TemplateOutput,
+  buildBuiltInContext,
+  type ISPFxBuiltInContext,
+  toHyphenCase,
+  type PackageManager,
+  tryReadPackageManagerFromPackageJsonEnginesAsync,
+  writePackageManagerToPackageJsonEnginesAsync
 } from '@microsoft/spfx-template-api';
 
 import { SOLUTION_NAME_PATTERN } from '../../utilities/validation';
 import { SPFxActionBase } from './SPFxActionBase';
+import packageJson from '../../../package.json';
 
-// Deterministic namespace for CI mode GUIDs, derived from the well-known URL
-// namespace: uuidv5('spfx-cli:ci', '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
-const CI_NAMESPACE: string = '035a23a9-8c9e-569b-ae00-7ff2e4c82fb0';
-const CI_SOLUTION_ID: string = '22222222-2222-2222-2222-222222222222';
+const CLI_VERSION: string = packageJson.version;
 
 interface IScaffoldProfile {
   localTemplateSources?: Array<string> | readonly string[];
@@ -45,9 +46,9 @@ const ScaffoldProfileSchema: z.ZodType<IScaffoldProfile> = z.object({
 });
 
 export class CreateAction extends SPFxActionBase {
-  private readonly _targetDirParameter: IRequiredCommandLineStringParameter;
+  private readonly _targetDirParameter: CommandLineStringParameter;
   private readonly _templateParameter: IRequiredCommandLineStringParameter;
-  private readonly _libraryNameParameter: IRequiredCommandLineStringParameter;
+  private readonly _libraryNameParameter: CommandLineStringParameter;
   private readonly _componentNameParameter: IRequiredCommandLineStringParameter;
   private readonly _componentAliasParameter: CommandLineStringParameter;
   private readonly _componentDescriptionParameter: CommandLineStringParameter;
@@ -58,7 +59,7 @@ export class CreateAction extends SPFxActionBase {
     super(
       {
         actionName: 'create',
-        summary: 'Scaffolds an SPFx component into the current folder',
+        summary: 'Scaffolds a new SPFx component',
         documentation: 'This command creates a new SPFx component.'
       },
       terminal
@@ -67,8 +68,9 @@ export class CreateAction extends SPFxActionBase {
     this._targetDirParameter = this.defineStringParameter({
       parameterLongName: '--target-dir',
       argumentName: 'TARGET_DIR',
-      description: 'The directory to create the solution (or where the solution already exists)',
-      defaultValue: process.cwd()
+      description:
+        'The directory to scaffold into. When omitted, defaults to ' +
+        'a subfolder named after the solution in the current working directory.'
     });
 
     this._templateParameter = this.defineStringParameter({
@@ -81,8 +83,8 @@ export class CreateAction extends SPFxActionBase {
     this._libraryNameParameter = this.defineStringParameter({
       parameterLongName: '--library-name',
       argumentName: 'LIBRARY_NAME',
-      description: 'The library name for the component',
-      required: true
+      description: 'The library name for the component. Defaults to the solution name if not specified.',
+      required: false
     });
 
     this._componentNameParameter = this.defineStringParameter({
@@ -124,10 +126,39 @@ export class CreateAction extends SPFxActionBase {
     const terminal: Terminal = this._terminal;
 
     try {
+      // Get component name and validate
+      const componentName: string = this._componentNameParameter.value;
+      if (!componentName || componentName.trim().length === 0) {
+        throw new Error('Component name is required and cannot be empty or only whitespace.');
+      }
+
+      const rawSolutionName: string | undefined = this._solutionNameParameter.value?.trim();
+      if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
+        throw new Error(
+          `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
+        );
+      }
+      // Compute a preliminary hyphen-case solution name for targetDir before the
+      // template is loaded. buildBuiltInContext will produce the same value.
+      const solutionName: string = rawSolutionName || toHyphenCase(componentName);
+
+      const rawTargetDir: string | undefined = this._targetDirParameter.value?.trim();
+      const targetDir: string =
+        rawTargetDir && rawTargetDir.length > 0 ? rawTargetDir : `${process.cwd()}/${solutionName}`;
+
+      const log: SPFxScaffoldLog = await SPFxScaffoldLog.loadFromFolderAsync(targetDir);
+      const isExistingProject: boolean = log.hasEntries;
+
+      log.append({
+        kind: 'session-started',
+        cliVersion: CLI_VERSION
+      });
+
+      const templateName: string = this._templateParameter.value;
       const options: IScaffoldProfile = {
         localTemplateSources: this._localSourceParameter.values,
-        templateName: this._templateParameter.value,
-        targetDir: this._targetDirParameter.value
+        templateName,
+        targetDir
       };
 
       const validationResult: z.ZodSafeParseResult<IScaffoldProfile> =
@@ -135,7 +166,6 @@ export class CreateAction extends SPFxActionBase {
       if (!validationResult.success) {
         throw new Error(`Invalid scaffold profile: ${JSON.stringify(validationResult.error.issues)}`);
       }
-      const { templateName, targetDir } = options;
 
       const manager: SPFxTemplateRepositoryManager = new SPFxTemplateRepositoryManager();
 
@@ -165,60 +195,74 @@ export class CreateAction extends SPFxActionBase {
         );
       }
 
-      // Get component name and validate
-      const componentName: string = this._componentNameParameter.value;
-      if (!componentName || componentName.trim().length === 0) {
-        throw new Error('Component name is required and cannot be empty or only whitespace.');
-      }
-
-      const componentAlias: string = this._componentAliasParameter.value || componentName;
-
       // CI mode is read from an environment variable instead of a ts-command-line
       // parameter so it stays out of --help output. It is an internal/undocumented
       // flag used only by CI pipelines and tests to produce deterministic output.
       // eslint-disable-next-line dot-notation
       const ciMode: boolean = process.env['SPFX_CI_MODE'] === '1';
-      const componentId: string = ciMode ? uuidv5(`component:${componentAlias}`, CI_NAMESPACE) : uuidv4();
-      const solutionId: string = ciMode ? CI_SOLUTION_ID : uuidv4();
-      const featureId: string = ciMode ? uuidv5(`feature:${componentAlias}`, CI_NAMESPACE) : uuidv4();
-      const componentDescription: string =
-        this._componentDescriptionParameter.value || `${componentName} description`;
 
-      const rawSolutionName: string | undefined = this._solutionNameParameter.value?.trim();
-      if (rawSolutionName !== undefined && !SOLUTION_NAME_PATTERN.test(rawSolutionName)) {
-        throw new Error(
-          `Invalid solution name: "${rawSolutionName}". Must contain only alphanumeric characters, hyphens, and underscores.`
-        );
-      }
-      const solutionName: string = rawSolutionName || kebabCase(componentName);
-
-      const fs: MemFsEditor = await template.renderAsync(
+      const builtInContext: ISPFxBuiltInContext = buildBuiltInContext(
         {
-          solution_name: solutionName,
-          libraryName: this._libraryNameParameter.value,
+          componentName,
+          libraryName: this._libraryNameParameter.value || solutionName,
           spfxVersion: template.spfxVersion,
-          // The shields.io badge URL uses dashes as separators, so dashes in version numbers
-          // need to be escaped as double dashes to avoid ambiguity. For example, "1.23.0-beta.0" becomes "1.23.0--beta.0".
-          spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
-          componentId: componentId,
-          featureId: featureId,
-          solutionId: solutionId,
-          componentAlias: componentAlias,
-          componentName: componentName,
-          componentDescription: componentDescription
+          solutionName: rawSolutionName || undefined,
+          componentAlias: this._componentAliasParameter.value?.trim() || undefined,
+          componentDescription: this._componentDescriptionParameter.value?.trim() || undefined
         },
-        targetDir,
-        { retainPhaseScripts: ciMode }
+        { ciMode }
       );
 
-      _printFileChanges(this._terminal, fs, targetDir);
-      const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
-      await writer.writeAsync(fs, targetDir);
+      // Spread into Record<string, string> because ISPFxBuiltInContext uses named
+      // keys (for type-safe BUILT_IN_PARAMETER_NAMES) while renderAsync needs a
+      // general-purpose Record.
+      const renderContext: Record<string, string> = { ...builtInContext };
+
+      const templateFs: TemplateOutput = await template.renderAsync(renderContext, {
+        retainPhaseScripts: ciMode
+      });
+
+      log.append({
+        kind: 'template-rendered',
+        templateName: template.name,
+        templateVersion: template.version,
+        spfxVersion: template.spfxVersion,
+        context: renderContext,
+        cliVersion: CLI_VERSION
+      });
 
       const packageManager: PackageManager | 'none' = this._packageManagerParameter.value;
+      const previousPackageManager: PackageManager | undefined =
+        await tryReadPackageManagerFromPackageJsonEnginesAsync(targetDir);
+
+      _printFileChanges(this._terminal, templateFs, targetDir);
+      const writer: SPFxTemplateWriter = new SPFxTemplateWriter();
+      await writer.writeAsync(templateFs, targetDir, { log });
+
       if (packageManager !== 'none') {
-        await _runInstallAsync(packageManager, targetDir, terminal);
+        let resolvedPackageManager: PackageManager = packageManager;
+
+        if (isExistingProject && previousPackageManager && previousPackageManager !== packageManager) {
+          const packageManagerParameterLongName: string = this._packageManagerParameter.longName;
+          terminal.writeWarningLine(
+            `${packageManagerParameterLongName} "${packageManager}" is overridden by ` +
+              `"${previousPackageManager}" from the existing project's \`package.json\` \`engines\` field. ` +
+              `The ${packageManagerParameterLongName} parameter will be ignored.`
+          );
+          resolvedPackageManager = previousPackageManager;
+        }
+
+        log.append({
+          kind: 'package-manager-selected',
+          packageManager: resolvedPackageManager,
+          targetDir
+        });
+
+        await _runInstallAsync(resolvedPackageManager, targetDir, terminal, log);
+        await writePackageManagerToPackageJsonEnginesAsync(resolvedPackageManager, targetDir, terminal);
       }
+
+      await log.saveToFolderAsync(targetDir);
     } catch (error: unknown) {
       const message: string = error instanceof Error ? error.message : String(error);
       terminal.writeErrorLine(`Error creating SPFx component: ${message}`);
@@ -230,11 +274,14 @@ export class CreateAction extends SPFxActionBase {
 /**
  * Spawns the chosen package manager's install command in targetDir and waits for it to finish.
  * Files are already written before this is called, so a failure here does not undo scaffolding.
+ *
+ * Appends a `package-manager-install-completed` event to the log and throws on failure.
  */
 async function _runInstallAsync(
   packageManager: PackageManager,
   targetDir: string,
-  terminal: Terminal
+  terminal: Terminal,
+  log: SPFxScaffoldLog
 ): Promise<void> {
   terminal.writeLine(`Running ${packageManager} install in ${targetDir}...`);
 
@@ -243,15 +290,24 @@ async function _runInstallAsync(
     stdio: 'inherit'
   });
 
-  const { exitCode, signal } = await Executable.waitForExitAsync(child, {
+  const result: IWaitForExitResultWithoutOutput = await Executable.waitForExitAsync(child, {
     throwOnNonZeroExitCode: false,
     throwOnSignal: false
   });
 
-  if (signal != null) {
-    throw new Error(`${packageManager} install was terminated by signal ${signal}`);
-  } else if (exitCode !== 0) {
-    throw new Error(`${packageManager} install exited with code ${exitCode}`);
+  const normalizedExitCode: number = result.exitCode ?? -1;
+
+  log.append({
+    kind: 'package-manager-install-completed',
+    packageManager,
+    exitCode: normalizedExitCode,
+    signal: result.signal ?? undefined
+  });
+
+  if (result.signal != null) {
+    throw new Error(`${packageManager} install was terminated by signal ${result.signal}`);
+  } else if (normalizedExitCode !== 0) {
+    throw new Error(`${packageManager} install exited with code ${normalizedExitCode}`);
   }
 
   terminal.writeLine(`${packageManager} install completed successfully.`);
@@ -260,39 +316,16 @@ async function _runInstallAsync(
 /**
  * Utility function to show the user which files in the in-memory file system are pending changes.
  */
-function _printFileChanges(terminal: Terminal, fs: MemFsEditor, targetDir: string): void {
+function _printFileChanges(terminal: Terminal, templateFs: TemplateOutput, targetDir: string): void {
   terminal.writeLine(`targetDir: ${targetDir}`);
-  interface IChangedFile {
-    state: 'modified' | 'deleted';
-    isNew: boolean;
-  }
-  const changed: { [key: string]: IChangedFile } = fs.dump(targetDir);
 
   terminal.writeLine();
-  terminal.writeLine(Colorize.cyan('The following files will be modified:'));
+  terminal.writeLine(Colorize.cyan('The following files will be generated:'));
 
-  const changedEntries: [string, IChangedFile][] = Object.entries(changed).sort(([a], [b]) =>
-    a < b ? -1 : a > b ? 1 : 0
-  );
+  const sortedFiles: string[] = Array.from(templateFs.files.keys()).sort();
 
-  for (const [file, data] of changedEntries) {
-    const { state, isNew } = data;
-    if (isNew) {
-      terminal.writeLine(Colorize.green(`Added: ${file}`));
-      continue;
-    }
-
-    switch (state) {
-      case 'modified':
-        terminal.writeLine(Colorize.yellow(`Modified: ${file}`));
-        break;
-      case 'deleted':
-        terminal.writeLine(Colorize.red(`Deleted: ${file}`));
-        break;
-      default:
-        terminal.writeLine(`Unchanged: ${file}`);
-        break;
-    }
+  for (const file of sortedFiles) {
+    terminal.writeLine(Colorize.green(`  ${Path.convertToSlashes(file)}`));
   }
 
   terminal.writeLine();

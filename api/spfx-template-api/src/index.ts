@@ -18,6 +18,12 @@ export {
   type IRenderOptions,
   SPFX_TEMPLATE_CATEGORIES,
   type SPFxTemplateCategory,
+  type ISPFxBuiltInContextInputs,
+  type ISPFxBuiltInContext,
+  type IBuildBuiltInContextOptions,
+  BUILT_IN_PARAMETER_NAMES,
+  buildBuiltInContext,
+  toHyphenCase,
   ENGINE_VERSION
 } from './templating/index';
 export {
@@ -37,5 +43,25 @@ export {
   ConfigJsonMergeHelper,
   PackageSolutionJsonMergeHelper,
   ServeJsonMergeHelper,
-  SPFxTemplateWriter
+  SPFxTemplateWriter,
+  type IWriteOptions,
+  type ITemplateOutputEntry,
+  TemplateOutput,
+  VALID_PACKAGE_MANAGERS,
+  type PackageManager,
+  tryReadPackageManagerFromPackageJsonEnginesAsync,
+  writePackageManagerToPackageJsonEnginesAsync
 } from './writing/index';
+export {
+  type ISPFxScaffoldEventBase,
+  type ISessionStartedEvent,
+  type ITemplateRenderedEvent,
+  type IPackageManagerSelectedEvent,
+  type FileWriteOutcome,
+  type IFileWriteEvent,
+  type IPackageManagerInstallCompletedEvent,
+  type ISPFxScaffoldEvent,
+  SPFxScaffoldLog,
+  type ISPFxScaffoldEventInput,
+  SCAFFOLD_LOG_FILENAME
+} from './logging/index';

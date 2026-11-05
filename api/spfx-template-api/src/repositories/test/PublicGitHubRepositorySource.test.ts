@@ -73,6 +73,25 @@ describe(PublicGitHubRepositorySource.name, () => {
 
       expect(source['_terminal']).toBe(terminal);
     });
+
+    it('should store token when provided', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.com/owner/repo',
+        token: 'ghp_abc123',
+        terminal
+      });
+
+      expect(source['_token']).toBe('ghp_abc123');
+    });
+
+    it('should have undefined token when not provided', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.com/owner/repo',
+        terminal
+      });
+
+      expect(source['_token']).toBeUndefined();
+    });
   });
 
   describe('kind property', () => {
@@ -86,15 +105,15 @@ describe(PublicGitHubRepositorySource.name, () => {
     });
   });
 
-  describe('_parseGitHubUrl', () => {
+  describe('_parseRepoUrl', () => {
     it('should parse valid GitHub HTTPS URL', () => {
       const source = new PublicGitHubRepositorySource({
         repoUrl: 'https://github.com/owner/repo',
         terminal
       });
-      const result = source['_parseGitHubUrl']();
+      const result = source['_parseRepoUrl']();
 
-      expect(result).toEqual({ owner: 'owner', repo: 'repo' });
+      expect(result).toEqual({ host: 'github.com', owner: 'owner', repo: 'repo' });
     });
 
     it('should parse GitHub URL with .git extension', () => {
@@ -102,32 +121,71 @@ describe(PublicGitHubRepositorySource.name, () => {
         repoUrl: 'https://github.com/owner/repo.git',
         terminal
       });
-      const result = source['_parseGitHubUrl']();
+      const result = source['_parseRepoUrl']();
 
-      expect(result).toEqual({ owner: 'owner', repo: 'repo' });
+      expect(result).toEqual({ host: 'github.com', owner: 'owner', repo: 'repo' });
     });
 
-    it('should throw error for invalid URL', () => {
+    it('should parse GitHub Enterprise URL', () => {
       const source = new PublicGitHubRepositorySource({
-        repoUrl: 'https://invalid.com/repo',
+        repoUrl: 'https://github.mycompany.com/org/repo',
+        terminal
+      });
+      const result = source['_parseRepoUrl']();
+
+      expect(result).toEqual({ host: 'github.mycompany.com', owner: 'org', repo: 'repo' });
+    });
+
+    it('should parse GitHub Enterprise URL with .git extension', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.mycompany.com/org/repo.git',
+        terminal
+      });
+      const result = source['_parseRepoUrl']();
+
+      expect(result).toEqual({ host: 'github.mycompany.com', owner: 'org', repo: 'repo' });
+    });
+
+    it('should normalize host to lowercase', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://GitHub.COM/owner/repo',
+        terminal
+      });
+      const result = source['_parseRepoUrl']();
+
+      expect(result).toEqual({ host: 'github.com', owner: 'owner', repo: 'repo' });
+    });
+
+    it('should reject http:// URLs', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'http://github.com/owner/repo',
         terminal
       });
 
-      expect(() => source['_parseGitHubUrl']()).toThrow(/Invalid GitHub repository URL/);
+      expect(() => source['_parseRepoUrl']()).toThrow(/Invalid GitHub repository URL/);
     });
 
-    it('should throw error for malformed GitHub URL', () => {
+    it('should throw error for URL with only one path segment', () => {
       const source = new PublicGitHubRepositorySource({
         repoUrl: 'https://github.com/owner',
         terminal
       });
 
-      expect(() => source['_parseGitHubUrl']()).toThrow(/Invalid GitHub repository URL/);
+      expect(() => source['_parseRepoUrl']()).toThrow(/Invalid GitHub repository URL/);
+    });
+
+    it('should throw error for URL with no path', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.com',
+        terminal
+      });
+
+      expect(() => source['_parseRepoUrl']()).toThrow(/Invalid GitHub repository URL/);
     });
   });
 
   describe('_buildDownloadUrl', () => {
-    it('should build correct download URL for main branch', () => {
+    it('should build codeload URL for github.com', () => {
       const source = new PublicGitHubRepositorySource({
         repoUrl: 'https://github.com/owner/repo',
         branch: 'main',
@@ -158,6 +216,38 @@ describe(PublicGitHubRepositorySource.name, () => {
       const url = source['_buildDownloadUrl']();
 
       expect(url).toBe('https://codeload.github.com/microsoft/spfx/zip/v1.18');
+    });
+
+    it('should use codeload URL for mixed-case GitHub.com host', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://GitHub.COM/owner/repo',
+        branch: 'main',
+        terminal
+      });
+      const url = source['_buildDownloadUrl']();
+
+      expect(url).toBe('https://codeload.github.com/owner/repo/zip/main');
+    });
+
+    it('should build GHE REST API URL for non-github.com hosts', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.mycompany.com/org/repo',
+        branch: 'main',
+        terminal
+      });
+      const url = source['_buildDownloadUrl']();
+
+      expect(url).toBe('https://github.mycompany.com/api/v3/repos/org/repo/zipball/main');
+    });
+
+    it('should build GHE URL with default branch', () => {
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.mycompany.com/org/repo',
+        terminal
+      });
+      const url = source['_buildDownloadUrl']();
+
+      expect(url).toBe('https://github.mycompany.com/api/v3/repos/org/repo/zipball/version/latest');
     });
   });
 
@@ -420,8 +510,118 @@ describe(PublicGitHubRepositorySource.name, () => {
       });
       const templates = await source.getTemplatesAsync();
 
-      expect(mockFetch).toHaveBeenCalledWith('https://codeload.github.com/owner/repo/zip/version/latest');
+      expect(mockFetch).toHaveBeenCalledWith('https://codeload.github.com/owner/repo/zip/version/latest', {});
       expect(templates).toHaveLength(1);
+    });
+
+    it('should send Authorization header when token is provided', async () => {
+      const mockTemplate = { name: 'Template', unknownFields: [] } as unknown as SPFxTemplate;
+
+      const mockEntries = [
+        {
+          entryName: 'repo-main/webpart/template.json',
+          isDirectory: false,
+          getData: jest.fn().mockReturnValue(Buffer.from(JSON.stringify({ name: 'T' })))
+        }
+      ];
+
+      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(
+        () =>
+          ({
+            getEntries: jest.fn().mockReturnValue(mockEntries)
+          }) as unknown as AdmZip
+      );
+
+      mockFetch.mockResolvedValue({
+        ok: true,
+        arrayBuffer: jest.fn().mockResolvedValue(new ArrayBuffer(0))
+      } as unknown as Response);
+
+      mockFromMemoryAsync.mockResolvedValue(mockTemplate);
+
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.com/owner/repo',
+        token: 'ghp_abc123',
+        terminal
+      });
+      await source.getTemplatesAsync();
+
+      expect(mockFetch).toHaveBeenCalledWith('https://codeload.github.com/owner/repo/zip/version/latest', {
+        headers: { Authorization: 'token ghp_abc123' }
+      });
+    });
+
+    it('should not send Authorization header when no token', async () => {
+      const mockTemplate = { name: 'Template', unknownFields: [] } as unknown as SPFxTemplate;
+
+      const mockEntries = [
+        {
+          entryName: 'repo-main/webpart/template.json',
+          isDirectory: false,
+          getData: jest.fn().mockReturnValue(Buffer.from(JSON.stringify({ name: 'T' })))
+        }
+      ];
+
+      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(
+        () =>
+          ({
+            getEntries: jest.fn().mockReturnValue(mockEntries)
+          }) as unknown as AdmZip
+      );
+
+      mockFetch.mockResolvedValue({
+        ok: true,
+        arrayBuffer: jest.fn().mockResolvedValue(new ArrayBuffer(0))
+      } as unknown as Response);
+
+      mockFromMemoryAsync.mockResolvedValue(mockTemplate);
+
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.com/owner/repo',
+        terminal
+      });
+      await source.getTemplatesAsync();
+
+      expect(mockFetch).toHaveBeenCalledWith('https://codeload.github.com/owner/repo/zip/version/latest', {});
+    });
+
+    it('should use GHE API URL for enterprise hosts', async () => {
+      const mockTemplate = { name: 'Template', unknownFields: [] } as unknown as SPFxTemplate;
+
+      const mockEntries = [
+        {
+          entryName: 'repo-main/webpart/template.json',
+          isDirectory: false,
+          getData: jest.fn().mockReturnValue(Buffer.from(JSON.stringify({ name: 'T' })))
+        }
+      ];
+
+      (AdmZip as jest.MockedClass<typeof AdmZip>).mockImplementation(
+        () =>
+          ({
+            getEntries: jest.fn().mockReturnValue(mockEntries)
+          }) as unknown as AdmZip
+      );
+
+      mockFetch.mockResolvedValue({
+        ok: true,
+        arrayBuffer: jest.fn().mockResolvedValue(new ArrayBuffer(0))
+      } as unknown as Response);
+
+      mockFromMemoryAsync.mockResolvedValue(mockTemplate);
+
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.mycompany.com/org/repo',
+        branch: 'main',
+        token: 'ghp_enterprise_token',
+        terminal
+      });
+      await source.getTemplatesAsync();
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://github.mycompany.com/api/v3/repos/org/repo/zipball/main',
+        { headers: { Authorization: 'token ghp_enterprise_token' } }
+      );
     });
 
     it('should throw error when download fails', async () => {

@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`CommandLineHelp prints the help: create-github-releases 1`] = `
+"usage: repo-toolbox create-github-releases [-h] --github-token TOKEN
+                                           --packages-path PATH --commit-sha
+                                           SHA --repo-slug SLUG
+
+
+Creates a GitHub release and tag for each .tgz file in the specified
+directory. Tags are formatted as @scope/package_vX.Y.Z. Release notes are
+sourced from the package CHANGELOG.md. Versions with a pre-release suffix (e.
+g. -alpha.1) are marked as GitHub pre-releases. Packages whose release
+already exists are skipped.
+
+Optional arguments:
+  -h, --help            Show this help message and exit.
+  --github-token TOKEN  GitHub token. Accepts a raw installation token (e.g.
+                        \`ghs_xxx\`) or a full Authorization header value (e.g.
+                        \`basic <base64>\`). This parameter may alternatively
+                        be specified via the GITHUB_TOKEN environment
+                        variable.
+  --packages-path PATH  Path to directory containing .tgz package files.
+  --commit-sha SHA      The commit SHA to tag.
+  --repo-slug SLUG      GitHub repository slug in the form owner/repo.
+"
+`;
+
+exports[`CommandLineHelp prints the help: create-or-update-pr 1`] = `
+"usage: repo-toolbox create-or-update-pr [-h] --collection-uri URI
+                                        --team-project PROJECT --branch-name
+                                        BRANCH [--base-branch BRANCH] --title
+                                        TITLE [--body BODY] --status-context
+                                        CONTEXT --build-id ID
+
+
+Optional arguments:
+  -h, --help            Show this help message and exit.
+  --collection-uri URI  Azure DevOps collection URI. This parameter may
+                        alternatively be specified via the
+                        SYSTEM_COLLECTIONURI environment variable.
+  --team-project PROJECT
+                        Azure DevOps team project name. This parameter may
+                        alternatively be specified via the SYSTEM_TEAMPROJECT
+                        environment variable.
+  --branch-name BRANCH  The source branch for the pull request
+  --base-branch BRANCH  The target branch for the pull request. The default
+                        value is \\"main\\".
+  --title TITLE         The pull request title. This parameter may
+                        alternatively be specified via the PR_TITLE
+                        environment variable.
+  --body BODY           The pull request body. This parameter may
+                        alternatively be specified via the PR_BODY
+                        environment variable. The default value is \\"\\".
+  --status-context CONTEXT
+                        Posts a pending GitHub commit status with this
+                        context string and emits it as the StatusContext AzDO
+                        output variable for use by downstream stages.
+  --build-id ID         The AzDO build ID, used to build the pipeline run
+                        target URL. This parameter may alternatively be
+                        specified via the BUILD_BUILDID environment variable.
+"
+`;
+
+exports[`CommandLineHelp prints the help: emit-github-vars 1`] = `
+"usage: repo-toolbox emit-github-vars [-h] [--github-token TOKEN]
+
+Reads the GitHub repository slug from the local git remote and the
+authorization token from --github-token / GITHUB_TOKEN (if set) or the git
+checkout credential, then emits them as GitHubRepoSlug and GitHubToken AzDO
+output variables for use by downstream stages.
+
+Optional arguments:
+  -h, --help            Show this help message and exit.
+  --github-token TOKEN  GitHub token. Accepts a raw installation token (e.g.
+                        \`ghs_xxx\`) or a full Authorization header value (e.g.
+                        \`basic <base64>\`). This parameter may alternatively
+                        be specified via the GITHUB_TOKEN environment
+                        variable.
+"
+`;
+
+exports[`CommandLineHelp prints the help: find-bump-pipeline-run 1`] = `
+"usage: repo-toolbox find-bump-pipeline-run [-h] --collection-uri URI
+                                           --team-project PROJECT --commit-sha
+                                           SHA --pipeline-id ID --access-token
+                                           TOKEN
+
+
+Finds the merged PR for the specified commit SHA via the GitHub API, then
+queries the Azure DevOps Build API for a pipeline run tagged with the PR's
+head commit SHA. Sets the AzDO output variables IsVersionBumpMerge
+(true/false), BumpPipelineRunId (the build ID), and BumpCommitSha (the
+pre-merge head SHA of the version bump PR branch).
+
+Optional arguments:
+  -h, --help            Show this help message and exit.
+  --collection-uri URI  Azure DevOps collection URI. This parameter may
+                        alternatively be specified via the
+                        SYSTEM_COLLECTIONURI environment variable.
+  --team-project PROJECT
+                        Azure DevOps team project name. This parameter may
+                        alternatively be specified via the SYSTEM_TEAMPROJECT
+                        environment variable.
+  --commit-sha SHA      The merge commit SHA to look up. This parameter may
+                        alternatively be specified via the
+                        BUILD_SOURCEVERSION environment variable.
+  --pipeline-id ID      The pipeline definition ID of the bump versions
+                        pipeline
+  --access-token TOKEN  Azure DevOps access token. This parameter may
+                        alternatively be specified via the SYSTEM_ACCESSTOKEN
+                        environment variable.
+"
+`;
+
+exports[`CommandLineHelp prints the help: global help 1`] = `
+"usage: repo-toolbox [-h] <command> ...
+
+Used to execute various operations specific to this repo
+
+Positional arguments:
+  <command>
+    create-or-update-pr
+                        Creates or updates a pull request for the repository.
+                        To be used only on AzDO pipelines.
+    emit-github-vars    Emits GitHub repo slug and auth token as AzDO output
+                        variables.
+    tag-build           Tags the AzDO build with the bump commit SHA and
+                        emits it as an output variable.
+    find-bump-pipeline-run
+                        If the current commit is a version bump merge, finds
+                        the originating bump pipeline run.
+    create-github-releases
+                        Creates a GitHub release for each .tgz package in a
+                        directory.
+    verify-npm-tag      Verifies that the version of each .tgz package in a
+                        directory matches the expected npm tag.
+
+Optional arguments:
+  -h, --help            Show this help message and exit.
+
+[bold]For detailed help about a specific command, use: repo-toolbox <command>
+-h[normal]
+"
+`;
+
+exports[`CommandLineHelp prints the help: tag-build 1`] = `
+"usage: repo-toolbox tag-build [-h]
+
+Reads the HEAD commit SHA, emits it as the BumpSha AzDO output variable, and
+tags the current build with a structured tag so that find-bump-pipeline-run
+can locate this run later.
+
+Optional arguments:
+  -h, --help  Show this help message and exit.
+"
+`;
+
+exports[`CommandLineHelp prints the help: verify-npm-tag 1`] = `
+"usage: repo-toolbox verify-npm-tag [-h] --packages-path PATH --npm-tag TAG
+
+Optional arguments:
+  -h, --help            Show this help message and exit.
+  --packages-path PATH  Path to directory containing .tgz package files.
+  --npm-tag TAG         The npm tag to verify against (e.g., \\"latest\\").
+"
+`;

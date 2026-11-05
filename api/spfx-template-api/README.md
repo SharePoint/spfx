@@ -8,7 +8,7 @@ Programmatic API for loading, rendering, and writing [SharePoint Framework (SPFx
 npm install @microsoft/spfx-template-api
 ```
 
-**Requires Node.js `>=22.14.0 <23.0.0` or `>=24.12.0 <25.0.0`**
+**Requires Node.js `>=22.14.0 <23.0.0`, `>=24.12.0 <25.0.0`, or `>=26.0.0 <27.0.0`**
 
 ---
 
@@ -19,7 +19,8 @@ import { Terminal, ConsoleTerminalProvider } from '@rushstack/terminal';
 import {
   SPFxTemplateRepositoryManager,
   PublicGitHubRepositorySource,
-  SPFxTemplateWriter
+  SPFxTemplateWriter,
+  buildBuiltInContext
 } from '@microsoft/spfx-template-api';
 
 const terminal = new Terminal(new ConsoleTerminalProvider());
@@ -32,27 +33,21 @@ const templates = await manager.getTemplatesAsync();
 const template = templates.get('webpart-react');
 if (!template) throw new Error('Template not found');
 
-// 2. Render to an in-memory file system
-// String values are automatically wrapped with casing helpers (e.g. componentName.pascal)
-const fs = await template.renderAsync(
-  {
-    solution_name: 'my-solution',
-    libraryName: 'my-spfx-library',
-    spfxVersion: template.spfxVersion,
-    spfxVersionForBadgeUrl: template.spfxVersion.replace(/-/g, '--'),
-    componentId: '<uuid>',
-    featureId: '<uuid>',
-    solutionId: '<uuid>',
-    componentAlias: 'MyWebPart',
-    componentName: 'My Web Part',
-    componentDescription: 'My Web Part description'
-  },
-  '/path/to/output'
-);
+// 2. Build the render context from CLI inputs
 
-// 3. Write files to disk (merges into existing SPFx solutions automatically)
+const builtInContext = buildBuiltInContext({
+  componentName: 'My Web Part',
+  libraryName: 'my-spfx-library',
+  spfxVersion: template.spfxVersion
+});
+
+// 3. Render to an in-memory file system
+// String values are automatically wrapped with casing helpers (e.g. componentName.pascal)
+const templateFs = await template.renderAsync(builtInContext);
+
+// 4. Write files to disk (merges into existing SPFx solutions automatically)
 const writer = new SPFxTemplateWriter();
-await writer.writeAsync(fs, '/path/to/output');
+await writer.writeAsync(templateFs, '/path/to/output');
 ```
 
 ---
@@ -61,7 +56,7 @@ await writer.writeAsync(fs, '/path/to/output');
 
 ### `PublicGitHubRepositorySource`
 
-Fetches templates from a public GitHub repository. Pin a specific SPFx version with an optional branch/tag ref.
+Fetches templates from a GitHub repository (github.com or GitHub Enterprise). Pin a specific SPFx version with an optional branch/tag ref. An optional `token` enables access to GitHub Enterprise instances or private repositories on github.com.
 
 ```typescript
 import { Terminal, ConsoleTerminalProvider } from '@rushstack/terminal';
@@ -73,7 +68,14 @@ const terminal = new Terminal(new ConsoleTerminalProvider());
 new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', terminal });
 
 // Specific version
-new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', branch: 'version/1.22', terminal });
+new PublicGitHubRepositorySource({ repoUrl: 'https://github.com/SharePoint/spfx', branch: 'version/1.24', terminal });
+
+// GitHub Enterprise with authentication
+new PublicGitHubRepositorySource({
+  repoUrl: 'https://github.mycompany.com/org/spfx-templates',
+  terminal,
+  token: process.env.GITHUB_TOKEN
+});
 ```
 
 ### `LocalFileSystemRepositorySource`
@@ -110,11 +112,11 @@ const templates = await manager.getTemplatesAsync();
 
 ## Writing to disk
 
-`SPFxTemplateWriter` commits the in-memory `MemFsEditor` to the target directory. When scaffolding into an existing SPFx solution, it merges generated content into existing files rather than overwriting them.
+`SPFxTemplateWriter` writes the in-memory `TemplateOutput` to the target directory. When scaffolding into an existing SPFx solution, it intelligently merges known config files (package.json, serve.json, etc.) via registered merge helpers. Unregistered text files that already exist on disk are preserved; binary files and new files are written directly.
 
 ```typescript
 const writer = new SPFxTemplateWriter();
-await writer.writeAsync(fs, targetDir);
+await writer.writeAsync(templateFs, targetDir);
 ```
 
 ### Merge helpers
@@ -140,22 +142,68 @@ The writer uses these helpers internally. You can also import them directly for 
 | `SPFxTemplateRepositoryManager` | Aggregates sources and returns a `SPFxTemplateCollection` |
 | `SPFxTemplateCollection` | `Map<string, SPFxTemplate>` of all loaded templates |
 | `SPFxTemplate` | Single template — exposes `name`, `category`, `spfxVersion`, and `renderAsync()` |
-| `PublicGitHubRepositorySource` | Loads templates from a public GitHub repo |
+| `ITemplateOutputEntry` | A single file entry (text or binary contents) |
+| `TemplateOutput` | In-memory file system implementation backed by a `Map`, returned by `renderAsync()` |
+| `PublicGitHubRepositorySource` | Loads templates from a GitHub repo (github.com or GHE, with optional auth token) |
 | `LocalFileSystemRepositorySource` | Loads templates from the local filesystem |
 | `BaseSPFxTemplateRepositorySource` | Base class for building custom template sources |
 | `SPFxRepositorySource` | Interface implemented by all source types |
-| `SPFxTemplateWriter` | Writes a rendered `MemFsEditor` to disk with merge support |
+| `SPFxTemplateWriter` | Writes a `TemplateOutput` to disk with merge support |
+| `IWriteOptions` | Options for `SPFxTemplateWriter.writeAsync()` (includes optional `log`) |
 | `IMergeHelper` | Interface for implementing custom merge helpers |
 | `ServeJsonMergeHelper` | Merges `config/serve.json` (also available standalone) |
+| `SPFxScaffoldLog` | Append-only event log for recording scaffolding operations; serializes to JSONL |
+| `ISPFxScaffoldEventInput` | Input type for `SPFxScaffoldLog.append()` (timestamp is optional) |
+| `ISPFxScaffoldEvent` | Discriminated union of all scaffold event types |
+| `ISPFxScaffoldEventBase` | Base interface shared by every scaffold event (`kind` + `timestamp`) |
+| `ITemplateRenderedEvent` | Event recorded after a template is rendered |
+| `IPackageManagerSelectedEvent` | Event recorded when a package manager is chosen |
+| `IFileWriteEvent` | Event recorded for each file written during the write phase |
+| `FileWriteOutcome` | Union type: `'new' \| 'merged' \| 'preserved' \| 'unchanged'` |
+| `IPackageManagerInstallCompletedEvent` | Event recorded after the package-manager install exits |
+| `SCAFFOLD_LOG_FILENAME` | The well-known filename constant (`.spfx-scaffold.jsonl`) |
 | `SPFxTemplateCategory` | Union type of template categories: `'webpart' | 'extension' | 'ace' | 'library'` |
 | `SPFX_TEMPLATE_CATEGORIES` | Array of all valid category values (useful for validation/iteration) |
 | `ENGINE_VERSION` | Semver string identifying the installed engine version (matches `package.json` version) |
+| `buildBuiltInContext` | Computes the 10 built-in context variables from raw CLI inputs (UUIDs, solution name, badge URL, etc.) |
+| `ISPFxBuiltInContextInputs` | Input interface for `buildBuiltInContext` |
+| `ISPFxBuiltInContext` | Output interface — the 10 built-in variables every template receives |
+| `IBuildBuiltInContextOptions` | Options for `buildBuiltInContext` (e.g. `ciMode`) |
+| `BUILT_IN_PARAMETER_NAMES` | `ReadonlySet` of all built-in context variable names |
 | `ISPFxTemplateJson` | Shape of the `template.json` manifest (includes `category`, optional `minimumEngineVersion`) |
 | `SPFxTemplateDefinitionSchema` | Zod schema for validating a `template.json` (uses passthrough mode for forward compatibility) |
 | `SPFxTemplateJsonFile` | Typed wrapper around a parsed `template.json` file |
 | `SPFxTemplateRepositorySourceKind` | Union type of all built-in repository source kinds (`'local' | 'github'`) |
 | `IPublicGitHubRepositorySourceOptions` | Options object for constructing a `PublicGitHubRepositorySource` |
 | `IRenderOptions` | Context object passed to `template.renderAsync()` |
+
+---
+
+## Scaffold event log
+
+`SPFxScaffoldLog` records structured events during scaffolding. Pass it to `writeAsync()` to capture file-write outcomes, then serialize for debugging or analytics.
+
+```typescript
+import { SPFxScaffoldLog, SPFxTemplateWriter, type IFileWriteEvent } from '@microsoft/spfx-template-api';
+
+// Load existing log from disk (returns empty if file doesn't exist)
+const log = await SPFxScaffoldLog.loadFromFolderAsync(targetDir);
+
+// Check if this is an existing project
+if (log.hasEntries) {
+  console.log('Existing project detected');
+}
+
+// Record events during scaffolding
+log.append({ kind: 'template-rendered', templateName: 'webpart-react', templateVersion: '1.0.0', spfxVersion: '1.24.1', context: { componentName: 'MyWebPart' }, cliVersion: '0.1.0' });
+
+// Pass to writer to auto-record file-write events
+const writer = new SPFxTemplateWriter();
+await writer.writeAsync(templateFs, targetDir, { log });
+
+// Persist back to disk
+await log.saveToFolderAsync(targetDir);
+```
 
 ---
 

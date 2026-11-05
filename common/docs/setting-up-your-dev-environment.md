@@ -2,7 +2,7 @@
 
 ## Node.js
 
-This repository requires **Node.js >=22.14.0 <23.0.0** (specified in `rush.json`).
+This repository requires **Node.js `>=22.14.0 <23.0.0`, `>=24.12.0 <25.0.0`, or `>=26.0.0 <27.0.0`** (specified in `rush.json`).
 
 We recommend [**nvs**](https://github.com/jasongin/nvs) (Node Version Switcher) to manage Node.js versions:
 
@@ -14,7 +14,7 @@ nvs add 22
 nvs use 22
 ```
 
-Any Node.js version manager (nvm, fnm, volta, etc.) works — just make sure the active version satisfies `>=22.14.0 <23.0.0`.
+Any Node.js version manager (nvm, fnm, volta, etc.) works — just make sure the active version satisfies `>=22.14.0 <23.0.0`, `>=24.12.0 <25.0.0`, or `>=26.0.0 <27.0.0`.
 
 ## Rush
 

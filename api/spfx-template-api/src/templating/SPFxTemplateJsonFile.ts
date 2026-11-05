@@ -16,11 +16,12 @@ const DESCRIPTION_MAX_LENGTH: number = 500;
  * The allowed category values for SPFx templates.
  * @public
  */
-export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library'] = [
+export const SPFX_TEMPLATE_CATEGORIES: readonly ['webpart', 'extension', 'ace', 'library', 'copilot'] = [
   'webpart',
   'extension',
   'ace',
-  'library'
+  'library',
+  'copilot'
 ] as const;
 
 /**
@@ -50,8 +51,6 @@ export interface ISPFxTemplateJson {
   version: string;
   /** The SPFx version this template is compatible with */
   spfxVersion: string;
-  /** Optional schema defining the context variables required by this template */
-  contextSchema?: Record<string, { type: 'string'; description: string }>;
   /**
    * Optional minimum engine version required to process this template.
    * When set, the template engine's orchestrator (for example,
@@ -80,15 +79,6 @@ const _templateJsonSchemaShape = {
   spfxVersion: z.string().refine(isValidSemver, {
     message: 'Invalid semantic version for "spfxVersion" (expected format like "1.0.0").'
   }),
-  contextSchema: z
-    .record(
-      z.string(),
-      z.object({
-        type: z.enum(['string']),
-        description: z.string()
-      })
-    )
-    .optional(),
   minimumEngineVersion: z
     .string()
     .refine(isValidSemver, {
@@ -163,13 +153,6 @@ export class SPFxTemplateJsonFile {
    */
   public get spfxVersion(): string {
     return this._data.spfxVersion;
-  }
-
-  /**
-   * Gets the context schema defining the variables required for template rendering.
-   */
-  public get contextSchema(): Record<string, { type: 'string'; description: string }> | undefined {
-    return this._data.contextSchema;
   }
 
   /**
