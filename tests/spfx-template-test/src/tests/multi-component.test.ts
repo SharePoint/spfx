@@ -4,7 +4,7 @@
 import * as fs from 'node:fs';
 import * as os from 'node:os';
 
-import { FileSystem } from '@rushstack/node-core-library';
+import { FileSystem, JsonFile } from '@rushstack/node-core-library';
 
 import { scaffoldAsync } from './testUtilities';
 import { TEMPLATES_DIR } from './constants';
@@ -68,4 +68,84 @@ describe('Multi-component scaffolding', () => {
     expect(minimalWebPartExists).toBe(true);
     expect(appCustomizerApplicationCustomizerExists).toBe(true);
   });
+
+  it.each([
+    { selection: 'legacy omission', exposure: undefined },
+    { selection: 'Connector only', exposure: ['Connector'] },
+    { selection: 'Agent only', exposure: ['Agent'] },
+    { selection: 'both', exposure: ['Connector', 'Agent'] },
+    { selection: 'reversed both', exposure: ['Agent', 'Connector'] }
+  ])(
+    'should preserve $selection and authored Copilot assets through re-scaffolding and component-add',
+    async ({ exposure }) => {
+      const options = {
+        templateName: 'copilot-component-minimal',
+        targetDir: tempDir,
+        localTemplatePath: TEMPLATES_DIR,
+        libraryName: '@spfx-template/copilot-preservation-test',
+        componentName: 'First'
+      };
+      await scaffoldAsync(options);
+
+      const solutionPath = `${tempDir}/config/package-solution.json`;
+      const manifestPath = `${tempDir}/copilot/manifest.json`;
+      const agentConfigPath = `${tempDir}/config/copilot-agent.json`;
+      const solution = await JsonFile.loadAsync(solutionPath);
+      if (exposure) {
+        solution.solution.copilotComponentExposure = exposure;
+      } else {
+        delete solution.solution.copilotComponentExposure;
+      }
+      await JsonFile.saveAsync(solution, solutionPath);
+
+      const manifest = await JsonFile.loadAsync(manifestPath);
+      manifest.agentConnectors[0].id = 'authoredConnector';
+      manifest.agentSkills = [{ folder: 'skills/authored' }];
+      await JsonFile.saveAsync(manifest, manifestPath);
+
+      const agentConfig = await JsonFile.loadAsync(agentConfigPath);
+      agentConfig.agents[0].toolDiscovery = 'static';
+      await JsonFile.saveAsync(agentConfig, agentConfigPath);
+
+      const skillPath = `${tempDir}/copilot/skills/authored/SKILL.md`;
+      const supportPath = `${tempDir}/copilot/skills/authored/references/example.bin`;
+      const skill = '# Authored skill\n\nKeep these instructions unchanged.\n';
+      const support = Buffer.from([0, 1, 127, 128, 255]);
+      await Promise.all([
+        FileSystem.writeFileAsync(skillPath, skill, { ensureFolderExists: true }),
+        FileSystem.writeFileAsync(supportPath, support, { ensureFolderExists: true })
+      ]);
+      const [authoredManifest, authoredConfig, authoredPlugin] = await Promise.all([
+        FileSystem.readFileAsync(manifestPath),
+        FileSystem.readFileAsync(agentConfigPath),
+        FileSystem.readFileAsync(`${tempDir}/copilot/ai-plugin.json`)
+      ]);
+
+      for (const componentName of ['First', 'Second']) {
+        await scaffoldAsync({ ...options, componentName });
+
+        const result = await JsonFile.loadAsync(solutionPath);
+        if (exposure) {
+          expect(result.solution.copilotComponentExposure).toEqual(exposure);
+        } else {
+          expect(result.solution).not.toHaveProperty('copilotComponentExposure');
+        }
+        const [actualManifest, actualConfig, actualPlugin, actualSkill, actualSupport] = await Promise.all([
+          FileSystem.readFileAsync(manifestPath),
+          FileSystem.readFileAsync(agentConfigPath),
+          FileSystem.readFileAsync(`${tempDir}/copilot/ai-plugin.json`),
+          FileSystem.readFileAsync(skillPath),
+          FileSystem.readFileToBufferAsync(supportPath)
+        ]);
+        expect(actualManifest).toBe(authoredManifest);
+        expect(actualConfig).toBe(authoredConfig);
+        expect(actualPlugin).toBe(authoredPlugin);
+        expect(actualSkill).toBe(skill);
+        expect(actualSupport).toEqual(support);
+      }
+      const config = await JsonFile.loadAsync(`${tempDir}/config/config.json`);
+      expect(Object.keys(config.bundles)).toEqual(['first-copilot-component', 'second-copilot-component']);
+      expect(await FileSystem.existsAsync(`${tempDir}/src/SecondCopilotComponent.ts`)).toBe(true);
+    }
+  );
 });

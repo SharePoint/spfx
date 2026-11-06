@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
+import { JsonFile } from '@rushstack/node-core-library';
+
 import { PackageSolutionJsonMergeHelper } from '../PackageSolutionJsonMergeHelper';
 
 describe(PackageSolutionJsonMergeHelper.name, () => {
@@ -133,6 +135,60 @@ describe(PackageSolutionJsonMergeHelper.name, () => {
     it('should throw when incoming content is invalid JSON', () => {
       const existing = JSON.stringify({ solution: { features: [] } });
       expect(() => helper.merge(existing, 'not json')).toThrow(SyntaxError);
+    });
+  });
+
+  describe('Copilot component exposure', () => {
+    const incoming = JSON.stringify({
+      solution: {
+        copilotComponentExposure: ['Connector', 'Agent'],
+        features: [{ id: 'feat-2', title: 'New component' }]
+      }
+    });
+
+    it('should retain the new-project default when no solution exists', () => {
+      const result = JsonFile.parseString(helper.merge('{}', incoming));
+
+      expect(result.solution.copilotComponentExposure).toEqual(['Connector', 'Agent']);
+    });
+
+    it('should preserve an existing omission while adding component features', () => {
+      const existing = JSON.stringify({
+        solution: {
+          name: 'legacy-solution',
+          features: [{ id: 'feat-1', title: 'Existing component' }]
+        }
+      });
+
+      const result = JsonFile.parseString(helper.merge(existing, incoming));
+
+      expect(result.solution).not.toHaveProperty('copilotComponentExposure');
+      expect(result.solution.features.map((feature: { id: string }) => feature.id)).toEqual([
+        'feat-1',
+        'feat-2'
+      ]);
+    });
+
+    it.each([
+      { exposure: ['Connector'] },
+      { exposure: ['Agent'] },
+      { exposure: ['Connector', 'Agent'] },
+      { exposure: ['Agent', 'Connector'] }
+    ])('should preserve the explicit selection $exposure without unioning modes', ({ exposure }) => {
+      const existing = JSON.stringify({ solution: { copilotComponentExposure: exposure } });
+      const result = JsonFile.parseString(helper.merge(existing, incoming));
+
+      expect(result.solution.copilotComponentExposure).toEqual(exposure);
+    });
+
+    it('should leave non-Copilot solution metadata unchanged', () => {
+      const existing = JSON.stringify({ solution: { name: 'webpart-solution', version: '1.0.0.0' } });
+      const newWebPart = JSON.stringify({ solution: { features: [{ id: 'feat-2' }] } });
+      const result = JsonFile.parseString(helper.merge(existing, newWebPart));
+
+      expect(result.solution).not.toHaveProperty('copilotComponentExposure');
+      expect(result.solution.name).toBe('webpart-solution');
+      expect(result.solution.version).toBe('1.0.0.0');
     });
   });
 
