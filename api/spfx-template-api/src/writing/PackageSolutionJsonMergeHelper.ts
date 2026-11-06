@@ -27,6 +27,15 @@ export class PackageSolutionJsonMergeHelper extends JsonMergeHelper {
       // Spread existing first, then overlay incoming metadata for keys absent in existing
       merged.solution = { ...incoming.solution, ...existing.solution } as ISolution;
 
+      // Omission is the legacy Agent-only choice, not permission to apply a new scaffold default.
+      if (
+        existing.solution &&
+        !('copilotComponentExposure' in existing.solution) &&
+        'copilotComponentExposure' in merged.solution
+      ) {
+        delete merged.solution.copilotComponentExposure;
+      }
+
       const existingFeatures: IFeature[] = existing.solution?.features ?? [];
       const incomingFeatures: IFeature[] = incoming.solution?.features ?? [];
 
