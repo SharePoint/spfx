@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
-import type { _ISpfxServe as IServeJson } from '@microsoft/spfx-heft-plugins';
+import type { ISpfxServe as IServeJson } from '@microsoft/spfx-heft-plugins/lib/spfxConfig/interfaces/serve';
 
 import { JsonMergeHelper } from './JsonMergeHelper';
 
