@@ -131,6 +131,13 @@ The writer uses these helpers internally. You can also import them directly for 
 | `PackageSolutionJsonMergeHelper` | `config/package-solution.json` |
 | `ServeJsonMergeHelper` | `config/serve.json` |
 
+For Copilot solutions, `PackageSolutionJsonMergeHelper` preserves an existing
+`solution.copilotComponentExposure` selection exactly. An omitted selection remains omitted
+when adding or re-scaffolding a component; it is not replaced by a new template's
+`["Connector", "Agent"]` default. Compatible build tooling treats legacy omission as Agent-only.
+New files are written directly, so a new Copilot solution receives its template's explicit default.
+Existing authored Copilot manifests, discovery settings and skill files are preserved by the writer.
+
 ---
 
 ## API reference

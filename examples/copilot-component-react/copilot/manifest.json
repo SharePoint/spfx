@@ -22,6 +22,18 @@
     "full": "React CopilotComponent Description"
   },
   "accentColor": "#FFFFFF",
+  "agentConnectors": [
+    {
+      "id": "sampleConnector",
+      "displayName": "Sample",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "{{TENANT_MCP_URL}}",
+          "authorization": { "type": "None" }
+        }
+      }
+    }
+  ],
   "copilotAgents": {
     "declarativeAgents": [
       {

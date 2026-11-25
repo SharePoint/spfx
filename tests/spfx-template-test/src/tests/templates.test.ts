@@ -5,7 +5,7 @@ import * as path from 'node:path';
 import ignore from 'ignore';
 
 import { _isBinaryFile as isBinaryFile } from '@microsoft/spfx-template-api';
-import { Async, FileSystem, NewlineKind, Path } from '@rushstack/node-core-library';
+import { Async, FileSystem, JsonFile, NewlineKind, Path } from '@rushstack/node-core-library';
 
 import { PROJECT_ROOT, REPO_ROOT, TEMPLATES_DIR } from './constants';
 
@@ -399,6 +399,44 @@ describe('SPFx Template Scaffolding', () => {
         } catch (error: unknown) {
           const message = error instanceof Error ? error.message : String(error);
           throw new Error(`Failed to scaffold template '${templateName}': ${message}`);
+        }
+
+        if (templateName.startsWith('copilot-component-')) {
+          const packageSolution = await JsonFile.loadAsync(`${outputPath}/config/package-solution.json`);
+          expect(packageSolution.solution.copilotComponentExposure).toEqual(['Connector', 'Agent']);
+
+          const [manifest, agentConfig] = await Promise.all([
+            JsonFile.loadAsync(`${outputPath}/copilot/manifest.json`),
+            JsonFile.loadAsync(`${outputPath}/config/copilot-agent.json`)
+          ]);
+          expect(manifest.manifestVersion).toBe('1.29');
+          expect(manifest.$schema).toContain('/teams/v1.29/');
+          expect(manifest.agentConnectors).toHaveLength(1);
+          expect(manifest.agentConnectors[0]).toMatchObject({
+            id: expect.stringMatching(/Connector$/),
+            displayName: componentName,
+            toolSource: {
+              remoteMcpServer: {
+                mcpServerUrl: '{{TENANT_MCP_URL}}',
+                authorization: { type: 'None' }
+              }
+            }
+          });
+          expect(manifest.agentConnectors[0].toolSource.remoteMcpServer).not.toHaveProperty(
+            'mcpToolDescription'
+          );
+          expect(manifest.copilotAgents.declarativeAgents).toHaveLength(1);
+          expect(manifest).not.toHaveProperty('agentSkills');
+          expect(agentConfig.agents).toHaveLength(1);
+          expect(agentConfig.agents[0]).not.toHaveProperty('toolDiscovery');
+          expect(await FileSystem.existsAsync(`${outputPath}/copilot/mcp-tools.json`)).toBe(false);
+          expect(await FileSystem.existsAsync(`${outputPath}/copilot/skills`)).toBe(false);
+        } else {
+          if (templateName !== 'test') {
+            const packageSolution = await JsonFile.loadAsync(`${outputPath}/config/package-solution.json`);
+            expect(packageSolution.solution).not.toHaveProperty('copilotComponentExposure');
+          }
+          expect(await FileSystem.existsAsync(`${outputPath}/copilot`)).toBe(false);
         }
 
         // Parse .gitignore from template

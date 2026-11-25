@@ -22,6 +22,18 @@
     "full": "Minimal CopilotComponent Description"
   },
   "accentColor": "#FFFFFF",
+  "agentConnectors": [
+    {
+      "id": "minimalConnector",
+      "displayName": "Minimal",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "{{TENANT_MCP_URL}}",
+          "authorization": { "type": "None" }
+        }
+      }
+    }
+  ],
   "copilotAgents": {
     "declarativeAgents": [
       {

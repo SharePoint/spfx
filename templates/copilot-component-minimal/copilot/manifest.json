@@ -22,6 +22,18 @@
     "full": "<%= componentDescription %>"
   },
   "accentColor": "#FFFFFF",
+  "agentConnectors": [
+    {
+      "id": "<%= componentName.camel %>Connector",
+      "displayName": "<%= componentName %>",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "{{TENANT_MCP_URL}}",
+          "authorization": { "type": "None" }
+        }
+      }
+    }
+  ],
   "copilotAgents": {
     "declarativeAgents": [
       {

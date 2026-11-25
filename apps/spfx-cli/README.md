@@ -150,6 +150,21 @@ Templates are fetched at runtime from the [SharePoint/spfx](https://github.com/S
 | `copilot-component-noframework` | No-framework Copilot Component (HTML/CSS) with theming and localization |
 | `copilot-component-react` | React-based Copilot Component using Fluent UI, Microsoft Graph, and SharePoint REST |
 
+New Copilot solutions explicitly select `["Connector", "Agent"]` in
+`solution.copilotComponentExposure` (`config/package-solution.json`) and include both source
+declarations at Teams manifest version 1.29. Connector exposure depends on compatible SPFx
+build tooling and SharePoint deployment support; the published 1.24.1 packages do not yet
+implement this contract. These templates must not be promoted for deployment before that
+support is released and target-host acceptance is verified.
+
+Re-scaffolding or adding a component preserves an existing explicit selection or omission
+(legacy Agent-only), authored Copilot JSON and manual skills. It does not upgrade the SDK.
+Discovery still defaults to dynamic via the existing `agents[].toolDiscovery` setting in
+`config/copilot-agent.json`; explicit `"static"` remains supported by compatible tooling.
+The generated solution README explains the mode-dependent catalogs and optional
+`copilot/skills/<name>/SKILL.md` layout with root ZIP-relative `agentSkills` references.
+No skill folder, catalog or dangling reference is scaffolded automatically.
+
 ### Other
 
 | Name | Description |
