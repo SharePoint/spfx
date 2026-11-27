@@ -7,6 +7,19 @@ parameters:
     default: '24.14.x'
 
 steps:
+  # The publish-rushstack pool's ubuntu-24-minimal image leaves the tool cache owned by root.
+  # Make only the Node.js cache directory writable before installing a downloaded version.
+  - bash: |
+      set -euo pipefail
+      NODE_CACHE_DIR="$(Agent.ToolsDirectory)/node"
+      if ! mkdir -p "$NODE_CACHE_DIR" 2>/dev/null || [ ! -w "$NODE_CACHE_DIR" ]; then
+        echo "Making $NODE_CACHE_DIR writable by $(id -un)"
+        sudo -n mkdir -p "$NODE_CACHE_DIR"
+        sudo -n chown "$(id -u):$(id -g)" "$NODE_CACHE_DIR"
+      fi
+    displayName: 'Ensure Node.js tool cache is writable'
+    condition: and(succeeded(), eq(variables['Agent.OS'], 'Linux'))
+
   - task: NodeTool@0
     inputs:
       versionSpec: '${{ parameters.NodeVersion }}'
