@@ -4,6 +4,7 @@
 import { AnsiEscape, Terminal, StringBufferTerminalProvider } from '@rushstack/terminal';
 
 import { SPFxCommandLineParser } from '../SPFxCommandLineParser';
+import packageJson from '../../../package.json';
 
 describe('CommandLineHelp', () => {
   beforeEach(() => {
@@ -36,5 +37,16 @@ describe('CommandLineHelp', () => {
       );
       expect(actionHelpText).toMatchSnapshot(action.actionName);
     }
+  });
+
+  it.each(['--version', '-v'])('prints the CLI version for %s', async (versionFlag) => {
+    const terminalProvider: StringBufferTerminalProvider = new StringBufferTerminalProvider();
+    const parser: SPFxCommandLineParser = new SPFxCommandLineParser(new Terminal(terminalProvider));
+
+    await parser.executeWithoutErrorHandlingAsync([versionFlag]);
+
+    expect(terminalProvider.getAllOutputAsChunks({ asLines: true })).toEqual([
+      `[    log] ${packageJson.version}[n]`
+    ]);
   });
 });
