@@ -641,6 +641,24 @@ describe(PublicGitHubRepositorySource.name, () => {
       );
     });
 
+    it('should list available versions when --spfx-version does not exist in the official repo', async () => {
+      mockFetch.mockResolvedValue({
+        ok: false,
+        status: 404,
+        statusText: 'Not Found'
+      } as unknown as Response);
+
+      const source = new PublicGitHubRepositorySource({
+        repoUrl: 'https://github.com/SharePoint/spfx',
+        branch: 'version/1.21',
+        terminal
+      });
+
+      await expect(source.getTemplatesAsync()).rejects.toThrow(
+        /Unsupported value for --spfx-version "1.21"\. Available versions: latest \(1\.22\), next \(1\.23\.0-beta\)\./
+      );
+    });
+
     it('should throw error when network request fails', async () => {
       mockFetch.mockRejectedValue(new Error('Network error'));
 
