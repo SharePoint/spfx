@@ -23,6 +23,16 @@ cd tests/spfx-template-test
 rushx build
 ```
 
+## Azure DevOps Node.js Setup
+
+The versioning and publishing pipelines share the
+[Node.js installer template](../config/azure-pipelines/templates/install-node.yaml).
+The `publish-rushstack` pool's `ubuntu-24-minimal` image leaves the agent tool cache
+owned by root. On Linux, the template repairs ownership of only
+`$(Agent.ToolsDirectory)/node` when needed before running `NodeTool@0`, following
+[Rush Stack's workaround](https://github.com/microsoft/rushstack/blob/main/common/config/azure-pipelines/templates/install-node.yaml).
+It preserves the standard cache location and leaves other tool caches unchanged.
+
 ## Rush Phased Commands
 
 This repo uses explicit Rush phases defined in `common/config/rush/command-line.json`:
